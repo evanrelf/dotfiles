@@ -1,7 +1,7 @@
 [user]
 	name = Evan Relf
 	email = evan@evanrelf.com
-	signingkey = EBF02C975E8F50A9
+	signingkey = CBBFDFF349BC66D7
 [core]
 	editor = nvim
 [alias]
@@ -31,3 +31,5 @@
 	tool = Kaleidoscope
 [commit]
 	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg

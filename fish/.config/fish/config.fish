@@ -2,6 +2,7 @@
 
 # VARIABLES {{{1
 set -x EDITOR nvim
+set -x GPG_TTY (tty)
 
 set -l paths $HOME/.cargo/bin $HOME/.local/bin
 for i in $paths
@@ -12,10 +13,15 @@ end
 
 
 # COMMANDS {{{1
-alias ls "ls -AFGh"
+# alias ls "ls -AFGh"
+alias ls "exa -aF --group-directories-first"
+alias ll "ls -l"
+alias lsa "exa -a --group-directories-first"
+alias rm "trash"
 alias git "hub"
-alias refresh "killall SystemUIServer; killall ControlStrip; killall Dock"
+alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
 alias reload "source $HOME/.config/fish/config.fish"
+alias tower "gittower ."
 
 # wm - Manage tiling window manager {{{2
 function wm -d "Manage tiling window manager"
@@ -72,6 +78,8 @@ function rc -d "Open the specified program's configuration file"
         eval $EDITOR $HOME/.chunkwmrc
       case skhd
         eval $EDITOR $HOME/.skhdrc
+      case hammerspoon
+        eval $EDITOR $HOME/.hammerspoon/init.lua
 
       # Shells
       case fish
@@ -81,6 +89,12 @@ function rc -d "Open the specified program's configuration file"
       case bash
         eval $EDITOR $HOME/.bashrc
 
+      # Other
+      case git
+        eval $EDITOR $HOME/.gitconfig
+      case ranger
+        eval $EDITOR $HOME/.config/ranger/rc.conf
+
       case "*"
         echo Not defined: $argv[1]
     end
@@ -88,53 +102,53 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune alacritty kitty chunkwm skhd fish zsh bash"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune alacritty kitty chunkwm skhd hammerspoon fish zsh bash git ranger"
 
 # update -d Run all update commands {{{2
 function update -d "Run all update commands"
   if contains "all" $argv
-    echo "--- Updating Fish command completions..."
+    echo "-- Updating Fish command completions..."
     fish_update_completions
 
     if test -e /usr/local/bin/stack
-      echo "--- Updating stack packages..."
+      echo "-- Updating stack packages..."
       stack update
     end
 
     if test -e $HOME/.cargo/bin/rustup
-      echo "--- Updating rustup..."
+      echo "-- Updating rustup..."
       rustup update
     end
 
     if test -e /usr/local/bin/npm
-      echo "--- Updating npm packages..."
+      echo "-- Updating npm packages..."
       npm update
     end
   end
 
   if test -e /usr/local/bin/nvim
     if test -d $HOME/.config/nvim/plugged
-      echo "--- Updating Neovim plugins..."
-      nvim +PlugUpgrade +PlugClean! +PlugUpdate +qa
+      echo "-- Updating Neovim plugins..."
+      nvim +PlugUpgrade +PlugUpdate +qa
     end
   else
     if test -d $HOME/.vim/plugged
-      echo "--- Updating Vim plugins..."
-      vim +PlugUpgrade +PlugClean! +PlugUpdate +qa
+      echo "-- Updating Vim plugins..."
+      vim +PlugUpgrade +PlugUpdate +qa
     end
   end
 
-  echo "--- Updating system packages..."
+  echo "-- Updating system packages..."
   softwareupdate -lia
 
   if test -e /usr/local/bin/mas
-    echo "--- Updating App Store apps..."
+    echo "-- Updating App Store apps..."
     mas outdated
     mas upgrade
   end
 
   if test -e /usr/local/bin/brew
-    echo "--- Updating Homebrew packages..."
+    echo "-- Updating Homebrew packages..."
     brew update
     brew upgrade
 
@@ -144,7 +158,7 @@ function update -d "Run all update commands"
     end
   end
 
-  echo "--- Updates complete!"
+  echo "-- Updates complete!"
 end
 complete --command update --require-parameter --no-files --arguments "all clean"
 
@@ -238,14 +252,14 @@ function fish_prompt
     set -l git_text (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
     set -l git_bg black
     set -l git_fg white
-    switch (string sub --length=1 --start=-1 $git_text)
-      case "+" "\*"
-        set git_bg yellow
-        set git_fg black
-      case "%"
-        set git_bg red
-        set git_fg black
-    end
+    # switch (string sub --length=1 --start=-1 $git_text)
+    #   case "+" "\*"
+    #     set git_bg yellow
+    #     set git_fg black
+    #   case "%"
+    #     set git_bg red
+    #     set git_fg black
+    # end
     prompt_segment $git_bg $git_fg (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
   end
 
@@ -262,9 +276,9 @@ set fish_color_valid_path      --underline
 set fish_color_comment         brblack
 set fish_color_autosuggestion  brblack
 
-# MISCELLANEOUS {{{1
-if test -e $HOME/.iterm2_shell_integration.fish
-  source $HOME/.iterm2_shell_integration.fish
+# iTERM {{{1
+if test -e $HOME/.config/fish/iterm2_shell_integration.fish
+  source $HOME/.config/fish/iterm2_shell_integration.fish
 end
 
 

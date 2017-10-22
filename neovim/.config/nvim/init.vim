@@ -52,8 +52,10 @@ Plug 'evanrelf/vim-deep-space'
 " Appearance {{{3
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'
+Plug 'myusuf3/numbers.vim'
 " Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-" Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
+Plug 'evanrelf/goyo.vim', { 'on': 'Goyo' }
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
 " Editing {{{3
@@ -62,18 +64,21 @@ Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
-" Plug 'wellle/visual-split.vim'
+Plug 'wellle/visual-split.vim'
 
 " Auto-complete {{{3
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        \| Plug 'Shougo/neco-syntax'
-        \| Plug 'zchee/deoplete-clang'
-        \| Plug 'eagletmt/neco-ghc'
-        \| Plug 'pbogut/deoplete-elm'
-        \| Plug 'sebastianmarkow/deoplete-rust'
+        \ | Plug 'Shougo/neco-syntax'
+        \ | Plug 'zchee/deoplete-clang'
+        \ | Plug 'eagletmt/neco-ghc'
+        \ | Plug 'pbogut/deoplete-elm'
+        \ | Plug 'sebastianmarkow/deoplete-rust'
+else
+  Plug 'ajh17/VimCompletesMe'
 endif
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
 
 " Analysis {{{3
 Plug 'w0rp/ale'
@@ -82,6 +87,7 @@ Plug 'normenmueller/vim-hindent', { 'for': 'haskell' }
 Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] }
 Plug 'mhinz/vim-signify'
 Plug 'sickill/vim-pasta'
+Plug 'metakirby5/codi.vim'
 
 " Files {{{3
 Plug 'junegunn/fzf', { 'do': './install --bin' }
@@ -93,6 +99,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'elmcast/elm-vim'
 Plug 'othree/yajs.vim'
 Plug 'ap/vim-css-color'
+Plug 'leafo/moonscript-vim'
 Plug 'kid-icarus/vim-blockify'
 
 " Utilities {{{3
@@ -165,7 +172,6 @@ let g:multi_cursor_exit_from_insert_mode = 0
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:clang_format#auto_format = 1
 let g:gtfo#terminals = { 'mac': 'iterm' }
-let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'vim-plug', 'codi']
 let g:polyglot_disabled = ['javascript', 'jsx', 'graphql', 'elm']
 let g:undofile_warn_mode = 2
 let g:signify_vcs_list = ['git']
@@ -519,17 +525,22 @@ noremap <Leader>u :MundoToggle<CR>
 noremap <Leader>t :NERDTreeToggle<CR>
 noremap <Leader>\ :NERDTreeToggle<CR>
 " visual-split
-xnoremap V :VSSplitAbove<CR>
-xnoremap R :VSResize<CR>
+xmap V <Plug>(Visual-Split-VSSplitAbove)
+xmap R <Plug>(Visual-Split-VSResize)
 " easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " operator-flashy
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
-" deoplete
-inoremap <silent> <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+if has('nvim')
+  " deoplete
+  inoremap <silent> <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+else
+  " VimCompletesMe
+  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 " }}}
 

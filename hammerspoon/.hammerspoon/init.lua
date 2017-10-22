@@ -17,6 +17,15 @@ local function appEvents()
         window:setFullScreen(not window:isFullScreen())
       end)
     end
+
+    -- Auto-maximize Affinity Photo on launch
+    if appName == "Affinity Photo" and eventType == hs.application.watcher.launched then
+      local window = app:mainWindow()
+      hs.timer.doAfter(1, function()
+        window:maximize()
+      end)
+    end
+
   end):start()
 end
 
@@ -99,7 +108,7 @@ local function wm()
     if not undo then
       hs.alert.show("No undo history")
     else
-      window():setFrame(popUndo())
+      window():setFrame(undo)
     end
   end)
 end
