@@ -17,151 +17,108 @@ end
 alias ls "exa -aF --group-directories-first"
 alias ll "ls -l"
 alias lsa "exa -a --group-directories-first"
-alias rm "trash"
 alias git "hub"
-alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
 alias reload "source $HOME/.config/fish/config.fish"
-alias tower "gittower ."
 
-# wm - Manage tiling window manager {{{2
-function wm -d "Manage tiling window manager"
-  if test (count $argv) -gt 0
-    switch $argv[1]
-    case start enable
-      brew services start chunkwm
-      brew services start skhd
-    case stop disable
-      brew services stop chunkwm
-      brew services stop skhd
-    case restart
-      brew services restart chunkwm
-      brew services restart skhd
-    case "*"
-      echo Not defined: $argv[1]
+switch (uname)
+case Darwin
+  alias rm "trash"
+  alias tower "gittower"
+  alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
+
+  function iso2img -d "Convert an ISO to an IMG"
+    for iso in $argv
+      hdiutil convert -format UDRW -o "$iso.img" "$iso"
+      mv "$iso.img.dmg" "$iso.img"
+      mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
     end
-  else
-    echo No argument
   end
+  complete --command iso2img --require-parameter
+case Linux
 end
-complete --command wm --require-parameter --no-files --arguments "start stop restart"
 
-# iso2img - Convert an ISO to an IMG {{{2
-function iso2img -d "Convert an ISO to an IMG"
-  for iso in $argv
-    hdiutil convert -format UDRW -o "$iso.img" "$iso"
-    mv "$iso.img.dmg" "$iso.img"
-    mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
+# update - Run all update commands {{{2
+function update -d "Run all update commands"
+  switch (uname)
+  case Darwin
+    set_color yellow; echo "-- Updating macOS software..."; set_color normal
+    softwareupdate -lia
+    test (which mas); and mas upgrade
+
+    if test (which brew)
+      set_color yellow; echo "-- Updating Homebrew packages..."; set_color normal
+      brew update
+      brew upgrade
+    end
+  case Linux
+    set_color yellow; echo "-- Updating Arch Linux packages..."; set_color normal
+    sudo pacman -Syu
+
+    if test (which aura)
+      set_color yellow; echo "-- Updating AUR packages..."; set_color normal
+      sudo aura -Aua
+    end
   end
+
+  if test (which npm)
+    set_color yellow; echo "-- Updating NPM packages..."; set_color normal
+    npm update -g
+  end
+
+  if test (which stack)
+    set_color yellow; echo "-- Updating Haskell Stack packages..."; set_color normal
+    stack update
+  end
+
+  if test (which rustup)
+    set_color yellow; echo "-- Updating Rust..."; set_color normal
+    rustup update
+  end
+
+  if test (which nvim) -a -e $HOME/.config/nvim/autoload/plug.vim
+    set_color yellow; echo "-- Updating Neovim packages..."; set_color normal
+    nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
+  else if test (which vim) -a -e $HOME/.vim/autoload/plug.vim
+    set_color yellow; echo "-- Updating Vim packages..."; set_color normal
+    vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
+  end
+
+  set_color yellow; echo "-- Updating Fish command completions..."; set_color normal
+  fish_update_completions
 end
-complete --command iso2img --require-parameter
 
 # rc - Open the specified program's configuration file {{{2
 function rc -d "Open the specified program's configuration file"
   if test (count $argv) -gt 0
     switch $argv[1]
-      # Editors
-      case vim vi
-        eval $EDITOR $HOME/.vimrc
-      case neovim nvim
-        eval $EDITOR $HOME/.config/nvim/init.vim
-      case kakoune kak
-        eval $EDITOR $HOME/.config/kak/kakrc
+    # Editors
+    case vim vi
+      eval $EDITOR $HOME/.vimrc
+    case neovim nvim
+      eval $EDITOR $HOME/.config/nvim/init.vim
 
-      # Terminals
-      case alacritty
-        eval $EDITOR $HOME/.config/alacritty/alacritty.yml
-      case kitty
-        eval $EDITOR $HOME/.kitty.conf
+    # Shells
+    case fish
+      eval $EDITOR $HOME/.config/fish/config.fish
+    case zsh
+      eval $EDITOR $HOME/.zshrc
+    case bash
+      eval $EDITOR $HOME/.bashrc
 
-      # Window manager
-      case chunkwm
-        eval $EDITOR $HOME/.chunkwmrc
-      case skhd
-        eval $EDITOR $HOME/.skhdrc
-      case hammerspoon
-        eval $EDITOR $HOME/.hammerspoon/init.lua
+    # Other
+    case git
+      eval $EDITOR $HOME/.gitconfig
+    case hammerspoon
+      eval $EDITOR $HOME/.hammerspoon/init.lua
 
-      # Shells
-      case fish
-        eval $EDITOR $HOME/.config/fish/config.fish
-      case zsh
-        eval $EDITOR $HOME/.zshrc
-      case bash
-        eval $EDITOR $HOME/.bashrc
-
-      # Other
-      case git
-        eval $EDITOR $HOME/.gitconfig
-      case ranger
-        eval $EDITOR $HOME/.config/ranger/rc.conf
-
-      case "*"
-        echo Not defined: $argv[1]
-    end
+    case "*"
+      echo Not defined: $argv[1]
+  end
   else
     echo No argument
   end
 end
 complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune alacritty kitty chunkwm skhd hammerspoon fish zsh bash git ranger"
-
-# update -d Run all update commands {{{2
-function update -d "Run all update commands"
-  if contains "all" $argv
-    echo "-- Updating Fish command completions..."
-    fish_update_completions
-
-    if test -e /usr/local/bin/stack
-      echo "-- Updating stack packages..."
-      stack update
-    end
-
-    if test -e $HOME/.cargo/bin/rustup
-      echo "-- Updating rustup..."
-      rustup update
-    end
-
-    if test -e /usr/local/bin/npm
-      echo "-- Updating npm packages..."
-      npm update
-    end
-  end
-
-  if test -e /usr/local/bin/nvim
-    if test -d $HOME/.config/nvim/plugged
-      echo "-- Updating Neovim plugins..."
-      nvim +PlugUpgrade +PlugUpdate +qa
-    end
-  else
-    if test -d $HOME/.vim/plugged
-      echo "-- Updating Vim plugins..."
-      vim +PlugUpgrade +PlugUpdate +qa
-    end
-  end
-
-  echo "-- Updating system packages..."
-  softwareupdate -lia
-
-  if test -e /usr/local/bin/mas
-    echo "-- Updating App Store apps..."
-    mas outdated
-    mas upgrade
-  end
-
-  if test -e /usr/local/bin/brew
-    echo "-- Updating Homebrew packages..."
-    brew update
-    brew upgrade
-
-    if contains "clean" $argv
-      brew cleanup
-      brew cask cleanup
-    end
-  end
-
-  echo "-- Updates complete!"
-end
-complete --command update --require-parameter --no-files --arguments "all clean"
-
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"
@@ -176,10 +133,15 @@ complete --command runcpp --require-parameter
 if status --is-interactive
   set -g fish_user_abbreviations
 
-  abbr --add cask   "brew cask"
-  abbr --add ghc    "stack ghc"
-  abbr --add ghci   "stack ghci"
-  abbr --add runghc "stack runghc"
+  switch (uname)
+  case Darwin
+    abbr --add cask "brew cask"
+  case Linux
+  case "*"
+    abbr --add ghc "stack ghc"
+    abbr --add ghci "stack ghci"
+    abbr --add runghc "stack runghc"
+  end
 end
 
 
