@@ -13,7 +13,7 @@ local function appEvents()
     -- Auto-fullscreen Spotify on launch
     if appName == "Spotify" and eventType == hs.application.watcher.launched then
       local window = app:mainWindow()
-      hs.timer.doAfter(1, function()
+      hs.timer.doAfter(2, function()
         window:setFullScreen(not window:isFullScreen())
       end)
     end

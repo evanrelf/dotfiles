@@ -1,10 +1,10 @@
-# vim foldmethod=marker foldenable
+# vim: foldmethod=marker foldenable
 
 # VARIABLES {{{1
 set -x EDITOR nvim
 set -x GPG_TTY (tty)
 
-set -l paths $HOME/.cargo/bin $HOME/.local/bin
+set -l paths $HOME/.cargo/bin $HOME/.local/bin /usr/local/opt/qt/bin
 for i in $paths
   if test -d $i
     set -x PATH $i $PATH
@@ -13,51 +13,51 @@ end
 
 
 # COMMANDS {{{1
-# alias ls "ls -AFGh"
-alias ls "exa -aF --group-directories-first"
-alias ll "ls -l"
-alias lsa "exa -a --group-directories-first"
+alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
+alias ll "exa -aFl --ignore-glob .DS_Store --group-directories-first"
+alias tree "exa -aF --tree --git-ignore --ignore-glob=.DS_Store\|.git --group-directories-first"
+alias lss "/bin/ls -AFGh"
 alias git "hub"
 alias reload "source $HOME/.config/fish/config.fish"
+alias rm "trash"
+alias tower "gittower"
+alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
 
-switch (uname)
-case Darwin
-  alias rm "trash"
-  alias tower "gittower"
-  alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
+# edit - Wrap $EDITOR with fzf {{{2
+function edit -d "Wrap $EDITOR with fzf"
+  if [ $argv[1] ]
+    eval $EDITOR $argv
+  else
+    # set choice (fzf --reverse --preview "head -(tput lines) {}" --preview-window=right:75%)
+    set choice (fzf --reverse --preview "cat {}" --preview-window=right:75%)
 
-  function iso2img -d "Convert an ISO to an IMG"
-    for iso in $argv
-      hdiutil convert -format UDRW -o "$iso.img" "$iso"
-      mv "$iso.img.dmg" "$iso.img"
-      mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
+    if [ $choice ]
+      eval $EDITOR "$choice"
     end
   end
-  complete --command iso2img --require-parameter
-case Linux
 end
+complete --command e --wraps $EDITOR
+
+# iso2img - Convert an ISO to an IMG {{{2
+function iso2img -d "Convert an ISO to an IMG"
+  for iso in $argv
+    hdiutil convert -format UDRW -o "$iso.img" "$iso"
+    mv "$iso.img.dmg" "$iso.img"
+    mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
+  end
+end
+complete --command iso2img --require-parameter
 
 # update - Run all update commands {{{2
 function update -d "Run all update commands"
-  switch (uname)
-  case Darwin
-    set_color yellow; echo "-- Updating macOS software..."; set_color normal
-    softwareupdate -lia
-    test (which mas); and mas upgrade
+  set_color yellow; echo "-- Updating macOS software..."; set_color normal
+  softwareupdate -lia
+  test (which mas); and mas upgrade
 
-    if test (which brew)
-      set_color yellow; echo "-- Updating Homebrew packages..."; set_color normal
-      brew update
-      brew upgrade
-    end
-  case Linux
-    set_color yellow; echo "-- Updating Arch Linux packages..."; set_color normal
-    sudo pacman -Syu
-
-    if test (which aura)
-      set_color yellow; echo "-- Updating AUR packages..."; set_color normal
-      sudo aura -Aua
-    end
+  if test (which brew)
+    set_color yellow; echo "-- Updating Homebrew packages..."; set_color normal
+    brew update
+    brew upgrade
   end
 
   if test (which npm)
@@ -87,6 +87,30 @@ function update -d "Run all update commands"
   fish_update_completions
 end
 
+# install - Interactive Homebrew installer {{{2
+function brew-install -d "Interactive package installer"
+  if [ $argv[1] ]
+    set choice $argv[1]
+  else
+    set choice (brew search | fzf --reverse --preview "brew info {}" --preview-window=right:75%)
+  end
+  if [ $choice ]
+    brew install $choice
+  end
+end
+
+# install-cask - Interactive Homebrew Cask installer {{{2
+function cask-install -d "Interactive package installer"
+  if [ $argv[1] ]
+    set choice $argv[1]
+  else
+    set choice (brew cask search | fzf --reverse --preview "brew cask info {}" --preview-window=right:75%)
+  end
+  if [ $choice ]
+    brew cask install $choice
+  end
+end
+
 # rc - Open the specified program's configuration file {{{2
 function rc -d "Open the specified program's configuration file"
   if test (count $argv) -gt 0
@@ -96,6 +120,10 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR $HOME/.vimrc
     case neovim nvim
       eval $EDITOR $HOME/.config/nvim/init.vim
+    case emacs
+      eval $EDITOR $HOME/.emacs
+    case spacemacs
+      eval $EDITOR $HOME/.spacemacs
 
     # Shells
     case fish
@@ -118,7 +146,7 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune alacritty kitty chunkwm skhd hammerspoon fish zsh bash git ranger"
+complete --command rc --require-parameter --no-files --arguments "vim neovim emacs spacemacs ev fish zsh bash git hammerspoon"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"
@@ -132,16 +160,10 @@ complete --command runcpp --require-parameter
 # ABBREVIATIONS {{{1
 if status --is-interactive
   set -g fish_user_abbreviations
-
-  switch (uname)
-  case Darwin
-    abbr --add cask "brew cask"
-  case Linux
-  case "*"
-    abbr --add ghc "stack ghc"
-    abbr --add ghci "stack ghci"
-    abbr --add runghc "stack runghc"
-  end
+  abbr --add cask "brew cask"
+  abbr --add ghc "stack ghc"
+  abbr --add ghci "stack ghci"
+  abbr --add runghc "stack runghc"
 end
 
 
