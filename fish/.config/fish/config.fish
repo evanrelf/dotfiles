@@ -138,6 +138,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR $HOME/.gitconfig
     case hammerspoon
       eval $EDITOR $HOME/.hammerspoon/init.lua
+    case alacritty
+      eval $EDITOR $HOME/.config/alacritty/alacritty.yml
 
     case "*"
       echo Not defined: $argv[1]
@@ -146,7 +148,7 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim emacs spacemacs ev fish zsh bash git hammerspoon"
+complete --command rc --require-parameter --no-files --arguments "vim neovim emacs spacemacs ev fish zsh bash git hammerspoon alacritty"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"
