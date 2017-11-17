@@ -2,6 +2,7 @@
 
 # VARIABLES {{{1
 set -x EDITOR nvim
+set -x MANPAGER "nvim -c 'set ft=man' -"
 set -x GPG_TTY (tty)
 
 set -l paths $HOME/.cargo/bin $HOME/.local/bin /usr/local/opt/qt/bin
@@ -20,8 +21,9 @@ alias lss "/bin/ls -AFGh"
 alias git "hub"
 alias reload "source $HOME/.config/fish/config.fish"
 alias rm "trash"
-alias tower "gittower"
+alias tower "gittower ."
 alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
+alias pdf "pandoc -t latex -V geometry:margin=1in"
 
 # edit - Wrap $EDITOR with fzf {{{2
 function edit -d "Wrap $EDITOR with fzf"
@@ -134,6 +136,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR $HOME/.bashrc
 
     # Other
+    case tmux
+      eval $EDITOR $HOME/.tmux.conf
     case git
       eval $EDITOR $HOME/.gitconfig
     case hammerspoon
@@ -148,7 +152,7 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim emacs spacemacs ev fish zsh bash git hammerspoon alacritty"
+complete --command rc --require-parameter --no-files --arguments "vim neovim emacs spacemacs ev fish zsh bash tmux git hammerspoon alacritty"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"

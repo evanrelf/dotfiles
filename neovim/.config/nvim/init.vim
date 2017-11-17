@@ -1,4 +1,10 @@
+" META {{{1
 " vim: foldenable foldmethod=marker
+
+" Evan Relf's Neovim config
+" https://github.com/evanrelf/dotfiles/
+
+
 " PLUGINS {{{1
 " Auto-install vim-plug {{{2
 if has('nvim')
@@ -20,35 +26,34 @@ if empty(glob(g:plug_dir . '/autoload/plug.vim'))
     echomsg 'Install skipped'
   endif
 endif
-" 2}}}
+" }}}2
 
 call plug#begin()
 
-" Appearance
+" Appearance {{{2
 Plug 'cocopon/iceberg.vim'
-Plug 'evanrelf/vim-deep-space'
 Plug 'itchyny/lightline.vim'
 Plug 'evanrelf/goyo.vim'
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
-" Editing
+" Editing {{{2
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 
-" Movement
+" Movement {{{2
 Plug 'junegunn/vim-slash'
 Plug 'wellle/targets.vim'
 Plug 'vim-utils/vim-husk'
 
-" Navigation
+" Navigation {{{2
 Plug 'junegunn/fzf', { 'do': './install --bin' } | Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-gtfo'
 
-" Auto-complete
+" Auto-complete {{{2
 Plug 'cohama/lexima.vim'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -58,25 +63,29 @@ endif
 Plug 'eagletmt/neco-ghc'
 Plug 'zchee/deoplete-clang'
 
-" Languages
+" Syntax {{{2
 Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
 Plug 'sheerun/vim-polyglot'
+Plug 'leafo/moonscript-vim'
 Plug 'othree/yajs.vim'
 Plug 'elmcast/elm-vim'
 Plug 'kid-icarus/vim-blockify'
 
-" Miscellaneous
+" Miscellaneous {{{2
 Plug 'tpope/vim-eunuch'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'wincent/terminus'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'sickill/vim-pasta'
 Plug 'Carpetsmoker/undofile_warn.vim'
 Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 
+" }}}2
+
 call plug#end()
 
-
-" PLUGIN SETTINGS {{{2
+" Plugin settings {{{2
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:necoghc_use_stack = 1
@@ -108,6 +117,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'cpp': ['clang-format']
 \ }
+let g:ale_lua_luacheck_options = '--std _G+love'
 
 " fzf
 let g:fzf_layout = { 'down': '~20%' }
@@ -131,11 +141,10 @@ let g:fzf_colors = {
 let g:polyglot_disabled = ['javascript', 'jsx', 'graphql', 'elm']
 let g:undofile_warn_mode = 2
 let g:table_mode_corner="|"
-" 2}}}
+" }}}2
 
 
 " SETTINGS {{{1
-
 " Neovim defaults for Vim {{{2
 if !has('nvim')
   if !isdirectory($HOME . '/.vim/backup')
@@ -177,9 +186,8 @@ if !has('nvim')
   set viminfo+=!
   set wildmenu
 endif
-" 2}}}
 
-" Apperance
+" Apperance {{{2
 set termguicolors
 set background=dark
 colorscheme iceberg
@@ -189,7 +197,7 @@ set shortmess=filmxTWIc
 set splitbelow
 set splitright
 
-" Indentation
+" Indentation {{{2
 set smartindent
 set expandtab
 set tabstop=2
@@ -197,7 +205,7 @@ set softtabstop=2
 set shiftwidth=2
 set shiftround
 
-" Formatting
+" Formatting {{{2
 set nowrap
 set textwidth=79
 set linebreak
@@ -205,50 +213,61 @@ set breakindent
 set formatoptions=crqnj
 set nojoinspaces
 
-" Extra files
+" Extra files {{{2
 set undofile
 set noswapfile
 set nobackup
 set nowritebackup
 
-" Searching
+" Searching {{{2
 set nohlsearch
 set ignorecase
 set smartcase
 set gdefault
 set report=0
 
-" Wild mode
+" Wild mode {{{2
 set wildmode=longest:full,full
 set wildignore+=*/.git/*,*/tmp/*,*.swp,.DS_Store
 set wildignorecase
 
-" Miscellaneous
+" Miscellaneous {{{2
 set lazyredraw
 set hidden
 set mouse=a
 set virtualedit=block
-set inccommand=nosplit
 set keywordprg=:help
+
+if has('nvim')
+  set inccommand=nosplit
+endif
+
+" }}}2
 
 
 " COMMANDS {{{1
 command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Reload source $MYVIMRC
-command! -range PlugOpen silent normal! ^"zyi':!open https://github.com/z<CR>
 command! Marked silent !open % -a 'Marked 2.app'
 
 
 " MAPPINGS {{{1
-" Disabled
-noremap U <Nop>
-noremap M <Nop>
-noremap S <Nop>
-noremap X <Nop>
-inoremap <C-c> <Nop>
+" Leader {{{2
+map <Space> <Leader>
+nnoremap <Leader>s :%s/
+xnoremap <Leader>s :s/
+nmap <Leader>; m`gcc``
+xmap <Leader>; gcgv
+noremap <Leader>b :ls<CR>:b<Space>
+noremap <Leader><Space> :<C-u>Files<CR>
+noremap <Leader>/ :<C-u>Lines<CR>
+noremap <Leader>h :<C-u>Helptags<CR>
+map <Leader>en <Plug>(ale_next_wrap)
+map <Leader>ep <Plug>(ale_previous_wrap)
+map <Leader>ei <Plug>(ale_detail)
 
-" Improved defaults
+" Normal & Visual {{{2
 noremap ; :
 noremap : ;
 noremap Y y$
@@ -257,56 +276,58 @@ noremap k gk
 noremap gj j
 noremap gk k
 noremap ' `
-nnoremap J m`J``
-tnoremap <Esc> <C-\><C-n>
-
-" Personal preference
+nnoremap gp `[v`]
 noremap Q @@
+noremap <Tab> zo
+noremap <S-Tab> zc
+noremap <silent> <C-Tab> :<C-u>bnext<CR>
+noremap <silent> <C-S-Tab> :<C-u>bprev<CR>
+noremap <C-l> :<C-u>redraw!<CR>
+map y <Plug>(operator-flashy)
+
+" Normal {{{2
+nnoremap J m`J``
+nmap ga <Plug>(EasyAlign)
+nmap Y <Plug>(operator-flashy)$
+
+" Visual {{{2
 xnoremap > >gv
 xnoremap < <gv
-nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
 xnoremap p "_dP
 xnoremap P p
-
-" Tab
-noremap <Tab> zo
-noremap <S-Tab> zc
-noremap <silent> <C-Tab> :bnext<CR>
-noremap <silent> <C-S-Tab> :bprev<CR>
-
-" Leader
-map <Space> <Leader>
-nnoremap <Leader>s :%s/
-xnoremap <Leader>s :s/
-nmap <Leader>; m`gcc``
-xmap <Leader>; gcgv
-noremap <Leader>b :ls<CR>:b<Space>
-
-" Plugin
-noremap <Leader><Space> :<C-u>Files<CR>
-noremap <Leader>/ :<C-u>Lines<CR>
-noremap <Leader>h :<C-u>Helptags<CR>
 xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-map <Leader>en <Plug>(ale_next_wrap)
-map <Leader>ep <Plug>(ale_previous_wrap)
-map <Leader>ei <Plug>(ale_detail)
+
+" Insert {{{2
+inoremap <C-c> <Nop>
+inoremap <C-l> <C-o>:redraw!<CR>
 inoremap <silent> <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" Command {{{2
+
+
+" Terminal {{{2
+tnoremap <Esc> <C-\><C-n>
+
+" Disabled {{{2
+nnoremap U <Nop>
+noremap M <Nop>
+noremap S <Nop>
+noremap X <Nop>
+
+" }}}2
 
 
 " AUTOCOMMANDS {{{1
-augroup WebDev
+augroup WebDev " {{{2
+  autocmd!
   autocmd BufLeave *.css,*.scss normal! mC
   autocmd BufLeave *.html normal! mH
   autocmd BufLeave *.js normal! mJ
 augroup END
 
-augroup FileTypeSettings
+augroup FileTypeSettings " {{{2
   autocmd!
   " Vim
   autocmd FileType vim,help setlocal keywordprg=:help
@@ -318,6 +339,11 @@ augroup FileTypeSettings
   autocmd FileType fzf
         \   nnoremap <buffer> <Esc> :q<CR>
         \ | nnoremap <buffer> q :q<CR>
+  " Man pages
+  autocmd FileType man
+        \   setlocal laststatus=0
+        \ | map <buffer> J <C-e>
+        \ | map <buffer> K <C-y>
   " Git
   autocmd FileType gitcommit setlocal textwidth=72 colorcolumn=73
   " Markdown
@@ -329,9 +355,16 @@ augroup FileTypeSettings
         \ | nnoremap <silent> <buffer> <Leader>4 :s/\v^#+ //e<CR>I#### <Esc>
   " Haskell
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+  " LÖVE
+  autocmd FileType lua,moon nnoremap <buffer> K :silent !open . -a love.app<CR>
 augroup END
 
-augroup FormatOptions
+augroup FormatOptions " {{{2
   autocmd!
   autocmd FileType * set formatoptions=cqnj
 augroup END
+
+" }}}2
+
+
+" }}}1
