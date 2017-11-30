@@ -22,8 +22,13 @@ alias git "hub"
 alias reload "source $HOME/.config/fish/config.fish"
 alias rm "trash"
 alias tower "gittower ."
+alias marked "open -a Marked\ 2.app"
 alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
 alias pdf "pandoc -t latex -V geometry:margin=1in"
+alias cask "brew cask"
+alias ghc "stack ghc"
+alias ghci "stack ghci"
+alias runghc "stack runghc"
 
 # edit - Wrap $EDITOR with fzf {{{2
 function edit -d "Wrap $EDITOR with fzf"
@@ -122,6 +127,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR $HOME/.vimrc
     case neovim nvim
       eval $EDITOR $HOME/.config/nvim/init.vim
+    case kakoune kak
+      eval $EDITOR $HOME/.config/kak/kakrc
     case emacs
       eval $EDITOR $HOME/.emacs
     case spacemacs
@@ -152,7 +159,7 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim emacs spacemacs ev fish zsh bash tmux git hammerspoon alacritty"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs ev fish zsh bash tmux git hammerspoon alacritty"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"
@@ -166,10 +173,10 @@ complete --command runcpp --require-parameter
 # ABBREVIATIONS {{{1
 if status --is-interactive
   set -g fish_user_abbreviations
-  abbr --add cask "brew cask"
-  abbr --add ghc "stack ghc"
-  abbr --add ghci "stack ghci"
-  abbr --add runghc "stack runghc"
+  # abbr --add cask "brew cask"
+  # abbr --add ghc "stack ghc"
+  # abbr --add ghci "stack ghci"
+  # abbr --add runghc "stack runghc"
 end
 
 

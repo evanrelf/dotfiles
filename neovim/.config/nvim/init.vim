@@ -39,7 +39,6 @@ Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 " Editing {{{2
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
-Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 
@@ -66,12 +65,15 @@ Plug 'zchee/deoplete-clang'
 " Syntax {{{2
 Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
 Plug 'sheerun/vim-polyglot'
-Plug 'leafo/moonscript-vim'
 Plug 'othree/yajs.vim'
 Plug 'elmcast/elm-vim'
+Plug 'leafo/moonscript-vim'
+Plug 'ssteinbach/vim-pico8-syntax'
 Plug 'kid-icarus/vim-blockify'
+Plug 'ap/vim-css-color'
 
 " Miscellaneous {{{2
+Plug 'mhinz/vim-sayonara'
 Plug 'tpope/vim-eunuch'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'wincent/terminus'
@@ -110,9 +112,8 @@ let g:lightline.active = { 'right': [['lineinfo'], ['percent'], ['linter_errors'
 " ale
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_fix_on_save = 1
 let g:ale_linters = {
-\   'haskell': ['stack_build', 'stack_ghc', 'stack-ghc-mod', 'ghc-mod', 'hlint', 'hfmt']
+\   'haskell': ['stack-ghc-mod', 'hlint', 'stack-build', 'stack-ghc']
 \ }
 let g:ale_fixers = {
 \   'cpp': ['clang-format']
@@ -191,11 +192,14 @@ endif
 set termguicolors
 set background=dark
 colorscheme iceberg
+set number
 set noshowmode
 set title
 set shortmess=filmxTWIc
 set splitbelow
 set splitright
+set list
+set listchars=tab:▸\ ,nbsp:␣
 
 " Indentation {{{2
 set smartindent
@@ -255,6 +259,9 @@ command! Marked silent !open % -a 'Marked 2.app'
 " MAPPINGS {{{1
 " Leader {{{2
 map <Space> <Leader>
+noremap <Leader>q :Sayonara<CR>
+noremap <Leader>Q :Sayonara!<CR>
+noremap <Leader>w :update<CR>
 nnoremap <Leader>s :%s/
 xnoremap <Leader>s :s/
 nmap <Leader>; m`gcc``
@@ -333,7 +340,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType vim,help setlocal keywordprg=:help
   autocmd FileType help
         \   noremap <buffer> q :q<CR>
-        \ | nnoremap <Esc> :q<CR>
+        \ | nnoremap <buffer> <Esc> :q<CR>
   " Plugins
   autocmd FileType vim-plug setlocal nonumber norelativenumber
   autocmd FileType fzf
