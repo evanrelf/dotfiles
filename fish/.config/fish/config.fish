@@ -23,12 +23,18 @@ alias reload "source $HOME/.config/fish/config.fish"
 alias rm "trash"
 alias tower "gittower ."
 alias marked "open -a Marked\ 2.app"
-alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\""
+alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
 alias pdf "pandoc -t latex -V geometry:margin=1in"
 alias cask "brew cask"
 alias ghc "stack ghc"
 alias ghci "stack ghci"
 alias runghc "stack runghc"
+
+# emacs - emacsclient helper {{{2
+function emacs -d "emacsclient helper"
+  osascript -e 'tell application "Emacs" to activate'
+  emacsclient -c $argv > /dev/null &
+end
 
 # edit - Wrap $EDITOR with fzf {{{2
 function edit -d "Wrap $EDITOR with fzf"
@@ -94,7 +100,7 @@ function update -d "Run all update commands"
   fish_update_completions
 end
 
-# install - Interactive Homebrew installer {{{2
+# brew-install - Interactive Homebrew installer {{{2
 function brew-install -d "Interactive package installer"
   if [ $argv[1] ]
     set choice $argv[1]
@@ -106,7 +112,7 @@ function brew-install -d "Interactive package installer"
   end
 end
 
-# install-cask - Interactive Homebrew Cask installer {{{2
+# cask-install - Interactive Homebrew Cask installer {{{2
 function cask-install -d "Interactive package installer"
   if [ $argv[1] ]
     set choice $argv[1]

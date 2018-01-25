@@ -325,7 +325,6 @@ noremap X <Nop>
 
 " }}}2
 
-
 " AUTOCOMMANDS {{{1
 augroup WebDev " {{{2
   autocmd!
