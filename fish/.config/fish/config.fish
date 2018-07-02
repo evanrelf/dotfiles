@@ -18,7 +18,6 @@ alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
 alias ll "exa -aFl --ignore-glob .DS_Store --group-directories-first"
 alias tree "exa -aF --tree --git-ignore --ignore-glob=.DS_Store\|.git --group-directories-first"
 alias lss "/bin/ls -AFGh"
-alias git "hub"
 alias reload "source $HOME/.config/fish/config.fish"
 alias rm "trash"
 alias tower "gittower ."
@@ -31,10 +30,10 @@ alias ghci "stack ghci"
 alias runghc "stack runghc"
 
 # emacs - emacsclient helper {{{2
-function emacs -d "emacsclient helper"
-  osascript -e 'tell application "Emacs" to activate'
-  emacsclient -c $argv > /dev/null &
-end
+# function emacs -d "emacsclient helper"
+#   osascript -e 'tell application "Emacs" to activate'
+#   emacsclient -c $argv > /dev/null &
+# end
 
 # edit - Wrap $EDITOR with fzf {{{2
 function edit -d "Wrap $EDITOR with fzf"

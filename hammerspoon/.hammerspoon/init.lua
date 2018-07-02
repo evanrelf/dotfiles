@@ -2,7 +2,7 @@ hs.alert.show("Hammerspoon loaded!")
 
 -- hs.window.animationDuration = 0.05
 hs.window.animationDuration = 0
-local hyper = {"cmd", "alt", "ctrl"}
+local hyper = {"shift", "cmd", "alt", "ctrl"}
 
 local undoHistory = {}
 
@@ -18,13 +18,13 @@ local function appEvents()
       end)
     end
 
-    -- Auto-maximize Affinity Photo on launch
-    if appName == "Affinity Photo" and eventType == hs.application.watcher.launched then
-      local window = app:mainWindow()
-      hs.timer.doAfter(1, function()
-        window:maximize()
-      end)
-    end
+    -- -- Auto-maximize Affinity Photo on launch
+    -- if appName == "Affinity Photo" and eventType == hs.application.watcher.launched then
+    --   local window = app:mainWindow()
+    --   hs.timer.doAfter(1, function()
+    --     window:maximize()
+    --   end)
+    -- end
 
   end):start()
 end
@@ -74,8 +74,6 @@ local function wm()
 
   -- Left 1/2
   w(hyper, "R", { x = 0, w = (1/2) })
-  -- Middle 1/2
-  w(hyper, "P", { x = 0, w = (1/2) })
   -- Right 1/2
   w(hyper, "T", { x = (1/2), w = (1/2) })
 
@@ -113,19 +111,5 @@ local function wm()
   end)
 end
 
-local function wm2()
-  local gridWidth = 6
-  local gridHeight = 2
-  hs.grid.setGrid(hs.geometry.size(gridWidth, gridHeight))
-  hs.grid.setMargins(hs.geometry.size(0, 0))
-
-  hs.hotkey.bind(hyper, ",", hs.grid.toggleShow)
-
-  hs.hotkey.bind(hyper, ".", function()
-    hs.grid.snap(hs.window.frontmostWindow())
-  end)
-end
-
 appEvents()
 wm()
-wm2()

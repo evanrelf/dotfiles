@@ -33,12 +33,12 @@ call plug#begin()
 " Appearance {{{2
 Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'evanrelf/goyo.vim'
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
 " Editing {{{2
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
 Plug 'dhruvasagar/vim-table-mode'
 
@@ -54,21 +54,22 @@ Plug 'justinmk/vim-gtfo'
 
 " Auto-complete {{{2
 Plug 'cohama/lexima.vim'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim' | Plug 'roxma/nvim-yarp' | Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'eagletmt/neco-ghc'
-Plug 'zchee/deoplete-clang'
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim' | Plug 'roxma/nvim-yarp' | Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" Plug 'eagletmt/neco-ghc'
+" Plug 'zchee/deoplete-clang'
 
 " Syntax {{{2
 Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+
 Plug 'sheerun/vim-polyglot'
 Plug 'othree/yajs.vim'
 Plug 'elmcast/elm-vim'
 Plug 'leafo/moonscript-vim'
-Plug 'ssteinbach/vim-pico8-syntax'
 Plug 'kid-icarus/vim-blockify'
 Plug 'ap/vim-css-color'
 
@@ -139,6 +140,7 @@ let g:fzf_colors = {
   \ }
 
 " Other
+let g:multi_cursor_exit_from_insert_mode = 0
 let g:polyglot_disabled = ['javascript', 'jsx', 'graphql', 'elm']
 let g:undofile_warn_mode = 2
 let g:table_mode_corner="|"
@@ -192,7 +194,6 @@ endif
 set termguicolors
 set background=dark
 colorscheme iceberg
-set number
 set noshowmode
 set title
 set shortmess=filmxTWIc
@@ -326,13 +327,6 @@ noremap X <Nop>
 " }}}2
 
 " AUTOCOMMANDS {{{1
-augroup WebDev " {{{2
-  autocmd!
-  autocmd BufLeave *.css,*.scss normal! mC
-  autocmd BufLeave *.html normal! mH
-  autocmd BufLeave *.js normal! mJ
-augroup END
-
 augroup FileTypeSettings " {{{2
   autocmd!
   " Vim
@@ -340,6 +334,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType help
         \   noremap <buffer> q :q<CR>
         \ | nnoremap <buffer> <Esc> :q<CR>
+  autocmd FileType ale-preview setlocal wrap
   " Plugins
   autocmd FileType vim-plug setlocal nonumber norelativenumber
   autocmd FileType fzf
@@ -360,7 +355,10 @@ augroup FileTypeSettings " {{{2
         \ | nnoremap <silent> <buffer> <Leader>3 :s/\v^#+ //e<CR>I### <Esc>
         \ | nnoremap <silent> <buffer> <Leader>4 :s/\v^#+ //e<CR>I#### <Esc>
   " Haskell
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+  autocmd FileType haskell
+        \   setlocal omnifunc=necoghc#omnifunc
+        " \ | ALEDisable
+        " \ | Ghcid
   " LÖVE
   autocmd FileType lua,moon nnoremap <buffer> K :silent !open . -a love.app<CR>
 augroup END
