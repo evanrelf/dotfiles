@@ -3,124 +3,134 @@
 # VARIABLES {{{1
 set -x EDITOR nvim
 set -x MANPAGER "nvim -c 'set ft=man' -"
-set -x GPG_TTY (tty)
 
-set -l paths $HOME/.cargo/bin $HOME/.local/bin /usr/local/opt/qt/bin
+set -l paths $HOME/.cargo/bin $HOME/.local/bin
 for i in $paths
   if test -d $i
     set -x PATH $i $PATH
   end
 end
 
+if status --is-interactive
+  set -g fish_user_abbreviations
+end
+
 
 # COMMANDS {{{1
-alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
-alias ll "exa -aFl --ignore-glob .DS_Store --group-directories-first"
-alias tree "exa -aF --tree --git-ignore --ignore-glob=.DS_Store\|.git --group-directories-first"
-alias lss "/bin/ls -AFGh"
 alias reload "source $HOME/.config/fish/config.fish"
-alias rm "trash"
-alias tower "gittower ."
-alias marked "open -a Marked\ 2.app"
-alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
-alias pdf "pandoc -t latex -V geometry:margin=1in"
-alias cask "brew cask"
-alias ghc "stack ghc"
-alias ghci "stack ghci"
-alias runghc "stack runghc"
+if test (which exa 2>/dev/null)
+  alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
+  alias ll "exa -aFl --ignore-glob .DS_Store --group-directories-first"
+  alias tree "exa -aF --tree --git-ignore --ignore-glob=.DS_Store\|.git --group-directories-first"
+else
+  alias ls "ls -AFGh"
+end
 
-# emacs - emacsclient helper {{{2
-# function emacs -d "emacsclient helper"
-#   osascript -e 'tell application "Emacs" to activate'
-#   emacsclient -c $argv > /dev/null &
-# end
+switch (uname)
+  case Linux
 
-# edit - Wrap $EDITOR with fzf {{{2
-function edit -d "Wrap $EDITOR with fzf"
-  if [ $argv[1] ]
-    eval $EDITOR $argv
-  else
-    # set choice (fzf --reverse --preview "head -(tput lines) {}" --preview-window=right:75%)
-    set choice (fzf --reverse --preview "cat {}" --preview-window=right:75%)
+  case Darwin
+    alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
+    alias cask "brew cask"
+    alias rm "trash"
+    alias tower "gittower ."
+    alias marked "open -a Marked\ 2.app"
 
-    if [ $choice ]
-      eval $EDITOR "$choice"
+    # iso2img - Convert an ISO to an IMG {{{2
+    function iso2img -d "Convert an ISO to an IMG"
+      for iso in $argv
+        hdiutil convert -format UDRW -o "$iso.img" "$iso"
+        mv "$iso.img.dmg" "$iso.img"
+        mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
+      end
     end
-  end
-end
-complete --command e --wraps $EDITOR
+    complete --command iso2img --require-parameter
 
-# iso2img - Convert an ISO to an IMG {{{2
-function iso2img -d "Convert an ISO to an IMG"
-  for iso in $argv
-    hdiutil convert -format UDRW -o "$iso.img" "$iso"
-    mv "$iso.img.dmg" "$iso.img"
-    mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
-  end
+    # brew-install - Interactive Homebrew installer {{{2
+    function brew-install -d "Interactive package installer"
+      if [ $argv[1] ]
+        set choice $argv[1]
+      else
+        set choice (brew search | fzf --reverse --preview "brew info {}" --preview-window=right:75%)
+      end
+      if [ $choice ]
+        brew install $choice
+      end
+    end
+
+    # cask-install - Interactive Homebrew Cask installer {{{2
+    function cask-install -d "Interactive package installer"
+      if [ $argv[1] ]
+        set choice $argv[1]
+      else
+        set choice (brew cask search | fzf --reverse --preview "brew cask info {}" --preview-window=right:75%)
+      end
+      if [ $choice ]
+        brew cask install $choice
+      end
+    end
+    # }}}2
+  case '*'
+    # nothing
 end
-complete --command iso2img --require-parameter
 
 # update - Run all update commands {{{2
 function update -d "Run all update commands"
-  set_color yellow; echo "-- Updating macOS software..."; set_color normal
-  softwareupdate -lia
-  test (which mas); and mas upgrade
+  switch (uname)
+    case Linux
+      if test (which pacman 2>/dev/null)
+        # Arch Linux
+        sudo pacman -Syu
+      else if test (which nix-env 2>/dev/null)
+        # NixOS
+        sudo nixos-rebuild switch --upgrade
+      else if test (which apt 2>/dev/null)
+        # Ubuntu & Debian
+        sudo apt update
+        sudo apt upgrade
+      else if test (which dnf 2>/dev/null)
+        # Fedora & Red Hat
+        sudo dnf upgrade
+      end
+    case Darwin
+      set_color yellow; echo "-- Updating macOS software..."; set_color normal
+      softwareupdate -lia
+      test (which mas 2>/dev/null); and mas upgrade
 
-  if test (which brew)
-    set_color yellow; echo "-- Updating Homebrew packages..."; set_color normal
-    brew update
-    brew upgrade
+      if test (which brew 2>/dev/null)
+        set_color yellow; echo "-- Updating Homebrew packages..."; set_color normal
+        brew update
+        brew upgrade
+      end
+    case '*'
+      # nothing
   end
 
-  if test (which npm)
+  if test (which npm 2>/dev/null)
     set_color yellow; echo "-- Updating NPM packages..."; set_color normal
     npm update -g
   end
 
-  if test (which stack)
+  if test (which stack 2>/dev/null)
     set_color yellow; echo "-- Updating Haskell Stack packages..."; set_color normal
     stack update
   end
 
-  if test (which rustup)
+  if test (which rustup 2>/dev/null)
     set_color yellow; echo "-- Updating Rust..."; set_color normal
     rustup update
   end
 
-  if test (which nvim) -a -e $HOME/.config/nvim/autoload/plug.vim
+  if test (which nvim 2>/dev/null) -a -e $HOME/.config/nvim/autoload/plug.vim
     set_color yellow; echo "-- Updating Neovim packages..."; set_color normal
     nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
-  else if test (which vim) -a -e $HOME/.vim/autoload/plug.vim
+  else if test (which vim 2>/dev/null) -a -e $HOME/.vim/autoload/plug.vim
     set_color yellow; echo "-- Updating Vim packages..."; set_color normal
     vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
   end
 
   set_color yellow; echo "-- Updating Fish command completions..."; set_color normal
   fish_update_completions
-end
-
-# brew-install - Interactive Homebrew installer {{{2
-function brew-install -d "Interactive package installer"
-  if [ $argv[1] ]
-    set choice $argv[1]
-  else
-    set choice (brew search | fzf --reverse --preview "brew info {}" --preview-window=right:75%)
-  end
-  if [ $choice ]
-    brew install $choice
-  end
-end
-
-# cask-install - Interactive Homebrew Cask installer {{{2
-function cask-install -d "Interactive package installer"
-  if [ $argv[1] ]
-    set choice $argv[1]
-  else
-    set choice (brew cask search | fzf --reverse --preview "brew cask info {}" --preview-window=right:75%)
-  end
-  if [ $choice ]
-    brew cask install $choice
-  end
 end
 
 # rc - Open the specified program's configuration file {{{2
@@ -168,21 +178,15 @@ complete --command rc --require-parameter --no-files --arguments "vim neovim kak
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"
-  clang++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
+  if test (which clang++ 2>/dev/null)
+    clang++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
+  else
+    g++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
+  end
 end
 complete --command runcpp --require-parameter
 
 # }}}
-
-
-# ABBREVIATIONS {{{1
-if status --is-interactive
-  set -g fish_user_abbreviations
-  # abbr --add cask "brew cask"
-  # abbr --add ghc "stack ghc"
-  # abbr --add ghci "stack ghci"
-  # abbr --add runghc "stack runghc"
-end
 
 
 # PROMPT {{{1
@@ -277,6 +281,7 @@ set fish_color_error           red
 set fish_color_valid_path      --underline
 set fish_color_comment         brblack
 set fish_color_autosuggestion  brblack
+
 
 # iTERM {{{1
 if test -e $HOME/.config/fish/iterm2_shell_integration.fish

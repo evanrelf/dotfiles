@@ -63,7 +63,7 @@ Plug 'cohama/lexima.vim'
 " Plug 'zchee/deoplete-clang'
 
 " Syntax {{{2
-Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
+" Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 Plug 'sheerun/vim-polyglot'
@@ -201,6 +201,8 @@ set splitbelow
 set splitright
 set list
 set listchars=tab:▸\ ,nbsp:␣
+set number
+set colorcolumn=81
 
 " Indentation {{{2
 set smartindent
