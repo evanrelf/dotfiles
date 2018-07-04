@@ -28,6 +28,7 @@ end
 
 switch (uname)
   case Linux
+    # nothing
 
   case Darwin
     alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
@@ -157,6 +158,18 @@ function rc -d "Open the specified program's configuration file"
     case bash
       eval $EDITOR $HOME/.bashrc
 
+    # Window managers
+    case bspwm
+      eval $EDITOR $HOME/.config/bspwm/bspwmrc
+    case sxhkd
+      eval $EDITOR $HOME/.config/sxhkd/sxhkdrc
+
+    # Xorg
+    case xresources
+      eval $EDITOR $HOME/.Xresources
+    case xinit
+      eval $EDITOR $HOME/.xinitrc
+
     # Other
     case tmux
       eval $EDITOR $HOME/.tmux.conf
@@ -166,6 +179,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR $HOME/.hammerspoon/init.lua
     case alacritty
       eval $EDITOR $HOME/.config/alacritty/alacritty.yml
+    case nixos
+      eval sudo $EDITOR /etc/nixos/configuration.nix
 
     case "*"
       echo Not defined: $argv[1]
@@ -174,7 +189,7 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs ev fish zsh bash tmux git hammerspoon alacritty"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs fish zsh bash bspwm sxhkd xresources xinit tmux git hammerspoon alacritty nixos"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"
