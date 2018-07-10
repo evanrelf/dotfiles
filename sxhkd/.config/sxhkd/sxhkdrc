@@ -1,9 +1,10 @@
+#
 # wm independent hotkeys
 #
 
 # terminal emulator
 super + Return
-  urxvt
+  urxvtc
 
 # program launcher
 super + @space
