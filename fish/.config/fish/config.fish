@@ -163,6 +163,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR $HOME/.config/bspwm/bspwmrc
     case sxhkd
       eval $EDITOR $HOME/.config/sxhkd/sxhkdrc
+    case xmonad
+      eval $EDITOR $HOME/.config/xmonad/xmonad.hs
 
     # Xorg
     case xresources
@@ -180,7 +182,7 @@ function rc -d "Open the specified program's configuration file"
     case alacritty
       eval $EDITOR $HOME/.config/alacritty/alacritty.yml
     case nixos
-      eval sudo $EDITOR /etc/nixos/configuration.nix
+      eval sudoedit /etc/nixos/configuration.nix
 
     case "*"
       echo Not defined: $argv[1]
@@ -189,7 +191,7 @@ function rc -d "Open the specified program's configuration file"
     echo No argument
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs fish zsh bash bspwm sxhkd xresources xinit tmux git hammerspoon alacritty nixos"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty nixos"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output"

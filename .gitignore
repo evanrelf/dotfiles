@@ -1,3 +1,10 @@
 # macOS
 .DS_Store
 .localized
+
+# fish
+/fish/.config/fish/fishd.*
+
+# neovim
+neovim/.config/nvim/plugged
+neovim/.config/nvim/autoload

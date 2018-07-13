@@ -1,11 +1,13 @@
 #!/bin/sh
 
+# Launching other things
 sxhkd &
-urxvtd &
-urxvtc
 setxkbmap -option caps:escape
-xset r rate 150 30
+xset r rate 200 30
+feh --bg-scale ~/.wallpaper.jpg &
 
+
+# bspwm config
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width 2
