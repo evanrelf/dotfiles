@@ -47,30 +47,6 @@ switch (uname)
     end
     complete --command iso2img --require-parameter
 
-    # brew-install - Interactive Homebrew installer {{{2
-    function brew-install -d "Interactive package installer"
-      if [ $argv[1] ]
-        set choice $argv[1]
-      else
-        set choice (brew search | fzf --reverse --preview "brew info {}" --preview-window=right:75%)
-      end
-      if [ $choice ]
-        brew install $choice
-      end
-    end
-
-    # cask-install - Interactive Homebrew Cask installer {{{2
-    function cask-install -d "Interactive package installer"
-      if [ $argv[1] ]
-        set choice $argv[1]
-      else
-        set choice (brew cask search | fzf --reverse --preview "brew cask info {}" --preview-window=right:75%)
-      end
-      if [ $choice ]
-        brew cask install $choice
-      end
-    end
-    # }}}2
   case '*'
     # nothing
 end

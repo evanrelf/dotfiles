@@ -31,16 +31,15 @@ endif
 call plug#begin()
 
 " Appearance {{{2
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
 " Editing {{{2
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'tomtom/tcomment_vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
-Plug 'dhruvasagar/vim-table-mode'
 
 " Movement {{{2
 Plug 'junegunn/vim-slash'
@@ -50,34 +49,23 @@ Plug 'vim-utils/vim-husk'
 " Navigation {{{2
 Plug 'junegunn/fzf', { 'do': './install --bin' } | Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
 Plug 'justinmk/vim-gtfo'
+Plug 'airblade/vim-rooter'
 
-" Auto-complete {{{2
+" Intelligence {{{2
+Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
 Plug 'cohama/lexima.vim'
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim' | Plug 'roxma/nvim-yarp' | Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" Plug 'eagletmt/neco-ghc'
-" Plug 'zchee/deoplete-clang'
 
 " Syntax {{{2
-" Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-
 Plug 'sheerun/vim-polyglot'
 Plug 'othree/yajs.vim'
-Plug 'elmcast/elm-vim'
-Plug 'leafo/moonscript-vim'
 Plug 'kid-icarus/vim-blockify'
 Plug 'ap/vim-css-color'
 
 " Miscellaneous {{{2
-Plug 'mhinz/vim-sayonara'
 Plug 'tpope/vim-eunuch'
 Plug 'pbrisbin/vim-mkdir'
-Plug 'wincent/terminus'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'sickill/vim-pasta'
 Plug 'Carpetsmoker/undofile_warn.vim'
@@ -98,7 +86,7 @@ let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/5.0.0/lib/l
 
 " lightline
 let g:lightline = {}
-let g:lightline = { 'colorscheme': 'iceberg' }
+let g:lightline = { 'colorscheme': 'PaperColor' }
 let g:lightline.component_expand = {
       \   'linter_warnings': 'lightline#ale#warnings',
       \   'linter_errors': 'lightline#ale#errors',
@@ -113,12 +101,6 @@ let g:lightline.active = { 'right': [['lineinfo'], ['percent'], ['linter_errors'
 " ale
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_linters = {
-\   'haskell': ['stack-ghc-mod', 'hlint', 'stack-build', 'stack-ghc']
-\ }
-let g:ale_fixers = {
-\   'cpp': ['clang-format']
-\ }
 let g:ale_lua_luacheck_options = '--std _G+love'
 
 " fzf
@@ -140,10 +122,9 @@ let g:fzf_colors = {
   \ }
 
 " Other
-let g:multi_cursor_exit_from_insert_mode = 0
-let g:polyglot_disabled = ['javascript', 'jsx', 'graphql', 'elm']
+" runtime macros/sandwich/keymap/surround.vim
+let g:polyglot_disabled = ['javascript', 'jsx']
 let g:undofile_warn_mode = 2
-let g:table_mode_corner="|"
 " }}}2
 
 
@@ -192,8 +173,8 @@ endif
 
 " Apperance {{{2
 set termguicolors
-set background=dark
-colorscheme iceberg
+set background=light
+colorscheme PaperColor
 set noshowmode
 set title
 set shortmess=filmxTWIc
@@ -257,27 +238,10 @@ command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Reload source $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
+command! Bg let &background=(&background == "dark" ? "light" : "dark")
 
 
 " MAPPINGS {{{1
-" Leader {{{2
-map <Space> <Leader>
-noremap <Leader>q :Sayonara<CR>
-noremap <Leader>Q :Sayonara!<CR>
-noremap <Leader>w :update<CR>
-nnoremap <Leader>s :%s/
-xnoremap <Leader>s :s/
-nmap <Leader>; m`gcc``
-xmap <Leader>; gcgv
-noremap <Leader>b :ls<CR>:b<Space>
-noremap <Leader><Space> :<C-u>Files<CR>
-noremap <Leader>/ :<C-u>Lines<CR>
-noremap <Leader>h :<C-u>Helptags<CR>
-map <Leader>en <Plug>(ale_next_wrap)
-map <Leader>ep <Plug>(ale_previous_wrap)
-map <Leader>ei <Plug>(ale_detail)
-
-" Normal & Visual {{{2
 noremap ; :
 noremap : ;
 noremap Y y$
@@ -285,48 +249,52 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
-noremap ' `
-nnoremap gp `[v`]
-noremap Q @@
-noremap <Tab> zo
-noremap <S-Tab> zc
-noremap <silent> <C-Tab> :<C-u>bnext<CR>
-noremap <silent> <C-S-Tab> :<C-u>bprev<CR>
-noremap <C-l> :<C-u>redraw!<CR>
-map y <Plug>(operator-flashy)
-
-" Normal {{{2
-nnoremap J m`J``
-nmap ga <Plug>(EasyAlign)
-nmap Y <Plug>(operator-flashy)$
-
-" Visual {{{2
 xnoremap > >gv
 xnoremap < <gv
-xnoremap gp <Esc>`[v`]
+nnoremap J m`J``
 xnoremap p "_dP
 xnoremap P p
-xmap ga <Plug>(EasyAlign)
 
-" Insert {{{2
-inoremap <C-c> <Nop>
-inoremap <C-l> <C-o>:redraw!<CR>
-inoremap <silent> <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+noremap Q @@
+nnoremap gp `[v`]
+xnoremap gp <Esc>`[v`]
+noremap gb :let &background=(&background == "dark" ? "light" : "dark")<CR>
 
-" Command {{{2
+noremap <Tab> zo
+noremap <S-Tab> zc
 
-
-" Terminal {{{2
 tnoremap <Esc> <C-\><C-n>
 
-" Disabled {{{2
+map <Space> <Leader>
+nnoremap <Leader>s :%s/
+xnoremap <Leader>s :s/
+
+" EasyAlign
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+" FZF
+noremap <Leader><Space> :<C-u>Files<CR>
+noremap <Leader>/ :<C-u>BLines<CR>
+noremap <Leader>h :<C-u>Helptags<CR>
+noremap <Leader>b :<C-u>Buffers<CR>
+
+" ALE
+map <Leader>en <Plug>(ale_next_wrap)
+map <Leader>ep <Plug>(ale_previous_wrap)
+map <Leader>ei <Plug>(ale_detail)
+
+" vim-operator-flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+
+" Disabled
 nnoremap U <Nop>
 noremap M <Nop>
 noremap S <Nop>
 noremap X <Nop>
+inoremap <C-c> <Nop>
 
-" }}}2
 
 " AUTOCOMMANDS {{{1
 augroup FileTypeSettings " {{{2
@@ -368,6 +336,11 @@ augroup END
 augroup FormatOptions " {{{2
   autocmd!
   autocmd FileType * set formatoptions=cqnj
+augroup END
+
+augroup NERDTree " {{{2
+  autocmd!
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " }}}2
