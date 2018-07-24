@@ -3,6 +3,10 @@
 # VARIABLES {{{1
 set -x EDITOR nvim
 set -x MANPAGER "nvim -c 'set ft=man' -"
+set -U FZF_LEGACY_KEYBINDINGS 0
+# set -U FZF_FIND_FILE_COMMAND "rg --files --hidden -g '!*/.git/*'"
+set -U FZF_FIND_FILE_COMMAND "ag -l --hidden --ignore .git"
+set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
 
 set -l paths $HOME/.cargo/bin $HOME/.local/bin
 for i in $paths
@@ -18,6 +22,10 @@ end
 
 # COMMANDS {{{1
 alias reload "source $HOME/.config/fish/config.fish"
+
+alias e "emacsclient -t -a ''"
+alias eg "emacsclient -cn -a ''"
+
 if test (which exa 2>/dev/null)
   alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
   alias ll "exa -aFl --ignore-glob .DS_Store --group-directories-first"
@@ -31,11 +39,17 @@ switch (uname)
     # nothing
 
   case Darwin
-    alias refresh "killall SystemUIServer; killall Dock; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
+    alias refresh "killall SystemUIServer; killall Dock; killall Finder; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
     alias cask "brew cask"
-    alias rm "trash"
-    alias tower "gittower ."
-    alias marked "open -a Marked\ 2.app"
+    if test (which trash 2>/dev/null)
+      alias rm "trash"
+    end
+    if test (which gittower 2>/dev/null)
+      alias tower "gittower ."
+    end
+    if test -e /Applications/Marked\ 2.app
+      alias marked "open -a Marked\ 2.app"
+    end
 
     # iso2img - Convert an ISO to an IMG {{{2
     function iso2img -d "Convert an ISO to an IMG"
@@ -46,6 +60,7 @@ switch (uname)
       end
     end
     complete --command iso2img --require-parameter
+    # }}}2
 
   case '*'
     # nothing
@@ -162,22 +177,26 @@ function rc -d "Open the specified program's configuration file"
 
     case "*"
       echo Not defined: $argv[1]
+      return 1
   end
   else
     echo No argument
+    return 1
   end
 end
 complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty nixos"
 
 # runcpp - Run C++ file and then delete output {{{2
-function runcpp -d "Run C++ file and then delete output"
+function runcpp -d "Run C++ file and then delete output" -w clang++
   if test (which clang++ 2>/dev/null)
     clang++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
-  else
+  else if test (which g++ 2>/dev/null)
     g++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
+  else
+    echo "No C++ compiler installed"
+    return 1
   end
 end
-complete --command runcpp --require-parameter
 
 # }}}
 

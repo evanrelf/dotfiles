@@ -100,6 +100,11 @@ local function wm()
     window():centerOnScreen()
   end)
 
+  -- Fn + Backspace -> Delete
+  hs.hotkey.bind(hyper, "delete", function()
+    hs.eventtap.keyStroke({}, "forwarddelete")
+  end)
+
   -- Undo
   hs.hotkey.bind(hyper, "Z", function()
     local undo = popUndo()

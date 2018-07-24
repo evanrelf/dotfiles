@@ -55,6 +55,10 @@ Plug 'airblade/vim-rooter'
 
 " Intelligence {{{2
 Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': './install.sh'
+      \ }
 Plug 'cohama/lexima.vim'
 
 " Syntax {{{2
@@ -102,6 +106,12 @@ let g:lightline.active = { 'right': [['lineinfo'], ['percent'], ['linter_errors'
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lua_luacheck_options = '--std _G+love'
+
+" languageclient
+let g:LanguageClient_serverCommands = {
+      \ 'haskell': ['stack', 'exec', '--', 'hie-wrapper', '--lsp'],
+      \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/var/cquery/"}']
+      \ }
 
 " fzf
 let g:fzf_layout = { 'down': '~20%' }
@@ -173,7 +183,7 @@ endif
 
 " Apperance {{{2
 set termguicolors
-set background=light
+set background=dark
 colorscheme PaperColor
 set noshowmode
 set title
@@ -184,6 +194,7 @@ set list
 set listchars=tab:▸\ ,nbsp:␣
 set number
 set colorcolumn=81
+" set cmdheight=2
 
 " Indentation {{{2
 set smartindent
@@ -269,6 +280,9 @@ map <Space> <Leader>
 nnoremap <Leader>s :%s/
 xnoremap <Leader>s :s/
 
+" NERDTree
+noremap <Leader>t :NERDTreeToggle<CR>
+
 " EasyAlign
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -283,6 +297,9 @@ noremap <Leader>b :<C-u>Buffers<CR>
 map <Leader>en <Plug>(ale_next_wrap)
 map <Leader>ep <Plug>(ale_previous_wrap)
 map <Leader>ei <Plug>(ale_detail)
+
+" LanguageClient
+nnoremap <Leader>lc :call LanguageClient_contextMenu()<CR>
 
 " vim-operator-flashy
 map y <Plug>(operator-flashy)
@@ -325,10 +342,10 @@ augroup FileTypeSettings " {{{2
         \ | nnoremap <silent> <buffer> <Leader>3 :s/\v^#+ //e<CR>I### <Esc>
         \ | nnoremap <silent> <buffer> <Leader>4 :s/\v^#+ //e<CR>I#### <Esc>
   " Haskell
-  autocmd FileType haskell
-        \   setlocal omnifunc=necoghc#omnifunc
-        " \ | ALEDisable
-        " \ | Ghcid
+  " autocmd FileType haskell
+  "       \   setlocal omnifunc=necoghc#omnifunc
+  "       \ | ALEDisable
+  "       \ | Ghcid
   " LÖVE
   autocmd FileType lua,moon nnoremap <buffer> K :silent !open . -a love.app<CR>
 augroup END
