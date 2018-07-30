@@ -3,8 +3,12 @@
 .localized
 
 # fish
-/fish/.config/fish/fishd.*
+/fish/.config/fish/*
+!/fish/.config/fish/config.fish
+!/fish/.config/fish/fishfile
+!/fish/.config/fish/iterm2_shell_integration.fish
 
 # neovim
-neovim/.config/nvim/plugged
-neovim/.config/nvim/autoload
+/neovim/.config/nvim/*
+!/neovim/.config/nvim/init.vim
+!/neovim/.config/nvim/old-init.vim
