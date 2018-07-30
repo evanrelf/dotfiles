@@ -4,7 +4,6 @@
 set -x EDITOR nvim
 set -x MANPAGER "nvim -c 'set ft=man' -"
 set -U FZF_LEGACY_KEYBINDINGS 0
-# set -U FZF_FIND_FILE_COMMAND "rg --files --hidden -g '!*/.git/*'"
 set -U FZF_FIND_FILE_COMMAND "ag -l --hidden --ignore .git"
 set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
 
@@ -24,7 +23,7 @@ end
 alias reload "source $HOME/.config/fish/config.fish"
 
 alias e "emacsclient -t -a ''"
-alias eg "emacsclient -cn -a ''"
+alias eg "emacsclient -cn -a ''; and open -a Emacs"
 
 if test (which exa 2>/dev/null)
   alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
@@ -200,6 +199,9 @@ end
 
 # }}}
 
+abbr --add ghc "stack ghc"
+abbr --add ghci "stack ghci"
+abbr --add runghc "stack runghc"
 
 # PROMPT {{{1
 set -g fish_greeting

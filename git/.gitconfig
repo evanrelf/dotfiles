@@ -1,35 +1,11 @@
 [user]
 	name = Evan Relf
 	email = evan@evanrelf.com
-	# signingkey = CBBFDFF349BC66D7
 [core]
 	editor = nvim
-[alias]
-	c = commit
-	co = checkout
-	b = branch
-	s = status
-	l = log
 [push]
 	default = current
 [credential]
 	helper = osxkeychain
 [color]
 	ui = auto
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
-[merge]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
-[mergetool]
-	prompt = false
-[diff]
-	tool = Kaleidoscope
-# [commit]
-# 	gpgsign = true
-# [gpg]
-# 	program = /usr/local/bin/gpg
