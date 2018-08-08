@@ -1,27 +1,35 @@
+" META {{{1
+" vim: foldenable foldmethod=marker
+
+" Evan Relf's Neovim config
+" https://github.com/evanrelf/dotfiles/
+
+
 " PLUGINS {{{1
 call plug#begin()
 
 " Appearance {{{2
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'junegunn/goyo.vim'
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
 " Editing {{{2
-Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-sandwich'
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'michaeljsmith/vim-indent-object'
 
 " Navigation {{{2
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'qpkorr/vim-bufkill'
 
 " Movement {{{2
 Plug 'wellle/targets.vim'
 Plug 'critiqjo/husk-x.vim'
+Plug 'junegunn/vim-slash'
 
 " Intelligence {{{2
 Plug 'lifepillar/vim-mucomplete'
@@ -33,13 +41,12 @@ Plug 'sickill/vim-pasta'
 " Syntax {{{2
 Plug 'sheerun/vim-polyglot'
 Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
+Plug 'tpope/vim-sleuth'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Miscellaneous {{{2
 Plug 'vimlab/split-term.vim'
-Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-sleuth'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'Carpetsmoker/undofile_warn.vim'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-repeat'
@@ -50,6 +57,9 @@ Plug 'Konfekt/FastFold'
 call plug#end()
 
 " Plugin settings {{{2
+" PaperColor
+let g:PaperColor_Theme_Options = { 'theme': { 'default': { 'allow_bold': 0 } } }
+
 " lightline
 let g:lightline = { 'colorscheme': 'PaperColor' }
 
@@ -62,10 +72,7 @@ let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#delayed_completion = 1
 
 " Neomake
-call neomake#configure#automake('rw', 1000)
-
-" intero-neovim
-let g:intero_type_on_hover = 1
+" call neomake#configure#automake('rw', 1000)
 
 " split-term
 let g:disable_key_mappings = 1
@@ -78,6 +85,12 @@ let g:undofile_warn_mode = 2
 
 " SETTINGS {{{1
 " Apperance {{{2
+augroup ColorSchemes " {{{2
+  autocmd!
+  autocmd ColorScheme *
+        \   highlight CursorLineNr NONE
+        \ | highlight link CursorLineNr Normal
+augroup END " }}}2
 set termguicolors
 set background=dark
 colorscheme PaperColor
@@ -91,6 +104,26 @@ set listchars=tab:▸\ ,nbsp:␣
 set number
 set numberwidth=2
 set colorcolumn=81
+
+" Status line {{{2
+set statusline=
+set statusline+=%#Cursor#
+" Mode
+set statusline+=\ %{SL_Mode()}
+set statusline+=\ %#CursorLine#
+" File path
+set statusline+=\ %f\ %m\%r
+" Separator
+set statusline+=%=
+" File format
+set statusline+=\ %{&fileformat}
+" File encoding
+set statusline+=\ \|\ %{strlen(&fileencoding)?&fileencoding:'-'}
+" Filetype
+set statusline+=\ \|\ %{strlen(&filetype)?&filetype:'-'}
+set statusline+=\ %#Cursor#
+" Cursor position
+set statusline+=\ %3l:%-3v
 
 " Indentation {{{2
 set expandtab
@@ -137,11 +170,44 @@ set inccommand=nosplit
 " }}}2
 
 
+" FUNCTIONS {{{1
+function! SL_Mode() abort
+  let l:mode = mode()
+  if l:mode ==# 'n'
+    return 'NORMAL'
+  elseif l:mode ==# 'i'
+    return 'INSERT'
+  elseif l:mode ==# 'v'
+    return 'VISUAL'
+  elseif l:mode ==# 'V'
+    return "V-LINE"
+  elseif l:mode ==# ''
+    return "V-BLOCK"
+  elseif l:mode ==# 'R'
+    return 'REPLACE'
+  elseif l:mode ==# 'c'
+    return 'COMMAND'
+  elseif l:mode ==# 't'
+    return 'TERMINAL'
+  else
+    return l:mode
+  endif
+endfunction
+
+function! CommandCabbr(abbreviation, expansion) abort
+  silent execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
+endfunction
+command! -nargs=+ Command call CommandCabbr(<f-args>)
+
+
 " COMMANDS {{{1
 command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == "dark" ? "light" : "dark")
+command! Ghcid 60VTerm ghcid
+
+Command w update
 
 
 " MAPPINGS {{{1
@@ -166,6 +232,11 @@ xnoremap gp <Esc>`[v`]
 nnoremap <Tab> zo
 nnoremap <S-Tab> zc
 
+noremap <C-Tab> :<C-u>bnext<CR>
+noremap <C-S-Tab> :<C-u>bprev<CR>
+inoremap <C-Tab> :<C-u>bnext<CR>
+inoremap <C-S-Tab> :<C-u>bprev<CR>
+
 tnoremap <Esc> <C-\><C-n>
 
 " Leader {{{2
@@ -177,18 +248,23 @@ nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
 nnoremap <Leader>G :%g!/
 xnoremap <Leader>G :g!/
-noremap <Leader>bb :<C-u>Buffers<CR>
-noremap <Leader><Tab> :<C-u>b#<CR>
-noremap <Leader>bn :<C-u>bnext<CR>
-noremap <Leader>bp :<C-u>bprev<CR>
-noremap <Leader>bd :<C-u>bdelete<CR>
-noremap <Leader>fs :<C-u>update<CR>
-noremap <Leader>qq :<C-u>qa<CR>
+
+" FZF
 noremap <Leader>h :<C-u>Helptags<CR>
 noremap <Leader>f :<C-u>Files<CR>
 noremap <Leader>/ :<C-u>BLines<CR>
+
+" Terminal
 noremap <Leader>t :<C-u>Term<CR>
 noremap <Leader>T :<C-u>VTerm<CR>
+
+" Spacemacs
+noremap <Leader>bb :<C-u>Buffers<CR>
+noremap <Leader><Tab> :<C-u>b#<CR>
+noremap <Leader>bn :<C-u>BF<CR>
+noremap <Leader>bp :<C-u>BB<CR>
+noremap <Leader>bd :<C-u>BUN<CR>
+noremap <Leader>qq :<C-u>qa<CR>
 
 " Plugins {{{2
 " EasyAlign
@@ -198,6 +274,9 @@ xmap ga <Plug>(EasyAlign)
 " vim-operator-flashy
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
+
+" Neoformat
+xnoremap gQ :Neoformat<CR>
 
 " Disabled {{{2
 nnoremap U <Nop>
@@ -226,7 +305,12 @@ augroup FileTypeSettings " {{{2
         \   setlocal nonumber
         \ | setlocal norelativenumber
         \ | startinsert
-  " Man pager
+        \ | noremap <buffer> <C-c> I<C-c>
+  " dirvish
+  autocmd FileType dirvish
+        \   noremap <buffer> u u
+        \ | noremap <buffer> <C-r> <C-r>
+  " Man pages
   autocmd FileType man
         \   setlocal laststatus=0
         \ | noremap <buffer> h <Nop>
@@ -248,5 +332,4 @@ augroup END
 " }}}2
 
 
-" vim: foldenable foldmethod=marker
 " }}}1

@@ -7,6 +7,7 @@
 !/fish/.config/fish/config.fish
 !/fish/.config/fish/fishfile
 !/fish/.config/fish/iterm2_shell_integration.fish
+!/fish/.config/fish/functions/fisher.fish
 
 # neovim
 /neovim/.config/nvim/*

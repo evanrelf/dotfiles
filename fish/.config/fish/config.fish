@@ -26,11 +26,14 @@ alias e "emacsclient -t -a ''"
 alias eg "emacsclient -cn -a ''; and open -a Emacs"
 
 if test (which exa 2>/dev/null)
-  alias ls "exa -aF --ignore-glob .DS_Store --group-directories-first"
-  alias ll "exa -aFl --ignore-glob .DS_Store --group-directories-first"
-  alias tree "exa -aF --tree --git-ignore --ignore-glob=.DS_Store\|.git --group-directories-first"
+  alias ls "exa --group-directories-first"
+  alias tree "exa --tree --group-directories-first"
 else
   alias ls "ls -AFGh"
+end
+
+if test (which hub 2>/dev/null)
+  alias git "hub"
 end
 
 switch (uname)
@@ -130,47 +133,49 @@ function rc -d "Open the specified program's configuration file"
     switch $argv[1]
     # Editors
     case vim vi
-      eval $EDITOR $HOME/.vimrc
+      eval $EDITOR "$HOME/.vimrc"
     case neovim nvim
-      eval $EDITOR $HOME/.config/nvim/init.vim
+      eval $EDITOR "$HOME/.config/nvim/init.vim"
     case kakoune kak
-      eval $EDITOR $HOME/.config/kak/kakrc
+      eval $EDITOR "$HOME/.config/kak/kakrc"
     case emacs
-      eval $EDITOR $HOME/.emacs
+      eval $EDITOR "$HOME/.emacs"
     case spacemacs
-      eval $EDITOR $HOME/.spacemacs
+      eval $EDITOR "$HOME/.spacemacs"
+    case vscode
+      eval $EDITOR "$HOME/Library/Application\ Support/Code/User/settings.json"
 
     # Shells
     case fish
-      eval $EDITOR $HOME/.config/fish/config.fish
+      eval $EDITOR "$HOME/.config/fish/config.fish"
     case zsh
-      eval $EDITOR $HOME/.zshrc
+      eval $EDITOR "$HOME/.zshrc"
     case bash
-      eval $EDITOR $HOME/.bashrc
+      eval $EDITOR "$HOME/.bashrc"
 
     # Window managers
     case bspwm
-      eval $EDITOR $HOME/.config/bspwm/bspwmrc
+      eval $EDITOR "$HOME/.config/bspwm/bspwmrc"
     case sxhkd
-      eval $EDITOR $HOME/.config/sxhkd/sxhkdrc
+      eval $EDITOR "$HOME/.config/sxhkd/sxhkdrc"
     case xmonad
-      eval $EDITOR $HOME/.config/xmonad/xmonad.hs
+      eval $EDITOR "$HOME/.config/xmonad/xmonad.hs"
 
     # Xorg
     case xresources
-      eval $EDITOR $HOME/.Xresources
+      eval $EDITOR "$HOME/.Xresources"
     case xinit
-      eval $EDITOR $HOME/.xinitrc
+      eval $EDITOR "$HOME/.xinitrc"
 
     # Other
     case tmux
-      eval $EDITOR $HOME/.tmux.conf
+      eval $EDITOR "$HOME/.tmux.conf"
     case git
-      eval $EDITOR $HOME/.gitconfig
+      eval $EDITOR "$HOME/.gitconfig"
     case hammerspoon
-      eval $EDITOR $HOME/.hammerspoon/init.lua
+      eval $EDITOR "$HOME/.hammerspoon/init.lua"
     case alacritty
-      eval $EDITOR $HOME/.config/alacritty/alacritty.yml
+      eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
     case nixos
       eval sudoedit /etc/nixos/configuration.nix
 
@@ -183,7 +188,7 @@ function rc -d "Open the specified program's configuration file"
     return 1
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty nixos"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs vscode fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty nixos"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output" -w clang++
