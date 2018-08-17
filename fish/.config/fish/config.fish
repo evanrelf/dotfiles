@@ -14,10 +14,6 @@ for i in $paths
   end
 end
 
-if status --is-interactive
-  set -g fish_user_abbreviations
-end
-
 
 # COMMANDS {{{1
 alias reload "source $HOME/.config/fish/config.fish"
@@ -25,14 +21,14 @@ alias reload "source $HOME/.config/fish/config.fish"
 alias e "emacsclient -t -a ''"
 alias eg "emacsclient -cn -a ''; and open -a Emacs"
 
-if test (which exa 2>/dev/null)
+if test (command -s exa)
   alias ls "exa --group-directories-first"
   alias tree "exa --tree --group-directories-first"
 else
   alias ls "ls -AFGh"
 end
 
-if test (which hub 2>/dev/null)
+if test (command -s hub)
   alias git "hub"
 end
 
@@ -41,27 +37,70 @@ switch (uname)
     # nothing
 
   case Darwin
-    alias refresh "killall SystemUIServer; killall Dock; killall Finder; killall ControlStrip; pkill \"Touch Bar agent\"; defaults write com.apple.dock ResetLaunchPad -bool true"
     alias cask "brew cask"
-    if test (which trash 2>/dev/null)
+
+    if test (command -s trash)
       alias rm "trash"
     end
-    if test (which gittower 2>/dev/null)
+
+    if test (command -s gittower)
       alias tower "gittower ."
     end
+
     if test -e /Applications/Marked\ 2.app
       alias marked "open -a Marked\ 2.app"
     end
 
+    # refresh - Restart system applications {{{2
+    function refresh -d "Restart system applications"
+      defaults write com.apple.dock ResetLaunchPad -bool true 2>/dev/null; or echo "Failed to kill SystemUIServer" >&2
+      killall SystemUIServer 2>/dev/null; or echo "Failed to kill SystemUIServer" >&2
+      killall Dock 2>/dev/null; or echo "Failed to kill Dock" >&2
+      killall Finder 2>/dev/null; or echo "Failed to kill Finder" >&2
+      killall ControlStrip 2>/dev/null; or echo "Failed to kill ControlStrip" >&2
+    end
+
+    # rmds - Remove .DS_Store files recursively from current directory {{{2
+    function rmds -d "Remove .DS_Store files recursively from current directory"
+      if test (command -s fd)
+        echo "Searching..."
+        set -l files (fd --hidden --no-ignore --case-sensitive --absolute-path --exclude '.Trash' .DS_Store)
+        if test (count $files) -gt 0
+          for i in $files
+            rm "$i"
+            and echo "Removed $i"
+            or echo "* Failed to remove $i" >&2
+          end
+        else
+          echo "No .DS_Store files found" >&2
+          return 1
+        end
+      else
+        echo "fd not installed" >&2
+        return 1
+      end
+    end
+
     # iso2img - Convert an ISO to an IMG {{{2
     function iso2img -d "Convert an ISO to an IMG"
-      for iso in $argv
-        hdiutil convert -format UDRW -o "$iso.img" "$iso"
-        mv "$iso.img.dmg" "$iso.img"
-        mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
+      if test (count $argv) -gt 0
+        for iso in $argv
+          hdiutil convert -format UDRW -o "$iso.img" "$iso"
+          and mv "$iso.img.dmg" "$iso.img"
+          and mv "$iso.img" (echo "$iso.img" | sed "s/\.iso//")
+        end
+      else
+        echo "No ISO files specified" >&2
+        return 1
       end
     end
     complete --command iso2img --require-parameter
+
+    # pman - Open man page as PDF in Preview {{{2
+    function pman -d "Open man page as PDF in Preview" -w man
+      man -t $argv[1] | open -f -a Preview
+    end
+
     # }}}2
 
   case '*'
@@ -72,27 +111,33 @@ end
 function update -d "Run all update commands"
   switch (uname)
     case Linux
-      if test (which pacman 2>/dev/null)
+      if test (command -s pacman)
         # Arch Linux
+        set_color yellow; echo "== Updating Arch Linux packages"; set_color normal
         sudo pacman -Syu
-      else if test (which nix-env 2>/dev/null)
+      else if test (command -s nix-env)
         # NixOS
+        set_color yellow; echo "== Updating NixOS derivations"; set_color normal
+        nix-channel --update
+        nix-env --upgrade
         sudo nixos-rebuild switch --upgrade
-      else if test (which apt 2>/dev/null)
+      else if test (command -s apt)
         # Ubuntu & Debian
+        set_color yellow; echo "== Updating Ubuntu/Debian packages"; set_color normal
         sudo apt update
         sudo apt upgrade
-      else if test (which dnf 2>/dev/null)
+      else if test (command -s dnf)
         # Fedora & Red Hat
+        set_color yellow; echo "== Updating Fedora/Red Hat packages"; set_color normal
         sudo dnf upgrade
       end
     case Darwin
-      set_color yellow; echo "-- Updating macOS software..."; set_color normal
+      set_color yellow; echo "== Updating macOS software"; set_color normal
       softwareupdate -lia
-      test (which mas 2>/dev/null); and mas upgrade
+      test (command -s mas); and mas upgrade
 
-      if test (which brew 2>/dev/null)
-        set_color yellow; echo "-- Updating Homebrew packages..."; set_color normal
+      if test (command -s brew)
+        set_color yellow; echo "== Updating Homebrew packages"; set_color normal
         brew update
         brew upgrade
       end
@@ -100,30 +145,30 @@ function update -d "Run all update commands"
       # nothing
   end
 
-  if test (which npm 2>/dev/null)
-    set_color yellow; echo "-- Updating NPM packages..."; set_color normal
+  if test (command -s npm)
+    set_color yellow; echo "== Updating NPM packages"; set_color normal
     npm update -g
   end
 
-  if test (which stack 2>/dev/null)
-    set_color yellow; echo "-- Updating Haskell Stack packages..."; set_color normal
+  if test (command -s stack)
+    set_color yellow; echo "== Updating Haskell Stack packages"; set_color normal
     stack update
   end
 
-  if test (which rustup 2>/dev/null)
-    set_color yellow; echo "-- Updating Rust..."; set_color normal
+  if test (command -s rustup)
+    set_color yellow; echo "== Updating Rust"; set_color normal
     rustup update
   end
 
-  if test (which nvim 2>/dev/null) -a -e $HOME/.config/nvim/autoload/plug.vim
-    set_color yellow; echo "-- Updating Neovim packages..."; set_color normal
+  if test (command -s nvim) -a -e $HOME/.config/nvim/autoload/plug.vim
+    set_color yellow; echo "== Updating Neovim packages"; set_color normal
     nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
-  else if test (which vim 2>/dev/null) -a -e $HOME/.vim/autoload/plug.vim
-    set_color yellow; echo "-- Updating Vim packages..."; set_color normal
+  else if test (command -s vim) -a -e $HOME/.vim/autoload/plug.vim
+    set_color yellow; echo "== Updating Vim packages"; set_color normal
     vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
   end
 
-  set_color yellow; echo "-- Updating Fish command completions..."; set_color normal
+  set_color yellow; echo "== Updating Fish command completions"; set_color normal
   fish_update_completions
 end
 
@@ -180,11 +225,11 @@ function rc -d "Open the specified program's configuration file"
       eval sudoedit /etc/nixos/configuration.nix
 
     case "*"
-      echo Not defined: $argv[1]
+      echo "Not config defined for '$argv[1]'" >&2
       return 1
   end
   else
-    echo No argument
+    echo "No config specified" >&2
     return 1
   end
 end
@@ -192,21 +237,37 @@ complete --command rc --require-parameter --no-files --arguments "vim neovim kak
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output" -w clang++
-  if test (which clang++ 2>/dev/null)
-    clang++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
-  else if test (which g++ 2>/dev/null)
-    g++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]; and ./fish_runcpp.temp; rm fish_runcpp.temp
+  if test (command -s clang++)
+    echo "Compiling..."
+    clang++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]
+    and echo "Running..."
+    and ./fish_runcpp.temp
+    rm fish_runcpp.temp
+  else if test (command -s g++)
+    echo "Compiling..."
+    g++ -Wall -std=c++14 -o fish_runcpp.temp $argv[1]
+    and echo "Running..."
+    and ./fish_runcpp.temp
+    rm fish_runcpp.temp
   else
-    echo "No C++ compiler installed"
+    echo "No C++ compiler installed" >&2
     return 1
   end
 end
 
 # }}}
 
-abbr --add ghc "stack ghc"
-abbr --add ghci "stack ghci"
-abbr --add runghc "stack runghc"
+if status --is-interactive
+  set -g fish_user_abbreviations
+  abbr --add ghc "stack ghc"
+  abbr --add ghci "stack ghci"
+  abbr --add runghc "stack runghc"
+end
+
+function echo-replace
+  echo -ne "\e[0K\r$argv"
+end
+
 
 # PROMPT {{{1
 set -g fish_greeting
@@ -217,7 +278,8 @@ set __fish_git_prompt_showstashstate "true"
 
 # Helpers {{{
 set -g current_bg NONE
-set -g segment_separator \uE0B0
+# set -g segment_separator \uE0B0
+set -g segment_separator ""
 
 function prompt_segment -d "Function to draw a segment"
   set -l bg
@@ -277,14 +339,6 @@ function fish_prompt
     set -l git_text (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
     set -l git_bg black
     set -l git_fg white
-    # switch (string sub --length=1 --start=-1 $git_text)
-    #   case "+" "\*"
-    #     set git_bg yellow
-    #     set git_fg black
-    #   case "%"
-    #     set git_bg red
-    #     set git_fg black
-    # end
     prompt_segment $git_bg $git_fg (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
   end
 
@@ -293,13 +347,13 @@ end
 
 
 # COLORS {{{1
-set fish_color_command         blue
-set fish_color_param           normal
-set fish_color_quote           green
-set fish_color_error           red
-set fish_color_valid_path      --underline
-set fish_color_comment         brblack
-set fish_color_autosuggestion  brblack
+set fish_color_command blue
+set fish_color_param normal
+set fish_color_quote green
+set fish_color_error red
+set fish_color_valid_path --underline
+set fish_color_comment brblack
+set fish_color_autosuggestion brblack
 
 
 # iTERM {{{1

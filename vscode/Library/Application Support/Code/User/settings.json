@@ -1,4 +1,5 @@
 {
+    "breadcrumbs.enabled": true,
     "editor.cursorBlinking": "solid",
     "editor.find.autoFindInSelection": true,
     "editor.fontFamily": "PragmataPro",
@@ -30,6 +31,7 @@
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "dark-plus-syntax",
     "workbench.editor.showIcons": false,
+    "workbench.editor.showTabs": false,
     "workbench.iconTheme": "vs-minimal",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.statusBar.feedback.visible": false,

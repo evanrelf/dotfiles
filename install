@@ -1,37 +1,36 @@
 #!/usr/bin/env bash
 
-folder() { (set -x; mkdir -p "$1") }
-
 if ! [ -x "$(command -v stow)" ]; then
-  echo 'ERROR: stow is not installed' >&2
+  echo "ERROR: stow is not installed" >&2
   exit 1
 fi
 
 if [ $# -gt 0 ]; then
+  # Creates config folders if they don't already exist
   for i in "$@"; do
     case $i in
       bspwm )
-        folder "$HOME/.config/bspwm/";;
+        (set -x; mkdir -p "$HOME/.config/bspwm/");;
       fish )
-        folder "$HOME/.config/fish/functions/";;
+        (set -x; mkdir -p "$HOME/.config/fish/functions/");;
       hammerspoon )
-        folder "$HOME/.hammerspoon/";;
+        (set -x; mkdir -p "$HOME/.hammerspoon/");;
       kakoune )
-        folder "$HOME/.config/kak/";;
+        (set -x; mkdir -p "$HOME/.config/kak/");;
       neovim )
-        folder "$HOME/.config/nvim/";;
+        (set -x; mkdir -p "$HOME/.config/nvim/");;
       sxhkd )
-        folder "$HOME/.config/sxhkd/";;
+        (set -x; mkdir -p "$HOME/.config/sxhkd/");;
       vscode )
-        folder "$HOME/Library/Application Support/Code/User/";;
+        (set -x; mkdir -p "$HOME/Library/Application Support/Code/User/");;
       xmonad )
-        folder "$HOME/.config/xmonad/";;
+        (set -x; mkdir -p "$HOME/.config/xmonad/");;
       * )
         ;;
     esac
   done
   (set -x; stow --target "$HOME" -S "$@")
 else
-  echo "ERROR: No arguments" >&2
+  echo "Usage:  ./install package ..."
   exit 1
 fi

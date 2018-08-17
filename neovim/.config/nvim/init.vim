@@ -24,7 +24,6 @@ Plug 'michaeljsmith/vim-indent-object'
 " Navigation {{{2
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
-Plug 'qpkorr/vim-bufkill'
 
 " Movement {{{2
 Plug 'wellle/targets.vim'
@@ -33,13 +32,19 @@ Plug 'junegunn/vim-slash'
 
 " Intelligence {{{2
 Plug 'lifepillar/vim-mucomplete'
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
-Plug 'cohama/lexima.vim'
+" Plug 'cohama/lexima.vim'
+" Plug 'rstacruz/vim-closer'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
+Plug 'alvan/vim-closetag'
 Plug 'sickill/vim-pasta'
 
 " Syntax {{{2
 Plug 'sheerun/vim-polyglot'
+Plug 'lervag/vimtex'
 Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
 Plug 'tpope/vim-sleuth'
 Plug 'ntpeters/vim-better-whitespace'
@@ -49,6 +54,7 @@ Plug 'vimlab/split-term.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'Carpetsmoker/undofile_warn.vim'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'amiorin/vim-eval'
 Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 
@@ -60,8 +66,8 @@ call plug#end()
 " PaperColor
 let g:PaperColor_Theme_Options = { 'theme': { 'default': { 'allow_bold': 0 } } }
 
-" lightline
-let g:lightline = { 'colorscheme': 'PaperColor' }
+" polyglot
+let g:vim_markdown_new_list_item_indent = 0
 
 " gitgutter
 let g:gitgutter_map_keys = 0
@@ -71,8 +77,18 @@ set completeopt+=menuone,noselect
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#delayed_completion = 1
 
+" ALE
+let g:ale_lint_on_text_changed = 'never'
+" let g:ale_linters = { 'haskell': [] }
+
 " Neomake
 " call neomake#configure#automake('rw', 1000)
+
+" polyglot
+let g:polyglot_disabled = ['latex']
+
+" vimtex
+let g:vimtex_view_method = 'skim'
 
 " split-term
 let g:disable_key_mappings = 1
@@ -88,8 +104,8 @@ let g:undofile_warn_mode = 2
 augroup ColorSchemes " {{{2
   autocmd!
   autocmd ColorScheme *
-        \   highlight CursorLineNr NONE
-        \ | highlight link CursorLineNr Normal
+        \  highlight CursorLineNr NONE
+        \| highlight link CursorLineNr Normal
 augroup END " }}}2
 set termguicolors
 set background=dark
@@ -118,7 +134,7 @@ set statusline+=%=
 " File format
 set statusline+=\ %{&fileformat}
 " File encoding
-set statusline+=\ \|\ %{strlen(&fileencoding)?&fileencoding:'-'}
+set statusline+=\ \|\ %{strlen(&encoding)?&encoding:'-'}
 " Filetype
 set statusline+=\ \|\ %{strlen(&filetype)?&filetype:'-'}
 set statusline+=\ %#Cursor#
@@ -234,20 +250,32 @@ nnoremap <S-Tab> zc
 
 noremap <C-Tab> :<C-u>bnext<CR>
 noremap <C-S-Tab> :<C-u>bprev<CR>
-inoremap <C-Tab> :<C-u>bnext<CR>
-inoremap <C-S-Tab> :<C-u>bprev<CR>
+inoremap <C-Tab> <Esc>:<C-u>bnext<CR>
+inoremap <C-S-Tab> <Esc>:<C-u>bprev<CR>
+tnoremap <C-Tab> <C-\><C-n>:<C-u>bnext<CR>
+tnoremap <C-S-Tab> <C-\><C-n>:<C-u>bprev<CR>
 
 tnoremap <Esc> <C-\><C-n>
+tnoremap <C-w> <C-\><C-n><C-w>
+
+" EasyAlign
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+" vim-operator-flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 " Leader {{{2
 map <Space> <Leader>
-map <Leader>y "+y
 nnoremap <Leader>s :%s/
 xnoremap <Leader>s :s/
 nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
 nnoremap <Leader>G :%g!/
 xnoremap <Leader>G :g!/
+nnoremap <Leader>= :<C-u>Neoformat<CR>
+xnoremap <Leader>= :Neoformat<CR>
 
 " FZF
 noremap <Leader>h :<C-u>Helptags<CR>
@@ -257,26 +285,6 @@ noremap <Leader>/ :<C-u>BLines<CR>
 " Terminal
 noremap <Leader>t :<C-u>Term<CR>
 noremap <Leader>T :<C-u>VTerm<CR>
-
-" Spacemacs
-noremap <Leader>bb :<C-u>Buffers<CR>
-noremap <Leader><Tab> :<C-u>b#<CR>
-noremap <Leader>bn :<C-u>BF<CR>
-noremap <Leader>bp :<C-u>BB<CR>
-noremap <Leader>bd :<C-u>BUN<CR>
-noremap <Leader>qq :<C-u>qa<CR>
-
-" Plugins {{{2
-" EasyAlign
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-
-" vim-operator-flashy
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-
-" Neoformat
-xnoremap gQ :Neoformat<CR>
 
 " Disabled {{{2
 nnoremap U <Nop>
@@ -299,34 +307,43 @@ augroup FileTypeSettings " {{{2
   " Vim
   autocmd FileType vim,help setlocal keywordprg=:help
   autocmd FileType help
-        \   noremap <buffer> q :q<CR>
-        \ | nnoremap <buffer> <Esc> :q<CR>
+        \  noremap <buffer> q :q<CR>
+        \| nnoremap <buffer> <Esc> :q<CR>
+  " Terminal
   autocmd TermOpen *
-        \   setlocal nonumber
-        \ | setlocal norelativenumber
-        \ | startinsert
-        \ | noremap <buffer> <C-c> I<C-c>
+        \  setlocal nonumber norelativenumber
+        \| noremap <buffer> <C-c> i<C-c>
+        \| noremap <buffer> <C-d> i<C-d>
+  autocmd BufEnter,WinEnter term://* startinsert
   " dirvish
   autocmd FileType dirvish
-        \   noremap <buffer> u u
-        \ | noremap <buffer> <C-r> <C-r>
+        \  noremap <buffer> u u
+        \| noremap <buffer> <C-r> <C-r>
   " Man pages
   autocmd FileType man
-        \   setlocal laststatus=0
-        \ | noremap <buffer> h <Nop>
-        \ | noremap <buffer> j <C-e>L0
-        \ | noremap <buffer> k <C-y>H0
-        \ | noremap <buffer> l <Nop>
-  " Plugins
+        \  setlocal laststatus=0
+        \| noremap <buffer> h <Nop>
+        \| noremap <buffer> j <C-e>L0
+        \| noremap <buffer> k <C-y>H0
+        \| noremap <buffer> l <Nop>
+  " plug
   autocmd FileType vim-plug setlocal nonumber norelativenumber
+  " FZF
   autocmd FileType fzf
-        \   nnoremap <buffer> <Esc> :q<CR>
-        \ | nnoremap <buffer> q :q<CR>
+        \  nnoremap <buffer> <Esc> :q<CR>
+        \| nnoremap <buffer> q :q<CR>
+  " ALE
+  autocmd FileType ale-preview setlocal wrap nonumber norelativenumber
 augroup END
 
 augroup FormatOptions " {{{2
   autocmd!
   autocmd FileType * set formatoptions=cqnj
+augroup END
+
+augroup ResizeSplits " {{{2
+  autocmd!
+  autocmd VimResized * wincmd =
 augroup END
 
 " }}}2
