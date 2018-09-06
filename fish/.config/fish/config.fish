@@ -1,5 +1,7 @@
 # vim: foldmethod=marker foldenable
 
+status --is-interactive; and source (jump shell fish | psub)
+
 # VARIABLES {{{1
 set -x EDITOR nvim
 set -x MANPAGER "nvim -c 'set ft=man' -"
@@ -20,6 +22,8 @@ alias reload "source $HOME/.config/fish/config.fish"
 
 alias e "emacsclient -t -a ''"
 alias eg "emacsclient -cn -a ''; and open -a Emacs"
+
+alias pandochtml "pandoc -o output.html --to=html5 --css=\"$HOME/Docments/github.css\" --highlight-style=haddock --self-contained"
 
 if test (command -s exa)
   alias ls "exa --group-directories-first"
@@ -168,6 +172,11 @@ function update -d "Run all update commands"
     vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
   end
 
+  if test (command -s tldr)
+    set_color yellow; echo "== Updating tldr"; set_color normal
+    tldr --update
+  end
+
   set_color yellow; echo "== Updating Fish command completions"; set_color normal
   fish_update_completions
 end
@@ -187,6 +196,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR "$HOME/.emacs"
     case spacemacs
       eval $EDITOR "$HOME/.spacemacs"
+    case doom
+      eval $EDITOR "$HOME/.emacs.d/init.el"
     case vscode
       eval $EDITOR "$HOME/Library/Application\ Support/Code/User/settings.json"
 
@@ -221,6 +232,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR "$HOME/.hammerspoon/init.lua"
     case alacritty
       eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
+    case kitty
+      eval $EDITOR "$HOME/.config/kitty/kitty.conf"
     case nixos
       eval sudoedit /etc/nixos/configuration.nix
 
@@ -233,7 +246,7 @@ function rc -d "Open the specified program's configuration file"
     return 1
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs vscode fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty nixos"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs vscode fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty kitty nixos"
 
 # runcpp - Run C++ file and then delete output {{{2
 function runcpp -d "Run C++ file and then delete output" -w clang++

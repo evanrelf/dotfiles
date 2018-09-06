@@ -11,12 +11,16 @@ if [ $# -gt 0 ]; then
     case $i in
       bspwm )
         (set -x; mkdir -p "$HOME/.config/bspwm/");;
+      doom-emacs )
+        (set -x; mkdir -p "$HOME/.emacs.d/");;
       fish )
         (set -x; mkdir -p "$HOME/.config/fish/functions/");;
       hammerspoon )
         (set -x; mkdir -p "$HOME/.hammerspoon/");;
       kakoune )
         (set -x; mkdir -p "$HOME/.config/kak/");;
+      kitty )
+        (set -x; mkdir -p "$HOME/.config/kitty/");;
       neovim )
         (set -x; mkdir -p "$HOME/.config/nvim/");;
       sxhkd )
@@ -31,6 +35,6 @@ if [ $# -gt 0 ]; then
   done
   (set -x; stow --target "$HOME" -S "$@")
 else
-  echo "Usage:  ./install package ..."
+  echo "Usage:  ./install package ..." >&2
   exit 1
 fi

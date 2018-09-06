@@ -10,14 +10,15 @@ call plug#begin()
 
 " Appearance {{{2
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+" Plug 'airblade/vim-gitgutter'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'junegunn/goyo.vim'
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
 " Editing {{{2
 Plug 'machakann/vim-sandwich'
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 
@@ -31,12 +32,17 @@ Plug 'critiqjo/husk-x.vim'
 Plug 'junegunn/vim-slash'
 
 " Intelligence {{{2
-Plug 'lifepillar/vim-mucomplete'
-" Plug 'neomake/neomake'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"       \| Plug 'eagletmt/neco-ghc'
+"       \| Plug 'zchee/deoplete-clang'
+"       \| Plug 'Shougo/neoinclude.vim'
+"       \| Plug 'pbogut/deoplete-elm'
+"       \| Plug 'ponko2/deoplete-fish'
+"       \| Plug 'Shougo/neco-vim'
+"       \| Plug 'Shougo/neco-syntax'
+"       \| Plug 'Shougo/echodoc.vim'
 Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
-" Plug 'cohama/lexima.vim'
-" Plug 'rstacruz/vim-closer'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
@@ -66,26 +72,32 @@ call plug#end()
 " PaperColor
 let g:PaperColor_Theme_Options = { 'theme': { 'default': { 'allow_bold': 0 } } }
 
-" polyglot
-let g:vim_markdown_new_list_item_indent = 0
+" lightline
+let g:lightline = { 'colorscheme': 'wombat' }
 
 " gitgutter
 let g:gitgutter_map_keys = 0
 
-" MUcomplete
-set completeopt+=menuone,noselect
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#delayed_completion = 1
+" deoplete
+set completeopt+=menu
+set completeopt-=preview
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+augroup Deoplete
+  autocmd!
+  autocmd CompleteDone * silent! pclose!
+augroup END
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
 
 " ALE
 let g:ale_lint_on_text_changed = 'never'
 " let g:ale_linters = { 'haskell': [] }
 
-" Neomake
-" call neomake#configure#automake('rw', 1000)
-
 " polyglot
 let g:polyglot_disabled = ['latex']
+let g:vim_markdown_new_list_item_indent = 0
 
 " vimtex
 let g:vimtex_view_method = 'skim'
@@ -101,12 +113,12 @@ let g:undofile_warn_mode = 2
 
 " SETTINGS {{{1
 " Apperance {{{2
-augroup ColorSchemes " {{{2
+augroup ColorSchemes " {{{3
   autocmd!
   autocmd ColorScheme *
         \  highlight CursorLineNr NONE
         \| highlight link CursorLineNr Normal
-augroup END " }}}2
+augroup END " }}}3
 set termguicolors
 set background=dark
 colorscheme PaperColor
@@ -122,24 +134,26 @@ set numberwidth=2
 set colorcolumn=81
 
 " Status line {{{2
-set statusline=
-set statusline+=%#Cursor#
-" Mode
-set statusline+=\ %{SL_Mode()}
-set statusline+=\ %#CursorLine#
-" File path
-set statusline+=\ %f\ %m\%r
-" Separator
-set statusline+=%=
-" File format
-set statusline+=\ %{&fileformat}
-" File encoding
-set statusline+=\ \|\ %{strlen(&encoding)?&encoding:'-'}
-" Filetype
-set statusline+=\ \|\ %{strlen(&filetype)?&filetype:'-'}
-set statusline+=\ %#Cursor#
-" Cursor position
-set statusline+=\ %3l:%-3v
+" set statusline=
+" set statusline+=%#Cursor#
+" " Mode
+" set statusline+=\ %{SL_Mode()}
+" set statusline+=\ %#CursorLine#
+" " File path
+" set statusline+=\ %f\ %m\%r
+" " Separator
+" set statusline+=%=
+" " Indentation
+" set statusline+=%{&expandtab?&shiftwidth.'\ spaces':'tabs'}
+" " File format
+" set statusline+=\ \|\ %{&fileformat}
+" " File encoding
+" set statusline+=\ \|\ %{strlen(&encoding)?&encoding:'-'}
+" " Filetype
+" set statusline+=\ \|\ %{strlen(&filetype)?&filetype:'-'}
+" set statusline+=\ %#Cursor#
+" " Cursor position
+" set statusline+=\ %3l:%-3v
 
 " Indentation {{{2
 set expandtab
@@ -176,6 +190,7 @@ set wildignorecase
 
 " Miscellaneous {{{2
 set hidden
+set autoread
 set mouse=a
 set virtualedit=block
 set keywordprg=:help
@@ -220,10 +235,10 @@ command! -nargs=+ Command call CommandCabbr(<f-args>)
 command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
-command! Bg let &background=(&background == "dark" ? "light" : "dark")
+command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
 command! Ghcid 60VTerm ghcid
 
-Command w update
+" Command w update
 
 
 " MAPPINGS {{{1
@@ -300,6 +315,8 @@ augroup FileTypeSettings " {{{2
   autocmd!
   " Haskell
   autocmd FileType haskell setlocal keywordprg=hoogle\ --info
+  " C++
+  autocmd FileType cpp setlocal commentstring=//\ %s
   " Markdown
   autocmd FileType markdown setlocal wrap
   " Git
@@ -334,6 +351,10 @@ augroup FileTypeSettings " {{{2
         \| nnoremap <buffer> q :q<CR>
   " ALE
   autocmd FileType ale-preview setlocal wrap nonumber norelativenumber
+  " Fish
+  " autocmd FileType fish silent MUcompleteAutoOff
+  " No name buffers
+  autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 augroup END
 
 augroup FormatOptions " {{{2
@@ -344,6 +365,11 @@ augroup END
 augroup ResizeSplits " {{{2
   autocmd!
   autocmd VimResized * wincmd =
+augroup END
+
+augroup AutoRead " {{{2
+  autocmd!
+  autocmd FocusGained,BufEnter * :checktime
 augroup END
 
 " }}}2

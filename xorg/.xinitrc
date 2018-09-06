@@ -5,6 +5,7 @@ xrdb -merge .Xresources
 feh --bg-scale ~/.wallpaper.jpg
 
 setxkbmap -option caps:escape
-xset r rate 200 30
+xset r rate 200 20
 
-exec xmonad
+xmonad --replace &
+exec xfce4-session

@@ -474,12 +474,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (require 'mouse)
-  (global-set-key [mouse-4] '(lambda ()
-                               (interactive)
-                               (scroll-down 1)))
-  (global-set-key [mouse-5] '(lambda ()
-                               (interactive)
-                               (scroll-up 1)))
+  (global-set-key [mouse-4] '(scroll-down 1))
+  (global-set-key [mouse-5] '(scroll-up 1))
 
   (setq powerline-default-separator 'utf-8)
   (spacemacs/toggle-mode-line-minor-modes-off)
