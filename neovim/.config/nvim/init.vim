@@ -18,6 +18,7 @@ Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
 
 " Editing {{{2
 Plug 'machakann/vim-sandwich'
+Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
@@ -98,6 +99,7 @@ let g:ale_lint_on_text_changed = 'never'
 " polyglot
 let g:polyglot_disabled = ['latex']
 let g:vim_markdown_new_list_item_indent = 0
+let g:elm_format_autosave = 0
 
 " vimtex
 let g:vimtex_view_method = 'skim'

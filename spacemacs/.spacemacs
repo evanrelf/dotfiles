@@ -34,41 +34,42 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
-     ;; Editing
+   '(;; Editing
      evil-commentary
 
      ;; Intelligence
      auto-completion
      syntax-checking
+     prettier
 
      ;; Syntax
      (c-c++ :variables
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode)
-     (haskell :variables
-              haskell-completion-backend 'dante)
+     haskell
      elm
      javascript
      html
      markdown
      yaml
      shell-scripts
+     docker
      emacs-lisp
-     vimscript
-     lua
-     python
-     rust
+     ;; vimscript
+     ;; lua
+     ;; python
+     ;; rust
 
      ;; Utilities
      ivy
-     version-control
-     git
+     ;; version-control
+     ;; git
 
      ;; Miscellaneous
-     ;; osx
-     org
+     osx
+     ;; org
      )
+
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -77,7 +78,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(general)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -200,17 +201,18 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(doom-one
+                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
-   ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
-   ;; are spaceline themes. `vanilla' is default Emacs mode-line. `custom' is a
-   ;; user defined themes, refer to the DOCUMENTATION.org for more info on how
-   ;; to create your own spaceline theme. Value can be a symbol or list with\
-   ;; additional properties.
+   ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
+   ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
+   ;; `vanilla' is default Emacs mode-line. `custom' is a user defined themes,
+   ;; refer to the DOCUMENTATION.org for more info on how to create your own
+   ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(doom)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -218,8 +220,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Iosevka"
-                               :size 15
+   dotspacemacs-default-font '("PragmataPro"
+                               :size 14
                                :weight normal
                                :width normal)
 
@@ -282,9 +284,9 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
-   ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
-   ;; `p' several times cycles through the elements in the `kill-ring'.
-   ;; (default nil)
+   ;; If non-nil, the paste transient-state is enabled. While enabled, after you
+   ;; paste something, pressing `C-j' and `C-k' several times cycles through the
+   ;; elements in the `kill-ring'. (default nil)
    dotspacemacs-enable-paste-transient-state nil
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
@@ -379,7 +381,7 @@ It should only modify the values of Spacemacs settings."
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
-   dotspacemacs-highlight-delimiters 'all
+   dotspacemacs-highlight-delimiters nil
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
@@ -394,7 +396,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server t
+   dotspacemacs-persistent-server nil
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -454,18 +456,13 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq custom-file "~/.local/share/spacemacs/customize.el")
-
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  )
+  (setq custom-file "~/.local/share/spacemacs/customize.el"))
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
-dump."
-  )
+dump.")
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -473,21 +470,25 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (require 'mouse)
-  (global-set-key [mouse-4] '(scroll-down 1))
-  (global-set-key [mouse-5] '(scroll-up 1))
+  ;; Follow symlinks when opening files under version control
+  (setq vc-follow-symlinks t)
+  ;; Disable bold font
+  (set-face-bold 'bold nil)
+  ;; Smaller modeline
+  (setq doom-modeline-height 20)
+  ;; Enable mouse support in terminal
+  (unless window-system
+    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
-  (setq powerline-default-separator 'utf-8)
-  (spacemacs/toggle-mode-line-minor-modes-off)
-  (set-face-attribute 'spacemacs-normal-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-hybrid-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-emacs-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-evilified-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-visual-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-replace-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-iedit-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-lisp-face nil :foreground "#262626")
-  (set-face-attribute 'spacemacs-evilified-face nil :foreground "#262626")
-  (set-face-attribute 'mode-line nil :background "black" :foreground "white")
-  (set-face-attribute 'mode-line-inactive nil :foreground "#65737E")
-  )
+  ;; Mappings
+  (general-evil-setup t)
+  (mmap
+    ";" 'evil-ex
+    ":" 'evil-repeat-find-char)
+  (nmap
+    "j" 'evil-next-visual-line
+    "k" 'evil-previous-visual-line)
+  (vmap
+    "j" 'evil-next-visual-line
+    "k" 'evil-previous-visual-line))

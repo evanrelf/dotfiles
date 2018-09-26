@@ -20,8 +20,9 @@ end
 # COMMANDS {{{1
 alias reload "source $HOME/.config/fish/config.fish"
 
-alias e "emacsclient -t -a ''"
 alias eg "emacsclient -cn -a ''; and open -a Emacs"
+alias et "emacs -nw"
+alias emacs "emacs -nw"
 
 alias pandochtml "pandoc -o output.html --to=html5 --css=\"$HOME/Docments/github.css\" --highlight-style=haddock --self-contained"
 
@@ -42,10 +43,6 @@ switch (uname)
 
   case Darwin
     alias cask "brew cask"
-
-    if test (command -s trash)
-      alias rm "trash"
-    end
 
     if test (command -s gittower)
       alias tower "gittower ."
@@ -283,7 +280,7 @@ end
 
 
 # PROMPT {{{1
-set -g fish_greeting
+set -g fish_greeting ""
 set -g fish_prompt_pwd_dir_length 0
 set __fish_git_prompt_showdirtystate "true"
 set __fish_git_prompt_showuntrackedfiles "true"
@@ -335,27 +332,46 @@ function prompt_finish -d "Close open segments"
 end
 # }}}
 
+# function fish_prompt
+#   echo
+#   set -l exit_code $status
+#   set_color --background black white
+
+#   # Exit code
+#   if test $exit_code -ne 0
+#     prompt_segment red black $exit_code
+#   end
+
+#   # PWD
+#   prompt_segment white black (prompt_pwd)
+
+#   # Git
+#   # if test -d .git -o -d ../.git -o (git rev-parse --git-dir > /dev/null 2>&1; echo $status) -eq 0
+#   #   set -l git_text (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
+#   #   set -l git_bg black
+#   #   set -l git_fg white
+#   #   prompt_segment $git_bg $git_fg (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
+#   # end
+
+#   prompt_finish
+# end
+
 function fish_prompt
   set -l exit_code $status
-  set_color --background black white
+  echo ""
 
-  # Exit code
   if test $exit_code -ne 0
-    prompt_segment red black $exit_code
+    set_color red
+    echo -n "[$exit_code] "
+    set_color normal
   end
 
-  # PWD
-  prompt_segment white black (prompt_pwd)
+  set_color yellow
+  echo -n (prompt_pwd)
+  set_color normal
 
-  # Git
-  if test -d .git -o -d ../.git -o (git rev-parse --git-dir > /dev/null 2>&1; echo $status) -eq 0
-    set -l git_text (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
-    set -l git_bg black
-    set -l git_fg white
-    prompt_segment $git_bg $git_fg (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
-  end
-
-  prompt_finish
+  echo -n " λ "
+  set_color normal
 end
 
 
@@ -375,3 +391,10 @@ if test -e $HOME/.config/fish/iterm2_shell_integration.fish
 end
 
 
+# NIX {{{1
+if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
+  bass source $HOME/.nix-profile/etc/profile.d/nix.sh
+end
+
+
+#}}}1
