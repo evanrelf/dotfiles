@@ -1,6 +1,12 @@
 [user]
 	name = Evan Relf
 	email = evan@evanrelf.com
+[alias]
+	s = status
+	c = commit
+	co = checkout
+	b = branch
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
 	editor = nvim
 [push]
