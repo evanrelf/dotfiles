@@ -1,6 +1,14 @@
 # vim: foldmethod=marker foldenable
 
-status --is-interactive; and source (jump shell fish | psub)
+if test (command -s jump)
+  status --is-interactive; and source (jump shell fish | psub)
+end
+
+# WORK {{{1
+alias qa "~/qa.bash"
+alias qaa "cat ~/qa.bash | vipe | bash"
+alias vpn "~/vpn.bash"
+
 
 # VARIABLES {{{1
 set -x EDITOR nvim
@@ -20,9 +28,12 @@ end
 # COMMANDS {{{1
 alias reload "source $HOME/.config/fish/config.fish"
 
-alias eg "emacsclient -cn -a ''; and open -a Emacs"
-alias et "emacs -nw"
-alias emacs "emacs -nw"
+alias ed "pkill Emacs; pkill Emacs; emacs --daemon=term; emacs --daemon=gui"
+alias et "emacsclient -s term -t"
+alias eg "emacsclient -s gui -c -n"
+
+alias wg-up "wg-quick up mullvad-us2"
+alias wg-down "wg-quick down mullvad-us2"
 
 alias pandochtml "pandoc -o output.html --to=html5 --css=\"$HOME/Docments/github.css\" --highlight-style=haddock --self-contained"
 
@@ -332,45 +343,33 @@ function prompt_finish -d "Close open segments"
 end
 # }}}
 
-# function fish_prompt
-#   echo
-#   set -l exit_code $status
-#   set_color --background black white
-
-#   # Exit code
-#   if test $exit_code -ne 0
-#     prompt_segment red black $exit_code
-#   end
-
-#   # PWD
-#   prompt_segment white black (prompt_pwd)
-
-#   # Git
-#   # if test -d .git -o -d ../.git -o (git rev-parse --git-dir > /dev/null 2>&1; echo $status) -eq 0
-#   #   set -l git_text (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
-#   #   set -l git_bg black
-#   #   set -l git_fg white
-#   #   prompt_segment $git_bg $git_fg (__fish_git_prompt | sed -n "s/.*(\(.*\)).*/\1/p")
-#   # end
-
-#   prompt_finish
-# end
-
 function fish_prompt
   set -l exit_code $status
-  echo ""
+  # echo ""
 
-  if test $exit_code -ne 0
-    set_color red
-    echo -n "[$exit_code] "
+  # PWD
+  set_color cyan
+  echo -n (prompt_pwd)" "
+  set_color normal
+
+  # Git
+  set -l git_dir (git rev-parse --git-dir 2> /dev/null)
+  if test -n "$git_dir"
+    set -l dirty (git status --porcelain)
+    if test -n "$dirty"
+      set_color yellow
+    else
+      set_color green
+    end
+    echo -n (git symbolic-ref --short HEAD 2>/dev/null)" "
     set_color normal
   end
 
-  set_color yellow
-  echo -n (prompt_pwd)
-  set_color normal
-
-  echo -n " λ "
+  # Exit status
+  if test $exit_code -ne 0
+    set_color red
+  end
+  echo -n "λ "
   set_color normal
 end
 
@@ -386,9 +385,10 @@ set fish_color_autosuggestion brblack
 
 
 # iTERM {{{1
-if test -e $HOME/.config/fish/iterm2_shell_integration.fish
-  source $HOME/.config/fish/iterm2_shell_integration.fish
+if test ! -e $HOME/.config/fish/iterm2_shell_integration.fish
+  curl -o $HOME/.config/fish/iterm2_shell_integration.fish https://iterm2.com/shell_integration/fish
 end
+source $HOME/.config/fish/iterm2_shell_integration.fish
 
 
 # NIX {{{1

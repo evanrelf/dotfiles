@@ -94,7 +94,7 @@ let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools
 
 " ALE
 let g:ale_lint_on_text_changed = 'never'
-" let g:ale_linters = { 'haskell': [] }
+let g:ale_linters = { 'haskell': ['hie', 'stack_build', 'stack_ghc', 'hlint', 'ghc'] }
 
 " polyglot
 let g:polyglot_disabled = ['latex']
@@ -204,29 +204,6 @@ set inccommand=nosplit
 
 
 " FUNCTIONS {{{1
-function! SL_Mode() abort
-  let l:mode = mode()
-  if l:mode ==# 'n'
-    return 'NORMAL'
-  elseif l:mode ==# 'i'
-    return 'INSERT'
-  elseif l:mode ==# 'v'
-    return 'VISUAL'
-  elseif l:mode ==# 'V'
-    return "V-LINE"
-  elseif l:mode ==# ''
-    return "V-BLOCK"
-  elseif l:mode ==# 'R'
-    return 'REPLACE'
-  elseif l:mode ==# 'c'
-    return 'COMMAND'
-  elseif l:mode ==# 't'
-    return 'TERMINAL'
-  else
-    return l:mode
-  endif
-endfunction
-
 function! CommandCabbr(abbreviation, expansion) abort
   silent execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction

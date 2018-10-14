@@ -4,8 +4,8 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>features.websearch.google.fallback</string>
 		<string>features.websearch.duckduckgo.fallback</string>
+		<string>features.websearch.google.fallback</string>
 	</array>
 	<key>showContacts</key>
 	<false/>

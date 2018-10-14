@@ -13,14 +13,16 @@ if [ $# -gt 0 ]; then
         (set -x; mkdir -p "$HOME/Library/Application Support/Alfred 3/");;
       bspwm )
         (set -x; mkdir -p "$HOME/.config/bspwm/");;
-      doom-emacs )
+      emacs-doom )
         (set -x; mkdir -p "$HOME/.emacs.d/");;
       fish )
         (set -x; mkdir -p "$HOME/.config/fish/functions/");;
       hammerspoon )
-        (set -x; mkdir -p "$HOME/.hammerspoon/");;
+        (set -x; mkdir -p "$HOME/.hammerspoon/Spoons");;
       kakoune )
         (set -x; mkdir -p "$HOME/.config/kak/");;
+      karabiner )
+        (set -x; mkdir -p "$HOME/.config/karabiner/");;
       kitty )
         (set -x; mkdir -p "$HOME/.config/kitty/");;
       neovim )

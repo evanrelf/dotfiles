@@ -1,4 +1,8 @@
 ;; vim: ft=lisp
+
+;; How to byte-compile ~/.emacs.d:
+;; (byte-recompile-directory "~/.emacs.d/" 0 t)
+
 ;; PACKAGES
 ;; straight.el
 (defvar bootstrap-version)
@@ -29,6 +33,7 @@
   :init
   (setq evil-want-Y-yank-to-eol t)
   (setq evil-want-integration nil)
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
 (use-package evil-collection
@@ -82,16 +87,26 @@
 (use-package counsel
   :config
   (counsel-mode 1))
-(use-package aggressive-indent
-  :config
-  (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode))
+;; (use-package aggressive-indent
+;;   :config
+;;   (global-aggressive-indent-mode 1)
+;;   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+;;   (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode))
 ;; Languages
 (use-package haskell-mode)
-(use-package intero
+;; (use-package intero
+;;   :config
+;;   (intero-global-mode 1))
+(use-package dante
+  :after haskell-mode
+  :commands 'dante-mode
+  :init
+  (add-hook 'haskell-mode-hook 'dante-mode)
+  (add-hook 'haskell-mode-hook 'flycheck-mode)
   :config
-  (intero-global-mode 1))
+  (add-hook 'dante-mode-hook
+	    '(lambda () (flycheck-add-next-checker 'haskell-dante
+						   '(warning . haskell-hlint)))))
 (use-package irony
   :config
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -102,6 +117,10 @@
   :config
   (setq elm-format-on-save t))
 (use-package markdown-mode)
+(use-package yaml-mode
+  :config (add-hook 'yaml-mode-hook
+                    '(lambda ()
+                       (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 ;; Other
 (use-package general
   :config
@@ -110,6 +129,9 @@
   :config
   (require 'smartparens-config)
   (smartparens-global-mode t))
+(use-package simpleclip
+  :config
+  (simpleclip-mode t))
 (use-package ws-butler
   :config
   (ws-butler-global-mode))
@@ -121,7 +143,6 @@
 
 ;; SETTINGS
 ;; GUI font
-(set-frame-font "PragmataPro 14" nil t)
 (setq default-frame-alist '((font . "PragmataPro-14")))
 ;; Disable bold font
 (set-face-bold 'bold nil)
@@ -166,8 +187,7 @@
 (setq make-backup-files nil)
 ;; Disable auto-save files
 (setq auto-save-default nil)
-;; Stop evil from using the system clipboard
-(setq select-enable-clipboard nil)
+;; Stop evil from using the system l)
 ;; Indent with 2 spaces
 (setq tab-width 2)
 (setq indent-tabs-mode nil)
@@ -183,16 +203,12 @@
 ;; Scroll line-by-line
 (setq scroll-step 1)
 (setq scroll-conservatively 10000)
-;; Disable automatic descriptions
-(global-eldoc-mode -1)
+;; Maximize new GUI frames
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; MAPPINGS
 (mmap
   ";" 'evil-ex
-  ":" 'evil-repeat-find-char)
-(nmap
-  "j" 'evil-next-visual-line
-  "k" 'evil-previous-visual-line)
-(vmap
+  ":" 'evil-repeat-find-char
   "j" 'evil-next-visual-line
   "k" 'evil-previous-visual-line)

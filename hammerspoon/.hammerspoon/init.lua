@@ -1,7 +1,9 @@
+-- luacheck: globals hs
+
 hs.alert.show("Hammerspoon loaded!")
 
--- hs.window.animationDuration = 0.05
 hs.window.animationDuration = 0
+
 local hyper = {"shift", "cmd", "alt", "ctrl"}
 
 local undoHistory = {}
@@ -17,15 +19,6 @@ local function appEvents()
         window:setFullScreen(not window:isFullScreen())
       end)
     end
-
-    -- -- Auto-maximize Affinity Photo on launch
-    -- if appName == "Affinity Photo" and eventType == hs.application.watcher.launched then
-    --   local window = app:mainWindow()
-    --   hs.timer.doAfter(1, function()
-    --     window:maximize()
-    --   end)
-    -- end
-
   end):start()
 end
 
