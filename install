@@ -10,29 +10,29 @@ if [ $# -gt 0 ]; then
   for i in "$@"; do
     case $i in
       alfred )
-        (set -x; mkdir -p "$HOME/Library/Application Support/Alfred 3/");;
+        (set -x; mkdir -p "$HOME/Library/Application Support/Alfred 3");;
       bspwm )
-        (set -x; mkdir -p "$HOME/.config/bspwm/");;
+        (set -x; mkdir -p "$HOME/.config/bspwm");;
       emacs-doom )
-        (set -x; mkdir -p "$HOME/.emacs.d/");;
+        (set -x; mkdir -p "$HOME/.emacs.d");;
       fish )
-        (set -x; mkdir -p "$HOME/.config/fish/functions/");;
+        (set -x; mkdir -p "$HOME/.config/fish/functions");;
       hammerspoon )
-        (set -x; mkdir -p "$HOME/.hammerspoon/Spoons");;
+        (set -x; mkdir -p "$HOME/.hammerspoon");;
       kakoune )
-        (set -x; mkdir -p "$HOME/.config/kak/");;
+        (set -x; mkdir -p "$HOME/.config/kak");;
       karabiner )
-        (set -x; mkdir -p "$HOME/.config/karabiner/");;
+        (set -x; mkdir -p "$HOME/.config/karabiner");;
       kitty )
-        (set -x; mkdir -p "$HOME/.config/kitty/");;
+        (set -x; mkdir -p "$HOME/.config/kitty");;
       neovim )
-        (set -x; mkdir -p "$HOME/.config/nvim/");;
+        (set -x; mkdir -p "$HOME/.config/nvim");;
       sxhkd )
-        (set -x; mkdir -p "$HOME/.config/sxhkd/");;
+        (set -x; mkdir -p "$HOME/.config/sxhkd");;
       vscode )
-        (set -x; mkdir -p "$HOME/Library/Application Support/Code/User/");;
+        (set -x; mkdir -p "$HOME/Library/Application Support/Code/User");;
       xmonad )
-        (set -x; mkdir -p "$HOME/.config/xmonad/");;
+        (set -x; mkdir -p "$HOME/.config/xmonad");;
       * )
         ;;
     esac

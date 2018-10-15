@@ -30,12 +30,24 @@ local function log()
 end
 
 local function resize(pos)
+  local win = hs.window.focusedWindow():frame()
+  local screen = hs.screen.mainScreen():frame()
   if not pos.x then pos.x = 0 end
   if not pos.y then pos.y = 0 end
   if not pos.w then pos.w = 1 end
   if not pos.h then pos.h = 1 end
+  local dw = math.abs(win.w - (pos.w * screen.w))
+  local dh = math.abs(win.h - (pos.h * screen.h))
+  local threshold = 10
+  -- Allow animations if the window size doesn't change much
+  if dw > threshold or dh > threshold then
+    hs.window.animationDuration = 0
+  else
+    hs.window.animationDuration = 0.05
+  end
   log()
   hs.window.focusedWindow():moveToUnit(hs.geometry.rect(pos.x, pos.y, pos.w, pos.h))
+  hs.window.animationDuration = 0.2
 end
 
 function module.undo()

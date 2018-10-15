@@ -274,7 +274,8 @@ xnoremap <Leader>= :Neoformat<CR>
 " FZF
 noremap <Leader>h :<C-u>Helptags<CR>
 noremap <Leader>f :<C-u>Files<CR>
-noremap <Leader>/ :<C-u>BLines<CR>
+noremap <Leader>g :<C-u>GFiles<CR>
+noremap <Leader>r :<C-u>Rg<CR>
 
 " Terminal
 noremap <Leader>t :<C-u>Term<CR>
