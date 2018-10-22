@@ -11,7 +11,7 @@ call plug#begin()
 " Appearance {{{2
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'itchyny/lightline.vim'
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'junegunn/goyo.vim'
 Plug 'haya14busa/vim-operator-flashy' | Plug 'kana/vim-operator-user'
@@ -43,6 +43,9 @@ Plug 'junegunn/vim-slash'
 "       \| Plug 'Shougo/neco-syntax'
 "       \| Plug 'Shougo/echodoc.vim'
 Plug 'w0rp/ale'
+" TODO
+" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+Plug '~/Projects/ghcid/plugins/nvim'
 Plug 'sbdchd/neoformat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
@@ -52,8 +55,7 @@ Plug 'sickill/vim-pasta'
 " Syntax {{{2
 Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex'
-Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
-Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth', { 'on': [] } " Doesn't get along with vim-polyglot
 Plug 'ntpeters/vim-better-whitespace'
 
 " Miscellaneous {{{2
@@ -94,7 +96,15 @@ let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools
 
 " ALE
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_linters = { 'haskell': ['hie', 'stack_build', 'stack_ghc', 'hlint', 'ghc'] }
+" let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
+let g:ale_linters = { 'haskell': [] }
+let g:ale_fixers = { 'haskell': ['hlint'] }
+
+" Ghcid
+let g:ghcid_verbosity = 1
+
+" Neoformat
+let g:neoformat_basic_format_trim = 1
 
 " polyglot
 let g:polyglot_disabled = ['latex']
@@ -135,28 +145,6 @@ set number
 set numberwidth=2
 set colorcolumn=81
 
-" Status line {{{2
-" set statusline=
-" set statusline+=%#Cursor#
-" " Mode
-" set statusline+=\ %{SL_Mode()}
-" set statusline+=\ %#CursorLine#
-" " File path
-" set statusline+=\ %f\ %m\%r
-" " Separator
-" set statusline+=%=
-" " Indentation
-" set statusline+=%{&expandtab?&shiftwidth.'\ spaces':'tabs'}
-" " File format
-" set statusline+=\ \|\ %{&fileformat}
-" " File encoding
-" set statusline+=\ \|\ %{strlen(&encoding)?&encoding:'-'}
-" " Filetype
-" set statusline+=\ \|\ %{strlen(&filetype)?&filetype:'-'}
-" set statusline+=\ %#Cursor#
-" " Cursor position
-" set statusline+=\ %3l:%-3v
-
 " Indentation {{{2
 set expandtab
 set tabstop=8
@@ -184,6 +172,7 @@ set ignorecase
 set smartcase
 set gdefault
 set report=0
+set grepprg=rg\ --vimgrep
 
 " Wild mode {{{2
 set wildmode=longest:full,full
@@ -215,9 +204,24 @@ command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
-command! Ghcid 60VTerm ghcid
 
 " Command w update
+
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+      \   { 'options': '--delimiter : --nth 4..' },
+      \   <bang>0)
+
+command! -bang -nargs=* GRg
+      \ call fzf#vim#grep(
+      \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+      \   { 'dir': systemlist('git rev-parse --show-toplevel')[0],
+      \     'options': '--delimiter : --nth 4..' },
+      \   <bang>0)
+
+command! -bang -nargs=? -complete=dir FilesP
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 " MAPPINGS {{{1
@@ -271,15 +275,21 @@ xnoremap <Leader>G :g!/
 nnoremap <Leader>= :<C-u>Neoformat<CR>
 xnoremap <Leader>= :Neoformat<CR>
 
+" ALE
+noremap <silent> <Leader>ap :<C-u>ALEPrevious<CR>
+noremap <silent> <Leader>an :<C-u>ALENext<CR>
+noremap <silent> <Leader>ad :<C-u>ALEDetail<CR>
+noremap <silent> <Leader>af :<C-u>ALEFix<CR>
+
 " FZF
-noremap <Leader>h :<C-u>Helptags<CR>
-noremap <Leader>f :<C-u>Files<CR>
-noremap <Leader>g :<C-u>GFiles<CR>
-noremap <Leader>r :<C-u>Rg<CR>
+noremap <silent> <Leader>f :<C-u>GFiles<CR>
+noremap <silent> <Leader>F :<C-u>Files<CR>
+noremap <silent> <Leader>r :<C-u>GRg<CR>
+noremap <silent> <Leader>R :<C-u>Rg<CR>
 
 " Terminal
-noremap <Leader>t :<C-u>Term<CR>
-noremap <Leader>T :<C-u>VTerm<CR>
+noremap <silent> <Leader>t :<C-u>Term<CR>
+noremap <silent> <Leader>T :<C-u>VTerm<CR>
 
 " Disabled {{{2
 nnoremap U <Nop>
@@ -294,13 +304,21 @@ inoremap <C-c> <Nop>
 augroup FileTypeSettings " {{{2
   autocmd!
   " Haskell
-  autocmd FileType haskell setlocal keywordprg=hoogle\ --info
+  autocmd FileType haskell
+        \ setlocal keywordprg=hoogle\ --info
+  " Elm
+  autocmd BufWritePre *.elm undojoin | Neoformat
   " C++
   autocmd FileType cpp setlocal commentstring=//\ %s
   " Markdown
   autocmd FileType markdown setlocal wrap
   " Git
   autocmd FileType gitcommit setlocal textwidth=72 colorcolumn=73
+  autocmd BufEnter .gitconfig*
+        \  setlocal filetype=gitconfig
+        \| setlocal noexpandtab shiftwidth=8
+  " Docker
+  autocmd BufEnter Dockerfile* setlocal ft=Dockerfile
   " Vim
   autocmd FileType vim,help setlocal keywordprg=:help
   autocmd FileType help
@@ -311,7 +329,7 @@ augroup FileTypeSettings " {{{2
         \  setlocal nonumber norelativenumber
         \| noremap <buffer> <C-c> i<C-c>
         \| noremap <buffer> <C-d> i<C-d>
-  autocmd BufEnter,WinEnter term://* startinsert
+  " autocmd BufEnter,WinEnter term://* startinsert
   " dirvish
   autocmd FileType dirvish
         \  noremap <buffer> u u
@@ -330,11 +348,15 @@ augroup FileTypeSettings " {{{2
         \  nnoremap <buffer> <Esc> :q<CR>
         \| nnoremap <buffer> q :q<CR>
   " ALE
-  autocmd FileType ale-preview setlocal wrap nonumber norelativenumber
+  autocmd FileType ale-preview
+        \  setlocal wrap nonumber norelativenumber
+        \| noremap <buffer> <Esc> :<C-u>q<CR>
   " Fish
   " autocmd FileType fish silent MUcompleteAutoOff
   " No name buffers
-  autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+  autocmd BufEnter * if &filetype == "" | setlocal filetype=text | endif
+  " Fix vim-sleuth and vim-polyglot not getting along
+  autocmd Filetype * if &filetype != 'markdown' | call plug#load('vim-sleuth') | endif
 augroup END
 
 augroup FormatOptions " {{{2
@@ -342,10 +364,10 @@ augroup FormatOptions " {{{2
   autocmd FileType * set formatoptions=cqnj
 augroup END
 
-augroup ResizeSplits " {{{2
-  autocmd!
-  autocmd VimResized * wincmd =
-augroup END
+" augroup ResizeSplits " {{{2
+"   autocmd!
+"   autocmd VimResized * wincmd =
+" augroup END
 
 augroup AutoRead " {{{2
   autocmd!

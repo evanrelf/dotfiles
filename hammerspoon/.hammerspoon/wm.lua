@@ -7,6 +7,8 @@ local undoStack = {}
 local redoStack = {}
 local saved = {}
 
+hs.window.animationDuration = 0
+
 local function push(history)
   local windowState = hs.window.frontmostWindow():frame()
   -- Don't save consecutive duplicates
@@ -30,24 +32,12 @@ local function log()
 end
 
 local function resize(pos)
-  local win = hs.window.focusedWindow():frame()
-  local screen = hs.screen.mainScreen():frame()
   if not pos.x then pos.x = 0 end
   if not pos.y then pos.y = 0 end
   if not pos.w then pos.w = 1 end
   if not pos.h then pos.h = 1 end
-  local dw = math.abs(win.w - (pos.w * screen.w))
-  local dh = math.abs(win.h - (pos.h * screen.h))
-  local threshold = 10
-  -- Allow animations if the window size doesn't change much
-  if dw > threshold or dh > threshold then
-    hs.window.animationDuration = 0
-  else
-    hs.window.animationDuration = 0.05
-  end
   log()
   hs.window.focusedWindow():moveToUnit(hs.geometry.rect(pos.x, pos.y, pos.w, pos.h))
-  hs.window.animationDuration = 0.2
 end
 
 function module.undo()
@@ -70,6 +60,11 @@ function module.redo()
   end
 end
 
+function module.nextScreen()
+  log()
+  hs.window.focusedWindow():moveToScreen(hs.screen.mainScreen():next())
+end
+
 function module.center()
   log()
   hs.window.focusedWindow():centerOnScreen()
@@ -83,9 +78,9 @@ function module.custom(pos)
   return function() resize(pos) end
 end
 
--- 1/2 (horizontal) {{{
+-- 1/2 {{{
 function module.halfLeft()
-  resize({ x = 0, w = (1/2) })
+  resize({ w = (1/2) })
 end
 
 function module.halfCenter()
@@ -95,15 +90,19 @@ end
 function module.halfRight()
   resize({ x = (1/2), w = (1/2) })
 end
--- }}}
 
--- 1/2 (vertical) {{{
--- TODO
+function module.halfTop()
+  resize({ h = (1/2) })
+end
+
+function module.halfBottom()
+  resize({ y = (1/2), h = (1/2) })
+end
 -- }}}
 
 -- 1/3 {{{
 function module.thirdLeft()
-  resize({ x = 0, w = (1/3) })
+  resize({ w = (1/3) })
 end
 
 function module.thirdCenter()
@@ -117,7 +116,7 @@ end
 
 -- 2/3 {{{
 function module.twoThirdsLeft()
-  resize({ x = 0, w = (2/3) })
+  resize({ w = (2/3) })
 end
 
 function module.twoThirdsCenter()
@@ -130,19 +129,33 @@ end
 -- }}}
 
 -- 1/4 {{{
--- TODO
+function module.quarterTopLeft()
+  resize({ w = (1/2), h = (1/2) })
+end
+
+function module.quarterTopRight()
+  resize({ x = (1/2), w = (1/2), h = (1/2) })
+end
+
+function module.quarterBottomLeft()
+  resize({ y = (1/2), w = (1/2), h = (1/2) })
+end
+
+function module.quarterBottomRight()
+  resize({ x = (1/2), y = (1/2), w = (1/2), h = (1/2) })
+end
 -- }}}
 
 -- Saved {{{
 function module.save()
-  saved = hs.window.focusedWindow():frame()
-  hs.alert("Saved window state")
+  saved = hs.window.focusedWindow():size()
+  hs.alert("Saved window size")
 end
 
 function module.load()
   log()
-  hs.window.focusedWindow():setFrame(saved)
-  hs.alert("Loaded window state")
+  hs.window.focusedWindow():setSize(saved)
+  hs.alert("Loaded window size")
 end
 --- }}}
 

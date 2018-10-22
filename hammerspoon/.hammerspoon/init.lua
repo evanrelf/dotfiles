@@ -15,6 +15,8 @@ hs.application.watcher.new(function(appName, eventType, app)
   end
 end):start()
 
+-- hs.noises.new(hs.alert.show):start()
+
 bind(hyper, "\\", hs.reload)
 bind(hyper, "delete", function() hs.eventtap.keyStroke({}, "forwarddelete") end)
 bind(hyper, "R", wm.halfLeft)
@@ -26,18 +28,16 @@ bind(hyper, "3", wm.thirdRight)
 bind(hyper, "4", wm.twoThirdsLeft)
 bind(hyper, "B", wm.twoThirdsCenter)
 bind(hyper, "5", wm.twoThirdsRight)
+bind(hyper, "Q", wm.quarterTopLeft)
+bind(hyper, "W", wm.quarterTopRight)
+bind(hyper, "A", wm.quarterBottomLeft)
+bind(hyper, "S", wm.quarterBottomRight)
 bind(hyper, "F", wm.full)
 bind(hyper, "C", wm.center)
 bind(hyper, "Z", wm.undo)
 bind(hyper, "Y", wm.redo)
-
--- -- Top left 1/4
--- w(hyper, "Q", { x = 0, y = 0, w = (1/2), h = (1/2) })
--- -- Top right 1/4
--- w(hyper, "W", { x = (1/2), y = 0, w = (1/2), h = (1/2) })
--- -- Bottom left 1/4
--- w(hyper, "A", { x = 0, y = (1/2), w = (1/2), h = (1/2) })
--- -- Bottom right 1/4
--- w(hyper, "S", { x = (1/2), y = (1/2), w = (1/2), h = (1/2) })
+bind(hyper, "I", wm.save)
+bind(hyper, "O", wm.load)
+bind(hyper, "Tab", wm.nextScreen)
 
 hs.alert.show("Hammerspoon loaded!")

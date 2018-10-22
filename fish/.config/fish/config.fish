@@ -1,11 +1,26 @@
 # vim: foldmethod=marker foldenable
 
+# PLUGINS {{{1
+# Auto-install fisher and plugins
+if not functions -q fisher
+  echo "Installing fisher..."
+  curl https://git.io/fisher --create-dirs -sLo $HOME/.config/fish/functions/fisher.fish
+  source $HOME/.config/fish/functions/fisher.fish
+  fisher
+end
+
+set -U FZF_LEGACY_KEYBINDINGS 0
+set -U FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude '.git'"
+set -U FZF_FIND_FILE_COMMAND "$FZF_DEFAULT_COMMAND"
+set -U FZF_CD_COMMAND "fd --type directory --follow"
+set -U FZF_CD_WITH_HIDDEN_COMMAND "$FZF_CD_COMMAND --hidden --exclude '.git'"
+set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
+set -U FZF_PREVIEW_FILE_COMMAND "bat --plain --color always --line-range :\$LINES"
+
+
 # VARIABLES {{{1
 set -x EDITOR nvim
-# set -x MANPAGER "nvim -c 'set ft=man' -"
-set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_FIND_FILE_COMMAND "ag -l --hidden --ignore .git"
-set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
+set -x MANPAGER "nvim -c 'set ft=man' -"
 
 set -l paths $HOME/.cargo/bin $HOME/.local/bin
 for i in $paths
@@ -22,9 +37,12 @@ alias ed "pkill Emacs; pkill Emacs; emacs --daemon=term; emacs --daemon=gui"
 alias et "emacsclient -s term -t"
 alias eg "emacsclient -s gui -c -n"
 
+alias g "git"
+
 if test (command -s exa)
   alias ls "exa --group-directories-first"
-  alias tree "exa --tree --group-directories-first"
+  alias ll "exa -l --group-directories-first"
+  alias tree "exa --tree --group-directories-first -I '.git|.stack-work|elm-stuff'"
 else
   alias ls "ls -AFGh"
 end
@@ -50,6 +68,80 @@ if status --is-interactive
   end
 end
 
+alias qa "~/qa"
+alias vpn "~/vpn"
+alias sql "psql -d vetpro -p 5432 -h localhost -U postgres"
+
+# update - Run all update commands {{{2
+function update -d "Run all update commands"
+  switch (uname)
+    case Linux
+      if test (command -s pacman)
+        # Arch Linux
+        set_color yellow; echo "== Updating Arch Linux packages"; set_color normal
+        sudo pacman -Syu
+      else if test (command -s nix-env)
+        # NixOS
+        set_color yellow; echo "== Updating NixOS derivations"; set_color normal
+        nix-channel --update
+        nix-env --upgrade
+        sudo nixos-rebuild switch --upgrade
+      else if test (command -s apt)
+        # Ubuntu & Debian
+        set_color yellow; echo "== Updating Ubuntu/Debian packages"; set_color normal
+        sudo apt update
+        sudo apt upgrade
+      else if test (command -s dnf)
+        # Fedora & Red Hat
+        set_color yellow; echo "== Updating Fedora/Red Hat packages"; set_color normal
+        sudo dnf upgrade
+      end
+    case Darwin
+      set_color yellow; echo "== Updating macOS software"; set_color normal
+      softwareupdate -lia
+      test (command -s mas); and mas upgrade
+
+      if test (command -s brew)
+        set_color yellow; echo "== Updating Homebrew packages"; set_color normal
+        brew update
+        brew upgrade
+      end
+    case '*'
+      # nothing
+  end
+
+  if test (command -s npm)
+    set_color yellow; echo "== Updating NPM packages"; set_color normal
+    npm update -g
+  end
+
+  if test (command -s stack)
+    set_color yellow; echo "== Updating Haskell Stack packages"; set_color normal
+    stack update
+  end
+
+  if test (command -s rustup)
+    set_color yellow; echo "== Updating Rust"; set_color normal
+    rustup update
+  end
+
+  if test (command -s nvim) -a -e $HOME/.config/nvim/autoload/plug.vim
+    set_color yellow; echo "== Updating Neovim packages"; set_color normal
+    nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
+  else if test (command -s vim) -a -e $HOME/.vim/autoload/plug.vim
+    set_color yellow; echo "== Updating Vim packages"; set_color normal
+    vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
+  end
+
+  if test (command -s tldr)
+    set_color yellow; echo "== Updating tldr"; set_color normal
+    tldr --update
+  end
+
+  set_color yellow; echo "== Updating Fish command completions"; set_color normal
+  fish_update_completions
+end
+# }}}2
 # iso2img - Convert an ISO to an IMG {{{2
 function iso2img -d "Convert an ISO to an IMG"
   if test (count $argv) -gt 0
@@ -146,16 +238,8 @@ end
 # }}}2
 # r - cd to project root {{{2
 function r -d "cd to project root"
-  set -l start (pwd)
-  while test ! -d .git -a (pwd) != "$HOME"
-    cd ..
-  end
-  if test (pwd) = "$HOME"
-    cd $start
-    echo "Not in Git repository"
-    return 1
-  end
-  return 0
+  set -l root (git rev-parse --show-toplevel 2>/dev/null; or echo "")
+  test -n $root; and cd $root; or return 1
 end
 # }}}2
 # rc - Open the specified program's configuration file {{{2
@@ -171,9 +255,9 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR "$HOME/.config/kak/kakrc"
     case emacs
       eval $EDITOR "$HOME/.emacs"
-    case spacemacs
+    case spacemacs emacs-spacemacs
       eval $EDITOR "$HOME/.spacemacs"
-    case doom
+    case doom emacs-doom
       eval $EDITOR "$HOME/.emacs.d/init.el"
     case vscode
       eval $EDITOR "$HOME/Library/Application\ Support/Code/User/settings.json"
@@ -181,18 +265,20 @@ function rc -d "Open the specified program's configuration file"
     # Shells
     case fish
       eval $EDITOR "$HOME/.config/fish/config.fish"
+    case fisher fishfile
+      eval $EDITOR "$HOME/.config/fish/fishfile"
     case zsh
       eval $EDITOR "$HOME/.zshrc"
     case bash
       eval $EDITOR "$HOME/.bashrc"
 
     # Window managers
+    case xmonad
+      eval $EDITOR "$HOME/.config/xmonad/xmonad.hs"
     case bspwm
       eval $EDITOR "$HOME/.config/bspwm/bspwmrc"
     case sxhkd
       eval $EDITOR "$HOME/.config/sxhkd/sxhkdrc"
-    case xmonad
-      eval $EDITOR "$HOME/.config/xmonad/xmonad.hs"
 
     # Xorg
     case xresources
@@ -205,6 +291,8 @@ function rc -d "Open the specified program's configuration file"
       eval $EDITOR "$HOME/.tmux.conf"
     case git
       eval $EDITOR "$HOME/.gitconfig"
+    case git-local
+      eval $EDITOR "$HOME/.gitconfig.local"
     case hammerspoon
       eval $EDITOR "$HOME/.hammerspoon/init.lua"
     case alacritty
@@ -212,18 +300,22 @@ function rc -d "Open the specified program's configuration file"
     case kitty
       eval $EDITOR "$HOME/.config/kitty/kitty.conf"
     case nixos
-      eval sudoedit /etc/nixos/configuration.nix
+      sudoedit "/etc/nixos/configuration.nix"
 
     case "*"
-      echo "Not config defined for '$argv[1]'" >&2
+      set_color red
+      echo "No config defined for '$argv[1]'" >&2
+      set_color normal
       return 1
   end
   else
+    set_color red
     echo "No config specified" >&2
+    set_color normal
     return 1
   end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs vscode fish zsh bash bspwm sxhkd xmonad xresources xinit tmux git hammerspoon alacritty kitty nixos"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xresources xinit tmux git git-local hammerspoon alacritty kitty nixos"
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"
@@ -255,6 +347,30 @@ function rmds -d "Remove .DS_Store files recursively from current directory"
   end
 end
 # }}}2
+# v - Fuzzy file open in editor {{{2
+function v -d "Fuzzy file open in editor"
+  # Arguments to the function are passed to fzf as exact phrases
+  set -l queries
+  for arg in $argv
+    set queries $queries "'$arg"
+  end
+  set -l fd_cmd "fd --type file --follow --hidden --exclude '.git'"
+  set -l fzf_cmd "fzf -1 -0 --height=30% -q \"$queries \""
+  set -l file (eval "$fd_cmd | $fzf_cmd")
+  if test $status -eq 130
+    return 0
+  end
+  test -n "$file"; and eval $EDITOR $file; or return 1
+end
+# }}}2
+# fv - Fuzzy project file open in editor {{{2
+function fv -d "Fuzzy project file open in editor"
+  r
+  v $argv
+  cd -
+end
+# }}}2
+
 
 # PROMPT {{{1
 set -g fish_greeting ""
@@ -272,14 +388,22 @@ function fish_prompt
   # Git
   set -l git_dir (git rev-parse --git-dir 2> /dev/null)
   if test -n "$git_dir"
-    set -l dirty (git status --porcelain)
-    if test -n "$dirty"
-      set_color yellow
-    else
-      set_color green
+    set -l branch (git symbolic-ref --short HEAD 2>/dev/null)
+    if test -n "$branch"
+      set -l truncated (echo $branch | cut -c 1-15)
+      set -l dirty (git status --porcelain)
+      if test -n "$dirty"
+        set_color yellow
+      else
+        set_color green
+      end
+      if test "$branch" != "$truncated"
+        echo -n "$truncated... "
+      else
+        echo -n "$branch "
+      end
+      set_color normal
     end
-    echo -n (git symbolic-ref --short HEAD 2>/dev/null)" "
-    set_color normal
   end
   # Exit status
   if test $exit_code -ne 0
@@ -302,24 +426,18 @@ set fish_color_autosuggestion brblack
 
 
 # EXTRAS {{{1
-# Auto-install fisher and plugins {{{2
-if not functions -q fisher
-  echo "Installing fisher for the first time..." >&2
-  set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-  curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-  source $XDG_CONFIG_HOME/fish/functions/fisher.fish
-  fisher
-end
-
-# iTerm shell integration {{{2
-if test -e $HOME/.config/fish/iterm2_shell_integration.fish
-  source $HOME/.config/fish/iterm2_shell_integration.fish
-end
-# curl -o $HOME/.config/fish/iterm2_shell_integration.fish https://iterm2.com/shell_integration/fish
-
 # Nix {{{2
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
-  bass source $HOME/.nix-profile/etc/profile.d/nix.sh
+  if type -q bass
+    bass source $HOME/.nix-profile/etc/profile.d/nix.sh
+  else
+    echo "Nix isn't working because you don't have bass"
+  end
+end
+# }}}2
+# Jump {{{2
+if test (command -s jump)
+  status --is-interactive; and source (jump shell fish | psub)
 end
 # }}}2
 

@@ -1,17 +1,42 @@
 [user]
 	name = Evan Relf
-	email = evan@evanrelf.com
 [alias]
 	s = status
-	c = commit
+	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	ci = commit
 	co = checkout
-	b = branch
-	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ds = diff --staged
+	clean-ignore = clean -Xdf
+	clean-untracked = clean -xdi
+	undo = reset --soft HEAD^
+	amend = commit --amend
+	root = rev-parse --show-toplevel
+	exec = "!exec "
 [core]
 	editor = nvim
+	pager = diff-so-fancy | less --tabs=2 -RFX
+[status]
+	showUntrackedFiles = all
 [push]
 	default = current
-[credential]
-	helper = osxkeychain
+[diff]
+	renames = copies
+	algorithm = patience
+[merge]
+	conflictstyle = diff3
 [color]
-	ui = auto
+	ui = true
+[include]
+	path = ~/.gitconfig.local
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

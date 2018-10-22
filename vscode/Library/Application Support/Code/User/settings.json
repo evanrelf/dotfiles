@@ -27,7 +27,7 @@
     "vim.leader": "<space>",
     "vim.substituteGlobalFlag": true,
     "workbench.activityBar.visible": true,
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "dark-plus-syntax",
     "workbench.editor.showIcons": false,
     "workbench.iconTheme": "vs-minimal",
     "workbench.startupEditor": "newUntitledFile",
@@ -54,4 +54,6 @@
         { "before": ["<"], "after": ["<", "g", "v"] },
         // { "before": [], "after": [] },
     ],
+    "editor.occurrencesHighlight": false,
+    "window.zoomLevel": 0,
 }
