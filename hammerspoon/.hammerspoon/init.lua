@@ -15,8 +15,6 @@ hs.application.watcher.new(function(appName, eventType, app)
   end
 end):start()
 
--- hs.noises.new(hs.alert.show):start()
-
 bind(hyper, "\\", hs.reload)
 bind(hyper, "delete", function() hs.eventtap.keyStroke({}, "forwarddelete") end)
 bind(hyper, "R", wm.halfLeft)

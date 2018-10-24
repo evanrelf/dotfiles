@@ -307,7 +307,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType haskell
         \ setlocal keywordprg=hoogle\ --info
   " Elm
-  autocmd BufWritePre *.elm undojoin | Neoformat
+  " autocmd BufWritePre *.elm silent! undojoin | silent Neoformat
   " C++
   autocmd FileType cpp setlocal commentstring=//\ %s
   " Markdown
@@ -324,6 +324,9 @@ augroup FileTypeSettings " {{{2
   autocmd FileType help
         \  noremap <buffer> q :q<CR>
         \| nnoremap <buffer> <Esc> :q<CR>
+  " Fish
+  autocmd FileType fish setlocal shiftwidth=4
+  " autocmd BufWritePre *.fish silent! undojoin | silent Neoformat
   " Terminal
   autocmd TermOpen *
         \  setlocal nonumber norelativenumber

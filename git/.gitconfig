@@ -5,6 +5,7 @@
 	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	ci = commit
 	co = checkout
+	d = diff
 	ds = diff --staged
 	clean-ignore = clean -Xdf
 	clean-untracked = clean -xdi
