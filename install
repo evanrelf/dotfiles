@@ -9,6 +9,8 @@ if [ $# -gt 0 ]; then
   # Creates config folders if they don't already exist
   for i in "$@"; do
     case $i in
+      bitbar )
+        (set -x; mkdir -p "$HOME/.config/bitbar/plugins");;
       bspwm )
         (set -x; mkdir -p "$HOME/.config/bspwm");;
       emacs-doom )

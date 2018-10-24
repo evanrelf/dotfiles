@@ -13,3 +13,6 @@
 /neovim/.config/nvim/*
 !/neovim/.config/nvim/init.vim
 !/neovim/.config/nvim/old-init.vim
+
+# BitBar
+/bitbar/.config/bitbar/cache_*.json
