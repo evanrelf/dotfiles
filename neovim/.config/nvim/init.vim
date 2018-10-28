@@ -9,7 +9,7 @@
 call plug#begin()
 
 " Appearance {{{2
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'evanrelf/papercolor-theme'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -325,7 +325,6 @@ augroup FileTypeSettings " {{{2
         \  noremap <buffer> q :q<CR>
         \| nnoremap <buffer> <Esc> :q<CR>
   " Fish
-  autocmd FileType fish setlocal shiftwidth=4
   " autocmd BufWritePre *.fish silent! undojoin | silent Neoformat
   " Terminal
   autocmd TermOpen *
