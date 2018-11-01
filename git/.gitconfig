@@ -7,6 +7,7 @@
 	co = checkout
 	d = diff
 	ds = diff --staged
+	ks = difftool -y -t Kaleidoscope
 	clean-ignore = clean -Xdf
 	clean-untracked = clean -xdi
 	undo = reset --soft HEAD^
@@ -23,6 +24,8 @@
 [diff]
 	renames = copies
 	algorithm = patience
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [merge]
 	conflictstyle = diff3
 [color]

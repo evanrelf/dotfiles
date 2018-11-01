@@ -68,9 +68,9 @@ if status --is-interactive
   end
 end
 
-alias qa "~/qa"
-alias vpn "~/vpn"
-alias gauntlet "~/gauntlet"
+alias qa "~/Code/scripts/qa/qa"
+alias vpn "~/Code/scripts/vpn/vpn"
+alias gauntlet "~/Code/scripts/gauntlet/gauntlet"
 alias sql "psql -d vetpro -p 5432 -h localhost -U postgres"
 
 # update - Run all update commands {{{2
@@ -282,7 +282,9 @@ function rc -d "Open the specified program's configuration file"
           case neovim nvim
             eval $EDITOR "$HOME/.config/nvim/init.vim"
           case kakoune kak
-            eval $EDITOR "$HOME/.config/kak/kakrc"
+            cd "$HOME/.config/kak"
+            ls -l
+            # eval $EDITOR "$HOME/.config/kak/kakrc"
           case emacs
             eval $EDITOR "$HOME/.emacs"
           case spacemacs emacs-spacemacs
