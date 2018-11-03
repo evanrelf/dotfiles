@@ -8,88 +8,73 @@
     acpi
     binutils
     clang
-    dropbox-cli
+    diff-so-fancy
+    docker
     exa
-    feh
+    fd
+    fish
+    fzf
     git
-    gnumake
-    htop
     mkpasswd
+    mosh
     neofetch
     neovim
-    pipes
+    nodejs
     powertop
     ripgrep
-    scrot
-    silver-searcher
     stack
     stow
+    tmux
 
     # Desktop
-    dmenu
-    lightlocker
+    xorg.setxkbmap
     xorg.xbacklight
-
-    # Themes & icons
-    arc-theme
-    arc-icon-theme
-    adapta-gtk-theme
-    papirus-icon-theme
+    xorg.xset
+    xsel
+    feh
 
     # Apps
     chromium
-    emacs
-    # qutebrowser
+    rofi
     spotify
-    termite
-    vscode
-    wpa_supplicant_gui
+    xst
   ];
 
   programs = {
-    vim.defaultEditor = true;
     fish.enable = true;
-    mosh.enable = true;
   };
 
 
   # FONTS {{{1
   fonts.fonts = with pkgs; [
     iosevka-bin
-    noto-fonts
-    gohufont
-    terminus_font
   ];
 
 
   # BOOT {{{1
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.editor = false;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-  boot.kernelModules = [ "acpi_call" ];
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
-      device = "/dev/disk/by-uuid/9f49b01f-65ea-4e76-b7e3-69527fe787d5";
-      preLVM = true;
-      allowDiscards = true;
-    }
-  ];
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      systemd-boot.editor = false;
+      efi.canTouchEfiVariables = true;
+    };
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    kernelModules = [ "acpi_call" ];
+    initrd.luks.devices = [
+      {
+        name = "root";
+        device = "/dev/disk/by-uuid/5e2e8df5-c276-4e65-bf10-020516074377";
+        preLVM = true;
+        allowDiscards = true;
+      }
+    ];
+  };
 
 
   # NETOWRKING {{{1
   networking = {
-    hostName = "thinkpad";
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-      interfaces = [ "wlp4s0" ];
-      networks = {
-          # REDACTED
-        };
-      };
-    };
+    hostName = "nixos";
+    wireless.enable = true;
   };
 
 
@@ -99,23 +84,16 @@
     tlp.enable = true;
     xserver = {
       enable = true;
-      displayManager.lightdm = {
-        enable = true;
-        autoLogin = {
-          enable = true;
-          user = "evanrelf";
-        };
-      };
-      desktopManager.xfce.enable = true;
-      desktopManager.xterm.enable = false;
+      displayManager.lightdm.enable = true;
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
       };
+      desktopManager.xterm.enable = false;
       libinput = {
         enable = true;
-        tapping = false;
         naturalScrolling = true;
+        tapping = false;
       };
       wacom.enable = true;
     };
@@ -128,27 +106,24 @@
     #   # shadow = true;
     #   # shadowOffsets = [ (-10) (-10) ];
     # };
-    unclutter.enable = true;
     redshift = {
       enable = true;
       latitude = "34.0522";
       longitude = "-118.2437";
     };
+    unclutter.enable = true;
   };
 
 
   # USERS {{{1
   users = {
-    # mutableUsers = false;
-    # users.root.hashedPassword = "REDACTED";
     users.evanrelf = {
       description = "Evan Relf";
       home = "/home/evanrelf";
+      initialPassword = "banana";
       shell = pkgs.fish;
       extraGroups = [ "wheel" "networkmanager" ];
       isNormalUser = true;
-      uid = 1000;
-      # hashedPassword = "REDACTED";
     };
   };
 
@@ -163,16 +138,13 @@
   powerManagement.powertop.enable = true;
   time.timeZone = "America/Los_Angeles";
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  security.sudo.extraConfig = ''
+    %wheel ALL=(ALL) NOPASSWD: /run/current-system/sw/bin/setkeycodes
+  '';
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "18.03"; # Did you read the comment?
+  imports = [ ./hardware-configuration.nix ];
+
+  system.stateVersion = "18.09";
 
 
   # }}}1

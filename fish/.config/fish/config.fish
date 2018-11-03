@@ -306,7 +306,7 @@ function rc -d "Open the specified program's configuration file"
 
             # Window managers
           case xmonad
-            eval $EDITOR "$HOME/.config/xmonad/xmonad.hs"
+            eval $EDITOR "$HOME/.xmonad/xmonad.hs"
           case bspwm
             eval $EDITOR "$HOME/.config/bspwm/bspwmrc"
           case sxhkd
@@ -333,6 +333,7 @@ function rc -d "Open the specified program's configuration file"
             eval $EDITOR "$HOME/.config/kitty/kitty.conf"
           case nixos
             sudoedit "/etc/nixos/configuration.nix"
+            cp -v "/etc/nixos/configuration.nix" "$HOME/dotfiles/nixos/configuration.nix"
 
           case "*"
             set_color red
