@@ -37,6 +37,19 @@ alias ed "pkill Emacs; pkill Emacs; emacs --daemon=term; emacs --daemon=gui"
 alias et "emacsclient -s term -t"
 alias eg "emacsclient -s gui -c -n"
 
+function kak
+  if command kak -l | not rg -q 'daemon'
+    command kak -d -s daemon 2>/dev/null
+  end
+
+  if test (count $argv) -eq 0
+    eval "command kak -c daemon -e 'buffer *scratch*'"
+  else
+    eval "command kak -c daemon $argv"
+  end
+end
+complete -c k -w kak
+
 alias g "git"
 
 if test (command -s exa)
@@ -405,13 +418,17 @@ end
 # }}}2
 # v - Fuzzy project file open in editor {{{2
 function v -d "Fuzzy project file open in editor"
+  set -l before (pwd)
   r
+  set -l after (pwd)
   V $argv
-  cd -
+  if test $before != $after
+    cd -
+  end
 end
 # }}}2
 # C - Fuzzy directory changer {{{2
-function C -d "Fuzzy file open in editor"
+function C -d "Fuzzy directory changer"
   # Arguments to the function are passed to fzf as exact phrases
   set -l queries
   # for arg in $argv
@@ -429,7 +446,7 @@ function C -d "Fuzzy file open in editor"
 end
 # }}}2
 # c - Fuzzy project directory changer {{{2
-function c -d "Fuzzy project file open in editor"
+function c -d "Fuzzy project directory changer"
   r
   C $argv
 end

@@ -215,6 +215,9 @@ tnoremap <Esc> <C-\><C-n>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+" vim-slash
+map <plug>(slash-after) zz
+
 " Leader {{{2
 map <Space> <Leader>
 nnoremap <Leader>s :%s/
