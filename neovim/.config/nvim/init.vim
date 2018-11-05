@@ -9,6 +9,7 @@
 call plug#begin()
 
 " Appearance {{{2
+Plug 'lifepillar/vim-solarized8'
 Plug 'evanrelf/papercolor-theme'
 Plug 'itchyny/lightline.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -63,7 +64,7 @@ call plug#end()
 let g:PaperColor_Theme_Options = { 'theme': { 'default': { 'allow_bold': 0 } } }
 
 " lightline
-let g:lightline = { 'colorscheme': 'wombat' }
+let g:lightline = { 'colorscheme': 'solarized' }
 
 " vim-smooth-scroll
 let g:ms_per_line = 3
@@ -93,15 +94,15 @@ let g:elm_format_autosave = 0
 
 " SETTINGS {{{1
 " Apperance {{{2
-augroup ColorSchemes
-  autocmd!
-  autocmd ColorScheme *
-        \  highlight CursorLineNr NONE
-        \| highlight link CursorLineNr Normal
-augroup END
+" augroup ColorSchemes
+"   autocmd!
+"   autocmd ColorScheme *
+"         \  highlight CursorLineNr NONE
+"         \| highlight link CursorLineNr Normal
+" augroup END
 set termguicolors
 set background=dark
-colorscheme PaperColor
+colorscheme solarized8
 set noshowmode
 set title
 set shortmess=filmxTWIc
@@ -193,8 +194,8 @@ command! -bang -nargs=? -complete=dir FilesP
 
 " MAPPINGS {{{1
 " General {{{2
-noremap ; :
-noremap : ;
+" noremap ; :
+" noremap : ;
 noremap Y y$
 noremap j gj
 noremap k gk

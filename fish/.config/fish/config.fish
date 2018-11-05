@@ -37,19 +37,6 @@ alias ed "pkill Emacs; pkill Emacs; emacs --daemon=term; emacs --daemon=gui"
 alias et "emacsclient -s term -t"
 alias eg "emacsclient -s gui -c -n"
 
-function kak
-  if command kak -l | not rg -q 'daemon'
-    command kak -d -s daemon 2>/dev/null
-  end
-
-  if test (count $argv) -eq 0
-    eval "command kak -c daemon -e 'buffer *scratch*'"
-  else
-    eval "command kak -c daemon $argv"
-  end
-end
-complete -c k -w kak
-
 alias g "git"
 
 if test (command -s exa)
@@ -482,7 +469,7 @@ set __fish_git_prompt_showstashstate "true"
 function fish_prompt
   set -l exit_code $status
   # PWD
-  set_color cyan
+  set_color blue
   echo -n (prompt_pwd)" "
   set_color normal
   # Git
@@ -492,18 +479,22 @@ function fish_prompt
     if test -n "$branch"
       set -l truncated (echo $branch | cut -c 1-15)
       set -l dirty (git status --porcelain)
-      if test -n "$dirty"
-        set_color yellow
-          else
-            set_color green
-          end
-          if test "$branch" != "$truncated"
-            echo -n "$truncated... "
-          else
-            echo -n "$branch "
-          end
-          set_color normal
+      if test -z "$dirty"
+        set_color green
+      else
+        if echo "$dirty" | rg -q "\?\?"
+          set_color red --bold
+        else
+          set_color yellow
+        end
       end
+      if test "$branch" != "$truncated"
+        echo -n "$truncated... "
+      else
+        echo -n "$branch "
+      end
+      set_color normal
+    end
   end
   # Exit status
   if test $exit_code -ne 0
@@ -516,13 +507,13 @@ end
 
 
 # COLORS {{{1
-set fish_color_command blue
+set fish_color_command green
 set fish_color_param normal
-set fish_color_quote green
+set fish_color_quote cyan
 set fish_color_error red
 set fish_color_valid_path --underline
-set fish_color_comment brblack
-set fish_color_autosuggestion brblack
+set fish_color_comment green --bold
+set fish_color_autosuggestion green --bold
 
 
 # EXTRAS {{{1

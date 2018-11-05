@@ -8,13 +8,14 @@
     acpi
     binutils
     clang
-    diff-so-fancy
     docker
+    dropbox-cli
     exa
     fd
     fish
     fzf
     git
+    gitAndTools.diff-so-fancy
     mkpasswd
     mosh
     neofetch
@@ -22,16 +23,19 @@
     nodejs
     powertop
     ripgrep
+    scrot
     stack
     stow
+    tldr
     tmux
 
     # Desktop
+    feh
+    xclip
     xorg.setxkbmap
     xorg.xbacklight
     xorg.xset
     xsel
-    feh
 
     # Apps
     chromium

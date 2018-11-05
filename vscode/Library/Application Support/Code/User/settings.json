@@ -27,7 +27,6 @@
     "vim.leader": "<space>",
     "vim.substituteGlobalFlag": true,
     "workbench.activityBar.visible": true,
-    "workbench.colorTheme": "dark-plus-syntax",
     "workbench.editor.showIcons": false,
     "workbench.iconTheme": "vs-minimal",
     "workbench.startupEditor": "newUntitledFile",
@@ -36,13 +35,13 @@
     "zenMode.fullScreen": false,
 
     "vim.normalModeKeyBindingsNonRecursive": [
-        { "before": [";"], "after": [":"] },
-        { "before": [":"], "after": [";"] },
+        // { "before": [";"], "after": [":"] },
+        // { "before": [":"], "after": [";"] },
         { "before": ["Y"], "after": ["y", "$"] },
-        { "before": ["j"], "after": ["g", "j"] },
-        { "before": ["k"], "after": ["g", "k"] },
-        { "before": ["g", "j"], "after": ["j"] },
-        { "before": ["g", "k"], "after": ["k"] },
+        // { "before": ["j"], "after": ["g", "j"] },
+        // { "before": ["k"], "after": ["g", "k"] },
+        // { "before": ["g", "j"], "after": ["j"] },
+        // { "before": ["g", "k"], "after": ["k"] },
         { "before": ["J"], "after": ["m", "z", "J", "`", "z"] },
         { "before": ["Q"], "after": ["@", "@"] },
         // { "before": [], "after": [] },
@@ -56,4 +55,5 @@
     ],
     "editor.occurrencesHighlight": false,
     "window.zoomLevel": 0,
+    "workbench.colorTheme": "Better Solarized Dark",
 }

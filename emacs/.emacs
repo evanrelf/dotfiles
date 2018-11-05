@@ -21,9 +21,13 @@
 (straight-use-package 'use-package)
 
 ;; Appearance
-(use-package doom-themes
+(use-package doom-themes)
+  ;; :config
+  ;; (load-theme 'doom-one t))
+(use-package solarized-theme
   :config
-  (load-theme 'doom-one t))
+  (setq solarized-use-less-bold t)
+  (load-theme 'solarized-dark t))
 (use-package doom-modeline
   :config
   (doom-modeline-init)
@@ -208,7 +212,7 @@
 
 ;; MAPPINGS
 (mmap
-  ";" 'evil-ex
-  ":" 'evil-repeat-find-char
+  ;; ";" 'evil-ex
+  ;; ":" 'evil-repeat-find-char
   "j" 'evil-next-visual-line
   "k" 'evil-previous-visual-line)

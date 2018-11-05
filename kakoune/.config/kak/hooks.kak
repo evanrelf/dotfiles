@@ -1,10 +1,16 @@
 hook global WinCreate .* %{
-  # Line numbers
-  # add-highlighter window/number-lines number-lines -hlcursor -separator ' ' -relative
-  # Highlight matching pairs
-  add-highlighter global/ show-matching
-  # Highlight TODO comments
-  add-highlighter global/ regex \b(TODO|FIXME|XXX|NOTE)\b 0:default+r
+  # add-highlighter global/ show-matching
+  # add-highlighter global/ regex \b(TODO|FIXME|XXX|NOTE)\b 0:default+r
+  add-highlighter global/ show-whitespaces -lf ' ' -spc ' '
+  add-highlighter window/trailing-whitespace regex \h+$ 0:default,red
+}
+
+hook global InsertBegin .* %{
+  remove-highlighter window/trailing-whitespace
+}
+
+hook global InsertEnd .* %{
+  add-highlighter window/trailing-whitespace regex \h+$ 0:default,red
 }
 
 hook global InsertCompletionShow .* %{
@@ -31,12 +37,10 @@ define-command disable-autoformat -docstring 'Disable auto-format' %{
 hook global WinSetOption filetype=.* %{
   disable-autoformat
   disable-autolint
-  hook window -group format BufWritePre .* %{
-    try %{ execute-keys -draft \%s\h+$<ret>d }
-  }
 }
 
 hook global WinSetOption filetype=haskell %{
+  set-option window makecmd 'stack build'
   set-option window lintcmd 'hlint'
   set-option window formatcmd 'brittany'
   hook window -group lint BufWritePost .* lint
@@ -56,13 +60,18 @@ hook global WinSetOption filetype=elm %{
 
 
 hook global WinSetOption filetype=cpp %{
+  set-option window makecmd 'make'
   set-option window formatcmd 'clang-format'
   hook window -group format BufWritePre .* format
   clang-enable-autocomplete
   clang-enable-diagnostics
 }
 
-hook global WinSetOption filetype=(javascript|typescript|css|scss|json|markdown|yaml) %{
+hook global WinSetOption filetype=(makefile|ini) %{
+  space-indent-disable
+}
+
+hook global WinSetOption filetype=(javascript|typescript|vue|css|scss|less|json|markdown|yaml) %{
   set-option window formatcmd 'prettier --stdin-filepath=${kak_buffile}'
   hook window -group format BufWritePre .* format
 }

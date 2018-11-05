@@ -33,14 +33,14 @@
 [include]
 	path = ~/.gitconfig.local
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+	oldNormal = red
+	oldHighlight = red
+	newNormal = green
+	newHighlight = green
 [color "diff"]
 	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
+	frag = magenta
+	commit = yellow
+	old = red
+	new = green
 	whitespace = red reverse

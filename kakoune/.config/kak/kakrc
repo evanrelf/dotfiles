@@ -1,4 +1,5 @@
 source '~/.config/kak/plugins.kak'
 source '~/.config/kak/options.kak'
+source '~/.config/kak/commands.kak'
 source '~/.config/kak/mappings.kak'
 source '~/.config/kak/hooks.kak'
