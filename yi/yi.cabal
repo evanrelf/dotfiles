@@ -1,0 +1,27 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: cd409bce0db77812623b100b3703342591d78f0e07ff5ee265d967130e2c5683
+
+name:           yi
+version:        0.0.0
+build-type:     Simple
+
+executable yi
+  main-is: Main.hs
+  other-modules:
+      Paths_yi
+  hs-source-dirs:
+      src
+  ghc-options: -threaded
+  build-depends:
+      base >=4.7 && <5
+    , mtl
+    , yi-core
+    , yi-frontend-vty
+    , yi-keymap-vim
+    , yi-mode-haskell
+  default-language: Haskell2010

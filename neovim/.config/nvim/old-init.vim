@@ -1,78 +1,90 @@
+" META {{{1
+" vim: foldenable foldmethod=marker
+
+" Evan Relf's Neovim config
+" https://github.com/evanrelf/dotfiles/
+
+
 " PLUGINS {{{1
 call plug#begin()
 
-" Appearance
+" Appearance {{{2
 Plug 'rakr/vim-one'
-Plug 'roman/golden-ratio'
+Plug 'lifepillar/vim-solarized8'
+Plug 'evanrelf/papercolor-theme'
+Plug 'cocopon/iceberg.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
-" Movement
-Plug 'junegunn/vim-slash'
-Plug 'critiqjo/husk-x.vim'
-
-" Editing
+" Editing {{{2
+Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
-Plug 'wellle/targets.vim'
-
-" Completion
-" Plug 'zxqfl/tabnine-vim', { 'on': [] }
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-endwise'
-
-" Formatting
-Plug 'sbdchd/neoformat'
+Plug 'matze/vim-move'
 Plug 'junegunn/vim-easy-align'
-Plug 'sickill/vim-pasta'
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-abolish'
 
-" Syntax
-Plug 'w0rp/ale'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-sleuth', { 'on': [] }
-
-" Files
+" Navigation {{{2
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 
-" Miscellaneous
+" Movement {{{2
+Plug 'wellle/targets.vim'
+Plug 'critiqjo/husk-x.vim'
+Plug 'junegunn/vim-slash'
+
+" Intelligence {{{2
+" Plug 'zxqfl/tabnine-vim'
+Plug 'w0rp/ale'
+Plug 'sbdchd/neoformat'
+Plug 'airblade/vim-gitgutter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
+Plug 'alvan/vim-closetag'
+Plug 'sickill/vim-pasta'
+
+" Syntax {{{2
+Plug 'sheerun/vim-polyglot'
+Plug 'ap/vim-css-color'
+Plug 'lervag/vimtex'
+Plug 'tpope/vim-sleuth', { 'on': [] } " Doesn't get along with vim-polyglot
+Plug 'ntpeters/vim-better-whitespace'
+
+" Miscellaneous {{{2
+Plug 'vimlab/split-term.vim'
 Plug 'moll/vim-bbye'
+Plug 'tpope/vim-eunuch'
+Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/visualrepeat'
+Plug 'Konfekt/FastFold'
+
+" }}}2
 
 call plug#end()
 
 " Plugin settings {{{2
-" one
-let g:one_allow_italics = 1
+" PaperColor
+let g:PaperColor_Theme_Options = { 'theme': { 'default': { 'allow_bold': 0 } } }
 
-" languageclient
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['~/.local/bin/hie-wrapper']
-    \ }
-let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_loggingFile = expand('~/.local/share/nvim/LanguageClient.log')
-let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
+" lightline
+let g:lightline = { 'colorscheme': 'one' }
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
+" gitgutter
+let g:gitgutter_map_keys = 0
 
-" neoformat
-let g:neoformat_only_msg_on_error = 1
+" vim-better-whitespace
+let g:better_whitespace_filetypes_blacklist = ['vim-plug', 'help']
 
-" ale
+" ALE
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
 
-" better-whitespace
-let g:strip_whitelines_at_eof = 1
+" Neoformat
+let g:neoformat_basic_format_trim = 1
 
 " polyglot
+let g:polyglot_disabled = ['latex']
 let g:vim_markdown_new_list_item_indent = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
@@ -81,17 +93,26 @@ let g:elm_format_autosave = 0
 
 
 " SETTINGS {{{1
-" Appearance {{{2
+" Apperance {{{2
+" augroup ColorSchemes
+"   autocmd!
+"   autocmd ColorScheme *
+"         \  highlight CursorLineNr NONE
+"         \| highlight link CursorLineNr Normal
+" augroup END
 set termguicolors
 set background=dark
 colorscheme one
-set number
-set relativenumber
 set noshowmode
-set shortmess=filmxTWIcF
 set title
+set shortmess=filmxTWIc
 set splitbelow
 set splitright
+set list
+set listchars=tab:▸\ ,nbsp:␣
+set number
+set numberwidth=2
+set colorcolumn=81
 
 " Indentation {{{2
 set expandtab
@@ -104,8 +125,8 @@ set nowrap
 set textwidth=79
 set linebreak
 set breakindent
+set formatoptions=crqnj
 set nojoinspaces
-set formatoptions=cqnj
 
 " Extra files {{{2
 set noswapfile
@@ -118,35 +139,41 @@ set ignorecase
 set smartcase
 set gdefault
 set report=0
+set grepprg=rg\ --vimgrep
 
 " Wild mode {{{2
 set wildmode=longest:full,full
-set wildignore+=*/.git/*,.DS_Store
+set wildignore+=*/.git/*,*/tmp/*,*.swp,.DS_Store
 set wildignorecase
 
 " Miscellaneous {{{2
-set mouse=a
 set hidden
+set autoread
+set mouse=nv
 set virtualedit=block
-set lazyredraw
-set updatetime=2000
-set inccommand=nosplit
 set keywordprg=:help
-set shell=/bin/bash
+set lazyredraw
+set updatetime=100
+set inccommand=nosplit
 
 " }}}2
 
 
-" COMMANDS {{{1
+" FUNCTIONS {{{1
 function! CommandCabbr(abbreviation, expansion) abort
   silent execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
 command! -nargs=+ Command call CommandCabbr(<f-args>)
 
+
+" COMMANDS {{{1
 command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
+
+" Command w update
+Command bd Bd
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
@@ -161,100 +188,117 @@ command! -bang -nargs=* GRg
       \     'options': '--delimiter : --nth 4..' },
       \   <bang>0)
 
-Command bd Bd
+command! -bang -nargs=? -complete=dir FilesP
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 " MAPPINGS {{{1
+" General {{{2
+" noremap ; :
+" noremap : ;
 noremap Y y$
 noremap j gj
 noremap k gk
-nnoremap J m`J``
-xnoremap < <gv
 xnoremap > >gv
+xnoremap < <gv
+nnoremap J m`J``
+
+noremap Q @@
 nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
+
+nnoremap <Tab> zo
+nnoremap <S-Tab> zc
+
 tnoremap <Esc> <C-\><C-n>
-vnoremap <silent> p :<C-u>let @p = @+<CR>gvp:let @+ = @p<CR>
 
-" noremap <silent> <C-h> :ALENext<CR>
-" noremap <silent> <C-j> :ALEPrevious<CR>
-" noremap <silent> <C-k> :ALENext<CR>
-" noremap <silent> <C-l> :ALEPrevious<CR>
-
-nnoremap <silent> <C-n> :ALENext<CR>
-nnoremap <silent> <C-p> :ALEPrevious<CR>
+" EasyAlign
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-map <Plug>(slash-after) zz
 
-" Kakoune
-noremap gh ^
-noremap gj G
-noremap gk gg
-noremap gl g_
-nnoremap < <<
-nnoremap > >>
-nnoremap \| :%!
-xnoremap \| :!
+" vim-slash
+map <plug>(slash-after) zz
 
-" Leader
+" Leader {{{2
 map <Space> <Leader>
-noremap <silent> <Leader>w :<C-u>update<CR>
-noremap <Leader>y "+y
+noremap <Leader>w :<C-u>write<CR>
 nnoremap <Leader>s :%s/
 xnoremap <Leader>s :s/
 nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
-noremap <silent> <Leader>= :Neoformat<CR>
+nnoremap <Leader>= :<C-u>Neoformat<CR>
+xnoremap <Leader>= :Neoformat<CR>
+
+" ALE
 noremap <silent> <Leader>ap :<C-u>ALEPrevious<CR>
 noremap <silent> <Leader>an :<C-u>ALENext<CR>
 noremap <silent> <Leader>ad :<C-u>ALEDetail<CR>
+noremap <silent> <Leader>af :<C-u>ALEFix<CR>
+
+" FZF
 noremap <silent> <Leader>f :<C-u>GFiles<CR>
+noremap <silent> <Leader>F :<C-u>Files<CR>
 noremap <silent> <Leader>r :<C-u>GRg<CR>
+noremap <silent> <Leader>R :<C-u>Rg<CR>
 noremap <silent> <Leader>h :<C-u>Helptags<CR>
 noremap <silent> <Leader>b :<C-u>Buffers<CR>
 
-" Experimental
-nnoremap <Leader>S vip:sort<CR>
-xnoremap <Leader>S :sort<CR>
+" Terminal
+noremap <silent> <Leader>t :<C-u>Term<CR>
+noremap <silent> <Leader>T :<C-u>VTerm<CR>
 
-" Available
-noremap \\ <Nop>
+" GUI {{{2
+if has('gui_vimr')
+  noremap <silent> <C-Tab> :<C-u>tabnext<CR>
+  noremap <silent> <C-S-Tab> :<C-u>tabprev<CR>
+endif
+
+" Disabled {{{2
+nnoremap U <Nop>
 noremap S <Nop>
-noremap + <Nop>
-noremap _ <Nop>
-noremap <Tab> <Nop>
-noremap <S-Tab> <Nop>
-xnoremap P <Nop>
-xnoremap Q <Nop>
-xnoremap R <Nop>
-xnoremap Z <Nop>
+noremap X <Nop>
+inoremap <C-c> <Nop>
+
+" }}}2
 
 
 " AUTOCOMMANDS {{{1
 augroup FileTypeSettings " {{{2
   autocmd!
+  " Haskell
   autocmd FileType haskell setlocal keywordprg=hoogle\ --info
+  " C++
   autocmd FileType cpp setlocal commentstring=//\ %s
+  " Markdown
   autocmd FileType markdown setlocal wrap
-  autocmd FileType gitcommit setlocal textwidth=72 colorcolumn=73 spell
-  autocmd BufEnter .gitconfig* setlocal filetype=gitconfig noexpandtab shiftwidth=8
-  autocmd BufEnter Dockerfile.* setlocal filetype=Dockerfile
+  " Git
+  autocmd FileType gitcommit setlocal textwidth=72 colorcolumn=73
+  autocmd BufEnter .gitconfig*
+        \  setlocal filetype=gitconfig
+        \| setlocal noexpandtab shiftwidth=8
+  " Docker
+  autocmd BufEnter Dockerfile* setlocal ft=Dockerfile
+  " Vim
   autocmd FileType vim,help setlocal keywordprg=:help
   autocmd FileType help
-        \| noremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd TermOpen * setlocal wrap nonumber norelativenumber
+        \  noremap <buffer> q :q<CR>
+        \| nnoremap <buffer> <Esc> :q<CR>
+  " Terminal
+  autocmd TermOpen * setlocal nonumber norelativenumber
+  " Man pages
   autocmd FileType man
-        \  setlocal laststatus=0 noruler
+        \  setlocal laststatus=0
         \| noremap <buffer> h <Nop>
         \| noremap <buffer> j <C-e>L0
         \| noremap <buffer> k <C-y>H0
         \| noremap <buffer> l <Nop>
-        " \| autocmd! LazyLoadPlugins
-  autocmd FileType vim-plug
-        \  setlocal wrap nonumber norelativenumber
-        \| noremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd FileType fzf noremap <buffer> <Esc> :<C-u>q<CR>
+  " plug
+  autocmd FileType vim-plug setlocal nonumber norelativenumber
+  " FZF
+  autocmd FileType fzf
+        \  nnoremap <buffer> <Esc> :q<CR>
+        \| nnoremap <buffer> q :q<CR>
+  " ALE
   autocmd FileType ale-preview
         \  setlocal wrap nonumber norelativenumber
         \| noremap <buffer> <Esc> :<C-u>q<CR>
@@ -271,24 +315,19 @@ augroup AutoRead " {{{2
 augroup END
 
 augroup IgnoreCaseCommandMode " {{{2
-  autocmd!
-  autocmd CmdLineEnter : set nosmartcase
-  autocmd CmdLineLeave : set smartcase
+    autocmd!
+    autocmd CmdLineEnter : set nosmartcase
+    autocmd CmdLineLeave : set smartcase
 augroup END
 
 augroup FixSleuthPolyglot " {{{2
   autocmd!
+  " Fix vim-sleuth and vim-polyglot not getting along
   autocmd Filetype * if &filetype != 'markdown' | call plug#load('vim-sleuth') | endif
 augroup END
 
-" augroup LazyLoadPlugins " {{{2
-"   autocmd!
-"   autocmd CursorHold,CursorHoldI *
-"         \  call plug#load('tabnine-vim')
-"         \| autocmd! LazyLoadPlugins
-" augroup END
 
 " }}}2
 
 
-" vim: foldenable foldmethod=marker
+" }}}1

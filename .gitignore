@@ -3,16 +3,19 @@
 .localized
 
 # fish
-/fish/.config/fish/*
-!/fish/.config/fish/config.fish
-!/fish/.config/fish/fishfile
-!/fish/.config/fish/iterm2_shell_integration.fish
-!/fish/.config/fish/functions/fisher.fish
+fish/.config/fish/*
+!fish/.config/fish/config.fish
+!fish/.config/fish/fishfile
+!fish/.config/fish/iterm2_shell_integration.fish
+!fish/.config/fish/functions/fisher.fish
 
 # neovim
-/neovim/.config/nvim/*
-!/neovim/.config/nvim/init.vim
-!/neovim/.config/nvim/old-init.vim
+neovim/.config/nvim/*
+!neovim/.config/nvim/init.vim
+!neovim/.config/nvim/old-init.vim
 
 # BitBar
-/bitbar/.config/bitbar/cache_*.json
+bitbar/.config/bitbar/cache_*.json
+
+# Yi
+yi/.stack-work

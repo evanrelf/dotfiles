@@ -22,7 +22,7 @@ set -U FZF_PREVIEW_FILE_COMMAND "bat --plain --color always --line-range :\$LINE
 set -x EDITOR nvim
 set -x MANPAGER "nvim -c 'set ft=man' -"
 
-set -l paths $HOME/.cargo/bin $HOME/.local/bin /usr/local/sbin
+set -l paths $HOME/.cargo/bin $HOME/.local/bin /usr/local/sbin /usr/local/Cellar/node/11.0.0/bin /usr/local/opt/python/libexec/bin
 for i in $paths
   if test -d $i
     set -x PATH $i $PATH
@@ -36,6 +36,20 @@ alias reload "source $HOME/.config/fish/config.fish"
 alias ed "pkill Emacs; pkill Emacs; emacs --daemon=term; emacs --daemon=gui"
 alias et "emacsclient -s term -t"
 alias eg "emacsclient -s gui -c -n"
+
+function kd
+  command kak -c daemon -e 'kill'
+  command kak -d -s daemon 2>/dev/null
+end
+
+function kc
+   if test (count $argv) -eq 0
+    command kak -c daemon -e 'buffer *scratch*'
+  else
+    command kak -c daemon $argv
+  end
+end
+complete -c kc -w kak
 
 alias g "git"
 
@@ -162,6 +176,13 @@ function update -d "Run all update commands"
     echo "== Updating tldr"
     set_color normal
     tldr --update
+  end
+
+  if test (command -s jump)
+    set_color yellow
+    echo "== Updating jump directories"
+    set_color normal
+    jump clean
   end
 
   set_color yellow
@@ -393,12 +414,13 @@ function V -d "Fuzzy file open in editor"
   #     set queries $queries "'$arg"
   # end
   set -l fd_cmd "fd --type file --follow --hidden --exclude '.git'"
-  set -l fzf_cmd "fzf -1 -0 --height=30% -q \"$queries \""
+  set -l fzf_cmd "fzf -1 -0 --height=30% --exact -q \"$queries \""
   set -l file (eval "$fd_cmd | $fzf_cmd")
   if test $status -eq 130
     return 0
   end
   test -n "$file"
+  and echo "Opening $file"
   and eval $EDITOR $file
   or return 1
 end
@@ -422,7 +444,7 @@ function C -d "Fuzzy directory changer"
   #     set queries $queries "'$arg"
   # end
   set -l fd_cmd "fd --type directory --follow --hidden --exclude '.git'"
-  set -l fzf_cmd "fzf -1 -0 --height=30% -q \"$queries \""
+  set -l fzf_cmd "fzf -1 -0 --height=30% --exact -q \"$queries \""
   set -l dir (eval "$fd_cmd | $fzf_cmd")
   if test $status -eq 130
     return 0
@@ -472,6 +494,12 @@ function fish_prompt
   set_color blue
   echo -n (prompt_pwd)" "
   set_color normal
+  # virtualenv
+  if set -q VIRTUAL_ENV
+    set_color cyan
+    echo -n -s "(" (basename "$VIRTUAL_ENV") ") "
+    set_color normal
+  end
   # Git
   set -l git_dir (git rev-parse --git-dir 2> /dev/null)
   if test -n "$git_dir"
@@ -512,8 +540,8 @@ set fish_color_param normal
 set fish_color_quote cyan
 set fish_color_error red
 set fish_color_valid_path --underline
-set fish_color_comment green --bold
-set fish_color_autosuggestion green --bold
+set fish_color_comment black --bold
+set fish_color_autosuggestion black --bold
 
 
 # EXTRAS {{{1
@@ -531,6 +559,12 @@ if test (command -s jump)
   status --is-interactive
   and source (jump shell fish | psub)
 end
+
+# virtualfish {{{2
+# if test (command -s python3)
+#   eval (python3 -m virtualfish)
+# end
+
 # }}}2
 
 

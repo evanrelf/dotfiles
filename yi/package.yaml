@@ -1,0 +1,16 @@
+name: yi
+
+dependencies:
+  - base >= 4.7 && < 5
+  - mtl
+  - yi-core
+  - yi-keymap-vim
+  - yi-frontend-vty
+  - yi-mode-haskell
+
+
+executables:
+  yi:
+    source-dirs: src
+    main: Main.hs
+    ghc-options: "-threaded"

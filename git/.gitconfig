@@ -3,17 +3,25 @@
 [alias]
 	s = status
 	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	b = branch
+	a = add
+	aa = "!git add -A && git status"
+	f = fetch
 	ci = commit
 	co = checkout
 	d = diff
 	ds = diff --staged
-	ks = difftool -y -t Kaleidoscope
+	kd = difftool -y -t Kaleidoscope
+	km = mergetool -y -t Kaleidoscope
 	clean-ignore = clean -Xdf
 	clean-untracked = clean -xdi
-	undo = reset --soft HEAD^
+	; undo = reset --soft HEAD^
 	amend = commit --amend
 	root = rev-parse --show-toplevel
 	exec = "!exec "
+	; Custom
+	new = "!if [ -z \"$1\" ]; then echo 'Error: No branch name specified'; exit 1; fi && git fetch && git checkout origin/master && git checkout -b $1 && :"
+	up = "!git fetch && git rebase origin/master"
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=2 -RFX
@@ -21,11 +29,15 @@
 	showUntrackedFiles = all
 [push]
 	default = current
+	followTags = true
 [diff]
 	renames = copies
 	algorithm = patience
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
 [merge]
 	conflictstyle = diff3
 [color]
@@ -44,3 +56,5 @@
 	old = red
 	new = green
 	whitespace = red reverse
+[fetch]
+	prune = true

@@ -5,8 +5,8 @@ Managed using [GNU Stow](https://www.gnu.org/software/stow/)
 
 Install
 -------
-```sh
+```bash
 git clone https://github.com/evanrelf/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow <config names here>
+./install <config names here>
 ```

@@ -4,7 +4,6 @@
     "editor.fontFamily": "PragmataPro",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
-    "editor.lineHeight": 17,
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
     "editor.minimap.renderCharacters": false,
@@ -47,13 +46,20 @@
         // { "before": [], "after": [] },
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
-        { "before": [";"], "after": [":"] },
-        { "before": [":"], "after": [";"] },
+        // { "before": [";"], "after": [":"] },
+        // { "before": [":"], "after": [";"] },
         { "before": [">"], "after": [">", "g", "v"] },
         { "before": ["<"], "after": ["<", "g", "v"] },
         // { "before": [], "after": [] },
     ],
     "editor.occurrencesHighlight": false,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Better Solarized Dark",
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.acceptSuggestionOnEnter": "off",
+    "elm.compiler": "npx elm",
+    "[elm]": {
+        "editor.formatOnSave": true
+    },
+    "editor.lineHeight": 16,
+    "languageServerHaskell.trace.server": "verbose"
 }

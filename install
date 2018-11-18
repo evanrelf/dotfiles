@@ -27,8 +27,6 @@ if [ $# -gt 0 ]; then
         (set -x; mkdir -p "$HOME/.config/kitty");;
       neovim )
         (set -x; mkdir -p "$HOME/.config/nvim");;
-      neovim2 )
-        (set -x; mkdir -p "$HOME/.config/nvim");;
       sxhkd )
         (set -x; mkdir -p "$HOME/.config/sxhkd");;
       vscode )

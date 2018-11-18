@@ -14,8 +14,11 @@ hook global InsertEnd .* %{
 }
 
 hook global InsertCompletionShow .* %{
-  map window insert <tab> <c-n>
-  map window insert <s-tab> <c-p>
+  try %{
+    execute-keys -draft 'h<a-K>\h<ret>'
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+  }
 }
 
 hook global InsertCompletionHide .* %{
@@ -40,20 +43,20 @@ hook global WinSetOption filetype=.* %{
 }
 
 hook global WinSetOption filetype=haskell %{
-  set-option window makecmd 'stack build'
-  set-option window lintcmd 'hlint'
+  set-option window makecmd 'stack build --fast'
+  set-option window lintcmd 'hlint; stack build --fast'
   set-option window formatcmd 'brittany'
   hook window -group lint BufWritePost .* lint
-  # add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]\w*)\s+::\s 1:type
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]\w*)\s+::\s 1:function
   lint-enable
   lint
 }
 
 hook global WinSetOption filetype=elm %{
+  set-option window makecmd 'npm run build'
   set-option window formatcmd 'elm-format --stdin'
   hook window -group format BufWritePre .* format
-  add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:type
+  add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
   add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
   add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
@@ -67,13 +70,13 @@ hook global WinSetOption filetype=cpp %{
   clang-enable-diagnostics
 }
 
-hook global WinSetOption filetype=(makefile|ini) %{
-  space-indent-disable
-}
-
 hook global WinSetOption filetype=(javascript|typescript|vue|css|scss|less|json|markdown|yaml) %{
   set-option window formatcmd 'prettier --stdin-filepath=${kak_buffile}'
-  hook window -group format BufWritePre .* format
+  # hook window -group format BufWritePre .* format
+}
+
+hook global WinSetOption filetype=(html|xml) %{
+  set-option -add global auto_pairs < >
 }
 
 hook global WinSetOption filetype=markdown %{

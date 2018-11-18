@@ -11,8 +11,8 @@ plug 'andreyorst/plug.kak' noload
 #   }
 # }
 
-plug 'ul/kak-lsp' noload do %{ cargo build --release } %{
-  hook global WinSetOption filetype=(c|cpp) %{
+plug 'ul/kak-lsp' do %{ cargo build --release } noload %{
+  hook global WinSetOption filetype=(haskell|c|cpp) %{
     evaluate-commands %sh{ kak-lsp --kakoune -s $kak_session }
     map global user l ': enter-user-mode lsp<ret>' -docstring 'LSP mode'
     set-option global lsp_hover_anchor true
@@ -25,9 +25,10 @@ plug 'ul/kak-lsp' noload do %{ cargo build --release } %{
 #   map global user 'f' ': fzf-mode<ret>' -docstring 'FZF mode'
 # }
 
-plug 'alexherbo2/auto-pairs.kak' %{
-  hook global WinCreate .* auto-pairs-enable
-}
+# plug 'alexherbo2/auto-pairs.kak' %{
+#   set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` `
+#   hook global WinCreate .* auto-pairs-enable
+# }
 
 plug 'h-youhei/kakoune-surround' %{
   declare-user-mode surround
@@ -38,13 +39,11 @@ plug 'h-youhei/kakoune-surround' %{
   map global user s ': enter-user-mode surround<ret>' -docstring 'Surround mode'
 }
 
-plug 'alexherbo2/space-indent.kak' %{
-  hook global WinCreate .* space-indent-enable
-}
+plug 'Delapouite/kakoune-text-objects'
 
 plug 'Delapouite/kakoune-auto-percent'
 
-plug 'Delapouite/kakoune-text-objects'
+plug 'Delapouite/kakoune-auto-star'
 
 plug 'evanrelf/kakoune-number-toggle' %{
   set-option global number_toggle_params -hlcursor -separator ' '
