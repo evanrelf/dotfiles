@@ -41,6 +41,11 @@ plug 'h-youhei/kakoune-surround' %{
 
 plug 'Delapouite/kakoune-text-objects'
 
+# plug 'andreyorst/smarttab.kak' %{
+#   expandtab
+#   set-option softtabstop 2
+# }
+
 plug 'Delapouite/kakoune-auto-percent'
 
 plug 'Delapouite/kakoune-auto-star'

@@ -13,6 +13,7 @@
 	ds = diff --staged
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
+	pop = stash pop
 	clean-ignore = clean -Xdf
 	clean-untracked = clean -xdi
 	; undo = reset --soft HEAD^

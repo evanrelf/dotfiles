@@ -215,4 +215,5 @@
   ;; ";" 'evil-ex
   ;; ":" 'evil-repeat-find-char
   "j" 'evil-next-visual-line
+  "
   "k" 'evil-previous-visual-line)

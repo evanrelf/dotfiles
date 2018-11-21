@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cd409bce0db77812623b100b3703342591d78f0e07ff5ee265d967130e2c5683
+-- hash: b34e4b7393fe00864bfcd9cbb704e7c74d6aa508b195c1e9a5ac3127827b49c9
 
 name:           yi
 version:        0.0.0
@@ -19,6 +19,7 @@ executable yi
   ghc-options: -threaded
   build-depends:
       base >=4.7 && <5
+    , microlens-platform
     , mtl
     , yi-core
     , yi-frontend-vty

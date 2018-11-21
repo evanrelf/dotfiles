@@ -74,8 +74,8 @@ if test (uname) = "Darwin"
 end
 
 if status --is-interactive
+  set -g fish_user_abbreviations
   if test (command -s stack)
-    set -g fish_user_abbreviations
     abbr --add ghc "stack ghc"
     abbr --add ghci "stack ghci"
     abbr --add runghc "stack runghc"
@@ -305,7 +305,6 @@ function rc -d "Open the specified program's configuration file"
           case kakoune kak
             cd "$HOME/.config/kak"
             ls -l
-            # eval $EDITOR "$HOME/.config/kak/kakrc"
           case emacs
             eval $EDITOR "$HOME/.emacs"
           case spacemacs emacs-spacemacs
@@ -314,6 +313,8 @@ function rc -d "Open the specified program's configuration file"
             eval $EDITOR "$HOME/.emacs.d/init.el"
           case vscode
             eval $EDITOR "$HOME/Library/Application\ Support/Code/User/settings.json"
+          case yi
+            cd "$HOME/dotfiles/yi"
 
             # Shells
           case fish
@@ -355,6 +356,8 @@ function rc -d "Open the specified program's configuration file"
           case nixos
             sudoedit "/etc/nixos/configuration.nix"
             cp -v "/etc/nixos/configuration.nix" "$HOME/dotfiles/nixos/configuration.nix"
+          case ranger
+            eval $EDITOR "$HOME/.config/ranger/rc.conf"
 
           case "*"
             set_color red

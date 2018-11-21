@@ -14,15 +14,11 @@ Plug 'critiqjo/husk-x.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
+Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
 " Plug 'zxqfl/tabnine-vim', { 'on': [] }
 " Plug 'jiangmiao/auto-pairs'
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 
@@ -35,6 +31,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Syntax
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
+Plug 'idris-hackers/idris-vim'
 Plug 'tpope/vim-sleuth', { 'on': [] }
 
 " Files
@@ -50,16 +47,8 @@ call plug#end()
 " one
 let g:one_allow_italics = 1
 
-" languageclient
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['~/.local/bin/hie-wrapper']
-    \ }
-let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_loggingFile = expand('~/.local/share/nvim/LanguageClient.log')
-let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
+" golden-ratio
+let g:golden_ratio_autocommand = 0
 
 " neoformat
 let g:neoformat_only_msg_on_error = 1
@@ -217,6 +206,7 @@ noremap <silent> <Leader>b :<C-u>Buffers<CR>
 " Experimental
 nnoremap <Leader>S vip:sort<CR>
 xnoremap <Leader>S :sort<CR>
+noremap <Leader>G :<C-u>GoldenRatioToggle<CR>:<C-u>GoldenRatioToggle<CR>
 
 " Available
 noremap \\ <Nop>
