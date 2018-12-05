@@ -44,9 +44,6 @@ Plug 'tpope/vim-repeat'
 call plug#end()
 
 " Plugin settings {{{2
-" one
-let g:one_allow_italics = 1
-
 " golden-ratio
 let g:golden_ratio_autocommand = 0
 
@@ -54,6 +51,7 @@ let g:golden_ratio_autocommand = 0
 let g:neoformat_only_msg_on_error = 1
 
 " ale
+let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
@@ -74,6 +72,7 @@ let g:elm_format_autosave = 0
 set termguicolors
 set background=dark
 colorscheme one
+set colorcolumn=81
 set number
 set relativenumber
 set noshowmode
@@ -188,8 +187,8 @@ xnoremap \| :!
 
 " Leader
 map <Space> <Leader>
-noremap <silent> <Leader>w :<C-u>update<CR>
 noremap <Leader>y "+y
+noremap <Leader>Y "+y$
 nnoremap <Leader>s :%s/
 xnoremap <Leader>s :s/
 nnoremap <Leader>g :%g/
@@ -204,9 +203,11 @@ noremap <silent> <Leader>h :<C-u>Helptags<CR>
 noremap <silent> <Leader>b :<C-u>Buffers<CR>
 
 " Experimental
+xnoremap <Leader>H :!sort-imports<CR>
+
 nnoremap <Leader>S vip:sort<CR>
 xnoremap <Leader>S :sort<CR>
-noremap <Leader>G :<C-u>GoldenRatioToggle<CR>:<C-u>GoldenRatioToggle<CR>
+noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
 
 " Available
 noremap \\ <Nop>

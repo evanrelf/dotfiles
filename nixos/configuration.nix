@@ -5,6 +5,7 @@
   # PACKAGES {{{1
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    # Tools
     acpi
     binutils
     clang
@@ -16,6 +17,7 @@
     fzf
     git
     gitAndTools.diff-so-fancy
+    kakoune
     mkpasswd
     mosh
     neofetch
@@ -31,6 +33,8 @@
 
     # Desktop
     feh
+    haskellPackages.xmobar
+    rofi
     xclip
     xorg.setxkbmap
     xorg.xbacklight
@@ -39,9 +43,13 @@
 
     # Apps
     chromium
-    rofi
+    firefox
     spotify
     xst
+    zathura
+
+    # Libraries
+    libu2f-host
   ];
 
   programs = {
@@ -116,6 +124,18 @@
       longitude = "-118.2437";
     };
     unclutter.enable = true;
+  };
+
+  systemd.services.key-swap = {
+    enable = true;
+    restartIfChanged = true;
+    script = "
+    export PATH=/run/current-system/sw/bin
+    setkeycodes 3a 1
+    setkeycodes 38 125
+    setkeycodes e05b 56
+    ";
+    wantedBy = [ "multi-user.target" ];
   };
 
 

@@ -73,6 +73,10 @@ if test (uname) = "Darwin"
   end
 end
 
+if test (command -s pnpm)
+  alias npm "pnpm"
+end
+
 if status --is-interactive
   set -g fish_user_abbreviations
   if test (command -s stack)
@@ -376,8 +380,8 @@ complete --command rc --require-parameter --no-files --arguments "vim neovim kak
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"
-  defaults write com.apple.dock ResetLaunchPad -bool true 2>/dev/null
-  or echo "Failed to kill SystemUIServer" >&2
+  # defaults write com.apple.dock ResetLaunchPad -bool true 2>/dev/null
+  # or echo "Failed to kill SystemUIServer" >&2
   killall SystemUIServer 2>/dev/null
   or echo "Failed to kill SystemUIServer" >&2
   killall Dock 2>/dev/null

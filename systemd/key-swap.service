@@ -1,0 +1,8 @@
+[Unit]
+Description=Key swap
+
+[Service]
+ExecStart=/bin/sh -c "setkeycodes 3a 1; setkeycodes 38 125; setkeycodes e05b 56"
+
+[Install]
+WantedBy=multiuser.target
