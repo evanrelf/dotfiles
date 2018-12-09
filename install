@@ -29,10 +29,14 @@ if [ $# -gt 0 ]; then
         (set -x; mkdir -p "$HOME/.config/nvim");;
       sxhkd )
         (set -x; mkdir -p "$HOME/.config/sxhkd");;
+      systemd )
+        (set -x; mkdir -p "$HOME/.config/systemd/user");;
       vscode )
         (set -x; mkdir -p "$HOME/Library/Application Support/Code/User");;
       xmonad )
         (set -x; mkdir -p "$HOME/.config/xmonad");;
+      zathura )
+        (set -x; mkdir -p "$HOME/.config/zathura");;
       * )
         ;;
     esac

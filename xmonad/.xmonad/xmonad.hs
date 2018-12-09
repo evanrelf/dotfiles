@@ -8,8 +8,8 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import Data.Function ((&))
 
 myKeys =
-  [ ("<XF86MonBrightnessDown>", safeSpawn "xbacklight" ["-10", "-time", "50"])
-  , ("<XF86MonBrightnessUp>"  , safeSpawn "xbacklight" ["+10", "-time", "50"])
+  [ ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "10"])
+  , ("<XF86MonBrightnessUp>"  , safeSpawn "light" ["-A", "10"])
   , ("<XF86AudioLowerVolume>" , safeSpawn "amixer" ["-q", "sset", "Master", "2%-"])
   , ("<XF86AudioRaiseVolume>" , safeSpawn "amixer" ["-q", "sset", "Master", "2%+"])
   , ("<XF86AudioMute>"        , safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
@@ -21,7 +21,7 @@ myLayoutHook = layoutHook def
   & smartSpacingWithEdge 4
 
 myConfig = def
-  { terminal = "st"
+  { terminal = "xst || st"
   , focusFollowsMouse = False
   , borderWidth = 2
   , normalBorderColor = "#383c4a"

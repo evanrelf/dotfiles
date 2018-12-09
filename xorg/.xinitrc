@@ -1,12 +1,10 @@
 #!/bin/sh
 
 xrdb -merge .Xresources
-# caps -> esc
-# sudo setkeycodes 3a 1
-# alt -> cmd
-# sudo setkeycodes 38 125
-# cmd -> alt
-# sudo setkeycodes e05b 56
-feh --bg-scale ~/.wallpaper.jpg
 xset r rate 200 20
+xinput --set-prop "Synaptics TM3075-002" "libinput Natural Scrolling Enabled" 1
+xinput --set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
+xinput --set-prop "Synaptics TM3075-002" "libinput Tapping Drag Enabled" 0
+xinput --set-prop "Synaptics TM3075-002" "libinput Disable While Typing Enabled" 0
+xinput --set-prop "Synaptics TM3075-002" "libinput Accel Speed" 0.3
 exec xmonad

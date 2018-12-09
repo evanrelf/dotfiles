@@ -11,6 +11,7 @@
 	co = checkout
 	d = diff
 	ds = diff --staged
+	dd = diff origin/master
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
 	pop = stash pop
@@ -48,9 +49,9 @@
 	path = ~/.gitconfig.local
 [color "diff-highlight"]
 	oldNormal = red
-	oldHighlight = red
+	oldHighlight = red 52
 	newNormal = green
-	newHighlight = green
+	newHighlight = green 22
 [color "diff"]
 	meta = yellow
 	frag = magenta
