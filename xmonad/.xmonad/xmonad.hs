@@ -2,7 +2,7 @@ import XMonad
 import XMonad.Core
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing (smartSpacingWithEdge)
-import XMonad.Util.Run (safeSpawn, spawnPipe)
+import XMonad.Util.Run (safeSpawn)
 import XMonad.Util.EZConfig (additionalKeysP)
 
 import Data.Function ((&))
@@ -10,8 +10,8 @@ import Data.Function ((&))
 myKeys =
   [ ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "10"])
   , ("<XF86MonBrightnessUp>"  , safeSpawn "light" ["-A", "10"])
-  , ("<XF86AudioLowerVolume>" , safeSpawn "amixer" ["-q", "sset", "Master", "2%-"])
-  , ("<XF86AudioRaiseVolume>" , safeSpawn "amixer" ["-q", "sset", "Master", "2%+"])
+  , ("<XF86AudioLowerVolume>" , safeSpawn "amixer" ["-q", "sset", "Master", "10%-"])
+  , ("<XF86AudioRaiseVolume>" , safeSpawn "amixer" ["-q", "sset", "Master", "10%+"])
   , ("<XF86AudioMute>"        , safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
   , ("M-p"                    , safeSpawn "rofi" ["-show", "run"])
   ]
@@ -31,5 +31,4 @@ myConfig = def
   } `additionalKeysP` myKeys
 
 main = do
-  xmobar <- spawnPipe "xmobar"
   xmonad myConfig

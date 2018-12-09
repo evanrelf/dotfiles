@@ -27,6 +27,8 @@ if [ $# -gt 0 ]; then
         (set -x; mkdir -p "$HOME/.config/kitty");;
       neovim )
         (set -x; mkdir -p "$HOME/.config/nvim");;
+      redshift )
+        (set -x; mkdir -p "$HOME/.config/redshift");;
       sxhkd )
         (set -x; mkdir -p "$HOME/.config/sxhkd");;
       systemd )

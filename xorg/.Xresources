@@ -7,6 +7,7 @@ st.bold_font:   0
 
 !! rofi
 rofi.font: Iosevka 13
+rofi.theme: Arc-Dark
 
 !! one dark colors
 ! special

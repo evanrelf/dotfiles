@@ -377,6 +377,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
             case zathura
                 eval $EDITOR "$HOME/.config/zathura/zathurarc"
+            case redshift
+                eval $EDITOR "$HOME/.config/redshift/redshift.conf"
 
             case "*"
                 set_color red
@@ -391,7 +393,7 @@ function rc -d "Open the specified program's configuration file"
         return 1
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos redshift"
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"
