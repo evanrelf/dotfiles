@@ -13,8 +13,6 @@ if [ $# -gt 0 ]; then
       #   (set -x; mkdir -p "$HOME/.config/bitbar");;
       bspwm )
         (set -x; mkdir -p "$HOME/.config/bspwm");;
-      emacs-doom )
-        (set -x; mkdir -p "$HOME/.emacs.d");;
       fish )
         (set -x; mkdir -p "$HOME/.config/fish/functions");;
       hammerspoon )
@@ -31,10 +29,6 @@ if [ $# -gt 0 ]; then
         (set -x; mkdir -p "$HOME/.config/redshift");;
       sxhkd )
         (set -x; mkdir -p "$HOME/.config/sxhkd");;
-      systemd )
-        (set -x; mkdir -p "$HOME/.config/systemd/user");;
-      vscode )
-        (set -x; mkdir -p "$HOME/Library/Application Support/Code/User");;
       xmonad )
         (set -x; mkdir -p "$HOME/.config/xmonad");;
       zathura )
