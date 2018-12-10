@@ -72,7 +72,7 @@ let g:elm_format_autosave = 0
 " Appearance {{{2
 set termguicolors
 set background=dark
-colorscheme one
+colorscheme PaperColor
 set colorcolumn=81
 set number
 set relativenumber
@@ -90,7 +90,6 @@ set shiftround
 
 " Formatting {{{2
 set nowrap
-set textwidth=79
 set linebreak
 set breakindent
 set nojoinspaces
@@ -232,7 +231,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType haskell setlocal keywordprg=hoogle\ --info
   autocmd FileType cpp setlocal commentstring=//\ %s
   autocmd FileType markdown setlocal wrap
-  autocmd FileType gitcommit setlocal textwidth=72 colorcolumn=73 spell
+  autocmd FileType gitcommit setlocal colorcolumn=73 spell
   autocmd BufEnter .gitconfig* setlocal filetype=gitconfig noexpandtab shiftwidth=8
   autocmd BufEnter Dockerfile.* setlocal filetype=Dockerfile
   autocmd FileType vim,help setlocal keywordprg=:help

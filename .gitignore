@@ -19,3 +19,7 @@ bitbar/.config/bitbar/cache_*.json
 
 # Yi
 yi/.stack-work
+
+# Xmonad
+xmonad/.xmonad/
+!xmonad/.xmonad/xmonad.hs

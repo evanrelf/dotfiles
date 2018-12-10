@@ -1,8 +1,0 @@
-
-xmonad.hs:21:5: warning: [-Wdeprecations]
-    In the use of ‘smartSpacingWithEdge’
-    (imported from XMonad.Layout.Spacing):
-    Deprecated: "Use spacingRaw instead."
-   |
-21 |   & smartSpacingWithEdge 4
-   |     ^^^^^^^^^^^^^^^^^^^^

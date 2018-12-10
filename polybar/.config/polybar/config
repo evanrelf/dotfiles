@@ -1,0 +1,45 @@
+; vim: ft=dosini
+
+[colors]
+foreground = #FFFFFF
+background = #000000
+dimmed = #777777
+highlight = #5294e2
+
+[bar/top]
+width = 100%
+height = 20
+font-0 = xos4Terminus:style=Regular:pixelsize=16
+font-1 = WunconSiji:style=Regular:pixelsize=16
+underline-size = 1
+underline-color = ${colors.highlight}
+fixed-center = true
+foreground = ${colors.foreground}
+background = ${colors.background}
+modules-left = workspaces
+modules-center =
+modules-right = battery date
+
+[module/date]
+type = internal/date
+interval = 1.0
+date = "%a, %b %e"
+time = "%l:%M %p"
+label = "%date% %time%"
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ACAD
+label-discharging = " %percentage%%"
+label-charging = " %percentage%%"
+label-full = " %percentage%%"
+
+[module/workspaces]
+type = internal/xworkspaces
+enable-scroll = false
+label-active = " %index% "
+label-empty = " %index% "
+label-active-foreground = ${colors.foreground}
+label-active-underline = ${colors.foreground}
+label-empty-foreground = ${colors.dimmed}

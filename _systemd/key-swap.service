@@ -1,0 +1,11 @@
+[Unit]
+Description=Key swap
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/setkeycodes 3a 1
+ExecStart=/usr/bin/setkeycodes 38 125
+ExecStart=/usr/bin/setkeycodes e05b 56
+
+[Install]
+WantedBy=multi-user.target

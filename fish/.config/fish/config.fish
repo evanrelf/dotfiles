@@ -346,6 +346,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.xmonad/xmonad.hs"
             case xmobar
                 eval $EDITOR "$HOME/.xmobarrc"
+            case polybar
+                eval $EDITOR "$HOME/.config/polybar/config"
             case bspwm
                 eval $EDITOR "$HOME/.config/bspwm/bspwmrc"
             case sxhkd
@@ -393,7 +395,7 @@ function rc -d "Open the specified program's configuration file"
         return 1
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos redshift"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"
