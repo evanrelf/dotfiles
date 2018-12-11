@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Config
+mac_dir="$HOME/Library/Application Support/Code/User"
+linux_dir="$HOME/.vscode/User"
+
+name="$(basename "$(pwd)")"
+install_dir=""
+
+if ! [ -x "$(command -v stow)" ]; then
+  echo "ERROR: stow is not installed" >&2
+  exit 1
+fi
+
+case "$(uname)" in
+  "Darwin" ) install_dir="$mac_dir";;
+  "Linux" ) install_dir="$linux_dir";;
+  * ) echo "Unknown OS" >&2; exit 1;;
+esac
+
+if [ -n "$install_dir" ]; then
+  set -x
+  mkdir -p "$install_dir"
+  stow --dir ".." --target "$install_dir" -S "$name" --ignore "install"
+fi

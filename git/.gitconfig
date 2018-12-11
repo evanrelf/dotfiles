@@ -4,7 +4,7 @@
 	s = status
 	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	b = branch
-	a = "!if [ -z \"$1\" ]; then echo 'Error: No files specified'; exit 1; fi && git add $1 && git status && :"
+	a = "!if [ -z \"$1\" ]; then echo 'Error: No files specified'; exit 1; fi && git add $@ && git status && :"
 	aa = "!git add -A && git status && :"
 	f = fetch
 	ci = commit
@@ -17,14 +17,15 @@
 	pop = stash pop
 	clean-ignore = clean -Xdf
 	clean-untracked = clean -xdi
-	; undo = reset --soft HEAD^
+	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
 	rename = commit --amend
 	root = rev-parse --show-toplevel
 	exec = "!exec "
-	; Custom
 	new = "!if [ -z \"$1\" ]; then echo 'Error: No branch name specified'; exit 1; fi && git fetch && git checkout origin/master && git checkout -b $1 && :"
 	up = "!git fetch && git rebase origin/master && :"
+	unsafe-perform-amend = "!if [ -n \"$1\" ]; then git add $@; else git add -A; fi && git commit --amend --no-edit && git push --force && :"
+	unsafe-perform-up = "!git fetch && git rebase origin/master && git push --force && :"
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=2 -RFX
