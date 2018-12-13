@@ -18,7 +18,7 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-" Plug 'zxqfl/tabnine-vim', { 'on': [] }
+Plug 'zxqfl/tabnine-vim', { 'on': [] }
 " Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
@@ -275,12 +275,12 @@ augroup FixSleuthPolyglot " {{{2
   autocmd Filetype * if &filetype != 'markdown' | call plug#load('vim-sleuth') | endif
 augroup END
 
-" augroup LazyLoadPlugins " {{{2
-"   autocmd!
-"   autocmd CursorHold,CursorHoldI *
-"         \  call plug#load('tabnine-vim')
-"         \| autocmd! LazyLoadPlugins
-" augroup END
+augroup LazyLoadPlugins " {{{2
+  autocmd!
+  autocmd CursorHold,CursorHoldI *
+        \  call plug#load('tabnine-vim')
+        \| autocmd! LazyLoadPlugins
+augroup END
 
 " }}}2
 

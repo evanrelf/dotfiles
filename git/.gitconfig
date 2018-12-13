@@ -14,8 +14,8 @@
 	dd = diff origin/master
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
-	pop = stash pop
-	clean-ignore = clean -Xdf
+	st = stash
+	clean-ignored = clean -Xdf
 	clean-untracked = clean -xdi
 	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
@@ -24,7 +24,7 @@
 	exec = "!exec "
 	new = "!if [ -z \"$1\" ]; then echo 'Error: No branch name specified'; exit 1; fi && git fetch && git checkout origin/master && git checkout -b $1 && :"
 	up = "!git fetch && git rebase origin/master && :"
-	unsafe-perform-amend = "!if [ -n \"$1\" ]; then git add $@; else git add -A; fi && git commit --amend --no-edit && git push --force && :"
+	unsafe-perform-amend = "!if [ -z \"$1\" ]; then git add -A; else git add $@; fi && git commit --amend --no-edit && git push --force && :"
 	unsafe-perform-up = "!git fetch && git rebase origin/master && git push --force && :"
 [core]
 	editor = nvim
@@ -62,3 +62,4 @@
 	whitespace = red reverse
 [fetch]
 	prune = true
+	pruneTags = true
