@@ -11,6 +11,8 @@ if [ $# -gt 0 ]; then
     case $i in
       # bitbar )
       #   (set -x; mkdir -p "$HOME/.config/bitbar");;
+      alacritty )
+        (set -x; mkdir -p "$HOME/.config/alacritty");;
       bspwm )
         (set -x; mkdir -p "$HOME/.config/bspwm");;
       fish )

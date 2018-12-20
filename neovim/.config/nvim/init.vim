@@ -198,7 +198,9 @@ noremap <silent> <Leader>ap :<C-u>ALEPrevious<CR>
 noremap <silent> <Leader>an :<C-u>ALENext<CR>
 noremap <silent> <Leader>ad :<C-u>ALEDetail<CR>
 noremap <silent> <Leader>f :<C-u>GFiles<CR>
+noremap <silent> <Leader>F :<C-u>Files<CR>
 noremap <silent> <Leader>r :<C-u>GRg<CR>
+noremap <silent> <Leader>R :<C-u>Rg<CR>
 noremap <silent> <Leader>h :<C-u>Helptags<CR>
 noremap <silent> <Leader>b :<C-u>Buffers<CR>
 
@@ -236,7 +238,7 @@ augroup FileTypeSettings " {{{2
   autocmd BufEnter Dockerfile.* setlocal filetype=Dockerfile
   autocmd FileType vim,help setlocal keywordprg=:help
   autocmd FileType help
-        \| noremap <buffer> <Esc> :<C-u>q<CR>
+        \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd TermOpen * setlocal wrap nonumber norelativenumber
   autocmd FileType man
         \  setlocal laststatus=0 noruler
@@ -247,11 +249,11 @@ augroup FileTypeSettings " {{{2
         " \| autocmd! LazyLoadPlugins
   autocmd FileType vim-plug
         \  setlocal wrap nonumber norelativenumber
-        \| noremap <buffer> <Esc> :<C-u>q<CR>
+        \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType fzf noremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType ale-preview
         \  setlocal wrap nonumber norelativenumber
-        \| noremap <buffer> <Esc> :<C-u>q<CR>
+        \| nnoremap <buffer> <Esc> :<C-u>q<CR>
 augroup END
 
 augroup FormatOptions " {{{2

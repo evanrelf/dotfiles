@@ -531,7 +531,7 @@ function fish_prompt
     if test -n "$git_dir"
         set -l branch (git symbolic-ref --short HEAD 2>/dev/null)
         if test -n "$branch"
-            set -l truncated (echo $branch | cut -c 1-15)
+            set -l truncated (echo $branch | cut -c 1-25)
             set -l dirty (git status --porcelain)
             if test -z "$dirty"
                 set_color green

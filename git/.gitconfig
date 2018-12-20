@@ -11,10 +11,13 @@
 	co = checkout
 	d = diff
 	ds = diff --staged
-	dd = diff origin/master
+	dd = "!if [ -z \"$1\" ]; then git diff origin/master; else git diff origin/$1; fi && :"
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
-	st = stash
+	st = stash push
+	stu = stash push --include-untracked
+	stp = stash pop
+	stl = stash list
 	clean-ignored = clean -Xdf
 	clean-untracked = clean -xdi
 	undo = reset --soft HEAD^
@@ -22,8 +25,8 @@
 	rename = commit --amend
 	root = rev-parse --show-toplevel
 	exec = "!exec "
-	new = "!if [ -z \"$1\" ]; then echo 'Error: No branch name specified'; exit 1; fi && git fetch && git checkout origin/master && git checkout -b $1 && :"
-	up = "!git fetch && git rebase origin/master && :"
+	new = "!if [ -z \"$1\" ]; then echo 'Usage: git new <name> [base]'; exit 1; fi && git fetch && if [ -z \"$2\" ]; then git checkout origin/master; else git checkout $2; fi && git checkout -b $1 && :"
+	up = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master; else git rebase origin/$1; fi && :"
 	unsafe-perform-amend = "!if [ -z \"$1\" ]; then git add -A; else git add $@; fi && git commit --amend --no-edit && git push --force && :"
 	unsafe-perform-up = "!git fetch && git rebase origin/master && git push --force && :"
 [core]
