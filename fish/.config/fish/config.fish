@@ -19,9 +19,14 @@ set -U FZF_PREVIEW_FILE_COMMAND "bat --plain --color always --line-range :\$LINE
 
 
 # VARIABLES {{{1
-set -x EDITOR nvim
+set -x EDITOR "nvim"
 set -x MANPAGER "nvim -c 'set ft=man' -"
 set -x npm_config_prefix "$HOME/.node_modules"
+set -x NNN_USE_EDITOR 1
+
+if test (uname) = "Linux"
+    set -x BROWSER "chromium"
+end
 
 set paths "$HOME/.local/bin" $paths
 set paths "$HOME/.cargo/bin" $paths
@@ -590,6 +595,13 @@ end
 # if test (command -s python3)
 #   eval (python3 -m virtualfish)
 # end
+
+# xinit {{{2
+if test (tty) = "/dev/tty1"
+    if test (command -s startx)
+        startx
+    end
+end
 
 # }}}2
 
