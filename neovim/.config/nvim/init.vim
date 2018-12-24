@@ -246,6 +246,8 @@ augroup FileTypeSettings " {{{2
         \| noremap <buffer> j <C-e>L0
         \| noremap <buffer> k <C-y>H0
         \| noremap <buffer> l <Nop>
+        \| noremap <buffer> d <C-d>
+        \| noremap <buffer> u <C-u>
         " \| autocmd! LazyLoadPlugins
   autocmd FileType vim-plug
         \  setlocal wrap nonumber norelativenumber

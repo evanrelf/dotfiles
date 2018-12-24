@@ -21,13 +21,13 @@
 (straight-use-package 'use-package)
 
 ;; Appearance
-(use-package doom-themes)
-  ;; :config
-  ;; (load-theme 'doom-one t))
-(use-package solarized-theme
+(use-package doom-themes
   :config
-  (setq solarized-use-less-bold t)
-  (load-theme 'solarized-dark t))
+  (load-theme 'doom-one t))
+; (use-package solarized-theme
+;   :config
+;   (setq solarized-use-less-bold t)
+;   (load-theme 'solarized-dark t))
 (use-package doom-modeline
   :config
   (doom-modeline-init)
@@ -147,7 +147,7 @@
 
 ;; SETTINGS
 ;; GUI font
-(setq default-frame-alist '((font . "PragmataPro-14")))
+(setq default-frame-alist '((font . "Iosevka-14")))
 ;; Disable bold font
 (set-face-bold 'bold nil)
 ;; Enable line numbers

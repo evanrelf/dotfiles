@@ -68,7 +68,8 @@ end
 complete -c kc -w kak
 
 alias g "git"
-alias p "command sudo aura"
+alias scrot "command scrot --silent"
+alias lock "systemctl suspend; and physlock -d"
 
 if test (command -s exa)
     alias ls "exa --group-directories-first"
@@ -357,6 +358,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/bspwm/bspwmrc"
             case sxhkd
                 eval $EDITOR "$HOME/.config/sxhkd/sxhkdrc"
+            case compton
+                eval $EDITOR "$HOME/.config/compton.conf"
 
                 # Xorg
             case xresources
@@ -400,7 +403,7 @@ function rc -d "Open the specified program's configuration file"
         return 1
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"

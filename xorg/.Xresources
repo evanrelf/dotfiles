@@ -1,5 +1,5 @@
 !! xst
-st.font:        Iosevka:pixelsize=18:antialias=true:autohint=true;
+st.font:        PragmataPro Liga:style=Regular:pixelsize=20:antialias=true:autohint=true
 st.bellvolume:  0
 st.borderpx:    5
 st.termname:    xterm-256color
@@ -8,11 +8,12 @@ st.bold_font:   0
 !! rofi
 rofi.font: Iosevka 13
 rofi.theme: Arc-Dark
+rofi.show-icons: true
 
 !! one dark colors
 ! special
 *.foreground:   #ABB2BF
-*.background:   #282C34
+*.background:   #000000
 *.cursorColor:  #ABB2BF
 
 ! black
