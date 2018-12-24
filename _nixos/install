@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source_path="$HOME/dotfiles/configuration.nix"
+destination_path="/etc/nixos/configuration.nix"
+
+if [ -f "$source_path" ]; then
+  sudo ln -vs "$source_path" "$destination_path"
+else
+  echo "ERROR: File '$source_path' does not exist" >&2 && exit 1
+fi

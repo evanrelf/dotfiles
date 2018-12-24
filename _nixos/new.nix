@@ -4,35 +4,44 @@
   # PROGRAMS {{{1
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    arc-theme
+    adapta-gtk-theme
     autojump
+    borgbackup
     chromium
     clang
     cquery
+    docker
     entr
     exa
     fd
     feh
     ffmpeg
+    fish
     fzf
     fzf
     git
     gitAndTools.diff-so-fancy
     gnome3.nautilus
+    gnupg
     jq
+    light
     linuxPackages.wireguard
     lxappearance-gtk3
+    mosh
     mpv
     mupdf
     neovim
     nodePackages.prettier
     nodejs
+    npm
     pandoc
     papirus-icon-theme
     polybar
     ranger
+    rclone
     ripgrep
     rofi
+    rsync
     rustup
     shellcheck
     spotify
@@ -40,6 +49,7 @@
     stow
     tealdeer
     tmux
+    transmission-gtk
     wireguard-tools
     xclip
     xorg.xrdb
@@ -47,14 +57,6 @@
     xst
     youtube-dl
     zathura
-    transmission-gtk
-
-    # gnupg
-    # fish
-    # light
-    # mosh
-    # npm
-    # docker
   ];
   programs = {
     fish.enable = true;
@@ -71,6 +73,8 @@
     fonts = with pkgs; [
       dejavu_fonts
       iosevka-bin
+      material-icons
+      roboto
     ];
     fontconfig.ultimate = {
       enable = true;
@@ -136,16 +140,27 @@
   networking = {
     wireless = {
       enable = true;
-      networks = {
-        "Batman" = {};
-        "Evan's iPhone" = {};
-      };
     };
     networkmanager = {
       enable = true;
       wifi.powersave = true;
     };
-    hostName = "evan-nixos";
+    hostName = "nixos";
+  };
+
+
+  # BACKUP {{{1
+  services.borgbackup = {
+    "nixos" = {
+      paths = "/home/evanrelf";
+      repo = "TODO";
+      startAt = "daily";
+      encryption = {
+        mode = "repokey-blake2";
+        passCommand = "TODO";
+      };
+      compression = "zstd,10";
+    };
   };
 
 
