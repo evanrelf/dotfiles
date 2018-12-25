@@ -1,175 +1,225 @@
-# vim: foldenable foldmethod=marker
 { config, pkgs, ... }:
 
 {
-  # PACKAGES {{{1
+  imports = [ ./hardware-configuration.nix ];
+
+  # PROGRAMS {{{1
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    # Tools
+
     acpi
+    adapta-gtk-theme
+    autojump
     binutils
+    borgbackup
+    chromium
     clang
+    cquery
     docker
-    dropbox-cli
+    entr
     exa
     fd
+    feh
+    ffmpeg
     fish
     fzf
     git
     gitAndTools.diff-so-fancy
-    kakoune
-    mkpasswd
+    gnome3.nautilus
+    gnupg
+    haskellPackages.ghcid
+    hlint
+    jq
+    light
+    lxappearance-gtk3
     mosh
+    mpv
+    mupdf
     neofetch
     neovim
+    nodePackages.prettier
     nodejs
+    pandoc
+    papirus-icon-theme
+    polybar
     powertop
+    ranger
+    rclone
     ripgrep
+    rofi
+    rsync
+    rustup
     scrot
+    shellcheck
+    spotify
     stack
     stow
-    tldr
+    tealdeer
     tmux
-
-    # Desktop
-    feh
-    haskellPackages.xmobar
-    rofi
     xclip
-    xorg.setxkbmap
-    xorg.xbacklight
+    xorg.xrdb
     xorg.xset
-    xsel
-
-    # Apps
-    chromium
-    firefox
-    spotify
     xst
+    youtube-dl
     zathura
 
-    # Libraries
-    libu2f-host
   ];
-
   programs = {
     fish.enable = true;
+    light.enable = true;
+    mosh.enable = true;
+    npm.enable = true;
   };
+  virtualisation.docker.enable = true;
+  services.openssh.enable = true;
 
 
   # FONTS {{{1
-  fonts.fonts = with pkgs; [
-    iosevka-bin
-  ];
-
-
-  # BOOT {{{1
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      systemd-boot.editor = false;
-      efi.canTouchEfiVariables = true;
-    };
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-    kernelModules = [ "acpi_call" ];
-    initrd.luks.devices = [
-      {
-        name = "root";
-        device = "/dev/disk/by-uuid/5e2e8df5-c276-4e65-bf10-020516074377";
-        preLVM = true;
-        allowDiscards = true;
-      }
+  fonts = {
+    fonts = with pkgs; [
+      dejavu_fonts
+      iosevka-bin
+      material-icons
+      roboto
+      terminus_font
     ];
+    fontconfig.ultimate = {
+      enable = true;
+      preset = "osx";
+    };
   };
 
 
-  # NETOWRKING {{{1
+  # DESKTOP {{{1
+  services.xserver = {
+    enable = true;
+    libinput = {
+      enable = true;
+      naturalScrolling = true;
+      tappingDragLock = false;
+      middleEmulation = false;
+    };
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+    };
+    displayManager.lightdm.enable = true;
+    desktopManager.xterm.enable = false;
+  };
+  services.compton = {
+    enable = true;
+    fade = true;
+    fadeDelta = 3;
+  };
+  services.redshift = {
+    enable = true;
+    latitude = "34.0522";
+    longitude = "-118.2437";
+  };
+  services.unclutter.enable = true;
+
+
+  # SOUND {{{1
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
+
+  # POWER {{{1
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+  services.tlp.enable = true;
+
+
+  # SECURITY {{{1
+  security.sudo.wheelNeedsPassword = false;
+  hardware.u2f.enable = true;
+  services.physlock.enable = true;
+
+
+  # NETWORK {{{1
+  hardware.bluetooth.powerOnBoot = false;
   networking = {
     hostName = "nixos";
-    wireless.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = true;
+    };
   };
+
+
+  # BACKUP {{{1
+  # services.borgbackup.jobs = {
+  #   "nixos" = {
+  #     paths = "/home/evanrelf";
+  #     repo = "/home/evanrelf/borg";
+  #     startAt = "daily";
+  #     doInit = true; # disable if using SSH or FUSE mount
+  #     encryption = {
+  #       mode = "repokey-blake2";
+  #       passCommand = "TODO";
+  #     };
+  #     compression = "zstd,10";
+  #   };
+  # };
 
 
   # SERVICES {{{1
-  services = {
-    openssh.enable = true;
-    tlp.enable = true;
-    xserver = {
+  systemd.services = {
+    "keyswap" = {
+      description = "Key swap";
       enable = true;
-      displayManager.lightdm.enable = true;
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
-      desktopManager.xterm.enable = false;
-      libinput = {
-        enable = true;
-        naturalScrolling = true;
-        tapping = false;
-      };
-      wacom.enable = true;
+      script = "
+      export PATH=/run/current-system/sw/bin:$PATH
+      setkeycodes 3a 1
+      setkeycodes 38 125
+      setkeycodes e05b 56
+      ";
+      wantedBy = [ "multi-user.target" ];
     };
-    # compton = {
-    #   enable = true;
-    #   fade = true;
-    #   fadeDelta = 3;
-    #   # activeOpacity = "0.8";
-    #   # inactiveOpacity = "0.8";
-    #   # shadow = true;
-    #   # shadowOffsets = [ (-10) (-10) ];
-    # };
-    redshift = {
-      enable = true;
-      latitude = "34.0522";
-      longitude = "-118.2437";
-    };
-    unclutter.enable = true;
   };
 
-  systemd.services.key-swap = {
-    enable = true;
-    restartIfChanged = true;
-    script = "
-    export PATH=/run/current-system/sw/bin
-    setkeycodes 3a 1
-    setkeycodes 38 125
-    setkeycodes e05b 56
-    ";
-    wantedBy = [ "multi-user.target" ];
-  };
 
 
   # USERS {{{1
-  users = {
-    users.evanrelf = {
+  users.users = {
+    "evanrelf" = {
       description = "Evan Relf";
-      home = "/home/evanrelf";
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+      ];
       initialPassword = "banana";
       shell = pkgs.fish;
-      extraGroups = [ "wheel" "networkmanager" ];
-      isNormalUser = true;
     };
+  };
+
+
+  # KERNEL MODULES {{{1
+  boot = {
+    loader.grub.device = "/dev/sda";
+    extraModulePackages = with pkgs.linuxPackages; [
+      acpi_call
+      wireguard
+    ];
+    kernelModules = [
+      "acpi_call"
+      "wireguard"
+    ];
+    plymouth.enable = true;
   };
 
 
   # MISCELLANEOUS {{{1
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.bluetooth.enable = false;
-  powerManagement.enable = true;
-  powerManagement.powertop.enable = true;
   time.timeZone = "America/Los_Angeles";
-
-  security.sudo.extraConfig = ''
-    %wheel ALL=(ALL) NOPASSWD: /run/current-system/sw/bin/setkeycodes
-  '';
-
-  imports = [ ./hardware-configuration.nix ];
-
   system.stateVersion = "18.09";
 
 
   # }}}1
 }
+
+# vim: foldenable foldmethod=marker

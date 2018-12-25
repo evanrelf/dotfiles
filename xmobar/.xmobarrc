@@ -1,8 +1,0 @@
--- vim: ft=haskell
-
-Config {
-  -- Appearance
-    font = "xft:Iosevka:size=12:antialias=true"
-  , fgColor = "white"
-  , bgColor = "black"
-}

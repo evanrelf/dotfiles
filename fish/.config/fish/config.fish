@@ -382,7 +382,6 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
             case nixos
                 sudoedit "/etc/nixos/configuration.nix"
-                cp -v "/etc/nixos/configuration.nix" "$HOME/dotfiles/nixos/configuration.nix"
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
             case zathura
