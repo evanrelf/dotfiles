@@ -1,10 +1,10 @@
 ; vim: ft=dosini
 
 [colors]
-foreground = #FFFFFF
+foreground = #CCCCCC
 background = #000000
 dimmed = #777777
-highlight = #5294e2
+highlight = #5294E2
 
 [bar/top]
 width = 100%

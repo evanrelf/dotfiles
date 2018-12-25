@@ -105,13 +105,18 @@
     };
     displayManager.lightdm.enable = true;
     desktopManager.xterm.enable = false;
+    xautolock = {
+      enable = true;
+      time = "5";
+      locker = "systemctl suspend";
+    };
   };
   services.redshift = {
     enable = true;
     latitude = "34.0522";
     longitude = "-118.2437";
   };
-  services.unclutter.enable = true;
+  services.unclutter-xfixes.enable = true;
 
 
   # SOUND {{{1
@@ -125,6 +130,7 @@
     powertop.enable = true;
   };
   services.tlp.enable = true;
+  # services.undervolt = {};
 
 
   # SECURITY {{{1
@@ -210,6 +216,8 @@
   # MISCELLANEOUS {{{1
   hardware.cpu.intel.updateMicrocode = true;
   time.timeZone = "America/Los_Angeles";
+  services.timesyncd.enable = true;
+  services.printing.enable = true;
   system.stateVersion = "18.09";
 
 

@@ -65,5 +65,5 @@ myConfig = def
   } `additionalKeysP` myKeymap
 
 main = do
-  polybar <- spawnPipe "pkill polybar; sleep 0.2; polybar top"
+  polybar <- spawnPipe "polybar -r top"
   xmonad (myConfig & docks & ewmh)
