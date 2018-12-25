@@ -29,8 +29,8 @@ myKeymap =
   , ("M-p"                    , moveTo Prev NonEmptyWS)
   , ("M-n"                    , moveTo Next NonEmptyWS)
   -- Move window to next/previous workspace
-  , ("M-S-p"                  , shiftTo Prev AnyWS)
-  , ("M-S-n"                  , shiftTo Next AnyWS)
+  , ("M-S-p"                  , shiftTo Prev NonEmptyWS)
+  , ("M-S-n"                  , shiftTo Next NonEmptyWS)
   -- Go to last workspace
   , ("M-`"                    , toggleWS)
   -- Resize window
@@ -55,8 +55,8 @@ myConfig = def
   { terminal = "xst"
   , focusFollowsMouse = True
   , borderWidth = 2
-  , normalBorderColor = "#383c4a"
-  , focusedBorderColor = "#5294e2"
+  , normalBorderColor = "#383C4A"
+  , focusedBorderColor = "#777777"
   , startupHook = myStartupHook
   , layoutHook = myLayoutHook
   , manageHook = myManageHook
