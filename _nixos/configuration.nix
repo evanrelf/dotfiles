@@ -106,11 +106,6 @@
     displayManager.lightdm.enable = true;
     desktopManager.xterm.enable = false;
   };
-  services.compton = {
-    enable = true;
-    fade = true;
-    fadeDelta = 3;
-  };
   services.redshift = {
     enable = true;
     latitude = "34.0522";
@@ -209,7 +204,6 @@
       "acpi_call"
       "wireguard"
     ];
-    plymouth.enable = true;
   };
 
 

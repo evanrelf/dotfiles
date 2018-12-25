@@ -6,7 +6,6 @@ import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
 import XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single)
 import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.Reflect (REFLECTX(..), REFLECTY(..))
 -- import XMonad.Layout.ResizableTile (MirrorResize(..), ResizableTall(..))
 import XMonad.Layout.Spacing (smartSpacingWithEdge)
 import XMonad.Util.EZConfig (additionalKeysP, checkKeymap)
@@ -37,21 +36,12 @@ myKeymap =
   -- Resize window
   -- , ("M--"                    , sendMessage MirrorShrink)
   -- , ("M-="                    , sendMessage MirrorExpand)
-  -- Reflect layout
-  , ("M-\\"                   , sendMessage $ Toggle REFLECTX)
-  , ("M-S-\\"                 , sendMessage $ Toggle REFLECTY)
-  -- Launch apps
-  , ("M-c"                    , safeSpawn "chromium" [])
-  , ("M-r"                    , safeSpawn "xst" ["ranger"])
   ]
 
 myStartupHook = return () >> checkKeymap myConfig myKeymap
 
 myLayoutHook =
   {- ResizableTall 1 (1/10) (1/2) [] ||| -} Tall 1 (1/10) (1/2) ||| Full
-    -- Add reflected layouts
-    & mkToggle (single REFLECTX)
-    & mkToggle (single REFLECTY)
     & smartBorders
     -- & smartSpacingWithEdge 7
     & avoidStruts

@@ -10,6 +10,5 @@ xinput --set-prop "Synaptics TM3075-002" "libinput Disable While Typing Enabled"
 xinput --set-prop "Synaptics TM3075-002" "libinput Accel Speed" 0.3 &
 redshift &
 unclutter --exclude-root --fork
-feh --bg-fill ~/.wallpapers/current &
-# compton &
+feh --bg-tile ~/.wallpapers/current &
 exec xmonad
