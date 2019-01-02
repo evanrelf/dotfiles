@@ -201,6 +201,14 @@ function update -d "Run all update commands"
         tldr --update
     end
 
+
+    if test (command -s jump)
+        set_color yellow
+        echo "== Updating jump directories"
+        set_color normal
+        jump clean
+    end
+
     set_color yellow
     echo "== Updating Fish command completions"
     set_color normal
@@ -579,7 +587,13 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
         echo "Nix isn't working because you don't have bass"
     end
 end
-# }}}2
+
+# jump {{{2
+if test (command -s jump)
+    status --is-interactive
+    and source (jump shell fish | psub)
+end
+
 # virtualfish {{{2
 # if test (command -s python3)
 #   eval (python3 -m virtualfish)
