@@ -6,6 +6,7 @@ Plug 'rakr/vim-one'
 Plug 'evanrelf/papercolor-theme'
 Plug 'roman/golden-ratio'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'evanrelf/goyo.vim'
 
 " Movement
 Plug 'junegunn/vim-slash'
@@ -18,7 +19,7 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-Plug 'zxqfl/tabnine-vim', { 'on': [] }
+" Plug 'zxqfl/tabnine-vim', { 'on': [] }
 " Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
@@ -47,6 +48,10 @@ call plug#end()
 " Plugin settings {{{2
 " golden-ratio
 let g:golden_ratio_autocommand = 0
+
+" goyo
+let g:goyo_height = "100%"
+let g:goyo_width = "100%"
 
 " neoformat
 let g:neoformat_only_msg_on_error = 1
@@ -163,6 +168,8 @@ nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
 vnoremap <silent> p :<C-u>let @p = @+<CR>gvp:let @+ = @p<CR>
+noremap Q @@
+noremap <C-g> :Goyo<CR>
 
 " noremap <silent> <C-h> :ALENext<CR>
 " noremap <silent> <C-j> :ALEPrevious<CR>
@@ -215,14 +222,12 @@ noremap <Up> 2<C-y>
 noremap <Down> 2<C-e>
 
 " Available
-noremap \\ <Nop>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
 noremap <Tab> <Nop>
 noremap <S-Tab> <Nop>
 xnoremap P <Nop>
-xnoremap Q <Nop>
 xnoremap R <Nop>
 xnoremap Z <Nop>
 
@@ -256,6 +261,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType ale-preview
         \  setlocal wrap nonumber norelativenumber
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
+  autocmd FileType markdown,text,latex,tex setlocal nonumber norelativenumber
 augroup END
 
 augroup FormatOptions " {{{2
@@ -279,12 +285,12 @@ augroup FixSleuthPolyglot " {{{2
   autocmd Filetype * if &filetype != 'markdown' | call plug#load('vim-sleuth') | endif
 augroup END
 
-augroup LazyLoadPlugins " {{{2
-  autocmd!
-  autocmd CursorHold,CursorHoldI *
-        \  call plug#load('tabnine-vim')
-        \| autocmd! LazyLoadPlugins
-augroup END
+" augroup LazyLoadPlugins " {{{2
+"   autocmd!
+"   autocmd CursorHold,CursorHoldI *
+"         \  call plug#load('tabnine-vim')
+"         \| autocmd! LazyLoadPlugins
+" augroup END
 
 " }}}2
 

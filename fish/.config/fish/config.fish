@@ -182,16 +182,16 @@ function update -d "Run all update commands"
         rustup update
     end
 
-    if test (command -s nvim) -a -e $HOME/.config/nvim/autoload/plug.vim
+    if test (command -s nvim) -a -e $HOME/.local/share/nvim/site/autoload/plug.vim
         set_color yellow
         echo "== Updating Neovim packages"
         set_color normal
         nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
-    else if test (command -s vim) -a -e $HOME/.vim/autoload/plug.vim
-        set_color yellow
-        echo "== Updating Vim packages"
-        set_color normal
-        vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
+    # else if test (command -s vim) -a -e $HOME/.vim/autoload/plug.vim
+    #     set_color yellow
+    #     echo "== Updating Vim packages"
+    #     set_color normal
+    #     vim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
     end
 
     if test (command -s tldr)
@@ -309,6 +309,12 @@ function pman -d "Open man page as PDF in Preview" -w man
     man -t $argv[1] | open -f -a Preview
 end
 # }}}2
+# tldrf - Fuzzy search tldr entries
+function tldrf -d "Fuzzy search tldr entries"
+  set -l choice (tldr --list | tr , '\n' | cut -d ' ' -f 2 | fzf)
+  tldr choice
+end
+#
 # r - cd to project root {{{2
 function r -d "cd to project root"
     set -l root (git rev-parse --show-toplevel 2>/dev/null; or echo "")
@@ -509,6 +515,7 @@ function wig -d "WireGuard"
             or echo "Up"
         case "*"
             echo "Invalid command '$argv[1]'" >&2
+            echo "Comands: up down status" >&2
             return 1
     end
 end
