@@ -52,7 +52,7 @@ myManageHook = manageHook def <+> manageDocks
 myHandleEventHook = handleEventHook def <+> fullscreenEventHook
 
 myConfig = def
-  { terminal = "xst"
+  { terminal = "st"
   , focusFollowsMouse = True
   , borderWidth = 2
   , normalBorderColor = "#383C4A"

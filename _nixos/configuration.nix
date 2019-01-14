@@ -189,9 +189,10 @@
       description = "Evan Relf";
       isNormalUser = true;
       extraGroups = [
-        "wheel"
-        "networkmanager"
+        "audio"
         "docker"
+        "networkmanager"
+        "wheel"
       ];
       initialPassword = "banana";
       shell = pkgs.fish;
@@ -201,6 +202,18 @@
 
   # BOOT {{{1
   boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd.luks.devices = [
+      {
+        name = "root";
+        device = "/dev/disk/by-uuid/8dc139f4-1390-4367-97d3-fb7a0d14e363";
+        preLVM = true;
+        allowDiscards = true;
+      }
+    ];
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call
       wireguard

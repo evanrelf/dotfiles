@@ -1,12 +1,12 @@
 !! xst
-st.font:        PragmataPro Liga:style=Regular:size=15:antialias=true:autohint=true
+st.font:        Iosevka:style=Regular:size=15:antialias=true:autohint=true
 st.bold_font:   0
 st.borderpx:    5
 st.termname:    xterm-256color
 st.bellvolume:  0
 
 !! rofi
-rofi.font: PragmataPro Liga 13
+rofi.font: Iosevka 13
 rofi.theme: Arc-Dark
 rofi.show-icons: true
 
