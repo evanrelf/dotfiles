@@ -55,6 +55,7 @@
     stack
     stow
     tealdeer
+    texlive.combined.scheme-basic
     tmux
     xclip
     xorg.xrdb
@@ -107,8 +108,8 @@
     desktopManager.xterm.enable = false;
     xautolock = {
       enable = true;
-      time = "5";
-      locker = "systemctl suspend";
+      time = 5;
+      locker = "${pkgs.systemd}/bin/systemctl suspend";
     };
   };
   services.redshift = {
@@ -182,7 +183,6 @@
   };
 
 
-
   # USERS {{{1
   users.users = {
     "evanrelf" = {
@@ -199,9 +199,8 @@
   };
 
 
-  # KERNEL MODULES {{{1
+  # BOOT {{{1
   boot = {
-    loader.grub.device = "/dev/sda";
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call
       wireguard

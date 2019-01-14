@@ -68,6 +68,7 @@ end
 complete -c kc -w kak
 
 alias g "git"
+alias n "nvim"
 alias scrot "command scrot --silent"
 alias lock "systemctl suspend; and physlock -d"
 
@@ -91,10 +92,6 @@ if test (uname) = "Darwin"
     end
 end
 
-if test (command -s pnpm)
-    alias npm "pnpm"
-end
-
 if status --is-interactive
     set -g fish_user_abbreviations
     if test (command -s stack)
@@ -104,9 +101,10 @@ if status --is-interactive
     end
 end
 
+alias artifact "~/Code/scripts/artifact/artifact"
+alias gauntlet "~/Code/scripts/gauntlet/gauntlet"
 alias qa "~/Code/scripts/qa/qa"
 alias vpn "~/Code/scripts/vpn/vpn"
-alias gauntlet "~/Code/scripts/gauntlet/gauntlet"
 alias sql "psql -d vetpro -p 5432 -h localhost -U postgres"
 
 # update - Run all update commands {{{2
@@ -544,7 +542,7 @@ function fish_prompt
     # Git
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
     if test -n "$git_dir"
-        set -l branch (git symbolic-ref --short HEAD 2>/dev/null)
+        set -l branch (git symbolic-ref --short HEAD 2>/dev/null; or git rev-parse --short HEAD)
         if test -n "$branch"
             set -l truncated (echo $branch | cut -c 1-25)
             set -l dirty (git status --porcelain)
@@ -569,6 +567,8 @@ function fish_prompt
     if test $exit_code -ne 0
         set_color red
     end
+    # Newline
+    echo
     # Prompt character
     echo -n "λ "
     set_color normal

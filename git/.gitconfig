@@ -4,7 +4,6 @@
 	s = status
 	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	b = branch
-	a = "!if [ -z \"$1\" ]; then echo 'Error: No files specified'; exit 1; fi && git add $@ && git status && :"
 	aa = "!git add -A && git status && :"
 	f = fetch
 	ci = commit
