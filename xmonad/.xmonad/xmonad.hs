@@ -24,7 +24,7 @@ myKeymap =
   , ("<XF86AudioMute>"        , safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
   -- Rofi
   , ("M-/"                    , safeSpawn "rofi" ["-show", "drun"])
-  , ("M-S-/"                  , safeSpawn "rofi" ["-show", "window"])
+  , ("M-S-/"                  , safeSpawn "rofi" ["-show", "run"])
   -- Go to next/previous non-empty workspace
   , ("M-p"                    , moveTo Prev NonEmptyWS)
   , ("M-n"                    , moveTo Next NonEmptyWS)
@@ -36,6 +36,9 @@ myKeymap =
   -- Resize window
   -- , ("M--"                    , sendMessage MirrorShrink)
   -- , ("M-="                    , sendMessage MirrorExpand)
+  -- Apps
+  , ("M-c"                    , safeSpawn "chromium" [])
+  , ("M-f"                    , safeSpawn "nautilus" [])
   ]
 
 myStartupHook = return () >> checkKeymap myConfig myKeymap
@@ -43,9 +46,8 @@ myStartupHook = return () >> checkKeymap myConfig myKeymap
 myLayoutHook =
   {- ResizableTall 1 (1/10) (1/2) [] ||| -} Tall 1 (1/10) (1/2) ||| Full
     & smartBorders
-    -- & smartSpacingWithEdge 7
+    -- & smartSpacingWithEdge 5
     & avoidStruts
-  -- safeSpawn "polybar-msg" ["-p", {- polybar pid -}, "top", "layout", "1"]
 
 myManageHook = manageHook def <+> manageDocks
 
@@ -53,7 +55,7 @@ myHandleEventHook = handleEventHook def <+> fullscreenEventHook
 
 myConfig = def
   { terminal = "st"
-  , focusFollowsMouse = True
+  , focusFollowsMouse = False
   , borderWidth = 2
   , normalBorderColor = "#383C4A"
   , focusedBorderColor = "#777777"
@@ -64,6 +66,4 @@ myConfig = def
   , modMask = mod4Mask
   } `additionalKeysP` myKeymap
 
-main = do
-  polybar <- spawnPipe "polybar -r top"
-  xmonad (myConfig & docks & ewmh)
+main = xmonad (myConfig & docks & ewmh)

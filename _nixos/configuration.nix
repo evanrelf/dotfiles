@@ -104,8 +104,15 @@
       enable = true;
       enableContribAndExtras = true;
     };
-    displayManager.lightdm.enable = true;
+    windowManager.bspwm.enable = true;
+    windowManager.default = "xmonad";
+    displayManager.lightdm = {
+      enable = true;
+      autoLogin.enable = true;
+      autoLogin.user = "evanrelf";
+    };
     desktopManager.xterm.enable = false;
+    desktopManager.default = "none";
     xautolock = {
       enable = true;
       time = 5;
@@ -126,10 +133,8 @@
 
 
   # POWER {{{1
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
+  powerManagement.enable = true;
+  powerManagement.powertop.enable = true;
   services.tlp.enable = true;
   # services.undervolt = {};
 
@@ -184,28 +189,24 @@
 
 
   # USERS {{{1
-  users.users = {
-    "evanrelf" = {
-      description = "Evan Relf";
-      isNormalUser = true;
-      extraGroups = [
-        "audio"
-        "docker"
-        "networkmanager"
-        "wheel"
-      ];
-      initialPassword = "banana";
-      shell = pkgs.fish;
-    };
+  users.users."evanrelf" = {
+    description = "Evan Relf";
+    isNormalUser = true;
+    extraGroups = [
+      "audio"
+      "docker"
+      "networkmanager"
+      "wheel"
+    ];
+    initialPassword = "banana";
+    shell = pkgs.fish;
   };
 
 
   # BOOT {{{1
   boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
     initrd.luks.devices = [
       {
         name = "root";

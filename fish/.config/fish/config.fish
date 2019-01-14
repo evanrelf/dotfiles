@@ -371,6 +371,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.Xresources"
             case xinit
                 eval $EDITOR "$HOME/.xinitrc"
+            case xprofile
+                eval $EDITOR "$HOME/.xprofile"
 
                 # Other
             case tmux
@@ -407,7 +409,7 @@ function rc -d "Open the specified program's configuration file"
         return 1
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
+complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"

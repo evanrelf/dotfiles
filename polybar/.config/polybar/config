@@ -10,11 +10,10 @@ background = #000000
 dimmed = #777777
 highlight = #5294E2
 
-[bar/top]
+[bar/bar]
 width = 100%
-height = 25
+height = 30
 font-0 = Roboto:style=Regular:size=13
-; font-1 = Siji:style=Regular:pixelsize=16
 font-1 = Material Icons:style=Regular:size=13
 underline-size = 1
 underline-color = ${colors.foreground}
@@ -22,10 +21,9 @@ fixed-center = true
 foreground = ${colors.foreground}
 background = ${colors.background}
 modules-left = workspaces
-modules-center = title
-; modules-right = brightness sep volume sep battery sep wifi sep date pad
-modules-right = brightness sep battery sep wifi sep date pad
-enable-ipc = true
+; modules-center = title
+modules-right = brightness sep volume sep battery sep wifi sep date pad
+; enable-ipc = true
 
 [module/sep]
 type = custom/text
@@ -61,6 +59,7 @@ label-full = " %percentage%%"
 
 [module/volume]
 type = internal/pulseaudio
+sink = "alsa_output.pci-0000_00_1b.0.analog-stereo"
 label-volume = " %percentage%%"
 label-muted = " Muted"
 
