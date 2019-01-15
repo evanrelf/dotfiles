@@ -15,7 +15,6 @@ set -U FZF_FIND_FILE_COMMAND "$FZF_DEFAULT_COMMAND"
 set -U FZF_CD_COMMAND "fd --type directory --follow"
 set -U FZF_CD_WITH_HIDDEN_COMMAND "$FZF_CD_COMMAND --hidden --exclude '.git'"
 set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
-set -U FZF_PREVIEW_FILE_COMMAND "bat --plain --color always --line-range :\$LINES"
 
 
 # VARIABLES {{{1
@@ -67,11 +66,6 @@ function kc
 end
 complete -c kc -w kak
 
-alias g "git"
-alias n "nvim"
-alias scrot "command scrot --silent"
-alias lock "systemctl suspend; and physlock -d"
-
 if test (command -s exa)
     alias ls "exa --group-directories-first"
     alias ll "exa -l --group-directories-first"
@@ -81,12 +75,9 @@ else
 end
 
 if test (uname) = "Darwin"
-    alias cask "brew cask"
-
     if test (command -s gittower)
         alias tower "gittower ."
     end
-
     if test -e /Applications/Marked\ 2.app
         alias marked "open -a Marked\ 2.app"
     end
@@ -94,18 +85,23 @@ end
 
 if status --is-interactive
     set -g fish_user_abbreviations
+    abbr --add n "nvim"
+    abbr --add g "git"
+    if test (uname) = "Darwin"
+      abbr --add cask "brew cask"
+    end
     if test (command -s stack)
         abbr --add ghc "stack ghc"
         abbr --add ghci "stack ghci"
         abbr --add runghc "stack runghc"
     end
+    abbr --add sql "psql -d vetpro -p 5432 -h localhost -U postgres"
 end
 
 alias artifact "~/Code/scripts/artifact/artifact"
 alias gauntlet "~/Code/scripts/gauntlet/gauntlet"
 alias qa "~/Code/scripts/qa/qa"
 alias vpn "~/Code/scripts/vpn/vpn"
-alias sql "psql -d vetpro -p 5432 -h localhost -U postgres"
 
 # update - Run all update commands {{{2
 function update -d "Run all update commands"
@@ -531,6 +527,9 @@ set __fish_git_prompt_showstashstate "true"
 
 function fish_prompt
     set -l exit_code $status
+    # set_color green
+    # echo -n (whoami)"@"(hostname -s)" "
+    # set_color normal
     # PWD
     set_color blue
     echo -n (prompt_pwd)" "
@@ -544,9 +543,9 @@ function fish_prompt
     # Git
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
     if test -n "$git_dir"
-        set -l branch (git symbolic-ref --short HEAD 2>/dev/null; or git rev-parse --short HEAD)
+        set -l branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
         if test -n "$branch"
-            set -l truncated (echo $branch | cut -c 1-25)
+            set -l truncated (echo $branch | cut -c 1-35)
             set -l dirty (git status --porcelain)
             if test -z "$dirty"
                 set_color green
