@@ -607,11 +607,12 @@ end
 #   eval (python3 -m virtualfish)
 # end
 
-# xinit {{{2
+# No display manager {{{2
 if test (tty) = "/dev/tty1"
     if test (command -s startx)
         startx
     end
+    exit 0
 end
 
 # }}}2

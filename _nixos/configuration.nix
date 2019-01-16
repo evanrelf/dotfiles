@@ -23,6 +23,7 @@
     ffmpeg
     fish
     fzf
+    gimp
     git
     gitAndTools.diff-so-fancy
     gnome3.nautilus
@@ -57,7 +58,9 @@
     tealdeer
     texlive.combined.scheme-basic
     tmux
+    transmission-gtk
     xclip
+    xorg.xev
     xorg.xrdb
     xorg.xset
     xst
@@ -70,6 +73,31 @@
     light.enable = true;
     mosh.enable = true;
     npm.enable = true;
+    chromium = {
+      enable = true;
+      extensions = [
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
+        "kbmfpngjjgdllneeigpgjifpgocmfgmb" # Reddit Enhancement Suite
+        "dneaehbmnbhcippjikoajpoabadpodje" # Old Reddit Redirect
+        "dfoegpibjpjpchgmjnmomelfnclbijnm" # BazQux - Open in Background Tab
+        "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+        "edemalkcamdhnnpkbdbokkflbcnhfhbi" # Mojave Pure Dark (theme)
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+        "pgdnlhfefecpicbbihgmbmffkjpaplco" # uBlock Origin Extra
+        "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
+        "ldpochfccmkkmhdbclfhpagapcfdljkj" # Decentraleyes
+        "gcbommkclmclpchllfjekcdonpmejbdp" # HTTPS Everywhere
+      ];
+      extraOpts = {
+        "DefaultSearchProviderEnabled" = "true";
+        "DefaultSearchProviderSearchURL" = "https://www.startpage.com/do/dsearch?query={searchTerms}";
+        "BlockThirdPartyCookies" = "true";
+        "BrowserSignin" = "0";
+        "SyncDisabled" = "true";
+        "PasswordManagerEnabled" = "false";
+        "NewTabPageLocation" = "about:blank";
+      };
+    };
   };
   virtualisation.docker.enable = true;
   services.openssh.enable = true;
@@ -99,13 +127,15 @@
       naturalScrolling = true;
       tappingDragLock = false;
       middleEmulation = false;
+      accelSpeed = "0.3";
     };
+    wacom.enable = true;
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
     };
     windowManager.bspwm.enable = true;
-    windowManager.default = "xmonad";
+    windowManager.default = "bspwm";
     displayManager.lightdm = {
       enable = true;
       autoLogin.enable = true;
@@ -124,7 +154,6 @@
     latitude = "34.0522";
     longitude = "-118.2437";
   };
-  services.unclutter-xfixes.enable = true;
 
 
   # SOUND {{{1

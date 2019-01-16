@@ -34,6 +34,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'idris-hackers/idris-vim'
+Plug 'kovetskiy/sxhkd-vim'
 Plug 'tpope/vim-sleuth', { 'on': [] }
 
 " Files
@@ -246,7 +247,7 @@ augroup FileTypeSettings " {{{2
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd TermOpen * setlocal wrap nonumber norelativenumber
   autocmd FileType man
-        \  setlocal laststatus=0 noruler
+        \  setlocal laststatus=0 noruler wrap
         \| noremap <buffer> h <Nop>
         \| noremap <buffer> j <C-e>L0
         \| noremap <buffer> k <C-y>H0

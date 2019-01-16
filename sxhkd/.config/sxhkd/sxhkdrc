@@ -1,4 +1,16 @@
 #
+# media keys
+#
+
+# volume
+XF86Audio{Mute,LowerVolume,RaiseVolume}
+  amixer -q sset Master {toggle,10%-,10%+}
+
+# brightness
+XF86MonBrightness{Down,Up}
+  light {-U,-A} 5
+
+#
 # wm independent hotkeys
 #
 

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# id="$1"
+# class="$2"
+# instance="$3"
+
+# focus="$(bspc query --nodes --node)"
+count="$(bspc query --nodes --desktop --node .window | wc -l)"
+
+case "$count" in
+  0 ) ;;
+  1 ) ;;
+  * ) ;;
+esac
