@@ -126,7 +126,6 @@ set lazyredraw
 set updatetime=2000
 set inccommand=nosplit
 set keywordprg=:help
-set shell=/bin/bash
 
 " }}}2
 

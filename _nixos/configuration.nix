@@ -135,7 +135,7 @@
       enableContribAndExtras = true;
     };
     windowManager.bspwm.enable = true;
-    windowManager.default = "bspwm";
+    windowManager.default = "xmonad";
     displayManager.lightdm = {
       enable = true;
       autoLogin.enable = true;

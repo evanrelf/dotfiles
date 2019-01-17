@@ -52,6 +52,21 @@ alias ed "pkill Emacs; pkill Emacs; emacs --daemon=term; emacs --daemon=gui"
 alias et "emacsclient -s term -t"
 alias eg "emacsclient -s gui -c -n"
 
+function os
+    switch $argv[1]
+        case install i
+            nix-env -iA "nixos.$argv[2]"
+        case remove r
+            nix-env -e
+        case update u
+            nix-env -u $argv[2]
+        case search s
+            nix search $argv[2]
+        case list l
+            nix-env -q
+    end
+end
+
 function kd
     command kak -c daemon -e 'kill'
     command kak -d -s daemon 2>/dev/null
