@@ -110,7 +110,7 @@ if status --is-interactive
         abbr --add ghci "stack ghci"
         abbr --add runghc "stack runghc"
     end
-    abbr --add sql "psql -d vetpro -p 5432 -h localhost -U postgres"
+    abbr --add sql "psql -d vetpro -U postgres -h localhost -p 5432"
 end
 
 alias artifact "~/Code/scripts/artifact/artifact"
@@ -588,6 +588,12 @@ function fish_prompt
     # Prompt character
     echo -n "λ "
     set_color normal
+end
+
+function fish_right_prompt
+  set_color black
+  date +%T
+  set_color normal
 end
 
 

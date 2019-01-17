@@ -247,10 +247,10 @@ augroup FileTypeSettings " {{{2
   autocmd TermOpen * setlocal wrap nonumber norelativenumber
   autocmd FileType man
         \  setlocal laststatus=0 noruler wrap
-        \| noremap <buffer> h <Nop>
-        \| noremap <buffer> j <C-e>L0
-        \| noremap <buffer> k <C-y>H0
-        \| noremap <buffer> l <Nop>
+        \| noremap <buffer> h 2zh
+        \| noremap <buffer> j 2<C-e>L0
+        \| noremap <buffer> k 2<C-y>H0
+        \| noremap <buffer> l 2zl
         \| noremap <buffer> d <C-d>
         \| noremap <buffer> u <C-u>
         " \| autocmd! LazyLoadPlugins
