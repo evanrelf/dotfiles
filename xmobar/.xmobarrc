@@ -1,0 +1,7 @@
+-- vim: filetype=haskell
+
+Config
+  { font = "xft:Terminus:style=Regular:size=12:antialias=false"
+  , bgColor = "black"
+  , fgColor = "#999999"
+  }

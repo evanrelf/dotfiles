@@ -154,6 +154,7 @@
     latitude = "34.0522";
     longitude = "-118.2437";
   };
+  services.xbanish.enable = true;
 
 
   # SOUND {{{1

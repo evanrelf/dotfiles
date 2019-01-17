@@ -14,4 +14,4 @@ if uname -a | grep -qvi "NixOS"; then
   xautolock -locker "systemctl suspend" -time 5 &
 fi
 (sleep 1 && feh --bg-tile ~/.wallpapers/current) &
-(sleep 1 && polybar -r bar) &
+# (sleep 1 && polybar -r bar) &

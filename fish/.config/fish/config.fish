@@ -55,13 +55,13 @@ alias eg "emacsclient -s gui -c -n"
 function os
     switch $argv[1]
         case install i
-            nix-env -iA "nixos.$argv[2]"
+            nix-env -i $argv[2..-1]
         case remove r
-            nix-env -e
+            nix-env -e $argv[2..-1]
         case update u
-            nix-env -u $argv[2]
+            nix-env -u $argv[2..-1]
         case search s
-            nix search $argv[2]
+            nix search $argv[2..-1]
         case list l
             nix-env -q
     end
@@ -129,14 +129,14 @@ function update -d "Run all update commands"
                 set_color normal
                 sudo pacman -Syu
                 sudo aura -Akua
-            else if test (command -s nix-env)
-                # NixOS
-                set_color yellow
-                echo "== Updating NixOS derivations"
-                set_color normal
-                nix-channel --update
-                nix-env --upgrade
-                sudo nixos-rebuild switch --upgrade
+            # else if test (command -s nix-env)
+            #     # NixOS
+            #     set_color yellow
+            #     echo "== Updating NixOS derivations"
+            #     set_color normal
+            #     nix-channel --update
+            #     nix-env --upgrade
+            #     sudo nixos-rebuild switch --upgrade
             else if test (command -s apt)
                 # Ubuntu & Debian
                 set_color yellow
@@ -399,7 +399,11 @@ function rc -d "Open the specified program's configuration file"
             case kitty
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
             case nixos
-                sudoedit "/etc/nixos/configuration.nix"
+                # sudoedit "/etc/nixos/configuration.nix"
+                eval $EDITOR "$HOME/dotfiles/_nixos/configuration.nix"
+                echo "Copying '$HOME/dotfiles/_nixos/configuration.nix' to '/etc/nixos/configuration.nix'..."
+                bash "$HOME/dotfiles/_nixos/install"
+
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
             case zathura
