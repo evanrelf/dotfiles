@@ -26,8 +26,8 @@
 	exec = "!exec "
 	new = "!if [ -z \"$1\" ]; then echo 'Usage: git new <name> [base]'; exit 1; fi && git fetch && if [ -z \"$2\" ]; then git checkout origin/master; else git checkout $2; fi && git checkout -b $1 && :"
 	up = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master; else git rebase origin/$1; fi && :"
-	unsafe-perform-amend = "!if [ -z \"$1\" ]; then git add -A; else git add $@; fi && git commit --amend --no-edit && git push --force && :"
-	unsafe-perform-up = "!git fetch && git rebase origin/master && git push --force && :"
+	up-local = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option theirs; else git rebase origin/$1 --strategy-option theirs; fi && :"
+	up-remote = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option ours; else git rebase origin/$1 --strategy-option ours; fi && :"
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=2 -RFX

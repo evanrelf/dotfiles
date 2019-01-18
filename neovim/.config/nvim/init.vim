@@ -20,7 +20,7 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
 " Plug 'zxqfl/tabnine-vim', { 'on': [] }
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 
@@ -216,10 +216,10 @@ xnoremap <Leader>H :!sort-imports<CR>
 nnoremap <Leader>S vip:sort<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
-noremap <Left> 2zh
-noremap <Right> 2zl
-noremap <Up> 2<C-y>
-noremap <Down> 2<C-e>
+noremap <Left> 5zh
+noremap <Right> 5zl
+noremap <Up> 5<C-y>
+noremap <Down> 5<C-e>
 
 " Available
 noremap S <Nop>

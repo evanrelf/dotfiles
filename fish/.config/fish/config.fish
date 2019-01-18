@@ -353,7 +353,7 @@ function rc -d "Open the specified program's configuration file"
             case yi
                 cd "$HOME/dotfiles/yi"
 
-                # Shells
+            # Shells
             case fish
                 eval $EDITOR "$HOME/.config/fish/config.fish"
             case fisher fishfile
@@ -363,7 +363,7 @@ function rc -d "Open the specified program's configuration file"
             case bash
                 eval $EDITOR "$HOME/.bashrc"
 
-                # Window managers
+            # Window managers
             case xmonad
                 eval $EDITOR "$HOME/.xmonad/xmonad.hs"
             case xmobar
@@ -376,8 +376,14 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/sxhkd/sxhkdrc"
             case compton
                 eval $EDITOR "$HOME/.config/compton.conf"
+            case hammerspoon
+                eval $EDITOR "$HOME/.hammerspoon/init.lua"
+            case chunkwm
+                eval $EDITOR "$HOME/.chunkwmrc"
+            case skhd
+                eval $EDITOR "$HOME/.skhdrc"
 
-                # Xorg
+            # Xorg
             case xresources
                 eval $EDITOR "$HOME/.Xresources"
             case xinit
@@ -385,15 +391,13 @@ function rc -d "Open the specified program's configuration file"
             case xprofile
                 eval $EDITOR "$HOME/.xprofile"
 
-                # Other
+            # Other
             case tmux
                 eval $EDITOR "$HOME/.tmux.conf"
             case git
                 eval $EDITOR "$HOME/.gitconfig"
             case git-local
                 eval $EDITOR "$HOME/.gitconfig.local"
-            case hammerspoon
-                eval $EDITOR "$HOME/.hammerspoon/init.lua"
             case alacritty
                 eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
             case kitty
@@ -424,7 +428,7 @@ function rc -d "Open the specified program's configuration file"
         return 1
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
+complete --command rc --require-parameter --no-files --arguments "chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
 # }}}2
 # refresh - Restart system applications {{{2
 function refresh -d "Restart system applications"
@@ -596,7 +600,7 @@ end
 
 function fish_right_prompt
   set_color black
-  date +%T
+  date +%r
   set_color normal
 end
 
