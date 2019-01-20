@@ -35,8 +35,11 @@
     light
     lxappearance-gtk3
     mosh
+    mpc_cli
+    mpd
     mpv
     mupdf
+    ncmpcpp
     neofetch
     neovim
     nodePackages.prettier

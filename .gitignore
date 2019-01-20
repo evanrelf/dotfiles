@@ -17,3 +17,6 @@ xmonad-x86_64-linux
 
 # Wallpapers
 wallpapers/.wallpapers/current
+
+# ncmpcpp
+ncmpcpp/.config/ncmpcpp/error.log
