@@ -9,5 +9,5 @@ Folders that start with an underscore need to be installed manually.
 ```bash
 git clone https://github.com/evanrelf/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install
+./install [PACKAGES]
 ```

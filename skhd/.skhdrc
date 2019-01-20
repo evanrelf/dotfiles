@@ -84,13 +84,7 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
-
-# open qutebrowser
-cmd + shift - return : ~/Scripts/qtb.sh
-
-# open mpv
-cmd - m : open -na /Applications/mpv.app $(pbpaste)
+cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 
 # close focused window
 alt - w : chunkc tiling::window --close

@@ -14,6 +14,7 @@
     borgbackup
     chromium
     clang
+    cmus
     cquery
     docker
     entr

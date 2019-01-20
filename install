@@ -1,86 +1,40 @@
 #!/usr/bin/env bash
 
-log() {
-  echo "$*" >&2
-}
-
 error() {
-  log "ERROR: $*"
+  echo -e "ERROR: $*" >&2
   exit 1
 }
 
-cmd_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
+# Error and exit if stow isn't installed
+command -v stow >/dev/null 2>&1 || error "stow is not installed"
 
-app_exists() {
-  [ -d "/Applications/$1.app" ]
-}
+if [ $# -gt 0 ]; then
+  # Create config folders if they don't already exist
+  for i in "$@"; do
+    case $i in
 
-# Install config
-install() {
-  name="$1"
-  read -r -n 1 -p "Install $name? [yN] " reply
-  echo
-  if [ "$reply" = "y" ]; then
-    log "Installing $name..."
-    stow --dir "$HOME/dotfiles" --target "$HOME" -S "$name"
-  else
-    log "Skipped $name"
-    return 1
-  fi
-}
+      alacritty   ) (set -x; mkdir -p "$HOME/.config/alacritty");;
+      bspwm       ) (set -x; mkdir -p "$HOME/.config/bspwm");;
+      compton     ) (set -x; mkdir -p "$HOME/.config/compton");;
+      fish        ) (set -x; mkdir -p "$HOME/.config/fish/functions");;
+      hammerspoon ) (set -x; mkdir -p "$HOME/.hammerspoon");;
+      kakoune     ) (set -x; mkdir -p "$HOME/.config/kak");;
+      karabiner   ) (set -x; mkdir -p "$HOME/.config/karabiner");;
+      kitty       ) (set -x; mkdir -p "$HOME/.config/kitty");;
+      mpd         ) (set -x; mkdir -p "$HOME/.config/mpd");;
+      ncmpcpp     ) (set -x; mkdir -p "$HOME/.config/ncmpcpp");;
+      neovim      ) (set -x; mkdir -p "$HOME/.config/nvim");;
+      polybar     ) (set -x; mkdir -p "$HOME/.config/polybar");;
+      ranger      ) (set -x; mkdir -p "$HOME/.config/ranger");;
+      redshift    ) (set -x; mkdir -p "$HOME/.config/redshift");;
+      sxhkd       ) (set -x; mkdir -p "$HOME/.config/sxhkd");;
+      xmonad      ) (set -x; mkdir -p "$HOME/.config/xmonad");;
+      zathura     ) (set -x; mkdir -p "$HOME/.config/zathura");;
 
-# Install config and create directory
-install_dir() {
-  mkdir -p "$HOME/${2:-".config/$name"}"
-  install "$1"
-}
-
-install_neovim() {
-  install_dir neovim ".config/nvim" || return
-  log "Downloading vim-plug for neovim..."
-  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-}
-
-install_vim() {
-  install vim || return
-  log "Downloading vim-plug for vim..."
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-}
-
-# Check for dependencies
-cmd_exists git || error "git is not installed"
-cmd_exists stow || error "stow is not installed"
-
-# Install configs
-if [ "$(uname)" = "Linux" ]; then
-  cmd_exists bspwm && install_dir bspwm
-  cmd_exists compton && install_dir compton
-  cmd_exists kitty && install_dir kitty
-  cmd_exists polybar && install_dir polybar
-  cmd_exists redshift && install_dir redshift
-  cmd_exists sxhkd && install_dir sxhkd
-  cmd_exists xmonad && install xmonad
-  (cmd_exists startx || cmd_exists xorg-server) && install xorg
-  cmd_exists zathura && install_dir zathura
-elif [ "$(uname)" = "Darwin" ]; then
-  app_exists "BitBar" && install bitbar
-  app_exists "Hammerspoon" && install_dir hammerspoon ".hammerspoon"
-  app_exists "Karabiner-Elements" && install_dir karabiner
-  app_exists "kitty" && install_dir kitty
+      *           ) ;;
+    esac
+  done
+  (set -x; stow --target "$HOME" -S "$@")
 else
-  error "Unknown operating system"
+  error "No packages specified\nUsage:  ./install [PACKAGES]"
 fi
-cmd_exists alacritty && install_dir alacritty
-cmd_exists clang-format && install clang-format
-cmd_exists emacs && install emacs
-cmd_exists fish && install_dir fish ".config/fish/functions"
-cmd_exists git && install git
-cmd_exists kak && install_dir kakoune ".config/kak"
-(cmd_exists nvim && install_neovim) || (cmd_exists vim && install_vim)
-# cmd_exists spacemacs && install spacemacs
-cmd_exists tmux && install tmux
-install wallpapers
