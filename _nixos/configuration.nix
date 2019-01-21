@@ -9,6 +9,7 @@
 
     acpi
     adapta-gtk-theme
+    arandr
     autojump
     binutils
     borgbackup
@@ -16,13 +17,11 @@
     clang
     cmus
     cquery
-    docker
     entr
     exa
     fd
     feh
     ffmpeg
-    fish
     fzf
     gimp
     git
@@ -30,11 +29,11 @@
     gnome3.nautilus
     gnupg
     haskellPackages.ghcid
+    haskellPackages.xmobar
     hlint
+    htop
     jq
-    light
     lxappearance-gtk3
-    mosh
     mpc_cli
     mpd
     mpv
@@ -42,11 +41,11 @@
     ncmpcpp
     neofetch
     neovim
+    nnn
     nodePackages.prettier
     nodejs
     pandoc
     papirus-icon-theme
-    polybar
     powertop
     ranger
     rclone
@@ -60,6 +59,7 @@
     spotify
     stack
     stow
+    sxiv
     tealdeer
     texlive.combined.scheme-basic
     tmux
@@ -165,10 +165,6 @@
   # SOUND {{{1
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  services.mpd = {
-    enable = true;
-    startWhenNeeded = true;
-  };
 
 
   # POWER {{{1

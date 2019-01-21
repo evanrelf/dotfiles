@@ -1,5 +1,6 @@
 ncmpcpp_directory = ~/.config/ncmpcpp
 mpd_music_dir = ~/Music/Library
+data_fetching_delay = no
 
 ##############################################################################
 ## This is the example configuration file. Copy it to $HOME/.ncmpcpp/config ##
