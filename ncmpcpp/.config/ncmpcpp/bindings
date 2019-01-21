@@ -1,3 +1,35 @@
+def_key "h"
+  previous_column
+
+def_key "h"
+  master_screen
+
+def_key "h"
+  volume_down
+
+def_key "j"
+  scroll_down
+
+def_key "J"
+  select_item
+  scroll_down
+
+def_key "k"
+  scroll_up
+
+def_key "K"
+  select_item
+  scroll_up
+
+def_key "l"
+  next_column
+
+def_key "l"
+  slave_screen
+
+def_key "l"
+  volume_up
+
 ##############################################################
 ## This is the example bindings file. Copy it to            ##
 ## ~/.ncmpcpp/bindings or $XDG_CONFIG_HOME/ncmpcpp/bindings ##
