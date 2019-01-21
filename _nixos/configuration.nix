@@ -56,6 +56,7 @@
     rustup
     scrot
     shellcheck
+    slack
     spotify
     stack
     stow
@@ -164,6 +165,10 @@
   # SOUND {{{1
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  services.mpd = {
+    enable = true;
+    startWhenNeeded = true;
+  };
 
 
   # POWER {{{1

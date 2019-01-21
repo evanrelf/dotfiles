@@ -1,5 +1,5 @@
 import Data.Function ((&))
-import XMonad hiding (mouseResizeWindow)
+import XMonad
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
 import XMonad.Actions.UpdateFocus (adjustEventInput, focusOnMouseMove)
@@ -76,6 +76,6 @@ myHandleEventHook = handleEventHook def
   <+> fullscreenEventHook
   <+> focusOnMouseMove
 
-myLogHook = updatePointer (0.5, 0.5) (0.99, 0.99)
+myLogHook = updatePointer (0.5, 0.5) (0, 0)
 
 {-# ANN module "HLint: Redundant return" #-}

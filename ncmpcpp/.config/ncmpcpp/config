@@ -1,7 +1,3 @@
-ncmpcpp_directory = ~/.config/ncmpcpp
-mpd_music_dir = ~/Music/Library
-mpd_crossfade_time = 3
-
 ##############################################################################
 ## This is the example configuration file. Copy it to $HOME/.ncmpcpp/config ##
 ## or $XDG_CONFIG_HOME/ncmpcpp/config and set up your preferences.          ##

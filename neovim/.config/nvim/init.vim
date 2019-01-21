@@ -2,11 +2,9 @@
 call plug#begin()
 
 " Appearance
-Plug 'rakr/vim-one'
 Plug 'evanrelf/papercolor-theme'
 Plug 'roman/golden-ratio'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'evanrelf/goyo.vim'
+" Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
 Plug 'junegunn/vim-slash'
@@ -16,11 +14,11 @@ Plug 'critiqjo/husk-x.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
-Plug 'michaeljsmith/vim-indent-object'
+" Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
 " Plug 'zxqfl/tabnine-vim', { 'on': [] }
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 
@@ -33,9 +31,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " Syntax
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
-Plug 'idris-hackers/idris-vim'
-Plug 'kovetskiy/sxhkd-vim'
-Plug 'tpope/vim-sleuth', { 'on': [] }
 
 " Files
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
@@ -49,10 +44,6 @@ call plug#end()
 " Plugin settings {{{2
 " golden-ratio
 let g:golden_ratio_autocommand = 0
-
-" goyo
-let g:goyo_height = "100%"
-let g:goyo_width = "100%"
 
 " neoformat
 let g:neoformat_only_msg_on_error = 1
@@ -81,7 +72,7 @@ set background=dark
 colorscheme PaperColor
 set colorcolumn=81
 set number
-set relativenumber
+" set relativenumber
 set noshowmode
 set shortmess=filmxTWIcF
 set title
@@ -169,28 +160,17 @@ xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
 vnoremap <silent> p :<C-u>let @p = @+<CR>gvp:let @+ = @p<CR>
 noremap Q @@
-noremap <C-g> :Goyo<CR>
-
-" noremap <silent> <C-h> :ALENext<CR>
-" noremap <silent> <C-j> :ALEPrevious<CR>
-" noremap <silent> <C-k> :ALENext<CR>
-" noremap <silent> <C-l> :ALEPrevious<CR>
-
+noremap H ^
+noremap L g_
 nnoremap <silent> <C-n> :ALENext<CR>
 nnoremap <silent> <C-p> :ALEPrevious<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 map <Plug>(slash-after) zz
-
-" Kakoune
-noremap gh ^
-noremap gj G
-noremap gk gg
-noremap gl g_
-nnoremap < <<
-nnoremap > >>
-nnoremap \| :%!
-xnoremap \| :!
+noremap <Left> 5zh
+noremap <Right> 5zl
+noremap <Up> 5<C-y>
+noremap <Down> 5<C-e>
 
 " Leader
 map <Space> <Leader>
@@ -201,8 +181,6 @@ xnoremap <Leader>s :s/
 nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
 noremap <silent> <Leader>= :Neoformat<CR>
-noremap <silent> <Leader>ap :<C-u>ALEPrevious<CR>
-noremap <silent> <Leader>an :<C-u>ALENext<CR>
 noremap <silent> <Leader>ad :<C-u>ALEDetail<CR>
 noremap <silent> <Leader>f :<C-u>GFiles<CR>
 noremap <silent> <Leader>F :<C-u>Files<CR>
@@ -210,18 +188,12 @@ noremap <silent> <Leader>r :<C-u>GRg<CR>
 noremap <silent> <Leader>R :<C-u>Rg<CR>
 noremap <silent> <Leader>h :<C-u>Helptags<CR>
 noremap <silent> <Leader>b :<C-u>Buffers<CR>
-
-" Experimental
-xnoremap <Leader>H :!sort-imports<CR>
 nnoremap <Leader>S vip:sort<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
-noremap <Left> 5zh
-noremap <Right> 5zl
-noremap <Up> 5<C-y>
-noremap <Down> 5<C-e>
 
 " Available
+noremap M <Nop>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
@@ -237,13 +209,11 @@ augroup FileTypeSettings " {{{2
   autocmd!
   autocmd FileType haskell setlocal keywordprg=hoogle\ --info
   autocmd FileType cpp setlocal commentstring=//\ %s
-  autocmd FileType markdown setlocal wrap
   autocmd FileType gitcommit setlocal colorcolumn=73 spell
   autocmd BufEnter .gitconfig* setlocal filetype=gitconfig noexpandtab shiftwidth=8
-  autocmd BufEnter Dockerfile.* setlocal filetype=Dockerfile
+  autocmd BufEnter Dockerfile* setlocal filetype=Dockerfile
   autocmd FileType vim,help setlocal keywordprg=:help
-  autocmd FileType help
-        \| nnoremap <buffer> <Esc> :<C-u>q<CR>
+  autocmd FileType help nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd TermOpen * setlocal wrap nonumber norelativenumber
   autocmd FileType man
         \  setlocal laststatus=0 noruler wrap
@@ -261,7 +231,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType ale-preview
         \  setlocal wrap nonumber norelativenumber
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd FileType markdown,text,latex,tex setlocal nonumber norelativenumber
+  autocmd FileType markdown,text,latex,tex setlocal nonumber norelativenumber wrap
 augroup END
 
 augroup FormatOptions " {{{2
@@ -280,11 +250,6 @@ augroup IgnoreCaseCommandMode " {{{2
   autocmd CmdLineLeave : set smartcase
 augroup END
 
-augroup FixSleuthPolyglot " {{{2
-  autocmd!
-  autocmd Filetype * if &filetype != 'markdown' | call plug#load('vim-sleuth') | endif
-augroup END
-
 " augroup LazyLoadPlugins " {{{2
 "   autocmd!
 "   autocmd CursorHold,CursorHoldI *
@@ -293,6 +258,5 @@ augroup END
 " augroup END
 
 " }}}2
-
 
 " vim: foldenable foldmethod=marker
