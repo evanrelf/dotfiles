@@ -1,40 +1,67 @@
 #!/usr/bin/env bash
 
+log() {
+  echo -e "$*" >&2
+}
+
 error() {
-  echo -e "ERROR: $*" >&2
+  log "ERROR: $*"
   exit 1
+}
+
+kakoune_plug() {
+  if [ ! -f "$HOME/.config/kak/plugins/plug.kak" ]; then
+    log "Installing plug.kak..."
+    git clone "https://github.com/andreyorst/plug.kak.git" \
+      "$HOME/.config/kak/plugins/plug.kak"
+  else
+    log "plug.kak already installed"
+  fi
+}
+
+neovim_plug() {
+  if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+    log "Installing vim-plug..."
+    curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+      "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  else
+    log "vim-plug already installed"
+  fi
 }
 
 # Error and exit if stow isn't installed
 command -v stow >/dev/null 2>&1 || error "stow is not installed"
 
 if [ $# -gt 0 ]; then
-  # Create config folders if they don't already exist
+  log "Creating directories..."
   for i in "$@"; do
     case $i in
 
-      alacritty   ) (set -x; mkdir -p "$HOME/.config/alacritty");;
-      bspwm       ) (set -x; mkdir -p "$HOME/.config/bspwm");;
-      compton     ) (set -x; mkdir -p "$HOME/.config/compton");;
-      fish        ) (set -x; mkdir -p "$HOME/.config/fish/functions");;
-      hammerspoon ) (set -x; mkdir -p "$HOME/.hammerspoon");;
-      kakoune     ) (set -x; mkdir -p "$HOME/.config/kak");;
-      karabiner   ) (set -x; mkdir -p "$HOME/.config/karabiner");;
-      kitty       ) (set -x; mkdir -p "$HOME/.config/kitty");;
-      mpd         ) (set -x; mkdir -p "$HOME/.config/mpd");;
-      ncmpcpp     ) (set -x; mkdir -p "$HOME/.config/ncmpcpp");;
-      neovim      ) (set -x; mkdir -p "$HOME/.config/nvim");;
-      polybar     ) (set -x; mkdir -p "$HOME/.config/polybar");;
-      ranger      ) (set -x; mkdir -p "$HOME/.config/ranger");;
-      redshift    ) (set -x; mkdir -p "$HOME/.config/redshift");;
-      sxhkd       ) (set -x; mkdir -p "$HOME/.config/sxhkd");;
-      xmonad      ) (set -x; mkdir -p "$HOME/.config/xmonad");;
-      zathura     ) (set -x; mkdir -p "$HOME/.config/zathura");;
+      alacritty   ) mkdir -p "$HOME/.config/alacritty";;
+      bspwm       ) mkdir -p "$HOME/.config/bspwm";;
+      compton     ) mkdir -p "$HOME/.config/compton";;
+      fish        ) mkdir -p "$HOME/.config/fish/functions";;
+      hammerspoon ) mkdir -p "$HOME/.hammerspoon";;
+      kakoune     ) mkdir -p "$HOME/.config/kak/pligins"; kakoune_plug;;
+      karabiner   ) mkdir -p "$HOME/.config/karabiner";;
+      kitty       ) mkdir -p "$HOME/.config/kitty";;
+      mpd         ) mkdir -p "$HOME/.config/mpd";;
+      ncmpcpp     ) mkdir -p "$HOME/.config/ncmpcpp";;
+      neovim      ) mkdir -p "$HOME/.config/nvim"; neovim_plug;;
+      polybar     ) mkdir -p "$HOME/.config/polybar";;
+      ranger      ) mkdir -p "$HOME/.config/ranger";;
+      redshift    ) mkdir -p "$HOME/.config/redshift";;
+      sxhkd       ) mkdir -p "$HOME/.config/sxhkd";;
+      xmonad      ) mkdir -p "$HOME/.config/xmonad";;
+      zathura     ) mkdir -p "$HOME/.config/zathura";;
 
       *           ) ;;
     esac
   done
-  (set -x; stow --target "$HOME" -S "$@")
+  log "Stowing config files..."
+  stow --target "$HOME" -S "$@"
 else
   error "No packages specified\nUsage:  ./install [PACKAGES]"
 fi
+
+log "Done!"
