@@ -365,9 +365,9 @@ function rc -d "Open the specified program's configuration file"
 
             # Window managers
             case xmonad
-                eval $EDITOR "$HOME/.xmonad/xmonad.hs"
+                eval $EDITOR "$HOME/.config/xmonad/xmonad.hs"
             case xmobar
-                eval $EDITOR "$HOME/.xmobarrc"
+                eval $EDITOR "$HOME/.config/xmobar/xmobarrc"
             case polybar
                 eval $EDITOR "$HOME/.config/polybar/config"
             case bspwm
