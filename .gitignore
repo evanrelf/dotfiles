@@ -8,13 +8,6 @@ bitbar/.config/bitbar/cache_*.json
 # Yi
 yi/.stack-work/
 
-# Xmonad
-xmonad/.xmonad/.stack-work/
-xmonad.hi
-xmonad.o
-xmonad.errors
-xmonad-x86_64-linux
-
 # Wallpapers
 wallpapers/.wallpapers/current
 

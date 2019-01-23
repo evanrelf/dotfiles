@@ -17,6 +17,7 @@
     clang
     cmus
     cquery
+    dunst
     entr
     exa
     fd
@@ -27,6 +28,7 @@
     git
     gitAndTools.diff-so-fancy
     gnome3.nautilus
+    gnumake
     gnupg
     haskellPackages.ghcid
     haskellPackages.xmobar
@@ -44,6 +46,7 @@
     nnn
     nodePackages.prettier
     nodejs
+    notify-desktop
     pandoc
     papirus-icon-theme
     powertop
@@ -151,6 +154,9 @@
     xautolock = {
       enable = true;
       time = 5;
+      enableNotifier = true;
+      notify = 10;
+      notifier = "${pkgs.notify-desktop} -t 10000 'Sleeping in 10s...'";
       locker = "${pkgs.systemd}/bin/systemctl suspend";
     };
   };
@@ -177,7 +183,10 @@
   # SECURITY {{{1
   security.sudo.wheelNeedsPassword = false;
   hardware.u2f.enable = true;
-  services.physlock.enable = true;
+  services.physlock = {
+    enable = true;
+    lockOn.hibernate = false;
+  };
 
 
   # NETWORK {{{1

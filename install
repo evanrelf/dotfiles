@@ -55,7 +55,7 @@ if [ $# -gt 0 ]; then
           ranger      ) mkdir -p "$HOME/.config/ranger";;
           redshift    ) mkdir -p "$HOME/.config/redshift";;
           sxhkd       ) mkdir -p "$HOME/.config/sxhkd";;
-          xmonad      ) mkdir -p "$HOME/.config/xmonad";;
+          xmonad      ) mkdir -p "$HOME/.xmonad";;
           zathura     ) mkdir -p "$HOME/.config/zathura";;
 
           *           ) ;;
