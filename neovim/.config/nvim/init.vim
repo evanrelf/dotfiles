@@ -171,6 +171,8 @@ noremap <Left> 5zh
 noremap <Right> 5zl
 noremap <Up> 5<C-y>
 noremap <Down> 5<C-e>
+nnoremap > >>
+nnoremap < <<
 
 " Leader
 map <Space> <Leader>
@@ -210,7 +212,6 @@ augroup FileTypeSettings " {{{2
   autocmd FileType haskell setlocal keywordprg=hoogle\ --info
   autocmd FileType cpp setlocal commentstring=//\ %s
   autocmd FileType gitcommit setlocal colorcolumn=73 spell
-  autocmd BufEnter .gitconfig* setlocal filetype=gitconfig noexpandtab shiftwidth=8
   autocmd BufEnter Dockerfile* setlocal filetype=Dockerfile
   autocmd FileType vim,help setlocal keywordprg=:help
   autocmd FileType help nnoremap <buffer> <Esc> :<C-u>q<CR>

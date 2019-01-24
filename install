@@ -44,6 +44,7 @@ if [ $# -gt 0 ]; then
           bspwm       ) mkdir -p "$HOME/.config/bspwm";;
           compton     ) mkdir -p "$HOME/.config/compton";;
           fish        ) mkdir -p "$HOME/.config/fish/functions";;
+          git         ) mkdir -p "$HOME/.config/git";;
           hammerspoon ) mkdir -p "$HOME/.hammerspoon";;
           kakoune     ) mkdir -p "$HOME/.config/kak/plugins"; kakoune_plug;;
           karabiner   ) mkdir -p "$HOME/.config/karabiner";;

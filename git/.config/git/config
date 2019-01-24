@@ -1,16 +1,20 @@
 [user]
-	name = Evan Relf
+        name = Evan Relf
+        useConfigOnly = true
 [alias]
 	s = status
 	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	b = branch
-	aa = "!git add -A && git status && :"
+	a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status && :"
+	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status && :"
+	r = reset
 	f = fetch
-	ci = commit
+        ci = "!if [ -z \"$1\" ]; then git commit; else git commit --message=\"$1\"; fi && : "
 	co = checkout
+        # Tip: -w ignores whitespace changes
 	d = diff
 	ds = diff --staged
-	dd = "!if [ -z \"$1\" ]; then git diff origin/master; else git diff origin/$1; fi && :"
+	dd = diff origin/master
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
 	st = stash push
@@ -26,8 +30,9 @@
 	exec = "!exec "
 	new = "!if [ -z \"$1\" ]; then echo 'Usage: git new <name> [base]'; exit 1; fi && git fetch && if [ -z \"$2\" ]; then git checkout origin/master; else git checkout $2; fi && git checkout -b $1 && :"
 	up = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master; else git rebase origin/$1; fi && :"
-	up-local = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option theirs; else git rebase origin/$1 --strategy-option theirs; fi && :"
-	up-remote = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option ours; else git rebase origin/$1 --strategy-option ours; fi && :"
+	# The role of 'theirs' and 'ours' is reversed with rebase
+	up-favor-local = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option theirs; else git rebase origin/$1 --strategy-option theirs; fi && :"
+	up-favor-remote = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option ours; else git rebase origin/$1 --strategy-option ours; fi && :"
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=2 -RFX
@@ -49,7 +54,7 @@
 [color]
 	ui = true
 [include]
-	path = ~/.gitconfig.local
+	path = ~/.config/git/local
 [color "diff-highlight"]
 	oldNormal = red
 	oldHighlight = red 52

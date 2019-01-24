@@ -401,9 +401,9 @@ function rc -d "Open the specified program's configuration file"
             case tmux
                 eval $EDITOR "$HOME/.tmux.conf"
             case git
-                eval $EDITOR "$HOME/.gitconfig"
+                eval $EDITOR "$HOME/.config/git/config"
             case git-local
-                eval $EDITOR "$HOME/.gitconfig.local"
+                eval $EDITOR "$HOME/.config/git/local"
             case alacritty
                 eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
             case kitty
