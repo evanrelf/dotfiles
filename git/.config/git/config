@@ -1,19 +1,26 @@
+# Tip: `git diff -w` ignores whitespace changes
+
 [user]
-        name = Evan Relf
-        useConfigOnly = true
+	name = Evan Relf
+	useConfigOnly = true
 [alias]
 	s = status
-	l = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	# Truncated log
+	l = log --max-count=20 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	# Full log
+	lg = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	# Only show commits ahead of origin/master
+	ll = log origin/master.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	b = branch
 	a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status && :"
 	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status && :"
 	r = reset
 	f = fetch
-        ci = "!if [ -z \"$1\" ]; then git commit; else git commit --message=\"$1\"; fi && : "
+	ci = "!if [ -z \"$1\" ]; then git commit; else git commit --message=\"$1\"; fi && : "
 	co = checkout
-        # Tip: -w ignores whitespace changes
 	d = diff
 	ds = diff --staged
+	# Only show differences from origin/master
 	dd = diff origin/master
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
@@ -23,14 +30,19 @@
 	stl = stash list
 	clean-ignored = clean -Xdf
 	clean-untracked = clean -xdi
+	# Un-commit
 	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
 	rename = commit --amend
+	# Print the path to the root of the git repo
 	root = rev-parse --show-toplevel
+	# Run a command from the root of the git repo
 	exec = "!exec "
-	new = "!if [ -z \"$1\" ]; then echo 'Usage: git new <name> [base]'; exit 1; fi && git fetch && if [ -z \"$2\" ]; then git checkout origin/master; else git checkout $2; fi && git checkout -b $1 && :"
+	# Fetch and create a new branch off of origin/master
+	new = "!if [ -z \"$1\" ]; then echo 'Usage: git new <BRANCH-NAME> [BASE-BRANCH]'; exit 1; fi && git fetch && if [ -z \"$2\" ]; then git checkout origin/master; else git checkout $2; fi && git checkout -b $1 && :"
+	# Fetch and rebase on origin master
 	up = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master; else git rebase origin/$1; fi && :"
-	# The role of 'theirs' and 'ours' is reversed with rebase
+	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
 	up-favor-local = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option theirs; else git rebase origin/$1 --strategy-option theirs; fi && :"
 	up-favor-remote = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option ours; else git rebase origin/$1 --strategy-option ours; fi && :"
 [core]

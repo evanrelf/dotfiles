@@ -27,6 +27,7 @@ Plug 'sbdchd/neoformat'
 Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-sleuth'
 
 " Syntax
 Plug 'w0rp/ale'

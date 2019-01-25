@@ -9,64 +9,39 @@ error() {
   exit 1
 }
 
-kakoune_plug() {
-  if [ ! -f "$HOME/.config/kak/plugins/plug.kak" ]; then
-    log "Installing plug.kak..."
-    git clone --depth 1 "https://github.com/andreyorst/plug.kak.git" \
-      "$HOME/.config/kak/plugins/plug.kak"
-  else
-    log "plug.kak already installed"
-  fi
-}
-
-neovim_plug() {
-  if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
-    log "Installing vim-plug..."
-    curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-      "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  else
-    log "vim-plug already installed"
-  fi
-}
-
-# Error and exit if stow isn't installed
 command -v stow >/dev/null 2>&1 || error "stow is not installed"
 
 if [ $# -gt 0 ]; then
   for i in "$@"; do
     log "Installing '$i'..."
-    case $i in
-      nixos | systemd | vscode ) bash "$i/install";;
-      * )
-        case $i in
-
-          alacritty   ) mkdir -p "$HOME/.config/alacritty";;
-          bspwm       ) mkdir -p "$HOME/.config/bspwm";;
-          compton     ) mkdir -p "$HOME/.config/compton";;
-          fish        ) mkdir -p "$HOME/.config/fish/functions";;
-          git         ) mkdir -p "$HOME/.config/git";;
-          hammerspoon ) mkdir -p "$HOME/.hammerspoon";;
-          kakoune     ) mkdir -p "$HOME/.config/kak/plugins"; kakoune_plug;;
-          karabiner   ) mkdir -p "$HOME/.config/karabiner";;
-          kitty       ) mkdir -p "$HOME/.config/kitty";;
-          mpd         ) mkdir -p "$HOME/.config/mpd";;
-          ncmpcpp     ) mkdir -p "$HOME/.config/ncmpcpp";;
-          neovim      ) mkdir -p "$HOME/.config/nvim"; neovim_plug;;
-          polybar     ) mkdir -p "$HOME/.config/polybar";;
-          ranger      ) mkdir -p "$HOME/.config/ranger";;
-          redshift    ) mkdir -p "$HOME/.config/redshift";;
-          sxhkd       ) mkdir -p "$HOME/.config/sxhkd";;
-          xmonad      ) mkdir -p "$HOME/.xmonad";;
-          zathura     ) mkdir -p "$HOME/.config/zathura";;
-
-          *           ) ;;
-        esac
-        stow --target "$HOME" -S "$i"
-        ;;
-    esac
+    if [ -f "$i/install" ]; then
+      bash "$i/install"
+    else
+      case $i in
+        kakoune )
+          if [ ! -f "$HOME/.config/kak/plugins/plug.kak" ]; then
+            command -v git >/dev/null 2>&1 || error "git is not installed"
+            log "Installing plug.kak..."
+            git clone --depth 1 "https://github.com/andreyorst/plug.kak.git" \
+              "$HOME/.config/kak/plugins/plug.kak"
+          else
+            log "plug.kak already installed"
+          fi
+          ;;
+        neovim )
+          if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+            log "Installing vim-plug..."
+            command -v curl >/dev/null 2>&1 || error "curl is not installed"
+            curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
+              "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+          else
+            log "vim-plug already installed"
+          fi
+          ;;
+      esac
+      stow --no-folding --target "$HOME" -S "$i"
+    fi
   done
 else
-  error "No packages specified\nUsage:  ./install [PACKAGES]"
+  error "No packages specified\nUsage: ./install [PACKAGES]"
 fi
-
-log "Done!"
