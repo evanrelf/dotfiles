@@ -138,12 +138,15 @@
       accelSpeed = "0.3";
     };
     wacom.enable = true;
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
+    windowManager = {
+      default = "xmonad";
+      xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+      };
+      bspwm.enable = true;
+      awesome.enable = true;
     };
-    windowManager.bspwm.enable = true;
-    windowManager.default = "xmonad";
     displayManager.lightdm = {
       enable = true;
       autoLogin.enable = true;

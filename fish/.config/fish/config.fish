@@ -365,7 +365,7 @@ function rc -d "Open the specified program's configuration file"
 
             # Window managers
             case xmonad
-                eval $EDITOR "$HOME/.config/xmonad/xmonad.hs"
+                eval $EDITOR "$HOME/.xmonad/xmonad.hs"
             case xmobar
                 eval $EDITOR "$HOME/.config/xmobar/xmobarrc"
             case polybar
@@ -410,9 +410,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
             case nixos
                 # sudoedit "/etc/nixos/configuration.nix"
-                eval $EDITOR "$HOME/dotfiles/_nixos/configuration.nix"
-                echo "Copying '$HOME/dotfiles/_nixos/configuration.nix' to '/etc/nixos/configuration.nix'..."
-                bash "$HOME/dotfiles/_nixos/install"
+                eval $EDITOR "$HOME/dotfiles/nixos/configuration.nix"
+                bash "$HOME/dotfiles/nixos/install"
 
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
