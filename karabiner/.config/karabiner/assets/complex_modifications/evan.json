@@ -31,6 +31,31 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "Fn to Meh",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "fn",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command",
+              "modifiers": [
+                "right_control",
+                "right_option"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
