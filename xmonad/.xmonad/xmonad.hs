@@ -122,16 +122,16 @@ myLayoutHook =
   & avoidStruts
 
 myManageHook = manageHook def
-  <+> manageDocks
-  <+> scratchpadManageHook (RationalRect (1/4) (1/4) (1/2) (1/2))
-  <+> insertPosition Below Newer
+  <> manageDocks
+  <> scratchpadManageHook (RationalRect (1/4) (1/4) (1/2) (1/2))
+  <> insertPosition Below Newer
 
 myHandleEventHook = handleEventHook def
-  <+> fullscreenEventHook
-  <+> focusOnMouseMove
+  <> fullscreenEventHook
+  <> focusOnMouseMove
 
 myLogHook = logHook def
-  <+> updatePointer (0.5, 0.5) (0, 0)
+  <> updatePointer (0.5, 0.5) (0, 0)
 
 myTheme :: Themes.ThemeInfo
 myTheme = Themes.xmonadTheme
