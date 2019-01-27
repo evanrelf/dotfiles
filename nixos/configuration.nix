@@ -168,12 +168,6 @@
     enable = true;
     backend = "glx";
     vSync = "opengl-swc";
-    shadow = true;
-    shadowOpacity = "0.5";
-    shadowOffsets = [ (-5) (-5) ];
-    extraOptions = "
-    inactive-dim = 0.2;
-    ";
   };
   services.redshift = {
     enable = true;
@@ -264,8 +258,12 @@
 
   # BOOT {{{1
   boot = {
-    loader.grub.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot = {
+      enable = true;
+      editor = false;
+      consoleMode = "auto";
+    };
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call
       wireguard
@@ -283,11 +281,6 @@
   services.timesyncd.enable = true;
   services.printing.enable = true;
   system.stateVersion = "18.09";
-
-  # Reflex
-  nix.binaryCaches = [ "https://cache.nixos.org/" "https://nixcache.reflex-frp.org" ];
-  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
-
 
   # }}}1
 }

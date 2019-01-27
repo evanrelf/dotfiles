@@ -368,6 +368,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.xmonad/xmonad.hs"
             case xmobar
                 eval $EDITOR "$HOME/.config/xmobar/xmobarrc"
+            case awesome
+                eval $EDITOR "$HOME/.config/awesome/rc.lua"
             case polybar
                 eval $EDITOR "$HOME/.config/polybar/config"
             case bspwm
