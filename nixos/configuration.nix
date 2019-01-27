@@ -115,6 +115,7 @@
   fonts = {
     fonts = with pkgs; [
       dejavu_fonts
+      gohufont
       iosevka-bin
       material-icons
       roboto
@@ -162,6 +163,17 @@
       notifier = "${pkgs.notify-desktop} -t 10000 'Sleeping in 10s...'";
       locker = "${pkgs.systemd}/bin/systemctl suspend";
     };
+  };
+  services.compton = {
+    enable = true;
+    backend = "glx";
+    vsync = "opengl-swc";
+    shadow = true;
+    shadowOpacity = "0.5";
+    shadowOffsets = [ (-5) (-5) ];
+    extraOptions = "
+    inactive-dim = 0.2;
+    ";
   };
   services.redshift = {
     enable = true;
