@@ -6,7 +6,7 @@
 [alias]
 	s = status
 	# Truncated log
-	l = log --max-count=20 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Full log
 	lg = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of origin/master
@@ -16,12 +16,13 @@
 	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status && :"
 	r = reset
 	f = fetch
-	ci = "!if [ -z \"$1\" ]; then git commit; else git commit --message=\"$1\"; fi && : "
+	ci = commit
 	co = checkout
 	d = diff
 	ds = diff --staged
 	# Only show differences from origin/master
 	dd = diff origin/master
+	ddn = diff origin/master --name-only
 	kd = difftool -y -t Kaleidoscope
 	km = mergetool -y -t Kaleidoscope
 	st = stash push
