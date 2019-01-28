@@ -12,7 +12,6 @@
     arandr
     autojump
     binutils
-    borgbackup
     chromium
     clang
     cmus
@@ -24,7 +23,6 @@
     feh
     ffmpeg
     fzf
-    gimp
     git
     gitAndTools.diff-so-fancy
     gnome3.nautilus
@@ -35,7 +33,7 @@
     hlint
     htop
     jq
-    lxappearance-gtk3
+    lxappearance
     mpc_cli
     mpd
     mpv
@@ -51,22 +49,17 @@
     papirus-icon-theme
     powertop
     ranger
-    rclone
     ripgrep
     rofi
-    rsync
-    rustup
     scrot
     shellcheck
     slack
     spotify
     stack
     stow
-    sxiv
     tealdeer
     texlive.combined.scheme-basic
     tmux
-    transmission-gtk
     xclip
     xorg.xev
     xorg.xrdb
@@ -74,6 +67,15 @@
     xst
     youtube-dl
     zathura
+
+    autokey
+    firefox
+    gimp
+    rclone
+    rsync
+    rustup
+    sxiv
+    transmission-gtk
 
   ];
   programs = {
@@ -87,9 +89,9 @@
         "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
         "kbmfpngjjgdllneeigpgjifpgocmfgmb" # Reddit Enhancement Suite
         "dneaehbmnbhcippjikoajpoabadpodje" # Old Reddit Redirect
-        "dfoegpibjpjpchgmjnmomelfnclbijnm" # BazQux - Open in Background Tab
+        "dfoegpibjpjpchgmjnmomelfnclbijnm" # BazQux Open in Background Tab
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
-        "edemalkcamdhnnpkbdbokkflbcnhfhbi" # Mojave Pure Dark (theme)
+        "edemalkcamdhnnpkbdbokkflbcnhfhbi" # Mojave Pure Dark theme
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
         "pgdnlhfefecpicbbihgmbmffkjpaplco" # uBlock Origin Extra
         "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
@@ -103,7 +105,7 @@
         "BrowserSignin" = "0";
         "SyncDisabled" = "true";
         "PasswordManagerEnabled" = "false";
-        "NewTabPageLocation" = "about:blank";
+        # "NewTabPageLocation" = "about:blank";
       };
     };
   };
@@ -114,12 +116,24 @@
   # FONTS {{{1
   fonts = {
     fonts = with pkgs; [
+      # Regular
       dejavu_fonts
-      gohufont
+      liberation_ttf
+      libertinus
+
+      # Monospaced
       iosevka-bin
-      material-icons
-      roboto
+      inconsolata
+      anonymousPro
+
+      # Bitmap
       terminus_font
+      gohufont
+
+      # Emoji and icons
+      noto-fonts-emoji
+      material-icons
+      emacs-all-the-icons-fonts
     ];
     fontconfig.ultimate = {
       enable = true;

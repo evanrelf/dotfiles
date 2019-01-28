@@ -411,9 +411,10 @@ function rc -d "Open the specified program's configuration file"
             case kitty
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
             case nixos
-                # sudoedit "/etc/nixos/configuration.nix"
                 eval $EDITOR "$HOME/dotfiles/nixos/configuration.nix"
-                bash "$HOME/dotfiles/nixos/install"
+                if test (uname) = "Linux"
+                  bash "$HOME/dotfiles/nixos/install"
+                end
 
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"

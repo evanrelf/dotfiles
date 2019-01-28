@@ -3,6 +3,8 @@ call plug#begin()
 
 " Appearance
 Plug 'evanrelf/papercolor-theme'
+Plug 'ajh17/Spacegray.vim'
+" Plug 'airblade/vim-gitgutter'
 Plug 'roman/golden-ratio'
 " Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -57,6 +59,13 @@ let g:ale_fixers = { 'haskell': ['hlint'] }
 
 " better-whitespace
 let g:strip_whitelines_at_eof = 1
+
+" gitgutter
+let g:gitgutter_map_keys = 0
+let g:gitgutter_sign_added = '┃'
+let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_removed = '━'
+let g:gitgutter_sign_modified_removed = '┳'
 
 " polyglot
 let g:vim_markdown_new_list_item_indent = 0
@@ -115,7 +124,7 @@ set mouse=a
 set hidden
 set virtualedit=block
 set lazyredraw
-set updatetime=2000
+set updatetime=100
 set inccommand=nosplit
 set keywordprg=:help
 
