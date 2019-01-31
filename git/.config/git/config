@@ -35,6 +35,8 @@
 	undo = reset --soft HEAD^
 	amend = commit --amend --no-edit
 	rename = commit --amend
+	continue = rebase --continue
+	abort = rebase --abort
 	# Print the path to the root of the git repo
 	root = rev-parse --show-toplevel
 	# Run a command from the root of the git repo

@@ -113,11 +113,25 @@ if status --is-interactive
     abbr --add sql "psql -d vetpro -U postgres -h localhost -p 5432"
 end
 
+# Panoramic
 alias artifact "~/Code/scripts/artifact/artifact"
 alias gauntlet "~/Code/scripts/gauntlet/gauntlet"
 alias qa "~/Code/scripts/qa/qa"
 alias vpn "~/Code/scripts/vpn/vpn"
 
+# fn - Search for Elm/Haskell function definition {{{2
+function fn -d "Search for Elm/Haskell function definition"
+    set -l match (rg -Hin "^\s*$argv[1] ::? " -g "*.hs" -g "*.elm" || rg -Hin "^\s*.*$argv[1].* ::? " -g "*.hs" -g "*.elm" | fzf -1 -0 --height 10%)
+    set -l file (echo $match | cut -d ':' -f 1)
+    set -l line (echo $match | cut -d ':' -f 2)
+    if test -e $file
+        nvim $file +$line +"norm zz"
+    else
+        echo "No results found" >&2
+        return 1
+    end
+end
+# }}}2
 # update - Run all update commands {{{2
 function update -d "Run all update commands"
     switch (uname)
@@ -318,12 +332,12 @@ function pman -d "Open man page as PDF in Preview" -w man
     man -t $argv[1] | open -f -a Preview
 end
 # }}}2
-# tldrf - Fuzzy search tldr entries
+# tldrf - Fuzzy search tldr entries {{{2
 function tldrf -d "Fuzzy search tldr entries"
   set -l choice (tldr --list | tr , '\n' | cut -d ' ' -f 2 | fzf)
   tldr choice
 end
-#
+# }}}2
 # r - cd to project root {{{2
 function r -d "cd to project root"
     set -l root (git rev-parse --show-toplevel 2>/dev/null; or echo "")

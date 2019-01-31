@@ -43,6 +43,16 @@ bind(meh, "tab", wm.nextScreen)
 
 -- Tiling windows (Amethyst)
 bind({"alt", "shift"}, "return", run.terminal)
+bind({"alt"}, "1", function() hs.eventtap.keyStroke({"ctrl"}, "1") end)
+bind({"alt"}, "2", function() hs.eventtap.keyStroke({"ctrl"}, "2") end)
+bind({"alt"}, "3", function() hs.eventtap.keyStroke({"ctrl"}, "3") end)
+bind({"alt"}, "4", function() hs.eventtap.keyStroke({"ctrl"}, "4") end)
+bind({"alt"}, "5", function() hs.eventtap.keyStroke({"ctrl"}, "5") end)
+bind({"alt"}, "6", function() hs.eventtap.keyStroke({"ctrl"}, "6") end)
+bind({"alt"}, "7", function() hs.eventtap.keyStroke({"ctrl"}, "7") end)
+bind({"alt"}, "8", function() hs.eventtap.keyStroke({"ctrl"}, "8") end)
+bind({"alt"}, "9", function() hs.eventtap.keyStroke({"ctrl"}, "9") end)
+bind({"alt"}, "0", function() hs.eventtap.keyStroke({"ctrl"}, "0") end)
 
 -- tell application "iTerm"
 -- 	create window with default profile
