@@ -71,6 +71,7 @@
     autokey
     firefox
     gimp
+    libreoffice-fresh
     rclone
     rsync
     rustup

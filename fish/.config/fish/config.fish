@@ -121,7 +121,7 @@ alias vpn "~/Code/scripts/vpn/vpn"
 
 # fn - Search for Elm/Haskell function definition {{{2
 function fn -d "Search for Elm/Haskell function definition"
-    set -l match (rg -Hin "^\s*$argv[1] ::? " -g "*.hs" -g "*.elm" || rg -Hin "^\s*.*$argv[1].* ::? " -g "*.hs" -g "*.elm" | fzf -1 -0 --height 10%)
+    set -l match (rg -Hin "^\s*$argv[1] ::? " -g "*.hs" -g "*.elm"; or rg -Hin "^\s*.*$argv[1].* ::? " -g "*.hs" -g "*.elm" | fzf -1 -0 --height 10%)
     set -l file (echo $match | cut -d ':' -f 1)
     set -l line (echo $match | cut -d ':' -f 2)
     if test -e $file
