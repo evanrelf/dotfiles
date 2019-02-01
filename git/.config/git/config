@@ -29,6 +29,7 @@
 	stu = stash push --include-untracked
 	stp = stash pop
 	stl = stash list
+	std = stash drop
 	clean-ignored = clean -Xdf
 	clean-untracked = clean -xdi
 	# Un-commit
@@ -39,6 +40,8 @@
 	abort = rebase --abort
 	# Print the path to the root of the git repo
 	root = rev-parse --show-toplevel
+	# Print the commit hash
+	hash = "!if [ -z \"$1\" ]; then git rev-parse HEAD; else git rev-parse $1; fi && :"
 	# Run a command from the root of the git repo
 	exec = "!exec "
 	# Fetch and create a new branch off of origin/master

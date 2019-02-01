@@ -36,7 +36,7 @@
 (use-package evil
   :init
   (setq evil-want-Y-yank-to-eol t)
-  (setq evil-want-integration nil)
+  (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
