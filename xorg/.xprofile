@@ -13,5 +13,6 @@ if uname -a | grep -qvi "NixOS"; then
   unclutter --exclude-root --fork
   xautolock -locker "systemctl suspend" -time 5 &
 fi
+autocutsel -fork
 dunst &
 (sleep 1 && feh --bg-tile ~/.wallpapers/current) &

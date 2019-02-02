@@ -1,6 +1,6 @@
 function v -d "Fuzzy project file open in editor"
-    set -l git_root (git rev-parse --show-toplevel)
-    set -l fd_cmd "fd --type file --follow --hidden --exclude '.git' $git_root"
+    set -l git_root (realpath --relative-to=(pwd) (git rev-parse --show-toplevel))
+    set -l fd_cmd "fd --type file --follow --hidden --exclude '.git' . $git_root"
     set -l fzf_cmd "fzf -1 -0 --height=30% --exact"
     set -l file (eval "$fd_cmd | $fzf_cmd")
     if test $status -eq 130

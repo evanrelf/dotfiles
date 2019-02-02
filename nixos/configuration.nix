@@ -10,6 +10,7 @@
     acpi
     adapta-gtk-theme
     arandr
+    autocutsel
     autojump
     binutils
     chromium
@@ -175,7 +176,7 @@
       time = 5;
       enableNotifier = true;
       notify = 10;
-      notifier = "${pkgs.notify-desktop} -t 10000 'Sleeping in 10s...'";
+      notifier = "${pkgs.notify-desktop} 'Sleeping in 10s...'";
       locker = "${pkgs.systemd}/bin/systemctl suspend";
     };
   };
@@ -201,7 +202,13 @@
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   services.tlp.enable = true;
-  # services.undervolt = {};
+  # services.thermald.enable = true;
+  services.acpid.enable = true;
+  # services.undervolt = {
+  #   enable = true;
+  #   coreOffset = "-50";
+  #   gpuOffset = "-50";
+  # };
 
 
   # SECURITY {{{1
@@ -273,12 +280,16 @@
 
   # BOOT {{{1
   boot = {
+    tmpOnTmpfs = true;
     loader.efi.canTouchEfiVariables = true;
     loader.systemd-boot = {
       enable = true;
       editor = false;
       consoleMode = "auto";
     };
+    kernelParams = [
+      "i915.enable_psr=1"
+    ];
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call
       wireguard
