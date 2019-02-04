@@ -16,7 +16,8 @@ function rc -d "Open the specified program's configuration file"
 
             # Shells
             case fish
-                eval $EDITOR "$HOME/.config/fish/config.fish"
+                # eval $EDITOR "$HOME/.config/fish/config.fish"
+                cd "$HOME/.config/fish"
             case fisher fishfile
                 eval $EDITOR "$HOME/.config/fish/fishfile"
             case zsh
@@ -69,7 +70,7 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
             case nixos
                 eval $EDITOR "$HOME/dotfiles/nixos/configuration.nix"
-                if _exists nixos-version
+                and if _exists nixos-version
                     bash "$HOME/dotfiles/nixos/install"
                 end
             case ranger

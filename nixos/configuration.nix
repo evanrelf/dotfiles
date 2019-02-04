@@ -24,6 +24,7 @@
     feh
     ffmpeg
     fzf
+    gimp
     git
     gitAndTools.diff-so-fancy
     gnome3.nautilus
@@ -34,6 +35,7 @@
     hlint
     htop
     jq
+    libreoffice-fresh
     lxappearance
     mpc_cli
     mpd
@@ -42,6 +44,7 @@
     ncmpcpp
     neofetch
     neovim
+    nixops
     nnn
     nodePackages.prettier
     nodejs
@@ -50,17 +53,22 @@
     papirus-icon-theme
     powertop
     ranger
+    rclone
     ripgrep
     rofi
+    rsync
+    rustup
     scrot
     shellcheck
     slack
     spotify
     stack
     stow
+    sxiv
     tealdeer
     texlive.combined.scheme-basic
     tmux
+    transmission-gtk
     xclip
     xorg.xev
     xorg.xrdb
@@ -68,16 +76,6 @@
     xst
     youtube-dl
     zathura
-
-    autokey
-    firefox
-    gimp
-    libreoffice-fresh
-    rclone
-    rsync
-    rustup
-    sxiv
-    transmission-gtk
 
   ];
   programs = {
@@ -145,8 +143,16 @@
 
 
   # DESKTOP {{{1
+  hardware.trackpoint = {
+    enable = true;
+    emulateWheel = true;
+    sensitivity = 100; # 0-255 (128)
+    speed = 80; # 0-255 (97)
+  };
   services.xserver = {
     enable = true;
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 50;
     libinput = {
       enable = true;
       naturalScrolling = true;
@@ -174,9 +180,6 @@
     xautolock = {
       enable = true;
       time = 5;
-      enableNotifier = true;
-      notify = 10;
-      notifier = "${pkgs.notify-desktop} 'Sleeping in 10s...'";
       locker = "${pkgs.systemd}/bin/systemctl suspend";
     };
   };
@@ -202,13 +205,12 @@
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   services.tlp.enable = true;
-  # services.thermald.enable = true;
-  services.acpid.enable = true;
-  # services.undervolt = {
-  #   enable = true;
-  #   coreOffset = "-50";
-  #   gpuOffset = "-50";
-  # };
+  services.thermald.enable = true;
+  services.undervolt = {
+    enable = true;
+    coreOffset = "-50";
+    gpuOffset = "-50";
+  };
 
 
   # SECURITY {{{1
@@ -232,6 +234,12 @@
 
 
   # BACKUP {{{1
+  services.syncthing = {
+    enable = true;
+    user = "evanrelf";
+    dataDir = "/home/evanrelf/.config/syncthing";
+    openDefaultPorts = true;
+  };
   # services.borgbackup.jobs = {
   #   "nixos" = {
   #     paths = "/home/evanrelf";
@@ -252,12 +260,12 @@
     "keyswap" = {
       description = "Key swap";
       enable = true;
-      script = "
+      script = ''
       export PATH=/run/current-system/sw/bin:$PATH
       setkeycodes 3a 1
       setkeycodes 38 125
       setkeycodes e05b 56
-      ";
+      '';
       wantedBy = [ "multi-user.target" ];
     };
   };
@@ -289,6 +297,10 @@
     };
     kernelParams = [
       "i915.enable_psr=1"
+      "i915.enable_fbc=1"
+      "i915.enable_rc6=7"
+
+      # "i915.fastboot=1" # Skylate and later
     ];
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call

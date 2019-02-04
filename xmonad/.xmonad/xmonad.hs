@@ -3,6 +3,7 @@ import System.Exit (ExitCode(..), exitWith)
 import XMonad
 import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS')
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
+import XMonad.Actions.SinkAll (sinkAll)
 import XMonad.Actions.UpdateFocus (adjustEventInput, focusOnMouseMove)
 import XMonad.Actions.UpdatePointer (updatePointer)
 import qualified XMonad.Hooks.DynamicLog as DL
@@ -15,7 +16,6 @@ import XMonad.Layout.Renamed (Rename(..), renamed)
 import XMonad.Layout.ResizableTile (MirrorResize(..), ResizableTall(..))
 import XMonad.Layout.Spacing (Border(..), spacingRaw)
 import XMonad.Layout.Tabbed (shrinkText, tabbed)
-import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 import qualified XMonad.Prompt as Prompt
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
 import XMonad.StackSet (RationalRect(..))
@@ -25,19 +25,8 @@ import XMonad.Util.Run (safeSpawn)
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
 import qualified XMonad.Util.Themes as Themes
 
--- FEATURES:
--- * Vertically resize window (M--, M-=)
--- * Maximize window (M-f)
--- * Toggle scratchpad (M-s)
--- * Tabbed layout
--- * Conditional borders and gaps
--- * Mouse resizing from all corners/sides
--- * Confirm exit
--- * etc.
-
 -- TODO:
 -- * Disable mouse snapping when resizing window with mouse
--- * Disable/exit Full layout when only one window
 -- * Format xmobar (brightness, volume, battery, wifi, date, time)
 
 main :: IO ()
@@ -80,12 +69,12 @@ myKeys =
   [ ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M--", sendMessage MirrorShrink)
   , ("M-=", sendMessage MirrorExpand)
-  , ("M-f", sendMessage ToggleLayout)
   , ("M-<Tab>", toggleWS' ["NSP"])
-  , ("M-n", moveTo Next NonEmptyWS)
-  , ("M-p", moveTo Prev NonEmptyWS)
-  , ("M-S-n", shiftTo Next NonEmptyWS)
-  , ("M-S-p", shiftTo Prev NonEmptyWS)
+  -- , ("M-n", moveTo Next NonEmptyWS)
+  -- , ("M-p", moveTo Prev NonEmptyWS)
+  -- , ("M-S-n", shiftTo Next NonEmptyWS)
+  -- , ("M-S-p", shiftTo Prev NonEmptyWS)
+  , ("M-S-t", sinkAll)
   , ("M-s", scratchpadSpawnActionCustom "st -n scratchpad")
   , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
   -- Brightness
@@ -116,7 +105,7 @@ myStartupHook = do
 myLayoutHook =
   let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
       tabs = renamed [Replace "Tabs"] $ tabbed shrinkText (Themes.theme myTheme)
-  in toggleLayouts Full (tall ||| tabs)
+  in tall ||| tabs
   & renamed [CutWordsLeft 1] . spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True
   & smartBorders
   & avoidStruts

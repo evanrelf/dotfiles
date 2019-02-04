@@ -2,6 +2,19 @@
 
 Config
   { font = "xft:Terminus:style=Regular:size=12:antialias=false"
-  , bgColor = "black"
+  , additionalFonts = ["xft:Material Icons:style=Regular:size=12:antialias=true"]
+  , bgColor = "#000000"
   , fgColor = "#999999"
+  , commands = -- refresh rate is in 1/10ths of a second
+      [ Run Com "sh" ["-c", "echo $(light -G | cut -d '.' -f 1)%"] "brightness" 5
+      , Run ComX "sh" ["-c", "nmcli -t device status | grep wifi | cut -d ':' -f 4"] "n/a" "wifi" 100
+      -- [ Run Brightness ["-t", "<percent>%", "-D", "intel_backlight"] 10
+      -- , Run Alsa "default" "Master" []
+      , Run Volume "default" "Master" ["-t", "<volume>%"] 5
+      , Run Battery ["-t", "<left>% (<timeleft>)"] 300
+      -- , Run Wireless "%wlp4s0%" ["-t", "<essid>"] 50
+      , Run Date "%a %b %e %l:%M %p" "date" 50
+      , Run UnsafeStdinReader
+      ]
+  , template = "%UnsafeStdinReader% }{ BRI: %brightness% | VOL: %default:Master% | BAT: %battery% | NET: %wifi% | %date%"
   }
