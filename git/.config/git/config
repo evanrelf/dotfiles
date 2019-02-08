@@ -1,56 +1,112 @@
+# TODO:
+# - Learn reset
+# - Learn cherry-pick
+# - Learn reflog
+# - Learn merge
+
 # Tip: `git diff -w` ignores whitespace changes
 
 [user]
 	name = Evan Relf
 	useConfigOnly = true
 [alias]
-	s = status
+	#######
+	# LOG #
+	#######
 	# Truncated log
 	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Full log
-	lg = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	ll = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of origin/master
-	ll = log origin/master.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-	b = branch
-	a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status && :"
-	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status && :"
-	r = reset
-	f = fetch
-	ci = commit
-	co = checkout
+	lx = log origin/master.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+
+	########
+	# DIFF #
+	########
 	d = diff
 	ds = diff --staged
-	# Only show differences from origin/master
-	dd = diff origin/master
-	ddn = diff origin/master --name-only
-	kd = difftool -y -t Kaleidoscope
-	km = mergetool -y -t Kaleidoscope
+	dx = diff origin/master
+
+	##########
+	# BRANCH #
+	##########
+	b = branch
+	bd = branch --delete
+	bdd = branch --delete --force
+	bm = branch --move
+	new = "!if [ -z \"$1\" ]; then return 1; else then git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
+
+	##########
+	# REBASE #
+	##########
+	rb = rebase
+	rbi = rebase --interactive
+	undo-rebase = reset --hard ORIG_HEAD
+	continue = rebase --continue
+	skip = rebase --skip
+	abort = rebase --abort
+	up = "!git fetch origin master && git rebase origin/master #"
+	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
+	up-favor-local = "!git fetch origin master && git rebase origin/master --strategy-option theirs #"
+	up-favor-remote = "!git fetch origin master && git rebase origin/master --strategy-option ours #"
+
+	#######
+	# ADD #
+	#######
+	a = add
+	ap = add --patch
+	aa = add --all
+	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status"
+	# aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status"
+
+	#########
+	# RESET #
+	#########
+	r = reset
+	rs = reset --soft
+
+	#########
+	# STASH #
+	#########
 	st = stash push
 	stu = stash push --include-untracked
 	stp = stash pop
+	sta = stash apply
 	stl = stash list
 	std = stash drop
-	clean-ignored = clean -Xdf
-	clean-untracked = clean -xdi
-	# Un-commit
-	undo = reset --soft HEAD^
+	stdd = stash clear
+
+	##########
+	# COMMIT #
+	##########
+	c = "!if [ $# -eq 0 ]; then git commit; else git commit --message \"$1\"; fi #"
 	amend = commit --amend --no-edit
 	rename = commit --amend
-	continue = rebase --continue
-	abort = rebase --abort
+	undo-commit = reset --soft HEAD^
+
+	########
+	# PUSH #
+	########
+	p = push
+	pf = push --force-with-lease
+	pff = push --force
+
+        #########
+	# OTHER #
+	#########
+	s = status --show-stash
+	f = fetch
+	ff = fetch --force
+	co = checkout
+	com = checkout origin/master
 	# Print the path to the root of the git repo
 	root = rev-parse --show-toplevel
 	# Print the commit hash
-	hash = "!if [ -z \"$1\" ]; then git rev-parse HEAD; else git rev-parse $1; fi && :"
+	hash = rev-parse --default HEAD
 	# Run a command from the root of the git repo
 	exec = "!exec "
-	# Fetch and create a new branch off of origin/master
-	new = "!if [ -z \"$1\" ]; then echo 'Usage: git new <BRANCH-NAME> [BASE-BRANCH]'; exit 1; fi && git fetch && if [ -z \"$2\" ]; then git checkout origin/master; else git checkout $2; fi && git checkout -b $1 && :"
-	# Fetch and rebase on origin master
-	up = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master; else git rebase origin/$1; fi && :"
-	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
-	up-favor-local = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option theirs; else git rebase origin/$1 --strategy-option theirs; fi && :"
-	up-favor-remote = "!git fetch && if [ -z \"$1\" ]; then git rebase origin/master --strategy-option ours; else git rebase origin/$1 --strategy-option ours; fi && :"
+	clean-ignored = clean -Xdf
+	clean-untracked = clean -xdi
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=2 -RFX
@@ -62,17 +118,10 @@
 [diff]
 	renames = copies
 	algorithm = patience
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
 [merge]
 	conflictstyle = diff3
 [color]
 	ui = true
-[include]
-	path = ~/.config/git/local
 [color "diff-highlight"]
 	oldNormal = red
 	oldHighlight = red 52
@@ -88,3 +137,5 @@
 [fetch]
 	prune = true
 	pruneTags = true
+[include]
+	path = ~/.config/git/local

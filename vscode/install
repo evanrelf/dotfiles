@@ -4,7 +4,6 @@
 mac_dir="$HOME/Library/Application Support/Code/User"
 linux_dir="$HOME/.vscode/User"
 
-name="$(basename "$(pwd)")"
 install_dir=""
 
 if ! [ -x "$(command -v stow)" ]; then
@@ -21,5 +20,5 @@ esac
 if [ -n "$install_dir" ]; then
   set -x
   mkdir -p "$install_dir"
-  stow --dir ".." --target "$install_dir" -S "$name" --ignore "install"
+  stow --dir "$HOME/dotfiles" --target "$install_dir" -S "vscode" --ignore "install"
 fi

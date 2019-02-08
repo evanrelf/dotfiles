@@ -16,6 +16,9 @@ if [ $# -gt 0 ]; then
     log "Installing '$i'..."
     if [ -f "$i/install" ]; then
       bash "$i/install"
+    elif [ -f "$i/stow-ignore" ]; then
+      log "Cannot auto-install package '$i'"
+      exit 1
     else
       case $i in
         kakoune )
