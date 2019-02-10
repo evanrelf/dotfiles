@@ -3,7 +3,6 @@ call plug#begin()
 
 " Appearance
 Plug 'evanrelf/papercolor-theme'
-Plug 'ajh17/Spacegray.vim'
 " Plug 'airblade/vim-gitgutter'
 Plug 'roman/golden-ratio'
 " Plug 'jeffkreeftmeijer/vim-numbertoggle'

@@ -46,5 +46,5 @@ if [ $# -gt 0 ]; then
     fi
   done
 else
-  error "No packages specified\nUsage: ./install [PACKAGES]"
+  error "No packages specified\\nUsage: ./install [PACKAGES]"
 fi

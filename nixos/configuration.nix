@@ -225,11 +225,15 @@
   # NETWORK {{{1
   hardware.bluetooth.powerOnBoot = false;
   networking = {
-    hostName = "nixos";
+    hostName = "evanrelf-thinkpad";
     networkmanager = {
       enable = true;
       wifi.powersave = true;
     };
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
   };
 
 

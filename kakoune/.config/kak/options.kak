@@ -9,5 +9,5 @@ set-option global tabstop 4
 set-option global indentwidth 2
 set-option global grepcmd 'rg --column --smart-case'
 set-option global scrolloff 1,5
-set-option global startup_info_version 20181027
+set-option global startup_info_version 20190120
 add-highlighter global/ column 81 default,black

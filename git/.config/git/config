@@ -34,7 +34,7 @@
 	bd = branch --delete
 	bdd = branch --delete --force
 	bm = branch --move
-	new = "!if [ -z \"$1\" ]; then return 1; else then git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
+	new = "!if [ -z \"$1\" ]; then return 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
 
 	##########
 	# REBASE #
