@@ -3,7 +3,7 @@ call plug#begin()
 
 " Appearance
 Plug 'evanrelf/papercolor-theme'
-" Plug 'airblade/vim-gitgutter'
+Plug 'ap/vim-buftabline'
 Plug 'roman/golden-ratio'
 " Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -18,7 +18,6 @@ Plug 'wellle/targets.vim'
 " Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-" Plug 'zxqfl/tabnine-vim'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
@@ -44,6 +43,10 @@ Plug 'tpope/vim-repeat'
 call plug#end()
 
 " Plugin settings {{{2
+" buftabline
+let g:buftabline_show = 1
+let g:buftabline_indicators = 1
+
 " golden-ratio
 let g:golden_ratio_autocommand = 0
 
@@ -58,18 +61,15 @@ let g:ale_fixers = { 'haskell': ['hlint'] }
 
 " better-whitespace
 let g:strip_whitelines_at_eof = 1
-
-" gitgutter
-let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_modified = '┃'
-let g:gitgutter_sign_removed = '━'
-let g:gitgutter_sign_modified_removed = '┳'
+let g:strip_whitespace_on_save = 1
+let g:show_spaces_that_precede_tabs = 1
 
 " polyglot
 let g:vim_markdown_new_list_item_indent = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
+
+" PaperColor
 
 " }}}2
 
@@ -164,13 +164,13 @@ noremap k gk
 nnoremap J m`J``
 xnoremap < <gv
 xnoremap > >gv
+nnoremap > >>
+nnoremap < <<
 nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
 vnoremap <silent> p :<C-u>let @p = @+<CR>gvp:let @+ = @p<CR>
-noremap Q @@
-noremap H ^
-noremap L g_
+noremap Q @q
 nnoremap <silent> <C-n> :ALENext<CR>
 nnoremap <silent> <C-p> :ALEPrevious<CR>
 nmap ga <Plug>(EasyAlign)
@@ -180,17 +180,21 @@ noremap <Left> 5zh
 noremap <Right> 5zl
 noremap <Up> 5<C-y>
 noremap <Down> 5<C-e>
-nnoremap > >>
-nnoremap < <<
+noremap gh ^
+noremap gl g_
+noremap gk gg
+noremap gj G
+noremap <silent> <Tab> :bnext<CR>
+noremap <silent> <S-Tab> :bprev<CR>
 
 " Leader
 map <Space> <Leader>
-noremap <Leader>y "+y
-noremap <Leader>Y "+y$
 nnoremap <Leader>s :%s/
 xnoremap <Leader>s :s/
 nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
+nnoremap <Leader>n :%norm 0
+xnoremap <Leader>n :norm 0
 noremap <silent> <Leader>= :Neoformat<CR>
 noremap <silent> <Leader>ad :<C-u>ALEDetail<CR>
 noremap <silent> <Leader>f :<C-u>GFiles<CR>
@@ -199,7 +203,6 @@ noremap <silent> <Leader>r :<C-u>GRg<CR>
 noremap <silent> <Leader>R :<C-u>Rg<CR>
 noremap <silent> <Leader>h :<C-u>Helptags<CR>
 noremap <silent> <Leader>b :<C-u>Buffers<CR>
-nnoremap <Leader>S vip:sort<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
 
@@ -208,8 +211,7 @@ noremap M <Nop>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
-noremap <Tab> <Nop>
-noremap <S-Tab> <Nop>
+noremap # <Nop>
 xnoremap P <Nop>
 xnoremap R <Nop>
 xnoremap Z <Nop>
@@ -258,6 +260,18 @@ augroup IgnoreCaseCommandMode " {{{2
   autocmd!
   autocmd CmdLineEnter : set nosmartcase
   autocmd CmdLineLeave : set smartcase
+augroup END
+
+augroup ColorSchemeTweaks " {{{2
+  autocmd!
+  autocmd VimEnter *
+        \  highlight! default link StatusLine MatchParen
+        \| highlight! default link StatusLineNC Normal
+        \| highlight! default link ExtraWhitespace DiffDelete
+        \| highlight! default link BufTabLineCurrent MatchParen
+        \| highlight! default link BufTabLineActive MatchParen
+        \| highlight! default link BufTabLineHidden Normal
+        \| highlight! default link BufTabLineFill LineNr
 augroup END
 
 " augroup LazyLoadPlugins " {{{2

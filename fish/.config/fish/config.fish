@@ -46,6 +46,7 @@ if test (uname) = "Linux"
 end
 
 set paths "$HOME/.local/bin" $paths
+set paths "$HOME/.config/git/scripts" $paths
 set paths "$HOME/.cargo/bin" $paths
 set paths "$HOME/.node_modules/bin" $paths
 if test (uname) = "Darwin"

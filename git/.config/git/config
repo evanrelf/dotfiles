@@ -3,6 +3,7 @@
 # - Learn cherry-pick
 # - Learn reflog
 # - Learn merge
+# - Learn bisect
 
 # Tip: `git diff -w` ignores whitespace changes
 
