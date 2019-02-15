@@ -21,6 +21,14 @@ if [ $# -gt 0 ]; then
       exit 1
     else
       case $i in
+        fish )
+          if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" == "Darwin" ]; then
+            log "Installing iTerm Shell Integration for Fish..."
+            command -v curl >/dev/null 2>&1 || error "curl is not installed"
+            curl -Lo "$HOME/.config/fish/conf.d/iterm.fish" --create-dirs \
+              "https://iterm2.com/shell_integration/fish"
+          fi
+          ;;
         kakoune )
           if [ ! -f "$HOME/.config/kak/plugins/plug.kak" ]; then
             command -v git >/dev/null 2>&1 || error "git is not installed"

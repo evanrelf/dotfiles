@@ -9,7 +9,6 @@ source $HOME/.config/fish/modules/iso2img.fish
 source $HOME/.config/fish/modules/kakoune.fish
 source $HOME/.config/fish/modules/keeb.fish
 source $HOME/.config/fish/modules/macos.fish
-source $HOME/.config/fish/modules/nixos.fish
 source $HOME/.config/fish/modules/panosoft.fish
 source $HOME/.config/fish/modules/rc.fish
 source $HOME/.config/fish/modules/rmds.fish

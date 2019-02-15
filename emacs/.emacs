@@ -66,6 +66,9 @@
 (use-package evil-matchit
   :config
   (global-evil-matchit-mode 1))
+(use-package evil-magit)
+;; Git
+(use-package magit)
 ;; Intelligence
 (use-package company
   :config

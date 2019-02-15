@@ -13,11 +13,14 @@
     autocutsel
     autojump
     binutils
+    firefox
+    dmenu2
     chromium
     clang
     cmus
     cquery
     dunst
+    emacs
     entr
     exa
     fd
@@ -167,14 +170,10 @@
         enable = true;
         enableContribAndExtras = true;
       };
-      bspwm.enable = true;
-      awesome.enable = true;
+      # bspwm.enable = true;
+      # awesome.enable = true;
     };
-    displayManager.lightdm = {
-      enable = true;
-      autoLogin.enable = true;
-      autoLogin.user = "evanrelf";
-    };
+    displayManager.lightdm.enable = true;
     desktopManager.xterm.enable = false;
     desktopManager.default = "none";
     xautolock = {
@@ -283,6 +282,7 @@
       "audio"
       "docker"
       "networkmanager"
+      "sway"
       "wheel"
     ];
     initialPassword = "banana";

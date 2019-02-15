@@ -38,6 +38,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/bspwm/bspwmrc"
             case sxhkd
                 eval $EDITOR "$HOME/.config/sxhkd/sxhkdrc"
+            case sway
+                eval $EDITOR "$HOME/.config/sway/config"
             case compton
                 eval $EDITOR "$HOME/.config/compton.conf"
             case hammerspoon
@@ -87,4 +89,4 @@ function rc -d "Open the specified program's configuration file"
         _error "No config specified"
     end
 end
-complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar"
+complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway"

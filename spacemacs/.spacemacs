@@ -1,5 +1,4 @@
-;; -*- mode: emacs-lisp -*-
-;; vim: ft=lisp
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -10,7 +9,7 @@ This function should only modify configuration layer settings."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-distribution 'spacemacs-base
 
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
@@ -34,42 +33,38 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(;; Editing
+   '(
      evil-commentary
-
-     ;; Intelligence
-     auto-completion
-     syntax-checking
-     prettier
-
-     ;; Syntax
-     (c-c++ :variables
-            c-c++-enable-clang-support t
-            c-c++-default-mode-for-headers 'c++-mode)
+     multiple-cursors
      haskell
      elm
-     javascript
+     purescript
+     c-c++
      html
-     markdown
+     javascript
+     json
      yaml
-     shell-scripts
-     docker
+     lua
+     rust
+     python
+     markdown
+     latex
+     org
+     nixos
      emacs-lisp
-     ;; vimscript
-     ;; lua
-     ;; python
-     ;; rust
-
-     ;; Utilities
-     ivy
-     ;; version-control
-     ;; git
-
-     ;; Miscellaneous
-     osx
-     ;; org
+     shell-scripts
+     systemd
+     docker
+     auto-completion
+     lsp
+     syntax-checking
+     prettier
+     spell-checking
+     helm
+     ;; ivy
+     git
+     ;; treemacs
      )
-
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -78,7 +73,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(general)
+   dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -185,8 +180,7 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists nil
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
@@ -201,8 +195,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -212,7 +205,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(doom)
+   dotspacemacs-mode-line-theme '(all-the-icons)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -220,8 +213,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Iosevka"
-                               :size 18
+   dotspacemacs-default-font '("PragmataPro Liga"
+                               :size 15
                                :weight normal
                                :width normal)
 
@@ -309,7 +302,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar t
+   dotspacemacs-loading-progress-bar nil
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
@@ -381,7 +374,7 @@ It should only modify the values of Spacemacs settings."
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
-   dotspacemacs-highlight-delimiters nil
+   dotspacemacs-highlight-delimiters 'all
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
@@ -431,7 +424,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
 
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
@@ -456,13 +449,15 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq custom-file "~/.local/share/spacemacs/customize.el"))
+  (setq vc-follow-symlinks t)
+  )
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
-dump.")
+dump."
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -470,25 +465,31 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; Follow symlinks when opening files under version control
-  (setq vc-follow-symlinks t)
-  ;; Disable bold font
-  (set-face-bold 'bold nil)
-  ;; Smaller modeline
-  (setq doom-modeline-height 20)
-  ;; Enable mouse support in terminal
+  (xterm-mouse-mode 1)
   (unless window-system
     (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+  )
 
-  ;; Mappings
-  (general-evil-setup t)
-  ;; (mmap
-  ;;   ";" 'evil-ex
-  ;;   ":" 'evil-repeat-find-char)
-  (nmap
-    "j" 'evil-next-visual-line
-    "k" 'evil-previous-visual-line)
-  (vmap
-    "j" 'evil-next-visual-line
-    "k" 'evil-previous-visual-line))
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yasnippet-snippets yapfify yaml-mode web-mode web-beautify toml-mode toc-org tagedit systemd smeargle slim-mode scss-mode sass-mode racer pyvenv pytest pyenv-mode py-isort pug-mode psci purescript-mode psc-ide prettier-js pippel pipenv pip-requirements orgit org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain nix-mode mmm-mode markdown-toc magit-svn magit-gitflow lsp-ui livid-mode skewer-mode live-py-mode json-navigator hierarchy js2-refactor multiple-cursors js2-mode js-doc importmagic epc ctable concurrent deferred impatient-mode simple-httpd htmlize hlint-refactor hindent helm-rtags helm-pydoc helm-org-rifle helm-nixos-options helm-hoogle helm-gitignore request helm-git-grep helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode google-c-style gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-rust flycheck-rtags flycheck-pos-tip pos-tip flycheck-haskell flycheck-elm evil-org evil-magit magit transient git-commit with-editor lv evil-commentary emmet-mode elm-test-runner elm-mode reformatter dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat disaster cython-mode cquery company-web web-completion-data company-tern tern company-statistics company-shell company-rtags rtags company-nixos-options nixos-options company-lua lua-mode company-lsp company-ghci haskell-mode company-cabal company-c-headers company-auctex company-anaconda company cmm-mode clang-format ccls lsp-mode spinner dash-functional cargo markdown-mode rust-mode auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete org-plus-contrib which-key use-package treemacs-projectile treemacs-evil pcre2el overseer nameless macrostep insert-shebang helm-xref helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag flycheck-bashate fish-mode evil-mc elisp-slime-nav dotenv-mode diminish bind-map auto-compile ace-jump-helm-line))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)

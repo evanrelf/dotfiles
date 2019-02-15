@@ -27,6 +27,7 @@
 	d = diff
 	ds = diff --staged
 	dx = diff origin/master
+	dxx = "!git diff origin/$(git symbolic-ref --short HEAD) #"
 
 	##########
 	# BRANCH #
@@ -35,7 +36,8 @@
 	bd = branch --delete
 	bdd = branch --delete --force
 	bm = branch --move
-	new = "!if [ -z \"$1\" ]; then return 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
+	new = "!if [ -z \"$1\" ]; then return 1; else git checkout -b \"$1\" origin/master; fi #"
+	# new = "!if [ -z \"$1\" ]; then return 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
 
 	##########
 	# REBASE #
@@ -46,19 +48,28 @@
 	continue = rebase --continue
 	skip = rebase --skip
 	abort = rebase --abort
-	up = "!git fetch origin master && git rebase origin/master #"
+	up = "!git rebase origin/master #"
+	# up = "!git fetch origin master && git rebase origin/master #"
 	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
-	up-favor-local = "!git fetch origin master && git rebase origin/master --strategy-option theirs #"
-	up-favor-remote = "!git fetch origin master && git rebase origin/master --strategy-option ours #"
+	up-favor-local = "!git rebase origin/master --strategy-option theirs #"
+	up-favor-remote = "!git rebase origin/master --strategy-option ours #"
+	# up-favor-local = "!git fetch origin master && git rebase origin/master --strategy-option theirs #"
+	# up-favor-remote = "!git fetch origin master && git rebase origin/master --strategy-option ours #"
 
 	#######
 	# ADD #
 	#######
 	a = add
-	ap = add --patch
-	aa = add --all
-	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status"
-	# aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status"
+	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status #"
+	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status #"
+	# aa = add --all
+
+	############
+	# CHECKOUT #
+	############
+	co = checkout
+	com = "!git checkout origin/master -- $* #"
+	; com = "!git fetch origin master && git checkout origin/master -- $* #"
 
 	#########
 	# RESET #
@@ -95,22 +106,23 @@
         #########
 	# OTHER #
 	#########
-	s = status --show-stash
+	s = status --short
+	ss = status --show-stash
 	f = fetch
 	ff = fetch --force
-	co = checkout
-	com = checkout origin/master
+	clean-ignored = clean -Xdf
+	clean-untracked = clean -xdi
 	# Print the path to the root of the git repo
 	root = rev-parse --show-toplevel
 	# Print the commit hash
 	hash = rev-parse --default HEAD
 	# Run a command from the root of the git repo
 	exec = "!exec "
-	clean-ignored = clean -Xdf
-	clean-untracked = clean -xdi
+	# Open website (TODO: doesn't handle HTTPS correctly)
+	home = "!open $(git config --get remote.origin.url | sed -e 's/:/\\//' -e 's/^git@/https:\\/\\//' -e 's/.git$//') #"
 [core]
 	editor = nvim
-	pager = diff-so-fancy | less --tabs=2 -RFX
+	pager = diff-so-fancy | less --tabs=8 -RFX
 [status]
 	showUntrackedFiles = all
 [push]
@@ -138,5 +150,7 @@
 [fetch]
 	prune = true
 	pruneTags = true
+[interactive]
+	singleKey = true
 [include]
 	path = ~/.config/git/local

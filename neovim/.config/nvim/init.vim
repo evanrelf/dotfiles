@@ -274,6 +274,11 @@ augroup ColorSchemeTweaks " {{{2
         \| highlight! default link BufTabLineFill LineNr
 augroup END
 
+augroup RedrawOnResize " {{{2
+  autocmd!
+  autocmd VimResized * redraw!
+augroup END
+
 " augroup LazyLoadPlugins " {{{2
 "   autocmd!
 "   autocmd CursorHold,CursorHoldI *

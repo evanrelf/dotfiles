@@ -1,4 +1,5 @@
 import Data.Function ((&))
+import Data.Maybe (isJust)
 import System.Exit (ExitCode(..), exitWith)
 import XMonad
 import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS')
@@ -18,8 +19,8 @@ import XMonad.Layout.Spacing (Border(..), spacingRaw)
 import XMonad.Layout.Tabbed (shrinkText, tabbed)
 import qualified XMonad.Prompt as Prompt
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
-import XMonad.StackSet (RationalRect(..))
-import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeymap)
+import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
+import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeymap, removeKeysP)
 import XMonad.Util.Loggers (logCmd)
 import XMonad.Util.Run (safeSpawn)
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
@@ -55,7 +56,8 @@ myConfig = def
   , logHook = myLogHook
   , modMask = myModMask
   }
-  & (flip additionalKeysP) myKeys
+  & (flip removeKeysP) myRemoveKeys
+  & (flip additionalKeysP) myAdditionalKeys
   & (flip additionalMouseBindings) myMouse
   & docks
   & ewmh
@@ -64,19 +66,38 @@ myModMask = mod4Mask
 
 myFont = "xft:Terminus:style=Regular:size=12:antialias=false"
 
-myKeys =
-  -- Window manager
-  [ ("M-/", safeSpawn "rofi" ["-show", "run"])
+myRemoveKeys =
+  -- Rebound
+  [ "M-S-<Return>" -- Spawn terminal
+  , "M-S-c" -- Kill window
+  , "M-e" -- Switch to screen 2
+  , "M-r" -- Switch to screen 3
+  , "M-S-w" -- Move window to screen 1
+  , "M-S-e" -- Move window to screen 2
+  , "M-S-r" -- Move window to screen 3
+  , "M-S-<Tab>" -- Focus previous window
+  ]
+
+myAdditionalKeys =
+  -- Rebinds
+  [ ("M-<Return>", spawn $ terminal myConfig)
+  , ("M-S-m", windows swapMaster)
+  , ("M-c", kill)
+  -- Windows
+  , ("M-S-t", sinkAll)
   , ("M--", sendMessage MirrorShrink)
   , ("M-=", sendMessage MirrorExpand)
+  -- Workspaces
+  , ("M-n", moveTo Next $ WSIs (return nonEmptyWS'))
+  , ("M-p", moveTo Prev $ WSIs (return nonEmptyWS'))
+  , ("M-S-n", shiftTo Next $ WSIs (return anyWS'))
+  , ("M-S-p", shiftTo Prev $ WSIs (return anyWS'))
   , ("M-<Tab>", toggleWS' ["NSP"])
-  -- , ("M-n", moveTo Next NonEmptyWS)
-  -- , ("M-p", moveTo Prev NonEmptyWS)
-  -- , ("M-S-n", shiftTo Next NonEmptyWS)
-  -- , ("M-S-p", shiftTo Prev NonEmptyWS)
-  , ("M-S-t", sinkAll)
-  , ("M-s", scratchpadSpawnActionCustom "st -n scratchpad")
   , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
+  -- Apps
+  -- , ("M-/", safeSpawn "rofi" ["-show", "run"])
+  , ("M-/", safeSpawn "dmenu_run" ["-fn", myFont])
+  , ("M-s", scratchpadSpawnActionCustom "st -n scratchpad")
   -- Brightness
   , ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "5"])
   , ("<XF86MonBrightnessUp>", safeSpawn "light" ["-A", "5"])
@@ -85,7 +106,15 @@ myKeys =
   , ("<XF86AudioRaiseVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%+"])
   , ("<XF86AudioMute>", safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
   ]
-    where promptConfig = def
+    where nonEmptyWS' :: WindowSpace -> Bool
+          nonEmptyWS' (Workspace "NSP" _ _) = False
+          nonEmptyWS' ws = isJust . stack $ ws
+
+          anyWS' :: WindowSpace -> Bool
+          anyWS' (Workspace "NSP" _ _) = False
+          anyWS' _ = True
+
+          promptConfig = def
             { Prompt.fgColor = "red"
             , Prompt.bgColor = "black"
             , Prompt.position = Prompt.Top
@@ -99,7 +128,7 @@ myMouse =
 
 myStartupHook = do
   return () -- Do not remove
-  checkKeymap myConfig myKeys
+  checkKeymap myConfig myAdditionalKeys
   adjustEventInput
 
 myLayoutHook =
