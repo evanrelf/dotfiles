@@ -36,7 +36,7 @@
 	bd = branch --delete
 	bdd = branch --delete --force
 	bm = branch --move
-	new = "!if [ -z \"$1\" ]; then return 1; else git checkout -b \"$1\" origin/master; fi #"
+	new = "!if [ -z \"$1\" ]; then return 1; else git fetch && git checkout -b \"$1\" origin/master; fi #"
 	# new = "!if [ -z \"$1\" ]; then return 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
 
 	##########
@@ -48,11 +48,11 @@
 	continue = rebase --continue
 	skip = rebase --skip
 	abort = rebase --abort
-	up = "!git rebase origin/master #"
+	up = "!git fetch && git rebase origin/master #"
 	# up = "!git fetch origin master && git rebase origin/master #"
 	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
-	up-favor-local = "!git rebase origin/master --strategy-option theirs #"
-	up-favor-remote = "!git rebase origin/master --strategy-option ours #"
+	up-favor-local = "!git fetch && git rebase origin/master --strategy-option theirs #"
+	up-favor-remote = "!git fetch && git rebase origin/master --strategy-option ours #"
 	# up-favor-local = "!git fetch origin master && git rebase origin/master --strategy-option theirs #"
 	# up-favor-remote = "!git fetch origin master && git rebase origin/master --strategy-option ours #"
 
@@ -60,8 +60,8 @@
 	# ADD #
 	#######
 	a = add
-	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status #"
-	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status #"
+	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status --short #"
+	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status --short #"
 	# aa = add --all
 
 	############

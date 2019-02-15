@@ -5,6 +5,7 @@ call plug#begin()
 Plug 'evanrelf/papercolor-theme'
 Plug 'ap/vim-buftabline'
 Plug 'roman/golden-ratio'
+Plug 'wellle/visual-split.vim'
 " Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
@@ -175,6 +176,7 @@ nnoremap <silent> <C-n> :ALENext<CR>
 nnoremap <silent> <C-p> :ALEPrevious<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
+xmap V <Plug>(Visual-Split-VSSplit)
 map <Plug>(slash-after) zz
 noremap <Left> 5zh
 noremap <Right> 5zl

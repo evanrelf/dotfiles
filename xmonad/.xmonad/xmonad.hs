@@ -12,10 +12,12 @@ import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.InsertPosition (Focus(..), Position(..), insertPosition)
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
 import qualified XMonad.Layout.Decoration as Deco
+import XMonad.Layout.Master (mastered)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Renamed (Rename(..), renamed)
 import XMonad.Layout.ResizableTile (MirrorResize(..), ResizableTall(..))
 import XMonad.Layout.Spacing (Border(..), spacingRaw)
+import XMonad.Layout.StateFull (focusTracking)
 import XMonad.Layout.Tabbed (shrinkText, tabbed)
 import qualified XMonad.Prompt as Prompt
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
@@ -96,6 +98,7 @@ myAdditionalKeys =
   , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
   -- Apps
   -- , ("M-/", safeSpawn "rofi" ["-show", "run"])
+  , ("M-f", safeSpawn "firefox" [])
   , ("M-/", safeSpawn "dmenu_run" ["-fn", myFont])
   , ("M-s", scratchpadSpawnActionCustom "st -n scratchpad")
   -- Brightness
@@ -133,7 +136,8 @@ myStartupHook = do
 
 myLayoutHook =
   let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
-      tabs = renamed [Replace "Tabs"] $ tabbed shrinkText (Themes.theme myTheme)
+      -- tallTabs = renamed [Replace "Tall w/ Tabs"] $ mastered (1/20) (1/2) $ focusTracking $ tabbed shrinkText (Themes.theme myTheme)
+      tabs = renamed [Replace "Tabs"] $ focusTracking $ tabbed shrinkText (Themes.theme myTheme)
   in tall ||| tabs
   & renamed [CutWordsLeft 1] . spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True
   & smartBorders

@@ -1,0 +1,4 @@
+/* Move Find Bar above the page */
+.browserContainer > findbar {
+  -moz-box-ordinal-group: 0;
+}

@@ -50,19 +50,20 @@ This function should only modify configuration layer settings."
      markdown
      latex
      org
+     shell-scripts
      nixos
      emacs-lisp
-     shell-scripts
+     vimscript
      systemd
      docker
      auto-completion
      lsp
      syntax-checking
      prettier
-     spell-checking
+     ;; spell-checking
      helm
      ;; ivy
-     git
+     ;; git
      ;; treemacs
      )
 
@@ -172,7 +173,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner nil
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -205,7 +206,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(all-the-icons)
+   dotspacemacs-mode-line-theme '(spaceline :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -485,7 +486,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yapfify yaml-mode web-mode web-beautify toml-mode toc-org tagedit systemd smeargle slim-mode scss-mode sass-mode racer pyvenv pytest pyenv-mode py-isort pug-mode psci purescript-mode psc-ide prettier-js pippel pipenv pip-requirements orgit org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain nix-mode mmm-mode markdown-toc magit-svn magit-gitflow lsp-ui livid-mode skewer-mode live-py-mode json-navigator hierarchy js2-refactor multiple-cursors js2-mode js-doc importmagic epc ctable concurrent deferred impatient-mode simple-httpd htmlize hlint-refactor hindent helm-rtags helm-pydoc helm-org-rifle helm-nixos-options helm-hoogle helm-gitignore request helm-git-grep helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode google-c-style gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-rust flycheck-rtags flycheck-pos-tip pos-tip flycheck-haskell flycheck-elm evil-org evil-magit magit transient git-commit with-editor lv evil-commentary emmet-mode elm-test-runner elm-mode reformatter dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat disaster cython-mode cquery company-web web-completion-data company-tern tern company-statistics company-shell company-rtags rtags company-nixos-options nixos-options company-lua lua-mode company-lsp company-ghci haskell-mode company-cabal company-c-headers company-auctex company-anaconda company cmm-mode clang-format ccls lsp-mode spinner dash-functional cargo markdown-mode rust-mode auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete org-plus-contrib which-key use-package treemacs-projectile treemacs-evil pcre2el overseer nameless macrostep insert-shebang helm-xref helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag flycheck-bashate fish-mode evil-mc elisp-slime-nav dotenv-mode diminish bind-map auto-compile ace-jump-helm-line))))
+    (vimrc-mode dactyl-mode yasnippet-snippets yapfify yaml-mode which-key web-mode web-beautify use-package toml-mode toc-org tagedit systemd smeargle slim-mode scss-mode sass-mode racer pyvenv pytest pyenv-mode py-isort pug-mode psci psc-ide prettier-js pippel pipenv pip-requirements pcre2el overseer orgit org-present org-pomodoro org-mime org-download org-bullets org-brain nix-mode nameless mmm-mode markdown-toc magit-svn magit-gitflow macrostep lsp-ui livid-mode live-py-mode json-navigator js2-refactor js-doc insert-shebang importmagic impatient-mode hydra hlint-refactor hindent helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-projectile helm-org-rifle helm-nixos-options helm-mode-manager helm-make helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-c-style gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-elm flycheck-bashate fish-mode evil-org evil-mc evil-magit evil-commentary emmet-mode elm-test-runner elm-mode elisp-slime-nav dotenv-mode dockerfile-mode docker disaster diminish cython-mode cquery company-web company-tern company-statistics company-shell company-rtags company-nixos-options company-lua company-lsp company-ghci company-cabal company-c-headers company-auctex company-anaconda cmm-mode clang-format ccls cargo bind-map auto-yasnippet auto-dictionary auto-compile auctex-latexmk ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

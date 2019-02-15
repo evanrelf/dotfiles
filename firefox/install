@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "No installer available for Firefox package"
