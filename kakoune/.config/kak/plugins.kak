@@ -2,6 +2,8 @@ source '~/.config/kak/plugins/plug.kak/rc/plug.kak'
 
 plug 'andreyorst/plug.kak' noload
 
+# plug 'alexherbo2/kakoune-dracula-theme'
+
 # plug 'andreyorst/powerline.kak' %{
 #   hook -once global WinCreate .* %{
 #     set-option global powerline_separator ''

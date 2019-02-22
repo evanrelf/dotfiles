@@ -150,7 +150,7 @@
 
 ;; SETTINGS
 ;; GUI font
-(setq default-frame-alist '((font . "Iosevka-14")))
+(setq default-frame-alist '((font . "PragmataPro Liga-14")))
 ;; Disable bold font
 (set-face-bold 'bold nil)
 ;; Enable line numbers

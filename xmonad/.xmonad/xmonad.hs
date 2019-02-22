@@ -1,16 +1,22 @@
+import XMonad
 import Data.Function ((&))
 import Data.Maybe (isJust)
 import System.Exit (ExitCode(..), exitWith)
-import XMonad
+import qualified XMonad.Prompt as Prompt
+import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
+import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
+-- Actions
 import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS')
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
 import XMonad.Actions.SinkAll (sinkAll)
 import XMonad.Actions.UpdateFocus (adjustEventInput, focusOnMouseMove)
 import XMonad.Actions.UpdatePointer (updatePointer)
+-- Hooks
 import qualified XMonad.Hooks.DynamicLog as DL
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.InsertPosition (Focus(..), Position(..), insertPosition)
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
+-- Layouts
 import qualified XMonad.Layout.Decoration as Deco
 import XMonad.Layout.Master (mastered)
 import XMonad.Layout.NoBorders (smartBorders)
@@ -19,9 +25,7 @@ import XMonad.Layout.ResizableTile (MirrorResize(..), ResizableTall(..))
 import XMonad.Layout.Spacing (Border(..), spacingRaw)
 import XMonad.Layout.StateFull (focusTracking)
 import XMonad.Layout.Tabbed (shrinkText, tabbed)
-import qualified XMonad.Prompt as Prompt
-import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
-import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
+-- Utilities
 import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeymap, removeKeysP)
 import XMonad.Util.Loggers (logCmd)
 import XMonad.Util.Run (safeSpawn)
@@ -45,7 +49,7 @@ xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
       }
 
 myConfig = def
-  { terminal = "st"
+  { terminal = "kitty"
   , focusFollowsMouse = True
   , clickJustFocuses = True
   , borderWidth = 1

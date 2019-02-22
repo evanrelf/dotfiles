@@ -27,6 +27,7 @@
 	d = diff
 	ds = diff --staged
 	dx = diff origin/master
+	dxn = diff origin/master --name-only
 	dxx = "!git diff origin/$(git symbolic-ref --short HEAD) #"
 
 	##########
@@ -68,8 +69,7 @@
 	# CHECKOUT #
 	############
 	co = checkout
-	com = "!git checkout origin/master -- $* #"
-	; com = "!git fetch origin master && git checkout origin/master -- $* #"
+	com = "!cd -- ${GIT_PREFIX:-.} && git checkout origin/master -- $* #"
 
 	#########
 	# RESET #

@@ -4,21 +4,23 @@
   imports = [ ./hardware-configuration.nix ];
 
   # PROGRAMS {{{1
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
   environment.systemPackages = with pkgs; [
 
     acpi
     adapta-gtk-theme
+    alacritty
     arandr
     autocutsel
     autojump
     binutils
-    firefox
-    dmenu2
     chromium
     clang
     cmus
     cquery
+    dmenu2
     dunst
     emacs
     entr
@@ -26,6 +28,7 @@
     fd
     feh
     ffmpeg
+    firefox
     fzf
     gimp
     git
@@ -38,6 +41,7 @@
     hlint
     htop
     jq
+    kitty
     libreoffice-fresh
     lxappearance
     mpc_cli
@@ -189,8 +193,9 @@
   };
   services.redshift = {
     enable = true;
-    latitude = "34.0522";
-    longitude = "-118.2437";
+    provider = "geoclue2";
+    temperature.day = 6500;
+    temperature.night = 4000;
   };
   services.xbanish.enable = true;
 

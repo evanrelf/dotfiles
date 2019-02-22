@@ -19,10 +19,15 @@ function module.application(name)
   return module.shell("open -a " .. name)
 end
 
-module.terminal = module.appleScript([[
+module.iterm = module.appleScript([[
 tell application "iTerm"
   create window with default profile
 end tell
 ]])
+
+function module.kitty()
+  hs.application.launchOrFocus("kitty")
+  hs.eventtap.keyStroke({"cmd"}, "n")
+end
 
 return module

@@ -1,3 +1,8 @@
+if _exists git; and status --is-interactive
+  abbr --add k "kak"
+  abbr --add kc "kakc"
+end
+
 function kakd
     kak -c daemon -e 'kill'
     kak -d -s daemon 2>/dev/null

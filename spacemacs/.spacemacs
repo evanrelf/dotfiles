@@ -1,4 +1,5 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t -*-
+;; vim: ft=lisp
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -139,11 +140,11 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa nil
+   dotspacemacs-use-spacelpa t
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
    ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
+   dotspacemacs-verify-spacelpa-archives t
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
@@ -206,7 +207,8 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spaceline :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -214,10 +216,14 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("PragmataPro Liga"
-                               :size 15
-                               :weight normal
-                               :width normal)
+   dotspacemacs-default-font '(("PragmataPro Liga"
+                                :size 15
+                                :weight normal
+                                :width normal)
+                               ("Iosevka"
+                                :size 18
+                                :weight normal
+                                :width normal))
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -466,10 +472,15 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; Disable wrapping
+  (spacemacs/toggle-truncate-lines-on)
+  ;; j and k behave like gj and gk
+  (add-hook 'text-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
+  ;; Enable mouse support in the terminal
   (xterm-mouse-mode 1)
   (unless window-system
-    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+    (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
+    (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -486,7 +497,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (vimrc-mode dactyl-mode yasnippet-snippets yapfify yaml-mode which-key web-mode web-beautify use-package toml-mode toc-org tagedit systemd smeargle slim-mode scss-mode sass-mode racer pyvenv pytest pyenv-mode py-isort pug-mode psci psc-ide prettier-js pippel pipenv pip-requirements pcre2el overseer orgit org-present org-pomodoro org-mime org-download org-bullets org-brain nix-mode nameless mmm-mode markdown-toc magit-svn magit-gitflow macrostep lsp-ui livid-mode live-py-mode json-navigator js2-refactor js-doc insert-shebang importmagic impatient-mode hydra hlint-refactor hindent helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-projectile helm-org-rifle helm-nixos-options helm-mode-manager helm-make helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-c-style gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-elm flycheck-bashate fish-mode evil-org evil-mc evil-magit evil-commentary emmet-mode elm-test-runner elm-mode elisp-slime-nav dotenv-mode dockerfile-mode docker disaster diminish cython-mode cquery company-web company-tern company-statistics company-shell company-rtags company-nixos-options company-lua company-lsp company-ghci company-cabal company-c-headers company-auctex company-anaconda cmm-mode clang-format ccls cargo bind-map auto-yasnippet auto-dictionary auto-compile auctex-latexmk ace-jump-helm-line ac-ispell))))
+    (org-plus-contrib yasnippet-snippets yapfify yaml-mode which-key web-mode web-beautify vimrc-mode use-package toml-mode toc-org tagedit systemd slim-mode scss-mode sass-mode racer pyvenv pytest pyenv-mode py-isort pug-mode psci psc-ide prettier-js pippel pipenv pip-requirements pcre2el overseer org-present org-pomodoro org-mime org-download org-bullets org-brain nix-mode nameless mmm-mode markdown-toc macrostep lsp-ui livid-mode live-py-mode json-navigator js2-refactor js-doc insert-shebang importmagic impatient-mode hydra hlint-refactor hindent helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-projectile helm-org-rifle helm-nixos-options helm-mode-manager helm-make helm-hoogle helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-c-style gnuplot gh-md fuzzy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-elm flycheck-bashate fish-mode evil-org evil-mc evil-commentary emmet-mode elm-test-runner elm-mode elisp-slime-nav dotenv-mode dockerfile-mode docker disaster diminish dactyl-mode cython-mode cquery company-web company-tern company-statistics company-shell company-rtags company-nixos-options company-lua company-lsp company-ghci company-cabal company-c-headers company-auctex company-anaconda cmm-mode clang-format ccls cargo bind-map auto-yasnippet auto-compile auctex-latexmk ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

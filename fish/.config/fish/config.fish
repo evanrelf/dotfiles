@@ -27,6 +27,7 @@ if not functions -q fisher
 end
 
 set -U FZF_LEGACY_KEYBINDINGS 0
+set -U FZF_DEFAULT_OPTS "--exact --height $FZF_TMUX_HEIGHT"
 set -U FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude '.git'"
 set -U FZF_FIND_FILE_COMMAND "$FZF_DEFAULT_COMMAND"
 set -U FZF_CD_COMMAND "fd --type directory --follow"
@@ -141,13 +142,27 @@ end
 
 
 # COLORS {{{1
+set fish_color_autosuggestion black
+# set fish_color_cancel
 set fish_color_command green
-set fish_color_param normal
-set fish_color_quote cyan
+set fish_color_comment black
+# set fish_color_cwd
+# set fish_color_cwd_root
+# set fish_color_end
 set fish_color_error red
+# set fish_color_escape
+# set fish_color_history_current
+# set fish_color_host
+# set fish_color_match
+# set fish_color_normal
+# set fish_color_operator
+set fish_color_param normal
+set fish_color_quote yellow --bold
+# set fish_color_redirection
+# set fish_color_search_match
+# set fish_color_selection
+# set fish_color_user
 set fish_color_valid_path --underline
-set fish_color_comment black --bold
-set fish_color_autosuggestion black --bold
 
 
 # EXTRAS {{{1

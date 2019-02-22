@@ -2,29 +2,35 @@
 call plug#begin()
 
 " Appearance
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'Lokaltog/vim-monotone'
 Plug 'evanrelf/papercolor-theme'
 Plug 'ap/vim-buftabline'
-Plug 'roman/golden-ratio'
+Plug 'Yggdroot/indentLine'
+Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'wellle/visual-split.vim'
-" Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
 Plug 'junegunn/vim-slash'
 Plug 'critiqjo/husk-x.vim'
+Plug 'andymass/vim-matchup'
 
 " Editing
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-sandwich'
+Plug 'tpope/vim-abolish', { 'on': ['S', 'Subvert'] }
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
-" Plug 'michaeljsmith/vim-indent-object'
+Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 
 " Formatting
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat', { 'on': ['Neoformat'] }
 Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
@@ -32,33 +38,58 @@ Plug 'tpope/vim-sleuth'
 
 " Syntax
 Plug 'w0rp/ale'
+Plug 'evanrelf/haskell-vim'
 Plug 'sheerun/vim-polyglot'
 
 " Files
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'tpope/vim-eunuch'
 
 " Miscellaneous
+Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
+" Plug 'airblade/vim-gitgutter'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-repeat'
 
 call plug#end()
 
 " Plugin settings {{{2
+
+" monotone
+let g:monotone_color = [30, 50, 80]
+
 " buftabline
 let g:buftabline_show = 1
 let g:buftabline_indicators = 1
 
+" indentline
+let g:indentLine_setColors = 0
+
 " golden-ratio
 let g:golden_ratio_autocommand = 0
+
+" multiple-cursors
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
+" auto-pairs
+let g:AutoPairsMultilineClose = 0
 
 " neoformat
 let g:neoformat_only_msg_on_error = 1
 
 " ale
-let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
+let g:ale_sign_error = '--'
+let g:ale_sign_warning = '--'
+let g:ale_echo_msg_info_str = '[INFO]'
+let g:ale_echo_msg_error_str = '[ERR]'
+let g:ale_echo_msg_warning_str = '[WARN]'
+let g:ale_echo_msg_format = '%severity% %s'
 
 " better-whitespace
 let g:strip_whitelines_at_eof = 1
@@ -66,11 +97,79 @@ let g:strip_whitespace_on_save = 1
 let g:show_spaces_that_precede_tabs = 1
 
 " polyglot
+let g:polyglot_disabled = ['haskell']
 let g:vim_markdown_new_list_item_indent = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
+let g:haskell_enable_quantification = 1
 
-" PaperColor
+" tagbar
+let g:tagbar_compact = 1
+let g:tagbar_sort = 0
+let g:tagbar_type_elm = {
+  \ 'kinds' : [
+      \ 'm:modules:0:0',
+      \ 'i:imports:1:0',
+      \ 't:types:0:0',
+      \ 'a:type aliases:0:0',
+      \ 'c:type constructors:0:0',
+      \ 'p:ports:0:0',
+      \ 'f:functions:0:0',
+      \ 's:functions:0:0',
+  \ ]
+  \}
+let g:tagbar_type_haskell = {
+  \ 'ctagsbin'    : 'hasktags',
+  \ 'ctagsargs'   : '-x -c -o-',
+  \ 'kinds'       : [
+      \  'm:modules:0:1',
+      \  'd:data:0:1',
+      \  'd_gadt:data gadt:0:1',
+      \  'nt:newtype:0:1',
+      \  'c:classes:0:1',
+      \  'i:instances:0:1',
+      \  'cons:constructors:0:1',
+      \  'c_gadt:constructor gadt:0:1',
+      \  'c_a:constructor accessors:1:1',
+      \  't:type names:0:1',
+      \  'pt:pattern types:0:1',
+      \  'pi:pattern implementations:0:1',
+      \  'ft:function types:0:1',
+      \  'fi:function implementations:0:1',
+      \  'o:others:0:1'
+  \ ],
+  \ 'sro'          : '.',
+  \ 'kind2scope'   : {
+      \ 'm'        : 'module',
+      \ 'd'        : 'data',
+      \ 'd_gadt'   : 'd_gadt',
+      \ 'c_gadt'   : 'c_gadt',
+      \ 'nt'       : 'newtype',
+      \ 'cons'     : 'cons',
+      \ 'c_a'      : 'accessor',
+      \ 'c'        : 'class',
+      \ 'i'        : 'instance'
+  \ },
+  \ 'scope2kind'   : {
+      \ 'module'   : 'm',
+      \ 'data'     : 'd',
+      \ 'newtype'  : 'nt',
+      \ 'cons'     : 'c_a',
+      \ 'd_gadt'   : 'c_gadt',
+      \ 'class'    : 'ft',
+      \ 'instance' : 'ft'
+  \ }
+  \ }
+
+" nerdtree
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeNaturalSort = 1
+let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeMinimalUI = 1
+
+" gitgutter
+let g:gitgutter_map_keys = 0
+let g:gitgutter_grep = 'rg'
 
 " }}}2
 
@@ -79,10 +178,11 @@ let g:elm_format_autosave = 0
 " Appearance {{{2
 set termguicolors
 set background=dark
-colorscheme PaperColor
+colorscheme moonfly
 set colorcolumn=81
 set number
-" set relativenumber
+set relativenumber
+set rulerformat=%7(%3(%l%),%3(%c%V%)%)
 set noshowmode
 set shortmess=filmxTWIcF
 set title
@@ -172,11 +272,12 @@ xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
 vnoremap <silent> p :<C-u>let @p = @+<CR>gvp:let @+ = @p<CR>
 noremap Q @q
-nnoremap <silent> <C-n> :ALENext<CR>
-nnoremap <silent> <C-p> :ALEPrevious<CR>
+nmap <silent> g. <Plug>(ale_next_wrap)
+nmap <silent> g, <Plug>(ale_previous_wrap)
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-xmap V <Plug>(Visual-Split-VSSplit)
+xmap V <Plug>(Visual-Split-VSSplitAbove)
+xmap R <Plug>(Visual-Split-VSResize)
 map <Plug>(slash-after) zz
 noremap <Left> 5zh
 noremap <Right> 5zl
@@ -188,11 +289,13 @@ noremap gk gg
 noremap gj G
 noremap <silent> <Tab> :bnext<CR>
 noremap <silent> <S-Tab> :bprev<CR>
+noremap <C-]> <C-]>zz
+noremap <C-t> <C-t>zz
 
 " Leader
 map <Space> <Leader>
-nnoremap <Leader>s :%s/
-xnoremap <Leader>s :s/
+nnoremap <Leader>s :%S/
+xnoremap <Leader>s :S/
 nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
 nnoremap <Leader>n :%norm 0
@@ -203,20 +306,27 @@ noremap <silent> <Leader>f :<C-u>GFiles<CR>
 noremap <silent> <Leader>F :<C-u>Files<CR>
 noremap <silent> <Leader>r :<C-u>GRg<CR>
 noremap <silent> <Leader>R :<C-u>Rg<CR>
-noremap <silent> <Leader>h :<C-u>Helptags<CR>
+noremap <silent> <Leader>h :<C-u>History<CR>
+noremap <silent> <Leader>H :<C-u>Helptags<CR>
 noremap <silent> <Leader>b :<C-u>Buffers<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
+noremap <silent> <Leader>T :TagbarToggle<CR>
+noremap <silent> <Leader>N :NERDTreeToggle<CR>
 
 " Available
+noremap <C-t> <Nop>
 noremap M <Nop>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
 noremap # <Nop>
 xnoremap P <Nop>
-xnoremap R <Nop>
 xnoremap Z <Nop>
+
+map <Leader>0 :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 
 " AUTOCOMMANDS {{{1
@@ -260,25 +370,35 @@ augroup END
 
 augroup IgnoreCaseCommandMode " {{{2
   autocmd!
-  autocmd CmdLineEnter : set nosmartcase
-  autocmd CmdLineLeave : set smartcase
+  autocmd CmdLineEnter : setlocal nosmartcase
+  autocmd CmdLineLeave : setlocal smartcase
 augroup END
 
-augroup ColorSchemeTweaks " {{{2
-  autocmd!
-  autocmd VimEnter *
-        \  highlight! default link StatusLine MatchParen
-        \| highlight! default link StatusLineNC Normal
-        \| highlight! default link ExtraWhitespace DiffDelete
-        \| highlight! default link BufTabLineCurrent MatchParen
-        \| highlight! default link BufTabLineActive MatchParen
-        \| highlight! default link BufTabLineHidden Normal
-        \| highlight! default link BufTabLineFill LineNr
-augroup END
+" augroup ColorSchemeTweaks " {{{2
+"   autocmd!
+"   autocmd VimEnter *
+"         \  highlight! default link ExtraWhitespace DiffDelete
+"         \| highlight! default link BufTabLineCurrent StatusLine
+"         \| highlight! default link BufTabLineActive StatusLineNC
+"         \| highlight! default link BufTabLineHidden StatusLineNC
+"         \| highlight! default link BufTabLineFill StatusLineNC
+"       " \| highlight! default link StatusLine MatchParen
+"       " \| highlight! default link StatusLineNC Normal
+" augroup END
 
 augroup RedrawOnResize " {{{2
   autocmd!
   autocmd VimResized * redraw!
+augroup END
+
+augroup OpenTagBar " {{{2
+  autocmd!
+  autocmd VimEnter *.elm TagbarOpen
+augroup END
+
+augroup CloseNERDTree " {{{
+  autocmd!
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | quit | endif
 augroup END
 
 " augroup LazyLoadPlugins " {{{2
