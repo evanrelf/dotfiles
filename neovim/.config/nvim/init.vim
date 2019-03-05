@@ -6,7 +6,7 @@ Plug 'bluz71/vim-moonfly-colors'
 Plug 'Lokaltog/vim-monotone'
 Plug 'evanrelf/papercolor-theme'
 Plug 'ap/vim-buftabline'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'wellle/visual-split.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -17,9 +17,7 @@ Plug 'critiqjo/husk-x.vim'
 Plug 'andymass/vim-matchup'
 
 " Editing
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-sandwich'
-Plug 'tpope/vim-abolish', { 'on': ['S', 'Subvert'] }
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
@@ -70,10 +68,6 @@ let g:indentLine_setColors = 0
 " golden-ratio
 let g:golden_ratio_autocommand = 0
 
-" multiple-cursors
-let g:multi_cursor_exit_from_visual_mode = 0
-let g:multi_cursor_exit_from_insert_mode = 0
-
 " auto-pairs
 let g:AutoPairsMultilineClose = 0
 
@@ -98,6 +92,7 @@ let g:show_spaces_that_precede_tabs = 1
 
 " polyglot
 let g:polyglot_disabled = ['haskell']
+let g:vim_markdown_conceal = 0
 let g:vim_markdown_new_list_item_indent = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
@@ -178,7 +173,7 @@ let g:gitgutter_grep = 'rg'
 " Appearance {{{2
 set termguicolors
 set background=dark
-colorscheme moonfly
+colorscheme monotone
 set colorcolumn=81
 set number
 set relativenumber
@@ -188,6 +183,7 @@ set shortmess=filmxTWIcF
 set title
 set splitbelow
 set splitright
+set scrolloff=2
 
 " Indentation {{{2
 set expandtab
@@ -294,8 +290,8 @@ noremap <C-t> <C-t>zz
 
 " Leader
 map <Space> <Leader>
-nnoremap <Leader>s :%S/
-xnoremap <Leader>s :S/
+nnoremap <Leader>s :%s/
+xnoremap <Leader>s :s/
 nnoremap <Leader>g :%g/
 xnoremap <Leader>g :g/
 nnoremap <Leader>n :%norm 0
@@ -332,7 +328,12 @@ map <Leader>0 :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 " AUTOCOMMANDS {{{1
 augroup FileTypeSettings " {{{2
   autocmd!
-  autocmd FileType haskell setlocal keywordprg=hoogle\ --info
+  autocmd FileType elm
+        \  setlocal softtabstop=4
+        \| setlocal shiftwidth=4
+  autocmd FileType fish
+        \  setlocal softtabstop=4
+        \| setlocal shiftwidth=4
   autocmd FileType cpp setlocal commentstring=//\ %s
   autocmd FileType gitcommit setlocal colorcolumn=73 spell
   autocmd BufEnter Dockerfile* setlocal filetype=Dockerfile
@@ -374,17 +375,17 @@ augroup IgnoreCaseCommandMode " {{{2
   autocmd CmdLineLeave : setlocal smartcase
 augroup END
 
-" augroup ColorSchemeTweaks " {{{2
-"   autocmd!
-"   autocmd VimEnter *
-"         \  highlight! default link ExtraWhitespace DiffDelete
-"         \| highlight! default link BufTabLineCurrent StatusLine
-"         \| highlight! default link BufTabLineActive StatusLineNC
-"         \| highlight! default link BufTabLineHidden StatusLineNC
-"         \| highlight! default link BufTabLineFill StatusLineNC
-"       " \| highlight! default link StatusLine MatchParen
-"       " \| highlight! default link StatusLineNC Normal
-" augroup END
+augroup ColorSchemeTweaks " {{{2
+  autocmd!
+  autocmd VimEnter *
+        \  highlight! default link ExtraWhitespace DiffDelete
+        \| highlight! default link BufTabLineCurrent WildMenu
+        \| highlight! default link BufTabLineActive CursorLineNr
+        \| highlight! default link BufTabLineHidden StatusLineNC
+        \| highlight! default link BufTabLineFill StatusLineNC
+      " \| highlight! default link StatusLine MatchParen
+      " \| highlight! default link StatusLineNC Normal
+augroup END
 
 augroup RedrawOnResize " {{{2
   autocmd!

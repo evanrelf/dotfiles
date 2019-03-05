@@ -2,6 +2,7 @@
 
 xrdb -merge .Xresources
 xsetroot -cursor_name left_ptr
+xrandr --dpi 120
 if uname -a | grep -qvi "NixOS"; then
   xset r rate 200 20
   xinput --set-prop "Synaptics TM3075-002" "libinput Natural Scrolling Enabled" 1

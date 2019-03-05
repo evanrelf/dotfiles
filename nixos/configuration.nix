@@ -4,14 +4,11 @@
   imports = [ ./hardware-configuration.nix ];
 
   # PROGRAMS {{{1
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
 
     acpi
     adapta-gtk-theme
-    alacritty
     arandr
     autocutsel
     autojump
@@ -19,7 +16,6 @@
     chromium
     clang
     cmus
-    cquery
     dmenu2
     dunst
     emacs
@@ -41,6 +37,7 @@
     hlint
     htop
     jq
+    kakoune
     kitty
     libreoffice-fresh
     lxappearance
@@ -135,7 +132,6 @@
 
       # Bitmap
       terminus_font
-      gohufont
 
       # Emoji and icons
       noto-fonts-emoji
@@ -167,15 +163,12 @@
       middleEmulation = false;
       accelSpeed = "0.3";
     };
-    wacom.enable = true;
     windowManager = {
       default = "xmonad";
       xmonad = {
         enable = true;
         enableContribAndExtras = true;
       };
-      # bspwm.enable = true;
-      # awesome.enable = true;
     };
     displayManager.lightdm.enable = true;
     desktopManager.xterm.enable = false;
@@ -184,6 +177,9 @@
       enable = true;
       time = 5;
       locker = "${pkgs.systemd}/bin/systemctl suspend";
+      enableNotifier = true;
+      notify = 10;
+      notifier = "${pkgs.notify-desktop}/bin/notify-desktop 'Locking in 10 seconds...'";
     };
   };
   services.compton = {
@@ -218,7 +214,6 @@
 
 
   # SECURITY {{{1
-  security.sudo.wheelNeedsPassword = false;
   hardware.u2f.enable = true;
   services.physlock = {
     enable = true;
@@ -227,13 +222,14 @@
 
 
   # NETWORK {{{1
-  hardware.bluetooth.powerOnBoot = false;
-  networking = {
-    hostName = "evanrelf-thinkpad";
-    networkmanager = {
-      enable = true;
-      wifi.powersave = true;
-    };
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+  networking.hostName = "evanrelf-thinkpad";
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
   };
   services.avahi = {
     enable = true;
@@ -269,10 +265,10 @@
       description = "Key swap";
       enable = true;
       script = ''
-      export PATH=/run/current-system/sw/bin:$PATH
-      setkeycodes 3a 1
-      setkeycodes 38 125
-      setkeycodes e05b 56
+        export PATH=/run/current-system/sw/bin:$PATH
+        setkeycodes 3a 1
+        setkeycodes 38 125
+        setkeycodes e05b 56
       '';
       wantedBy = [ "multi-user.target" ];
     };
@@ -302,14 +298,20 @@
     loader.systemd-boot = {
       enable = true;
       editor = false;
-      consoleMode = "auto";
     };
+    initrd.luks.devices = [
+      {
+        name = "root";
+        device = "/dev/disk/by-uuid/76d089cb-ab13-43c2-a63e-cdccd2f56941";
+        preLVM = true;
+        allowDiscards = true;
+      }
+    ];
     kernelParams = [
       "i915.enable_psr=1"
       "i915.enable_fbc=1"
       "i915.enable_rc6=7"
-
-      # "i915.fastboot=1" # Skylate and later
+      "i915.fastboot=1"
     ];
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call

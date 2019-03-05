@@ -31,6 +31,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.xmonad/xmonad.hs"
             case xmobar
                 eval $EDITOR "$HOME/.config/xmobar/xmobarrc"
+            case taffybar
+                eval $EDITOR "$HOME/.config/taffybar/taffybar.hs"
             case awesome
                 eval $EDITOR "$HOME/.config/awesome/rc.lua"
             case polybar

@@ -20,6 +20,7 @@
 	ll = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of origin/master
 	lx = log origin/master.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	lxx = "!git log origin/$(git symbolic-ref --short HEAD) --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'"
 
 	########
 	# DIFF #
@@ -62,6 +63,7 @@
 	#######
 	a = add
 	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status --short #"
+	ap = add --patch
 	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status --short #"
 	# aa = add --all
 
@@ -91,7 +93,8 @@
 	##########
 	# COMMIT #
 	##########
-	c = "!if [ $# -eq 0 ]; then git commit; else git commit --message \"$1\"; fi #"
+	c = "!git commit #"
+	# c = "!if [ $# -eq 0 ]; then git commit; else git commit --message \"$1\"; fi #"
 	amend = commit --amend --no-edit
 	rename = commit --amend
 	undo-commit = reset --soft HEAD^
@@ -103,7 +106,7 @@
 	pf = push --force-with-lease
 	pff = push --force
 
-        #########
+	#########
 	# OTHER #
 	#########
 	s = status --short
@@ -123,6 +126,7 @@
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=8 -RFX
+	excludesfile = ~/.config/git/ignore
 [status]
 	showUntrackedFiles = all
 [push]
@@ -132,7 +136,7 @@
 	renames = copies
 	algorithm = patience
 [merge]
-	conflictstyle = diff3
+	# conflictstyle = diff3
 [color]
 	ui = true
 [color "diff-highlight"]

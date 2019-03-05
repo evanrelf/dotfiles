@@ -25,3 +25,7 @@ function fn -d "Search for Elm/Haskell function definition"
         return 1
     end
 end
+
+function rgl -d "Pipe ripgrep output to less"
+    rg --color always --heading --line-number --smart-case $argv | less --raw-control-chars
+end

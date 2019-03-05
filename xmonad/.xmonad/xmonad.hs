@@ -50,6 +50,7 @@ xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
 
 myConfig = def
   { terminal = "kitty"
+  , workspaces = show <$> [1..9]
   , focusFollowsMouse = True
   , clickJustFocuses = True
   , borderWidth = 1
@@ -76,11 +77,11 @@ myRemoveKeys =
   -- Rebound
   [ "M-S-<Return>" -- Spawn terminal
   , "M-S-c" -- Kill window
-  , "M-e" -- Switch to screen 2
-  , "M-r" -- Switch to screen 3
-  , "M-S-w" -- Move window to screen 1
-  , "M-S-e" -- Move window to screen 2
-  , "M-S-r" -- Move window to screen 3
+  -- , "M-e" -- Switch to screen 2
+  -- , "M-r" -- Switch to screen 3
+  -- , "M-S-w" -- Move window to screen 1
+  -- , "M-S-e" -- Move window to screen 2
+  -- , "M-S-r" -- Move window to screen 3
   , "M-S-<Tab>" -- Focus previous window
   ]
 
@@ -101,10 +102,10 @@ myAdditionalKeys =
   , ("M-<Tab>", toggleWS' ["NSP"])
   , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
   -- Apps
-  -- , ("M-/", safeSpawn "rofi" ["-show", "run"])
-  , ("M-f", safeSpawn "firefox" [])
+  , ("M-o f", safeSpawn "firefox" [])
+  , ("M-o n", safeSpawn "nautilus" [])
   , ("M-/", safeSpawn "dmenu_run" ["-fn", myFont])
-  , ("M-s", scratchpadSpawnActionCustom "st -n scratchpad")
+  , ("M-s", scratchpadSpawnActionCustom "kitty --name scratchpad")
   -- Brightness
   , ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "5"])
   , ("<XF86MonBrightnessUp>", safeSpawn "light" ["-A", "5"])

@@ -1,5 +1,3 @@
-# vim: foldmethod=marker foldenable
-
 # IMPORTS {{{1
 
 source $HOME/.config/fish/prelude.fish
@@ -75,6 +73,10 @@ else
     alias ls "ls -AFGh"
 end
 
+if _exists hub
+    alias git "hub"
+end
+
 if status --is-interactive
     # set -g fish_user_abbreviations
     abbr --add n "nvim"
@@ -132,6 +134,8 @@ function fish_prompt
     # Prompt character
     echo -n "λ "
     set_color normal
+    # Ring bell
+    # printf '\a'
 end
 
 # function fish_right_prompt
@@ -189,4 +193,4 @@ end
 # }}}2
 
 
-# }}}1
+# vim: foldmethod=marker foldenable
