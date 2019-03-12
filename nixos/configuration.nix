@@ -121,6 +121,7 @@
   fonts = {
     fonts = with pkgs; [
       # Regular
+      roboto
       dejavu_fonts
       liberation_ttf
       libertinus
@@ -128,7 +129,6 @@
       # Monospaced
       iosevka-bin
       inconsolata
-      anonymousPro
 
       # Bitmap
       terminus_font
@@ -161,7 +161,16 @@
       naturalScrolling = true;
       tappingDragLock = false;
       middleEmulation = false;
-      accelSpeed = "0.3";
+      accelSpeed = "0.4";
+    };
+    desktopManager = {
+      default = "none";
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        enableXfwm = false;
+        noDesktop = true;
+      };
     };
     windowManager = {
       default = "xmonad";
@@ -171,8 +180,6 @@
       };
     };
     displayManager.lightdm.enable = true;
-    desktopManager.xterm.enable = false;
-    desktopManager.default = "none";
     xautolock = {
       enable = true;
       time = 5;
@@ -185,7 +192,7 @@
   services.compton = {
     enable = true;
     backend = "glx";
-    vSync = "opengl-swc";
+    vSync = "opengl";
   };
   services.redshift = {
     enable = true;
@@ -226,7 +233,7 @@
     enable = true;
     powerOnBoot = false;
   };
-  networking.hostName = "evanrelf-thinkpad";
+  networking.hostName = "x1";
   networking.networkmanager = {
     enable = true;
     wifi.powersave = true;
@@ -306,12 +313,6 @@
         preLVM = true;
         allowDiscards = true;
       }
-    ];
-    kernelParams = [
-      "i915.enable_psr=1"
-      "i915.enable_fbc=1"
-      "i915.enable_rc6=7"
-      "i915.fastboot=1"
     ];
     extraModulePackages = with pkgs.linuxPackages; [
       acpi_call

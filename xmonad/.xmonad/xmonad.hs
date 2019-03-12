@@ -1,7 +1,8 @@
-import XMonad
 import Data.Function ((&))
 import Data.Maybe (isJust)
 import System.Exit (ExitCode(..), exitWith)
+import XMonad
+import XMonad.Config.Xfce (xfceConfig)
 import qualified XMonad.Prompt as Prompt
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
 import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
@@ -28,7 +29,7 @@ import XMonad.Layout.Tabbed (shrinkText, tabbed)
 -- Utilities
 import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeymap, removeKeysP)
 import XMonad.Util.Loggers (logCmd)
-import XMonad.Util.Run (safeSpawn)
+import XMonad.Util.Run (safeSpawn, spawnPipe)
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
 import qualified XMonad.Util.Themes as Themes
 
@@ -37,7 +38,9 @@ import qualified XMonad.Util.Themes as Themes
 -- * Format xmobar (brightness, volume, battery, wifi, date, time)
 
 main :: IO ()
-main = xmobar myConfig >>= xmonad
+main = do
+  stalonetray <- spawnPipe "stalonetray"
+  xmobar myConfig >>= xmonad
 
 xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
   where
@@ -48,7 +51,7 @@ xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
       , DL.ppTitle = const ""
       }
 
-myConfig = def
+myConfig = xfceConfig
   { terminal = "kitty"
   , workspaces = show <$> [1..9]
   , focusFollowsMouse = True
@@ -71,17 +74,12 @@ myConfig = def
 
 myModMask = mod4Mask
 
-myFont = "xft:Terminus:style=Regular:size=12:antialias=false"
+myFont = "xft:PragmataPro Liga:style=Regular:size=12:antialias=true"
 
 myRemoveKeys =
   -- Rebound
   [ "M-S-<Return>" -- Spawn terminal
   , "M-S-c" -- Kill window
-  -- , "M-e" -- Switch to screen 2
-  -- , "M-r" -- Switch to screen 3
-  -- , "M-S-w" -- Move window to screen 1
-  -- , "M-S-e" -- Move window to screen 2
-  -- , "M-S-r" -- Move window to screen 3
   , "M-S-<Tab>" -- Focus previous window
   ]
 
@@ -100,15 +98,18 @@ myAdditionalKeys =
   , ("M-S-n", shiftTo Next $ WSIs (return anyWS'))
   , ("M-S-p", shiftTo Prev $ WSIs (return anyWS'))
   , ("M-<Tab>", toggleWS' ["NSP"])
-  , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
+  -- , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
+  , ("M-S-s", safeSpawn "xfce4-screenshooter" [])
+  , ("M-S-q", safeSpawn "xfce4-session-logout" [])
   -- Apps
-  , ("M-o f", safeSpawn "firefox" [])
-  , ("M-o n", safeSpawn "nautilus" [])
-  , ("M-/", safeSpawn "dmenu_run" ["-fn", myFont])
+  -- , ("M-o f", safeSpawn "firefox" [])
+  -- , ("M-o n", safeSpawn "nautilus" [])
+  , ("M-/", safeSpawn "rofi" ["-show", "run"])
+  , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
   , ("M-s", scratchpadSpawnActionCustom "kitty --name scratchpad")
   -- Brightness
-  , ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "5"])
-  , ("<XF86MonBrightnessUp>", safeSpawn "light" ["-A", "5"])
+  , ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "3"])
+  , ("<XF86MonBrightnessUp>", safeSpawn "light" ["-A", "3"])
   -- Volume
   , ("<XF86AudioLowerVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%-"])
   , ("<XF86AudioRaiseVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%+"])
@@ -148,7 +149,7 @@ myLayoutHook =
   & smartBorders
   & avoidStruts
 
-myManageHook = manageHook def
+myManageHook = manageHook xfceConfig
   <> manageDocks
   <> scratchpadManageHook (RationalRect (1/4) (1/4) (1/2) (1/2))
   <> insertPosition Below Newer
@@ -158,7 +159,7 @@ myHandleEventHook = handleEventHook def
   <> focusOnMouseMove
 
 myLogHook = logHook def
-  <> updatePointer (0.5, 0.5) (0, 0)
+  -- <> updatePointer (0.5, 0.5) (0, 0)
 
 myTheme :: Themes.ThemeInfo
 myTheme = Themes.xmonadTheme
@@ -173,7 +174,7 @@ myTheme = Themes.xmonadTheme
     , Deco.inactiveTextColor = "#999999"
     , Deco.urgentTextColor = "red"
     , Deco.fontName = myFont
-    , Deco.decoHeight = 20
+    , Deco.decoHeight = 30
     }
   }
 

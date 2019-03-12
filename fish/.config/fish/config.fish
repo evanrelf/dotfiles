@@ -24,13 +24,13 @@ if not functions -q fisher
     fisher
 end
 
-set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_DEFAULT_OPTS "--exact --height $FZF_TMUX_HEIGHT"
-set -U FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude '.git'"
-set -U FZF_FIND_FILE_COMMAND "$FZF_DEFAULT_COMMAND"
-set -U FZF_CD_COMMAND "fd --type directory --follow"
-set -U FZF_CD_WITH_HIDDEN_COMMAND "$FZF_CD_COMMAND --hidden --exclude '.git'"
-set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
+set -x FZF_LEGACY_KEYBINDINGS 0
+set -x FZF_DEFAULT_OPTS "--exact --height $FZF_TMUX_HEIGHT"
+set -x FZF_DEFAULT_COMMAND "fd --type file --follow --hidden --exclude '.git'"
+set -x FZF_FIND_FILE_COMMAND "$FZF_DEFAULT_COMMAND"
+set -x FZF_CD_COMMAND "fd --type directory --follow"
+set -x FZF_CD_WITH_HIDDEN_COMMAND "$FZF_CD_COMMAND --hidden --exclude '.git'"
+set -x FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
 
 
 # VARIABLES {{{1
@@ -67,7 +67,7 @@ alias reload "source $HOME/.config/fish/config.fish"
 
 if _exists exa
     alias ls "exa --group-directories-first"
-    alias ll "exa -l --group-directories-first"
+    alias ll "exa -l --group-directories-first --git"
     alias tree "exa --tree --group-directories-first -I '.git|.stack-work|elm-stuff'"
 else
     alias ls "ls -AFGh"

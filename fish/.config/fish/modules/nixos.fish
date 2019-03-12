@@ -1,3 +1,5 @@
+set -x NIXPKGS_ALLOW_UNFREE 1
+
 function os
     switch $argv[1]
         case install i

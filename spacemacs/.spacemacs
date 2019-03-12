@@ -10,7 +10,7 @@ This function should only modify configuration layer settings."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs-base
+   dotspacemacs-distribution 'spacemacs
 
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
@@ -36,7 +36,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(
      evil-commentary
-     multiple-cursors
+     ;; multiple-cursors
      haskell
      elm
      purescript
@@ -64,7 +64,8 @@ This function should only modify configuration layer settings."
      ;; spell-checking
      helm
      ;; ivy
-     ;; git
+     git
+     version-control
      ;; treemacs
      )
 
@@ -217,7 +218,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '(("PragmataPro Liga"
-                                :size 15
+                                :size 22
                                 :weight normal
                                 :width normal)
                                ("Iosevka"
@@ -363,7 +364,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -497,7 +498,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-plus-contrib yasnippet-snippets yapfify yaml-mode which-key web-mode web-beautify vimrc-mode use-package toml-mode toc-org tagedit systemd slim-mode scss-mode sass-mode racer pyvenv pytest pyenv-mode py-isort pug-mode psci psc-ide prettier-js pippel pipenv pip-requirements pcre2el overseer org-present org-pomodoro org-mime org-download org-bullets org-brain nix-mode nameless mmm-mode markdown-toc macrostep lsp-ui livid-mode live-py-mode json-navigator js2-refactor js-doc insert-shebang importmagic impatient-mode hydra hlint-refactor hindent helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-projectile helm-org-rifle helm-nixos-options helm-mode-manager helm-make helm-hoogle helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-c-style gnuplot gh-md fuzzy flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-elm flycheck-bashate fish-mode evil-org evil-mc evil-commentary emmet-mode elm-test-runner elm-mode elisp-slime-nav dotenv-mode dockerfile-mode docker disaster diminish dactyl-mode cython-mode cquery company-web company-tern company-statistics company-shell company-rtags company-nixos-options company-lua company-lsp company-ghci company-cabal company-c-headers company-auctex company-anaconda cmm-mode clang-format ccls cargo bind-map auto-yasnippet auto-compile auctex-latexmk ace-jump-helm-line ac-ispell))))
+    (transient smeargle orgit magit-svn magit-gitflow helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter evil-magit magit git-commit ghub treepy graphql with-editor diff-hl browse-at-remote yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-evil toml-mode toc-org tagedit systemd symon string-inflection spaceline-all-the-icons slim-mode scss-mode sass-mode restart-emacs request rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode psci psc-ide prettier-js popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nix-mode nameless move-text mmm-mode markdown-toc macrostep lsp-ui lorem-ipsum livid-mode live-py-mode link-hint json-navigator js2-refactor js-doc insert-shebang indent-guide importmagic impatient-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-nixos-options helm-mode-manager helm-make helm-hoogle helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate google-c-style golden-ratio gnuplot gh-md fuzzy font-lock+ flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-haskell flycheck-elm flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eval-sexp-fu emmet-mode elm-test-runner elm-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline dockerfile-mode docker disaster diminish define-word dactyl-mode cython-mode cquery counsel-projectile company-web company-tern company-statistics company-shell company-rtags company-nixos-options company-lua company-lsp company-ghci company-cabal company-c-headers company-auctex company-anaconda column-enforce-mode cmm-mode clean-aindent-mode clang-format centered-cursor-mode ccls cargo auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -1,0 +1,9 @@
+background "#000000"
+geometry 1x1-0+0
+grow_gravity NW
+icon_gravity NW
+icon_size 32
+sticky true
+window_layer bottom
+no_shrink false
+skip_taskbar true

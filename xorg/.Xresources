@@ -6,7 +6,7 @@ st.termname:    xterm-256color
 st.bellvolume:  0
 
 !! rofi
-rofi.font: Terminus 12
+rofi.font: PragmataPro Liga 15
 rofi.show-icons: true
 rofi.hide-scrollbar: true
 rofi.separator-style: none
