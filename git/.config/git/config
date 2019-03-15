@@ -79,6 +79,13 @@
 	r = reset
 	rs = reset --soft
 
+	########
+	# SHOW #
+	########
+	sh = show
+	shx = "!git show origin/master:$1 #"
+	shxx = "!git show origin/$(git symbolic-ref --short HEAD):$1 #"
+
 	#########
 	# STASH #
 	#########

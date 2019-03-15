@@ -4,7 +4,6 @@ Config
   { font = "xft:PragmataPro Liga:size=10,Material Icons:size=11"
   , bgColor = "#000000"
   , fgColor = "#999999"
-  , position = Static { xpos = 0, ypos = 0, width = 2528, height = 32 }
   , commands = -- refresh rate is in 1/10ths of a second
       [ Run Com "sh" ["-c", "echo $(light -G | cut -d '.' -f 1)%"] "brightness" 5
       , Run ComX "sh" ["-c", "nmcli -t device status | grep wifi | cut -d ':' -f 4"] "n/a" "wifi" 100
@@ -16,5 +15,5 @@ Config
       , Run Date "%a %b %e %l:%M %p" "date" 50
       , Run UnsafeStdinReader
       ]
-  , template = "%UnsafeStdinReader% }{  %brightness% |  %default:Master% |  %battery% | %date% "
+  , template = "%UnsafeStdinReader% }{  %wifi% |  %brightness% |  %default:Master% |  %battery% | %date% "
   }

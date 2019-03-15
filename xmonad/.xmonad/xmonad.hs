@@ -39,7 +39,6 @@ import qualified XMonad.Util.Themes as Themes
 
 main :: IO ()
 main = do
-  stalonetray <- spawnPipe "stalonetray"
   xmobar myConfig >>= xmonad
 
 xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
