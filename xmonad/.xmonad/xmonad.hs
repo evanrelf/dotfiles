@@ -10,6 +10,7 @@ import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
 import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS')
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
 import XMonad.Actions.SinkAll (sinkAll)
+import XMonad.Actions.SwapWorkspaces (Direction1D(..), swapTo)
 import XMonad.Actions.UpdateFocus (adjustEventInput, focusOnMouseMove)
 import XMonad.Actions.UpdatePointer (updatePointer)
 -- Hooks
@@ -33,13 +34,8 @@ import XMonad.Util.Run (safeSpawn, spawnPipe)
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
 import qualified XMonad.Util.Themes as Themes
 
--- TODO:
--- * Disable mouse snapping when resizing window with mouse
--- * Format xmobar (brightness, volume, battery, wifi, date, time)
-
 main :: IO ()
-main = do
-  xmobar myConfig >>= xmonad
+main = xmobar myConfig >>= xmonad
 
 xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
   where
@@ -96,6 +92,8 @@ myAdditionalKeys =
   , ("M-p", moveTo Prev $ WSIs (return nonEmptyWS'))
   , ("M-S-n", shiftTo Next $ WSIs (return anyWS'))
   , ("M-S-p", shiftTo Prev $ WSIs (return anyWS'))
+  , ("M-M1-n", swapTo Next)
+  , ("M-M1-p", swapTo Prev)
   , ("M-<Tab>", toggleWS' ["NSP"])
   -- , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
   , ("M-S-s", safeSpawn "xfce4-screenshooter" [])

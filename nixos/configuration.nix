@@ -56,6 +56,7 @@
     pandoc
     papirus-icon-theme
     powertop
+    python3
     ranger
     rclone
     ripgrep
@@ -70,9 +71,11 @@
     stow
     sxiv
     tealdeer
-    texlive.combined.scheme-basic
+    tectonic
     tmux
     transmission-gtk
+    unar
+    unzip
     xclip
     xorg.xev
     xorg.xrdb
@@ -80,6 +83,7 @@
     xst
     youtube-dl
     zathura
+    zip
 
   ];
   programs = {
@@ -161,7 +165,7 @@
       naturalScrolling = true;
       tappingDragLock = false;
       middleEmulation = false;
-      accelSpeed = "0.4";
+      accelSpeed = "0.7";
     };
     desktopManager = {
       default = "none";

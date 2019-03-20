@@ -9,6 +9,8 @@ function update -d "Run all update commands"
             else if _exists nixos-version
                 # NixOS
                 _log "Updating NixOS packages"
+                nix-channel --update
+                sudo nix-channel --update
                 nix-env --upgrade
                 sudo nixos-rebuild switch --upgrade
             else if _exists apt
@@ -64,6 +66,11 @@ function update -d "Run all update commands"
     if _exists jump
         _log "Updating jump directories"
         jump clean
+    end
+
+    if _exists autojump
+        _log "Updating autojump directories"
+        autojump --purge
     end
 
     _log "Updating Fish command completions"
