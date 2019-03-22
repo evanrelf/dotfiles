@@ -12,33 +12,40 @@ highlight = #5294E2
 
 [bar/bar]
 width = 100%
-height = 30
-font-0 = Roboto:style=Regular:size=13
-font-1 = Material Icons:style=Regular:size=13
-underline-size = 1
-underline-color = ${colors.foreground}
+height = 35
+padding-right = 1
+
+font-0 = Roboto:style=Regular:size=16
+font-1 = Material Icons:style=Regular:size=15
+
+line-size = 2
+line-color = ${colors.foreground}
+
 fixed-center = true
+
 foreground = ${colors.foreground}
 background = ${colors.background}
-modules-left = workspaces
-; modules-center = title
-modules-right = brightness sep volume sep battery sep wifi sep date pad
-; enable-ipc = true
+
+modules-left = title
+modules-right = volume-alsa sep brightness sep battery sep wifi sep date
+
+tray-position = right
+tray-maxsize = 32
 
 [module/sep]
 type = custom/text
-content = " | "
+content = "|"
+content-padding = 2
 content-foreground = ${colors.dimmed}
-
-[module/pad]
-type = custom/text
-content = " "
 
 [module/date]
 type = internal/date
 interval = 1.0
 date = "%a %b %e"
+date-alt = "%Y-%m-%d"
 time = "%l:%M %p"
+time-alt = "%l:%M %p"
+; time-alt = "%H:%M"
 label = "%date% %time%"
 
 [module/brightness]
@@ -51,23 +58,42 @@ type = internal/battery
 battery = BAT0
 adapter = ACAD
 time-format = %-H:%M
-full-at = 90
+full-at = 95
 poll-interval = 30
-label-discharging = " %percentage%% (%time%)"
-label-charging = " %percentage%% (%time%)"
+label-discharging = " %percentage%%"
+label-charging = " %percentage%%"
+; label-discharging = " %percentage%% (%time%)"
+; label-charging = " %percentage%% (%time%)"
 label-full = " %percentage%%"
 
 [module/volume]
 type = internal/pulseaudio
-sink = "alsa_output.pci-0000_00_1b.0.analog-stereo"
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 label-volume = " %percentage%%"
 label-muted = " Muted"
 
+[module/volume-alsa]
+type = internal/alsa
+; headphone-soundcard = 1
+; headphone-mixer = PCM
+format-volume = <ramp-volume> <label-volume>
+format-muted =  <label-muted>
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+label-muted = Muted
+
 [module/wifi]
 type = internal/network
-interface = wlp4s0
+interface = wlp2s0
 label-connected = " %essid%"
 label-disconnected = " Disconnected"
+
+[module/ethernet]
+type = internal/network
+interface = enp0s31f6
 
 [module/title]
 type = internal/xwindow
@@ -75,8 +101,26 @@ type = internal/xwindow
 [module/workspaces]
 type = internal/xworkspaces
 enable-scroll = false
-label-active = "  %index%  "
-label-empty = "  %index%  "
+label-active = " %index% "
+label-empty = " %index% "
 label-active-foreground = ${colors.foreground}
+; label-active-overline = ${colors.foreground}
 label-active-underline = ${colors.foreground}
 label-empty-foreground = ${colors.dimmed}
+label-urgent-foreground = ${colors.highlight}
+
+[module/memory]
+type = internal/memory
+label = RAM: %gb_used%
+interval = 2
+
+[module/cpu]
+type = internal/cpu
+label = CPU: %percentage%%
+interval = 2
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+format-mounted =  <label-mounted>
+label-mounted = %percentage_used%%

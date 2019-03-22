@@ -2,20 +2,17 @@ import Data.Function ((&))
 import Data.Maybe (isJust)
 import System.Exit (ExitCode(..), exitWith)
 import XMonad
-import XMonad.Config.Xfce (xfceConfig)
-import qualified XMonad.Prompt as Prompt
-import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
+import XMonad.Config.Desktop (desktopConfig)
 import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
 -- Actions
-import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS')
+import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS)
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
 import XMonad.Actions.SinkAll (sinkAll)
 import XMonad.Actions.SwapWorkspaces (Direction1D(..), swapTo)
 import XMonad.Actions.UpdateFocus (adjustEventInput, focusOnMouseMove)
 import XMonad.Actions.UpdatePointer (updatePointer)
 -- Hooks
-import qualified XMonad.Hooks.DynamicLog as DL
-import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
+import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.InsertPosition (Focus(..), Position(..), insertPosition)
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
 -- Layouts
@@ -31,45 +28,36 @@ import XMonad.Layout.Tabbed (shrinkText, tabbed)
 import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeymap, removeKeysP)
 import XMonad.Util.Loggers (logCmd)
 import XMonad.Util.Run (safeSpawn, spawnPipe)
-import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
+import XMonad.Util.SpawnOnce (spawnOnce)
 import qualified XMonad.Util.Themes as Themes
 
 main :: IO ()
-main = xmobar myConfig >>= xmonad
+main = do
+  safeSpawn "/home/evanrelf/.xmonad/polybar.sh" []
+  xmonad myConfig
 
-xmobar = DL.statusBar "xmobar" pp toggleStrutsKey
-  where
-    toggleStrutsKey XConfig{modMask = modm} = (modm, xK_b )
-    pp = DL.xmobarPP
-      { DL.ppHidden = (\w -> if w == "NSP" then "" else w)
-      , DL.ppCurrent = DL.xmobarColor "white" "" . DL.wrap "[" "]"
-      , DL.ppTitle = const ""
-      }
-
-myConfig = xfceConfig
+myConfig = desktopConfig
   { terminal = "kitty"
   , workspaces = show <$> [1..9]
   , focusFollowsMouse = True
   , clickJustFocuses = True
-  , borderWidth = 1
+  , borderWidth = 2
   , normalBorderColor = "#333333"
   , focusedBorderColor = "#999999"
-  , startupHook = myStartupHook
+  , startupHook = myStartupHook <> startupHook desktopConfig
   , layoutHook = myLayoutHook
-  , manageHook = myManageHook
-  , handleEventHook = myHandleEventHook
-  , logHook = myLogHook
+  , manageHook = myManageHook <> manageHook desktopConfig
+  , handleEventHook = myHandleEventHook <> handleEventHook desktopConfig
   , modMask = myModMask
   }
   & (flip removeKeysP) myRemoveKeys
   & (flip additionalKeysP) myAdditionalKeys
   & (flip additionalMouseBindings) myMouse
   & docks
-  & ewmh
 
 myModMask = mod4Mask
 
-myFont = "xft:PragmataPro Liga:style=Regular:size=12:antialias=true"
+myFont = "xft:Roboto:style=Regular:size=12:antialias=true"
 
 myRemoveKeys =
   -- Rebound
@@ -83,27 +71,18 @@ myAdditionalKeys =
   [ ("M-<Return>", spawn $ terminal myConfig)
   , ("M-S-m", windows swapMaster)
   , ("M-c", kill)
-  -- Windows
-  , ("M-S-t", sinkAll)
-  , ("M--", sendMessage MirrorShrink)
-  , ("M-=", sendMessage MirrorExpand)
   -- Workspaces
-  , ("M-n", moveTo Next $ WSIs (return nonEmptyWS'))
-  , ("M-p", moveTo Prev $ WSIs (return nonEmptyWS'))
-  , ("M-S-n", shiftTo Next $ WSIs (return anyWS'))
-  , ("M-S-p", shiftTo Prev $ WSIs (return anyWS'))
+  , ("M-n", moveTo Next NonEmptyWS)
+  , ("M-p", moveTo Prev NonEmptyWS)
+  , ("M-S-n", shiftTo Next NonEmptyWS)
+  , ("M-S-p", shiftTo Prev NonEmptyWS)
   , ("M-M1-n", swapTo Next)
   , ("M-M1-p", swapTo Prev)
-  , ("M-<Tab>", toggleWS' ["NSP"])
-  -- , ("M-S-q", confirmPrompt promptConfig "exit" $ io (exitWith ExitSuccess))
-  , ("M-S-s", safeSpawn "xfce4-screenshooter" [])
+  , ("M-<Tab>", toggleWS)
   , ("M-S-q", safeSpawn "xfce4-session-logout" [])
   -- Apps
-  -- , ("M-o f", safeSpawn "firefox" [])
-  -- , ("M-o n", safeSpawn "nautilus" [])
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
-  , ("M-s", scratchpadSpawnActionCustom "kitty --name scratchpad")
   -- Brightness
   , ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "3"])
   , ("<XF86MonBrightnessUp>", safeSpawn "light" ["-A", "3"])
@@ -112,21 +91,6 @@ myAdditionalKeys =
   , ("<XF86AudioRaiseVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%+"])
   , ("<XF86AudioMute>", safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
   ]
-    where nonEmptyWS' :: WindowSpace -> Bool
-          nonEmptyWS' (Workspace "NSP" _ _) = False
-          nonEmptyWS' ws = isJust . stack $ ws
-
-          anyWS' :: WindowSpace -> Bool
-          anyWS' (Workspace "NSP" _ _) = False
-          anyWS' _ = True
-
-          promptConfig = def
-            { Prompt.fgColor = "red"
-            , Prompt.bgColor = "black"
-            , Prompt.position = Prompt.Top
-            , Prompt.font = myFont
-            , Prompt.promptBorderWidth = 0
-            }
 
 myMouse =
   [ ((myModMask, button3), (\w -> focus w >> mouseResizeEdgeWindow (1/2) w))
@@ -139,24 +103,15 @@ myStartupHook = do
 
 myLayoutHook =
   let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
-      -- tallTabs = renamed [Replace "Tall w/ Tabs"] $ mastered (1/20) (1/2) $ focusTracking $ tabbed shrinkText (Themes.theme myTheme)
       tabs = renamed [Replace "Tabs"] $ focusTracking $ tabbed shrinkText (Themes.theme myTheme)
-  in tall ||| tabs
+  in tall ||| tabs -- ||| Full
   & renamed [CutWordsLeft 1] . spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True
   & smartBorders
   & avoidStruts
 
-myManageHook = manageHook xfceConfig
-  <> manageDocks
-  <> scratchpadManageHook (RationalRect (1/4) (1/4) (1/2) (1/2))
-  <> insertPosition Below Newer
+myManageHook = manageDocks <> insertPosition Below Newer
 
-myHandleEventHook = handleEventHook def
-  <> fullscreenEventHook
-  <> focusOnMouseMove
-
-myLogHook = logHook def
-  -- <> updatePointer (0.5, 0.5) (0, 0)
+myHandleEventHook = focusOnMouseMove <> fullscreenEventHook
 
 myTheme :: Themes.ThemeInfo
 myTheme = Themes.xmonadTheme

@@ -4,7 +4,7 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-env:
+# env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -88,19 +88,19 @@ tabspaces: 8
 font:
   # Normal (roman) font face
   normal:
-    family: PragmataPro Mono Liga
+    family: "PragmataPro Liga"
     # The `style` can be specified to pick a specific face.
     style: Regular
 
   # Bold font face
   bold:
-    family: PragmataPro Mono Liga
+    family: "PragmataPro Liga"
     # The `style` can be specified to pick a specific face.
     style: Regular
 
   # Italic font face
   italic:
-    family: PragmataPro Mono Liga
+    family: "PragmataPro Liga"
     # The `style` can be specified to pick a specific face.
     style: Regular
 
@@ -140,9 +140,9 @@ draw_bold_text_with_bright_colors: false
 # Colors (Tomorrow Night Bright)
 colors:
   # Default colors
-  primary:
-    background: '0x000000'
-    foreground: '0xABB2BF'
+  # primary:
+  #   background: '0x000000'
+  #   foreground: '0xABB2BF'
 
     # Bright and dim foreground colors
     #

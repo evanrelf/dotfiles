@@ -32,12 +32,14 @@
     gnome3.nautilus
     gnumake
     gnupg
+    gparted
     haskellPackages.ghcid
     haskellPackages.xmobar
     hlint
     htop
     jq
     kakoune
+    killall
     kitty
     libreoffice-fresh
     lxappearance
@@ -55,6 +57,7 @@
     notify-desktop
     pandoc
     papirus-icon-theme
+    polybar
     powertop
     python3
     ranger

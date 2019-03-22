@@ -6,7 +6,12 @@ source $HOME/.config/fish/modules/git.fish
 source $HOME/.config/fish/modules/iso2img.fish
 source $HOME/.config/fish/modules/kakoune.fish
 source $HOME/.config/fish/modules/keeb.fish
-source $HOME/.config/fish/modules/macos.fish
+if test (uname) = "Darwin"
+    source $HOME/.config/fish/modules/macos.fish
+end
+if uname -a | grep -q NixOS
+    source $HOME/.config/fish/modules/nixos.fish
+end
 source $HOME/.config/fish/modules/panosoft.fish
 source $HOME/.config/fish/modules/rc.fish
 source $HOME/.config/fish/modules/rmds.fish
@@ -129,8 +134,10 @@ function fish_prompt
     if test $exit_code -ne 0
         set_color red
     end
-    # Newline
-    echo
+    # Smart newline
+    if test (math (tput cols) - (prompt_pwd | wc -c)) -lt 40
+        echo
+    end
     # Prompt character
     echo -n "λ "
     set_color normal
