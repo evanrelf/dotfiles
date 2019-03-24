@@ -50,6 +50,7 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-repeat'
+Plug 'Konfekt/FastFold'
 
 call plug#end()
 

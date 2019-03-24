@@ -42,6 +42,7 @@
     killall
     kitty
     libreoffice-fresh
+    lsof
     lxappearance
     mpc_cli
     mpd
