@@ -37,6 +37,7 @@ Plug 'tpope/vim-sleuth'
 " Syntax
 Plug 'w0rp/ale'
 Plug 'evanrelf/haskell-vim'
+Plug 'vmchale/dhall-vim'
 Plug 'sheerun/vim-polyglot'
 
 " Files
@@ -57,7 +58,7 @@ call plug#end()
 " Plugin settings {{{2
 
 " monotone
-let g:monotone_color = [30, 50, 80]
+" let g:monotone_color = [30, 50, 80]
 
 " buftabline
 let g:buftabline_show = 1
@@ -174,8 +175,8 @@ let g:gitgutter_grep = 'rg'
 " Appearance {{{2
 set termguicolors
 set background=dark
-colorscheme moonfly
-set colorcolumn=81
+colorscheme monotone
+set colorcolumn=81,101
 set number
 set relativenumber
 set rulerformat=%7(%3(%l%),%3(%c%V%)%)

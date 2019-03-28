@@ -1,3 +1,4 @@
+-- Miscellaneous
 import Data.Function ((&))
 import Data.Maybe (isJust)
 import System.Exit (ExitCode(..), exitWith)
@@ -31,10 +32,7 @@ import XMonad.Util.Run (safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 import qualified XMonad.Util.Themes as Themes
 
-main :: IO ()
-main = do
-  safeSpawn "/home/evanrelf/.xmonad/polybar.sh" []
-  xmonad myConfig
+main = xmonad myConfig
 
 myConfig = desktopConfig
   { terminal = "kitty"
@@ -51,7 +49,7 @@ myConfig = desktopConfig
   , modMask = myModMask
   }
   & (flip removeKeysP) myRemoveKeys
-  & (flip additionalKeysP) myAdditionalKeys
+  & (flip additionalKeysP) myKeys
   & (flip additionalMouseBindings) myMouse
   & docks
 
@@ -66,26 +64,30 @@ myRemoveKeys =
   , "M-S-<Tab>" -- Focus previous window
   ]
 
-myAdditionalKeys =
-  -- Rebinds
-  [ ("M-<Return>", spawn $ terminal myConfig)
-  , ("M-S-m", windows swapMaster)
+myKeys =
+  -- Windows
+  [ ("M-S-m", windows swapMaster)
   , ("M-c", kill)
+
   -- Workspaces
   , ("M-n", moveTo Next NonEmptyWS)
   , ("M-p", moveTo Prev NonEmptyWS)
-  , ("M-S-n", shiftTo Next NonEmptyWS)
-  , ("M-S-p", shiftTo Prev NonEmptyWS)
+  , ("M-S-n", shiftTo Next NonEmptyWS >> moveTo Next NonEmptyWS)
+  , ("M-S-p", shiftTo Prev NonEmptyWS >> moveTo Prev NonEmptyWS)
   , ("M-M1-n", swapTo Next)
   , ("M-M1-p", swapTo Prev)
   , ("M-<Tab>", toggleWS)
   , ("M-S-q", safeSpawn "xfce4-session-logout" [])
+
   -- Apps
+  , ("M-<Return>", safeSpawn (terminal myConfig) [])
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
+
   -- Brightness
   , ("<XF86MonBrightnessDown>", safeSpawn "light" ["-U", "3"])
   , ("<XF86MonBrightnessUp>", safeSpawn "light" ["-A", "3"])
+
   -- Volume
   , ("<XF86AudioLowerVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%-"])
   , ("<XF86AudioRaiseVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%+"])
@@ -98,8 +100,9 @@ myMouse =
 
 myStartupHook = do
   return () -- Do not remove
-  checkKeymap myConfig myAdditionalKeys
+  checkKeymap myConfig myKeys
   adjustEventInput
+  spawnOnce "polybar -r bar"
 
 myLayoutHook =
   let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
@@ -113,7 +116,6 @@ myManageHook = manageDocks <> insertPosition Below Newer
 
 myHandleEventHook = focusOnMouseMove <> fullscreenEventHook
 
-myTheme :: Themes.ThemeInfo
 myTheme = Themes.xmonadTheme
   { Themes.theme = def
     { Deco.activeColor = "black"
