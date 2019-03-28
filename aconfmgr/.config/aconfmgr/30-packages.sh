@@ -11,6 +11,7 @@ AddPackage alsa-utils # An alternative implementation of Linux sound support
 AddPackage autocutsel # synchronizes the two copy/paste buffers mainly used by X applications
 AddPackage autojump # A faster way to navigate your filesystem from the command line
 AddPackage btrfs-progs # Btrfs filesystem utilities
+AddPackage compton # X compositor that may fix tearing issues
 AddPackage diff-so-fancy # Good-looking diffs with diff-highlight and more
 AddPackage docker # Pack, ship and run any application as a lightweight container
 AddPackage docker # Pack, ship and run any application as a lightweight container
@@ -31,7 +32,6 @@ AddPackage mupdf # Lightweight PDF and XPS viewer
 AddPackage neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
 AddPackage networkmanager # Network connection manager and user applications
 AddPackage nodejs # Evented I/O for V8 javascript
-AddPackage nodejs-material-design-icons # Material Design icons by Google
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage npm # A package manager for javascript
 AddPackage pandoc # Conversion between markup formats
@@ -48,7 +48,9 @@ AddPackage rustup # The Rust toolchain installer
 AddPackage shellcheck # Shell script analysis tool
 AddPackage stack # The Haskell Tool Stack
 AddPackage stow # Manage installation of multiple softwares in the same directory tree
+AddPackage syncthing # Open Source Continuous Replication / Cluster Synchronization Thing
 AddPackage tlp # Linux Advanced Power Management
+AddPackage ttf-roboto # Google's signature family of fonts
 AddPackage unarchiver # unar and lsar
 AddPackage unclutter # A small program for hiding the mouse cursor
 AddPackage xautolock # An automatic X screen-locker/screen-saver
@@ -70,4 +72,6 @@ AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign polybar # A fast and easy-to-use status bar
 AddPackage --foreign tealdeer # An implementation of tldr in Rust
 AddPackage --foreign thermald # The Linux Thermal Daemon program from 01.org
+AddPackage --foreign ttf-iosevka # A slender monospace typeface. Shape
+AddPackage --foreign ttf-material-icons # Google Material Design icon font
 AddPackage --foreign yay # Yet another yogurt. Pacman wrapper and AUR helper written in go.

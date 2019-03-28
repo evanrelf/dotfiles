@@ -16,4 +16,5 @@ if uname -a | grep -qvi "NixOS"; then
 fi
 autocutsel -fork
 dunst &
+compton &
 (sleep 1 && feh --bg-tile ~/.wallpapers/current) &
