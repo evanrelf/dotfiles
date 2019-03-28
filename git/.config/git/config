@@ -100,11 +100,12 @@
 	##########
 	# COMMIT #
 	##########
-	c = "!git commit #"
-	# c = "!if [ $# -eq 0 ]; then git commit; else git commit --message \"$1\"; fi #"
+	c = "!git commit -v #"
+	# c = "!if [ $# -eq 0 ]; then git commit -v; else git commit --message \"$1\"; fi #"
 	amend = commit --amend --no-edit
 	rename = commit --amend
-	undo-commit = reset --soft HEAD^
+	undo-commit = reset --soft HEAD~
+	move-commit = "!git reset --soft HEAD~ && git stash && git checkout $1 && git stash pop #"
 
 	########
 	# PUSH #
@@ -129,7 +130,7 @@
 	# Run a command from the root of the git repo
 	exec = "!exec "
 	# Open website (TODO: doesn't handle HTTPS correctly)
-	home = "!open $(git config --get remote.origin.url | sed -e 's/:/\\//' -e 's/^git@/https:\\/\\//' -e 's/.git$//') #"
+	home = "!open $(git config --get remote.origin.url | sed -e 's|:|/|' -e 's|^git@|https://|' -e 's|.git$||') #"
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=8 -RFX

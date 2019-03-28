@@ -1,3 +1,6 @@
 .DS_Store
 tags
 TAGS
+.stack-work/
+elm-stuff/
+node_modules/

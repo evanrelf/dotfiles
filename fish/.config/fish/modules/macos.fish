@@ -26,3 +26,8 @@ end
 if test -e "/Applications/Marked 2.app"
     alias marked "open -a 'Marked 2.app'"
 end
+
+if test -f /usr/local/share/autojump/autojump.fish
+    source /usr/local/share/autojump/autojump.fish
+end
+

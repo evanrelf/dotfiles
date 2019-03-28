@@ -1,4 +1,3 @@
-alias artifact "~/Code/evan.relf/scripts/artifact/artifact"
 alias gauntlet "~/Code/evan.relf/scripts/gauntlet/gauntlet"
 alias qa "~/Code/evan.relf/scripts/qa/qa"
 alias vpn "~/Code/evan.relf/scripts/vpn/vpn"

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+script_path="$(cd "$(dirname "$0")" || $(echo "Failed to " >&2; exit 1); pwd -P)"
+
+# Install Homebrew
+if ! command -v brew >/dev/null 2>&1; then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Install packages from Brewfile
+brew bundle --file "$script_path/Brewfile"
