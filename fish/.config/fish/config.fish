@@ -107,9 +107,10 @@ function fish_prompt
     echo -n (prompt_pwd)" "
     set_color normal
     # Git
+    set -l branch ""
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
     if test -n "$git_dir"
-        set -l branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
+        set branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
         if test -n "$branch"
             set -l truncated (echo $branch | cut -c 1-35)
             set -l dirty (git status --porcelain)
@@ -135,7 +136,7 @@ function fish_prompt
         set_color red
     end
     # Smart newline
-    if test (math (tput cols) - (prompt_pwd | wc -c)) -lt 40
+    if test (math (tput cols) - \((echo \(prompt_pwd\)" $branch" | wc -c)\)) -lt 40
         echo
     end
     # Prompt character
