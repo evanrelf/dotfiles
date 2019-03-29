@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+IgnorePath '/etc/light'
 IgnorePath '/boot/*'
 IgnorePath '/etc/.pwd.lock'
 IgnorePath '/etc/.updated'

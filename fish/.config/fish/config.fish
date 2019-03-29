@@ -8,9 +8,10 @@ source $HOME/.config/fish/modules/kakoune.fish
 source $HOME/.config/fish/modules/keeb.fish
 if test (uname) = "Darwin"
     source $HOME/.config/fish/modules/macos.fish
-end
-if uname -a | grep -q NixOS
+else if uname -a | grep -q NixOS
     source $HOME/.config/fish/modules/nixos.fish
+else if uname -a | grep -q ARCH
+    source $HOME/.config/fish/modules/arch.fish
 end
 source $HOME/.config/fish/modules/panosoft.fish
 source $HOME/.config/fish/modules/rc.fish
