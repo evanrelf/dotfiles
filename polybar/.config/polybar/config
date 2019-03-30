@@ -15,7 +15,7 @@ width = 100%
 height = 35
 padding = 1
 
-font-0 = Roboto:style=Regular:size=16
+font-0 = Noto Sans Medium:style=Regular:size=15
 font-1 = Material Icons:style=Regular:size=15
 
 line-size = 2
@@ -26,7 +26,7 @@ fixed-center = true
 foreground = ${colors.foreground}
 background = ${colors.background}
 
-modules-left = title
+modules-left = workspaces sep title
 modules-right = volume-alsa sep brightness sep battery sep wifi sep date
 
 tray-position = right

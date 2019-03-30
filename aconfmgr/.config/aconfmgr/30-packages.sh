@@ -23,11 +23,14 @@ AddPackage feh # Fast and light imlib2-based image viewer
 AddPackage firefox # Standalone web browser from mozilla.org
 AddPackage fish # Smart and user friendly shell intended mostly for interactive use
 AddPackage fzf # Command-line fuzzy finder
+AddPackage htop # Interactive process viewer
 AddPackage intel-ucode # Microcode update files for Intel CPUs
 AddPackage kitty # A modern, hackable, featureful, OpenGL based terminal emulator
 AddPackage light # Program to easily change brightness on backlight-controllers.
 AddPackage light # Program to easily change brightness on backlight-controllers.
 AddPackage lvm2 # Logical Volume Manager 2 utilities
+AddPackage lxappearance # Feature-rich GTK+ theme switcher of the LXDE Desktop
+AddPackage materia-gtk-theme # A Material Design theme for GNOME/GTK+ based desktop environments
 AddPackage mosh # Mobile shell, surviving disconnects with local echo and line editing
 AddPackage mupdf # Lightweight PDF and XPS viewer
 AddPackage neofetch # A CLI system information tool written in BASH that supports displaying images.
@@ -54,9 +57,10 @@ AddPackage stack # The Haskell Tool Stack
 AddPackage stow # Manage installation of multiple softwares in the same directory tree
 AddPackage syncthing # Open Source Continuous Replication / Cluster Synchronization Thing
 AddPackage tlp # Linux Advanced Power Management
+AddPackage ttf-dejavu # Font family based on the Bitstream Vera Fonts with a wider range of characters
+AddPackage ttf-inconsolata # Monospace font for pretty code listings and for the terminal
 AddPackage ttf-roboto # Google's signature family of fonts
 AddPackage unarchiver # unar and lsar
-AddPackage unclutter # A small program for hiding the mouse cursor
 AddPackage unzip # For extracting and viewing files in .zip archives
 AddPackage xautolock # An automatic X screen-locker/screen-saver
 AddPackage xclip # Command line interface to the X11 clipboard
@@ -76,7 +80,11 @@ AddPackage zip # Compressor/archiver for creating and modifying zipfiles
 # AUR
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign aura-git # A package manager for Arch Linux and its AUR
+AddPackage --foreign autokey # AutoKey, a desktop automation utility for Linux and X11, updated to run on Python 3
+AddPackage --foreign chromium-vaapi-bin # Chromium with VA-API support to enable hardware acceleration, pre-compiled
 AddPackage --foreign polybar # A fast and easy-to-use status bar
+AddPackage --foreign pop-gtk-theme-bin # System76 Pop GTK+ Theme
+AddPackage --foreign pop-icon-theme-bin # A free and open source SVG icon theme for Linux, based on Paper Icon Set and Papirus.
 AddPackage --foreign tealdeer # An implementation of tldr in Rust
 AddPackage --foreign tectonic # Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
 AddPackage --foreign thermald # The Linux Thermal Daemon program from 01.org
