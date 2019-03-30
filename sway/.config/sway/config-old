@@ -1,54 +1,64 @@
-# VARIABLES {{{1
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
 set $mod Mod4
+# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+# Your preferred terminal emulator
 set $term kitty
-set $menu rofi -show run | xargs swaymsg exec
-set $resize_amount 20px
+# Your preferred application launcher
+# Note: it's recommended that you pass the final command to sway
+set $menu dmenu_path | dmenu | xargs swaymsg exec
 
-
-# INPUTS {{{1
-input "1:1:AT_Translated_Set_2_keyboard" {
-    repeat_delay 200
-    repeat_rate 30
-}
-input "2:7:SynPS/2_Synaptics_TouchPad" {
-    pointer_accel 0.6
-    natural_scroll enabled
-    tap enabled
-    drag disabled
-    drag_lock disabled
-    dwt disabled
-    middle_emulation enabled
-}
-input "2:10:TPPS/2_Elan_TrackPoint" {
-    natural_scroll enabled
-    pointer_accel 0.5
-}
-
-
-# OUTPUTS {{{1
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/evanrelf/dotfiles/wallpapers/.wallpapers/tile/geometric.png tile
-
-exec swayidle -w \
-         timeout 300 'swaylock' \
-         timeout 300 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock'
-
-
-# KEY BINDINGS {{{1
+### Output configuration
 #
-# New:
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
-bindsym $mod+Shift+n move container to workspace next
-bindsym $mod+Shift+p move container to workspace prev
-bindsym $mod+Tab workspace back_and_forth
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' \
+#               resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
 #
 # Basics:
 #
@@ -56,10 +66,10 @@ bindsym $mod+Tab workspace back_and_forth
     bindsym $mod+Return exec $term
 
     # kill focused window
-    bindsym $mod+c kill
+    bindsym $mod+Shift+q kill
 
     # start your launcher
-    bindsym $mod+Slash exec $menu
+    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -69,16 +79,10 @@ bindsym $mod+Tab workspace back_and_forth
     floating_modifier $mod normal
 
     # reload the configuration file
-    bindsym $mod+q reload
-
-    # suspend
-    bindsym $mod+Escape exec 'systemctl suspend'
-
-    # hibernate
-    bindsym $mod+Shift+Escape exec 'systemctl hibernate'
+    bindsym $mod+Shift+c reload
 
     # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -175,16 +179,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width $resize_amount
-    bindsym $down resize grow height $resize_amount
-    bindsym $up resize shrink height $resize_amount
-    bindsym $right resize grow width $resize_amount
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
 
     # ditto, with arrow keys
-    bindsym Left resize shrink width $resize_amount
-    bindsym Down resize grow height $resize_amount
-    bindsym Up resize shrink height $resize_amount
-    bindsym Right resize grow width $resize_amount
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
 
     # return to default mode
     bindsym Return mode "default"
@@ -192,47 +196,22 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-
-# BEHAVIOR {{{1
-focus_wrapping no
-focus_follows_mouse always
-mouse_warping container
-
-
-# APPEARANCE {{{1
-font Noto Sans Medium 15
-default_border pixel
-hide_edge_borders smart
-titlebar_border_thickness 1
-titlebar_padding 5 1
-
-
-# STATUS BAR {{{1
+#
+# Status Bar:
+#
 # Read `man 5 sway-bar` for more information about this section.
-set $color_dimmed #777777
-set $color_white #ffffff
-set $color_black #000000
-
 bar {
-    status_command while date +'%a %b %e %l:%M %p'; do sleep 1; done
     position top
-    # mode hide
-    font Noto Sans Medium 15
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+
     colors {
         statusline #ffffff
-        background #000000
-        focused_workspace $color_black $color_black $color_white
-        inactive_workspace $color_black $color_black $color_dimmed
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
 
-
-# AUTOSTART {{{1
-exec redshift
-
-
-# INCLUDES {{{1
 include /etc/sway/config.d/*
-
-
-# vim: foldenable foldmethod=marker

@@ -43,6 +43,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/sxhkd/sxhkdrc"
             case sway
                 eval $EDITOR "$HOME/.config/sway/config"
+            case swaylock
+                eval $EDITOR "$HOME/.config/swaylock/config"
             case compton
                 eval $EDITOR "$HOME/.config/compton.conf"
             case hammerspoon
@@ -89,7 +91,7 @@ function rc -d "Open the specified program's configuration file"
                 _error "No config defined for '$argv[1]'"
         end
     else
-        _error "No config specified"
+        fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --multi --exact | xargs $EDITOR
     end
 end
-complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway"
+complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock"
