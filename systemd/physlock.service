@@ -1,9 +1,11 @@
 [Unit]
 Description=Activate physlock on suspend
+Before=sleep.target
 
 [Service]
-User=evan
-ExecStart=/usr/bin/physlock
+User=evanrelf
+Type=forking
+ExecStart=/usr/bin/physlock -dm
 
 [Install]
 WantedBy=sleep.target

@@ -23,6 +23,7 @@ AddPackage feh # Fast and light imlib2-based image viewer
 AddPackage firefox # Standalone web browser from mozilla.org
 AddPackage fish # Smart and user friendly shell intended mostly for interactive use
 AddPackage fzf # Command-line fuzzy finder
+AddPackage gdm # Display manager and login screen
 AddPackage htop # Interactive process viewer
 AddPackage intel-ucode # Microcode update files for Intel CPUs
 AddPackage kitty # A modern, hackable, featureful, OpenGL based terminal emulator
