@@ -77,7 +77,8 @@ myKeys =
   , ("M-M1-n", swapTo Next)
   , ("M-M1-p", swapTo Prev)
   , ("M-<Tab>", toggleWS)
-  , ("M-S-q", safeSpawn "xfce4-session-logout" [])
+  -- , ("M-S-q", safeSpawn "xfce4-session-logout" [])
+  , ("M-S-q", io $ exitWith ExitSuccess)
 
   -- Apps
   , ("M-<Return>", safeSpawn (terminal myConfig) [])

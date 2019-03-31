@@ -15,6 +15,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     repeat_rate 30
 }
 input "2:7:SynPS/2_Synaptics_TouchPad" {
+    accel_profile adaptive
     pointer_accel 0.6
     natural_scroll enabled
     tap enabled
@@ -26,6 +27,43 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 input "2:10:TPPS/2_Elan_TrackPoint" {
     natural_scroll enabled
     pointer_accel 0.5
+}
+input * {
+    repeat_delay 200
+    repeat_rate 30
+    natural_scroll enabled
+    pointer_accel 0.5
+}
+
+seat "internal" {
+    attach "1:1:AT_Translated_Set_2_keyboard"
+    attach "2:7:SynPS/2_Synaptics_TouchPad"
+    attach "2:10:TPPS/2_Elan_TrackPoint"
+    attach "6058:20564:ThinkPad_Extra_Buttons"
+    attach "5075:22194:Integrated_Camera:_Integrated_C"
+    attach "0:3:Sleep_Button"
+    attach "0:5:Lid_Switch"
+    attach "0:6:Video_Bus"
+    attach "0:1:Power_Button"
+}
+
+seat "desk" {
+    attach "65261:24672:TADA_TADA68_Keyboard"
+    attach "65261:24672:TADA_TADA68_Consumer_Control"
+    attach "65261:24672:TADA_TADA68_Consumer_Control"
+    attach "65261:24672:TADA_TADA68_System_Control"
+    attach "65261:24672:TADA_TADA68_Mouse"
+    attach "65261:24672:TADA_TADA68"
+    attach "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall"
+    attach "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Consumer_Control"
+    attach "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Consumer_Control"
+    attach "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_System_Control"
+    attach "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Mouse"
+    attach "9770:4168:Yoyodyne_Consulting_JDS_Labs_Element_DAC"
+}
+
+seat "other" {
+    fallback true
 }
 
 
@@ -42,13 +80,23 @@ exec swayidle -w \
 
 # KEY BINDINGS {{{1
 #
-# New:
+# Relative:
 #
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
-bindsym $mod+Shift+n move container to workspace next
-bindsym $mod+Shift+p move container to workspace prev
-bindsym $mod+Tab workspace back_and_forth
+    bindsym $mod+n workspace next
+    bindsym $mod+p workspace prev
+    bindsym $mod+Shift+n move container to workspace next
+    bindsym $mod+Shift+p move container to workspace prev
+    bindsym $mod+Tab workspace back_and_forth
+#
+# Media:
+#
+    # Brightness
+    bindsym XF86MonBrightnessDown exec 'light -U 3'
+    bindsym XF86MonBrightnessUp exec 'light -A 3'
+    # Volume
+    bindsym XF86AudioLowerVolume exec 'amixer -q sset Master 10%-'
+    bindsym XF86AudioRaiseVolume exec 'amixer -q sset Master 10%+'
+    bindsym XF86AudioMute exec 'amixer -q sset Master toggle'
 #
 # Basics:
 #

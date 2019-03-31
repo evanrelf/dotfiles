@@ -188,15 +188,10 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
     end
 end
 
-# jump {{{2
-if _exists jump; status --is-interactive
-    and source (jump shell fish | psub)
-end
-
 # No display manager {{{2
 if test (tty) = "/dev/tty1"; and _exists startx
     if _exists sway
-        sway >/dev/null 2>&1
+        sway
     else
         startx
     end
