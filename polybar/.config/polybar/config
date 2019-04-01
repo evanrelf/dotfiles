@@ -12,6 +12,7 @@ foreground = #CCCCCC
 background = #000000
 dimmed = #777777
 highlight = #5294E2
+error = #df6470
 
 [bar/bar]
 monitor = ${env:MONITOR:}
@@ -32,7 +33,7 @@ foreground = ${colors.foreground}
 background = ${colors.background}
 
 modules-left = workspaces sep title
-modules-right = volume-alsa sep brightness sep battery sep wifi sep date
+modules-right = volume-alsa sep brightness sep battery sep wireguard sep wifi sep date
 
 tray-position = right
 tray-maxsize = 32
@@ -95,6 +96,11 @@ label-muted = Muted
 type = internal/mpd
 host = 127.0.0.1
 port = 6600
+
+[module/wireguard]
+type = custom/script
+exec = "wg show >/dev/null 2>&1 && echo '%{F#df6470} Insecure%{F-}' || echo ' Secure'"
+interval = 10
 
 [module/wifi]
 type = internal/network

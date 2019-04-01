@@ -1,5 +1,3 @@
-{-# ANN module "HLint: ignore Redundant return" #-}
-
 -- Miscellaneous
 import Data.Function ((&))
 import Data.Maybe (isJust)
@@ -9,7 +7,7 @@ import XMonad.Config.Desktop (desktopConfig)
 import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
 import qualified XMonad.StackSet as W
 -- Actions
-import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS)
+import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), doTo, moveTo, shiftTo, toggleWS)
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
 import XMonad.Actions.SinkAll (sinkAll)
 import XMonad.Actions.SwapWorkspaces (Direction1D(..), swapTo)
@@ -33,6 +31,7 @@ import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeym
 import XMonad.Util.Loggers (logCmd)
 import XMonad.Util.Run (safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
+import XMonad.Util.WorkspaceCompare (getSortByIndex)
 import qualified XMonad.Util.Themes as Themes
 
 main = xmonad myConfig
@@ -69,6 +68,7 @@ myRemoveKeys =
   ]
 
 myKeys =
+  let moveTo' dir t = doTo dir t getSortByIndex (windows . W.view) in
   -- Windows
   [ ("M-S-m", windows swapMaster)
   , ("M-c", kill)
@@ -99,10 +99,10 @@ myKeys =
   , ("<XF86AudioMute>", safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
   ]
   <>
-  -- Add 10th workspace, use `view` instead of `greedyView`
+  -- Add 10th workspace
   [ ("M-" <> mod <> [key], (windows . action) tag)
     | (tag, key) <- zip (workspaces myConfig) "1234567890"
-    , (mod, action) <- [ ("", W.view), ("S-", W.shift) ]
+    , (mod, action) <- [ ("", W.greedyView), ("S-", W.shift) ]
   ]
 
 myMouse =
@@ -113,7 +113,7 @@ myStartupHook = do
   return () -- Do not remove
   checkKeymap myConfig myKeys
   adjustEventInput
-  spawnOnce "polybar -r bar"
+  spawnOnce "~/.config/polybar/start"
 
 myLayoutHook =
   let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
@@ -144,3 +144,5 @@ myTheme = Themes.xmonadTheme
     , Deco.decoHeight = 30
     }
   }
+
+{-# ANN module "HLint: ignore Redundant return" #-}

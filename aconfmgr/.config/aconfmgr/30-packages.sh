@@ -82,6 +82,8 @@ AddPackage ttf-inconsolata # Monospace font for pretty code listings and for the
 AddPackage ttf-roboto # Google's signature family of fonts
 AddPackage unarchiver # unar and lsar
 AddPackage unzip # For extracting and viewing files in .zip archives
+AddPackage wireguard-arch # Wireguard module for Arch Kernel
+AddPackage wireguard-tools # next generation secure network tunnel
 AddPackage xautolock # An automatic X screen-locker/screen-saver
 AddPackage xclip # Command line interface to the X11 clipboard
 AddPackage xf86-video-intel # X.org Intel i810/i830/i915/945G/G965+ video drivers

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 IgnorePath '/boot/*'
+IgnorePath '/etc/*.bak'
 IgnorePath '/etc/.pwd.lock'
 IgnorePath '/etc/.updated'
 IgnorePath '/etc/NetworkManager/system-connections/*.nmconnection'
@@ -31,6 +32,7 @@ IgnorePath '/etc/systemd/system/*.service'
 IgnorePath '/etc/systemd/system/*.target'
 IgnorePath '/etc/systemd/system/*.target.wants'
 IgnorePath '/etc/systemd/user/*.target.wants'
+IgnorePath '/etc/wireguard/*.conf'
 IgnorePath '/etc/xml/catalog'
 IgnorePath '/opt/containerd/*'
 IgnorePath '/usr/bin/__pycache__/*'

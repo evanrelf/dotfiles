@@ -23,4 +23,4 @@ fi
 autocutsel -fork
 dunst &
 (sleep 1 && feh --bg-tile ~/.wallpapers/current) &
-(sleep 1 && autokey-gtk) &
+autorandr --change --default default
