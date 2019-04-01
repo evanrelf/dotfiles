@@ -4,7 +4,11 @@
 AddPackageGroup base
 AddPackageGroup base-devel
 
-# Sway
+# Uncertain
+AddPackage mpc # Minimalist command line interface to MPD
+AddPackage mpd # Flexible, powerful, server-side application for playing music
+AddPackage ncmpcpp # Almost exact clone of ncmpc with some new features
+AddPackage sonata # Elegant GTK+ music client for MPD
 AddPackage sway # Tiling Wayland compositor and replacement for the i3 window manager
 AddPackage swayidle # Idle management daemon for Wayland
 AddPackage swaylock # Screen locker for Wayland
@@ -14,8 +18,10 @@ AddPackage xorg-server-xwayland # run X clients under wayland
 AddPackage acpi # Client for battery, power, and thermal readings
 AddPackage alsa-utils # An alternative implementation of Linux sound support
 AddPackage alsa-utils # An alternative implementation of Linux sound support
+AddPackage arandr # Provide a simple visual front end for XRandR 1.2.
 AddPackage autocutsel # synchronizes the two copy/paste buffers mainly used by X applications
 AddPackage autojump # A faster way to navigate your filesystem from the command line
+AddPackage autorandr # Auto-detect connected display hardware and load appropiate X11 setup using xrandr
 AddPackage btrfs-progs # Btrfs filesystem utilities
 AddPackage clang # C language family frontend for LLVM
 AddPackage compton # X compositor that may fix tearing issues
@@ -43,9 +49,11 @@ AddPackage lxappearance # Feature-rich GTK+ theme switcher of the LXDE Desktop
 AddPackage materia-gtk-theme # A Material Design theme for GNOME/GTK+ based desktop environments
 AddPackage mosh # Mobile shell, surviving disconnects with local echo and line editing
 AddPackage mupdf # Lightweight PDF and XPS viewer
+AddPackage nemo # Cinnamon file manager (Nautilus fork)
 AddPackage neofetch # A CLI system information tool written in BASH that supports displaying images.
 AddPackage neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
 AddPackage networkmanager # Network connection manager and user applications
+AddPackage nnn # The fastest terminal file manager ever written.
 AddPackage nodejs # Evented I/O for V8 javascript
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage npm # A package manager for javascript
@@ -95,7 +103,6 @@ AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign aura-git # A package manager for Arch Linux and its AUR
 AddPackage --foreign chromium-vaapi-bin # Chromium with VA-API support to enable hardware acceleration, pre-compiled
 AddPackage --foreign polybar # A fast and easy-to-use status bar
-AddPackage --foreign pop-gtk-theme-bin # System76 Pop GTK+ Theme
 AddPackage --foreign pop-icon-theme-bin # A free and open source SVG icon theme for Linux, based on Paper Icon Set and Papirus.
 AddPackage --foreign spotify # A proprietary music streaming service
 AddPackage --foreign tealdeer # An implementation of tldr in Rust

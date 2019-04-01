@@ -1,10 +1,13 @@
+{-# ANN module "HLint: ignore Redundant return" #-}
+
 -- Miscellaneous
 import Data.Function ((&))
 import Data.Maybe (isJust)
-import System.Exit (ExitCode(..), exitWith)
+import System.Exit (exitSuccess)
 import XMonad
 import XMonad.Config.Desktop (desktopConfig)
 import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
+import qualified XMonad.StackSet as W
 -- Actions
 import XMonad.Actions.CycleWS (Direction1D(..), WSType(..), moveTo, shiftTo, toggleWS)
 import XMonad.Actions.FlexibleResize (mouseResizeEdgeWindow)
@@ -36,7 +39,7 @@ main = xmonad myConfig
 
 myConfig = desktopConfig
   { terminal = "kitty"
-  , workspaces = show <$> [1..9]
+  , workspaces = show <$> [1..10]
   , focusFollowsMouse = True
   , clickJustFocuses = True
   , borderWidth = 2
@@ -46,11 +49,12 @@ myConfig = desktopConfig
   , layoutHook = myLayoutHook
   , manageHook = myManageHook <> manageHook desktopConfig
   , handleEventHook = myHandleEventHook <> handleEventHook desktopConfig
+  , logHook = myLogHook <> logHook desktopConfig
   , modMask = myModMask
   }
-  & (flip removeKeysP) myRemoveKeys
-  & (flip additionalKeysP) myKeys
-  & (flip additionalMouseBindings) myMouse
+  & flip removeKeysP myRemoveKeys
+  & flip additionalKeysP myKeys
+  & flip additionalMouseBindings myMouse
   & docks
 
 myModMask = mod4Mask
@@ -78,7 +82,7 @@ myKeys =
   , ("M-M1-p", swapTo Prev)
   , ("M-<Tab>", toggleWS)
   -- , ("M-S-q", safeSpawn "xfce4-session-logout" [])
-  , ("M-S-q", io $ exitWith ExitSuccess)
+  , ("M-S-q", io exitSuccess)
 
   -- Apps
   , ("M-<Return>", safeSpawn (terminal myConfig) [])
@@ -94,9 +98,15 @@ myKeys =
   , ("<XF86AudioRaiseVolume>", safeSpawn "amixer" ["-q", "sset", "Master", "10%+"])
   , ("<XF86AudioMute>", safeSpawn "amixer" ["-q", "sset", "Master", "toggle"])
   ]
+  <>
+  -- Add 10th workspace, use `view` instead of `greedyView`
+  [ ("M-" <> mod <> [key], (windows . action) tag)
+    | (tag, key) <- zip (workspaces myConfig) "1234567890"
+    , (mod, action) <- [ ("", W.view), ("S-", W.shift) ]
+  ]
 
 myMouse =
-  [ ((myModMask, button3), (\w -> focus w >> mouseResizeEdgeWindow (1/2) w))
+  [ ((myModMask, button3), \w -> focus w >> mouseResizeEdgeWindow (1/2) w)
   ]
 
 myStartupHook = do
@@ -117,6 +127,8 @@ myManageHook = manageDocks <> insertPosition Below Newer
 
 myHandleEventHook = focusOnMouseMove <> fullscreenEventHook
 
+myLogHook = updatePointer (0.5, 0.5) (0, 0)
+
 myTheme = Themes.xmonadTheme
   { Themes.theme = def
     { Deco.activeColor = "black"
@@ -132,5 +144,3 @@ myTheme = Themes.xmonadTheme
     , Deco.decoHeight = 30
     }
   }
-
-{-# ANN module "HLint: Redundant return" #-}

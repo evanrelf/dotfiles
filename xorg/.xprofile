@@ -13,6 +13,8 @@ if uname -a | grep -qvi "NixOS"; then
   xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.7
   xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Natural Scrolling Enabled" 1
   xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.2
+  xinput --set-prop "ELECOM TrackBall Mouse DEFT Pro TrackBall Mouse" "libinput Natural Scrolling Enabled" 1
+  xinput --set-prop "ELECOM TrackBall Mouse DEFT Pro TrackBall Mouse" "libinput Accel Speed" -0.3
   redshift &
   xbanish &
   xautolock -locker "systemctl suspend" -time 5 &

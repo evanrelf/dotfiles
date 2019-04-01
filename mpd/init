@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/Music
+mkdir -p ~/.config/mpd/playlists

@@ -4,6 +4,9 @@
 ; https://material.io/tools/icons/
 ; https://github.com/google/material-design-icons/blob/master/iconfont/codepoints
 
+[settings]
+screenchange-reload = false
+
 [colors]
 foreground = #CCCCCC
 background = #000000
@@ -11,6 +14,8 @@ dimmed = #777777
 highlight = #5294E2
 
 [bar/bar]
+monitor = ${env:MONITOR:}
+monitor-fallback = eDP1
 width = 100%
 height = 35
 padding = 1
@@ -61,10 +66,11 @@ time-format = %-H:%M
 full-at = 95
 poll-interval = 30
 label-discharging = " %percentage%%"
-label-charging = " %percentage%%"
 ; label-discharging = " %percentage%% (%time%)"
-; label-charging = " %percentage%% (%time%)"
-label-full = " %percentage%%"
+; label-charging = " %percentage%%"
+label-charging = " %percentage%% (%time%)"
+; label-full = " %percentage%%"
+label-full = " Charged"
 
 [module/volume]
 type = internal/pulseaudio
@@ -85,6 +91,11 @@ ramp-headphones-0 = 
 ramp-headphones-1 = 
 label-muted = Muted
 
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+
 [module/wifi]
 type = internal/network
 interface = wlp2s0
@@ -97,6 +108,8 @@ interface = enp0s31f6
 
 [module/title]
 type = internal/xwindow
+label = %title%
+label-empty = XMonad
 
 [module/workspaces]
 type = internal/xworkspaces

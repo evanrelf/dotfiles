@@ -14,12 +14,15 @@ command -v stow >/dev/null 2>&1 || error "stow is not installed"
 if [ $# -gt 0 ]; then
   for i in "$@"; do
     log "Installing '$i'..."
-    if [ -f "$i/install" ]; then
-      bash "$i/install"
-    elif [ -f "$i/stow-ignore" ]; then
+    if [ -f "$i/stow-ignore" ]; then
       log "Cannot auto-install package '$i'"
-      exit 1
+    elif [ -f "$i/install" ]; then
+      bash "$i/install"
     else
+      if [ -f "$i/init" ]; then
+        log "Running init script for package '$i'"
+        bash "$i/init"
+      fi
       case $i in
         fish )
           if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" == "Darwin" ]; then
@@ -59,7 +62,7 @@ if [ $# -gt 0 ]; then
           fi
           ;;
       esac
-      stow --no-folding --target "$HOME" -S "$i"
+      stow --no-folding --target "$HOME" -S "$i" --ignore "init" --ignore "install"
     fi
   done
 else
