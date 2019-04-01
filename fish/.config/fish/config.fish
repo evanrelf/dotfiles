@@ -190,11 +190,11 @@ end
 
 # No display manager {{{2
 if test (tty) = "/dev/tty1"; and _exists startx
-    if _exists sway
-        sway
-    else
+    # if _exists sway
+    #     sway
+    # else
         startx
-    end
+    # end
     exit 0
 end
 
