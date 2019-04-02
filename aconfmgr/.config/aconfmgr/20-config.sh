@@ -15,6 +15,7 @@ echo 'LANG=en_US.UTF-8' > "$(CreateFile /etc/locale.conf)"
 sed -i \
   -e 's/^#\(Color\)/\1/g' \
   -e 's/^#\(VerbosePkgLists\)/\1/g' \
+  -e 's/^#\(UseDelta\)/\1/g' \
   "$(GetPackageOriginalFile pacman /etc/pacman.conf)"
 
 # /etc/localtime

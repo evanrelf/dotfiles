@@ -58,12 +58,12 @@ AddPackage nodejs # Evented I/O for V8 javascript
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage npm # A package manager for javascript
 AddPackage pandoc # Conversion between markup formats
-AddPackage physlock # Lightweight Linux console locking tool
 AddPackage powertop # A tool to diagnose issues with power consumption and power management
 AddPackage pulseaudio # A featureful, general-purpose sound server
 AddPackage pulseaudio # A featureful, general-purpose sound server
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
+AddPackage rclone # Sync files to and from Google Drive, S3, Swift, Cloudfiles, Dropbox and Google Cloud Storage
 AddPackage redshift # Adjusts the color temperature of your screen according to your surroundings.
 AddPackage ripgrep # A search tool that combines the usability of ag with the raw speed of grep
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
@@ -86,6 +86,7 @@ AddPackage wireguard-arch # Wireguard module for Arch Kernel
 AddPackage wireguard-tools # next generation secure network tunnel
 AddPackage xautolock # An automatic X screen-locker/screen-saver
 AddPackage xclip # Command line interface to the X11 clipboard
+AddPackage xdelta3 # Diff utility which works with binary files
 AddPackage xf86-video-intel # X.org Intel i810/i830/i915/945G/G965+ video drivers
 AddPackage xmonad # Lightweight X11 tiled window manager written in Haskell
 AddPackage xmonad-contrib # Add-ons for xmonad

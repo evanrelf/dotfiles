@@ -29,15 +29,17 @@ import XMonad.Layout.Tabbed (shrinkText, tabbed)
 -- Utilities
 import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings, checkKeymap, removeKeysP)
 import XMonad.Util.Loggers (logCmd)
+import XMonad.Util.Paste (sendKey)
 import XMonad.Util.Run (safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
-import XMonad.Util.WorkspaceCompare (getSortByIndex)
 import qualified XMonad.Util.Themes as Themes
+import XMonad.Util.WindowProperties (Property(..), focusedHasProperty)
+import XMonad.Util.WorkspaceCompare (getSortByIndex)
 
 main = xmonad myConfig
 
 myConfig = desktopConfig
-  { terminal = "kitty"
+  { terminal = "/home/evanrelf/.config/kitty/launch"
   , workspaces = show <$> [1..10]
   , focusFollowsMouse = True
   , clickJustFocuses = True
@@ -58,7 +60,7 @@ myConfig = desktopConfig
 
 myModMask = mod4Mask
 
-myFont = "xft:Roboto:style=Regular:size=12:antialias=true"
+myFont = "xft:Roboto:style=Regular:size=14:antialias=true"
 
 myRemoveKeys =
   -- Rebound
@@ -85,7 +87,15 @@ myKeys =
   , ("M-S-q", io exitSuccess)
 
   -- Apps
-  , ("M-<Return>", safeSpawn (terminal myConfig) [])
+  -- , ("M-<Return>", safeSpawn (terminal myConfig) [])
+  , ("M-<Return>", do
+      kitty <- focusedHasProperty $ ClassName "kitty"
+      if kitty then
+        -- sendKey (controlMask .|. shiftMask) xK_n
+        safeSpawn (terminal myConfig) []
+      else
+        safeSpawn (terminal myConfig) []
+    )
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
 
