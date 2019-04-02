@@ -1,0 +1,8 @@
+[Unit]
+Description=Perform Tarsnap backup
+
+[Service]
+Type=oneshot
+# ExecStart=/usr/bin/notify-send "Tarsnap" "Backup started"
+ExecStart=/root/tarsnap-backup.sh
+# ExecStart=/usr/bin/notify-send "Tarsnap" "Backup completed"

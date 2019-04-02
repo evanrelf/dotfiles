@@ -1,8 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # /etc/systemd/logind.conf
 sed -i 's/^#HandlePowerKey=poweroff/HandlePowerKey=suspend/g' \
   "$(GetPackageOriginalFile systemd /etc/systemd/logind.conf)"
+
+# /etc/systemd/sleep.conf
+sed -i \
+  -e 's/^#SuspendMode=/SuspendMode=suspend/g' \
+  -e 's/^#SuspendState=.*/SuspendState=disk/g' \
+  "$(GetPackageOriginalFile systemd /etc/systemd/sleep.conf)"
 
 # /etc/locale.gen
 sed -i 's/^#\(en_US.UTF-8\)/\1/g' \

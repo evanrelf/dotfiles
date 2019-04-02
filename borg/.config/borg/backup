@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -euo pipefail
+
+# Requires that the following environment variables are set:
+# - BORG_REPO="username@host:borg/repo/path"
+# - BORG_PASSPHRASE="hunter2"
+# - BORG_REMOTE_PATH="/path/to/remote/borg"
+
+archive="$(hostname)-$(date "+%Y-%m-%d_%H-%M-%S")"
+path="/home"
+
+/usr/bin/borg create ::"$archive" "$path"
+/usr/bin/borg prune ::"$archive" --keep-daily=30 --keep-weekly=8 --keep-monthly=12
+
+# To restore: borg extract <borg-repo>::<hostname>-<date>

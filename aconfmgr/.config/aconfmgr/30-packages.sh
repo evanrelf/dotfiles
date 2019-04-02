@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Groups
 AddPackageGroup base
@@ -22,6 +22,7 @@ AddPackage arandr # Provide a simple visual front end for XRandR 1.2.
 AddPackage autocutsel # synchronizes the two copy/paste buffers mainly used by X applications
 AddPackage autojump # A faster way to navigate your filesystem from the command line
 AddPackage autorandr # Auto-detect connected display hardware and load appropiate X11 setup using xrandr
+AddPackage borg # Deduplicating backup program with compression and authenticated encryption
 AddPackage btrfs-progs # Btrfs filesystem utilities
 AddPackage clang # C language family frontend for LLVM
 AddPackage compton # X compositor that may fix tearing issues

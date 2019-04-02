@@ -1,0 +1,11 @@
+[Unit]
+Description=Trigger Tarsnap backup
+
+[Timer]
+# Every 4 hours, at a random time in a 30 minute window
+OnCalendar=0/4:00:00
+RandomizedDelaySec=1800
+Persistent=true
+
+[Install]
+WantedBy=timers.target
