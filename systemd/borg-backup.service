@@ -1,0 +1,7 @@
+[Unit]
+Description=Perform Borg backup
+
+[Service]
+Type=oneshot
+EnvironmentFile=/home/evanrelf/.config/borg/env
+ExecStart=/home/evanrelf/.config/borg/backup

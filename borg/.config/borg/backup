@@ -7,11 +7,32 @@ set -euo pipefail
 # - BORG_PASSPHRASE="hunter2"
 # - BORG_REMOTE_PATH="/path/to/remote/borg"
 
-exclude_file="/home/evanrelf/.config/borg/exclude"
-archive_name="$(hostname)-$(date "+%Y-%m-%d_%H-%M-%S")"
-path="/home"
+if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" ]; then
+  echo "Environment variables are not configured correctly" >&2
+  exit 1
+fi
 
-/usr/bin/borg --exclude-from "$exclude_file" create ::"$archive_name" "$path"
-/usr/bin/borg prune ::"$archive_name" --keep-daily=30 --keep-weekly=8 --keep-monthly=12
+notify-send "Borg" "Backup starting"
+/usr/bin/borg \
+  --verbose \
+  create \
+  --stats \
+  --exclude-from "/home/evanrelf/.config/borg/exclude" \
+  --compression zstd,10 \
+  ::"$(hostname)-$(date "+%Y-%m-%d_%H-%M")" \
+  "/home/evanrelf" \
+  || (notify-send --urgency=critical "Borg" "Backup failed to complete"; exit 1)
+notify-send "Borg" "Backup finished successfully"
 
-# To restore: borg extract <borg-repo>::<hostname>-<date>
+notify-send "Borg" "Pruning backups"
+/usr/bin/borg \
+  --verbose \
+  prune \
+  --stats \
+  --save-space \
+  --keep-hourly=24 \
+  --keep-daily=30 \
+  --keep-weekly=8 \
+  --keep-monthly=12 \
+  || (notify-send --urgency=critical "Borg" "Pruning failed to complete"; exit 1)
+notify-send "Borg" "Pruning finished successfully"

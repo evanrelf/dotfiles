@@ -39,7 +39,8 @@ import XMonad.Util.WorkspaceCompare (getSortByIndex)
 main = xmonad myConfig
 
 myConfig = desktopConfig
-  { terminal = "/home/evanrelf/.config/kitty/launch"
+  -- { terminal = "/home/evanrelf/.config/kitty/launch"
+  { terminal = "kitty"
   , workspaces = show <$> [1..10]
   , focusFollowsMouse = True
   , clickJustFocuses = True

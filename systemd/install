@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -euo pipefail
+
+mode="$1"
+file="$(realpath "$2")"
+
+if [ -f "$file" ]; then
+  case "$mode" in
+    user )
+      echo "Linking '$2' to '~/.config/systemd/user/$(basename "$file")'"
+      mkdir -p ~/.config/systemd/user/
+      cd ~/.config/systemd/user/ || exit 1
+      ln -s "$(realpath --relative-to "." "$file")" "$(basename "$file")"
+      cd - || exit 1
+      ;;
+    system )
+      echo "Linking '$2' to '/etc/systemd/system/$(basename "$file")'"
+      cd /etc/systemd/system/ || exit 1
+      sudo ln -s "$(realpath --relative-to "." "$file")" "$(basename "$file")"
+      cd - || exit 1
+      ;;
+    * )
+      echo "Invalid mode '$mode'" >&2
+      echo "Usage: ./install (user | system) FILE" >&2
+      exit 1
+      ;;
+  esac
+else
+  echo "File '$file' does not exist" >&2
+  exit 1
+fi
+
