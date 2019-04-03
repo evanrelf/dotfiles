@@ -1,0 +1,12 @@
+.local/share/Trash
+.cache
+.stack
+.stack-work
+.ghc
+.elm
+elm-stuff
+.npm
+.node_modules
+node_modules
+.rustup
+.cargo

@@ -7,10 +7,11 @@ set -euo pipefail
 # - BORG_PASSPHRASE="hunter2"
 # - BORG_REMOTE_PATH="/path/to/remote/borg"
 
-archive="$(hostname)-$(date "+%Y-%m-%d_%H-%M-%S")"
+exclude_file="/home/evanrelf/.config/borg/exclude"
+archive_name="$(hostname)-$(date "+%Y-%m-%d_%H-%M-%S")"
 path="/home"
 
-/usr/bin/borg create ::"$archive" "$path"
-/usr/bin/borg prune ::"$archive" --keep-daily=30 --keep-weekly=8 --keep-monthly=12
+/usr/bin/borg --exclude-from "$exclude_file" create ::"$archive_name" "$path"
+/usr/bin/borg prune ::"$archive_name" --keep-daily=30 --keep-weekly=8 --keep-monthly=12
 
 # To restore: borg extract <borg-repo>::<hostname>-<date>
