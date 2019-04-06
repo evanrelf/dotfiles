@@ -3,7 +3,7 @@ Description=Activate physlock on suspend
 Before=sleep.target
 
 [Service]
-User=evanrelf
+User=%I
 Type=forking
 ExecStart=/usr/bin/physlock -dm
 

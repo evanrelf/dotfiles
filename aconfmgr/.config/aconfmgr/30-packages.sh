@@ -41,6 +41,7 @@ AddPackage fwupd # A simple daemon to allow session software to update firmware
 AddPackage fzf # Command-line fuzzy finder
 AddPackage hlint # Source code suggestions
 AddPackage htop # Interactive process viewer
+AddPackage i3lock # Improved screenlocker based upon XCB and PAM
 AddPackage intel-ucode # Microcode update files for Intel CPUs
 AddPackage kitty # A modern, hackable, featureful, OpenGL based terminal emulator
 AddPackage light # Program to easily change brightness on backlight-controllers.
@@ -58,7 +59,6 @@ AddPackage nnn # The fastest terminal file manager ever written.
 AddPackage nodejs # Evented I/O for V8 javascript
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage npm # A package manager for javascript
-AddPackage pandoc # Conversion between markup formats
 AddPackage powertop # A tool to diagnose issues with power consumption and power management
 AddPackage pulseaudio # A featureful, general-purpose sound server
 AddPackage pulseaudio # A featureful, general-purpose sound server
@@ -71,7 +71,6 @@ AddPackage rofi # A window switcher, application launcher and dmenu replacement
 AddPackage rsync # A file transfer program to keep remote files in sync
 AddPackage rustup # The Rust toolchain installer
 AddPackage scrot # Simple command-line screenshot utility for X
-AddPackage shellcheck # Shell script analysis tool
 AddPackage stack # The Haskell Tool Stack
 AddPackage stow # Manage installation of multiple softwares in the same directory tree
 AddPackage sxiv # Simple X Image Viewer
@@ -106,8 +105,10 @@ AddPackage zip # Compressor/archiver for creating and modifying zipfiles
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign aura-git # A package manager for Arch Linux and its AUR
 AddPackage --foreign chromium-vaapi-bin # Chromium with VA-API support to enable hardware acceleration, pre-compiled
+AddPackage --foreign pandoc-bin # Pandoc - executable only, without 750MB Haskell depends/makedepends
 AddPackage --foreign polybar # A fast and easy-to-use status bar
 AddPackage --foreign pop-icon-theme-bin # A free and open source SVG icon theme for Linux, based on Paper Icon Set and Papirus.
+AddPackage --foreign shellcheck-static ## shellcheck, without the 130MB haskell dependencies
 AddPackage --foreign spotify # A proprietary music streaming service
 AddPackage --foreign tealdeer # An implementation of tldr in Rust
 AddPackage --foreign tectonic # Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive

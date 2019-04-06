@@ -2,8 +2,16 @@
 
 set -euo pipefail
 
+# Usage: ./install MODE FILE [EXTRA]
+
 mode="$1"
 file="$(realpath "$2")"
+extra="${3:-}"
+
+# something@.service -> something@username.service
+if basename "$file" | grep -q "@\."; then
+  file=$(echo "$file" | sed "s/@\./@$extra\./")
+fi
 
 if [ -f "$file" ]; then
   case "$mode" in

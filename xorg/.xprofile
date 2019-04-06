@@ -17,7 +17,12 @@ if uname -a | grep -qvi "NixOS"; then
   xinput --set-prop "ELECOM TrackBall Mouse DEFT Pro TrackBall Mouse" "libinput Accel Speed" -0.3
   redshift &
   xbanish &
-  xautolock -locker "systemctl suspend" -time 5 &
+  xautolock \
+    -notify 10 \
+    -notifier "notify-send 'Suspending in 10 seconds...'" \
+    -locker "systemctl suspend" \
+    -time 5 \
+    -detectsleep &
   compton &
 fi
 autocutsel -fork

@@ -2,7 +2,7 @@
 
 # Config
 mac_dir="$HOME/Library/Application Support/Code/User"
-linux_dir="$HOME/.vscode/User"
+linux_dir="$HOME/.config/Code - OSS/User"
 
 install_dir=""
 

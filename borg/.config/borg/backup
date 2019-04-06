@@ -7,12 +7,17 @@ set -euo pipefail
 # - BORG_PASSPHRASE="hunter2"
 # - BORG_REMOTE_PATH="/path/to/remote/borg"
 
+# Check that environment variables are set
 if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" ]; then
   echo "Environment variables are not configured correctly" >&2
   exit 1
 fi
 
-notify-send "Borg" "Backup starting"
+# Wait for Wi-Fi connection when resuming
+ping -c 2 -w 30 rsync.net >/dev/null 2>&1 \
+  || (notify-send --urgency=critical "Borg" "Failed to connect to rsync.net")
+
+# Backup
 /usr/bin/borg \
   --verbose \
   create \
@@ -22,9 +27,10 @@ notify-send "Borg" "Backup starting"
   ::"$(hostname)-$(date "+%Y-%m-%d_%H-%M")" \
   "/home/evanrelf" \
   || (notify-send --urgency=critical "Borg" "Backup failed to complete"; exit 1)
+
 notify-send "Borg" "Backup finished successfully"
 
-notify-send "Borg" "Pruning backups"
+# Prune
 /usr/bin/borg \
   --verbose \
   prune \
@@ -35,4 +41,3 @@ notify-send "Borg" "Pruning backups"
   --keep-weekly=8 \
   --keep-monthly=12 \
   || (notify-send --urgency=critical "Borg" "Pruning failed to complete"; exit 1)
-notify-send "Borg" "Pruning finished successfully"

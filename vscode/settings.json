@@ -25,6 +25,7 @@
     "vim.hlsearch": true,
     "vim.leader": "<space>",
     "vim.substituteGlobalFlag": true,
+    "window.zoomLevel": 2,
     "workbench.activityBar.visible": true,
     "workbench.editor.showIcons": false,
     "workbench.iconTheme": "vs-minimal",
@@ -62,5 +63,5 @@
     },
     "editor.lineHeight": 16,
     "languageServerHaskell.trace.server": "verbose",
-    "vim.neovimPath": "/usr/local/bin/nvim"
+    "vim.neovimPath": "/usr/bin/nvim"
 }
