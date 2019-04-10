@@ -33,7 +33,7 @@ foreground = ${colors.foreground}
 background = ${colors.background}
 
 modules-left = workspaces sep title
-modules-right = volume-alsa sep brightness sep battery sep wireguard sep wifi sep date
+modules-right = volume sep brightness sep battery sep wireguard sep wifi sep date
 
 tray-position = right
 tray-maxsize = 32
@@ -75,7 +75,7 @@ label-full = " Charged"
 
 [module/volume]
 type = internal/pulseaudio
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+; sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 label-volume = " %percentage%%"
 label-muted = " Muted"
 

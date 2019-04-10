@@ -15,7 +15,7 @@ fi
 
 # Wait for Wi-Fi connection when resuming
 ping -c 2 -w 30 rsync.net >/dev/null 2>&1 \
-  || (notify-send --urgency=critical "Borg" "Failed to connect to rsync.net")
+  || (notify-send --urgency=critical "Borg" "Failed to connect to rsync.net"; exit 1)
 
 # Backup
 /usr/bin/borg \

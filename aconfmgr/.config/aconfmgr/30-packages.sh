@@ -22,6 +22,8 @@ AddPackage arandr # Provide a simple visual front end for XRandR 1.2.
 AddPackage autocutsel # synchronizes the two copy/paste buffers mainly used by X applications
 AddPackage autojump # A faster way to navigate your filesystem from the command line
 AddPackage autorandr # Auto-detect connected display hardware and load appropiate X11 setup using xrandr
+AddPackage bluez # Daemons for the bluetooth protocol stack
+AddPackage bluez-utils # Development and debugging utilities for the bluetooth protocol stack
 AddPackage borg # Deduplicating backup program with compression and authenticated encryption
 AddPackage btrfs-progs # Btrfs filesystem utilities
 AddPackage clang # C language family frontend for LLVM
@@ -59,18 +61,24 @@ AddPackage nnn # The fastest terminal file manager ever written.
 AddPackage nodejs # Evented I/O for V8 javascript
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage npm # A package manager for javascript
+AddPackage pandoc # Conversion between markup formats
+AddPackage parallel # A shell tool for executing jobs in parallel
+AddPackage pavucontrol # PulseAudio Volume Control
 AddPackage powertop # A tool to diagnose issues with power consumption and power management
 AddPackage pulseaudio # A featureful, general-purpose sound server
 AddPackage pulseaudio # A featureful, general-purpose sound server
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
+AddPackage pulseaudio-bluetooth # Bluetooth support for PulseAudio
 AddPackage rclone # Sync files to and from Google Drive, S3, Swift, Cloudfiles, Dropbox and Google Cloud Storage
 AddPackage redshift # Adjusts the color temperature of your screen according to your surroundings.
+AddPackage reflector # A Python 3 module and script to retrieve and filter the latest Pacman mirror list.
 AddPackage ripgrep # A search tool that combines the usability of ag with the raw speed of grep
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
 AddPackage rsync # A file transfer program to keep remote files in sync
 AddPackage rustup # The Rust toolchain installer
 AddPackage scrot # Simple command-line screenshot utility for X
+AddPackage shellcheck # Shell script analysis tool
 AddPackage stack # The Haskell Tool Stack
 AddPackage stow # Manage installation of multiple softwares in the same directory tree
 AddPackage sxiv # Simple X Image Viewer
@@ -105,10 +113,8 @@ AddPackage zip # Compressor/archiver for creating and modifying zipfiles
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign aura-git # A package manager for Arch Linux and its AUR
 AddPackage --foreign chromium-vaapi-bin # Chromium with VA-API support to enable hardware acceleration, pre-compiled
-AddPackage --foreign pandoc-bin # Pandoc - executable only, without 750MB Haskell depends/makedepends
 AddPackage --foreign polybar # A fast and easy-to-use status bar
 AddPackage --foreign pop-icon-theme-bin # A free and open source SVG icon theme for Linux, based on Paper Icon Set and Papirus.
-AddPackage --foreign shellcheck-static ## shellcheck, without the 130MB haskell dependencies
 AddPackage --foreign spotify # A proprietary music streaming service
 AddPackage --foreign tealdeer # An implementation of tldr in Rust
 AddPackage --foreign tectonic # Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive

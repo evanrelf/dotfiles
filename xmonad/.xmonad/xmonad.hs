@@ -124,7 +124,7 @@ myStartupHook = do
   return () -- Do not remove
   checkKeymap myConfig myKeys
   adjustEventInput
-  spawnOnce "~/.config/polybar/start"
+  spawnOnce "~/.config/polybar/launch"
 
 myLayoutHook =
   let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []

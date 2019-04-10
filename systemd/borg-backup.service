@@ -1,5 +1,7 @@
 [Unit]
 Description=Perform Borg backup
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 Type=oneshot

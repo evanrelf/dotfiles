@@ -26,3 +26,14 @@ sed -i \
 
 # /etc/localtime
 CreateLink /etc/localtime /usr/share/zoneinfo/America/Los_Angeles
+
+# /etc/modprobe.d/iwlwifi.conf
+echo "options iwlwifi bt_coex_active=0" \
+  > "$(CreateFile /etc/modprobe.d/iwlwifi.conf)"
+
+# /etc/pulse/default.pa
+echo "load-module module-switch-on-connect" \
+  >> "$(GetPackageOriginalFile pulseaudio /etc/pulse/default.pa)"
+
+# /etc/pacman.d/hooks/mirrorupgrade.hook
+CopyFile /etc/pacman.d/hooks/mirrorupgrade.hook
