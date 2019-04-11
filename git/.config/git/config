@@ -26,6 +26,8 @@
 	# DIFF #
 	########
 	d = diff
+	# TODO
+	# d1 = "!git diff $1~1 #"
 	ds = diff --staged
 	dx = diff origin/master
 	dxn = diff origin/master --name-only
@@ -38,8 +40,8 @@
 	bd = branch --delete
 	bdd = branch --delete --force
 	bm = branch --move
-	new = "!if [ -z \"$1\" ]; then return 1; else git fetch && git checkout -b \"$1\" origin/master; fi #"
-	# new = "!if [ -z \"$1\" ]; then return 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
+	new = "!if [ -z \"$1\" ]; then exit 1; else git fetch && git checkout -b \"$1\" origin/master; fi #"
+	# new = "!if [ -z \"$1\" ]; then exit 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
 
 	##########
 	# REBASE #

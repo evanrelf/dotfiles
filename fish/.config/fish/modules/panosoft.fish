@@ -4,8 +4,5 @@ alias vpn "~/Code/evan.relf/scripts/vpn/vpn"
 alias autocompile "~/Code/evan.relf/scripts/autocompile/autocompile"
 alias autotag "~/Code/evan.relf/scripts/autotag/autotag"
 alias mk "git show makefile:Makefile | make -f -"
-
-if _exists psql; and status --is-interactive
-  abbr --add sql "psql -d vetpro -U postgres -h localhost -p 5432"
-  abbr --add nr "npm run"
-end
+abbr --add nr "npm run"
+abbr --add sql "psql -d vetpro -U postgres -h localhost -p 5432"
