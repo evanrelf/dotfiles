@@ -99,6 +99,7 @@ let g:vim_markdown_new_list_item_indent = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
 let g:haskell_enable_quantification = 1
+let g:haskell_indent_if = 2
 
 " tagbar
 let g:tagbar_compact = 1
