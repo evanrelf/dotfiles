@@ -18,8 +18,8 @@
 	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Full log
 	ll = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-	# Only show commits ahead of origin/master
-	lx = log origin/master.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	# Only show commits ahead of origin/dev
+	lx = log origin/dev.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	lxx = "!git log origin/$(git symbolic-ref --short HEAD) --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'"
 
 	########
@@ -29,8 +29,8 @@
 	# TODO
 	# d1 = "!git diff $1~1 #"
 	ds = diff --staged
-	dx = diff origin/master
-	dxn = diff origin/master --name-only
+	dx = diff origin/dev
+	dxn = diff origin/dev --name-only
 	dxx = "!git diff origin/$(git symbolic-ref --short HEAD) #"
 
 	##########
@@ -40,8 +40,8 @@
 	bd = branch --delete
 	bdd = branch --delete --force
 	bm = branch --move
-	new = "!if [ -z \"$1\" ]; then exit 1; else git fetch && git checkout -b \"$1\" origin/master; fi #"
-	# new = "!if [ -z \"$1\" ]; then exit 1; else git fetch origin master && git checkout -b \"$1\" origin/master; fi #"
+	new = "!if [ -z \"$1\" ]; then exit 1; else git fetch && git checkout -b \"$1\" origin/dev; fi #"
+	# new = "!if [ -z \"$1\" ]; then exit 1; else git fetch origin dev && git checkout -b \"$1\" origin/dev; fi #"
 
 	##########
 	# REBASE #
@@ -52,13 +52,13 @@
 	continue = rebase --continue
 	skip = rebase --skip
 	abort = rebase --abort
-	up = "!git fetch && git rebase origin/master #"
-	# up = "!git fetch origin master && git rebase origin/master #"
+	up = "!git fetch && git rebase origin/dev #"
+	# up = "!git fetch origin dev && git rebase origin/dev #"
 	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
-	up-favor-local = "!git fetch && git rebase origin/master --strategy-option theirs #"
-	up-favor-remote = "!git fetch && git rebase origin/master --strategy-option ours #"
-	# up-favor-local = "!git fetch origin master && git rebase origin/master --strategy-option theirs #"
-	# up-favor-remote = "!git fetch origin master && git rebase origin/master --strategy-option ours #"
+	up-favor-local = "!git fetch && git rebase origin/dev --strategy-option theirs #"
+	up-favor-remote = "!git fetch && git rebase origin/dev --strategy-option ours #"
+	# up-favor-local = "!git fetch origin dev && git rebase origin/dev --strategy-option theirs #"
+	# up-favor-remote = "!git fetch origin dev && git rebase origin/dev --strategy-option ours #"
 
 	#######
 	# ADD #
@@ -73,7 +73,7 @@
 	# CHECKOUT #
 	############
 	co = checkout
-	com = "!cd -- ${GIT_PREFIX:-.} && git checkout origin/master -- $* #"
+	cod = "!cd -- ${GIT_PREFIX:-.} && git checkout origin/dev -- $* #"
 
 	#########
 	# RESET #
@@ -85,7 +85,7 @@
 	# SHOW #
 	########
 	sh = show
-	shx = "!git show origin/master:$1 #"
+	shx = "!git show origin/dev:$1 #"
 	shxx = "!git show origin/$(git symbolic-ref --short HEAD):$1 #"
 
 	#########

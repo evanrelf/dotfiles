@@ -176,6 +176,7 @@ let g:gitgutter_grep = 'rg'
 set termguicolors
 set background=dark
 colorscheme moonfly
+set cursorline
 set colorcolumn=81,101
 set number
 set relativenumber
