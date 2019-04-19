@@ -86,6 +86,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/zathura/zathurarc"
             case redshift
                 eval $EDITOR "$HOME/.config/redshift/redshift.conf"
+            case ghci
+                eval $EDITOR "$HOME/.ghci"
 
             case "*"
                 _error "No config defined for '$argv[1]'"
@@ -94,4 +96,4 @@ function rc -d "Open the specified program's configuration file"
         fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --multi --exact | xargs $EDITOR
     end
 end
-complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock"
+complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock ghci"
