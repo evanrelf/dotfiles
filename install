@@ -13,6 +13,10 @@ command -v stow >/dev/null 2>&1 || error "stow is not installed"
 
 if [ $# -gt 0 ]; then
   for i in "$@"; do
+    i=$(echo "$i" | sed 's|/||g')
+    if [ ! -e "$i" ]; then
+      error "Package '$i' doesn't exist"
+    fi
     log "Installing '$i'..."
     if [ -f "$i/stow-ignore" ]; then
       log "Cannot auto-install package '$i'"
@@ -33,7 +37,7 @@ if [ $# -gt 0 ]; then
           fi
           ;;
         kakoune )
-          if [ ! -f "$HOME/.config/kak/plugins/plug.kak" ]; then
+          if [ ! -e "$HOME/.config/kak/plugins/plug.kak/" ]; then
             command -v git >/dev/null 2>&1 || error "git is not installed"
             log "Installing plug.kak..."
             git clone --depth 1 "https://github.com/andreyorst/plug.kak.git" \
