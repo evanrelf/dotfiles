@@ -71,6 +71,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/git/config"
             case git-local
                 eval $EDITOR "$HOME/.config/git/local"
+            case hg mercurial
+                eval $EDITOR "$HOME/.config/hg/hgrc"
             case alacritty
                 eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
             case kitty
@@ -96,4 +98,4 @@ function rc -d "Open the specified program's configuration file"
         fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --multi --exact | xargs $EDITOR
     end
 end
-complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock ghci"
+complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock ghci hg mercurial"

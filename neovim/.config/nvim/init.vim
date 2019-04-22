@@ -31,7 +31,7 @@ Plug 'tpope/vim-endwise'
 Plug 'sbdchd/neoformat', { 'on': ['Neoformat'] }
 Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
-Plug 'ntpeters/vim-better-whitespace'
+" Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sleuth'
 
 " Syntax
