@@ -23,6 +23,7 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
+Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
@@ -69,6 +70,14 @@ let g:indentLine_setColors = 0
 
 " golden-ratio
 let g:golden_ratio_autocommand = 0
+
+" ultisnips
+let g:UltiSnipsExpandTrigger = "<Tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+" let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+let g:UltiSnipsEditSplit = "vertical"
 
 " auto-pairs
 let g:AutoPairsMultilineClose = 0
@@ -243,6 +252,7 @@ command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
+" command! Pragma normal! ggO{-# LANGUAGE  #-}<Left><Left><Left>
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
