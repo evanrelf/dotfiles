@@ -1,10 +1,12 @@
 " PLUGINS {{{1
 call plug#begin()
 
-" Appearance
+" Color schemes
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'Lokaltog/vim-monotone'
 Plug 'evanrelf/papercolor-theme'
+
+" Appearance
 Plug 'ap/vim-buftabline'
 " Plug 'Yggdroot/indentLine'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
@@ -44,6 +46,9 @@ Plug 'sheerun/vim-polyglot'
 " Files
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
+
+" Project
+Plug 'lambdalisue/gina.vim'
 
 " Miscellaneous
 Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
@@ -394,7 +399,8 @@ augroup END
 augroup ColorSchemeTweaks " {{{2
   autocmd!
   autocmd VimEnter *
-        \  highlight! default link ExtraWhitespace DiffDelete
+        \  highlight! Normal ctermfg=251 ctermbg=0 guifg=#c6c6c6 guibg=#000000
+        \| highlight! default link ExtraWhitespace DiffDelete
         \| highlight! default link BufTabLineCurrent WildMenu
         \| highlight! default link BufTabLineActive CursorLineNr
         \| highlight! default link BufTabLineHidden StatusLineNC

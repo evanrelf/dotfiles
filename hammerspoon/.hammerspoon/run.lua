@@ -30,4 +30,6 @@ function module.kitty()
   hs.eventtap.keyStroke({"cmd"}, "n")
 end
 
+module.alacritty = module.shell("open -na Alacritty")
+
 return module

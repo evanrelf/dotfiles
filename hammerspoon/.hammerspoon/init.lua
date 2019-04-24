@@ -42,7 +42,7 @@ bind(meh, "O", wm.load)
 bind(meh, "tab", wm.nextScreen)
 
 -- Tiling windows (Amethyst)
-bind({"alt", "shift"}, "return", run.kitty)
+bind({"alt", "shift"}, "return", run.alacritty)
 bind({"alt"}, "1", function() hs.eventtap.keyStroke({"ctrl"}, "1") end)
 bind({"alt"}, "2", function() hs.eventtap.keyStroke({"ctrl"}, "2") end)
 bind({"alt"}, "3", function() hs.eventtap.keyStroke({"ctrl"}, "3") end)
