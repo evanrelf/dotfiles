@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git fetch
+git rebase origin/"${1:-master}"

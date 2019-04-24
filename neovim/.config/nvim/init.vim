@@ -52,6 +52,7 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-repeat'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'Konfekt/FastFold'
 
 call plug#end()
@@ -295,10 +296,9 @@ noremap <Left> 5zh
 noremap <Right> 5zl
 noremap <Up> 5<C-y>
 noremap <Down> 5<C-e>
-noremap gh ^
-noremap gl g_
-noremap gk gg
-noremap gj G
+noremap H ^
+noremap L g_
+noremap <Backspace> :nohlsearch<CR>
 noremap <silent> <Tab> :bnext<CR>
 noremap <silent> <S-Tab> :bprev<CR>
 noremap <C-]> <C-]>zz
