@@ -405,6 +405,8 @@ augroup ColorSchemeTweaks " {{{2
         \| highlight! default link BufTabLineActive CursorLineNr
         \| highlight! default link BufTabLineHidden StatusLineNC
         \| highlight! default link BufTabLineFill StatusLineNC
+        \| highlight! Normal ctermbg=NONE guibg=NONE
+        \| highlight! NonText ctermbg=NONE guibg=NONE
       " \| highlight! default link StatusLine MatchParen
       " \| highlight! default link StatusLineNC Normal
 augroup END

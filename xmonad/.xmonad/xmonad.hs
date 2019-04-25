@@ -88,15 +88,16 @@ myKeys =
   , ("M-S-q", io exitSuccess)
 
   -- Apps
-  -- , ("M-<Return>", safeSpawn (terminal myConfig) [])
-  , ("M-<Return>", do
-      kitty <- focusedHasProperty $ ClassName "kitty"
-      if kitty then
-        -- sendKey (controlMask .|. shiftMask) xK_n
-        safeSpawn (terminal myConfig) []
-      else
-        safeSpawn (terminal myConfig) []
-    )
+  , ("M-<Return>", safeSpawn (terminal myConfig) [])
+  -- , ("M-<Return>", do
+  --     kitty <- focusedHasProperty $ ClassName "kitty"
+  --     if kitty then
+  --       -- sendKey (controlMask .|. shiftMask) xK_n
+  --       safeSpawn (terminal myConfig) []
+  --     else
+  --       safeSpawn (terminal myConfig) []
+  --   )
+  , ("M-S-<Return>", safeSpawn "alacritty" [])
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
 
