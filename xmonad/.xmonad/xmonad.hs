@@ -40,7 +40,7 @@ main = xmonad myConfig
 
 myConfig = desktopConfig
   -- { terminal = "/home/evanrelf/.config/kitty/launch"
-  { terminal = "kitty"
+  { terminal = "alacritty"
   , workspaces = show <$> [1..10]
   , focusFollowsMouse = True
   , clickJustFocuses = True
@@ -97,7 +97,7 @@ myKeys =
   --     else
   --       safeSpawn (terminal myConfig) []
   --   )
-  , ("M-S-<Return>", safeSpawn "alacritty" [])
+  , ("M-S-<Return>", safeSpawn "kitty" [])
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
 
