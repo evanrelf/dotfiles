@@ -8,7 +8,7 @@ Plug 'evanrelf/papercolor-theme'
 
 " Appearance
 Plug 'ap/vim-buftabline'
-" Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'wellle/visual-split.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -34,7 +34,7 @@ Plug 'tpope/vim-endwise'
 Plug 'sbdchd/neoformat', { 'on': ['Neoformat'] }
 Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
-" Plug 'ntpeters/vim-better-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sleuth'
 
 " Syntax
