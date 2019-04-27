@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export BROWSER="chromium"
+
 xrdb -merge .Xresources
 xsetroot -cursor_name left_ptr
 xrandr --dpi 120

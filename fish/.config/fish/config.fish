@@ -141,7 +141,6 @@ if status --is-interactive
         abbr --add ghc "stack ghc"
         abbr --add ghci "stack ghci"
         abbr --add runghc "stack runghc"
-        abbr --add ghcid "ghcid --command 'stack ghci'"
     end
 end
 

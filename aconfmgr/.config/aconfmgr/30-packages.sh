@@ -16,6 +16,7 @@ AddPackage xorg-server-xwayland # run X clients under wayland
 
 # Packages
 AddPackage acpi # Client for battery, power, and thermal readings
+AddPackage alacritty # A cross-platform, GPU-accelerated terminal emulator
 AddPackage alsa-utils # An alternative implementation of Linux sound support
 AddPackage alsa-utils # An alternative implementation of Linux sound support
 AddPackage arandr # Provide a simple visual front end for XRandR 1.2.
@@ -26,6 +27,7 @@ AddPackage bluez # Daemons for the bluetooth protocol stack
 AddPackage bluez-utils # Development and debugging utilities for the bluetooth protocol stack
 AddPackage borg # Deduplicating backup program with compression and authenticated encryption
 AddPackage btrfs-progs # Btrfs filesystem utilities
+AddPackage cabal-install # The command-line interface for Cabal and Hackage.
 AddPackage clang # C language family frontend for LLVM
 AddPackage compton # X compositor that may fix tearing issues
 AddPackage ctags # Generates an index file of language objects found in source files
@@ -42,9 +44,11 @@ AddPackage fish # Smart and user friendly shell intended mostly for interactive 
 AddPackage fwupd # A simple daemon to allow session software to update firmware
 AddPackage fzf # Command-line fuzzy finder
 AddPackage hlint # Source code suggestions
+AddPackage hoogle # Haskell API Search
 AddPackage htop # Interactive process viewer
 AddPackage i3lock # Improved screenlocker based upon XCB and PAM
 AddPackage intel-ucode # Microcode update files for Intel CPUs
+AddPackage kakoune # Multiple-selection, UNIX-flavored modal editor
 AddPackage kitty # A modern, hackable, featureful, OpenGL based terminal emulator
 AddPackage light # Program to easily change brightness on backlight-controllers.
 AddPackage light # Program to easily change brightness on backlight-controllers.
@@ -70,6 +74,7 @@ AddPackage pulseaudio # A featureful, general-purpose sound server
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
 AddPackage pulseaudio-bluetooth # Bluetooth support for PulseAudio
+AddPackage python-pip # The PyPA recommended tool for installing Python packages
 AddPackage rclone # Sync files to and from Google Drive, S3, Swift, Cloudfiles, Dropbox and Google Cloud Storage
 AddPackage redshift # Adjusts the color temperature of your screen according to your surroundings.
 AddPackage reflector # A Python 3 module and script to retrieve and filter the latest Pacman mirror list.
@@ -85,6 +90,8 @@ AddPackage sxiv # Simple X Image Viewer
 AddPackage syncthing # Open Source Continuous Replication / Cluster Synchronization Thing
 AddPackage time # Utility for monitoring a program's use of system resources
 AddPackage tlp # Linux Advanced Power Management
+AddPackage tmux # A terminal multiplexer
+AddPackage tokei # A blazingly fast CLOC (Count Lines Of Code) program
 AddPackage ttf-dejavu # Font family based on the Bitstream Vera Fonts with a wider range of characters
 AddPackage ttf-inconsolata # Monospace font for pretty code listings and for the terminal
 AddPackage ttf-roboto # Google's signature family of fonts

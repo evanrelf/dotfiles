@@ -37,8 +37,11 @@ Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sleuth'
 
-" Syntax
+" Intelligence
 Plug 'w0rp/ale'
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+
+" Syntax
 Plug 'evanrelf/haskell-vim'
 Plug 'vmchale/dhall-vim'
 Plug 'sheerun/vim-polyglot'
@@ -95,7 +98,7 @@ let g:neoformat_only_msg_on_error = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
-let g:ale_sign_error = '--'
+let g:ale_sign_error = '~~'
 let g:ale_sign_warning = '--'
 let g:ale_echo_msg_info_str = '[INFO]'
 let g:ale_echo_msg_error_str = '[ERR]'
@@ -318,7 +321,7 @@ xnoremap <Leader>g :g/
 nnoremap <Leader>n :%norm 0
 xnoremap <Leader>n :norm 0
 noremap <silent> <Leader>= :Neoformat<CR>
-noremap <silent> <Leader>ad :<C-u>ALEDetail<CR>
+map <silent> <Leader>ad <Plug>(ale_detail)
 noremap <silent> <Leader>f :<C-u>GFiles<CR>
 noremap <silent> <Leader>F :<C-u>Files<CR>
 noremap <silent> <Leader>r :<C-u>GRg<CR>
