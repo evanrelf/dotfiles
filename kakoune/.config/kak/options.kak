@@ -1,4 +1,4 @@
-colorscheme solarized-dark
+colorscheme gruvbox
 set-option global ui_options ncurses_assistant=none
 set-option global ui_options ncurses_enable_mouse=true
 set-option global aligntab false

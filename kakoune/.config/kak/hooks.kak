@@ -45,7 +45,7 @@ hook global WinSetOption filetype=.* %{
 hook global WinSetOption filetype=haskell %{
   set-option window makecmd 'stack build --fast'
   set-option window lintcmd 'hlint; stack build --fast'
-  set-option window formatcmd 'brittany'
+  set-option window formatcmd 'sort-imports'
   hook window -group lint BufWritePost .* lint
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]\w*)\s+::\s 1:function
   lint-enable
@@ -53,14 +53,13 @@ hook global WinSetOption filetype=haskell %{
 }
 
 hook global WinSetOption filetype=elm %{
-  set-option window makecmd 'npm run build'
+  set-option window makecmd 'make'
   set-option window formatcmd 'elm-format --stdin'
   hook window -group format BufWritePre .* format
   add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
   add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
   add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
-
 
 hook global WinSetOption filetype=cpp %{
   set-option window makecmd 'make'
