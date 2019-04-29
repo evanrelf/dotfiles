@@ -27,9 +27,9 @@
 	########
 	d = diff
 	ds = diff --staged
-	dx = "!git diff origin/${1:-master} #"
-	dxn = "!git diff origin/${1:-master} --name-only #"
-	dxx = "!git diff origin/$(git symbolic-ref --short HEAD) #"
+	dx = "!git diff origin/${1:-master}"
+	dxn = "!git diff origin/${1:-master} --name-only"
+	dxx = "!git diff origin/$(git symbolic-ref --short HEAD)"
 
 	##########
 	# BRANCH #
@@ -109,7 +109,7 @@
 	amend = commit --amend --no-edit
 	rename = commit --amend
 	undo-commit = reset --soft HEAD~
-	move-commit = "!git reset --soft HEAD~ && git stash && git checkout $1 && git stash pop #"
+	move-commit = "!if [ -z \"$1\" ]; then exit 1; else git reset --soft HEAD~ && git stash && git checkout $1 && git stash pop; fi #"
 
 	########
 	# PUSH #

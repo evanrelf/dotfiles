@@ -10,7 +10,7 @@ Plug 'evanrelf/papercolor-theme'
 Plug 'ap/vim-buftabline'
 " Plug 'Yggdroot/indentLine'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
-Plug 'wellle/visual-split.vim'
+" Plug 'wellle/visual-split.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
@@ -299,8 +299,8 @@ nmap <silent> g. <Plug>(ale_next_wrap)
 nmap <silent> g, <Plug>(ale_previous_wrap)
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-xmap V <Plug>(Visual-Split-VSSplitAbove)
-xmap R <Plug>(Visual-Split-VSResize)
+" xmap V <Plug>(Visual-Split-VSSplitAbove)
+" xmap R <Plug>(Visual-Split-VSResize)
 map <Plug>(slash-after) zz
 noremap <Left> 5zh
 noremap <Right> 5zl
