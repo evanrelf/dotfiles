@@ -198,7 +198,7 @@ let g:gitgutter_grep = 'rg'
 " Appearance {{{2
 set termguicolors
 set background=dark
-colorscheme moonfly
+colorscheme monotone
 set cursorline
 set colorcolumn=81,101
 set number
