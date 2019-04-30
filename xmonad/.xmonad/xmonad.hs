@@ -40,7 +40,7 @@ main = xmonad myConfig
 
 myConfig = desktopConfig
   -- { terminal = "/home/evanrelf/.config/kitty/launch"
-  { terminal = "alacritty"
+  { terminal = "kitty"
   , workspaces = show <$> [1..10]
   , focusFollowsMouse = True
   , clickJustFocuses = True
