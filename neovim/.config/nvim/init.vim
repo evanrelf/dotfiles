@@ -41,7 +41,7 @@ Plug 'tpope/vim-sleuth'
 " Intelligence
 Plug 'w0rp/ale'
 " Plug 'FrigoEU/psc-ide-vim'
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 " Syntax
 Plug 'evanrelf/haskell-vim'
@@ -99,7 +99,8 @@ let g:neoformat_only_msg_on_error = 1
 " ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
-let g:ale_fixers = { 'haskell': ['hlint'] }
+let g:ale_fixers = { 'elm': ['elm-format'] }
+let g:ale_fix_on_save = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_echo_msg_info_str = '[INFO]'
@@ -264,7 +265,6 @@ command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
-" command! Pragma normal! ggO{-# LANGUAGE  #-}<Left><Left><Left>
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
