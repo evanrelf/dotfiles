@@ -14,6 +14,7 @@ Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
+Plug 'jeetsukumaran/vim-indentwise'
 Plug 'junegunn/vim-slash'
 Plug 'critiqjo/husk-x.vim'
 Plug 'andymass/vim-matchup'
@@ -57,7 +58,7 @@ Plug 'lambdalisue/gina.vim'
 " Miscellaneous
 Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-repeat'
@@ -99,7 +100,7 @@ let g:neoformat_only_msg_on_error = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
 let g:ale_fixers = { 'haskell': ['hlint'] }
-let g:ale_sign_error = '~~'
+let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_echo_msg_info_str = '[INFO]'
 let g:ale_echo_msg_error_str = '[ERR]'
@@ -200,7 +201,7 @@ set termguicolors
 set background=dark
 colorscheme monotone
 set cursorline
-set colorcolumn=81,101
+set colorcolumn=81
 set number
 set relativenumber
 set rulerformat=%7(%3(%l%),%3(%c%V%)%)
@@ -290,10 +291,10 @@ xnoremap < <gv
 xnoremap > >gv
 nnoremap > >>
 nnoremap < <<
+vnoremap p "_dP
 nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
-vnoremap <silent> p :<C-u>let @p = @+<CR>gvp:let @+ = @p<CR>
 noremap Q @q
 nmap <silent> g. <Plug>(ale_next_wrap)
 nmap <silent> g, <Plug>(ale_previous_wrap)

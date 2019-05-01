@@ -27,9 +27,9 @@
 	########
 	d = diff
 	ds = diff --staged
-	dx = "!git diff origin/${1:-master}"
-	dxn = "!git diff origin/${1:-master} --name-only"
-	dxx = "!git diff origin/$(git symbolic-ref --short HEAD)"
+	dx = "!git diff origin/${1:-master} #"
+	dxn = "!git diff origin/${1:-master} --name-only #"
+	dxx = "!git diff origin/$(git symbolic-ref --short HEAD) #"
 
 	##########
 	# BRANCH #
