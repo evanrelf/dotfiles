@@ -170,3 +170,5 @@
 	singleKey = true
 [include]
 	path = ~/.config/git/local
+[diff "nodiff"]
+	command = /usr/bin/env true
