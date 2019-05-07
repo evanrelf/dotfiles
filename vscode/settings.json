@@ -25,7 +25,6 @@
     "vim.hlsearch": true,
     "vim.leader": "<space>",
     "vim.substituteGlobalFlag": true,
-    "window.zoomLevel": 2,
     "workbench.activityBar.visible": true,
     "workbench.editor.showIcons": false,
     "workbench.iconTheme": "vs-minimal",
@@ -54,8 +53,6 @@
         // { "before": [], "after": [] },
     ],
     "editor.occurrencesHighlight": false,
-    "window.zoomLevel": 0,
-    "workbench.colorTheme": "One Dark Pro",
     "editor.acceptSuggestionOnEnter": "off",
     "elm.compiler": "npx elm",
     "[elm]": {
@@ -63,5 +60,5 @@
     },
     "editor.lineHeight": 16,
     "languageServerHaskell.trace.server": "verbose",
-    "vim.neovimPath": "/usr/bin/nvim"
+    "vim.neovimPath": "/usr/local/bin/nvim"
 }

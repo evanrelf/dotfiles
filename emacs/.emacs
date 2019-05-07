@@ -24,10 +24,6 @@
 (use-package doom-themes
   :config
   (load-theme 'doom-one t))
-; (use-package solarized-theme
-;   :config
-;   (setq solarized-use-less-bold t)
-;   (load-theme 'solarized-dark t))
 (use-package doom-modeline
   :config
   (doom-modeline-init)
@@ -40,6 +36,18 @@
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
+(use-package evil-terminal-cursor-changer
+  :init
+  (setq evil-motion-state-cursor 'box)
+  (setq evil-visual-state-cursor 'box)
+  (setq evil-normal-state-cursor 'box)
+  (setq evil-insert-state-cursor 'bar)
+  (setq evil-emacs-state-cursor  'hbar)
+  :config
+  (unless
+    (display-graphic-p)
+    (require 'evil-terminal-cursor-changer)
+    (evil-terminal-cursor-changer-activate)))
 (use-package evil-collection
   :config
   (evil-collection-init))
@@ -94,26 +102,22 @@
 (use-package counsel
   :config
   (counsel-mode 1))
-;; (use-package aggressive-indent
-;;   :config
-;;   (global-aggressive-indent-mode 1)
-;;   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-;;   (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode))
 ;; Languages
 (use-package haskell-mode)
-;; (use-package intero
-;;   :config
-;;   (intero-global-mode 1))
-(use-package dante
-  :after haskell-mode
-  :commands 'dante-mode
-  :init
-  (add-hook 'haskell-mode-hook 'dante-mode)
-  (add-hook 'haskell-mode-hook 'flycheck-mode)
+(use-package intero
   :config
-  (add-hook 'dante-mode-hook
-	    '(lambda () (flycheck-add-next-checker 'haskell-dante
-						   '(warning . haskell-hlint)))))
+  (intero-global-mode 1))
+;; (use-package dante
+;;   :after haskell-mode
+;;   :commands 'dante-mode
+;;   :init
+;;   (add-hook 'haskell-mode-hook 'dante-mode)
+;;   (add-hook 'haskell-mode-hook 'flycheck-mode)
+;;   :config
+;;   (add-hook 'dante-mode-hook
+;; 	    '(lambda () (flycheck-add-next-checker 'haskell-dante
+;; 						   '(warning . haskell-hlint)))))
+;; (use-package) ;; purescript
 (use-package irony
   :config
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -150,7 +154,7 @@
 
 ;; SETTINGS
 ;; GUI font
-(setq default-frame-alist '((font . "PragmataPro Liga-14")))
+(setq default-frame-alist '((font . "PragmataPro Liga-16")))
 ;; Disable bold font
 (set-face-bold 'bold nil)
 ;; Enable line numbers
@@ -200,9 +204,25 @@
 (setq indent-tabs-mode nil)
 ;; Enable mouse support in terminal
 (xterm-mouse-mode 1)
+(setq scroll-step 3)
+;; (unless window-system
+;;   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+;;   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 (unless window-system
-  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-  (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+  (global-set-key (kbd "<mouse-4>")
+		  (lambda ()
+		    (interactive)
+		    (scroll-down-line)
+		    (scroll-down-line)
+		    (scroll-down-line)
+		    ))
+  (global-set-key (kbd "<mouse-5>")
+		  (lambda ()
+		    (interactive)
+		    (scroll-up-line)
+		    (scroll-up-line)
+		    (scroll-up-line)
+		    )))
 ;; Control mini window sizing
 (setq resize-mini-windows t)
 (setq max-mini-window-height 10)
@@ -212,11 +232,12 @@
 (setq scroll-conservatively 10000)
 ;; Maximize new GUI frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; Disable customizations
+(setq custom-file "/dev/null")
 
 ;; MAPPINGS
 (mmap
   ;; ";" 'evil-ex
   ;; ":" 'evil-repeat-find-char
   "j" 'evil-next-visual-line
-  "
   "k" 'evil-previous-visual-line)
