@@ -422,10 +422,10 @@ augroup RedrawOnResize " {{{2
   autocmd VimResized * redraw!
 augroup END
 
-augroup OpenTagBar " {{{2
-  autocmd!
-  autocmd VimEnter *.elm TagbarOpen
-augroup END
+" augroup OpenTagBar " {{{2
+"   autocmd!
+"   autocmd VimEnter *.elm TagbarOpen
+" augroup END
 
 augroup CloseNERDTree " {{{
   autocmd!
