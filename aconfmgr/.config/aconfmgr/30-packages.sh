@@ -15,9 +15,9 @@ AddPackage swaylock # Screen locker for Wayland
 AddPackage xorg-server-xwayland # run X clients under wayland
 
 # Packages
+AddPackage --foreign ttf-all-the-icons # Icon font for all-the-icons.el (A utility package to collect various Icon Fonts and propertize them within Emacs.)
 AddPackage acpi # Client for battery, power, and thermal readings
 AddPackage alacritty # A cross-platform, GPU-accelerated terminal emulator
-AddPackage alsa-utils # An alternative implementation of Linux sound support
 AddPackage alsa-utils # An alternative implementation of Linux sound support
 AddPackage arandr # Provide a simple visual front end for XRandR 1.2.
 AddPackage autocutsel # synchronizes the two copy/paste buffers mainly used by X applications
@@ -33,8 +33,8 @@ AddPackage compton # X compositor that may fix tearing issues
 AddPackage ctags # Generates an index file of language objects found in source files
 AddPackage diff-so-fancy # Good-looking diffs with diff-highlight and more
 AddPackage docker # Pack, ship and run any application as a lightweight container
-AddPackage docker # Pack, ship and run any application as a lightweight container
 AddPackage dunst # Customizable and lightweight notification-daemon
+AddPackage emacs # The extensible, customizable, self-documenting real-time display editor
 AddPackage entr # Run arbitrary commands when files change
 AddPackage exa # ls replacement
 AddPackage fd # Simple, fast and user-friendly alternative to find
@@ -50,7 +50,6 @@ AddPackage i3lock # Improved screenlocker based upon XCB and PAM
 AddPackage intel-ucode # Microcode update files for Intel CPUs
 AddPackage kakoune # Multiple-selection, UNIX-flavored modal editor
 AddPackage kitty # A modern, hackable, featureful, OpenGL based terminal emulator
-AddPackage light # Program to easily change brightness on backlight-controllers.
 AddPackage light # Program to easily change brightness on backlight-controllers.
 AddPackage lvm2 # Logical Volume Manager 2 utilities
 AddPackage lxappearance # Feature-rich GTK+ theme switcher of the LXDE Desktop
@@ -70,8 +69,6 @@ AddPackage parallel # A shell tool for executing jobs in parallel
 AddPackage pavucontrol # PulseAudio Volume Control
 AddPackage powertop # A tool to diagnose issues with power consumption and power management
 AddPackage pulseaudio # A featureful, general-purpose sound server
-AddPackage pulseaudio # A featureful, general-purpose sound server
-AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
 AddPackage pulseaudio-alsa # ALSA Configuration for PulseAudio
 AddPackage pulseaudio-bluetooth # Bluetooth support for PulseAudio
 AddPackage python-pip # The PyPA recommended tool for installing Python packages

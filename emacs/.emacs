@@ -104,9 +104,9 @@
   (counsel-mode 1))
 ;; Languages
 (use-package haskell-mode)
-(use-package intero
-  :config
-  (intero-global-mode 1))
+(use-package intero)
+  ;; :config
+  ;; (intero-global-mode 1))
 ;; (use-package dante
 ;;   :after haskell-mode
 ;;   :commands 'dante-mode
@@ -117,7 +117,9 @@
 ;;   (add-hook 'dante-mode-hook
 ;; 	    '(lambda () (flycheck-add-next-checker 'haskell-dante
 ;; 						   '(warning . haskell-hlint)))))
-;; (use-package) ;; purescript
+(use-package purescript-mode
+  :config
+  (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation))
 (use-package irony
   :config
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -128,6 +130,7 @@
   :config
   (setq elm-format-on-save t))
 (use-package markdown-mode)
+(use-package dhall-mode)
 (use-package yaml-mode
   :config (add-hook 'yaml-mode-hook
                     '(lambda ()
