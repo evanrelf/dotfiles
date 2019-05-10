@@ -164,8 +164,8 @@
 ;; Disable tool bar
 (tool-bar-mode -1)
 ;; Disable scroll bar
-(scroll-bar-mode -1)
-(horizontal-scroll-bar-mode -1)
+;; (scroll-bar-mode -1)
+;; (horizontal-scroll-bar-mode -1)
 ;; Disable cursor blink
 (blink-cursor-mode 0)
 ;; Disable audio bell

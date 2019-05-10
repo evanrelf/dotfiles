@@ -343,7 +343,7 @@ noremap M <Nop>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
-noremap # <Nop>
+" noremap # <Nop>
 xnoremap P <Nop>
 xnoremap Z <Nop>
 
