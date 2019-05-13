@@ -4,6 +4,7 @@ call plug#begin()
 " Color schemes
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'Lokaltog/vim-monotone'
+Plug 'rakr/vim-one'
 Plug 'evanrelf/papercolor-theme'
 
 " Appearance
@@ -71,6 +72,11 @@ call plug#end()
 
 " monotone
 " let g:monotone_color = [30, 50, 80]
+
+" one
+let g:one_allow_italics = 1
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
 
 " buftabline
 let g:buftabline_show = 1
@@ -199,8 +205,8 @@ let g:gitgutter_grep = 'rg'
 " SETTINGS {{{1
 " Appearance {{{2
 set termguicolors
+colorscheme one
 set background=dark
-colorscheme monotone
 set cursorline
 set colorcolumn=81
 set number
@@ -402,20 +408,20 @@ augroup IgnoreCaseCommandMode " {{{2
   autocmd CmdLineLeave : setlocal smartcase
 augroup END
 
-augroup ColorSchemeTweaks " {{{2
-  autocmd!
-  autocmd VimEnter *
-        \  highlight! Normal ctermfg=251 ctermbg=0 guifg=#c6c6c6 guibg=#000000
-        \| highlight! default link ExtraWhitespace DiffDelete
-        \| highlight! default link BufTabLineCurrent WildMenu
-        \| highlight! default link BufTabLineActive CursorLineNr
-        \| highlight! default link BufTabLineHidden StatusLineNC
-        \| highlight! default link BufTabLineFill StatusLineNC
-        \| highlight! Normal ctermbg=NONE guibg=NONE
-        \| highlight! NonText ctermbg=NONE guibg=NONE
-      " \| highlight! default link StatusLine MatchParen
-      " \| highlight! default link StatusLineNC Normal
-augroup END
+" augroup ColorSchemeTweaks " {{{2
+"   autocmd!
+"   autocmd VimEnter *
+"         \  highlight! Normal ctermfg=251 ctermbg=0 guifg=#c6c6c6 guibg=#000000
+"         \| highlight! default link ExtraWhitespace DiffDelete
+"         \| highlight! default link BufTabLineCurrent WildMenu
+"         \| highlight! default link BufTabLineActive CursorLineNr
+"         \| highlight! default link BufTabLineHidden StatusLineNC
+"         \| highlight! default link BufTabLineFill StatusLineNC
+"         \| highlight! Normal ctermbg=NONE guibg=NONE
+"         \| highlight! NonText ctermbg=NONE guibg=NONE
+"       " \| highlight! default link StatusLine MatchParen
+"       " \| highlight! default link StatusLineNC Normal
+" augroup END
 
 augroup RedrawOnResize " {{{2
   autocmd!
