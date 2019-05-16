@@ -9,9 +9,7 @@ Plug 'evanrelf/papercolor-theme'
 
 " Appearance
 Plug 'ap/vim-buftabline'
-" Plug 'Yggdroot/indentLine'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
-" Plug 'wellle/visual-split.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
@@ -41,26 +39,19 @@ Plug 'tpope/vim-sleuth'
 
 " Intelligence
 Plug 'w0rp/ale'
-" Plug 'FrigoEU/psc-ide-vim'
-" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 " Syntax
+Plug 'sheerun/vim-polyglot'
 Plug 'evanrelf/haskell-vim'
 Plug 'vmchale/dhall-vim'
-Plug 'sheerun/vim-polyglot'
 
 " Files
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
 
-" Project
-Plug 'lambdalisue/gina.vim'
-
 " Miscellaneous
-Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
+" Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 Plug 'airblade/vim-gitgutter'
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-repeat'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -297,7 +288,7 @@ xnoremap < <gv
 xnoremap > >gv
 nnoremap > >>
 nnoremap < <<
-vnoremap p "_dP
+xnoremap p "_dP
 nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
@@ -306,15 +297,15 @@ nmap <silent> g. <Plug>(ale_next_wrap)
 nmap <silent> g, <Plug>(ale_previous_wrap)
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-" xmap V <Plug>(Visual-Split-VSSplitAbove)
-" xmap R <Plug>(Visual-Split-VSResize)
 map <Plug>(slash-after) zz
 noremap <Left> 5zh
 noremap <Right> 5zl
 noremap <Up> 5<C-y>
 noremap <Down> 5<C-e>
-noremap H ^
-noremap L g_
+noremap gh ^
+noremap gj G
+noremap gk gg
+noremap gl g_
 noremap <Backspace> :nohlsearch<CR>
 noremap <silent> <Tab> :bnext<CR>
 noremap <silent> <S-Tab> :bprev<CR>
@@ -335,27 +326,17 @@ noremap <silent> <Leader>f :<C-u>GFiles<CR>
 noremap <silent> <Leader>F :<C-u>Files<CR>
 noremap <silent> <Leader>r :<C-u>GRg<CR>
 noremap <silent> <Leader>R :<C-u>Rg<CR>
-noremap <silent> <Leader>h :<C-u>History<CR>
-noremap <silent> <Leader>H :<C-u>Helptags<CR>
-noremap <silent> <Leader>b :<C-u>Buffers<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
 noremap <silent> <Leader>T :TagbarToggle<CR>
-noremap <silent> <Leader>N :NERDTreeToggle<CR>
 
 " Available
-noremap <C-t> <Nop>
-noremap M <Nop>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
 " noremap # <Nop>
 xnoremap P <Nop>
 xnoremap Z <Nop>
-
-map <Leader>0 :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 
 " AUTOCOMMANDS {{{1
@@ -433,10 +414,10 @@ augroup END
 "   autocmd VimEnter *.elm TagbarOpen
 " augroup END
 
-augroup CloseNERDTree " {{{
-  autocmd!
-  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | quit | endif
-augroup END
+" augroup CloseNERDTree " {{{
+"   autocmd!
+"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | quit | endif
+" augroup END
 
 " augroup LazyLoadPlugins " {{{2
 "   autocmd!

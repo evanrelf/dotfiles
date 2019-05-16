@@ -29,3 +29,7 @@ end
 function rgl -d "Pipe ripgrep output to less"
     rg --color always --heading --line-number --smart-case $argv | less --raw-control-chars
 end
+
+function treel -d "Pipe exa --tree output to less"
+    exa --color always --tree $argv | less --raw-control-chars
+end
