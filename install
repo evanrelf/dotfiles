@@ -65,6 +65,15 @@ if [ $# -gt 0 ]; then
             log "Spacemacs already cloned"
           fi
           ;;
+        doom-emacs )
+          if [ ! -d "$HOME/.emacs.d" ]; then
+            log "Cloning Doom Emacs..."
+            command -v git >/dev/null 2>&1 || error "git is not installed"
+            git clone -b develop "https://github.com/hlissner/doom-emacs.git" "$HOME/.emacs.d"
+          else
+            log "Doom Emacs already cloned"
+          fi
+          ;;
         tmux )
           if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
             git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

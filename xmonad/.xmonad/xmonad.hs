@@ -39,20 +39,19 @@ import XMonad.Util.WorkspaceCompare (getSortByIndex)
 main = xmonad myConfig
 
 myConfig = desktopConfig
-  -- { terminal = "/home/evanrelf/.config/kitty/launch"
-  { terminal = "kitty"
-  , workspaces = show <$> [1..10]
-  , focusFollowsMouse = True
-  , clickJustFocuses = True
-  , borderWidth = 2
-  , normalBorderColor = "#333333"
+  { terminal           = "kitty"
+  , workspaces         = show <$> [1..10]
+  , focusFollowsMouse  = True
+  , clickJustFocuses   = True
+  , borderWidth        = 2
+  , normalBorderColor  = "#333333"
   , focusedBorderColor = "#999999"
-  , startupHook = myStartupHook <> startupHook desktopConfig
-  , layoutHook = myLayoutHook
-  , manageHook = myManageHook <> manageHook desktopConfig
-  , handleEventHook = myHandleEventHook <> handleEventHook desktopConfig
-  , logHook = myLogHook <> logHook desktopConfig
-  , modMask = myModMask
+  , startupHook        = myStartupHook <> startupHook desktopConfig
+  , layoutHook         = myLayoutHook
+  , manageHook         = myManageHook <> manageHook desktopConfig
+  , handleEventHook    = myHandleEventHook <> handleEventHook desktopConfig
+  , logHook            = myLogHook <> logHook desktopConfig
+  , modMask            = myModMask
   }
   & flip removeKeysP myRemoveKeys
   & flip additionalKeysP myKeys
@@ -84,19 +83,10 @@ myKeys =
   , ("M-M1-n", swapTo Next)
   , ("M-M1-p", swapTo Prev)
   , ("M-<Tab>", toggleWS)
-  -- , ("M-S-q", safeSpawn "xfce4-session-logout" [])
   , ("M-S-q", io exitSuccess)
 
   -- Apps
   , ("M-<Return>", safeSpawn (terminal myConfig) [])
-  -- , ("M-<Return>", do
-  --     kitty <- focusedHasProperty $ ClassName "kitty"
-  --     if kitty then
-  --       -- sendKey (controlMask .|. shiftMask) xK_n
-  --       safeSpawn (terminal myConfig) []
-  --     else
-  --       safeSpawn (terminal myConfig) []
-  --   )
   , ("M-S-<Return>", safeSpawn "kitty" [])
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
@@ -122,18 +112,20 @@ myMouse =
   ]
 
 myStartupHook = do
-  return () -- Do not remove
+  pure () -- Do not remove
   checkKeymap myConfig myKeys
   adjustEventInput
   spawnOnce "~/.config/polybar/launch"
 
 myLayoutHook =
-  let tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
-      tabs = renamed [Replace "Tabs"] $ focusTracking $ tabbed shrinkText (Themes.theme myTheme)
-  in tall ||| tabs -- ||| Full
-  & renamed [CutWordsLeft 1] . spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True
-  & smartBorders
-  & avoidStruts
+  let
+    tall = renamed [Replace "Tall"] $ ResizableTall 1 (1/20) (1/2) []
+    tabs = renamed [Replace "Tabs"] $ focusTracking $ tabbed shrinkText (Themes.theme myTheme)
+  in
+    tall ||| tabs -- ||| Full
+    & renamed [CutWordsLeft 1] . spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True
+    & smartBorders
+    & avoidStruts
 
 myManageHook = manageDocks <> insertPosition Below Newer
 

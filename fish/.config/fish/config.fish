@@ -40,6 +40,8 @@ set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
 
 
 # VARIABLES {{{1
+# set -x EDITOR "nvim"
+# set -x EDITOR "emacsclient -s term -t"
 set -x EDITOR "nvim"
 set -x MANPAGER "nvim -c 'set ft=man' -"
 set -x npm_config_prefix "$HOME/.node_modules"
@@ -51,6 +53,7 @@ end
 
 set paths "$HOME/.local/bin" $paths
 set paths "$HOME/.config/git/scripts" $paths
+set paths "$HOME/.emacs.d/bin" $paths
 set paths "$HOME/.cargo/bin" $paths
 set paths "$HOME/.node_modules/bin" $paths
 if test (uname) = "Darwin"
