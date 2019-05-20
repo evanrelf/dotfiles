@@ -30,7 +30,6 @@ Plug 'SirVer/ultisnips'
 Plug 'tmsvg/pear-tree'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-" Plug 'tpope/vim-endwise'
 
 " Formatting
 Plug 'sbdchd/neoformat', { 'on': ['Neoformat'] }
@@ -142,8 +141,14 @@ let g:neoformat_only_msg_on_error = 1
 " ale
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
-let g:ale_fixers = { 'elm': ['elm-format'] }
+let g:ale_linters = {
+      \ 'haskell': ['stack_build', 'hlint'],
+      \ 'rust': ['rls', 'cargo', 'rustc']
+      \ }
+let g:ale_fixers = {
+      \ 'elm': ['elm-format'],
+      \ 'rust': ['rustfmt']
+      \ }
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '▌'
 let g:ale_sign_warning = '▌'
