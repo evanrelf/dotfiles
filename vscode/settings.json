@@ -20,7 +20,7 @@
     "telemetry.enableTelemetry": false,
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.confirmOnExit": true,
-    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontSize": 16,
     "vim.enableNeovim": true,
     "vim.hlsearch": true,
     "vim.leader": "<space>",
@@ -58,7 +58,8 @@
     "[elm]": {
         "editor.formatOnSave": true
     },
-    "editor.lineHeight": 16,
     "languageServerHaskell.trace.server": "verbose",
-    "vim.neovimPath": "/usr/local/bin/nvim"
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.lineHeight": 19
 }

@@ -2,12 +2,13 @@
 call plug#begin()
 
 " Color schemes
+Plug 'rakr/vim-one'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'Lokaltog/vim-monotone'
-Plug 'rakr/vim-one'
 Plug 'evanrelf/papercolor-theme'
 
 " Appearance
+Plug 'itchyny/lightline.vim' | Plug 'maximbaz/lightline-ale'
 Plug 'ap/vim-buftabline'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -20,15 +21,17 @@ Plug 'andymass/vim-matchup'
 
 " Editing
 Plug 'machakann/vim-sandwich'
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
+" Plug 'zxqfl/tabnine-vim'
 Plug 'SirVer/ultisnips'
-Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-endwise'
 
 " Formatting
 Plug 'sbdchd/neoformat', { 'on': ['Neoformat'] }
@@ -37,8 +40,10 @@ Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sleuth'
 
-" Intelligence
+" Information
 Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
+Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
@@ -50,8 +55,7 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
 
 " Miscellaneous
-" Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
-Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-repeat'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -69,6 +73,28 @@ let g:one_allow_italics = 1
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
 
+" lightline
+let g:lightline = {}
+let g:lightline.colorscheme = 'one'
+let g:lightline.component_expand = {
+      \ 'linter_checking': 'lightline#ale#checking',
+      \ 'linter_errors': 'lightline#ale#errors',
+      \ 'linter_warnings': 'lightline#ale#warnings',
+      \ 'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \ 'linter_checking': 'middle',
+      \ 'linter_errors': 'error',
+      \ 'linter_warnings': 'warning',
+      \ 'linter_ok': 'middle',
+      \ }
+let g:lightline.active = {
+      \ 'left': [[], ['paste', 'readonly', 'filename', 'modified'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']],
+      \ 'right': [[], ['filetype'], ['lineinfo']]
+      \}
+let g:lightline#ale#indicator_checking = '...'
+let g:lightline#ale#indicator_ok = ''
+
 " buftabline
 let g:buftabline_show = 1
 let g:buftabline_indicators = 1
@@ -79,13 +105,30 @@ let g:indentLine_setColors = 0
 " golden-ratio
 let g:golden_ratio_autocommand = 0
 
+" match up
+let g:matchup_matchparen_status_offscreen = 0
+let g:matchup_matchparen_deferred = 1
+
 " ultisnips
-let g:UltiSnipsExpandTrigger = "<Tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-" let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
-let g:UltiSnipsJumpForwardTrigger = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsExpandTrigger = '<Tab>'
+" let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+" let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+let g:UltiSnipsEditSplit = 'vertical'
+
+" pear tree
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_pairs = {
+      \ '(': {'closer': ')'},
+      \ '[': {'closer': ']'},
+      \ '{': {'closer': '}'},
+      \ "'": {'closer': "'"},
+      \ '"': {'closer': '"'},
+      \ '{-': {'closer': '-}'}
+      \ }
 
 " auto-pairs
 let g:AutoPairsMultilineClose = 0
@@ -94,16 +137,17 @@ let g:AutoPairsMultilineClose = 0
 let g:neoformat_only_msg_on_error = 1
 
 " ale
+let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = { 'haskell': ['stack_build', 'hlint'] }
 let g:ale_fixers = { 'elm': ['elm-format'] }
 let g:ale_fix_on_save = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = '▌'
+let g:ale_sign_warning = '▌'
 let g:ale_echo_msg_info_str = '[INFO]'
 let g:ale_echo_msg_error_str = '[ERR]'
 let g:ale_echo_msg_warning_str = '[WARN]'
-let g:ale_echo_msg_format = '%severity% %s'
+let g:ale_echo_msg_format = '%severity% %code: %%s [%linter%]'
 
 " better-whitespace
 let g:strip_whitelines_at_eof = 1
@@ -118,8 +162,9 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_new_list_item_indent = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
-let g:haskell_enable_quantification = 1
+let g:haskell_backpack = 1
 let g:haskell_indent_if = 2
+let g:haskell_indent_in = 0
 let g:purescript_indent_case = 2
 
 " tagbar
@@ -192,7 +237,6 @@ let g:gitgutter_grep = 'rg'
 
 " }}}2
 
-
 " SETTINGS {{{1
 " Appearance {{{2
 set termguicolors
@@ -209,6 +253,8 @@ set title
 set splitbelow
 set splitright
 set scrolloff=2
+set conceallevel=2
+set concealcursor=nc
 
 " Indentation {{{2
 set expandtab
@@ -245,9 +291,10 @@ set mouse=a
 set hidden
 set virtualedit=block
 set lazyredraw
-set updatetime=100
+set updatetime=250
 set inccommand=nosplit
 set keywordprg=:help
+scriptencoding 'utf-8'
 
 " }}}2
 
@@ -262,6 +309,7 @@ command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
+command! Num let &number=(&number == 0 ? 1 : 0) | let &relativenumber=&number
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
@@ -293,8 +341,8 @@ nnoremap gp `[v`]
 xnoremap gp <Esc>`[v`]
 tnoremap <Esc> <C-\><C-n>
 noremap Q @q
-nmap <silent> g. <Plug>(ale_next_wrap)
-nmap <silent> g, <Plug>(ale_previous_wrap)
+noremap <silent> g. :<C-u>ALENextWrap<CR>zz
+noremap <silent> g, :<C-u>ALEPreviousWrap<CR>zz
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 map <Plug>(slash-after) zz
@@ -329,6 +377,7 @@ noremap <silent> <Leader>R :<C-u>Rg<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
 noremap <silent> <Leader>T :TagbarToggle<CR>
+noremap <silent> <Leader>U :MundoToggle<CR>
 
 " Available
 noremap S <Nop>
@@ -387,6 +436,13 @@ augroup IgnoreCaseCommandMode " {{{2
   autocmd!
   autocmd CmdLineEnter : setlocal nosmartcase
   autocmd CmdLineLeave : setlocal smartcase
+augroup END
+
+augroup Concealing " {{{2
+  autocmd!
+  autocmd FileType haskell,purescript
+        \  syntax match Conceal "\<forall\>" conceal cchar=∀
+        \| hi! link Conceal Operator
 augroup END
 
 " augroup ColorSchemeTweaks " {{{2
