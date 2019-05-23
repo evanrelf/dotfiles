@@ -9,7 +9,6 @@ Plug 'evanrelf/papercolor-theme'
 
 " Appearance
 Plug 'itchyny/lightline.vim' | Plug 'maximbaz/lightline-ale'
-Plug 'ap/vim-buftabline'
 Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -44,6 +43,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
+Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
@@ -82,6 +82,9 @@ let g:lightline.component_expand = {
       \ 'linter_warnings': 'lightline#ale#warnings',
       \ 'linter_ok': 'lightline#ale#ok',
       \ }
+let g:lightline.component_function = {
+      \ 'gitbranch': 'fugitive#head'
+      \ }
 let g:lightline.component_type = {
       \ 'linter_checking': 'middle',
       \ 'linter_errors': 'error',
@@ -89,7 +92,7 @@ let g:lightline.component_type = {
       \ 'linter_ok': 'middle',
       \ }
 let g:lightline.active = {
-      \ 'left': [[], ['paste', 'readonly', 'filename', 'modified'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']],
+      \ 'left': [[], ['paste', 'filename', 'readonly', 'modified'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']],
       \ 'right': [[], ['filetype'], ['lineinfo']]
       \}
 let g:lightline#ale#indicator_checking = '...'
@@ -235,6 +238,9 @@ let g:NERDTreeMinimalUI = 1
 let g:gitgutter_map_keys = 0
 let g:gitgutter_grep = 'rg'
 
+" fugitive
+let g:fugitive_gitlab_domains = ['https://gitlab.vetpro.us']
+
 " }}}2
 
 " SETTINGS {{{1
@@ -304,27 +310,24 @@ function! CommandCabbr(abbreviation, expansion) abort
   silent execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
 command! -nargs=+ Command call CommandCabbr(<f-args>)
+Command bd Bd
 
 command! Cd setlocal autochdir! | setlocal autochdir!
 command! V edit $MYVIMRC
 command! Marked silent !open % -a 'Marked 2.app'
 command! Bg let &background=(&background == 'dark' ? 'light' : 'dark')
 command! Num let &number=(&number == 0 ? 1 : 0) | let &relativenumber=&number
-
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
       \   { 'options': '--exact --delimiter : --nth 4..' },
       \   <bang>0)
-
 command! -bang -nargs=* GRg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
       \   { 'dir': systemlist('git rev-parse --show-toplevel')[0],
       \     'options': '--exact --delimiter : --nth 4..' },
       \   <bang>0)
-
-Command bd Bd
 
 
 " MAPPINGS {{{1
@@ -355,8 +358,8 @@ noremap gj G
 noremap gk gg
 noremap gl g_
 noremap <Backspace> :nohlsearch<CR>
-noremap <silent> <Tab> :bnext<CR>
-noremap <silent> <S-Tab> :bprev<CR>
+noremap <silent> <Tab> :tabnext<CR>
+noremap <silent> <S-Tab> :tabprev<CR>
 noremap <C-]> <C-]>zz
 noremap <C-t> <C-t>zz
 
@@ -374,6 +377,7 @@ noremap <silent> <Leader>f :<C-u>GFiles<CR>
 noremap <silent> <Leader>F :<C-u>Files<CR>
 noremap <silent> <Leader>r :<C-u>GRg<CR>
 noremap <silent> <Leader>R :<C-u>Rg<CR>
+noremap <silent> <Leader>b :<C-u>Buffers<CR>
 xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
 noremap <silent> <Leader>T :TagbarToggle<CR>
@@ -415,11 +419,12 @@ augroup FileTypeSettings " {{{2
   autocmd FileType vim-plug
         \  setlocal wrap nonumber norelativenumber
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd FileType fzf noremap <buffer> <Esc> :<C-u>q<CR>
+  autocmd FileType fzf
+        \  nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType ale-preview
         \  setlocal wrap nonumber norelativenumber
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd FileType markdown,text,latex,tex setlocal nonumber norelativenumber wrap
+  autocmd FileType markdown,text,latex,tex setlocal wrap nonumber norelativenumber
 augroup END
 
 augroup FormatOptions " {{{2
@@ -436,6 +441,11 @@ augroup IgnoreCaseCommandMode " {{{2
   autocmd!
   autocmd CmdLineEnter : setlocal nosmartcase
   autocmd CmdLineLeave : setlocal smartcase
+augroup END
+
+augroup RedrawOnResize " {{{2
+  autocmd!
+  autocmd VimResized * redraw!
 augroup END
 
 augroup Concealing " {{{2
@@ -459,11 +469,6 @@ augroup END
 "       " \| highlight! default link StatusLine MatchParen
 "       " \| highlight! default link StatusLineNC Normal
 " augroup END
-
-augroup RedrawOnResize " {{{2
-  autocmd!
-  autocmd VimResized * redraw!
-augroup END
 
 " augroup OpenTagBar " {{{2
 "   autocmd!
