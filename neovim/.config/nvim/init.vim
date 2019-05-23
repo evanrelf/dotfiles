@@ -95,7 +95,7 @@ let g:lightline.active = {
       \ 'left': [[], ['paste', 'filename', 'readonly', 'modified'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']],
       \ 'right': [[], ['filetype'], ['lineinfo']]
       \}
-let g:lightline#ale#indicator_checking = '...'
+let g:lightline#ale#indicator_checking = ''
 let g:lightline#ale#indicator_ok = ''
 
 " buftabline
