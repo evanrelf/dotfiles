@@ -37,6 +37,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sleuth'
+Plug 'sgur/vim-editorconfig'
 
 " Information
 Plug 'w0rp/ale'
@@ -46,7 +47,8 @@ Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
-Plug 'evanrelf/haskell-vim'
+Plug 'evanrelf/purescript-vim'
+" Plug 'danieljharvey/psc-ide-vim' " Original: FrigoEU/psc-ide-vim
 Plug 'vmchale/dhall-vim'
 
 " Files
@@ -165,15 +167,19 @@ let g:strip_only_modified_lines = 1
 let g:show_spaces_that_precede_tabs = 1
 
 " polyglot
-let g:polyglot_disabled = ['haskell']
+let g:polyglot_disabled = ['purescript']
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_new_list_item_indent = 0
-let g:elm_setup_keybindings = 0
-let g:elm_format_autosave = 0
 let g:haskell_backpack = 1
 let g:haskell_indent_if = 2
 let g:haskell_indent_in = 0
+let g:elm_setup_keybindings = 0
+let g:elm_format_autosave = 0
 let g:purescript_indent_case = 2
+
+" evanrelf/purescript-vim
+let g:purescript_indent_if = 2
+let g:purescript_indent_in = 0
 
 " tagbar
 let g:tagbar_compact = 1
@@ -400,6 +406,9 @@ xnoremap Z <Nop>
 " AUTOCOMMANDS {{{1
 augroup FileTypeSettings " {{{2
   autocmd!
+  " autocmd FileType purescript
+  "       \  setlocal indentexpr=GetHaskellIndent()
+  "       \| setlocal indentkeys=!^F,o,O,0{,0},0(,0),0[,0],0,,0=where,0=let,0=in\ ,0=::\ ,0=\-\>\ ,0=\=\>\ ,0=\|\ ,=\=\,0=deriving
   autocmd FileType elm
         \  setlocal softtabstop=4
         \| setlocal shiftwidth=4
