@@ -25,8 +25,9 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 " Plug 'zxqfl/tabnine-vim'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'tmsvg/pear-tree'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
@@ -41,6 +42,7 @@ Plug 'sgur/vim-editorconfig'
 
 " Information
 Plug 'w0rp/ale'
+" Plug '~/Projects/ale' " Original: w0rp/ale
 Plug 'airblade/vim-gitgutter'
 Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-gitlab.vim'
@@ -84,7 +86,8 @@ let g:lightline.component_expand = {
       \ 'linter_ok': 'lightline#ale#ok',
       \ }
 let g:lightline.component_function = {
-      \ 'gitbranch': 'fugitive#head'
+      \ 'gitbranch': 'fugitive#head',
+      \ 'cocstatus': 'coc#status',
       \ }
 let g:lightline.component_type = {
       \ 'linter_checking': 'middle',
@@ -93,8 +96,8 @@ let g:lightline.component_type = {
       \ 'linter_ok': 'middle',
       \ }
 let g:lightline.active = {
-      \ 'left': [[], ['paste', 'filename', 'readonly', 'modified'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']],
-      \ 'right': [[], ['filetype'], ['lineinfo']]
+      \ 'left': [[], ['paste', 'filename', 'readonly', 'modified'], ['cocstatus', 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok']],
+      \ 'right': [[], ['filetype'], ['lineinfo']],
       \}
 let g:lightline#ale#indicator_checking = ''
 let g:lightline#ale#indicator_ok = ''
@@ -114,14 +117,15 @@ let g:matchup_matchparen_status_offscreen = 0
 let g:matchup_matchparen_deferred = 1
 
 " ultisnips
-let g:UltiSnipsExpandTrigger = '<Tab>'
+" let g:UltiSnipsExpandTrigger = '<Tab>'
 " let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 " let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+" let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+" let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:UltiSnipsEditSplit = 'vertical'
 
 " pear tree
+let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
@@ -131,7 +135,10 @@ let g:pear_tree_pairs = {
       \ '{': {'closer': '}'},
       \ "'": {'closer': "'"},
       \ '"': {'closer': '"'},
-      \ '{-': {'closer': '-}'}
+      \ '{-': {'closer': '-}'},
+      \ '{-#': {'closer': '#-}'},
+      \ '/*': {'closer': '*/'},
+      \ '<!--': {'closer': '-->'},
       \ }
 
 " auto-pairs
@@ -141,10 +148,9 @@ let g:AutoPairsMultilineClose = 0
 let g:neoformat_only_msg_on_error = 1
 
 " ale
-let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {
-      \ 'haskell': ['stack_build', 'hlint'],
+      \ 'haskell': ['hie', 'stack_build', 'hlint'],
       \ 'rust': ['rls', 'cargo', 'rustc']
       \ }
 let g:ale_fixers = {
@@ -263,6 +269,8 @@ set cursorline
 set colorcolumn=81
 set number
 set relativenumber
+set signcolumn=yes
+set cmdheight=2
 set rulerformat=%7(%3(%l%),%3(%c%V%)%)
 set noshowmode
 set shortmess=filmxTWIcF
@@ -271,7 +279,6 @@ set splitbelow
 set splitright
 set scrolloff=2
 set conceallevel=2
-set concealcursor=nc
 
 " Indentation {{{2
 set expandtab
@@ -439,6 +446,7 @@ augroup FileTypeSettings " {{{2
         \  setlocal wrap nonumber norelativenumber
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType markdown,text,latex,tex setlocal wrap nonumber norelativenumber
+  autocmd FileType json syntax match Comment +\/\/.\+$+
 augroup END
 
 augroup FormatOptions " {{{2
@@ -502,5 +510,107 @@ augroup END
 " augroup END
 
 " }}}2
+
+
+" COC {{{1
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <Tab>' to make sure Tab is not mapped by other plugin.
+" inoremap <silent> <expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+
+inoremap <silent> <expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <C-Space> to trigger completion.
+inoremap <silent> <expr> <C-Space> coc#refresh()
+
+" Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+
+" " Remap for format selected region
+" xmap <leader>f <Plug>(coc-format-selected)
+" nmap <leader>f <Plug>(coc-format-selected)
+
+" augroup mygroup
+"   autocmd!
+"   " Setup formatexpr specified filetype(s).
+"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"   " Update signature help on jump placeholder
+"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" augroup end
+
+" " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+" xmap <leader>a <Plug>(coc-codeaction-selected)
+" nmap <leader>a <Plug>(coc-codeaction-selected)
+
+" " Remap for do codeAction of current line
+" nmap <leader>ac <Plug>(coc-codeaction)
+" " Fix autofix problem of current line
+" nmap <leader>qf <Plug>(coc-fix-current)
+
+" " Use `:Format` to format current buffer
+" command! -nargs=0 Format :call CocAction('format')
+
+" " Use `:Fold` to fold current buffer
+" command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" " Using CocList
+" " Show all diagnostics
+" nnoremap <silent> <Leader>ca :<C-u>CocList diagnostics<cr>
+" " Manage extensions
+" nnoremap <silent> <Leader>ce :<C-u>CocList extensions<cr>
+" " Show commands
+" nnoremap <silent> <Leader>cc :<C-u>CocList commands<cr>
+" " Find symbol of current document
+" nnoremap <silent> <Leader>co :<C-u>CocList outline<cr>
+" " Search workspace symbols
+" nnoremap <silent> <Leader>cs :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent> <Leader>cj :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent> <Leader>ck :<C-u>CocPrev<CR>
+" " Resume latest coc list
+" nnoremap <silent> <Leader>cp :<C-u>CocListResume<CR>
+
 
 " vim: foldenable foldmethod=marker

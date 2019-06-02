@@ -65,5 +65,8 @@
     "material-icon-theme.opacity": 1,
     "material-icon-theme.saturation": 0,
     "material-icon-theme.folders.theme": "classic",
-    "workbench.colorTheme": "Ayu Light Bordered"
+    "workbench.colorTheme": "Ayu Dark Bordered",
+    "purescript.addSpagoSources": true,
+    "purescript.addNpmPath": true,
+    "purescript.buildCommand": "spago build -- --json-errors"
 }

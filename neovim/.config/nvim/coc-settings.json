@@ -1,0 +1,40 @@
+{
+  "languageserver": {
+    // "haskell": {
+    //   "command": "hie-wrapper",
+    //   "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+    //   "filetypes": ["hs", "lhs", "haskell"],
+    //   "initializationOptions": {},
+    //   "settings": {
+    //     "languageServerHaskell": {
+    //       "hlintOn": false,
+    //       "maxNumberOfProblems": 10,
+    //       "formatOnImportOn": false
+    //     }
+    //   }
+    // },
+    "purescript": {
+      "command": "purescript-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["purescript"],
+      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
+    }
+    // "elmLS": {
+    //   "command": "elm-language-server",
+    //   "args": ["--stdio"],
+    //   "filetypes": ["elm"],
+    //   "rootPatterns": ["elm.json"],
+    //   "initializationOptions": {
+    //     "runtime": "node",
+    //     "elmPath": "elm",
+    //     "elmFormatPath": "elm-format"
+    //   }
+    // },
+    // "bash": {
+    //   "command": "bash-language-server",
+    //   "args": ["start"],
+    //   "filetypes": ["sh"],
+    //   "ignoredRootPaths": ["~"]
+    // }
+  }
+}
