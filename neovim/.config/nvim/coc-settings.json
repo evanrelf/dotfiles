@@ -1,23 +1,34 @@
 {
+  "coc.preferences.snippets.enable": false,
+  "snippets.loadFromExtensions": false,
+  "snippets.snipmate.enable": false,
+  // "suggest.autoTrigger": "trigger",
+  // "suggest.triggerCompletionWait": 300,
+  "suggest.triggerCompletionWait": 100,
+  "suggest.minTriggerInputLength": 2,
+  "diagnostic.displayByAle": true,
+  // "diagnostic.refreshAfterSave": true,
   "languageserver": {
-    // "haskell": {
-    //   "command": "hie-wrapper",
-    //   "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
-    //   "filetypes": ["hs", "lhs", "haskell"],
-    //   "initializationOptions": {},
-    //   "settings": {
-    //     "languageServerHaskell": {
-    //       "hlintOn": false,
-    //       "maxNumberOfProblems": 10,
-    //       "formatOnImportOn": false
-    //     }
-    //   }
-    // },
+    "haskell": {
+      "command": "hie-wrapper",
+      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {},
+      "disableCompletion": true,
+      "settings": {
+        "languageServerHaskell": {
+          "hlintOn": false,
+          "maxNumberOfProblems": 10,
+          "formatOnImportOn": false
+        }
+      }
+    },
     "purescript": {
       "command": "purescript-language-server",
       "args": ["--stdio"],
       "filetypes": ["purescript"],
-      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
+      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"],
+      "disableCompletion": true
     }
     // "elmLS": {
     //   "command": "elm-language-server",

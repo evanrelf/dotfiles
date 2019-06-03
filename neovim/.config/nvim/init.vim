@@ -25,12 +25,8 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-" Plug 'zxqfl/tabnine-vim'
-" Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 Plug 'tmsvg/pear-tree'
-" Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
 
 " Formatting
 Plug 'sbdchd/neoformat', { 'on': ['Neoformat'] }
@@ -42,7 +38,6 @@ Plug 'sgur/vim-editorconfig'
 
 " Information
 Plug 'w0rp/ale'
-" Plug '~/Projects/ale' " Original: w0rp/ale
 Plug 'airblade/vim-gitgutter'
 Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-gitlab.vim'
@@ -50,7 +45,6 @@ Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-
 " Syntax
 Plug 'sheerun/vim-polyglot'
 Plug 'evanrelf/purescript-vim'
-" Plug 'danieljharvey/psc-ide-vim' " Original: FrigoEU/psc-ide-vim
 Plug 'vmchale/dhall-vim'
 
 " Files
@@ -60,9 +54,9 @@ Plug 'tpope/vim-eunuch'
 " Miscellaneous
 Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 Plug 'moll/vim-bbye'
-Plug 'tpope/vim-repeat'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'Konfekt/FastFold'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 
@@ -380,6 +374,7 @@ noremap <silent> <Tab> :tabnext<CR>
 noremap <silent> <S-Tab> :tabprev<CR>
 noremap <C-]> <C-]>zz
 noremap <C-t> <C-t>zz
+imap <Space> <Plug>(PearTreeSpace)
 
 " Leader
 map <Space> <Leader>
@@ -521,7 +516,7 @@ augroup END
 "       \ coc#refresh()
 
 inoremap <silent> <expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
+      \ pumvisible() ? "\<C-n>" :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
@@ -541,11 +536,11 @@ inoremap <silent> <expr> <C-Space> coc#refresh()
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" nmap <silent> [c <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
@@ -564,10 +559,10 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" " Remap for rename current word
+" Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)
 
-" " Remap for format selected region
+" Remap for format selected region
 " xmap <leader>f <Plug>(coc-format-selected)
 " nmap <leader>f <Plug>(coc-format-selected)
 
@@ -579,37 +574,37 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 "   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 " augroup end
 
-" " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 " xmap <leader>a <Plug>(coc-codeaction-selected)
 " nmap <leader>a <Plug>(coc-codeaction-selected)
 
-" " Remap for do codeAction of current line
+" Remap for do codeAction of current line
 " nmap <leader>ac <Plug>(coc-codeaction)
-" " Fix autofix problem of current line
+" Fix autofix problem of current line
 " nmap <leader>qf <Plug>(coc-fix-current)
 
-" " Use `:Format` to format current buffer
+" Use `:Format` to format current buffer
 " command! -nargs=0 Format :call CocAction('format')
 
-" " Use `:Fold` to fold current buffer
+" Use `:Fold` to fold current buffer
 " command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-" " Using CocList
-" " Show all diagnostics
+" Using CocList
+" Show all diagnostics
 " nnoremap <silent> <Leader>ca :<C-u>CocList diagnostics<cr>
-" " Manage extensions
+" Manage extensions
 " nnoremap <silent> <Leader>ce :<C-u>CocList extensions<cr>
-" " Show commands
+" Show commands
 " nnoremap <silent> <Leader>cc :<C-u>CocList commands<cr>
-" " Find symbol of current document
+" Find symbol of current document
 " nnoremap <silent> <Leader>co :<C-u>CocList outline<cr>
-" " Search workspace symbols
+" Search workspace symbols
 " nnoremap <silent> <Leader>cs :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
+" Do default action for next item.
 " nnoremap <silent> <Leader>cj :<C-u>CocNext<CR>
-" " Do default action for previous item.
+" Do default action for previous item.
 " nnoremap <silent> <Leader>ck :<C-u>CocPrev<CR>
-" " Resume latest coc list
+" Resume latest coc list
 " nnoremap <silent> <Leader>cp :<C-u>CocListResume<CR>
 
 
