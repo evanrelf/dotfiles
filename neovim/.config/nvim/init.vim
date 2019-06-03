@@ -14,12 +14,12 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
 Plug 'jeetsukumaran/vim-indentwise'
-Plug 'junegunn/vim-slash'
 Plug 'critiqjo/husk-x.vim'
 Plug 'andymass/vim-matchup'
 
 " Editing
 Plug 'machakann/vim-sandwich'
+Plug 'tommcdo/vim-exchange'
 Plug 'tomtom/tcomment_vim'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
@@ -271,7 +271,6 @@ set shortmess=filmxTWIcF
 set title
 set splitbelow
 set splitright
-set scrolloff=2
 set conceallevel=2
 
 " Indentation {{{2
@@ -293,7 +292,7 @@ set nobackup
 set nowritebackup
 
 " Searching {{{2
-set nohlsearch
+set hlsearch
 set ignorecase
 set smartcase
 set gdefault
@@ -360,7 +359,6 @@ noremap <silent> g. :<C-u>ALENextWrap<CR>zz
 noremap <silent> g, :<C-u>ALEPreviousWrap<CR>zz
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-map <Plug>(slash-after) zz
 noremap <Left> 5zh
 noremap <Right> 5zl
 noremap <Up> 5<C-y>
@@ -369,12 +367,14 @@ noremap gh ^
 noremap gj G
 noremap gk gg
 noremap gl g_
-noremap <Backspace> :nohlsearch<CR>
+noremap <silent> <Backspace> :<C-u>nohlsearch<CR>
 noremap <silent> <Tab> :tabnext<CR>
 noremap <silent> <S-Tab> :tabprev<CR>
 noremap <C-]> <C-]>zz
 noremap <C-t> <C-t>zz
 imap <Space> <Plug>(PearTreeSpace)
+noremap n nzz
+noremap N Nzz
 
 " Leader
 map <Space> <Leader>
@@ -424,7 +424,7 @@ augroup FileTypeSettings " {{{2
   autocmd FileType help nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd TermOpen * setlocal wrap nonumber norelativenumber
   autocmd FileType man
-        \  setlocal laststatus=0 noruler wrap
+        \  setlocal laststatus=0 noruler wrap colorcolumn=
         \| noremap <buffer> h 2zh
         \| noremap <buffer> j 2<C-e>L0
         \| noremap <buffer> k 2<C-y>H0
@@ -433,12 +433,12 @@ augroup FileTypeSettings " {{{2
         \| noremap <buffer> u <C-u>
         " \| autocmd! LazyLoadPlugins
   autocmd FileType vim-plug
-        \  setlocal wrap nonumber norelativenumber
+        \  setlocal wrap nonumber norelativenumber colorcolumn=
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType fzf
         \  nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType ale-preview
-        \  setlocal wrap nonumber norelativenumber
+        \  setlocal wrap nonumber norelativenumber colorcolumn=
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType markdown,text,latex,tex setlocal wrap nonumber norelativenumber
   autocmd FileType json syntax match Comment +\/\/.\+$+
