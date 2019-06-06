@@ -5,7 +5,6 @@
   // "suggest.autoTrigger": "trigger",
   // "suggest.triggerCompletionWait": 300,
   "suggest.triggerCompletionWait": 100,
-  "suggest.minTriggerInputLength": 2,
   "diagnostic.displayByAle": true,
   // "diagnostic.refreshAfterSave": true,
   "languageserver": {
