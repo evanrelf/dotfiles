@@ -271,7 +271,7 @@ set shortmess=filmxTWIcF
 set title
 set splitbelow
 set splitright
-set conceallevel=2
+" set conceallevel=2
 
 " Indentation {{{2
 set expandtab

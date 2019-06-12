@@ -52,6 +52,8 @@ if test (uname) = "Linux"
     set -x BROWSER "chromium"
 end
 
+# set paths "$HOME/.cabal/bin" $paths
+# set paths "$HOME/.ghcup" $paths
 set paths "$HOME/.local/bin" $paths
 set paths "$HOME/.config/git/scripts" $paths
 set paths "$HOME/.emacs.d/bin" $paths
@@ -146,6 +148,7 @@ if status --is-interactive
         abbr --add ghc "stack ghc"
         abbr --add ghci "stack ghci"
         abbr --add runghc "stack runghc"
+        abbr --add sbf "stack build --fast"
     end
 end
 
@@ -235,6 +238,37 @@ set fish_color_valid_path --underline
 
 
 # EXTRAS {{{1
+
+# Stack auto-completion {{{2
+function _stack
+    set -l cl (commandline --tokenize --current-process)
+    # Hack around fish issue #3934
+    set -l cn (commandline --tokenize --cut-at-cursor --current-process)
+    set -l cn (count $cn)
+    set -l tmpline --bash-completion-enriched --bash-completion-index $cn
+    for arg in $cl
+        set tmpline $tmpline --bash-completion-word $arg
+    end
+    for opt in (stack $tmpline)
+        if test -d $opt
+            echo -E "$opt/"
+        else
+            echo -E "$opt"
+        end
+    end
+end
+
+complete --no-files --command stack --arguments '(_stack)'
+
+# ghcup {{{2
+if test -e $HOME/.ghcup/env
+    if type -q bass
+        bass source $HOME/.ghcup/env
+    else
+        _error "ghcup isn't working because you don't have bass"
+    end
+end
+
 # Nix {{{2
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
     if type -q bass
