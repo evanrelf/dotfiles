@@ -57,9 +57,9 @@
 (use-package evil-commentary
   :config
   (evil-commentary-mode))
-(use-package evil-exchange
-  :config
-  (evil-exchange-install))
+;; (use-package evil-exchange
+;;   :config
+;;   (evil-exchange-install))
 (use-package evil-smartparens
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
@@ -74,10 +74,19 @@
 (use-package evil-matchit
   :config
   (global-evil-matchit-mode 1))
-(use-package evil-magit)
+;; (use-package evil-magit)
 ;; Git
-(use-package magit)
+;; (use-package magit)
 ;; Intelligence
+;; (use-package lsp-mode
+;;   :config
+;;
+;;   )
+;; (use-package lsp-ui)
+;; (use-package lsp-haskell
+;;   :config
+;;   (add-hook 'haskell-mode-hook #'lsp))
+;; (use-package company-lsp)
 (use-package company
   :config
   (setq company-idle-delay 0.2)
@@ -104,7 +113,7 @@
   (counsel-mode 1))
 ;; Languages
 (use-package haskell-mode)
-(use-package intero)
+;; (use-package intero)
   ;; :config
   ;; (intero-global-mode 1))
 ;; (use-package dante
@@ -115,26 +124,25 @@
 ;;   (add-hook 'haskell-mode-hook 'flycheck-mode)
 ;;   :config
 ;;   (add-hook 'dante-mode-hook
-;; 	    '(lambda () (flycheck-add-next-checker 'haskell-dante
-;; 						   '(warning . haskell-hlint)))))
+;;     '(lambda () (flycheck-add-next-checker 'haskell-dante '(warning . haskell-hlint)))))
 (use-package purescript-mode
   :config
   (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation))
+(use-package elm-mode
+  :config
+  (setq elm-format-on-save t))
 (use-package irony
   :config
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 (use-package company-irony)
-(use-package elm-mode
-  :config
-  (setq elm-format-on-save t))
 (use-package markdown-mode)
 (use-package dhall-mode)
 (use-package yaml-mode
-  :config (add-hook 'yaml-mode-hook
-                    '(lambda ()
-                       (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+  :config
+  (add-hook 'yaml-mode-hook
+    '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 ;; Other
 (use-package general
   :config
@@ -213,19 +221,18 @@
 ;;   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 (unless window-system
   (global-set-key (kbd "<mouse-4>")
-		  (lambda ()
-		    (interactive)
-		    (scroll-down-line)
-		    (scroll-down-line)
-		    (scroll-down-line)
-		    ))
+    ;; TODO: Find a more idiomatic way of doing this
+    (lambda ()
+      (interactive)
+      (scroll-down-line)
+      (scroll-down-line)
+      (scroll-down-line)))
   (global-set-key (kbd "<mouse-5>")
-		  (lambda ()
-		    (interactive)
-		    (scroll-up-line)
-		    (scroll-up-line)
-		    (scroll-up-line)
-		    )))
+    (lambda ()
+      (interactive)
+      (scroll-up-line)
+      (scroll-up-line)
+      (scroll-up-line))))
 ;; Control mini window sizing
 (setq resize-mini-windows t)
 (setq max-mini-window-height 10)
