@@ -135,6 +135,9 @@
     sensitivity = 100; # 0-255 (128)
     speed = 80; # 0-255 (97)
   };
+  services.gnome3 = {
+    chrome-gnome-shell.enable = true;
+  };
   services.xserver = {
     # enable = true;
     autoRepeatDelay = 200;
@@ -146,31 +149,37 @@
       middleEmulation = false;
       accelSpeed = "0.7";
     };
-    # desktopManager = {
-    #   default = "none";
-    #   xterm.enable = false;
-    #   xfce = {
-    #     enable = true;
-    #     enableXfwm = false;
-    #     noDesktop = true;
-    #   };
-    # };
-    # windowManager = {
-    #   default = "xmonad";
-    #   xmonad = {
-    #     enable = true;
-    #     enableContribAndExtras = true;
-    #   };
-    # };
-    # displayManager.lightdm.enable = true;
-    # xautolock = {
-    #   enable = true;
-    #   time = 5;
-    #   locker = "${pkgs.systemd}/bin/systemctl suspend";
-    #   enableNotifier = true;
-    #   notify = 10;
-    #   notifier = "${pkgs.notify-desktop}/bin/notify-desktop 'Locking in 10 seconds...'";
-    # };
+    displayManager.gdm = {
+      enable = true;
+      wayland = false;
+      autoLogin = {
+        enable = true;
+        user = "evanrelf";
+      };
+    };
+    desktopManager = {
+      default = "none";
+      xterm.enable = false;
+      gnome3 = {
+        enable = true;
+	extraGSettingsOverrides = ''
+	  [org.gnome.mutter]
+          experimental-features=['x11-randr-fractional-scaling']
+	'';
+        flashback.customSessions."xmonad" = {
+          wmCommand = "${pkgs.haskellPackages.xmonad}/bin/xmonad";
+          wmLabel = "XMonad";
+          wmName = "xmonad";
+        };
+      };
+    };
+    windowManager = {
+      default = "xmonad";
+      xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+      };
+    };
   };
   # services.compton = {
   #   enable = true;
@@ -210,7 +219,7 @@
   # NETWORK {{{1
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
+    # powerOnBoot = false;
   };
   networking.hostName = "nixos";
   networking.networkmanager = {
@@ -281,7 +290,7 @@
     initrd.luks.devices = [
       {
         name = "root";
-        # device = "/dev/disk/by-uuid/76d089cb-ab13-43c2-a63e-cdccd2f56941";
+        device = "/dev/disk/by-uuid/424daca7-06a2-429a-85e1-1f0a17799bed";
         preLVM = true;
         allowDiscards = true;
       }
