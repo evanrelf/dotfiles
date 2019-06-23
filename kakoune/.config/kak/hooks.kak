@@ -1,8 +1,8 @@
 hook global WinCreate .* %{
   # add-highlighter global/ show-matching
-  # add-highlighter global/ regex \b(TODO|FIXME|XXX|NOTE)\b 0:default+r
-  add-highlighter global/ show-whitespaces -lf ' ' -spc ' '
-  add-highlighter window/trailing-whitespace regex \h+$ 0:default,red
+  # add-highlighter global/ regex \b(TODO|FIXME|NOTE)\b 0:default+r
+  # add-highlighter global/ show-whitespaces -lf ' ' -spc ' '
+  # add-highlighter global/ regex \h+$ 0:default,red
 }
 
 hook global InsertBegin .* %{
@@ -44,13 +44,16 @@ hook global WinSetOption filetype=.* %{
 
 hook global WinSetOption filetype=haskell %{
   set-option window makecmd 'stack build --fast'
-  set-option window lintcmd 'hlint; stack build --fast'
+  set-option window lintcmd 'hlint'
   set-option window formatcmd 'sort-imports'
   hook window -group lint BufWritePost .* lint
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]\w*)\s+::\s 1:function
   lint-enable
   lint
 }
+
+# hook global WinSetOption filetype=purescript %{
+# }
 
 hook global WinSetOption filetype=elm %{
   set-option window makecmd 'make'
