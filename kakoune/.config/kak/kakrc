@@ -10,3 +10,11 @@ evaluate-commands %sh{
     }"
   done
 }
+
+# TODO
+# - Better Haskell syntax highlighting
+# - PureScript support
+# - Git gutter?
+# - FZF with fd and rg
+# - Maybe nicer status bar
+# - Change cursor shape

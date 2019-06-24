@@ -64,6 +64,12 @@ hook global WinSetOption filetype=elm %{
   add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
 
+hook global WinSetOption filetype=rust %{
+  set-option window makecmd 'cargo build'
+  set-option window formatcmd 'rustfmt --emit stdout'
+  hook window -group format BufWritePre .* format
+}
+
 hook global WinSetOption filetype=cpp %{
   set-option window makecmd 'make'
   set-option window formatcmd 'clang-format'

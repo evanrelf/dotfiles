@@ -1,4 +1,4 @@
-if _exists git; and status --is-interactive
+if _exists kak; and status --is-interactive
   abbr --add k "kak"
   abbr --add kc "kakc"
 end
@@ -13,6 +13,11 @@ function kakc
         kak -c daemon -e 'buffer *scratch*'
     else
         kak -c daemon $argv
+    end
+    if test $status -eq 255
+        echo "Starting Kakoune daemon"
+        kakd
+        kakc $argv
     end
 end
 complete --command kakc --wraps kak

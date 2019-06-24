@@ -17,7 +17,8 @@ plug "andreyorst/smarttab.kak" %{
   set-option gloabl expandtab
   set-option global softtabstop 2
   hook global WinSetOption filetype=(makefile) noexpandtab
-  hook global WinSetOption filetype=(rust|python) softtabstop 4
+  hook global WinSetOption filetype=(rust|python|elm) softtabstop 4
+  hook global WinSetOption filetype=(haskell|purescript) softtabstop 2
 }
 plug "alexherbo2/auto-pairs.kak" %{
   hook global WinCreate .* %{
@@ -43,7 +44,35 @@ plug "Delapouite/kakoune-text-objects"
 plug "Delapouite/kakoune-auto-percent"
 plug "Delapouite/kakoune-auto-star"
 
+# Syntax
+plug "ul/kak-lsp" do %{
+  cargo build --release --locked
+  cargo install --force --path .
+} %{
+  define-command lsp-restart %{ lsp-stop; lsp-start }
+  set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
+  set-option global lsp_diagnostic_line_error_sign "!"
+  set-option global lsp_diagnostic_line_warning_sign "?"
+  hook global WinSetOption filetype=(c|cpp|rust|haskell|purescript) %{
+    map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+    lsp-enable-window
+    lsp-auto-hover-enable
+    lsp-auto-hover-insert-mode-disable
+    set-option window lsp_hover_anchor true
+    set-face window DiagnosticError default+u
+    set-face window DiagnosticWarning default+u
+  }
+  hook global WinSetOption filetype=rust %{
+    set-option window lsp_server_configuration rust.clippy_preference="on"
+  }
+  hook global KakEnd .* lsp-exit
+}
+
 # Other
+plug "fsub/kakoune-mark" domain "gitlab.com" %{
+  map global user m ": mark-word<ret>" -docstring "Mark word"
+  map global user M ": mark-clear<ret>" -docstring "Clear marks"
+}
 plug "Delapouite/kakoune-cd" %{
   alias global "cdb" "change-directory-current-buffer"
   alias global "cdr" "change-directory-project-root"

@@ -363,8 +363,10 @@ noremap <Left> 5zh
 noremap <Right> 5zl
 noremap <Up> 5<C-y>
 noremap <Down> 5<C-e>
-noremap gh ^
+noremap gh 0
+noremap gi ^
 noremap gj G
+noremap ge G$
 noremap gk gg
 noremap gl g_
 noremap <silent> <Backspace> :<C-u>nohlsearch<CR>
