@@ -1,5 +1,9 @@
 # IMPORTS {{{1
 
+for a in (abbr --list)
+    abbr --erase $a
+end
+
 source $HOME/.config/fish/prelude.fish
 source $HOME/.config/fish/modules/emacs.fish
 source $HOME/.config/fish/modules/git.fish
@@ -145,9 +149,9 @@ if status --is-interactive
     # set -g fish_user_abbreviations
     abbr --add n "nvim"
     if _exists stack
-        abbr --add ghc "stack ghc"
+        # abbr --add ghc "stack ghc"
+        # abbr --add runghc "stack runghc"
         abbr --add ghci "stack ghci"
-        abbr --add runghc "stack runghc"
         abbr --add sbf "stack build --fast"
     end
 end
