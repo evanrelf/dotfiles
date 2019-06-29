@@ -144,7 +144,7 @@ let g:neoformat_only_msg_on_error = 1
 " ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {
-      \ 'haskell': [],
+      \ 'haskell': ['stack-build', 'hlint'],
       \ 'rust': ['rls', 'cargo', 'rustc']
       \ }
 let g:ale_fixers = {
