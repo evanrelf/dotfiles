@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 log() {
-  echo -e "$*" >&2
+  echo "$*" >&2
 }
 
 error() {
@@ -29,7 +29,7 @@ if [ $# -gt 0 ]; then
       fi
       case $i in
         fish )
-          if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" == "Darwin" ]; then
+          if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" = "Darwin" ]; then
             log "Installing iTerm Shell Integration for Fish..."
             command -v curl >/dev/null 2>&1 || error "curl is not installed"
             curl -Lo "$HOME/.config/fish/conf.d/iterm.fish" --create-dirs \

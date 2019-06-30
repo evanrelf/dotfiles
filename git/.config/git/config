@@ -153,9 +153,11 @@
 	ui = true
 [color "diff-highlight"]
 	oldNormal = red
-	oldHighlight = red 52
+	# oldHighlight = red 52
+	oldHighlight = red reverse
 	newNormal = green
-	newHighlight = green 22
+	# newHighlight = green 22
+	newHighlight = green reverse
 [color "diff"]
 	meta = yellow
 	frag = magenta

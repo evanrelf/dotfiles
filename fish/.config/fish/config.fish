@@ -1,9 +1,5 @@
 # IMPORTS {{{1
 
-for a in (abbr --list)
-    abbr --erase $a
-end
-
 source $HOME/.config/fish/prelude.fish
 source $HOME/.config/fish/modules/emacs.fish
 source $HOME/.config/fish/modules/git.fish
@@ -147,6 +143,9 @@ end
 
 if status --is-interactive
     # set -g fish_user_abbreviations
+    # for a in (abbr --list)
+    #     abbr --erase $a
+    # end
     abbr --add n "nvim"
     if _exists stack
         # abbr --add ghc "stack ghc"
@@ -218,7 +217,7 @@ end
 
 
 # COLORS {{{1
-set fish_color_autosuggestion black
+set fish_color_autosuggestion brblack
 # set fish_color_cancel
 set fish_color_command green
 set fish_color_comment black
@@ -226,15 +225,15 @@ set fish_color_comment black
 # set fish_color_cwd_root
 # set fish_color_end
 set fish_color_error red
-# set fish_color_escape
+set fish_color_escape cyan
 # set fish_color_history_current
 # set fish_color_host
 # set fish_color_match
-# set fish_color_normal
-# set fish_color_operator
+set fish_color_normal normal
+set fish_color_operator cyan
 set fish_color_param normal
-set fish_color_quote yellow --bold
-# set fish_color_redirection
+set fish_color_quote yellow
+set fish_color_redirection cyan
 # set fish_color_search_match
 # set fish_color_selection
 # set fish_color_user

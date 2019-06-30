@@ -9,23 +9,20 @@ Plug 'evanrelf/papercolor-theme'
 
 " Appearance
 Plug 'itchyny/lightline.vim' | Plug 'maximbaz/lightline-ale'
-Plug 'roman/golden-ratio', { 'on': ['GoldenRatioToggle'] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
-Plug 'jeetsukumaran/vim-indentwise'
 Plug 'critiqjo/husk-x.vim'
 Plug 'andymass/vim-matchup'
 
 " Editing
 Plug 'machakann/vim-sandwich'
-Plug 'tommcdo/vim-exchange'
 Plug 'tomtom/tcomment_vim'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', { 'do': './install.sh nightly' }
 Plug 'tmsvg/pear-tree'
 
 " Formatting
@@ -40,7 +37,6 @@ Plug 'sgur/vim-editorconfig'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
-Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
@@ -52,7 +48,6 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
 
 " Miscellaneous
-Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 Plug 'moll/vim-bbye'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'Konfekt/FastFold'
@@ -62,13 +57,13 @@ call plug#end()
 
 " Plugin settings {{{2
 
-" monotone
-" let g:monotone_color = [30, 50, 80]
-
 " one
 let g:one_allow_italics = 1
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
+
+" monotone
+" let g:monotone_color = [30, 50, 80]
 
 " lightline
 let g:lightline = {}
@@ -95,16 +90,6 @@ let g:lightline.active = {
       \}
 let g:lightline#ale#indicator_checking = ''
 let g:lightline#ale#indicator_ok = ''
-
-" buftabline
-let g:buftabline_show = 1
-let g:buftabline_indicators = 1
-
-" indentline
-let g:indentLine_setColors = 0
-
-" golden-ratio
-let g:golden_ratio_autocommand = 0
 
 " match up
 let g:matchup_matchparen_status_offscreen = 0
@@ -135,9 +120,6 @@ let g:pear_tree_pairs = {
       \ '<!--': {'closer': '-->'},
       \ }
 
-" auto-pairs
-let g:AutoPairsMultilineClose = 0
-
 " neoformat
 let g:neoformat_only_msg_on_error = 1
 
@@ -149,8 +131,10 @@ let g:ale_linters = {
       \ }
 let g:ale_fixers = {
       \ 'elm': ['elm-format'],
-      \ 'rust': ['rustfmt']
+      \ 'rust': ['rustfmt'],
       \ }
+      " \ 'javascript': ['prettier']
+      " \ }
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '▌'
 let g:ale_sign_warning = '▌'
@@ -164,93 +148,24 @@ let g:strip_whitelines_at_eof = 1
 let g:strip_whitespace_on_save = 1
 let g:strip_whitespace_confirm = 0
 let g:strip_only_modified_lines = 1
-let g:show_spaces_that_precede_tabs = 1
 
 " polyglot
 let g:polyglot_disabled = ['purescript']
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_new_list_item_indent = 0
-let g:haskell_backpack = 1
 let g:haskell_indent_if = 2
 let g:haskell_indent_in = 0
 let g:elm_setup_keybindings = 0
 let g:elm_format_autosave = 0
-let g:purescript_indent_case = 2
+" let g:purescript_indent_case = 2
 
 " evanrelf/purescript-vim
 let g:purescript_indent_if = 2
 let g:purescript_indent_in = 0
 
-" tagbar
-let g:tagbar_compact = 1
-let g:tagbar_sort = 0
-let g:tagbar_type_elm = {
-  \ 'kinds' : [
-      \ 'm:modules:0:0',
-      \ 'i:imports:1:0',
-      \ 't:types:0:0',
-      \ 'a:type aliases:0:0',
-      \ 'c:type constructors:0:0',
-      \ 'p:ports:0:0',
-      \ 'f:functions:0:0',
-      \ 's:functions:0:0',
-  \ ]
-  \}
-let g:tagbar_type_haskell = {
-  \ 'ctagsbin'    : 'hasktags',
-  \ 'ctagsargs'   : '-x -c -o-',
-  \ 'kinds'       : [
-      \  'm:modules:0:1',
-      \  'd:data:0:1',
-      \  'd_gadt:data gadt:0:1',
-      \  'nt:newtype:0:1',
-      \  'c:classes:0:1',
-      \  'i:instances:0:1',
-      \  'cons:constructors:0:1',
-      \  'c_gadt:constructor gadt:0:1',
-      \  'c_a:constructor accessors:1:1',
-      \  't:type names:0:1',
-      \  'pt:pattern types:0:1',
-      \  'pi:pattern implementations:0:1',
-      \  'ft:function types:0:1',
-      \  'fi:function implementations:0:1',
-      \  'o:others:0:1'
-  \ ],
-  \ 'sro'          : '.',
-  \ 'kind2scope'   : {
-      \ 'm'        : 'module',
-      \ 'd'        : 'data',
-      \ 'd_gadt'   : 'd_gadt',
-      \ 'c_gadt'   : 'c_gadt',
-      \ 'nt'       : 'newtype',
-      \ 'cons'     : 'cons',
-      \ 'c_a'      : 'accessor',
-      \ 'c'        : 'class',
-      \ 'i'        : 'instance'
-  \ },
-  \ 'scope2kind'   : {
-      \ 'module'   : 'm',
-      \ 'data'     : 'd',
-      \ 'newtype'  : 'nt',
-      \ 'cons'     : 'c_a',
-      \ 'd_gadt'   : 'c_gadt',
-      \ 'class'    : 'ft',
-      \ 'instance' : 'ft'
-  \ }
-  \ }
-
-" nerdtree
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeNaturalSort = 1
-let g:NERDTreeRespectWildIgnore = 1
-let g:NERDTreeMinimalUI = 1
-
 " gitgutter
 let g:gitgutter_map_keys = 0
 let g:gitgutter_grep = 'rg'
-
-" fugitive
-let g:fugitive_gitlab_domains = ['https://gitlab.vetpro.us']
 
 " }}}2
 
@@ -258,7 +173,7 @@ let g:fugitive_gitlab_domains = ['https://gitlab.vetpro.us']
 " Appearance {{{2
 set termguicolors
 colorscheme one
-set background=dark
+set background=light
 set cursorline
 set colorcolumn=81
 set number
@@ -271,7 +186,6 @@ set shortmess=filmxTWIcF
 set title
 set splitbelow
 set splitright
-" set conceallevel=2
 
 " Indentation {{{2
 set expandtab
@@ -402,7 +316,6 @@ noremap <silent> <Leader>U :MundoToggle<CR>
 noremap S <Nop>
 noremap + <Nop>
 noremap _ <Nop>
-" noremap # <Nop>
 xnoremap P <Nop>
 xnoremap Z <Nop>
 
@@ -414,17 +327,21 @@ augroup FileTypeSettings " {{{2
   "       \  setlocal indentexpr=GetHaskellIndent()
   "       \| setlocal indentkeys=!^F,o,O,0{,0},0(,0),0[,0],0,,0=where,0=let,0=in\ ,0=::\ ,0=\-\>\ ,0=\=\>\ ,0=\|\ ,=\=\,0=deriving
   autocmd FileType elm
-        \  setlocal softtabstop=4
-        \| setlocal shiftwidth=4
+        \  setlocal softtabstop=4 shiftwidth=4
   autocmd FileType fish
-        \  setlocal softtabstop=4
-        \| setlocal shiftwidth=4
-  autocmd FileType cpp setlocal commentstring=//\ %s
-  autocmd FileType gitcommit setlocal colorcolumn=73 spell
-  autocmd BufEnter Dockerfile* setlocal filetype=Dockerfile
-  autocmd FileType vim,help setlocal keywordprg=:help
-  autocmd FileType help nnoremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd TermOpen * setlocal wrap nonumber norelativenumber
+        \  setlocal softtabstop=4 shiftwidth=4
+  autocmd FileType cpp
+        \  setlocal commentstring=//\ %s
+  autocmd FileType gitcommit
+        \  setlocal colorcolumn=73 spell
+  autocmd BufEnter Dockerfile*
+        \  setlocal filetype=Dockerfile
+  autocmd FileType vim,help
+        \  setlocal keywordprg=:help
+  autocmd FileType help
+        \  nnoremap <buffer> <Esc> :<C-u>q<CR>
+  autocmd TermOpen *
+        \  setlocal wrap nonumber norelativenumber
   autocmd FileType man
         \  setlocal laststatus=0 noruler wrap colorcolumn=
         \| noremap <buffer> h 2zh
@@ -433,7 +350,6 @@ augroup FileTypeSettings " {{{2
         \| noremap <buffer> l 2zl
         \| noremap <buffer> d <C-d>
         \| noremap <buffer> u <C-u>
-        " \| autocmd! LazyLoadPlugins
   autocmd FileType vim-plug
         \  setlocal wrap nonumber norelativenumber colorcolumn=
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
@@ -442,8 +358,10 @@ augroup FileTypeSettings " {{{2
   autocmd FileType ale-preview
         \  setlocal wrap nonumber norelativenumber colorcolumn=
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
-  autocmd FileType markdown,text,latex,tex setlocal wrap nonumber norelativenumber
-  autocmd FileType json syntax match Comment +\/\/.\+$+
+  autocmd FileType markdown,text,latex,tex
+        \  setlocal wrap nonumber norelativenumber
+  autocmd FileType json
+        \  syntax match Comment +\/\/.\+$+
 augroup END
 
 augroup FormatOptions " {{{2
@@ -456,55 +374,16 @@ augroup AutoRead " {{{2
   autocmd FocusGained,BufEnter * :checktime
 augroup END
 
-augroup IgnoreCaseCommandMode " {{{2
-  autocmd!
-  autocmd CmdLineEnter : setlocal nosmartcase
-  autocmd CmdLineLeave : setlocal smartcase
-augroup END
+" augroup IgnoreCaseCommandMode " {{{2
+"   autocmd!
+"   autocmd CmdLineEnter : setlocal nosmartcase
+"   autocmd CmdLineLeave : setlocal smartcase
+" augroup END
 
 augroup RedrawOnResize " {{{2
   autocmd!
   autocmd VimResized * redraw!
 augroup END
-
-augroup Concealing " {{{2
-  autocmd!
-  autocmd FileType haskell,purescript
-        \  syntax match Conceal "\<forall\>" conceal cchar=∀
-        \| hi! link Conceal Operator
-augroup END
-
-" augroup ColorSchemeTweaks " {{{2
-"   autocmd!
-"   autocmd VimEnter *
-"         \  highlight! Normal ctermfg=251 ctermbg=0 guifg=#c6c6c6 guibg=#000000
-"         \| highlight! default link ExtraWhitespace DiffDelete
-"         \| highlight! default link BufTabLineCurrent WildMenu
-"         \| highlight! default link BufTabLineActive CursorLineNr
-"         \| highlight! default link BufTabLineHidden StatusLineNC
-"         \| highlight! default link BufTabLineFill StatusLineNC
-"         \| highlight! Normal ctermbg=NONE guibg=NONE
-"         \| highlight! NonText ctermbg=NONE guibg=NONE
-"       " \| highlight! default link StatusLine MatchParen
-"       " \| highlight! default link StatusLineNC Normal
-" augroup END
-
-" augroup OpenTagBar " {{{2
-"   autocmd!
-"   autocmd VimEnter *.elm TagbarOpen
-" augroup END
-
-" augroup CloseNERDTree " {{{
-"   autocmd!
-"   autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | quit | endif
-" augroup END
-
-" augroup LazyLoadPlugins " {{{2
-"   autocmd!
-"   autocmd CursorHold,CursorHoldI *
-"         \  call plug#load('tabnine-vim')
-"         \| autocmd! LazyLoadPlugins
-" augroup END
 
 " }}}2
 
@@ -531,21 +410,11 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <C-Space> to trigger completion.
-inoremap <silent> <expr> <C-Space> coc#refresh()
+" inoremap <silent> <expr> <C-Space> coc#refresh()
 
 " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[c` and `]c` to navigate diagnostics
-" nmap <silent> [c <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -557,57 +426,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-" nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-" xmap <leader>f <Plug>(coc-format-selected)
-" nmap <leader>f <Plug>(coc-format-selected)
-
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-" xmap <leader>a <Plug>(coc-codeaction-selected)
-" nmap <leader>a <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-" nmap <leader>ac <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-" nmap <leader>qf <Plug>(coc-fix-current)
-
-" Use `:Format` to format current buffer
-" command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-" command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-" Using CocList
-" Show all diagnostics
-" nnoremap <silent> <Leader>ca :<C-u>CocList diagnostics<cr>
-" Manage extensions
-" nnoremap <silent> <Leader>ce :<C-u>CocList extensions<cr>
-" Show commands
-" nnoremap <silent> <Leader>cc :<C-u>CocList commands<cr>
-" Find symbol of current document
-" nnoremap <silent> <Leader>co :<C-u>CocList outline<cr>
-" Search workspace symbols
-" nnoremap <silent> <Leader>cs :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-" nnoremap <silent> <Leader>cj :<C-u>CocNext<CR>
-" Do default action for previous item.
-" nnoremap <silent> <Leader>ck :<C-u>CocPrev<CR>
-" Resume latest coc list
-" nnoremap <silent> <Leader>cp :<C-u>CocListResume<CR>
 
 
 " vim: foldenable foldmethod=marker
