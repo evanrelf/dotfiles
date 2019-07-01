@@ -25,6 +25,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.zshrc"
             case bash
                 eval $EDITOR "$HOME/.bashrc"
+            case bash-profile
+                eval $EDITOR "$HOME/.bash_profile"
 
             # Window managers
             case xmonad
@@ -98,4 +100,4 @@ function rc -d "Open the specified program's configuration file"
         fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --multi --exact | xargs $EDITOR
     end
 end
-complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock ghci hg mercurial"
+complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bash-profile bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock ghci hg mercurial"

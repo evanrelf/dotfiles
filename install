@@ -28,14 +28,26 @@ if [ $# -gt 0 ]; then
         bash "$i/init"
       fi
       case $i in
-        fish )
-          if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" = "Darwin" ]; then
-            log "Installing iTerm Shell Integration for Fish..."
+        bash )
+          if [ ! -f "$HOME/local/share/bash/sensible.bash" ]; then
+            log "Installing Sensible Bash..."
             command -v curl >/dev/null 2>&1 || error "curl is not installed"
-            curl -Lo "$HOME/.config/fish/conf.d/iterm.fish" --create-dirs \
-              "https://iterm2.com/shell_integration/fish"
+            curl -Lo "$HOME/local/share/bash/sensible.bash" --create-dirs \
+              "https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash"
+          else
+            log "Sensible Bash already installed"
           fi
           ;;
+        # fish )
+        #   if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" = "Darwin" ]; then
+        #     log "Installing iTerm Shell Integration for Fish..."
+        #     command -v curl >/dev/null 2>&1 || error "curl is not installed"
+        #     curl -Lo "$HOME/.config/fish/conf.d/iterm.fish" --create-dirs \
+        #       "https://iterm2.com/shell_integration/fish"
+        #   else
+        #     log "iTerm Shell Integration for Fish already installed"
+        #   fi
+        #   ;;
         kakoune )
           if [ ! -e "$HOME/.config/kak/plugins/plug.kak/" ]; then
             command -v git >/dev/null 2>&1 || error "git is not installed"
