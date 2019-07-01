@@ -173,7 +173,7 @@ let g:gitgutter_grep = 'rg'
 " Appearance {{{2
 set termguicolors
 colorscheme one
-set background=light
+set background=dark
 set cursorline
 set colorcolumn=81
 set number
@@ -256,6 +256,8 @@ command! -bang -nargs=* GRg
 
 
 " MAPPINGS {{{1
+noremap ; :
+noremap : ;
 noremap Y y$
 noremap j gj
 noremap k gk

@@ -217,7 +217,7 @@ end
 
 
 # COLORS {{{1
-set fish_color_autosuggestion brblack
+set fish_color_autosuggestion black
 # set fish_color_cancel
 set fish_color_command green
 set fish_color_comment black
