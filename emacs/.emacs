@@ -74,9 +74,9 @@
 (use-package evil-matchit
   :config
   (global-evil-matchit-mode 1))
-;; (use-package evil-magit)
+(use-package evil-magit)
 ;; Git
-;; (use-package magit)
+(use-package magit)
 ;; Intelligence
 ;; (use-package lsp-mode
 ;;   :config
@@ -93,6 +93,7 @@
   (add-hook 'after-init-hook 'global-company-mode)
   (add-to-list 'company-backends 'company-irony)
   (add-to-list 'company-backends 'company-elm))
+  ;; (add-to-list 'company-backends 'company-haskell))
 (use-package flycheck
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
