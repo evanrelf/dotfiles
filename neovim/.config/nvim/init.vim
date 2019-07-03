@@ -126,7 +126,7 @@ let g:neoformat_only_msg_on_error = 1
 " ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {
-      \ 'haskell': ['stack-build', 'hlint'],
+      \ 'haskell': ['hie', 'stack-ghc', 'cabal-ghc', 'hlint'],
       \ 'rust': ['rls', 'cargo', 'rustc']
       \ }
 let g:ale_fixers = {
@@ -382,9 +382,11 @@ augroup END
 "   autocmd CmdLineLeave : setlocal smartcase
 " augroup END
 
-augroup RedrawOnResize " {{{2
+augroup AutoRedraw " {{{2
   autocmd!
   autocmd VimResized * redraw!
+  autocmd CursorHold * redraw!
+  autocmd CursorHoldI * redraw!
 augroup END
 
 " }}}2

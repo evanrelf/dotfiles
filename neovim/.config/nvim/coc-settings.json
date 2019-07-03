@@ -10,13 +10,14 @@
   "languageserver": {
     "haskell": {
       "command": "hie-wrapper",
-      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      // "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      "rootPatterns": ["package.yaml", "*.cabal", "stack.yaml", "cabal.project"],
       "filetypes": ["hs", "lhs", "haskell"],
       "initializationOptions": {},
       "disableCompletion": true,
       "settings": {
         "languageServerHaskell": {
-          "hlintOn": false,
+          "hlintOn": true,
           "maxNumberOfProblems": 10,
           "formatOnImportOn": false
         }
