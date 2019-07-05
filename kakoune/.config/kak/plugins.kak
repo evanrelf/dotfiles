@@ -13,19 +13,19 @@ plug "alexherbo2/search-highlighter.kak" %{
 }
 
 # Editing
-plug "andreyorst/smarttab.kak" %{
-  set-option gloabl expandtab
-  set-option global softtabstop 2
-  hook global WinSetOption filetype=(makefile) noexpandtab
-  hook global WinSetOption filetype=(rust|python|elm) softtabstop 4
-  hook global WinSetOption filetype=(haskell|purescript) softtabstop 2
-}
-plug "alexherbo2/auto-pairs.kak" %{
-  hook global WinCreate .* %{
-    auto-pairs-enable
-    # auto-pairs-surround
-  }
-}
+# plug "andreyorst/smarttab.kak" %{
+#   set-option gloabl expandtab
+#   set-option global softtabstop 2
+#   hook global WinSetOption filetype=(makefile) noexpandtab
+#   hook global WinSetOption filetype=(rust|python|elm) softtabstop 4
+#   hook global WinSetOption filetype=(haskell|purescript) softtabstop 2
+# }
+# plug "alexherbo2/auto-pairs.kak" %{
+#   hook global WinCreate .* %{
+#     auto-pairs-enable
+#     # auto-pairs-surround
+#   }
+# }
 plug "h-youhei/kakoune-surround" %{
   map global user s ": enter-user-mode surround<ret>" -docstring "Surround mode"
   declare-user-mode "surround"
@@ -44,7 +44,7 @@ plug "Delapouite/kakoune-text-objects"
 plug "Delapouite/kakoune-auto-percent"
 plug "Delapouite/kakoune-auto-star"
 
-# Syntax
+# yntax
 plug "ul/kak-lsp" do %{
   cargo build --release --locked
   cargo install --force --path .
@@ -53,7 +53,7 @@ plug "ul/kak-lsp" do %{
   set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
   set-option global lsp_diagnostic_line_error_sign "!"
   set-option global lsp_diagnostic_line_warning_sign "?"
-  hook global WinSetOption filetype=(c|cpp|rust|haskell|purescript) %{
+  hook global WinSetOption filetype=(c|cpp|rust|haskell|purescript|javascript|typescript) %{
     map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
     lsp-enable-window
     lsp-auto-hover-enable
@@ -69,12 +69,12 @@ plug "ul/kak-lsp" do %{
 }
 
 # Other
-plug "fsub/kakoune-mark" domain "gitlab.com" %{
-  map global user m ": mark-word<ret>" -docstring "Mark word"
-  map global user M ": mark-clear<ret>" -docstring "Clear marks"
-}
-plug "Delapouite/kakoune-cd" %{
-  alias global "cdb" "change-directory-current-buffer"
-  alias global "cdr" "change-directory-project-root"
-  alias global "pwd" "print-working-directory"
-}
+# plug "fsub/kakoune-mark" domain "gitlab.com" %{
+#   map global user m ": mark-word<ret>" -docstring "Mark word"
+#   map global user M ": mark-clear<ret>" -docstring "Clear marks"
+# }
+# plug "Delapouite/kakoune-cd" %{
+#   alias global "cdb" "change-directory-current-buffer"
+#   alias global "cdr" "change-directory-project-root"
+#   alias global "pwd" "print-working-directory"
+# }
