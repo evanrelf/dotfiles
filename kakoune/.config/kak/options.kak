@@ -1,4 +1,4 @@
-colorscheme solarized-dark
+colorscheme palenight
 set-option global ui_options \
   ncurses_assistant=none \
   ncurses_enable_mouse=true \
