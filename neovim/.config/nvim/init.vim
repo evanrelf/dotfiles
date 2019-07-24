@@ -31,7 +31,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sleuth'
-Plug 'sgur/vim-editorconfig'
 
 " Information
 Plug 'w0rp/ale'
@@ -48,6 +47,8 @@ Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
 
 " Miscellaneous
+Plug 'sgur/vim-editorconfig'
+Plug 'direnv/direnv.vim'
 Plug 'moll/vim-bbye'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'Konfekt/FastFold'

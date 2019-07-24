@@ -217,23 +217,9 @@
 ;; Enable mouse support in terminal
 (xterm-mouse-mode 1)
 (setq scroll-step 3)
-;; (unless window-system
-;;   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-;;   (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 (unless window-system
-  (global-set-key (kbd "<mouse-4>")
-    ;; TODO: Find a more idiomatic way of doing this
-    (lambda ()
-      (interactive)
-      (scroll-down-line)
-      (scroll-down-line)
-      (scroll-down-line)))
-  (global-set-key (kbd "<mouse-5>")
-    (lambda ()
-      (interactive)
-      (scroll-up-line)
-      (scroll-up-line)
-      (scroll-up-line))))
+  (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
+  (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 ;; Control mini window sizing
 (setq resize-mini-windows t)
 (setq max-mini-window-height 10)

@@ -61,12 +61,13 @@
     "editor.lineHeight": 19,
     "languageServerHaskell.formatOnImportOn": false,
     "languageServerHaskell.formattingProvider": "none",
-    "breadcrumbs.enabled": false,
+    "breadcrumbs.enabled": true,
     "material-icon-theme.opacity": 1,
     "material-icon-theme.saturation": 0,
     "material-icon-theme.folders.theme": "classic",
-    "workbench.colorTheme": "Ayu Dark Bordered",
+    "workbench.colorTheme": "Quiet Light",
     "purescript.addSpagoSources": true,
     "purescript.addNpmPath": true,
-    "purescript.buildCommand": "spago build -- --json-errors"
+    "purescript.buildCommand": "spago build -- --json-errors",
+    "languageServerHaskell.hieExecutablePath": "~/.local/bin/hie-wrapper"
 }
