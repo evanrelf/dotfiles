@@ -38,6 +38,8 @@ This function should only modify configuration layer settings."
      evil-commentary
      helm
      git
+     shell
+     sql
 
      lsp
      auto-completion
