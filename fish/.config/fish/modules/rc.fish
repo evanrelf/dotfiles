@@ -74,7 +74,7 @@ function rc -d "Open the specified program's configuration file"
             case git-local
                 eval $EDITOR "$HOME/.config/git/local"
             case hg mercurial
-                eval $EDITOR "$HOME/.config/hg/hgrc"
+                eval $EDITOR "$HOME/.hgrc"
             case alacritty
                 eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
             case kitty

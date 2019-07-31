@@ -37,6 +37,7 @@ This function should only modify configuration layer settings."
    '(
      evil-commentary
      helm
+     shell
      git
      shell
      sql
@@ -46,14 +47,17 @@ This function should only modify configuration layer settings."
      syntax-checking
      prettier
 
-     (haskell :variables
-              haskell-completion-backend 'lsp)
+     (haskell
+       :variables
+       haskell-completion-backend 'lsp)
      elm
-     (purescript :variables
-                 purescript-add-import-on-completion nil)
-     (c-c++ :variables
-            c-c++-enable-clang-support t
-            c-c++-default-mode-for-headers 'c++-mode)
+     (purescript
+       :variables
+       purescript-add-import-on-completion nil)
+     (c-c++
+       :variables
+       c-c++-enable-clang-support t
+       c-c++-default-mode-for-headers 'c++-mode)
      html
      javascript
      json

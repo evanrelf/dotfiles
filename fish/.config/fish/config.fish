@@ -169,13 +169,13 @@ function fish_prompt
     set_color blue
     echo -n (prompt_pwd)" "
     set_color normal
-    # Git
-    set -l branch ""
-    set -l git_dir (git rev-parse --git-dir 2> /dev/null)
-    if test -n "$git_dir"
-        set branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
-        if test -n "$branch"
-            set -l truncated (echo $branch | cut -c 1-35)
+    set -l git_branch ""
+    set -l hg_root_cmd (if command -v hg-root >/dev/null 2>&1; echo "hg-root"; else; echo "hg root"; end)
+    if git rev-parse --git-dir >/dev/null 2>&1
+        # Git
+        set git_branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
+        if test -n "$git_branch"
+            set -l truncated (echo $git_branch | cut -c 1-35)
             set -l dirty (git status --porcelain)
             if test -z "$dirty"
                 set_color green
@@ -186,20 +186,42 @@ function fish_prompt
                     set_color yellow
                 end
             end
-            if test "$branch" != "$truncated"
+            if test "$git_branch" != "$truncated"
                 echo -n "$truncated... "
             else
-                echo -n "$branch "
+                echo -n "$git_branch "
             end
             set_color normal
         end
+    else if eval "$hg_root_cmd" >/dev/null 2>&1
+        # Mercurial
+        set -l hg_info (hg prompt "{branch};{status};{status|unknown}")
+        set -l hg_branch (echo $hg_info | cut -d ';' -f 1)
+        set -l truncated (echo $hg_branch | cut -c 1-35)
+        set -l hg_status (echo $hg_info | cut -d ';' -f 2)
+        set -l hg_dirty (echo $hg_info | cut -d ';' -f 3)
+        if test -z "$hg_status"
+            set_color green
+        else
+            if test -n "$hg_dirty"
+                set_color red --bold
+            else
+                set_color yellow
+            end
+        end
+        if test "$hg_branch" != "$truncated"
+            echo -n "$truncated... "
+        else
+            echo -n "$hg_branch "
+        end
+        set_color normal
     end
     # Exit status
     if test $exit_code -ne 0
         set_color red
     end
     # Smart newline
-    if test (math (tput cols) - \((echo \(prompt_pwd\)" $branch" | wc -c)\)) -lt 40
+    if test (math (tput cols) - \((echo \(prompt_pwd\)" $git_branch" | wc -c)\)) -lt 40
         echo
     end
     # Prompt character
@@ -241,6 +263,17 @@ set fish_color_valid_path --underline
 
 
 # EXTRAS {{{1
+
+# hg-root {{{2
+if ! command -v hg-root >/dev/null 2>&1
+    _error "Your prompt may be slow if you don't have hg-root installed"
+    echo "https://github.com/evanrelf/hg-root"
+end
+
+# direnv {{{2
+if command -v direnv >/dev/null 2>&1
+    eval (direnv hook fish)
+end
 
 # Stack auto-completion {{{2
 function _stack
