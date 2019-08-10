@@ -52,14 +52,6 @@ if test (uname) = "Linux"
     set -x BROWSER "chromium"
 end
 
-# set paths "$HOME/.cabal/bin" $paths
-# set paths "$HOME/.ghcup" $paths
-set paths "$HOME/.local/bin" $paths
-set paths "$HOME/.config/git/scripts" $paths
-set paths "$HOME/.emacs.d/bin" $paths
-set paths "$HOME/.cargo/bin" $paths
-set paths "$HOME/.node_modules/bin" $paths
-set paths "$PSVM_HOME/current/bin" $paths
 if test (uname) = "Darwin"
     set paths "/usr/local/Cellar/node/11.0.0/bin" $paths
     set paths "/usr/local/sbin" $paths
@@ -67,6 +59,15 @@ if test (uname) = "Darwin"
 else if test (uname) = "Linux"
     set paths "$HOME/.gem/ruby/2.5.0/bin" $paths
 end
+# set paths "$HOME/.cabal/bin" $paths
+# set paths "$HOME/.ghcup" $paths
+set paths "$HOME/Library/Python/3.7/bin" $paths
+set paths "$HOME/.config/git/scripts" $paths
+set paths "$HOME/.emacs.d/bin" $paths
+set paths "$HOME/.cargo/bin" $paths
+set paths "$HOME/.node_modules/bin" $paths
+set paths "$PSVM_HOME/current/bin" $paths
+set paths "$HOME/.local/bin" $paths
 
 for i in $paths
     if test -d $i
@@ -150,8 +151,9 @@ if status --is-interactive
     if _exists stack
         # abbr --add ghc "stack ghc"
         # abbr --add runghc "stack runghc"
-        abbr --add ghci "stack ghci"
+        # abbr --add ghci "stack ghci"
         abbr --add sbf "stack build --fast"
+        abbr --add cbf "cabal v2-build -O0"
     end
 end
 

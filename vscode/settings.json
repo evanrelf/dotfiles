@@ -25,7 +25,7 @@
     "vim.hlsearch": true,
     "vim.leader": "<space>",
     "vim.substituteGlobalFlag": true,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "workbench.editor.showIcons": false,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
@@ -65,9 +65,9 @@
     "material-icon-theme.opacity": 1,
     "material-icon-theme.saturation": 0,
     "material-icon-theme.folders.theme": "classic",
-    "workbench.colorTheme": "Quiet Light",
     "purescript.addSpagoSources": true,
     "purescript.addNpmPath": true,
     "purescript.buildCommand": "spago build -- --json-errors",
-    "languageServerHaskell.hieExecutablePath": "~/.local/bin/hie-wrapper"
+    "languageServerHaskell.hieExecutablePath": "~/.local/bin/hie-wrapper",
+    "window.zoomLevel": 0
 }
