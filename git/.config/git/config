@@ -141,6 +141,8 @@
 	excludesfile = ~/.config/git/ignore
 [status]
 	showUntrackedFiles = all
+[commit]
+	template = ~/.config/git/template
 [push]
 	default = current
 	followTags = true
