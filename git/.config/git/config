@@ -11,130 +11,98 @@
 	name = Evan Relf
 	useConfigOnly = true
 [alias]
-	#######
-	# LOG #
-	#######
-	# Truncated log
+	# ADD
+	a = add
+	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all $@ && git status --short #"
+	ap = add --patch
+
+	# BRANCH
+	b = branch
+	bd = branch --delete
+	bdf = branch --delete --force
+
+	# CHECKOUT
+	co = checkout
+
+	# COMMIT
+	c = commit
+	amend = commit --amend --no-edit
+	rename = commit --amend
+	undo-commit = reset --soft HEAD~
+
+	# DIFF
+	d = diff
+	dw = diff -w
+	ds = diff --staged
+	dsw = diff --staged -w
+	dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
+	dxw = "!if [ -z \"$1\" ]; then exit 1; else git diff -w origin/$1 ${@:2}; fi #"
+
+	# FETCH
+	f = fetch
+	ff = fetch --force
+
+	# LOG
 	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Full log
 	ll = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of branch on origin
-	lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' #"
-	lxx = "!git log origin/$(git symbolic-ref --short HEAD) --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' #"
+	lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
 
-	########
-	# DIFF #
-	########
-	d = diff
-	ds = diff --staged
-	dx = "!git diff origin/${1:-master} #"
-	dxn = "!git diff origin/${1:-master} --name-only #"
-	dxx = "!git diff origin/$(git symbolic-ref --short HEAD) #"
-
-	##########
-	# BRANCH #
-	##########
-	b = branch
-	bd = branch --delete
-	bdd = branch --delete --force
-	bm = branch --move
-	new = "!if [ -z \"$1\" ] || [ -z \"$2\" ]; then exit 1; else git fetch && git checkout -b \"$2\" origin/$1; fi #"
-
-	#######
-	# TAG #
-	#######
-	t = tag
-	td = tag --delete
-
-	##########
-	# REBASE #
-	##########
-	rb = rebase
-	rbi = "!if [ -z \"$1\" ]; then exit 1; else git rebase --interactive HEAD~$1; fi #"
-	undo-rebase = reset --hard ORIG_HEAD
-	continue = rebase --continue
-	skip = rebase --skip
-	abort = rebase --abort
-	up = "!git fetch && git rebase origin/${1:-master} #"
-	# NOTE: The roles of `theirs` and `ours` are reversed with rebase
-	up-favor-local = "!git fetch && git rebase origin/${1:-master} --strategy-option theirs #"
-	up-favor-remote = "!git fetch && git rebase origin/${1:-master} --strategy-option ours #"
-
-	#######
-	# ADD #
-	#######
-	a = add
-	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all && git status --short #"
-	ap = add --patch
-	# a = "!cd -- ${GIT_PREFIX:-.} && git add \"$@\" && git status --short #"
-	# aa = add --all
-
-	############
-	# CHECKOUT #
-	############
-	co = checkout
-	cod = "!cd -- ${GIT_PREFIX:-.} && git checkout origin/dev -- $* #"
-	cor = "!cd -- ${GIT_PREFIX:-.} && git checkout origin/rc -- $* #"
-	com = "!cd -- ${GIT_PREFIX:-.} && git checkout origin/master -- $* #"
-
-	#########
-	# RESET #
-	#########
-	r = reset
-	rs = reset --soft
-
-	########
-	# SHOW #
-	########
-	sh = show
-	shx = "!git show origin/${1:-master}:$2 #"
-	shxx = "!git show origin/$(git symbolic-ref --short HEAD):$1 #"
-
-	#########
-	# STASH #
-	#########
-	st = stash push
-	stu = stash push --include-untracked
-	stp = stash pop
-	sta = stash apply
-	stl = stash list
-	std = stash drop
-	stdd = stash clear
-
-	##########
-	# COMMIT #
-	##########
-	c = commit
-	# c = "!if [ $# -eq 0 ]; then git commit -v; else git commit --message \"$1\"; fi #"
-	amend = commit --amend --no-edit
-	rename = commit --amend
-	undo-commit = reset --soft HEAD~
-	move-commit = "!if [ -z \"$1\" ]; then exit 1; else git reset --soft HEAD~ && git stash && git checkout $1 && git stash pop; fi #"
-
-	########
-	# PUSH #
-	########
+	# PUSH
 	p = push
 	pf = push --force-with-lease
 	pff = push --force
 
-	#########
-	# OTHER #
-	#########
+	# REBASE
+	rb = rebase
+	rbi = "!if [ -z \"$1\" ]; then exit 1; else git rebase --interactive HEAD~$1 ${@:2}; fi #"
+	up = "!if [ -z \"$1\" ]; then exit 1; else git rebase origin/$1 ${@:2}; fi #"
+	undo-rebase = reset --hard ORIG_HEAD
+	cont = rebase --continue
+	skip = rebase --skip
+	abort = rebase --abort
+
+	# RESET
+	r = reset
+	rs = reset --soft
+	rh = reset --hard
+
+	# REVISE
+	rv = revise
+
+	# SHOW
+	sh = show
+	shx = "!if [ -z \"$1\" ]; then exit 1; else git show origin/$1 ${@:2}; fi #"
+
+	# STASH
+	st = stash push
+	stu = stash push --include-untracked
+	stp = stash pop
+	stl = stash list
+	# std = stash drop
+	# sta = stash apply
+	# stdd = stash clear
+
+	# STATUS
 	s = status --short
 	ss = status --show-stash
-	f = fetch
-	ff = fetch --force
+
+	# TAG
+	t = tag
+	td = tag --delete
+
+	# CLEAN
 	clean-ignored = clean -Xdf
 	clean-untracked = clean -xdi
+
+	# OTHER
 	# Print the path to the root of the git repo
 	root = rev-parse --show-toplevel
 	# Print the commit hash
 	hash = rev-parse --default HEAD
 	# Run a command from the root of the git repo
 	exec = "!exec "
-	# Open website (TODO: doesn't handle HTTPS correctly)
-	home = "!open $(git config --get remote.origin.url | sed -e 's|:|/|' -e 's|^git@|https://|' -e 's|.git$||') #"
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=8 -RFX
@@ -149,8 +117,12 @@
 [diff]
 	renames = copies
 	algorithm = patience
+[diff "nodiff"]
+	command = true
 [merge]
 	# conflictstyle = diff3
+[merge "ours"]
+	command = true
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -174,5 +146,3 @@
 	singleKey = true
 [include]
 	path = ~/.config/git/local
-[diff "nodiff"]
-	command = /usr/bin/env true
