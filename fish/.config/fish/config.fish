@@ -195,28 +195,30 @@ function fish_prompt
             end
             set_color normal
         end
-    else if eval "$hg_root_cmd" >/dev/null 2>&1
-        # Mercurial
-        set -l hg_info (hg prompt "{branch};{status};{status|unknown}")
-        set -l hg_branch (echo $hg_info | cut -d ';' -f 1)
-        set -l truncated (echo $hg_branch | cut -c 1-35)
-        set -l hg_status (echo $hg_info | cut -d ';' -f 2)
-        set -l hg_dirty (echo $hg_info | cut -d ';' -f 3)
-        if test -z "$hg_status"
-            set_color green
-        else
-            if test -n "$hg_dirty"
-                set_color red --bold
+    else if command -v hg >/dev/null 2>&1
+        if eval "$hg_root_cmd" >/dev/null 2>&1
+            # Mercurial
+            set -l hg_info (hg prompt "{branch};{status};{status|unknown}")
+            set -l hg_branch (echo $hg_info | cut -d ';' -f 1)
+            set -l truncated (echo $hg_branch | cut -c 1-35)
+            set -l hg_status (echo $hg_info | cut -d ';' -f 2)
+            set -l hg_dirty (echo $hg_info | cut -d ';' -f 3)
+            if test -z "$hg_status"
+                set_color green
             else
-                set_color yellow
+                if test -n "$hg_dirty"
+                    set_color red --bold
+                else
+                    set_color yellow
+                end
             end
+            if test "$hg_branch" != "$truncated"
+                echo -n "$truncated... "
+            else
+                echo -n "$hg_branch "
+            end
+            set_color normal
         end
-        if test "$hg_branch" != "$truncated"
-            echo -n "$truncated... "
-        else
-            echo -n "$hg_branch "
-        end
-        set_color normal
     end
     # Exit status
     if test $exit_code -ne 0
@@ -267,7 +269,7 @@ set fish_color_valid_path --underline
 # EXTRAS {{{1
 
 # hg-root {{{2
-if ! command -v hg-root >/dev/null 2>&1
+if ! command -v hg-root >/dev/null 2>&1 && command -v hg >/dev/null 2>&1
     _error "Your prompt may be slow if you don't have hg-root installed"
     echo "https://github.com/evanrelf/hg-root"
 end
