@@ -335,9 +335,13 @@ augroup FileTypeSettings " {{{2
         \  setlocal softtabstop=4 shiftwidth=4
   autocmd FileType cpp
         \  setlocal commentstring=//\ %s
+  autocmd BufRead git-revise-todo
+        \  setlocal filetype=gitrebase
+        \| %s/\s\+$//e
+        \| normal! gg
   autocmd FileType gitcommit
         \  setlocal colorcolumn=73 spell
-  autocmd BufEnter Dockerfile*
+  autocmd BufRead Dockerfile*
         \  setlocal filetype=Dockerfile
   autocmd FileType vim,help
         \  setlocal keywordprg=:help

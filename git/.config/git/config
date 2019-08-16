@@ -32,22 +32,20 @@
 
 	# DIFF
 	d = diff
-	dw = diff -w
 	ds = diff --staged
-	dsw = diff --staged -w
 	dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
-	dxw = "!if [ -z \"$1\" ]; then exit 1; else git diff -w origin/$1 ${@:2}; fi #"
 
 	# FETCH
 	f = fetch
 	ff = fetch --force
 
 	# LOG
-	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Full log
-	ll = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+	ll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of branch on origin
-	lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
+	lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
+	lf = lookup # script
 
 	# PUSH
 	p = push
@@ -55,7 +53,7 @@
 
 	# REBASE
 	rb = rebase
-	rbi = "!if [ -z \"$1\" ]; then exit 1; else git rebase --interactive HEAD~$1 ${@:2}; fi #"
+	rbi = rebase-back # script
 	undo-rebase = reset --hard ORIG_HEAD
 	cont = rebase --continue
 	skip = rebase --skip
@@ -101,6 +99,7 @@
 	hash = rev-parse --default HEAD
 	# Run a command from the root of the git repo
 	exec = "!exec "
+	hi = hello
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=8 -RFX
