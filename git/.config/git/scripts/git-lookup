@@ -16,4 +16,4 @@ git log \
   --no-sort \
   --query "$*" \
 | cut -d ' ' -f 1 \
-| xargs git show
+| xargs git rev-parse --verify --quiet

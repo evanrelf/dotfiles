@@ -45,7 +45,10 @@
 	ll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of branch on origin
 	lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
-	lf = lookup # script
+
+	# LOOKUP (script)
+	k = "!git lookup | xargs git show --name-only #"
+	kd = "!git lookup | xargs git show #"
 
 	# PUSH
 	p = push
@@ -54,6 +57,7 @@
 	# REBASE
 	rb = rebase
 	rbi = rebase-back # script
+	rbiq = "!git lookup | xargs git rebase-back #"
 	undo-rebase = reset --hard ORIG_HEAD
 	cont = rebase --continue
 	skip = rebase --skip
@@ -74,10 +78,11 @@
 	# STASH
 	st = stash push
 	stu = stash push --include-untracked
+	sts = stash show
+	sta = stash apply
 	stp = stash pop
 	stl = stash list
-	# std = stash drop
-	# sta = stash apply
+	std = stash drop
 	# stdd = stash clear
 
 	# STATUS
@@ -99,13 +104,16 @@
 	hash = rev-parse --default HEAD
 	# Run a command from the root of the git repo
 	exec = "!exec "
-	hi = hello
+	hi = hello # script
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less --tabs=8 -RFX
 	excludesfile = ~/.config/git/ignore
 [status]
 	showUntrackedFiles = all
+[stash]
+	showPatch = true
+	showStat = true
 [commit]
 	template = ~/.config/git/template
 [push]
