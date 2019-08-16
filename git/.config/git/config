@@ -52,12 +52,10 @@
 	# PUSH
 	p = push
 	pf = push --force-with-lease
-	pff = push --force
 
 	# REBASE
 	rb = rebase
 	rbi = "!if [ -z \"$1\" ]; then exit 1; else git rebase --interactive HEAD~$1 ${@:2}; fi #"
-	up = "!if [ -z \"$1\" ]; then exit 1; else git rebase origin/$1 ${@:2}; fi #"
 	undo-rebase = reset --hard ORIG_HEAD
 	cont = rebase --continue
 	skip = rebase --skip
