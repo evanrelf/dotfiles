@@ -45,6 +45,7 @@ Plug 'vmchale/dhall-vim'
 " Files
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
+Plug 'EinfachToll/DidYouMean'
 
 " Miscellaneous
 Plug 'sgur/vim-editorconfig'
@@ -167,6 +168,9 @@ let g:purescript_indent_in = 0
 " gitgutter
 let g:gitgutter_map_keys = 0
 let g:gitgutter_grep = 'rg'
+
+" didyoumean
+let g:dym_use_fzf = 1
 
 " }}}2
 

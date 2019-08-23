@@ -57,7 +57,8 @@
 	# REBASE
 	rb = rebase
 	rbi = rebase-back # script
-	rbiq = "!git lookup | xargs git rebase-back #"
+	rbik = "!git lookup | xargs git rebase-back #"
+	rbix = "!git lx $1 | wc -l | xargs git rebase-back #"
 	undo-rebase = reset --hard ORIG_HEAD
 	cont = rebase --continue
 	skip = rebase --skip
@@ -72,8 +73,8 @@
 	rv = revise
 
 	# SHOW
-	sh = show
-	shx = "!if [ -z \"$1\" ]; then exit 1; else git show origin/$1 ${@:2}; fi #"
+	sh = show --name-only
+	shd = show
 
 	# STASH
 	st = stash push
@@ -126,8 +127,6 @@
 	command = true
 [merge]
 	# conflictstyle = diff3
-[merge "ours"]
-	command = true
 [color]
 	ui = true
 [color "diff-highlight"]
