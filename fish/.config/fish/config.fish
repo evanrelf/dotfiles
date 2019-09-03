@@ -153,7 +153,7 @@ if status --is-interactive
         # abbr --add runghc "stack runghc"
         # abbr --add ghci "stack ghci"
         abbr --add sbf "stack build --fast"
-        abbr --add cbf "cabal v2-build -O0"
+        abbr --add cbf "cabal build -O0"
     end
 end
 

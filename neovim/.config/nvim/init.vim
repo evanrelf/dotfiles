@@ -22,7 +22,8 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
-Plug 'neoclide/coc.nvim', { 'do': './install.sh nightly' }
+Plug 'zxqfl/tabnine-vim'
+" Plug 'neoclide/coc.nvim', { 'do': './install.sh nightly' }
 Plug 'tmsvg/pear-tree'
 
 " Formatting
@@ -147,9 +148,6 @@ let g:ale_echo_msg_format = '%severity% %code: %%s [%linter%]'
 
 " better-whitespace
 let g:strip_whitelines_at_eof = 1
-let g:strip_whitespace_on_save = 1
-let g:strip_whitespace_confirm = 0
-let g:strip_only_modified_lines = 1
 
 " polyglot
 let g:polyglot_disabled = ['purescript']
@@ -402,43 +400,43 @@ augroup END
 
 
 " COC {{{1
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <Tab>' to make sure Tab is not mapped by other plugin.
-" inoremap <silent> <expr> <Tab>
+" " Use tab for trigger completion with characters ahead and navigate.
+" " Use command ':verbose imap <Tab>' to make sure Tab is not mapped by other plugin.
+" " inoremap <silent> <expr> <Tab>
+" "       \ pumvisible() ? "\<C-n>" :
+" "       \ <SID>check_back_space() ? "\<Tab>" :
+" "       \ coc#refresh()
+"
+" inoremap <silent> <expr> <TAB>
 "       \ pumvisible() ? "\<C-n>" :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 "       \ <SID>check_back_space() ? "\<Tab>" :
 "       \ coc#refresh()
-
-inoremap <silent> <expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <C-Space> to trigger completion.
-" inoremap <silent> <expr> <C-Space> coc#refresh()
-
-" Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+"
+" " Use <C-Space> to trigger completion.
+" " inoremap <silent> <expr> <C-Space> coc#refresh()
+"
+" " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"
+" " Use K to show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 
 " vim: foldenable foldmethod=marker

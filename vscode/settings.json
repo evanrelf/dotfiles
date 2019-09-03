@@ -3,7 +3,7 @@
     "editor.find.autoFindInSelection": true,
     "editor.fontFamily": "PragmataPro Liga, Iosevka",
     "editor.fontLigatures": true,
-    "editor.fontSize": 16,
+    "editor.fontSize": 18,
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": true,
     "editor.minimap.renderCharacters": false,
@@ -69,5 +69,8 @@
     "purescript.addNpmPath": true,
     "purescript.buildCommand": "spago build -- --json-errors",
     "languageServerHaskell.hieExecutablePath": "~/.local/bin/hie-wrapper",
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "purescript.autocompleteAddImport": false,
+    "purescript.autocompleteAllModules": false,
+    "workbench.colorTheme": "Dracula"
 }
