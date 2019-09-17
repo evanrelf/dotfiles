@@ -134,6 +134,10 @@ if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa -l --group-directories-first --git"
     alias tree "exa --tree --group-directories-first -I '.git|.stack-work|elm-stuff'"
+else if _exists lsd
+    alias ls "lsd --group-dirs=first"
+    alias ll "lsd -l --group-dirs=first"
+    alias tree "lsd --tree --group-dirs=first"
 else
     alias ls "ls -AFGh"
 end

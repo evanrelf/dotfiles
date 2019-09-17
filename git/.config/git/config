@@ -50,6 +50,9 @@
 	k = "!git lookup | xargs git show --name-only #"
 	kd = "!git lookup | xargs git show #"
 
+	# PULL
+	pr = pull --rebase
+
 	# PUSH
 	p = push
 	pf = push --force-with-lease
