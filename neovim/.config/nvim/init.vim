@@ -202,7 +202,7 @@ set nowrap
 set linebreak
 set breakindent
 set nojoinspaces
-set formatoptions=cqnj
+set formatoptions=cqnjro
 
 " Extra files {{{2
 set noswapfile
@@ -370,14 +370,14 @@ augroup FileTypeSettings " {{{2
         \  setlocal wrap nonumber norelativenumber colorcolumn=
         \| nnoremap <buffer> <Esc> :<C-u>q<CR>
   autocmd FileType markdown,text,latex,tex
-        \  setlocal wrap nonumber norelativenumber
+        \  setlocal wrap nonumber norelativenumber formatoptions+=t
   autocmd FileType json
         \  syntax match Comment +\/\/.\+$+
 augroup END
 
 augroup FormatOptions " {{{2
   autocmd!
-  autocmd FileType * set formatoptions=cqnj
+  autocmd FileType * set formatoptions=cqnjro
 augroup END
 
 augroup AutoRead " {{{2

@@ -47,6 +47,8 @@ set -x MANPAGER "nvim -c 'set ft=man' -"
 set -x npm_config_prefix "$HOME/.node_modules"
 set -x NNN_USE_EDITOR 1
 set -x PSVM_HOME "$HOME/.config/psvm"
+set -x CARGO_HOME "$HOME/.config/cargo"
+set -x RUSTUP_HOME "$HOME/.config/rustup"
 
 if test (uname) = "Linux"
     set -x BROWSER "chromium"
@@ -64,7 +66,7 @@ end
 set paths "$HOME/Library/Python/3.7/bin" $paths
 set paths "$HOME/.config/git/scripts" $paths
 set paths "$HOME/.emacs.d/bin" $paths
-set paths "$HOME/.cargo/bin" $paths
+set paths "$CARGO_HOME/bin" $paths
 set paths "$HOME/.node_modules/bin" $paths
 set paths "$PSVM_HOME/current/bin" $paths
 set paths "$HOME/.local/bin" $paths
