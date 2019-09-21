@@ -67,14 +67,3 @@ plug "ul/kak-lsp" do %{
   }
   hook global KakEnd .* lsp-exit
 }
-
-# Other
-# plug "fsub/kakoune-mark" domain "gitlab.com" %{
-#   map global user m ": mark-word<ret>" -docstring "Mark word"
-#   map global user M ": mark-clear<ret>" -docstring "Clear marks"
-# }
-# plug "Delapouite/kakoune-cd" %{
-#   alias global "cdb" "change-directory-current-buffer"
-#   alias global "cdr" "change-directory-project-root"
-#   alias global "pwd" "print-working-directory"
-# }

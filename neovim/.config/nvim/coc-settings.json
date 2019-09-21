@@ -14,7 +14,7 @@
       "rootPatterns": ["package.yaml", "*.cabal", "stack.yaml", "cabal.project"],
       "filetypes": ["hs", "lhs", "haskell"],
       "initializationOptions": {},
-      "disableCompletion": true,
+      "disableCompletion": false,
       "settings": {
         "languageServerHaskell": {
           "hlintOn": true,

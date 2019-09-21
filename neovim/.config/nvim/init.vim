@@ -130,7 +130,7 @@ let g:neoformat_only_msg_on_error = 1
 " ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {
-      \ 'haskell': ['stack-build', 'hlint'],
+      \ 'haskell': ['hlint'],
       \ 'rust': ['rls', 'cargo', 'rustc']
       \ }
 let g:ale_fixers = {
@@ -343,7 +343,7 @@ augroup FileTypeSettings " {{{2
         \| %s/\s\+$//e
         \| normal! gg
   autocmd FileType gitcommit
-        \  setlocal colorcolumn=73 spell
+        \  setlocal colorcolumn=51,73 spell
   autocmd BufRead Dockerfile*
         \  setlocal filetype=Dockerfile
   autocmd FileType vim,help

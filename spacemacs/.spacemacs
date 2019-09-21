@@ -513,7 +513,7 @@ before packages are loaded."
   (add-hook 'text-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
   ;; evil-escape with jk instead of fd
   (setq-default evil-escape-key-sequence "jk")
-  ;; Enable mouse support in the terminal
+  ;; Enable mouse scrolling in the terminal
   (xterm-mouse-mode 1)
   (unless window-system
     (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))

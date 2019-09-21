@@ -12,6 +12,10 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; Disable Flycheck for Emacs Lisp files
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+;; Enable mouse scrolling in the terminal
+(unless window-system
+  (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
+  (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 ;; Change cursor depending on mode
 (after! evil-terminal-cursor-changer
   (setq evil-motion-state-cursor 'box)

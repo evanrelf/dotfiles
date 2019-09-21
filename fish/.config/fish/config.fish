@@ -40,9 +40,9 @@ set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
 
 
 # VARIABLES {{{1
-set -x EDITOR "nvim"
+# set -x EDITOR "nvim"
+set -x EDITOR "kak"
 # set -x EDITOR "emacsclient -s term -t"
-# set -x EDITOR "kak"
 set -x MANPAGER "nvim -c 'set ft=man' -"
 set -x npm_config_prefix "$HOME/.node_modules"
 set -x NNN_USE_EDITOR 1
