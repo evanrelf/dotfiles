@@ -48,7 +48,7 @@ if [ $# -gt 0 ]; then
         #     log "iTerm Shell Integration for Fish already installed"
         #   fi
         #   ;;
-        kakoune )
+        kakoune | kakoune2 )
           if [ ! -e "$HOME/.config/kak/plugins/plug.kak/" ]; then
             command -v git >/dev/null 2>&1 || error "git is not installed"
             log "Installing plug.kak..."
