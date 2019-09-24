@@ -37,6 +37,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
+Plug 'rhysd/git-messenger.vim'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
@@ -146,6 +147,9 @@ let g:ale_echo_msg_info_str = '[INFO]'
 let g:ale_echo_msg_error_str = '[ERR]'
 let g:ale_echo_msg_warning_str = '[WARN]'
 let g:ale_echo_msg_format = '%severity% %code: %%s [%linter%]'
+
+" git-messenger
+let g:git_messenger_no_default_mappings = 1
 
 " better-whitespace
 let g:strip_whitelines_at_eof = 1
@@ -317,6 +321,7 @@ xnoremap <Leader>S :sort<CR>
 noremap <silent> <Leader>G <C-w>=:<C-u>GoldenRatioToggle<CR>
 noremap <silent> <Leader>T :TagbarToggle<CR>
 noremap <silent> <Leader>U :MundoToggle<CR>
+nmap <Leader>m <Plug>(git-messenger)
 
 " Available
 noremap S <Nop>
