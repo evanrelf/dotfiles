@@ -12,6 +12,12 @@ plug "alexherbo2/search-highlighter.kak" %{
   }
 }
 
+# Files
+plug "andreyorst/fzf.kak" %{
+  set-option global fzf_file_command "rg"
+  set-option global fzf_preview false
+}
+
 # Editing
 # plug "andreyorst/smarttab.kak" %{
 #   set-option gloabl expandtab
@@ -44,7 +50,7 @@ plug "Delapouite/kakoune-text-objects"
 plug "Delapouite/kakoune-auto-percent"
 plug "Delapouite/kakoune-auto-star"
 
-# yntax
+# Syntax
 plug "ul/kak-lsp" do %{
   cargo build --release --locked
   cargo install --force --path .
@@ -56,8 +62,6 @@ plug "ul/kak-lsp" do %{
   hook global WinSetOption filetype=(c|cpp|rust|haskell|purescript|javascript|typescript) %{
     map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
     lsp-enable-window
-    lsp-auto-hover-enable
-    lsp-auto-hover-insert-mode-disable
     set-option window lsp_hover_anchor true
     set-face window DiagnosticError default+u
     set-face window DiagnosticWarning default+u

@@ -43,10 +43,8 @@ hook global WinSetOption filetype=.* %{
 }
 
 hook global WinSetOption filetype=haskell %{
-  set-option window makecmd "stack build --fast"
   set-option window lintcmd "hlint"
   set-option window formatcmd "sort-imports"
-  hook window -group lint BufWritePost .* lint
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]\w*)\s+::\s 1:function
   lint-enable
   lint

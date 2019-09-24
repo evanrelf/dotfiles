@@ -1,3 +1,4 @@
+# Normal
 map global normal ";" ":"
 map global normal ":" ";"
 map global normal "," "<space>"
@@ -8,9 +9,11 @@ map global normal "<a-/>" "<a-/>(?i)"
 map global normal "<a-?>" "<a-?>(?i)"
 map global normal "#" ": comment-line<ret>"
 
+# User
 map global user "y" "<a-|>pbcopy<ret>" -docstring "Yank to system clipboard"
 map global user "p" "!pbpaste<ret>" -docstring "Paste from system clipboard"
 map global user "=" ": format<ret>" -docstring "Format buffer"
+map global user "f" ": fzf-mode<ret>" -docstring "FZF mode"
 
-# map global goto H "<esc><a-h>" -docstring "Select to line begin"
-# map global goto L "<esc><a-l>" -docstring "Select to line end"
+# Disable
+map global goto "g" "<esc>" -docstring "Use gk"
