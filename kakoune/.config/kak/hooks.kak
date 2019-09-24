@@ -1,24 +1,24 @@
 hook global WinCreate .* %{
   # add-highlighter global/ show-matching
-  add-highlighter global/ regex \b(TODO|FIXME|NOTE)\b 0:default+r
+  # add-highlighter global/ regex \b(TODO|FIXME|NOTE)\b 0:default+r
   # add-highlighter global/ show-whitespaces -lf " " -spc " "
   # add-highlighter global/ regex \h+$ 0:default,red
   git show-diff
 }
 
-hook global BufWritePost .* %{
+hook buffer BufWritePost .* %{
   git update-diff
 }
 
-hook global InsertBegin .* %{
+hook window InsertBegin .* %{
   remove-highlighter window/trailing-whitespace
 }
 
-hook global InsertEnd .* %{
+hook window InsertEnd .* %{
   add-highlighter window/trailing-whitespace regex \h+$ 0:default,red
 }
 
-hook global InsertCompletionShow .* %{
+hook window InsertCompletionShow .* %{
   try %{
     execute-keys -draft "h<a-K>\h<ret>"
     map window insert <tab> <c-n>
@@ -26,7 +26,7 @@ hook global InsertCompletionShow .* %{
   }
 }
 
-hook global InsertCompletionHide .* %{
+hook window InsertCompletionHide .* %{
   unmap window insert <tab> <c-n>
   unmap window insert <s-tab> <c-p>
 }
@@ -42,12 +42,12 @@ define-command disable-autoformat -docstring "Disable auto-format" %{
   remove-hooks window format
 }
 
-hook global WinSetOption filetype=.* %{
+hook buffer WinSetOption filetype=.* %{
   disable-autoformat
   disable-autolint
 }
 
-hook global WinSetOption filetype=haskell %{
+hook window WinSetOption filetype=haskell %{
   set-option window lintcmd "hlint"
   set-option window formatcmd "sort-imports"
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]\w*)\s+::\s 1:function
@@ -58,7 +58,7 @@ hook global WinSetOption filetype=haskell %{
 # hook global WinSetOption filetype=purescript %{
 # }
 
-hook global WinSetOption filetype=elm %{
+hook window WinSetOption filetype=elm %{
   set-option window formatcmd "elm-format --stdin"
   hook window -group format BufWritePre .* format
   # add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
@@ -66,36 +66,38 @@ hook global WinSetOption filetype=elm %{
   # add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
 
-hook global WinSetOption filetype=rust %{
+hook window WinSetOption filetype=rust %{
   set-option window makecmd "cargo build"
   set-option window formatcmd "rustfmt --emit stdout"
   hook window -group format BufWritePre .* format
 }
 
-hook global WinSetOption filetype=cpp %{
+hook window WinSetOption filetype=cpp %{
   set-option window formatcmd "clang-format"
   hook window -group format BufWritePre .* format
   clang-enable-autocomplete
   clang-enable-diagnostics
 }
 
-hook global WinSetOption filetype=(javascript|typescript|vue|css|scss|less|json|markdown|yaml) %{
+hook window WinSetOption filetype=(javascript|typescript|vue|css|scss|less|json|markdown|yaml) %{
   set-option window formatcmd "prettier --stdin --stdin-filepath=${kak_buffile}"
 }
 
-hook global WinSetOption filetype=(html|xml) %{
-  set-option -add global auto_pairs < >
+hook buffer WinSetOption filetype=(html|xml) %{
+  set-option -add buffer auto_pairs < >
 }
 
-hook global WinSetOption filetype=markdown %{
+hook buffer WinSetOption filetype=markdown %{
   set-option -add buffer auto_pairs _ _ * *
 }
 
-hook global WinSetOption filetype=sh %{
+hook window WinSetOption filetype=sh %{
   set-option window lintcmd "shellcheck -f gcc"
   hook window -group lint BufWritePost .* lint
   lint-enable
   lint
 }
 
-remove-hooks window markdown-indent
+hook window WinSetOption filetype=markdown %{
+  remove-hooks window markdown-indent
+}

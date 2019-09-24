@@ -13,6 +13,5 @@ evaluate-commands %sh{
 
 # TODO
 # - Haskell QuasiQuotes syntax highlighting
-# - Git gutter?
 # - FZF with fd and rg
 # - Maybe nicer status bar
