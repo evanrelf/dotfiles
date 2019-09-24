@@ -1,8 +1,13 @@
 hook global WinCreate .* %{
   # add-highlighter global/ show-matching
-  # add-highlighter global/ regex \b(TODO|FIXME|NOTE)\b 0:default+r
+  add-highlighter global/ regex \b(TODO|FIXME|NOTE)\b 0:default+r
   # add-highlighter global/ show-whitespaces -lf " " -spc " "
   # add-highlighter global/ regex \h+$ 0:default,red
+  git show-diff
+}
+
+hook global BufWritePost .* %{
+  git update-diff
 }
 
 hook global InsertBegin .* %{
@@ -54,12 +59,11 @@ hook global WinSetOption filetype=haskell %{
 # }
 
 hook global WinSetOption filetype=elm %{
-  set-option window makecmd "make"
   set-option window formatcmd "elm-format --stdin"
   hook window -group format BufWritePre .* format
-  add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
-  add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
-  add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
+  # add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
+  # add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
+  # add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
 
 hook global WinSetOption filetype=rust %{
@@ -69,7 +73,6 @@ hook global WinSetOption filetype=rust %{
 }
 
 hook global WinSetOption filetype=cpp %{
-  set-option window makecmd "make"
   set-option window formatcmd "clang-format"
   hook window -group format BufWritePre .* format
   clang-enable-autocomplete
@@ -77,8 +80,7 @@ hook global WinSetOption filetype=cpp %{
 }
 
 hook global WinSetOption filetype=(javascript|typescript|vue|css|scss|less|json|markdown|yaml) %{
-  set-option window formatcmd "prettier --stdin-filepath=${kak_buffile}"
-  # hook window -group format BufWritePre .* format
+  set-option window formatcmd "prettier --stdin --stdin-filepath=${kak_buffile}"
 }
 
 hook global WinSetOption filetype=(html|xml) %{
@@ -95,3 +97,5 @@ hook global WinSetOption filetype=sh %{
   lint-enable
   lint
 }
+
+remove-hooks window markdown-indent

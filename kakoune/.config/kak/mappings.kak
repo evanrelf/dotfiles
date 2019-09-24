@@ -1,6 +1,6 @@
 # Normal
-map global normal ";" ":"
-map global normal ":" ";"
+# map global normal ";" ":"
+# map global normal ":" ";"
 map global normal "," "<space>"
 map global normal "<space>" ","
 map global normal "/" "/(?i)"

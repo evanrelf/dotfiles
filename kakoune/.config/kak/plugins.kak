@@ -1,8 +1,6 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
-
-# Appearance
 plug "evanrelf/kakoune-number-toggle" %{
   set-option global number_toggle_params -hlcursor -separator " "
 }
@@ -11,14 +9,11 @@ plug "alexherbo2/search-highlighter.kak" %{
     search-highlighter-enable
   }
 }
-
-# Files
-plug "andreyorst/fzf.kak" %{
-  set-option global fzf_file_command "rg"
+# plug "andreyorst/fzf.kak" %{
+plug "evanrelf/fzf.kak" %{
+  set-option global fzf_file_command "fd --type f --follow --hidden"
   set-option global fzf_preview false
 }
-
-# Editing
 # plug "andreyorst/smarttab.kak" %{
 #   set-option gloabl expandtab
 #   set-option global softtabstop 2
@@ -26,12 +21,9 @@ plug "andreyorst/fzf.kak" %{
 #   hook global WinSetOption filetype=(rust|python|elm) softtabstop 4
 #   hook global WinSetOption filetype=(haskell|purescript) softtabstop 2
 # }
-# plug "alexherbo2/auto-pairs.kak" %{
-#   hook global WinCreate .* %{
-#     auto-pairs-enable
-#     # auto-pairs-surround
-#   }
-# }
+plug "alexherbo2/auto-pairs.kak" %{
+  hook global WinCreate .* %{ auto-pairs-enable }
+}
 plug "h-youhei/kakoune-surround" %{
   map global user s ": enter-user-mode surround<ret>" -docstring "Surround mode"
   declare-user-mode "surround"
@@ -47,10 +39,8 @@ plug "h-youhei/kakoune-surround" %{
   map global "surround-tag" d ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
 }
 plug "Delapouite/kakoune-text-objects"
-plug "Delapouite/kakoune-auto-percent"
-plug "Delapouite/kakoune-auto-star"
-
-# Syntax
+# plug "Delapouite/kakoune-auto-percent"
+# plug "Delapouite/kakoune-auto-star"
 plug "ul/kak-lsp" do %{
   cargo build --release --locked
   cargo install --force --path .
