@@ -40,8 +40,8 @@ set -U FZF_OPEN_COMMAND "$FZF_FIND_FILE_COMMAND"
 
 
 # VARIABLES {{{1
-set -x EDITOR "nvim"
-# set -x EDITOR "kak"
+# set -x EDITOR "nvim"
+set -x EDITOR "kak"
 # set -x EDITOR "emacsclient -s term -t"
 if _exists bat
   set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"

@@ -110,7 +110,7 @@
 	exec = "!exec "
 	hi = hello # script
 [core]
-	editor = nvim
+	editor = kak
 	pager = diff-so-fancy | less --tabs=8 -RFX
 	excludesfile = ~/.config/git/ignore
 [status]

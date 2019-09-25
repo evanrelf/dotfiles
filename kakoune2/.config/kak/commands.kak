@@ -8,6 +8,16 @@ filetype -params 1 %{
   set-option window filetype %arg{1}
 }
 
+define-command -docstring "Enable soft wrapping" \
+softwrap-enable -params 0 %{
+  add-highlighter global/softwrap wrap
+}
+
+define-command -docstring "Disable soft wrapping" \
+softwrap-disable -params 0 %{
+  remove-highlighter global/softwrap
+}
+
 # TODO: Split current buffer if no argument provided
 define-command -docstring "Split tmux vertically" \
 vsplit -params 0..1 -file-completion %{

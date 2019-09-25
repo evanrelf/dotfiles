@@ -2,10 +2,10 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
 # Toggle between relative and absolute line numbers depending on mode
-plug "evanrelf/kakoune-number-toggle" %{
+plug "evanrelf/number-toggle.kak" %{
   set-option global number_toggle_params -hlcursor -separator " "
-
 }
+
 # Temporary highlighting of search matches
 plug "alexherbo2/search-highlighter.kak" %{
   hook global WinCreate .* %{ search-highlighter-enable }
@@ -43,24 +43,28 @@ plug "Delapouite/kakoune-auto-percent"
 # Automatically use word under cursor when advancing search without a selection
 plug "Delapouite/kakoune-auto-star"
 
+# Replace mode
+plug "alexherbo2/replace.kak" %{
+  map global user "r" ": replace<ret>" -docstring "Replace mode"
+}
+
+plug "alexherbo2/auto-pairs.kak" %{
+  hook global WinCreate .* %{ auto-pairs-enable }
+}
+
 # Language Server Protocol support
 plug "ul/kak-lsp" do %{
-  cargo build --release --locked
-  cargo install --force --path .
+  cargo install --locked --force --path .
 } %{
-  define-command lsp-restart %{ lsp-stop; lsp-start }
-  set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
-  set-option global lsp_diagnostic_line_error_sign "!"
-  set-option global lsp_diagnostic_line_warning_sign "?"
-  hook global WinSetOption filetype=(c|cpp|rust|haskell|purescript|javascript|typescript) %{
-    map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+  # Enable LSP for certain filetypes
+  hook global WinSetOption filetype=(haskell|purescript|rust|typescript|javascript) %{
+    set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log --config ~/.config/kak-lsp/kak-lsp.toml"
     lsp-enable-window
-    set-option window lsp_hover_anchor true
-    set-face window DiagnosticError default+u
-    set-face window DiagnosticWarning default+u
+    # Show LSP info at cursor instead of at the bottom
+    # set-option window lsp_hover_anchor true
+    map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
   }
-  hook global WinSetOption filetype=rust %{
-    set-option window lsp_server_configuration rust.clippy_preference="on"
-  }
-  hook global KakEnd .* lsp-exit
+  # set-option global lsp_diagnostic_line_error_sign "!"
+  # set-option global lsp_diagnostic_line_warning_sign "?"
+  # set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
 }
