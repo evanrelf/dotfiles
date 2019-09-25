@@ -36,6 +36,7 @@ Plug 'tpope/vim-sleuth'
 " Information
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 Plug 'simnalamburt/vim-mundo', { 'on': ['MundoToggle', 'MundoShow'] }
 Plug 'rhysd/git-messenger.vim'
 
@@ -171,6 +172,10 @@ let g:purescript_indent_in = 0
 " gitgutter
 let g:gitgutter_map_keys = 0
 let g:gitgutter_grep = 'rg'
+
+" tagbar
+let g:tagbar_compact = 1
+let g:tagbar_sort = 0
 
 " didyoumean
 let g:dym_use_fzf = 1
