@@ -10,8 +10,3 @@ evaluate-commands %sh{
     }"
   done
 }
-
-# TODO
-# - Haskell QuasiQuotes syntax highlighting
-# - FZF with fd and rg
-# - Maybe nicer status bar
