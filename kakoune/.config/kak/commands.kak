@@ -18,20 +18,19 @@ softwrap-disable -params 0 %{
   remove-highlighter global/softwrap
 }
 
-# TODO: Split current buffer if no argument provided
 define-command -docstring "Split tmux vertically" \
-vsplit -params 0..1 -file-completion %{
-  tmux-terminal-horizontal kak -c %val{session} "%arg{@}"
+vsplit -params 0.. -file-completion %{
+  tmux-terminal-horizontal kak -c %val{session} %arg{@}
 }
 alias global vs vsplit
 
 define-command -docstring "Split tmux horizontally" \
-split -params 0..1 -file-completion %{
-  tmux-terminal-vertical kak -c %val{session} "%arg{@}"
+split -params 0.. -file-completion %{
+  tmux-terminal-vertical kak -c %val{session} %arg{@}
 }
 alias global sp split
 
 define-command -docstring "Create new tmux window" \
 tabnew -params 0..1 -file-completion %{
-  tmux-terminal-window kak -c %val{session} "%arg{@}"
+  tmux-terminal-window kak -c %val{session} %arg{@}
 }

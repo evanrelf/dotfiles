@@ -18,9 +18,13 @@ map global normal "<a-#>" ": comment-block<ret>"
 # map global normal "n" "nvc"
 # map global normal "<a-n>" "<a-n>vc"
 
-# Change indentation in insert mode with Tab
-map global insert "<tab>" "<a-;><gt>"
-map global insert "<s-tab>" "<a-;><lt>"
+# Insert and delete spaces for indentation
+hook global InsertChar \t %{ try %{
+  execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+}}
+hook global InsertDelete ' ' %{ try %{
+  execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
+}}
 
 # User mode
 map global user "y" "<a-|>pbcopy<ret>" -docstring "Yank to system clipboard"
@@ -34,6 +38,7 @@ hook global InsertChar "k" %{ try %{
 }}
 
 # Disabled
+# TODO: Echo with red text
 map global normal "<a-h>" ": echo 'Use Gh'<ret>" -docstring "Use Gh"
 map global normal "<a-l>" ": echo 'Use Gl'<ret>" -docstring "Use Gl"
 map global goto "g" ": echo 'Use gk'<ret>" -docstring "Use gk"

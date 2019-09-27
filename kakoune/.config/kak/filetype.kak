@@ -28,6 +28,7 @@ hook global WinSetOption filetype=rust %{
   set-option window indentwidth 4
   set-option window formatcmd "rustfmt --emit stdout"
   hook global -group format BufWritePre .* %{ format-buffer }
+}
 
 # C++
 hook global WinSetOption filetype=cpp %{
@@ -59,6 +60,11 @@ hook global WinCreate git-revise-todo %{
 # Docker
 hook global WinCreate Dockerfile.* %{
   set-option window filetype dockerfile
+}
+
+hook global WinSetOption filetype=makefile %{
+  set-option window aligntab true
+  set-option window indentwidth 0
 }
 
 # Prettier

@@ -48,6 +48,7 @@ plug "alexherbo2/replace.kak" %{
   map global user "r" ": replace<ret>" -docstring "Replace mode"
 }
 
+# Automatically complete pairs
 plug "alexherbo2/auto-pairs.kak" %{
   hook global WinCreate .* %{ auto-pairs-enable }
 }
