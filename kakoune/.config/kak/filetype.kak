@@ -6,10 +6,10 @@ hook global WinSetOption filetype=haskell %{
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
   # Highlight function name in function definitions
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)(\h+['\w\[\]\(\),:\{\}\.]+)*\h+=\s 1:meta
-  # Highlight curly braces, square brackets, and commas
-  add-highlighter shared/haskell/code/ regex [\{\}\[\],] 0:operator
   # Highlight quasiquotes
   add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
+  # Highlight curly braces, square brackets, and commas
+  # add-highlighter shared/haskell/code/ regex [\{\}\[\],] 0:operator
 }
 
 # Elm

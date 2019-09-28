@@ -3,6 +3,8 @@
 # Space is my leader
 map global normal "," "<space>"
 map global normal "<space>" ","
+map global normal "<a-,>" "<a-space>"
+map global normal "<a-space>" "<a-,>"
 
 # Make search case-insensitive
 map global normal "/" "/(?i)"
@@ -39,7 +41,7 @@ hook global InsertChar "k" %{ try %{
 
 # Disabled
 # TODO: Echo with red text
-map global normal "<a-h>" ": echo 'Use Gh'<ret>" -docstring "Use Gh"
-map global normal "<a-l>" ": echo 'Use Gl'<ret>" -docstring "Use Gl"
-map global goto "g" ": echo 'Use gk'<ret>" -docstring "Use gk"
-map global view "v" ": echo 'Use vc'<ret>" -docstring "Use vc"
+map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
+map global normal "<a-l>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
+map global goto "g" "<esc>: echo -markup '{Error}Use gk{Default}'<ret>" -docstring "Use gk"
+map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstring "Use vc"

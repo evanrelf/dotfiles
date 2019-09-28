@@ -269,8 +269,8 @@ command! -bang -nargs=* GRg
 
 
 " MAPPINGS {{{1
-noremap ; :
-noremap : ;
+" noremap ; :
+" noremap : ;
 noremap Y y$
 noremap j gj
 noremap k gk
