@@ -1,7 +1,7 @@
 # Appearance
 colorscheme palenight
 add-highlighter global/column column 81 default,black
-add-highlighter global/ regex \b(TODO|FIXME|NOTE)\b 0:default+r
+add-highlighter global/ regex \b(TODO|FIXME|XXX|NOTE)\b 0:default+r
 # Modified colors for palenight theme
 face global PrimaryCursor rgb:292d3e,rgb:ffcb6b+bfg
 face global PrimarySelection rgb:292d3e,rgb:d7dae0+bfg

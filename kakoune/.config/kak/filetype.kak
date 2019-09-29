@@ -4,12 +4,10 @@ hook global WinSetOption filetype=haskell %{
   set-option window formatcmd "sort-imports"
   # Highlight function name in type signatures
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
-  # Highlight function name in function definitions
-  add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)(\h+['\w\[\]\(\),:\{\}\.]+)*\h+=\s 1:meta
   # Highlight quasiquotes
   add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
-  # Highlight curly braces, square brackets, and commas
-  # add-highlighter shared/haskell/code/ regex [\{\}\[\],] 0:operator
+  map window filetype "l" "gkO{-# LANGUAGE ChangeMe #-}<esc>bbe" -docstring "Insert LANGUAGE pragma"
+  map window filetype "o" "gk]po{-# OPTIONS_GHC -Wchange-me #-}<esc>bb<a-e>" -docstring "Insert OPTIONS_GHC pragma"
 }
 
 # Elm
@@ -48,9 +46,9 @@ hook global WinSetOption filetype=markdown %{
 
 # Git
 hook global WinSetOption filetype=git-commit %{
-  remove-highlighter global/column
   add-highlighter window/ column 51 default,black
   add-highlighter window/ column 73 default,black
+  map window filetype "d" "|date '+%%Y-%%m-%%d'<ret>;" -docstring "Insert ISO 8601 date"
 }
 hook global WinCreate git-revise-todo %{
   set-option window filetype git-rebase
@@ -62,6 +60,7 @@ hook global WinCreate Dockerfile.* %{
   set-option window filetype dockerfile
 }
 
+# Makefile
 hook global WinSetOption filetype=makefile %{
   set-option window aligntab true
   set-option window indentwidth 0
