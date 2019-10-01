@@ -14,6 +14,10 @@ map global normal "<a-?>" "<a-?>(?i)"
 map global normal "#" ": comment-line<ret>"
 map global normal "<a-#>" ": comment-block<ret>"
 
+# Formatting
+map global normal "=" ": format-buffer<ret>"
+map global normal "<a-=>" ": format-selections<ret>"
+
 # Allow selecting by line in both directions
 map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
@@ -40,7 +44,7 @@ map global user "R" "|pbpaste<ret>" -docstring "Paste replace from clipboard"
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
 declare-user-mode filetype
 map global user "<space>" ": enter-user-mode filetype<ret>" -docstring "Filetype mode"
-map global normal "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>"
+map global user "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>"
 
 # Escape with jk
 hook global InsertChar "k" %{ try %{

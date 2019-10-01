@@ -18,16 +18,16 @@ set-option global grepcmd "rg --column --smart-case"
 set-option global scrolloff 1,5
 set-option global startup_info_version 20190701
 
-# Highlight current word
-declare-option -hidden regex curword
-set-face global CurWord default,rgb:4a4a4a
+# # Highlight current word
+# declare-option -hidden regex curword
+# set-face global CurWord default,rgb:4a4a4a
 
-hook global NormalIdle .* %{
-  evaluate-commands -draft %{ try %{
-    execute-keys <space><a-i>w <a-k>\A\w+\z<ret>
-    set-option buffer curword "\b\Q%val{selection}\E\b"
-  } catch %{
-    set-option buffer curword ""
-  } }
-}
-add-highlighter global/ dynregex "%%opt{curword}" 0:CurWord
+# hook global NormalIdle .* %{
+#   evaluate-commands -draft %{ try %{
+#     execute-keys <space><a-i>w <a-k>\A\w+\z<ret>
+#     set-option buffer curword "\b\Q%val{selection}\E\b"
+#   } catch %{
+#     set-option buffer curword ""
+#   } }
+# }
+# add-highlighter global/ dynregex "%%opt{curword}" 0:CurWord
