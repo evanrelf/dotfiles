@@ -1,6 +1,8 @@
 # Haskell
 hook global WinSetOption filetype=haskell %{
   set-option window lintcmd "hlint"
+  hook window -group lint BufWritePost .* %{ lint }
+  lint-enable
   set-option window formatcmd "sort-imports"
   # Highlight function name in type signatures
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
@@ -14,7 +16,7 @@ hook global WinSetOption filetype=haskell %{
 hook global WinSetOption filetype=elm %{
   set-option window indentwidth 4
   set-option window formatcmd "elm-format --stdin"
-  hook global -group format BufWritePre .* %{ format-buffer }
+  hook window -group format BufWritePre .* %{ format-buffer }
   # Improve bad syntax highlighting
   add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
   add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
@@ -25,18 +27,20 @@ hook global WinSetOption filetype=elm %{
 hook global WinSetOption filetype=rust %{
   set-option window indentwidth 4
   set-option window formatcmd "rustfmt --emit stdout"
-  hook global -group format BufWritePre .* %{ format-buffer }
+  hook window -group format BufWritePre .* %{ format-buffer }
 }
 
 # C++
 hook global WinSetOption filetype=cpp %{
   set-option window formatcmd "clang-format"
-  hook global -group format BufWritePre .* %{ format-buffer }
+  hook window -group format BufWritePre .* %{ format-buffer }
 }
 
 # Shell
 hook global WinSetOption filetype=sh %{
   set-option window lintcmd "shellcheck -f gcc"
+  hook window -group lint BufWritePost .* %{ lint }
+  lint-enable
 }
 
 # Markdown
