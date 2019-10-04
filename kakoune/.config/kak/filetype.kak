@@ -46,6 +46,8 @@ hook global WinSetOption filetype=sh %{
 # Markdown
 hook global WinSetOption filetype=markdown %{
   remove-hooks window markdown-indent
+  map window filetype "=" "|fmt -w 80<ret>" -docstring "Wrap to 80 columns"
+  autowrap-enable
 }
 
 # Git
@@ -71,6 +73,11 @@ hook global WinSetOption filetype=makefile %{
 }
 
 # Prettier
-hook global WinSetOption filetype=(javascript|typescript|vue|css|scss|less|json|markdown|yaml) %{
-  set-option window formatcmd "prettier --stdin --stdin-filepath=${kak_buffile}"
-}
+hook global WinSetOption filetype=markdown %{ set-option window formatcmd "prettier --stdin --parser markdown" }
+hook global WinSetOption filetype=json %{ set-option window formatcmd "prettier --stdin --parser json" }
+hook global WinSetOption filetype=yaml %{ set-option window formatcmd "prettier --stdin --parser yaml" }
+hook global WinSetOption filetype=javascript %{ set-option window formatcmd "prettier --stdin --parser javascript" }
+hook global WinSetOption filetype=typescript %{ set-option window formatcmd "prettier --stdin --parser typescript" }
+hook global WinSetOption filetype=css %{ set-option window formatcmd "prettier --stdin --parser css" }
+hook global WinSetOption filetype=scss %{ set-option window formatcmd "prettier --stdin --parser scss" }
+hook global WinSetOption filetype=less %{ set-option window formatcmd "prettier --stdin --parser less" }

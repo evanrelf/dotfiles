@@ -44,7 +44,7 @@ map global user "R" "|pbpaste<ret>" -docstring "Paste replace from clipboard"
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
 declare-user-mode filetype
 map global user "<space>" ": enter-user-mode filetype<ret>" -docstring "Filetype mode"
-map global user "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>"
+map global user "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>" -docstring "Insert calculation"
 
 # Escape with jk
 hook global InsertChar "k" %{ try %{
