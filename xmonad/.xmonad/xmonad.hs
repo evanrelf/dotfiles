@@ -3,7 +3,7 @@ import Data.Function ((&))
 import Data.Maybe (isJust)
 import System.Exit (exitSuccess)
 import XMonad
-import XMonad.Config.Desktop (desktopConfig)
+-- import XMonad.Config.Desktop (desktopConfig)
 import XMonad.StackSet (RationalRect(..), Workspace(..), stack, swapMaster)
 import qualified XMonad.StackSet as W
 -- Actions
@@ -36,21 +36,25 @@ import qualified XMonad.Util.Themes as Themes
 import XMonad.Util.WindowProperties (Property(..), focusedHasProperty)
 import XMonad.Util.WorkspaceCompare (getSortByIndex)
 
+import XMonad.Config.Kde (kdeConfig)
+
+baseConfig = kdeConfig
+
 main = xmonad myConfig
 
-myConfig = desktopConfig
+myConfig = kdeConfig
   { terminal           = "kitty"
   , workspaces         = show <$> [1..10]
-  , focusFollowsMouse  = True
+  , focusFollowsMouse  = False
   , clickJustFocuses   = True
   , borderWidth        = 2
   , normalBorderColor  = "#333333"
   , focusedBorderColor = "#999999"
-  , startupHook        = myStartupHook <> startupHook desktopConfig
+  , startupHook        = myStartupHook <> startupHook baseConfig
   , layoutHook         = myLayoutHook
-  , manageHook         = myManageHook <> manageHook desktopConfig
-  , handleEventHook    = myHandleEventHook <> handleEventHook desktopConfig
-  , logHook            = myLogHook <> logHook desktopConfig
+  , manageHook         = myManageHook <> manageHook baseConfig
+  , handleEventHook    = myHandleEventHook <> handleEventHook baseConfig
+  , logHook            = myLogHook <> logHook baseConfig
   , modMask            = myModMask
   }
   & flip removeKeysP myRemoveKeys
@@ -87,7 +91,6 @@ myKeys =
 
   -- Apps
   , ("M-<Return>", safeSpawn (terminal myConfig) [])
-  , ("M-S-<Return>", safeSpawn "kitty" [])
   , ("M-/", safeSpawn "rofi" ["-show", "run"])
   , ("M-S-/", safeSpawn "rofi" ["-show", "drun"])
 
@@ -115,7 +118,6 @@ myStartupHook = do
   pure () -- Do not remove
   checkKeymap myConfig myKeys
   adjustEventInput
-  spawnOnce "~/.config/polybar/launch"
 
 myLayoutHook =
   let
@@ -127,7 +129,18 @@ myLayoutHook =
     & smartBorders
     & avoidStruts
 
-myManageHook = manageDocks <> insertPosition Below Newer
+myManageHook = composeAll
+  [ manageDocks
+  , insertPosition Below Newer
+  , className =? "plasmashell" --> doFloat
+  , className =? "Plasma" --> doFloat
+  , className =? "Plasmoidviewer" --> doFloat
+  , className =? "krunner" --> doFloat
+  , className =? "Klipper" --> doFloat
+  , className =? "Kmix" --> doFloat
+  , title =? "plasma-desktop" --> doFloat
+  , title =? "Desktop - Plasma" --> doFloat -- kill
+  ]
 
 myHandleEventHook = focusOnMouseMove <> fullscreenEventHook
 
@@ -149,4 +162,4 @@ myTheme = Themes.xmonadTheme
     }
   }
 
-{-# ANN module "HLint: ignore Redundant return" #-}
+{-# ANN module "HLint: ignore Redundant pure" #-}

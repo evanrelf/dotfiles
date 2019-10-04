@@ -7,96 +7,39 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
 
-    acpi
-    # adapta-gtk-theme
-    # arandr
-    autocutsel
+    # Apps
+    chromium
+    kitty
+
+    # Haskell
+    cabal-install
+    haskellPackages.ghcid
+    hlint
+    stack
+
+    # Everything else
     autojump
     binutils
-    chromium
-    # clang
-    # cmus
-    # dmenu2
-    # dunst
-    # emacs
-    entr
     exa
     fd
-    # feh
-    # ffmpeg
-    firefox
     fzf
-    # gimp
     git
     gitAndTools.diff-so-fancy
-    # gnome3.nautilus
-    gnumake
-    gnupg
-    # gparted
-    haskellPackages.ghcid
-    # haskellPackages.xmobar
-    hlint
-    htop
-    jq
-    # kakoune
-    killall
-    kitty
-    # libreoffice-fresh
-    lsof
-    # lxappearance
-    # mpc_cli
-    # mpd
-    # mpv
-    # mupdf
-    # ncmpcpp
-    # neofetch
+    kakoune
     neovim
-    # nixops
-    # nnn
-    # nodePackages.prettier # TODO
     nodejs
-    # notify-desktop
-    pandoc
-    # papirus-icon-theme
-    # polybar
-    powertop
-    python3
-    # ranger
-    # rclone
     ripgrep
-    # rofi
-    # rsync
     rustup
-    # scrot
     shellcheck
-    # slack
-    # spotify
-    stack
     stow
-    # sxiv
     tealdeer
-    # tectonic
     tmux
-    # transmission-gtk
-    unar
-    unzip
     xclip
-    xorg.xev
     xorg.xrdb
-    xorg.xset
-    # xst
-    # youtube-dl
-    # zathura
-    zip
 
   ];
-  programs = {
-    fish.enable = true;
-    light.enable = true;
-    mosh.enable = true;
-    npm.enable = true;
-  };
-  virtualisation.docker.enable = true;
+  programs.fish.enable = true;
+  programs.mosh.enable = true;
   services.openssh.enable = true;
 
 
@@ -106,20 +49,14 @@
       # Regular
       roboto
       dejavu_fonts
-      liberation_ttf
-      libertinus
 
       # Monospaced
       iosevka-bin
       inconsolata
 
-      # Bitmap
-      terminus_font
-
       # Emoji and icons
       noto-fonts-emoji
       material-icons
-      emacs-all-the-icons-fonts
     ];
     fontconfig.ultimate = {
       enable = true;
@@ -132,14 +69,12 @@
   hardware.trackpoint = {
     enable = true;
     emulateWheel = true;
-    sensitivity = 100; # 0-255 (128)
-    speed = 80; # 0-255 (97)
+    sensitivity = 100; # 0-255 (default 128)
+    speed = 80; # 0-255 (default 97)
   };
-  services.gnome3 = {
-    chrome-gnome-shell.enable = true;
-  };
+  services.gnome3.chrome-gnome-shell.enable = true;
   services.xserver = {
-    # enable = true;
+    enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 50;
     libinput = {
@@ -149,50 +84,14 @@
       middleEmulation = false;
       accelSpeed = "0.7";
     };
-    displayManager.gdm = {
-      enable = true;
-      wayland = false;
-      autoLogin = {
-        enable = true;
-        user = "evanrelf";
-      };
-    };
+    displayManager.lightdm.enable = true;
     desktopManager = {
       default = "none";
       xterm.enable = false;
-      gnome3 = {
-        enable = true;
-	extraGSettingsOverrides = ''
-	  [org.gnome.mutter]
-          experimental-features=['x11-randr-fractional-scaling']
-	'';
-        flashback.customSessions."xmonad" = {
-          wmCommand = "${pkgs.haskellPackages.xmonad}/bin/xmonad";
-          wmLabel = "XMonad";
-          wmName = "xmonad";
-        };
-      };
-    };
-    windowManager = {
-      default = "xmonad";
-      xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
+      gnome3.enable = true;
     };
   };
-  # services.compton = {
-  #   enable = true;
-  #   backend = "glx";
-  #   vSync = "opengl";
-  # };
-  # services.redshift = {
-  #   enable = true;
-  #   provider = "geoclue2";
-  #   temperature.day = 6500;
-  #   temperature.night = 4000;
-  # };
-  # services.xbanish.enable = true;
+  services.xbanish.enable = true;
 
 
   # SOUND {{{1
@@ -217,35 +116,12 @@
 
 
   # NETWORK {{{1
-  hardware.bluetooth = {
-    enable = true;
-    # powerOnBoot = false;
-  };
-  networking.hostName = "nixos";
+  hardware.bluetooth.enable = true;
+  networking.hostName = "evanrelf-nixos";
   networking.networkmanager = {
     enable = true;
     wifi.powersave = true;
   };
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
-
-  # BACKUP {{{1
-  # services.borgbackup.jobs = {
-  #   "nixos" = {
-  #     paths = "/home/evanrelf";
-  #     repo = "/home/evanrelf/borg";
-  #     startAt = "daily";
-  #     doInit = true; # disable if using SSH or FUSE mount
-  #     encryption = {
-  #       mode = "repokey-blake2";
-  #       passCommand = "TODO";
-  #     };
-  #     compression = "zstd,10";
-  #   };
-  # };
 
 
   # SERVICES {{{1
@@ -268,12 +144,7 @@
   users.users."evanrelf" = {
     description = "Evan Relf";
     isNormalUser = true;
-    extraGroups = [
-      "audio"
-      "docker"
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "audio" "networkmanager" "wheel" ];
     initialPassword = "banana";
     shell = pkgs.fish;
   };

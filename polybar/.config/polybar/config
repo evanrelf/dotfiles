@@ -33,7 +33,7 @@ foreground = ${colors.foreground}
 background = ${colors.background}
 
 modules-left = workspaces sep title
-modules-right = volume sep brightness sep battery sep wireguard sep wifi sep date
+modules-right = volume-alsa sep brightness sep battery sep wireguard sep wifi sep date
 
 tray-position = right
 tray-maxsize = 32

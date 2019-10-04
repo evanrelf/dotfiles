@@ -1,33 +1,3 @@
 #!/bin/sh
 
-export BROWSER="chromium"
-
 xrdb -merge .Xresources
-xsetroot -cursor_name left_ptr
-xrandr --dpi 120
-if uname -a | grep -qvi "NixOS"; then
-  xset r rate 200 20
-  # xinput --set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" 0
-  xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
-  xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-  xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Drag Enabled" 0
-  xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Disable While Typing Enabled" 0
-  xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.7
-  xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Natural Scrolling Enabled" 1
-  xinput --set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Speed" 0.2
-  xinput --set-prop "ELECOM TrackBall Mouse DEFT Pro TrackBall Mouse" "libinput Natural Scrolling Enabled" 1
-  xinput --set-prop "ELECOM TrackBall Mouse DEFT Pro TrackBall Mouse" "libinput Accel Speed" -0.3
-  redshift &
-  xbanish &
-  xautolock \
-    -notify 10 \
-    -notifier "notify-send 'Suspending in 10 seconds...'" \
-    -locker "systemctl suspend" \
-    -time 5 \
-    -detectsleep &
-  compton &
-fi
-autocutsel -fork
-dunst &
-(sleep 1 && feh --bg-tile ~/.wallpapers/current) &
-autorandr --change --default default
