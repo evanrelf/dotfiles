@@ -53,7 +53,6 @@ Plug 'EinfachToll/DidYouMean'
 
 " Miscellaneous
 Plug 'sgur/vim-editorconfig'
-Plug 'direnv/direnv.vim'
 Plug 'moll/vim-bbye'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'Konfekt/FastFold'

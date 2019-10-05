@@ -25,11 +25,11 @@
     fzf
     git
     gitAndTools.diff-so-fancy
+    gnupg
     kakoune
     neovim
     nodejs
     ripgrep
-    rustup
     shellcheck
     stow
     tealdeer
@@ -84,7 +84,14 @@
       middleEmulation = false;
       accelSpeed = "0.7";
     };
-    displayManager.lightdm.enable = true;
+    # displayManager.lightdm.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      autoLogin = {
+        enable = true;
+        user = "evanrelf";
+      };
+    };
     desktopManager = {
       default = "none";
       xterm.enable = false;
