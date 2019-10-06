@@ -15,7 +15,7 @@ function _error
     return 1
 end
 
-function _silent
+function _silently
     eval "$argv" >/dev/null 2>&1
 end
 

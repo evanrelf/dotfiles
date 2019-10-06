@@ -43,6 +43,12 @@ hook global WinSetOption filetype=sh %{
   lint-enable
 }
 
+# Fish
+hook global WinSetOption filetype=fish %{
+  # set-option window lintcmd "fish --no-execute"
+  set-option window indentwidth 4
+}
+
 # Markdown
 hook global WinSetOption filetype=markdown %{
   remove-hooks window markdown-indent

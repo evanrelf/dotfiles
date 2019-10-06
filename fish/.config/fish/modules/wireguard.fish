@@ -7,7 +7,7 @@ function wig -d "WireGuard"
         case d down stop
             sudo wg-quick down $interface
         case s status
-            _silent wg show
+            _silently wg show
             and _log "Down"
             or _log "Up"
         case "*"

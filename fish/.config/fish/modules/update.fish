@@ -48,15 +48,26 @@ function update -d "Run all update commands"
         stack update
     end
 
+    if _exists cabal
+      _log "Updating Cabal's Hackage package list"
+      cabal update
+    end
+
     if _exists rustup
         _log "Updating Rust"
         rustup update
     end
 
     if _exists nvim -a -e $HOME/.local/share/nvim/site/autoload/plug.vim
-        _log "Updating Neovim packages"
+        _log "Updating Neovim plugins"
         nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
     end
+
+    # TODO
+    # if _exists kak -a -e $HOME/.config/kak/plugins/plug.kak/
+    #   _log "Updating Kakoune plugins"
+    #   kak -e "plug-update"
+    # end
 
     if _exists tldr
         _log "Updating tldr"

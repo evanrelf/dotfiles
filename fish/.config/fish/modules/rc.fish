@@ -13,12 +13,13 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.emacs"
             case spacemacs
                 eval $EDITOR "$HOME/.spacemacs"
+            case doom
+                cd "$HOME/.doom.d/"
+                ls -l
 
             # Shells
             case fish
-                # eval $EDITOR "$HOME/.config/fish/config.fish"
-                cd "$HOME/.config/fish"
-                ls -l "modules"
+                eval $EDITOR "$HOME/.config/fish/config.fish"
             case fisher fishfile
                 eval $EDITOR "$HOME/.config/fish/fishfile"
             case zsh
@@ -73,16 +74,20 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/git/config"
             case git-local
                 eval $EDITOR "$HOME/.config/git/local"
-            case hg mercurial
+            case mercurial hg
                 eval $EDITOR "$HOME/.hgrc"
             case alacritty
                 eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
             case kitty
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
             case nixos
-                eval $EDITOR "$HOME/dotfiles/nixos/configuration.nix"
-                and if _exists nixos-version
-                    bash "$HOME/dotfiles/nixos/install"
+                if test -e "$HOME/dotfiles/nixos/configuration.nix"
+                  eval $EDITOR "$HOME/dotfiles/nixos/configuration.nix"
+                  and if _exists nixos-version
+                      bash "$HOME/dotfiles/nixos/install"
+                  end
+                else
+                  eval $EDITOR "/etc/nixos/configuration.nix"
                 end
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
@@ -100,4 +105,4 @@ function rc -d "Open the specified program's configuration file"
         fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --multi --exact | xargs $EDITOR
     end
 end
-complete --command rc --require-parameter --no-files --arguments "mpd ncmpcpp chunkwm skhd vim neovim kakoune emacs compton spacemacs doom vscode fish fisher zsh bash bash-profile bspwm sxhkd xmonad xmobar xresources xinit xprofile tmux git git-local hammerspoon alacritty kitty nixos redshift polybar sway swaylock ghci hg mercurial"
+complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs spacemacs doom fish fisher fishfile zsh bash bash-profile xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon mpd ncmpcpp xresources xprofile xinit tmux git git-local mercurial hg alacritty kitty nixos ranger zathura redshift ghci"
