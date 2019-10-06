@@ -29,15 +29,6 @@ function _stack
 end
 complete --no-files --command stack --arguments '(_stack)'
 
-# ghcup
-if test -e $HOME/.ghcup/env
-    if type -q bass
-        bass source $HOME/.ghcup/env
-    else
-        _error "ghcup isn't working because you don't have bass"
-    end
-end
-
 # Nix
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
     if type -q bass
@@ -47,7 +38,8 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
     end
 end
 if _exists any-nix-shell
-    any-nix-shell fish --info-right | source
+    # any-nix-shell fish --info-right | source
+    any-nix-shell fish | source
 end
 
 # macOS

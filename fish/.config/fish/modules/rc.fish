@@ -19,7 +19,8 @@ function rc -d "Open the specified program's configuration file"
 
             # Shells
             case fish
-                eval $EDITOR "$HOME/.config/fish/config.fish"
+                cd "$HOME/.config/fish/modules/"
+                ls -l
             case fisher fishfile
                 eval $EDITOR "$HOME/.config/fish/fishfile"
             case zsh

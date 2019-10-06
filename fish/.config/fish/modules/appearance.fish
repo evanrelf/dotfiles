@@ -7,6 +7,12 @@ set __fish_git_prompt_showstashstate "true"
 
 function fish_prompt
     set -l exit_code $status
+    # Nix shell
+    if test -n "$IN_NIX_SHELL"
+        set_color cyan
+        echo -n "nix-shell "
+        set_color normal
+    end
     # PWD
     set_color blue
     echo -n (prompt_pwd)" "
