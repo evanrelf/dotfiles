@@ -1,6 +1,6 @@
 # Display Git diff in gutter
-hook global WinCreate .* %{ try %{ git show-diff } }
-hook global BufWritePost .* %{ try %{ git update-diff } }
+# hook global WinCreate .* %{ try %{ git show-diff } }
+# hook global BufWritePost .* %{ try %{ git update-diff } }
 
 # Highlight trailing whitespace
 hook global InsertBegin .* %{ remove-highlighter window/trailing-whitespace }

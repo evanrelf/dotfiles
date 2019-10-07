@@ -10,7 +10,14 @@ function fish_prompt
     # Nix shell
     if test -n "$IN_NIX_SHELL"
         set_color cyan
-        echo -n "nix-shell "
+        if _exists direnv
+            set -l envrc (direnv status | grep 'Found RC path' | sed 's/Found RC path //g')
+            if grep -q 'lorri' $envrc
+                echo -n "lorri "
+            end
+        else
+            echo -n "nix-shell "
+        end
         set_color normal
     end
     # PWD
@@ -18,7 +25,7 @@ function fish_prompt
     echo -n (prompt_pwd)" "
     set_color normal
     set -l git_branch ""
-    set -l hg_root_cmd (if command -v hg-root >/dev/null 2>&1; echo "hg-root"; else; echo "hg root"; end)
+    # set -l hg_root_cmd (if command -v hg-root >/dev/null 2>&1; echo "hg-root"; else; echo "hg root"; end)
     if git rev-parse --git-dir >/dev/null 2>&1
         # Git
         set git_branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
@@ -41,30 +48,30 @@ function fish_prompt
             end
             set_color normal
         end
-    else if command -v hg >/dev/null 2>&1
-        if eval "$hg_root_cmd" >/dev/null 2>&1
-            # Mercurial
-            set -l hg_info (hg prompt "{branch};{status};{status|unknown}")
-            set -l hg_branch (echo $hg_info | cut -d ';' -f 1)
-            set -l truncated (echo $hg_branch | cut -c 1-35)
-            set -l hg_status (echo $hg_info | cut -d ';' -f 2)
-            set -l hg_dirty (echo $hg_info | cut -d ';' -f 3)
-            if test -z "$hg_status"
-                set_color green
-            else
-                if test -n "$hg_dirty"
-                    set_color red --bold
-                else
-                    set_color yellow
-                end
-            end
-            if test "$hg_branch" != "$truncated"
-                echo -n "$truncated... "
-            else
-                echo -n "$hg_branch "
-            end
-            set_color normal
-        end
+    # else if command -v hg >/dev/null 2>&1
+    #     if eval "$hg_root_cmd" >/dev/null 2>&1
+    #         # Mercurial
+    #         set -l hg_info (hg prompt "{branch};{status};{status|unknown}")
+    #         set -l hg_branch (echo $hg_info | cut -d ';' -f 1)
+    #         set -l truncated (echo $hg_branch | cut -c 1-35)
+    #         set -l hg_status (echo $hg_info | cut -d ';' -f 2)
+    #         set -l hg_dirty (echo $hg_info | cut -d ';' -f 3)
+    #         if test -z "$hg_status"
+    #             set_color green
+    #         else
+    #             if test -n "$hg_dirty"
+    #                 set_color red --bold
+    #             else
+    #                 set_color yellow
+    #             end
+    #         end
+    #         if test "$hg_branch" != "$truncated"
+    #             echo -n "$truncated... "
+    #         else
+    #             echo -n "$hg_branch "
+    #         end
+    #         set_color normal
+    #     end
     end
     # Exit status
     if test $exit_code -ne 0

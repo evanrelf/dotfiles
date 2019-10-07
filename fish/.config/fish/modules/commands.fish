@@ -21,7 +21,8 @@ if _exists git; and status --is-interactive
     abbr --add g "git"
 end
 function r -d "Change directory to Git repository root"
-    if test -n (git rev-parse --show-toplevel 2>/dev/null; or echo "")
+    set -l root (git rev-parse --show-toplevel 2>/dev/null; or echo "")
+    if test -n $root
         cd $root
     else
         return 1
