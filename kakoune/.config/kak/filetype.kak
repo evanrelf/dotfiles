@@ -53,7 +53,6 @@ hook global WinSetOption filetype=fish %{
 hook global WinSetOption filetype=markdown %{
   remove-hooks window markdown-indent
   map window filetype "=" "|fmt -w 80<ret>" -docstring "Wrap to 80 columns"
-  autowrap-enable
 }
 
 # Git

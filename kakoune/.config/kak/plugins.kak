@@ -7,12 +7,12 @@ plug "evanrelf/number-toggle.kak" %{
 }
 
 # FZF integration
-# plug "andreyorst/fzf.kak" %{
-plug "evanrelf/fzf.kak" %{
+plug "andreyorst/fzf.kak" %{
   map global user "f" ": fzf-mode<ret>" -docstring "FZF mode"
 } defer "fzf" %{
   set-option global fzf_file_command "fd --type f --follow --hidden"
   set-option global fzf_preview false
+  set-option global fzf_file_preview false
   set-option global fzf_vertical_map "ctrl-x"
   set-option global fzf_horizontal_map "ctrl-v"
 }

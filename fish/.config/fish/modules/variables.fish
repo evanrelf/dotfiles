@@ -13,16 +13,22 @@ if test (uname) = "Linux"
     set -x BROWSER "chromium"
 end
 
+# Fix issues:
+# https://github.com/NixOS/nix/pull/3130
+# https://github.com/NixOS/nix/issues/1865
+set --append NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
+set --append NIX_PATH "$HOME/.nix-defexpr/channels"
+
 # PATH (highest priority is defined first)
 set -l paths ""
-set paths "$HOME/.local/bin" $paths
-set paths "$HOME/.config/git/scripts" $paths
-set paths "$HOME/.cabal/bin" $paths
-set paths "$HOME/.ghcup/bin" $paths
-set paths "$CARGO_HOME/bin" $paths
-set paths "$PSVM_HOME/current/bin" $paths
-set paths "$HOME/.node_modules/bin" $paths
-set paths "$HOME/.emacs.d/bin" $paths
+set --append paths "$HOME/.local/bin"
+set --append paths "$HOME/.config/git/scripts"
+set --append paths "$HOME/.cabal/bin"
+set --append paths "$HOME/.ghcup/bin"
+set --append paths "$CARGO_HOME/bin"
+set --append paths "$PSVM_HOME/current/bin"
+set --append paths "$HOME/.node_modules/bin"
+set --append paths "$HOME/.emacs.d/bin"
 for i in $paths
     if test -d $i
         set -x PATH $i $PATH

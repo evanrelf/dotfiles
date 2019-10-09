@@ -68,7 +68,7 @@ function fn -d "Search for Elm/Haskell function definition"
     set -l file (echo $match | cut -d ':' -f 1)
     set -l line (echo $match | cut -d ':' -f 2)
     if test -e $file
-        nvim $file +$line +"norm zz"
+        eval $EDITOR $file +$line +"norm zz"
     else
         echo "No results found" >&2
         return 1

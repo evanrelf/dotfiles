@@ -23,10 +23,10 @@ map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
 
 # Center viewport when moving between search results
-map global normal "n" "nvc"
-map global normal "N" "Nvc"
-map global normal "<a-n>" "<a-n>vc"
-map global normal "<a-N>" "<a-N>vc"
+# map global normal "n" "nvc"
+# map global normal "N" "Nvc"
+# map global normal "<a-n>" "<a-n>vc"
+# map global normal "<a-N>" "<a-N>vc"
 
 # Insert and delete spaces for indentation
 hook global InsertChar \t %{ try %{
