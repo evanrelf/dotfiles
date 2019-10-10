@@ -22,6 +22,16 @@ map global normal "<a-=>" ": format-selections<ret>"
 map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
 
+# Move viewport
+map global normal "<left>" "vh"
+map global normal "<down>" "vj"
+map global normal "<up>" "vk"
+map global normal "<right>" "vl"
+map global insert "<left>" "<a-;>vh"
+map global insert "<down>" "<a-;>vj"
+map global insert "<up>" "<a-;>vk"
+map global insert "<right>" "<a-;>vl"
+
 # Center viewport when moving between search results
 # map global normal "n" "nvc"
 # map global normal "N" "Nvc"

@@ -17,6 +17,13 @@ plug "andreyorst/fzf.kak" %{
   set-option global fzf_horizontal_map "ctrl-v"
 }
 
+# Change directory
+plug "Delapouite/kakoune-cd" %{
+  alias global cd change-directory-current-buffer
+  alias global r change-directory-project-root
+  alias global pwd print-working-directory
+}
+
 # Surround selections with brackets
 plug "h-youhei/kakoune-surround" %{
   map global user "s" ": enter-user-mode surround<ret>" -docstring "Surround mode"

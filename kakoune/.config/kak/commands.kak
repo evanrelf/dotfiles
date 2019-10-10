@@ -32,13 +32,13 @@ softwrap-disable %{
 # tmux splits
 define-command -docstring "vsplit <filename>: open file in vertical tmux split" \
 vsplit -params 0.. -file-completion %{
-  tmux-terminal-horizontal kak -c %val{session} %arg{@}
+  tmux-terminal-horizontal sh -c "kak -c %val{session} %arg{@}; fish"
 }
 alias global vs vsplit
 
 define-command -docstring "split <filename>: open file in horizontal tmux split" \
 split -params 0.. -file-completion %{
-  tmux-terminal-vertical kak -c %val{session} %arg{@}
+  tmux-terminal-vertical sh -c "kak -c %val{session} %arg{@}; fish"
 }
 alias global sp split
 
