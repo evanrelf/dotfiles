@@ -7,32 +7,33 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
 
-    # Apps
-    chromium
-    kitty
-
-    # Haskell
-    cabal-install
-    haskellPackages.ghcid
-    hlint
-    stack
-
-    # Everything else
+    any-nix-shell
     autojump
     binutils
+    cabal-install
+    chromium
     exa
     fd
     fzf
     git
     gitAndTools.diff-so-fancy
+    git-revise
+    gnome3.gnome-tweaks
     gnupg
+    haskellPackages.ghcid
+    hlint
     kakoune
+    kitty
     neovim
     nodejs
+    pandoc
     ripgrep
     shellcheck
+    spotify
+    stack
     stow
     tealdeer
+    tectonic
     tmux
     xclip
     xorg.xrdb
@@ -45,18 +46,9 @@
 
   # FONTS {{{1
   fonts = {
+    enableDefaultFonts = true;
     fonts = with pkgs; [
-      # Regular
-      roboto
-      dejavu_fonts
-
-      # Monospaced
       iosevka-bin
-      inconsolata
-
-      # Emoji and icons
-      noto-fonts-emoji
-      material-icons
     ];
     fontconfig.ultimate = {
       enable = true;
@@ -92,18 +84,19 @@
         user = "evanrelf";
       };
     };
-    desktopManager = {
-      default = "none";
-      xterm.enable = false;
-      gnome3.enable = true;
-    };
+    desktopManager.gnome3.enable = true;
+    desktopManager.xterm.enable = false;
   };
   services.xbanish.enable = true;
 
 
   # SOUND {{{1
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+  };
 
 
   # POWER {{{1
@@ -183,7 +176,7 @@
   time.timeZone = "America/Los_Angeles";
   services.timesyncd.enable = true;
   services.printing.enable = true;
-  system.stateVersion = "19.03";
+  system.stateVersion = "19.09";
 
 
   # }}}1
