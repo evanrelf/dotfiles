@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -f "$HOME/.config/polybar/launch" ]; then
-  bash "$HOME/.config/polybar/launch"
-else
-  echo "Polybar launch script not found" >&2
-  exit 1
-fi

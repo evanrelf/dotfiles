@@ -1,46 +1,16 @@
 !! st
-st.font:        PragmataPro Liga:style=Regular:size=15:antialias=true:autohint=true
+st.font:        PragmataPro Mono Liga:style=Regular:size=15:antialias=true:autohint=true
 st.bold_font:   0
 st.borderpx:    2
 st.termname:    xterm-256color
 st.bellvolume:  0
 
 !! rofi
-rofi.font: PragmataPro Liga 15
+rofi.font: PragmataPro Mono Liga 15
 rofi.show-icons: true
 rofi.hide-scrollbar: true
 rofi.separator-style: none
 rofi.lines: 10
-
-! !! one dark colors
-! ! special
-! *.foreground:   #ABB2BF
-! *.background:   #000000
-! *.cursorColor:  #ABB2BF
-! ! black
-! *.color0:       #282C34
-! *.color8:       #3E4452
-! ! red
-! *.color1:       #E06C75
-! *.color9:       #BE5046
-! ! green
-! *.color2:       #98C379
-! *.color10:      #98C379
-! ! yellow
-! *.color3:       #E5C07B
-! *.color11:      #D19A66
-! ! blue
-! *.color4:       #61AFEF
-! *.color12:      #61AFEF
-! ! magenta
-! *.color5:       #C678DD
-! *.color13:      #C678DD
-! ! cyan
-! *.color6:       #56B6C2
-! *.color14:      #56B6C2
-! ! white
-! *.color7:       #ABB2BF
-! *.color15:      #5C6370
 
 !! moonfly colors
 *background:  #080808

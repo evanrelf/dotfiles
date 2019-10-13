@@ -1,15 +1,3 @@
 # macOS
 .DS_Store
 .localized
-
-# BitBar
-bitbar/.config/bitbar/cache_*.json
-
-# Yi
-yi/.stack-work/
-
-# Wallpapers
-wallpapers/.wallpapers/current
-
-# ncmpcpp
-ncmpcpp/.config/ncmpcpp/error.log
