@@ -77,6 +77,43 @@ hook global WinSetOption filetype=makefile %{
   set-option window indentwidth 0
 }
 
+# SQL
+hook global WinSetOption filetype=sql %{
+  declare-option -docstring "Postgres database" str postgres_database
+  declare-option -docstring "Postgres user" str postgres_user
+  declare-option -docstring "Postgres host" str postgres_host
+  declare-option -docstring "Postgres port" int postgres_port
+  declare-option -hidden str postgres_command
+  declare-option -hidden str postgres_response
+  set-option window postgres_database "vetpro"
+  set-option window postgres_user "postgres"
+  set-option window postgres_host "localhost"
+  set-option window postgres_port 5432
+  set-option window postgres_command "psql -A -d %opt{postgres_database} -U %opt{postgres_user} -h %opt{postgres_host} -p %opt{postgres_port}"
+
+  declare-option -hidden str psql_tmpfile
+  set-option window psql_tmpfile %sh{ mktemp /tmp/kakoune_psql.XXXX }
+  tmux-terminal-horizontal kak -s "%val{session}-psql" -e "edit %opt{psql_tmpfile}; set-option window autoreload yes"
+
+  hook window WinClose .* %{ nop %sh{
+    kak -c "${kak_session}-psql" -e "kill!"
+    # rm "/tmp/$kak_opt_psql_tmpfile"
+  }}
+
+  define-command -docstring "query-buffer" \
+  query-buffer %{
+    execute-keys -draft "%%<a-|>%opt{postgres_command} >> %opt{psql_tmpfile} 2>&1<ret>"
+  }
+  define-command -docstring "query-selection" \
+  query-selection %{
+    execute-keys -itersel -draft "<a-|>%opt{postgres_command} >> %opt{psql_tmpfile} 2>&1<ret>"
+  }
+
+  map window filetype "s" ": query-selection<ret>" -docstring "Query selection"
+  map window filetype "b" ": query-buffer<ret>" -docstring "Query buffer"
+  # map window filetype "c" ": nop %%sh{ echo '' > /tmp/$kak_opt_psql_tmpfile }<ret>" -docstring "Clear query history"
+}
+
 # Prettier
 hook global WinSetOption filetype=markdown %{ set-option window formatcmd "prettier --stdin --parser markdown" }
 hook global WinSetOption filetype=json %{ set-option window formatcmd "prettier --stdin --parser json" }

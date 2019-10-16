@@ -1,13 +1,9 @@
-define-command -docstring "strip-whitespace: strip trailing whitespace" \
-strip-whitespace %{
-  execute-keys -draft \%s\h+$<ret>d
-}
-
 # Extend line-based selections
 define-command -docstring "extend-line-down: extend selection with line down" \
 extend-line-down -params 1 %{
   execute-keys "<a-:>%arg{1}X"
 }
+
 define-command -docstring "extend-line-up: extend selection with line up" \
 extend-line-up -params 1 %{
   execute-keys "<a-:><a-;>%arg{1}K<a-;>"
@@ -30,13 +26,6 @@ softwrap-disable %{
 }
 
 # tmux splits
-define-command -docstring "vsplit <filename>: open file in vertical tmux split" \
-vsplit -params 0.. -file-completion %{
-  # tmux-terminal-horizontal sh -c "kak -c %val{session} %arg{@}; fish"
-  tmux-terminal-horizontal kak -c %val{session} %arg{@}
-}
-alias global vs vsplit
-
 define-command -docstring "split <filename>: open file in horizontal tmux split" \
 split -params 0.. -file-completion %{
   # tmux-terminal-vertical sh -c "kak -c %val{session} %arg{@}; fish"
@@ -44,13 +33,43 @@ split -params 0.. -file-completion %{
 }
 alias global sp split
 
+define-command -docstring "vsplit <filename>: open file in vertical tmux split" \
+vsplit -params 0.. -file-completion %{
+  # tmux-terminal-horizontal sh -c "kak -c %val{session} %arg{@}; fish"
+  tmux-terminal-horizontal kak -c %val{session} %arg{@}
+}
+alias global vs vsplit
+
+define-command -docstring "horizontally: run command in horizontal split" \
+horizontally -params 0.. -command-completion %{
+  tmux-terminal-vertical kak -c %val{session} -e "%arg{@}"
+}
+alias global horiz horizontally
+
+define-command -docstring "vertically: run command in vertical split" \
+vertically -params 0.. -command-completion %{
+  tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"
+}
+alias global vert vertically
+
 # Evaluate
 define-command -docstring "evaluate-buffer: evaluate buffer commands as if entered by user" \
 evaluate-buffer %{
-  execute-keys -draft "%: <space><c-r>.<ret>"
+  execute-keys -draft "%: <c-r>.<ret>"
 }
 
 define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
 evaluate-selection %{
-  execute-keys -itersel -draft ": <space><c-r>.<ret>"
+  execute-keys -itersel -draft ": <c-r>.<ret>"
+}
+
+# Other
+define-command -docstring "strip-whitespace: strip trailing whitespace" \
+strip-whitespace %{
+  execute-keys -draft "%%s\h+$<ret>d"
+}
+
+define-command -docstring "filetype: change filetype" \
+filetype -params 1 %{
+  set-option window filetype %arg{1}
 }

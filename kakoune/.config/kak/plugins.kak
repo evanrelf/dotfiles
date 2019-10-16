@@ -59,7 +59,7 @@ plug "ul/kak-lsp" do %{
 } %{
   # Enable LSP for certain filetypes
   hook global WinSetOption filetype=(haskell|purescript|rust|typescript|javascript) %{
-    set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log --config ~/.config/kak-lsp/kak-lsp.toml"
+    set-option window lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log --config ~/.config/kak-lsp/kak-lsp.toml"
     lsp-enable-window
     # Show LSP info at cursor instead of at the bottom
     # set-option window lsp_hover_anchor true

@@ -9,8 +9,7 @@ face global PrimaryCursor rgb:292d3e,rgb:ffcb6b+bfg
 face global PrimarySelection rgb:292d3e,rgb:d7dae0+bfg
 set-option global ui_options \
   ncurses_assistant=none \
-  ncurses_enable_mouse=true \
-  ncurses_set_title=true
+  ncurses_enable_mouse=true
 
 # Options
 set-option global indentwidth 2
@@ -19,15 +18,15 @@ set-option global scrolloff 1,5
 set-option global startup_info_version 20190701
 
 # # Highlight current word
-# declare-option -hidden regex curword
-# set-face global CurWord default,rgb:4a4a4a
+# declare-option -hidden regex currentword
+# set-face global CurrentWord default,rgb:4a4a4a
 
 # hook global NormalIdle .* %{
 #   evaluate-commands -draft %{ try %{
-#     execute-keys <space><a-i>w <a-k>\A\w+\z<ret>
-#     set-option buffer curword "\b\Q%val{selection}\E\b"
+#     execute-keys <space><a-i>w <a-k>\A[\w-]+\z<ret>
+#     set-option buffer currentword "\b\Q%val{selection}\E\b"
 #   } catch %{
-#     set-option buffer curword ""
+#     set-option buffer currentword ""
 #   } }
 # }
-# add-highlighter global/ dynregex "%%opt{curword}" 0:CurWord
+# add-highlighter global/ dynregex "%%opt{currentword}" 0:CurrentWord
