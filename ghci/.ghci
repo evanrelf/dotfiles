@@ -4,6 +4,7 @@
 
 -- Language extensions
 :set -XOverloadedStrings
+:set -XTypeApplications
 
 -- Hoogle
 -- :def! haddocks (\arg -> return $ ":! hoogle --color --info \'" ++ arg ++ "\'")
