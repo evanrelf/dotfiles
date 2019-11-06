@@ -9,20 +9,37 @@
   // "diagnostic.refreshAfterSave": true,
   "languageserver": {
     "haskell": {
-      "command": "hie-wrapper",
-      // "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
-      "rootPatterns": ["package.yaml", "*.cabal", "stack.yaml", "cabal.project"],
-      "filetypes": ["hs", "lhs", "haskell"],
-      "initializationOptions": {},
-      "disableCompletion": false,
-      "settings": {
-        "languageServerHaskell": {
-          "hlintOn": true,
-          "maxNumberOfProblems": 10,
-          "formatOnImportOn": false
-        }
-      }
+      "command": "ghcide",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml",
+        "*.cabal"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ]
     },
+    // "haskell": {
+    //   "command": "hie-wrapper",
+    //   // "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+    //   "rootPatterns": ["package.yaml", "*.cabal", "stack.yaml", "cabal.project"],
+    //   "filetypes": ["hs", "lhs", "haskell"],
+    //   "initializationOptions": {},
+    //   "disableCompletion": false,
+    //   "settings": {
+    //     "languageServerHaskell": {
+    //       "hlintOn": true,
+    //       "maxNumberOfProblems": 10,
+    //       "formatOnImportOn": false
+    //     }
+    //   }
+    // },
     "purescript": {
       "command": "purescript-language-server",
       "args": ["--stdio"],

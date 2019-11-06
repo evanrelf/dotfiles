@@ -21,8 +21,14 @@ args = ["--strict"]
 [language.haskell]
 filetypes = ["haskell"]
 roots = ["package.yaml", "*.cabal", "stack.yaml", "cabal.project", "Setup.hs"]
-command = "hie-wrapper"
+command = "ghcide"
 args = ["--lsp"]
+
+# [language.haskell]
+# filetypes = ["haskell"]
+# roots = ["package.yaml", "*.cabal", "stack.yaml", "cabal.project", "Setup.hs"]
+# command = "hie-wrapper"
+# args = ["--lsp"]
 
 # [language.haskell.initialization_options]
 # hlintOn = true
