@@ -18,7 +18,6 @@
     git
     gitAndTools.diff-so-fancy
     git-revise
-    gnome3.gnome-tweaks
     gnupg
     haskellPackages.ghcid
     hlint
@@ -64,11 +63,11 @@
     sensitivity = 100; # 0-255 (default 128)
     speed = 80; # 0-255 (default 97)
   };
-  services.gnome3.chrome-gnome-shell.enable = true;
+  services.pantheon.contractor.enable = true;
   services.xserver = {
     enable = true;
     autoRepeatDelay = 200;
-    autoRepeatInterval = 50;
+    autoRepeatInterval = 35;
     libinput = {
       enable = true;
       naturalScrolling = true;
@@ -76,16 +75,18 @@
       middleEmulation = false;
       accelSpeed = "0.7";
     };
-    # displayManager.lightdm.enable = true;
-    displayManager.gdm = {
+    displayManager.lightdm = {
       enable = true;
       autoLogin = {
         enable = true;
         user = "evanrelf";
       };
     };
-    desktopManager.gnome3.enable = true;
-    desktopManager.xterm.enable = false;
+    desktopManager = {
+      pantheon.enable = true;
+      xterm.enable = false;
+      default = "elementary";
+    };
   };
   services.xbanish.enable = true;
 

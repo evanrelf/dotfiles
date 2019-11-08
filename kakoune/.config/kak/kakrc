@@ -1,4 +1,4 @@
-source "%val{config}/purescript.kak"
+try %{ source "%val{config}/purescript.kak" }
 
 source "%val{config}/commands.kak"
 source "%val{config}/filetype.kak"
