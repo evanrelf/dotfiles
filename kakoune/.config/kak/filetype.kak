@@ -1,14 +1,19 @@
 # Haskell
 hook global WinSetOption filetype=haskell %{
   set-option window lintcmd "hlint"
+  # set-option window lintcmd "sleep 0.5; ghcid-format /tmp/ghcid"
   hook window -group lint BufWritePost .* %{ lint }
   lint-enable
   # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
   # Highlight function name in type signatures
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
-  # Highlight quasiquotes
-  add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
+  # Highlight "deriving {stock,newtype,anyclass}"
+  add-highlighter shared/haskell/code/ regex deriving\s+(stock|newtype|anyclass)? 0:keyword
+  # Highlight quasiquotes (new)
+  add-highlighter shared/haskell/code/ regex \[\b[\w]['\w]*\|(.*)\|\] 1:string
+  # Highlight quasiquotes (old)
+  # add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
   # Replace 'forall' with '∀'
   define-snippet window "forall" "∀"
   define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
