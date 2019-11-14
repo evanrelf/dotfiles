@@ -62,8 +62,8 @@
 	# REBASE
 	rb = rebase
 	rbi = rebase-back # script
-	rbik = "!git lookup | xargs git rebase-back #"
-	rbix = "!git lx $1 | wc -l | xargs git rebase-back #"
+	rbik = "!git lookup | xargs -o git rebase-back #"
+	rbix = "!git lx $1 | wc -l | xargs -o git rebase-back #"
 	undo-rebase = reset --hard ORIG_HEAD
 	cont = rebase --continue
 	skip = rebase --skip

@@ -1,3 +1,5 @@
+source %sh{ printf "$HOME/.config/kak/manual/purescript.kak" }
+
 evaluate-commands %sh{
   for file in "$HOME"/.config/kak/*.kak; do
     printf "%s\n" "try %{

@@ -9,8 +9,18 @@ hook global WinSetOption filetype=haskell %{
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
   # Highlight quasiquotes
   add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
-  map window filetype "l" "gkO{-# LANGUAGE ChangeMe #-}<esc>bbe" -docstring "Insert LANGUAGE pragma"
-  map window filetype "o" "gk]po{-# OPTIONS_GHC -Wchange-me #-}<esc>bb<a-e>" -docstring "Insert OPTIONS_GHC pragma"
+  # Replace 'forall' with '∀'
+  define-snippet window "forall" "∀"
+  define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
+  define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
+}
+
+# PureScript
+hook global WinSetOption filetype=purescript %{
+  # Highlight function name in type signatures
+  add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
+  # Replace 'forall' with '∀'
+  define-snippet window "forall" "∀"
 }
 
 # Elm
@@ -60,7 +70,7 @@ hook global WinSetOption filetype=markdown %{
 hook global WinSetOption filetype=git-commit %{
   add-highlighter window/ column 51 default,black
   add-highlighter window/ column 73 default,black
-  map window filetype "d" "|date '+%%Y-%%m-%%d'<ret>;" -docstring "Insert ISO 8601 date"
+  define-snippet window "date" '%sh{date +%Y-%m-%d}'
 }
 hook global WinCreate git-revise-todo %{
   set-option window filetype git-rebase
