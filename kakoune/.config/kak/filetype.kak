@@ -15,6 +15,7 @@ hook global WinSetOption filetype=haskell %{
   # Highlight quasiquotes (old)
   # add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
   # Replace 'forall' with '∀'
+  add-highlighter shared/purescript/code/ regex ∀ 0:keyword
   define-snippet window "forall" "∀"
   define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
   define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
@@ -25,7 +26,11 @@ hook global WinSetOption filetype=purescript %{
   # Highlight function name in type signatures
   add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
   # Replace 'forall' with '∀'
+  add-highlighter shared/purescript/code/ regex ∀ 0:keyword
   define-snippet window "forall" "∀"
+  set-option window comment_line "--"
+  set-option window comment_block_begin "{-"
+  set-option window comment_block_end "-}"
 }
 
 # Elm
