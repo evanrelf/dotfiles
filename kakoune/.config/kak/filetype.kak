@@ -8,14 +8,14 @@ hook global WinSetOption filetype=haskell %{
   set-option window formatcmd "sort-imports"
   # Highlight function name in type signatures
   add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
-  # Highlight "deriving {stock,newtype,anyclass}"
-  add-highlighter shared/haskell/code/ regex deriving\s+(stock|newtype|anyclass)? 0:keyword
-  # Highlight quasiquotes (new)
+  # Highlight deriving strategies
+  add-highlighter shared/haskell/code/ regex \bderiving\s+\b(stock|newtype|anyclass|via)\b 1:keyword
+  add-highlighter shared/haskell/code/ regex \bderiving\s+[^\s]+?\s+\b(via)\b 1:keyword
+  # Highlight quasiquotes
   add-highlighter shared/haskell/code/ regex \[\b[\w]['\w]*\|(.*)\|\] 1:string
-  # Highlight quasiquotes (old)
-  # add-highlighter shared/haskell/quasiquote region \[\b[\w]['\w]*\| \|\] fill string
-  # Replace 'forall' with '∀'
-  add-highlighter shared/purescript/code/ regex ∀ 0:keyword
+  # Highlight '∀' like 'forall'
+  add-higghlighter shared/haskell/code/ regex ∀ 0:keyword
+  # Snippets
   define-snippet window "forall" "∀"
   define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
   define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"

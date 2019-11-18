@@ -1,14 +1,8 @@
-source %sh{ printf "$HOME/.config/kak/manual/purescript.kak" }
+source %sh{ printf "$HOME/.config/kak/purescript.kak" }
 
-evaluate-commands %sh{
-  for file in "$HOME"/.config/kak/*.kak; do
-    printf "%s\n" "try %{
-      source '$file'
-      echo -debug 'Sourced $file'
-    } catch %{
-      echo -debug %val{error}
-    } catch %{
-      echo -debug 'Error sourcing $file'
-    }"
-  done
-}
+source %sh{ printf "$HOME/.config/kak/commands.kak" }
+source %sh{ printf "$HOME/.config/kak/filetype.kak" }
+source %sh{ printf "$HOME/.config/kak/hooks.kak" }
+source %sh{ printf "$HOME/.config/kak/mappings.kak" }
+source %sh{ printf "$HOME/.config/kak/options.kak" }
+source %sh{ printf "$HOME/.config/kak/plugins.kak" }

@@ -43,30 +43,25 @@ plug "h-youhei/kakoune-surround" %{
 # More text objects
 plug "Delapouite/kakoune-text-objects"
 
-# Replace mode
-plug "alexherbo2/replace.kak" %{
-  map global user "r" ": replace<ret>" -docstring "Replace mode"
-}
-
 # Automatically complete pairs
 plug "alexherbo2/auto-pairs.kak" %{
   hook global WinCreate .* %{ auto-pairs-enable }
 }
 
 # Language Server Protocol support
-plug "ul/kak-lsp" noload do %{
-  cargo install --locked --force --path .
-} %{
-  # Enable LSP for certain filetypes
-  hook global WinSetOption filetype=(haskell|purescript|rust|typescript|javascript) %{
-    eval %sh{kak-lsp --kakoune -s $kak_session --config ~/.config/kak-lsp/kak-lsp.toml}
-    set-option window lsp_diagnostic_line_error_sign "!"
-    set-option window lsp_diagnostic_line_warning_sign "?"
-    # Show LSP info at cursor instead of at the bottom
-    set-option window lsp_hover_anchor true
-    lsp-enable-window
-    map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
-  }
-  hook global KakEnd .* lsp-exit
-  # set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
-}
+# plug "ul/kak-lsp" noload do %{
+#   cargo install --locked --force --path .
+# } %{
+#   # Enable LSP for certain filetypes
+#   hook global WinSetOption filetype=(haskell|purescript|rust|typescript|javascript) %{
+#     eval %sh{kak-lsp --kakoune -s $kak_session --config ~/.config/kak-lsp/kak-lsp.toml}
+#     set-option window lsp_diagnostic_line_error_sign "!"
+#     set-option window lsp_diagnostic_line_warning_sign "?"
+#     # Show LSP info at cursor instead of at the bottom
+#     set-option window lsp_hover_anchor true
+#     lsp-enable-window
+#     map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+#   }
+#   hook global KakEnd .* lsp-exit
+#   # set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
+# }
