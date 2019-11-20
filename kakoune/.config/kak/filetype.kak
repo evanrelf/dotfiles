@@ -7,14 +7,14 @@ hook global WinSetOption filetype=haskell %{
   # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
   # Highlight function name in type signatures
-  add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
+  add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?\b([_a-z]['\w]*)+\b\s*:: 1:meta
   # Highlight deriving strategies
   add-highlighter shared/haskell/code/ regex \bderiving\s+\b(stock|newtype|anyclass|via)\b 1:keyword
   add-highlighter shared/haskell/code/ regex \bderiving\s+[^\s]+?\s+\b(via)\b 1:keyword
   # Highlight quasiquotes
   add-highlighter shared/haskell/code/ regex \[\b[\w]['\w]*\|(.*)\|\] 1:string
   # Highlight '∀' like 'forall'
-  add-higghlighter shared/haskell/code/ regex ∀ 0:keyword
+  add-highlighter shared/haskell/code/ regex ∀ 0:keyword
   # Snippets
   define-snippet window "forall" "∀"
   define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
