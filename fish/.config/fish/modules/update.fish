@@ -33,6 +33,7 @@ function update -d "Run all update commands"
                 _log "Updating Homebrew packages"
                 brew update
                 brew upgrade
+                brew cask upgrade
             end
         case '*'
             # Unknown OS

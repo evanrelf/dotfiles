@@ -3,8 +3,8 @@
 # hook global BufWritePost .* %{ try %{ git update-diff } }
 
 # Highlight trailing whitespace
-hook global InsertBegin .* %{ remove-highlighter window/trailing-whitespace }
-hook global InsertEnd .* %{ add-highlighter window/trailing-whitespace regex \h+$ 0:default,red }
+hook global ModeChange push:.*:insert %{ remove-highlighter window/trailing-whitespace }
+hook global ModeChange pop:insert:.* %{ add-highlighter window/trailing-whitespace regex \h+$ 0:default,red }
 
 # Use Tab key in autocomplete menu
 hook global InsertCompletionShow .* %{
