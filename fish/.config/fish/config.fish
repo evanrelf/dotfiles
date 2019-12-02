@@ -5,7 +5,7 @@ source "$HOME/.config/fish/modules/variables.fish"
 source "$HOME/.config/fish/modules/plugins.fish"
 source "$HOME/.config/fish/modules/appearance.fish"
 source "$HOME/.config/fish/modules/commands.fish"
-source "$HOME/.config/fish/modules/mappings.fish"
+source "$HOME/.config/fish/modules/bindings.fish"
 
 source "$HOME/.config/fish/modules/keeb.fish"
 source "$HOME/.config/fish/modules/panosoft.fish"

@@ -1,3 +1,5 @@
+bind \el "echo; ls -l; commandline -f repaint"
+
 function hybrid_bindings
     # fish_default_key_bindings -M default
     fish_default_key_bindings -M insert

@@ -3,7 +3,7 @@ plug "andreyorst/plug.kak" noload
 
 # Toggle between relative and absolute line numbers depending on mode
 plug "evanrelf/number-toggle.kak" %{
-  set-option global number_toggle_params -hlcursor -separator " "
+  set-option global number_toggle_params -hlcursor
 }
 
 # FZF integration

@@ -9,11 +9,10 @@ hook global WinSetOption filetype=haskell %{
   # Better highlighters
   add-highlighter shared/haskell/code/ regex ^\s*(?:where\s+|let\s+|default\s+)?([_a-z][a-zA-Z0-9_']*#?(?:,\s*[_a-z][a-zA-Z0-9_']*#?)*)\s+::\s 1:meta
   add-highlighter shared/haskell/code/ regex (?<!')\b(type|data)\b\s+(\bfamily\b)?(?!') 0:keyword
-  # add-highlighter shared/haskell/code/record region -recurse O O C regex ([_a-z]['\w]*)\s+::\s 1:default
-  # Snippets
-  # define-snippet window "forall" "∀"
-  # define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
-  # define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
+  # add-highlighter shared/haskell/code/record region -recurse O O C regex ([_a-z]['\w]*)\s+::\s 1:default # TODO
+  define-snippet window "forall" "∀"
+  define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
+  define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
 }
 
 # PureScript
@@ -22,7 +21,7 @@ hook global WinSetOption filetype=purescript %{
   add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
   # Replace 'forall' with '∀'
   add-highlighter shared/purescript/code/ regex ∀ 0:keyword
-  # define-snippet window "forall" "∀"
+  define-snippet window "forall" "∀"
   set-option window comment_line "--"
   set-option window comment_block_begin "{-"
   set-option window comment_block_end "-}"
@@ -69,13 +68,16 @@ hook global WinSetOption filetype=fish %{
 hook global WinSetOption filetype=markdown %{
   remove-hooks window markdown-indent
   map window filetype "=" "|fmt -w 80<ret>" -docstring "Wrap to 80 columns"
+  add-highlighter shared/markdown/comment region -recurse <!-- <!-- --> fill comment
+  set-option window comment_block_begin "<!-- "
+  set-option window comment_block_end " -->"
 }
 
 # Git
 hook global WinSetOption filetype=git-commit %{
   add-highlighter window/ column 51 default,black
   add-highlighter window/ column 73 default,black
-  # define-snippet window "date" '%sh{date +%Y-%m-%d}'
+  define-snippet window "date" '%sh{date +%Y-%m-%d}'
 }
 hook global WinCreate git-revise-todo %{
   set-option window filetype git-rebase
@@ -100,6 +102,11 @@ hook global WinSetOption filetype=sql %{
   map window filetype "b" ": query-buffer<ret>" -docstring "Query buffer"
   # map window filetype "c" ": nop %%sh{ echo '' > /tmp/$kak_opt_psql_tmpfile }<ret>" -docstring "Clear query history"
   psql-enable
+}
+
+# Kakoune
+hook global WinSetOption filetype=kak %{
+  add-highlighter shared/kakrc/code/ regex \bdefine-snippet\b 0:keyword
 }
 
 # Prettier

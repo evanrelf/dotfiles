@@ -10,14 +10,7 @@ function fish_prompt
     # Nix shell
     if test -n "$IN_NIX_SHELL"
         set_color cyan
-        if _exists direnv
-            set -l envrc (direnv status | grep 'Found RC path' | sed 's/Found RC path //g')
-            if grep -q 'lorri' $envrc
-                echo -n "lorri "
-            end
-        else
-            echo -n "nix-shell "
-        end
+        echo -n "nix-shell "
         set_color normal
     end
     # PWD

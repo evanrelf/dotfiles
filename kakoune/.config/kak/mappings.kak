@@ -4,11 +4,19 @@ map global normal "<space>" ","
 map global normal "<a-,>" "<a-space>"
 map global normal "<a-space>" "<a-,>"
 
-# Make search case-insensitive
+# Make search case-insensitive by default
 map global normal "/" "/(?i)"
 map global normal "?" "?(?i)"
 map global normal "<a-/>" "<a-/>(?i)"
 map global normal "<a-?>" "<a-?>(?i)"
+
+# Use alternative registers for K and S stuff
+map global normal "<a-k>" '"k<a-k>'
+map global normal "<a-K>" '"k<a-K>'
+map global normal "s" '"ss'
+map global normal "S" '"sS'
+map global normal "<a-s>" '"s<a-s>'
+map global normal "<a-S>" '"s<a-S>'
 
 # Commenting
 map global normal "#" ": comment-line<ret>"
@@ -32,12 +40,6 @@ map global insert "<down>" "<a-;>vj"
 map global insert "<up>" "<a-;>vk"
 map global insert "<right>" "<a-;>vl"
 
-# Center viewport when moving between search results
-# map global normal "n" "nvc"
-# map global normal "N" "Nvc"
-# map global normal "<a-n>" "<a-n>vc"
-# map global normal "<a-N>" "<a-N>vc"
-
 # Insert and delete spaces for indentation
 hook global InsertChar \t %{ try %{
   execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
@@ -52,15 +54,15 @@ map global user "p" "<a-!>pbpaste<ret>" -docstring "Paste after from clipboard"
 map global user "P" "!pbpaste<ret>" -docstring "Paste before from clipboard"
 map global user "R" "|pbpaste<ret>" -docstring "Paste replace from clipboard"
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
+map global user "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>" -docstring "Insert calculation"
 declare-user-mode filetype
 map global user "<space>" ": enter-user-mode filetype<ret>" -docstring "Filetype mode"
-map global user "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>" -docstring "Insert calculation"
 
-# Escape with jk
-hook global InsertChar "k" %{ try %{
-  execute-keys -draft "hH <a-k>jk<ret> d"
-  execute-keys "<esc>"
-}}
+# # Escape with jk
+# hook global InsertChar "k" %{ try %{
+#   execute-keys -draft "hH <a-k>jk<ret> d"
+#   execute-keys "<esc>"
+# }}
 
 # Disabled
 map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"

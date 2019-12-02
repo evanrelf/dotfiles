@@ -1,8 +1,8 @@
-source %sh{ printf "$HOME/.config/kak/purescript.kak" }
+source "%val{config}/purescript.kak" }
 
-source %sh{ printf "$HOME/.config/kak/commands.kak" }
-source %sh{ printf "$HOME/.config/kak/filetype.kak" }
-source %sh{ printf "$HOME/.config/kak/hooks.kak" }
-source %sh{ printf "$HOME/.config/kak/mappings.kak" }
-source %sh{ printf "$HOME/.config/kak/options.kak" }
-source %sh{ printf "$HOME/.config/kak/plugins.kak" }
+source "%val{config}/commands.kak" }
+source "%val{config}/filetype.kak" }
+source "%val{config}/hooks.kak" }
+source "%val{config}/mappings.kak" }
+source "%val{config}/options.kak" }
+source "%val{config}/plugins.kak" }
