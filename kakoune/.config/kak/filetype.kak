@@ -6,19 +6,14 @@ hook global WinSetOption filetype=haskell %{
   lint-enable
   # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
-  # Highlight function name in type signatures
-  add-highlighter shared/haskell/code/ regex ^\h*(?:(?:where|let|default)\h+)?\b([_a-z]['\w]*)+\b\s*:: 1:meta
-  # Highlight deriving strategies
-  add-highlighter shared/haskell/code/ regex \bderiving\s+\b(stock|newtype|anyclass|via)\b 1:keyword
-  add-highlighter shared/haskell/code/ regex \bderiving\s+[^\s]+?\s+\b(via)\b 1:keyword
-  # Highlight quasiquotes
-  add-highlighter shared/haskell/code/ regex \[\b[\w]['\w]*\|(.*)\|\] 1:string
-  # Highlight '∀' like 'forall'
-  add-highlighter shared/haskell/code/ regex ∀ 0:keyword
+  # Better highlighters
+  add-highlighter shared/haskell/code/ regex ^\s*(?:where\s+|let\s+|default\s+)?([_a-z][a-zA-Z0-9_']*#?(?:,\s*[_a-z][a-zA-Z0-9_']*#?)*)\s+::\s 1:meta
+  add-highlighter shared/haskell/code/ regex (?<!')\b(type|data)\b\s+(\bfamily\b)?(?!') 0:keyword
+  # add-highlighter shared/haskell/code/record region -recurse O O C regex ([_a-z]['\w]*)\s+::\s 1:default
   # Snippets
-  define-snippet window "forall" "∀"
-  define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
-  define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
+  # define-snippet window "forall" "∀"
+  # define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
+  # define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
 }
 
 # PureScript
@@ -27,7 +22,7 @@ hook global WinSetOption filetype=purescript %{
   add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
   # Replace 'forall' with '∀'
   add-highlighter shared/purescript/code/ regex ∀ 0:keyword
-  define-snippet window "forall" "∀"
+  # define-snippet window "forall" "∀"
   set-option window comment_line "--"
   set-option window comment_block_begin "{-"
   set-option window comment_block_end "-}"
@@ -80,7 +75,7 @@ hook global WinSetOption filetype=markdown %{
 hook global WinSetOption filetype=git-commit %{
   add-highlighter window/ column 51 default,black
   add-highlighter window/ column 73 default,black
-  define-snippet window "date" '%sh{date +%Y-%m-%d}'
+  # define-snippet window "date" '%sh{date +%Y-%m-%d}'
 }
 hook global WinCreate git-revise-todo %{
   set-option window filetype git-rebase

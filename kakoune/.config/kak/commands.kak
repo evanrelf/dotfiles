@@ -1,15 +1,15 @@
 # Snippets
-define-command -docstring "define-snippet" \
-define-snippet -params 3 %{ evaluate-commands %sh{
-  scope="$1"
-  snippet="$2"
-  expansion="$3"
-  length=$(printf '%s' "$snippet" | wc -c | tr -d " ")
-  printf "%s" "\
-    hook $scope InsertChar \t %{ try %{
-      execute-keys -draft \"h${length}H<a-k>$snippet<ret> c$expansion\"
-    }}"
-}}
+# define-command -docstring "define-snippet" \
+# define-snippet -params 3 %{ evaluate-commands %sh{
+#   scope="$1"
+#   snippet="$2"
+#   expansion="$3"
+#   length=$(printf '%s' "$snippet" | wc -c | tr -d " ")
+#   printf "%s" "\
+#     hook $scope InsertChar \t %{ try %{
+#       execute-keys -draft \"h${length}H<a-k>$snippet<ret> c$expansion\"
+#     }}"
+# }}
 
 # Extend line-based selections
 define-command -docstring "extend-line-down: extend selection with line down" \
