@@ -1,3 +1,5 @@
+provide-module "user_options" %{
+
 # Appearance
 colorscheme palenight
 add-highlighter global/ show-matching
@@ -18,3 +20,4 @@ set-option global grepcmd "rg --column --smart-case"
 set-option global scrolloff 1,5
 set-option global startup_info_version 20190701
 
+}

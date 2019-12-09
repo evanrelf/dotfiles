@@ -1,10 +1,13 @@
+provide-module "user_plugins" %{
+
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
 # Toggle between relative and absolute line numbers depending on mode
 plug "evanrelf/number-toggle.kak" %{
   set-option global number_toggle_params -hlcursor
-}
+} # defer "user_plugins" %{
+# }
 
 # FZF integration
 plug "andreyorst/fzf.kak" %{
@@ -65,3 +68,5 @@ plug "alexherbo2/auto-pairs.kak" %{
 #   hook global KakEnd .* lsp-exit
 #   # set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
 # }
+
+}

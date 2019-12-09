@@ -1,3 +1,5 @@
+provide-module "user_filetype" %{
+
 # Haskell
 hook global WinSetOption filetype=haskell %{
   set-option window lintcmd "hlint"
@@ -118,3 +120,5 @@ hook global WinSetOption filetype=typescript %{ set-option window formatcmd "pre
 hook global WinSetOption filetype=css %{ set-option window formatcmd "prettier --stdin --parser css" }
 hook global WinSetOption filetype=scss %{ set-option window formatcmd "prettier --stdin --parser scss" }
 hook global WinSetOption filetype=less %{ set-option window formatcmd "prettier --stdin --parser less" }
+
+}

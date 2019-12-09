@@ -1,3 +1,5 @@
+provide-module "user_commands" %{
+
 # Snippets
 define-command -docstring "define-snippet" \
 define-snippet -params 3 %{ evaluate-commands %sh{
@@ -133,3 +135,4 @@ psql-disable %{
   }
 }
 
+}
