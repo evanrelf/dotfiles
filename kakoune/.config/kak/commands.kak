@@ -8,6 +8,7 @@ define-snippet -params 3 %{ evaluate-commands %sh{
   expansion=$3
   length=$(printf '%s' "$snippet" | wc -c | tr -d " ")
   printf "%s" "\
+    # set-option -add window static_words '$snippet'
     hook $scope InsertChar \t %{ try %{\
       set-register 'l' \"$expansion\"
       execute-keys -draft '<esc>h${length}H<a-k>$snippet\t<ret>c<c-r>l'\
