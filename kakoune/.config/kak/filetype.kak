@@ -35,9 +35,9 @@ hook global WinSetOption filetype=elm %{
   set-option window formatcmd "elm-format --stdin"
   hook window -group format BufWritePre .* %{ format-buffer }
   # Improve bad syntax highlighting
-  add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
-  add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
-  add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
+  # add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
+  # add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
+  # add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
 
 # Rust
@@ -109,6 +109,9 @@ hook global WinSetOption filetype=sql %{
 # Kakoune
 hook global WinSetOption filetype=kak %{
   add-highlighter shared/kakrc/code/ regex \bdefine-snippet\b 0:keyword
+}
+hook global BufCreate \*scratch\* %{
+  execute-keys '%d'
 }
 
 # Prettier
