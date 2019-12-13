@@ -14,6 +14,8 @@ require-module "user_mappings"
 require-module "user_options"
 require-module "user_plugins"
 
+# source "%val{config}/evanrelf.kak"
+
 # hook -once global WinCreate .* %{
 #   declare-option str-list number_toggle_params
 #   require-module "user_options"

@@ -8,10 +8,6 @@ hook global WinSetOption filetype=haskell %{
   lint-enable
   # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
-  # Better highlighters
-  add-highlighter shared/haskell/code/ regex ^\s*(?:where\s+|let\s+|default\s+)?([_a-z][a-zA-Z0-9_']*#?(?:,\s*[_a-z][a-zA-Z0-9_']*#?)*)\s+::\s 1:meta
-  add-highlighter shared/haskell/code/ regex (?<!')\b(type|data)\b\s+(\bfamily\b)?(?!') 0:keyword
-  # add-highlighter shared/haskell/code/record region -recurse O O C regex ([_a-z]['\w]*)\s+::\s 1:default # TODO
   define-snippet window "forall" "∀"
   define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
   define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"

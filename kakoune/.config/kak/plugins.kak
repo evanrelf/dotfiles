@@ -3,6 +3,8 @@ provide-module "user_plugins" %{
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
+plug "Delapouite/kakoune-palette"
+
 # Toggle between relative and absolute line numbers depending on mode
 plug "evanrelf/number-toggle.kak" %{
   set-option global number_toggle_params -hlcursor

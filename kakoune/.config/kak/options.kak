@@ -18,6 +18,6 @@ set-option global ui_options \
 set-option global indentwidth 2
 set-option global grepcmd "rg --column --smart-case"
 set-option global scrolloff 1,5
-set-option global startup_info_version 20190701
+set-option global startup_info_version 20191210
 
 }
