@@ -1,18 +1,14 @@
 provide-module "user_commands" %{
 
-# Snippets
-define-command -docstring "define-snippet" \
-define-snippet -params 3 %{ evaluate-commands %sh{
+define-command -docstring "add-snippet" \
+add-snippet -params 3 %{ evaluate-commands %sh{
   scope=$1
   snippet=$2
   expansion=$3
-  length=$(printf '%s' "$snippet" | wc -c | tr -d " ")
-  printf "%s" "\
-    # set-option -add window static_words '$snippet'
-    hook $scope InsertChar \t %{ try %{\
-      set-register 'l' \"$expansion\"
-      execute-keys -draft '<esc>h${length}H<a-k>$snippet\t<ret>c<c-r>l'\
-    }}"
+  printf "%s" "
+  set-option -add $scope static_words '$2'
+  set-option -add $scope snippets '$2' '$3'
+  "
 }}
 
 # Extend line-based selections

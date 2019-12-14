@@ -1,6 +1,16 @@
 provide-module "user_filetype" %{
 
 # Haskell
+define-command -hidden haskell-language-pragma -params 0 %{
+  prompt -shell-script-candidates "ghc --supported-extensions" "extension: " %{
+    execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"
+  }
+}
+define-command -hidden haskell-options-pragma -params 0 %{
+  prompt -shell-script-candidates "ghc --show-options" "option: " %{
+    execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"
+  }
+}
 hook global WinSetOption filetype=haskell %{
   set-option window lintcmd "hlint"
   # set-option window lintcmd "sleep 0.5; ghcid-format /tmp/ghcid"
@@ -8,9 +18,9 @@ hook global WinSetOption filetype=haskell %{
   lint-enable
   # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
-  define-snippet window "forall" "∀"
-  define-snippet window "lang" "{-# LANGUAGE OverloadedStrings #-}"
-  define-snippet window "opt" "{-# OPTIONS_GHC -Wno-unused-top-binds #-}"
+  add-snippet window "forall" "∀"
+  add-snippet window "lang" "<esc>: haskell-language-pragma<ret>"
+  add-snippet window "opt" "<esc>: haskell-options-pragma<ret>"
 }
 
 # PureScript
@@ -19,7 +29,7 @@ hook global WinSetOption filetype=purescript %{
   add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
   # Replace 'forall' with '∀'
   add-highlighter shared/purescript/code/ regex ∀ 0:keyword
-  define-snippet window "forall" "∀"
+  add-snippet window "forall" "∀"
   set-option window comment_line "--"
   set-option window comment_block_begin "{-"
   set-option window comment_block_end "-}"
@@ -75,7 +85,7 @@ hook global WinSetOption filetype=markdown %{
 hook global WinSetOption filetype=git-commit %{
   add-highlighter window/ column 51 default,black
   add-highlighter window/ column 73 default,black
-  define-snippet window "date" '%sh{date +%Y-%m-%d}'
+  add-snippet window "date" '<esc>!date +%Y-%m-%d<ret>dh'
 }
 hook global WinCreate git-revise-todo %{
   set-option window filetype git-rebase
@@ -103,9 +113,6 @@ hook global WinSetOption filetype=sql %{
 }
 
 # Kakoune
-hook global WinSetOption filetype=kak %{
-  add-highlighter shared/kakrc/code/ regex \bdefine-snippet\b 0:keyword
-}
 hook global BufCreate \*scratch\* %{
   execute-keys '%d'
 }

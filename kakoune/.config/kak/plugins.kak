@@ -3,13 +3,12 @@ provide-module "user_plugins" %{
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
-plug "Delapouite/kakoune-palette"
+# plug "Delapouite/kakoune-palette"
 
 # Toggle between relative and absolute line numbers depending on mode
 plug "evanrelf/number-toggle.kak" %{
   set-option global number_toggle_params -hlcursor
-} # defer "user_plugins" %{
-# }
+}
 
 # FZF integration
 plug "andreyorst/fzf.kak" %{
@@ -32,6 +31,7 @@ plug "Delapouite/kakoune-cd" %{
 # Surround selections with brackets
 plug "h-youhei/kakoune-surround" %{
   map global user "s" ": enter-user-mode surround<ret>" -docstring "Surround mode"
+  map global normal "'" ": enter-user-mode surround<ret>" -docstring "Surround mode"
   declare-user-mode "surround"
   map global surround "s" ": select-surround<ret>" -docstring "Select surround"
   map global surround "a" ": surround<ret>" -docstring "Add surround"
@@ -51,6 +51,11 @@ plug "Delapouite/kakoune-text-objects"
 # Automatically complete pairs
 plug "alexherbo2/auto-pairs.kak" %{
   hook global WinCreate .* %{ auto-pairs-enable }
+}
+
+# Snippets
+plug "alexherbo2/snippets.kak" %{
+  hook global WinCreate .* %{ snippets-enable }
 }
 
 # Language Server Protocol support
