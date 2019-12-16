@@ -6,6 +6,7 @@
 
 # direnv
 if _exists direnv
+    set -x DIRENV_LOG_FORMAT ""
     eval (direnv hook fish)
 end
 
@@ -37,10 +38,10 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
         _error "Nix isn't working because you don't have bass"
     end
 end
-if _exists any-nix-shell
-    # any-nix-shell fish --info-right | source
-    any-nix-shell fish | source
-end
+# if _exists any-nix-shell
+#     # any-nix-shell fish --info-right | source
+#     any-nix-shell fish | source
+# end
 
 # macOS
 if test (uname) = "Darwin"

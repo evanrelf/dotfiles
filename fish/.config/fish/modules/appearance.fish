@@ -7,11 +7,24 @@ set __fish_git_prompt_showstashstate "true"
 
 function fish_prompt
     set -l exit_code $status
-    # Nix shell
-    if test -n "$IN_NIX_SHELL"
+    if echo "$name" | grep -q "^lorri"
+        # lorri
         set_color cyan
-        echo -n "nix-shell "
+        echo -n "lorri "
         set_color normal
+    else
+        # Nix shell
+        if test -n "$IN_NIX_SHELL"
+            set_color cyan
+            echo -n "nix-shell "
+            set_color normal
+        end
+        # direnv
+        if test -n "$DIRENV_DIFF"
+            set_color cyan
+            echo -n "direnv "
+            set_color normal
+        end
     end
     # PWD
     set_color blue

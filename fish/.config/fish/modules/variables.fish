@@ -1,7 +1,9 @@
 set -x EDITOR "kak"
 set -x VISUAL "$EDITOR"
 set -x NIXPKGS_ALLOW_UNFREE 1
-if _exists nvim
+if _exists kak
+    set -x MANPAGER "col -b -x | kak -e 'set-option buffer filetype man'"
+else if _exists nvim
     set -x MANPAGER "nvim -c 'set ft=man' -"
 end
 set -x npm_config_prefix "$HOME/.node_modules"

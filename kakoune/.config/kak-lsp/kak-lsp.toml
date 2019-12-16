@@ -7,22 +7,22 @@ verbosity = 2
 # set to 0 to disable
 timeout = 1800 # seconds = 30 minutes
 
-[language.rust]
-filetypes = ["rust"]
-roots = ["Cargo.toml"]
-command = "rls"
-
-[language.javascript]
-filetypes = ["javascript"]
-roots = ["package.json"]
-command = "javascript-typescript-stdio"
-args = ["--strict"]
-
 [language.haskell]
 filetypes = ["haskell"]
-roots = ["package.yaml", "*.cabal", "stack.yaml", "cabal.project", "Setup.hs"]
+roots = ["cabal.project", "*.cabal", "stack.yaml", "package.yaml", "Setup.hs"]
 command = "ghcide"
 args = ["--lsp"]
+
+# [language.rust]
+# filetypes = ["rust"]
+# roots = ["Cargo.toml"]
+# command = "rls"
+
+# [language.javascript]
+# filetypes = ["javascript"]
+# roots = ["package.json"]
+# command = "javascript-typescript-stdio"
+# args = ["--strict"]
 
 # [language.haskell]
 # filetypes = ["haskell"]

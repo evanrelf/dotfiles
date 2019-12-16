@@ -1,5 +1,9 @@
 alias reload "source $HOME/.config/fish/config.fish"
 
+function nixpkgs-sha256
+    nix-prefetch-url --type sha256 "https://github.com/nixos/nixpkgs/archive/$argv[1].tar.gz" --unpack
+end
+
 function abbr-erase
     set -g fish_user_abbreviations
     for a in (abbr --list)

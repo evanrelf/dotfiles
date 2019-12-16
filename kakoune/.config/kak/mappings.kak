@@ -1,5 +1,15 @@
 provide-module "user_mappings" %{
 
+# Use q for backwards word movement
+map global normal q b
+map global normal Q B
+map global normal <a-q> <a-b>
+map global normal <a-Q> <a-B>
+
+# Use caret for macros
+map global normal ^ q
+map global normal <a-^> Q
+
 # Space is my leader
 map global normal "," "<space>"
 map global normal "<space>" ","
@@ -32,7 +42,7 @@ map global normal "<a-=>" ": format-selections<ret>"
 map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
 
-# Move viewport
+# Move viewport with arrow keys
 map global normal "<left>" "vh"
 map global normal "<down>" "vj"
 map global normal "<up>" "vk"
@@ -43,11 +53,18 @@ map global insert "<up>" "<a-;>vk"
 map global insert "<right>" "<a-;>vl"
 
 # Insert and delete spaces for indentation
-hook global InsertChar \t %{ try %{
-  execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
-}}
+map global insert "<tab>" "<a-;><a-gt>"
+map global insert "<s-tab>" "<a-;><a-lt>"
+# hook global InsertChar \t %{
+#   try %{
+#     execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+#   } catch %{
+#     # execute-keys -draft "<esc>h%opt{indentwidth}@"
+#     execute-keys -draft "<esc>hd>"
+#   }
+# }
 hook global InsertDelete ' ' %{ try %{
-  execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
+  execute-keys -draft 'hGh<a-k>\A\h+\z<ret>i<space><esc><lt>'
 }}
 
 # User mode
