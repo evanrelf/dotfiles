@@ -1,14 +1,14 @@
 provide-module "user_mappings" %{
 
 # Use q for backwards word movement
-map global normal q b
-map global normal Q B
-map global normal <a-q> <a-b>
-map global normal <a-Q> <a-B>
+map global normal "q" "b"
+map global normal "Q" "B"
+map global normal "<a-q>" "<a-b>"
+map global normal "<a-Q>" "<a-B>"
 
 # Use caret for macros
-map global normal ^ q
-map global normal <a-^> Q
+map global normal "^" "q"
+map global normal "<a-^>" "Q"
 
 # Space is my leader
 map global normal "," "<space>"
@@ -88,5 +88,9 @@ map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstr
 map global normal "<a-l>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
 map global goto "g" "<esc>: echo -markup '{Error}Use gk{Default}'<ret>" -docstring "Use gk"
 map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstring "Use vc"
+map global normal "b" ": echo -markup '{Error}Use q{Default}'<ret>" -docstring "Use q"
+map global normal "B" ": echo -markup '{Error}Use Q{Default}'<ret>" -docstring "Use Q"
+map global normal "<a-b>" ": echo -markup '{Error}Use ⌥q{Default}'<ret>" -docstring "Use ⌥q"
+map global normal "<a-B>" ": echo -markup '{Error}Use ⌥Q{Default}'<ret>" -docstring "Use ⌥Q"
 
 }

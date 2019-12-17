@@ -1,12 +1,20 @@
 provide-module "user_hooks" %{
 
 # Display Git diff in gutter
-# hook global WinCreate .* %{ try %{ git show-diff } }
-# hook global BufWritePost .* %{ try %{ git update-diff } }
+# hook global WinCreate .* %{ try %{
+#   git show-diff
+# }}
+# hook global BufWritePost .* %{ try %{
+#   git update-diff
+# }}
 
 # Highlight trailing whitespace
-hook global ModeChange push:.*:insert %{ remove-highlighter window/trailing-whitespace }
-hook global ModeChange pop:insert:.* %{ add-highlighter window/trailing-whitespace regex \h+$ 0:default,red }
+hook global ModeChange push:.*:insert %{
+  remove-highlighter window/trailing-whitespace
+}
+hook global ModeChange pop:insert:.* %{
+  add-highlighter window/trailing-whitespace regex \h+$ 0:default,rgb:ff869a
+}
 
 # Use Tab key in autocomplete menu
 hook global InsertCompletionShow .* %{ try %{

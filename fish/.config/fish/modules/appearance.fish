@@ -7,25 +7,33 @@ set __fish_git_prompt_showstashstate "true"
 
 function fish_prompt
     set -l exit_code $status
-    if echo "$name" | grep -q "^lorri"
-        # lorri
-        set_color cyan
-        echo -n "lorri "
-        set_color normal
-    else
-        # Nix shell
-        if test -n "$IN_NIX_SHELL"
-            set_color cyan
-            echo -n "nix-shell "
-            set_color normal
+    set_color cyan
+    if test \( -n "$IN_NIX_SHELL" \) -a \( -n "$DIRENV_DIR" \)
+        # Project uses lorri
+        if pgrep -q "lorri"
+            # lorri daemon is running
+            echo -n "lorri "
+        else
+            set -l envrc (echo "$DIRENV_DIR/.envrc" | sed 's/^-//')
+            if test -f "$envrc" && cat "$envrc" | grep -q "lorri direnv"
+                # lorri daemon is not running
+                set_color red
+                echo -n "lorri "
+                set_color cyan
+            end
         end
-        # direnv
-        if test -n "$DIRENV_DIFF"
-            set_color cyan
+    else
+        # Project does not use lorri
+        if test -n "$IN_NIX_SHELL"
+            # In Nix shell
+            echo -n "nix-shell "
+        end
+        if test -n "$DIRENV_DIR"
+            # Using direnv
             echo -n "direnv "
-            set_color normal
         end
     end
+    set_color normal
     # PWD
     set_color blue
     echo -n (prompt_pwd)" "

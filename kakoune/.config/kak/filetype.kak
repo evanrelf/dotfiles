@@ -19,8 +19,8 @@ hook global WinSetOption filetype=haskell %{
   # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
   add-snippet window "forall" "∀"
-  add-snippet window "lang" "<esc>: haskell-language-pragma<ret>"
-  add-snippet window "opt" "<esc>: haskell-options-pragma<ret>"
+  add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
+  add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
 }
 
 # PureScript
@@ -85,7 +85,7 @@ hook global WinSetOption filetype=markdown %{
 hook global WinSetOption filetype=git-commit %{
   add-highlighter window/ column 51 default,black
   add-highlighter window/ column 73 default,black
-  add-snippet window "date" '<esc>!date +%Y-%m-%d<ret>dh'
+  add-snippet window "date" '<a-;>!date +%Y-%m-%d<ret><backspace>'
 }
 hook global WinCreate git-revise-todo %{
   set-option window filetype git-rebase
