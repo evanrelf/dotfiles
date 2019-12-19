@@ -7,11 +7,11 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
 
-    any-nix-shell
     autojump
     binutils
     cabal-install
     chromium
+    direnv
     exa
     fd
     fzf
@@ -23,7 +23,9 @@
     hlint
     kakoune
     kitty
+    lorri
     neovim
+    nnn
     nodejs
     pandoc
     ripgrep
