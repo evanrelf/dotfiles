@@ -31,12 +31,12 @@
 ;; Evil
 (use-package evil
   :init
-  (setq evil-want-Y-yank-to-eol t)
-  (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
   :config
   (evil-mode 1))
 (use-package evil-terminal-cursor-changer
+  :unless window-system
   :init
   (setq evil-motion-state-cursor 'box)
   (setq evil-visual-state-cursor 'box)
@@ -44,11 +44,10 @@
   (setq evil-insert-state-cursor 'bar)
   (setq evil-emacs-state-cursor  'hbar)
   :config
-  (unless
-    (display-graphic-p)
-    (require 'evil-terminal-cursor-changer)
-    (evil-terminal-cursor-changer-activate)))
+  (require 'evil-terminal-cursor-changer)
+  (evil-terminal-cursor-changer-activate))
 (use-package evil-collection
+  ;; :after evil
   :config
   (evil-collection-init))
 (use-package evil-surround
@@ -57,9 +56,6 @@
 (use-package evil-commentary
   :config
   (evil-commentary-mode))
-;; (use-package evil-exchange
-;;   :config
-;;   (evil-exchange-install))
 (use-package evil-smartparens
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
@@ -69,8 +65,7 @@
 (use-package evil-goggles
   :config
   (evil-goggles-mode)
-  (setq evil-goggles-duration 0.100)
-  (setq evil-goggles-blocking-duration 0.100))
+  (setq evil-goggles-duration 0.100))
 (use-package evil-matchit
   :config
   (global-evil-matchit-mode 1))
@@ -79,24 +74,23 @@
 (use-package magit)
 ;; Intelligence
 ;; (use-package lsp-mode
-;;   :config
-;;
-;;   )
-;; (use-package lsp-ui)
+;;   :hook (haskell-mode . lsp-deferred)
+;;   :commands (lsp lsp-deferred))
+;; (use-package lsp-ui
+;;   :commands lsp-ui-mode)
 ;; (use-package lsp-haskell
 ;;   :config
-;;   (add-hook 'haskell-mode-hook #'lsp))
-;; (use-package company-lsp)
+;;   (setq lsp-haskell-process-path-hie "ghcide")
+;;   (setq lsp-haskell-process-args-hie '()))
+;; (use-package company-lsp
+;;   :commands company-lsp)
 (use-package company
   :config
   (setq company-idle-delay 0.2)
-  (add-hook 'after-init-hook 'global-company-mode)
-  (add-to-list 'company-backends 'company-irony)
-  (add-to-list 'company-backends 'company-elm))
-  ;; (add-to-list 'company-backends 'company-haskell))
+  (add-hook 'after-init-hook 'global-company-mode))
 (use-package flycheck
   :config
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  (setq-default flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))
   (setq flymake-no-changes-timeout nil)
   (setq flymake-start-syntax-check-on-newline nil)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
@@ -105,7 +99,6 @@
   :config
   (with-eval-after-load 'flycheck
     (flycheck-pos-tip-mode)))
-(use-package format-all)
 (use-package ivy
   :config
   (ivy-mode 1))
@@ -114,30 +107,9 @@
   (counsel-mode 1))
 ;; Languages
 (use-package haskell-mode)
-;; (use-package intero)
-  ;; :config
-  ;; (intero-global-mode 1))
-;; (use-package dante
-;;   :after haskell-mode
-;;   :commands 'dante-mode
-;;   :init
-;;   (add-hook 'haskell-mode-hook 'dante-mode)
-;;   (add-hook 'haskell-mode-hook 'flycheck-mode)
-;;   :config
-;;   (add-hook 'dante-mode-hook
-;;     '(lambda () (flycheck-add-next-checker 'haskell-dante '(warning . haskell-hlint)))))
 (use-package purescript-mode
   :config
   (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation))
-(use-package elm-mode
-  :config
-  (setq elm-format-on-save t))
-(use-package irony
-  :config
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-(use-package company-irony)
 (use-package markdown-mode)
 (use-package dhall-mode)
 (use-package yaml-mode
@@ -185,8 +157,6 @@
 ;; Colored GUI titlebar
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
-;; Increase memory threshold before garbage collection
-(setq gc-cons-threshold 20000000)
 ;; Follow symlinks when opening files under version control
 (setq vc-follow-symlinks t)
 ;; Make files with a shebang executable when saving
@@ -210,7 +180,6 @@
 (setq make-backup-files nil)
 ;; Disable auto-save files
 (setq auto-save-default nil)
-;; Stop evil from using the system l)
 ;; Indent with 2 spaces
 (setq tab-width 2)
 (setq indent-tabs-mode nil)
@@ -234,7 +203,5 @@
 
 ;; MAPPINGS
 (mmap
-  ;; ";" 'evil-ex
-  ;; ":" 'evil-repeat-find-char
   "j" 'evil-next-visual-line
   "k" 'evil-previous-visual-line)

@@ -5,6 +5,10 @@ set __fish_git_prompt_showdirtystate "true"
 set __fish_git_prompt_showuntrackedfiles "true"
 set __fish_git_prompt_showstashstate "true"
 
+function newline_after --on-event fish_postexec
+    echo
+end
+
 function fish_prompt
     set -l exit_code $status
     set_color cyan
@@ -42,7 +46,7 @@ function fish_prompt
     # set -l hg_root_cmd (if command -v hg-root >/dev/null 2>&1; echo "hg-root"; else; echo "hg root"; end)
     if git rev-parse --git-dir >/dev/null 2>&1
         # Git
-        set git_branch (git symbolic-ref --short HEAD 2>/dev/null; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
+        set git_branch (git symbolic-ref --short HEAD --quiet; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
         if test -n "$git_branch"
             set -l truncated (echo $git_branch | cut -c 1-35)
             set -l dirty (git status --porcelain)
@@ -95,6 +99,7 @@ function fish_prompt
     if test (math (tput cols) - \((echo \(prompt_pwd\)" $git_branch" | wc -c)\)) -lt 40
         echo
     end
+    echo
     # Prompt character
     echo -n "λ "
     set_color normal
