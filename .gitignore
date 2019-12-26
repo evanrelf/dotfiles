@@ -1,3 +1,7 @@
-# macOS
 .DS_Store
 .localized
+xmonad/.xmonad/result
+xmonad/.xmonad/xmonad.errors
+xmonad/.xmonad/xmonad-x86_64-linux
+xmonad/.xmonad/my-xmonad/result
+xmonad/.xmonad/my-xmonad/dist-newstyle/

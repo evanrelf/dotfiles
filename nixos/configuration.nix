@@ -65,9 +65,10 @@
     sensitivity = 100; # 0-255 (default 128)
     speed = 80; # 0-255 (default 97)
   };
-  services.pantheon.contractor.enable = true;
+  # services.pantheon.contractor.enable = true;
   services.xserver = {
     enable = true;
+    dpi = 144;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
     libinput = {
@@ -76,6 +77,13 @@
       tappingDragLock = false;
       middleEmulation = false;
       accelSpeed = "0.7";
+    };
+    windowManager = {
+      default = "xmonad";
+      xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+      };
     };
     displayManager.lightdm = {
       enable = true;
@@ -87,7 +95,7 @@
     desktopManager = {
       pantheon.enable = true;
       xterm.enable = false;
-      default = "elementary";
+      # default = "elementary";
     };
   };
   services.xbanish.enable = true;
