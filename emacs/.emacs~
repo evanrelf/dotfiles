@@ -72,11 +72,11 @@
 (use-package evil-escape
   :config
   (evil-escape-mode))
-(use-package evil-indent-plus
-  :config
-  (evil-indent-plus-default-bindings))
 (use-package evil-anzu)
 (use-package evil-magit)
+(use-package vi-tilde-fringe-mode
+  :config
+  (global-vi-tilde-fringe-mode))
 ;; Git
 (use-package magit)
 ;; Intelligence
