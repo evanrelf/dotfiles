@@ -1,12 +1,3 @@
-# TODO:
-# - Learn reset
-# - Learn cherry-pick
-# - Learn reflog
-# - Learn merge
-# - Learn bisect
-
-# Tip: `git diff -w` ignores whitespace changes
-
 [user]
 	name = Evan Relf
 	useConfigOnly = true
@@ -33,7 +24,7 @@
 	# DIFF
 	d = diff
 	ds = diff --staged
-	dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
+	# dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
 
 	# FETCH
 	f = fetch
@@ -44,23 +35,19 @@
 	# Full log
 	ll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
 	# Only show commits ahead of branch on origin
-	lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
+	# lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
 
 	# LOOKUP (script)
-	k = "!git lookup | xargs git show --name-only #"
-	kd = "!git lookup | xargs git show #"
+	k = lookup
 
 	# PUSH
 	p = push
 	pf = push --force-with-lease
-	p-noci = push --push-option ci.skip
-	pf-noci = push --force-with-lease --push-option ci.skip
 
 	# REBASE
 	rb = rebase
-	rbi = rebase-back # script
-	rbik = "!git lookup | xargs -o git rebase-back #"
-	rbix = "!git lx $1 | wc -l | xargs -o git rebase-back #"
+	rbi = "!if [ -z \"$1\" ]; then git lookup | xargs -o git rebase-back; else git rebase-back $@; fi #" # script
+	# rbix = "!git lx $1 | wc -l | xargs -o git rebase-back #"
 	undo-rebase = reset --hard ORIG_HEAD
 	cont = rebase --continue
 	skip = rebase --skip
@@ -72,11 +59,11 @@
 	rh = reset --hard
 
 	# REVISE
-	rv = revise
+	rv = "!if [ -z \"$1\" ]; then git lookup | xargs git revise; else git revise $@; fi #"
 
 	# SHOW
-	sh = show --name-only
-	shd = show
+	sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
+	shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
 	# STASH
 	st = stash push
@@ -105,6 +92,8 @@
 	root = rev-parse --show-toplevel
 	# Print the commit hash
 	hash = rev-parse --default HEAD
+	# Print current branch
+	current-branch = "!git symbolic-ref --short HEAD --quiet || git branch | head -n 1 | awk '{print $NF}' | tr -d ')' #"
 	# Run a command from the root of the git repo
 	exec = "!exec "
 	blank = "!if [ -z \"$1\" ]; then exit 1; else git checkout --orphan $1 && git rm --cached -r .; fi #"

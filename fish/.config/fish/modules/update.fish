@@ -9,9 +9,7 @@ function update -d "Run all update commands"
             else if _exists nixos-version
                 # NixOS
                 _log "Updating NixOS packages"
-                nix-channel --update
                 sudo nix-channel --update
-                nix-env --upgrade
                 sudo nixos-rebuild switch --upgrade
             else if _exists apt
                 # Ubuntu & Debian
@@ -37,6 +35,11 @@ function update -d "Run all update commands"
             end
         case '*'
             # Unknown OS
+    end
+
+    if _exists nix-env
+        nix-channel --update
+        nix-env --upgrade
     end
 
     if _exists npm
