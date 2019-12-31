@@ -23,13 +23,11 @@ myConfig c = c
   , normalBorderColor = "#333333"
   , focusedBorderColor = "#999999"
   , workspaces = fmap show [1 .. 10 :: Int]
-
   -- , startupHook = undefined
   -- , logHook = undefined
   -- , layoutHook = undefined
   -- , manageHook = undefined
   -- , handleEventHook = undefined
-
   }
 
 myRemoveKeys :: XConfig l -> XConfig l
@@ -40,8 +38,10 @@ myRemoveKeys = flip EZConfig.removeKeysP
 
 myKeys :: XConfig l -> XConfig l
 myKeys = flip EZConfig.additionalKeysP
+  -- Launching
+  [ ("M-/", Run.safeSpawnProg "dmenu_run")
   -- Workspaces
-  [ ("M-<Tab>", CycleWS.toggleWS)
+  , ("M-<Tab>", CycleWS.toggleWS)
   -- Brightness
   , ("<XF86MonBrightnessDown>", Run.safeSpawn "light" ["-U", "3"])
   , ("<XF86MonBrightnessUp>", Run.safeSpawn "light" ["-A", "3"])

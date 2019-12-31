@@ -33,6 +33,7 @@
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-integration t)
+  (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1))
 (use-package evil-terminal-cursor-changer
@@ -72,11 +73,11 @@
 (use-package evil-escape
   :config
   (evil-escape-mode))
+(use-package evil-indent-plus
+  :config
+  (evil-indent-plus-default-bindings))
 (use-package evil-anzu)
 (use-package evil-magit)
-(use-package vi-tilde-fringe-mode
-  :config
-  (global-vi-tilde-fringe-mode))
 ;; Git
 (use-package magit)
 ;; Intelligence
@@ -109,11 +110,18 @@
 (use-package ivy
   :config
   (ivy-mode 1))
+(use-package ivy-posframe
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+  (ivy-posframe-mode 1))
 (use-package counsel
   :config
   (counsel-mode 1))
 (use-package which-key
   :config
+  (setq which-key-show-early-on-C-h t)
+  (setq which-key-idle-delay 10000)
+  (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 ;; Languages
 (use-package haskell-mode)
@@ -160,7 +168,7 @@
 
 ;; SETTINGS
 ;; GUI font
-(setq default-frame-alist '((font . "PragmataPro Liga-16")))
+(setq default-frame-alist '((font . "PragmataPro Liga-12")))
 ;; Disable bold font
 (set-face-bold 'bold nil)
 ;; Enable line numbers
@@ -170,8 +178,8 @@
 ;; Disable tool bar
 (tool-bar-mode -1)
 ;; Disable scroll bar
-;; (scroll-bar-mode -1)
-;; (horizontal-scroll-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
 ;; Disable cursor blink
 (blink-cursor-mode 0)
 ;; Disable audio bell

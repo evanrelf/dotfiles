@@ -12,6 +12,7 @@
     cabal-install
     chromium
     direnv
+    dmenu
     exa
     fd
     fzf
@@ -42,6 +43,7 @@
   ];
   programs.fish.enable = true;
   programs.mosh.enable = true;
+  programs.light.enable = true;
   services.openssh.enable = true;
 
 
@@ -155,7 +157,12 @@
   users.users."evanrelf" = {
     description = "Evan Relf";
     isNormalUser = true;
-    extraGroups = [ "audio" "networkmanager" "wheel" ];
+    extraGroups = [
+      "wheel"
+      "audio"
+      "video"
+      "networkmanager"
+    ];
     initialPassword = "banana";
     shell = pkgs.fish;
   };
