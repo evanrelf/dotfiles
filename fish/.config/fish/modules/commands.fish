@@ -15,7 +15,7 @@ end
 if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa -l --group-directories-first --git"
-    alias tree "exa --tree --group-directories-first -I '.git|dist|dist-newstyle|output|.cache|.stack-work|elm-stuff|node_modules'"
+    alias tree "exa --tree --group-directories-first -I '.git|dist-newstyle|.cache|.stack-work|elm-stuff|node_modules'"
 else
     alias ls "ls -AFGh"
 end
@@ -57,10 +57,10 @@ end
 complete --command kakc --wraps kak
 
 # nnn (from https://github.com/jarun/nnn/blob/master/misc/quitcd/quitcd.fish)
-function n --description 'support nnn quit and change directory'
+function nnn --description 'support nnn quit and change directory'
     # Block nesting of nnn in subshells
     if test -n "$NNNLVL"
-        if test $NNNLVL -ge 1
+        if test "$NNNLVL" -ge 1
             echo "nnn is already running"
             return
         end

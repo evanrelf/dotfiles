@@ -1,3 +1,12 @@
+# nnn
+# if _exists nnn
+#     function fish_greeting
+#         if test \( -z "$NNNLVL" \) -a \( -n "$TMUX" \)
+#             exec nnn
+#         end
+#     end
+# end
+
 # hg-root
 # if ! _exists hg-root && _exists hg 2>&1
 #     _error "Your prompt may be slow if you don't have hg-root installed"
