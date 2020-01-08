@@ -21,6 +21,7 @@ hook global WinSetOption filetype=haskell %{
   add-snippet window "forall" "∀"
   add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
   add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
+  add-highlighter shared/haskell/quasiquote region \[\b[_a-z]['\w]*#?\| \|\] regex \[\b[_a-z]['\w]*#?\|(.*?)\|\] 1:string
 }
 
 # PureScript
@@ -93,7 +94,7 @@ hook global WinCreate git-revise-todo %{
 }
 
 # Docker
-hook global WinCreate Dockerfile.* %{
+hook global WinCreate (Dockerfile.*|.*\.dockerfile) %{
   set-option window filetype dockerfile
 }
 

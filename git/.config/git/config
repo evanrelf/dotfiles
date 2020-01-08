@@ -1,142 +1,142 @@
 [user]
-	name = Evan Relf
-	useConfigOnly = true
+  name = Evan Relf
+  useConfigOnly = true
 [alias]
-	# ADD
-	a = add
-	aa = "!cd -- ${GIT_PREFIX:-.} && git add --all $@ && git status --short #"
-	ap = add --patch
+  # ADD
+  a = add
+  aa = "!cd -- ${GIT_PREFIX:-.} && git add --all $@ && git status --short #"
+  ap = add --patch
 
-	# BRANCH
-	b = branch
-	bd = branch --delete
-	bdf = branch --delete --force
+  # BRANCH
+  b = branch
+  bd = branch --delete
+  bdf = branch --delete --force
 
-	# CHECKOUT
-	co = checkout
+  # CHECKOUT
+  co = checkout
 
-	# COMMIT
-	c = commit
-	amend = commit --amend --no-edit
-	rename = commit --amend
-	undo-commit = reset --soft HEAD~
+  # COMMIT
+  c = commit
+  amend = commit --amend --no-edit
+  rename = commit --amend
+  undo-commit = reset --soft HEAD~
 
-	# DIFF
-	d = diff
-	ds = diff --staged
-	# dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
+  # DIFF
+  d = diff
+  ds = diff --staged
+  # dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
 
-	# FETCH
-	f = fetch
-	ff = fetch --force
+  # FETCH
+  f = fetch
+  ff = fetch --force
 
-	# LOG
-	l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-	# Full log
-	ll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-	# Only show commits ahead of branch on origin
-	# lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
+  # LOG
+  l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+  # Full log
+  ll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+  # Only show commits ahead of branch on origin
+  # lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
 
-	# LOOKUP (script)
-	k = lookup
+  # LOOKUP (script)
+  k = lookup
 
-	# PUSH
-	p = push
-	pf = push --force-with-lease
+  # PUSH
+  p = push
+  pf = push --force-with-lease
 
-	# REBASE
-	rb = rebase
-	rbi = "!if [ -z \"$1\" ]; then git lookup | xargs -o git rebase-back; else git rebase-back $@; fi #" # script
-	# rbix = "!git lx $1 | wc -l | xargs -o git rebase-back #"
-	undo-rebase = reset --hard ORIG_HEAD
-	cont = rebase --continue
-	skip = rebase --skip
-	abort = rebase --abort
+  # REBASE
+  rb = rebase
+  rbi = "!if [ -z \"$1\" ]; then git lookup | xargs -o git rebase-back; else git rebase-back $@; fi #" # script
+  # rbix = "!git lx $1 | wc -l | xargs -o git rebase-back #"
+  undo-rebase = reset --hard ORIG_HEAD
+  cont = rebase --continue
+  skip = rebase --skip
+  abort = rebase --abort
 
-	# RESET
-	r = reset
-	rs = reset --soft
-	rh = reset --hard
+  # RESET
+  r = reset
+  rs = reset --soft
+  rh = reset --hard
 
-	# REVISE
-	rv = "!if [ -z \"$1\" ]; then git lookup | xargs git revise; else git revise $@; fi #"
+  # REVISE
+  rv = "!if [ -z \"$1\" ]; then git lookup | xargs git revise; else git revise $@; fi #"
 
-	# SHOW
-	sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
-	shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
+  # SHOW
+  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
+  shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
-	# STASH
-	st = stash push
-	stu = stash push --include-untracked
-	sts = stash show
-	sta = stash apply
-	stp = stash pop
-	stl = stash list
-	std = stash drop
-	# stdd = stash clear
+  # STASH
+  st = stash push
+  stu = stash push --include-untracked
+  sts = stash show
+  sta = stash apply
+  stp = stash pop
+  stl = stash list
+  std = stash drop
+  # stdd = stash clear
 
-	# STATUS
-	s = status --short
-	ss = status --show-stash
+  # STATUS
+  s = status --short
+  ss = status --show-stash
 
-	# TAG
-	t = tag
-	td = tag --delete
+  # TAG
+  t = tag
+  td = tag --delete
 
-	# CLEAN
-	clean-ignored = clean -Xdf
-	clean-untracked = clean -xdi
+  # CLEAN
+  clean-ignored = clean -Xdf
+  clean-untracked = clean -xdi
 
-	# OTHER
-	# Print the path to the root of the git repo
-	root = rev-parse --show-toplevel
-	# Print the commit hash
-	hash = rev-parse --default HEAD
-	# Print current branch
-	current-branch = "!git symbolic-ref --short HEAD --quiet || git branch | head -n 1 | awk '{print $NF}' | tr -d ')' #"
-	# Run a command from the root of the git repo
-	exec = "!exec "
-	blank = "!if [ -z \"$1\" ]; then exit 1; else git checkout --orphan $1 && git rm --cached -r .; fi #"
+  # OTHER
+  # Print the path to the root of the git repo
+  root = rev-parse --show-toplevel
+  # Print the commit hash
+  hash = rev-parse --default HEAD
+  # Print current branch
+  current-branch = "!git symbolic-ref --short HEAD --quiet || git branch | head -n 1 | awk '{print $NF}' | tr -d ')' #"
+  # Run a command from the root of the git repo
+  exec = "!exec "
+  blank = "!if [ -z \"$1\" ]; then exit 1; else git checkout --orphan $1 && git rm --cached -r .; fi #"
 [core]
-	pager = diff-so-fancy | less --tabs=8 -RFX
-	excludesfile = ~/.config/git/ignore
+  pager = diff-so-fancy | less --tabs=8 -RFX
+  excludesfile = ~/.config/git/ignore
 [status]
-	showUntrackedFiles = all
+  showUntrackedFiles = all
 [stash]
-	showPatch = true
-	showStat = true
+  showPatch = true
+  showStat = true
 [commit]
-	template = ~/.config/git/template
+  template = ~/.config/git/template
 [push]
-	default = current
-	followTags = true
+  default = current
+  followTags = true
 [diff]
-	renames = copies
-	algorithm = patience
+  renames = copies
+  algorithm = patience
 [diff "nodiff"]
-	command = true
+  command = true
 [merge]
-	# conflictstyle = diff3
+  # conflictstyle = diff3
 [color]
-	ui = true
+  ui = true
 [color "diff-highlight"]
-	oldNormal = red
-	oldHighlight = red 52
+  oldNormal = red
+  oldHighlight = red 52
         # oldHighlight = red reverse
-	newNormal = green
-	newHighlight = green 22
+  newNormal = green
+  newHighlight = green 22
         # newHighlight = green reverse
 [color "diff"]
-	meta = yellow
-	frag = magenta
-	commit = yellow
-	old = red
-	new = green
-	whitespace = red reverse
+  meta = yellow
+  frag = magenta
+  commit = yellow
+  old = red
+  new = green
+  whitespace = red reverse
 [fetch]
-	prune = true
-	pruneTags = true
+  prune = true
+  pruneTags = true
 [interactive]
-	singleKey = true
+  singleKey = true
 [include]
-	path = ~/.config/git/local
+  path = ~/.config/git/local

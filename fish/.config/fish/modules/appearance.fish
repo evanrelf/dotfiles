@@ -68,6 +68,13 @@ function fish_prompt
         set git_branch (git symbolic-ref --short HEAD --quiet; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
         if test -n "$git_branch"
             set -l truncated (echo $git_branch | cut -c 1-35)
+            # Fast (ignores untracked files)
+            # if git diff --quiet --ignore-submodules HEAD
+            #     set_color green
+            # else
+            #     set_color yellow
+            # end
+            # Slow
             set -l dirty (git status --porcelain)
             if test -z "$dirty"
                 set_color green
