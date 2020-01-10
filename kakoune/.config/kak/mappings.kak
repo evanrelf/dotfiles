@@ -67,6 +67,9 @@ hook global InsertDelete ' ' %{ try %{
   execute-keys -draft 'hGh<a-k>\A\h+\z<ret>i<space><esc><lt>'
 }}
 
+# Tags
+map global user "t" "<a-i>w: ctags-search<ret>;<space>" -docstring "Jump to tag under cursor"
+
 # User mode
 map global user "y" "<a-|>pbcopy<ret>" -docstring "Yank to clipboard"
 map global user "p" "<a-!>pbpaste<ret>" -docstring "Paste after from clipboard"

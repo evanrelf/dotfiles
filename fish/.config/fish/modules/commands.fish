@@ -14,7 +14,7 @@ end
 # ls
 if _exists exa
     alias ls "exa --group-directories-first"
-    alias ll "exa -l --group-directories-first --git"
+    alias ll "exa -l --group-directories-first --"
     alias tree "exa --tree --group-directories-first -I '.git|dist-newstyle|.cache|.stack-work|elm-stuff|node_modules'"
 else
     alias ls "ls -AFGh"
@@ -95,8 +95,8 @@ if status --is-interactive
         abbr --add cbf "cabal build -O0"
     end
 end
-function fn -d "Search for Elm/Haskell function definition"
-    set -l match (rg -Hin "^\s*(,|\{)?\s*\w*$argv[1]\w* ::? " -g "*.hs" -g "*.elm" | fzf -1 -0 --height 50% --exact)
+function fn -d "Search for Haskell/PureScript function definition"
+    set -l match (rg --with-filename --ignore-case --line-number --multiline "^\s*(,|\{|let|where)?\s*\w*$argv[1]\w*\s+:: " -g "*.hs" -g "*.purs" | fzf -1 -0 --height 50% --exact)
     set -l file (echo $match | cut -d ':' -f 1)
     set -l line (echo $match | cut -d ':' -f 2)
     if test -e $file

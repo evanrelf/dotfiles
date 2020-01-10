@@ -19,12 +19,12 @@ hook global ModeChange pop:insert:.* %{
 # Use Tab key in autocomplete menu
 hook global InsertCompletionShow .* %{ try %{
   execute-keys -draft "h<a-K>\h<ret>"
-  map window insert <tab> <c-n>
-  map window insert <s-tab> <c-p>
+  map window insert "<tab>" "<c-n>"
+  map window insert "<s-tab>" "<c-p>"
 }}
 hook global InsertCompletionHide .* %{
-  unmap window insert <tab> <c-n>
-  unmap window insert <s-tab> <c-p>
+  unmap window insert "<tab>" "<c-n>"
+  unmap window insert "<s-tab>" "<c-p>"
 }
 
 # Highlight current selection
