@@ -10,7 +10,7 @@ function rc -d "Open the specified program's configuration file"
                 cd "$HOME/.config/kak"
                 ls -l
             case emacs
-                eval $EDITOR "$HOME/.emacs"
+                eval $EDITOR "$HOME/.emacs.d/init.el"
             case spacemacs
                 eval $EDITOR "$HOME/.spacemacs"
             case doom

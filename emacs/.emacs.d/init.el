@@ -125,6 +125,7 @@
   (which-key-mode))
 ;; Languages
 (use-package haskell-mode)
+(use-package nix-mode)
 (use-package purescript-mode
   :config
   (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation))
