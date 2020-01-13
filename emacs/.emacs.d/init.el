@@ -30,18 +30,18 @@
 ;; (use-package doom-themes
 ;;   :config
 ;;   (load-theme 'doom-one t))
-(use-package centaur-tabs
-  :config
-  (centaur-tabs-mode t))
+;; (use-package spacemacs-theme
+;;   :config
+;;   (load-theme 'spacemacs-light t))
+;; (use-package centaur-tabs
+;;   :config
+;;   (centaur-tabs-mode t))
 (use-package mood-line
   :config
   (mood-line-mode))
-;; (use-package doom-modeline
-;;   :config
-;;   (setq doom-modeline-major-mode-icon nil)
-;;   (setq doom-modeline-modal-icon nil)
-;;   (setq doom-modeline-height 1)
-;;   (doom-modeline-mode 1))
+(use-package centaur-tabs
+  :config
+  (centaur-tabs-mode t))
 ;; Evil
 (use-package evil
   :init
@@ -50,19 +50,18 @@
   (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1))
-(use-package evil-terminal-cursor-changer
-  :unless window-system
-  :init
-  (setq evil-motion-state-cursor 'box)
-  (setq evil-visual-state-cursor 'box)
-  (setq evil-normal-state-cursor 'box)
-  (setq evil-insert-state-cursor 'bar)
-  (setq evil-emacs-state-cursor  'hbar)
-  :config
-  (require 'evil-terminal-cursor-changer)
-  (evil-terminal-cursor-changer-activate))
+;; (use-package evil-terminal-cursor-changer
+;;   :unless window-system
+;;   :init
+;;   (setq evil-motion-state-cursor 'box)
+;;   (setq evil-visual-state-cursor 'box)
+;;   (setq evil-normal-state-cursor 'box)
+;;   (setq evil-insert-state-cursor 'bar)
+;;   (setq evil-emacs-state-cursor  'hbar)
+;;   :config
+;;   (require 'evil-terminal-cursor-changer)
+;;   (evil-terminal-cursor-changer-activate))
 (use-package evil-collection
-  ;; :after evil
   :config
   (evil-collection-init))
 (use-package evil-surround
@@ -80,7 +79,7 @@
 (use-package evil-goggles
   :config
   (evil-goggles-mode)
-  (setq evil-goggles-duration 0.100))
+  (setq evil-goggles-duration 0.05))
 (use-package evil-matchit
   :config
   (global-evil-matchit-mode 1))
@@ -106,6 +105,9 @@
 ;;   (setq lsp-haskell-process-args-hie '()))
 ;; (use-package company-lsp
 ;;   :commands company-lsp)
+(use-package projectile
+  :config
+  (projectile-mode +1))
 (use-package company
   :config
   (setq company-idle-delay 0.2)
@@ -113,6 +115,7 @@
 (use-package flycheck
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))
+  ;; Only run flycheck on initial load and file saving
   (setq flymake-no-changes-timeout nil)
   (setq flymake-start-syntax-check-on-newline nil)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
@@ -124,9 +127,18 @@
 (use-package ivy
   :config
   (ivy-mode 1))
+(use-package prescient)
+(use-package ivy-prescient
+  :after counsel
+  :config
+  (ivy-prescient-mode))
+(use-package company-prescient
+  :config
+  (company-prescient-mode))
 (use-package counsel
   :config
   (counsel-mode 1))
+(use-package dumb-jump)
 (use-package which-key
   :config
   (which-key-mode))
@@ -157,7 +169,6 @@
   (general-evil-setup t))
 (use-package smartparens
   :config
-  (require 'smartparens-config)
   (smartparens-global-mode t))
 (use-package simpleclip
   :config

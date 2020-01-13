@@ -2,10 +2,6 @@
 :set prompt "\ESC[1;35m\x03BB> \ESC[m"
 :set prompt-cont "\ESC[1;35m | \ESC[m"
 
--- Language extensions
-:set -XOverloadedStrings
-:set -XTypeApplications
-
 -- Hoogle
 -- :def! haddocks (\arg -> return $ ":! hoogle --color --info \'" ++ arg ++ "\'")
 -- :def! hoogle (\arg -> return $ ":! hoogle --color \'" ++ arg ++ "\'")
