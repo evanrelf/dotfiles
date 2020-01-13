@@ -20,4 +20,4 @@ if git rev-parse "$ref" --verify --quiet >/dev/null 2>&1; then
 fi
 
 # Begin interactive rebase
-git rebase --interactive "$ref" "${@:2}"
+git rebase --interactive --gpg-sign "$ref" "${@:2}"

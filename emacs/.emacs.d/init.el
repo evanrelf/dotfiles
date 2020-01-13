@@ -21,13 +21,27 @@
 (straight-use-package 'use-package)
 
 ;; Appearance
-(use-package doom-themes
+(use-package modus-operandi-theme
   :config
-  (load-theme 'doom-one t))
-(use-package doom-modeline
+  (load-theme 'modus-operandi t))
+;; (use-package modus-vivendi-theme
+;;   :config
+;;   (load-theme 'modus-vivendi t))
+;; (use-package doom-themes
+;;   :config
+;;   (load-theme 'doom-one t))
+(use-package centaur-tabs
   :config
-  (doom-modeline-init)
-  (setq doom-modeline-height 20))
+  (centaur-tabs-mode t))
+(use-package mood-line
+  :config
+  (mood-line-mode))
+;; (use-package doom-modeline
+;;   :config
+;;   (setq doom-modeline-major-mode-icon nil)
+;;   (setq doom-modeline-modal-icon nil)
+;;   (setq doom-modeline-height 1)
+;;   (doom-modeline-mode 1))
 ;; Evil
 (use-package evil
   :init
@@ -110,18 +124,11 @@
 (use-package ivy
   :config
   (ivy-mode 1))
-(use-package ivy-posframe
-  :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
-  (ivy-posframe-mode 1))
 (use-package counsel
   :config
   (counsel-mode 1))
 (use-package which-key
   :config
-  (setq which-key-show-early-on-C-h t)
-  (setq which-key-idle-delay 10000)
-  (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 ;; Languages
 (use-package haskell-mode)
@@ -143,7 +150,7 @@
 (use-package git-gutter
   :config
   (custom-set-variables '(git-gutter:modified-sign "~"))
-  (set-face-foreground 'git-gutter:modified "yellow")
+  ;; (set-face-foreground 'git-gutter:modified "yellow")
   (global-git-gutter-mode t))
 (use-package general
   :config
@@ -169,7 +176,7 @@
 
 ;; SETTINGS
 ;; GUI font
-(setq default-frame-alist '((font . "PragmataPro Liga-12")))
+(setq default-frame-alist '((font . "PragmataPro Liga-16")))
 ;; Disable bold font
 (set-face-bold 'bold nil)
 ;; Enable line numbers
@@ -186,8 +193,9 @@
 ;; Disable audio bell
 (setq ring-bell-function 'ignore)
 ;; Colored GUI titlebar
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
+;; (add-to-list 'default-frame-alist '(ns-appearance . light))
 ;; Follow symlinks when opening files under version control
 (setq vc-follow-symlinks t)
 ;; Make files with a shebang executable when saving

@@ -14,7 +14,7 @@ end
 # ls
 if _exists exa
     alias ls "exa --group-directories-first"
-    alias ll "exa -l --group-directories-first --"
+    alias ll "exa -l --group-directories-first"
     alias tree "exa --tree --group-directories-first -I '.git|dist-newstyle|.cache|.stack-work|elm-stuff|node_modules'"
 else
     alias ls "ls -AFGh"
