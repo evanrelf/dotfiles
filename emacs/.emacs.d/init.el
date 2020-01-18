@@ -39,9 +39,6 @@
 (use-package mood-line
   :config
   (mood-line-mode))
-(use-package centaur-tabs
-  :config
-  (centaur-tabs-mode t))
 ;; Evil
 (use-package evil
   :init
@@ -166,7 +163,7 @@
   (global-git-gutter-mode t))
 (use-package general
   :config
-  (general-evil-setup t))
+  (general-evil-setup))
 (use-package smartparens
   :config
   (smartparens-global-mode t))
@@ -252,6 +249,11 @@
 (setq custom-file "/dev/null")
 
 ;; MAPPINGS
-(mmap
+(general-mmap
   "j" 'evil-next-visual-line
-  "k" 'evil-previous-visual-line)
+  "k" 'evil-previous-visual-line
+  ;; "gi" 'evil-first-non-blank
+  "gh" 'evil-beginning-of-line
+  "gj" 'evil-goto-line
+  "gk" 'evil-goto-first-line
+  "gl" 'evil-end-of-line)

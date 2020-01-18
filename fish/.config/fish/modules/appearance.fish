@@ -122,9 +122,9 @@ function fish_prompt
         set_color red
     end
     # Smart newline
-    if test (math (tput cols) - \((echo \(prompt_pwd\)" $git_branch" | wc -c)\)) -lt 40
-        echo
-    end
+    # if test (math (tput cols) - \((echo \(prompt_pwd\)" $git_branch" | wc -c)\)) -lt 40
+    #     echo
+    # end
     echo
     # Prompt character
     echo -n "λ "
