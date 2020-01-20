@@ -21,21 +21,15 @@
 (straight-use-package 'use-package)
 
 ;; Appearance
-(use-package modus-operandi-theme
-  :config
-  (load-theme 'modus-operandi t))
+;; (use-package modus-operandi-theme
+;;   :config
+;;   (load-theme 'modus-operandi t))
 ;; (use-package modus-vivendi-theme
 ;;   :config
 ;;   (load-theme 'modus-vivendi t))
-;; (use-package doom-themes
-;;   :config
-;;   (load-theme 'doom-one t))
-;; (use-package spacemacs-theme
-;;   :config
-;;   (load-theme 'spacemacs-light t))
-;; (use-package centaur-tabs
-;;   :config
-;;   (centaur-tabs-mode t))
+(use-package doom-themes
+  :config
+  (load-theme 'doom-one t))
 (use-package mood-line
   :config
   (mood-line-mode))
