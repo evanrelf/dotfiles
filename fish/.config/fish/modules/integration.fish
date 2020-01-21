@@ -9,8 +9,7 @@
 
 # hg-root
 # if ! _exists hg-root && _exists hg 2>&1
-#     _error "Your prompt may be slow if you don't have hg-root installed"
-#     echo "https://github.com/evanrelf/hg-root"
+#     _error "Your prompt may be slow if you don't have hg-root installed\nhttps://github.com/evanrelf/hg-root"
 # end
 
 # direnv

@@ -1,9 +1,5 @@
 alias reload "source $HOME/.config/fish/config.fish"
 
-function nixpkgs-sha256
-    nix-prefetch-url --type sha256 "https://github.com/nixos/nixpkgs/archive/$argv[1].tar.gz" --unpack
-end
-
 function abbr-erase
     set -g fish_user_abbreviations
     for a in (abbr --list)
@@ -49,7 +45,7 @@ function kakc
         kak -c daemon $argv
     end
     if test $status -eq 255
-        echo "Starting Kakoune daemon"
+        _log "Starting Kakoune daemon"
         kakd
         kakc $argv
     end
@@ -61,7 +57,7 @@ function nnn --description 'support nnn quit and change directory'
     # Block nesting of nnn in subshells
     if test -n "$NNNLVL"
         if test "$NNNLVL" -ge 1
-            echo "nnn is already running"
+            _log "nnn is already running"
             return
         end
     end
@@ -83,6 +79,26 @@ function nnn --description 'support nnn quit and change directory'
     end
 end
 
+# Nix
+function do
+    if test -z "$argv"
+        _error "do what?"
+    end
+    if not _exists "nix-shell"
+        _error "Nix isn't installed"
+    end
+    if test -f "shell.nix" || test -f "default.nix"
+        _log "Running '$argv' in a Nix shell..."
+        nix-shell --run "$argv"
+    else
+        _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
+    end
+end
+
+function nixpkgs-sha256
+    nix-prefetch-url --type sha256 "https://github.com/nixos/nixpkgs/archive/$argv[1].tar.gz" --unpack
+end
+
 # Other
 if _exists hub
     alias git "hub"
@@ -102,8 +118,7 @@ function fn -d "Search for Haskell/PureScript function definition"
     if test -e $file
         eval $EDITOR $file +$line +"norm zz"
     else
-        echo "No results found" >&2
-        return 1
+        _error "No results found"
     end
 end
 function rgl -d "Pipe ripgrep output to less"

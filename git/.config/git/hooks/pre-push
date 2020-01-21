@@ -1,0 +1,17 @@
+#!/bin/bash
+
+protected_branch="master"
+current_branch=$(git symbolic-ref HEAD | sed -e "s,.*/\(.*\),\1,")
+
+if [ "$current_branch" = "$protected_branch" ]; then
+  read -p "You're about to push to $protected_branch, is that what you intended? [yN] " -n 1 -r < /dev/tty
+  echo
+  if echo "$REPLY" | grep -qE '^[Yy]$'; then
+    echo "Pushing to $protected_branch in 5 seconds... (Ctrl-C to cancel)"
+    sleep 5
+    exit 0
+  else
+    echo "Aborting"
+    exit 1
+  fi
+fi

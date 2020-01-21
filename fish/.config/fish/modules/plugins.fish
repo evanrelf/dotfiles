@@ -1,6 +1,6 @@
 # Auto-install fisher and plugins
 if not functions -q fisher
-    echo "Installing fisher..."
+    _log "Installing fisher..."
     curl https://git.io/fisher --create-dirs -sLo $HOME/.config/fish/functions/fisher.fish
     source $HOME/.config/fish/functions/fisher.fish
     fisher

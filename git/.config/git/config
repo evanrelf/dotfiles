@@ -42,8 +42,8 @@
   k = lookup
 
   # PUSH
-  p = push
-  pf = push --force-with-lease
+  p = "!bash $HOME/.config/git/hooks/pre-push && git push $@ #"
+  pf = "!bash $HOME/.config/git/hooks/pre-push && git push --force-with-lease $@ #"
 
   # REBASE
   rb = rebase
