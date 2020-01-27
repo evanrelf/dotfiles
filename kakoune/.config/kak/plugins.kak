@@ -18,13 +18,32 @@ plug "alexherbo2/snippets.kak" %{
   hook global WinCreate .* %{ snippets-enable }
 }
 
+# Replace mode
+plug "alexherbo2/replace-mode.kak" %{
+  map global normal "<a-r>" ": enter-replace-mode<ret><c-o>"
+}
+
+# Create parent directories if missing
+plug "alexherbo2/mkdir.kak" %{
+  hook global BufWritePre .* %{ mkdir-current-buffer }
+}
+
+# Move selections
+plug "alexherbo2/move-line.kak" %{
+  map global normal "<up>" ": move-line-above<ret>"
+  map global normal "<down>"  ": move-line-below<ret>"
+}
+
 # More text objects
 plug "Delapouite/kakoune-text-objects"
 
-# Buffers
+# Syntax highlighting for Graphviz
+plug "jwhett/graphviz-kak"
+
+# Manipulate buffers more quickly
 plug "Delapouite/kakoune-buffers" %{
-  map global normal b ": enter-user-mode buffers<ret>"
-  map global normal B ": enter-user-mode -lock buffers<ret>"
+  map global normal "b" ": enter-user-mode buffers<ret>"
+  map global normal "B" ": enter-user-mode -lock buffers<ret>"
 }
 
 # Change directory

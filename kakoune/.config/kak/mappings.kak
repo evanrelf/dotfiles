@@ -42,15 +42,15 @@ map global normal "<a-=>" ": format-selections<ret>"
 map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
 
-# Move viewport with arrow keys
-map global normal "<left>" "vh"
-map global normal "<down>" "vj"
-map global normal "<up>" "vk"
-map global normal "<right>" "vl"
-map global insert "<left>" "<a-;>vh"
-map global insert "<down>" "<a-;>vj"
-map global insert "<up>" "<a-;>vk"
-map global insert "<right>" "<a-;>vl"
+# # Move viewport with arrow keys
+# map global normal "<left>" "vh"
+# map global normal "<down>" "vj"
+# map global normal "<up>" "vk"
+# map global normal "<right>" "vl"
+# map global insert "<left>" "<a-;>vh"
+# map global insert "<down>" "<a-;>vj"
+# map global insert "<up>" "<a-;>vk"
+# map global insert "<right>" "<a-;>vl"
 
 # Insert and delete spaces for indentation
 map global insert "<tab>" "<a-;><a-gt>"
