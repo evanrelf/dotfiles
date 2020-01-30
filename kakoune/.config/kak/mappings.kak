@@ -52,6 +52,11 @@ map global normal "X" ": extend-line-up %%val{count}<ret>"
 # map global insert "<up>" "<a-;>vk"
 # map global insert "<right>" "<a-;>vl"
 
+# Center viewport when moving through jump list
+map global normal "<c-i>" "<c-i>vc"
+map global normal "<c-o>" "<c-o>vc"
+
+
 # Insert and delete spaces for indentation
 map global insert "<tab>" "<a-;><a-gt>"
 map global insert "<s-tab>" "<a-;><a-lt>"

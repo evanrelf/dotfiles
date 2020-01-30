@@ -104,18 +104,23 @@ hook global WinSetOption filetype=makefile %{
   set-option window indentwidth 0
 }
 
-# SQL
-hook global WinSetOption filetype=sql %{
-  hook window WinClose .* %{ psql-disable }
-  map window filetype "s" ": query-selection<ret>" -docstring "Query selection"
-  map window filetype "b" ": query-buffer<ret>" -docstring "Query buffer"
-  # map window filetype "c" ": nop %%sh{ echo '' > /tmp/$kak_opt_psql_tmpfile }<ret>" -docstring "Clear query history"
-  psql-enable
-}
+# # SQL
+# hook global WinSetOption filetype=sql %{
+#   hook window WinClose .* %{ psql-disable }
+#   map window filetype "s" ": query-selection<ret>" -docstring "Query selection"
+#   map window filetype "b" ": query-buffer<ret>" -docstring "Query buffer"
+#   # map window filetype "c" ": nop %%sh{ echo '' > /tmp/$kak_opt_psql_tmpfile }<ret>" -docstring "Clear query history"
+#   psql-enable
+# }
 
 # Kakoune
 hook global BufCreate \*scratch\* %{
   execute-keys '%d'
+}
+
+# Man
+hook global WinSetOption filetype=man %{
+  remove-highlighter global/number-lines_-hlcursor
 }
 
 # Prettier
