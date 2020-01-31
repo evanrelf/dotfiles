@@ -12,5 +12,6 @@ function wig -d "WireGuard"
             or _log "Up"
         case "*"
             _error "Invalid command '$argv[1]'\nComands: up down status"
+            return 1
     end
 end

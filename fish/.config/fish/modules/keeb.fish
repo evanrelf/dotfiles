@@ -4,24 +4,32 @@ function keeb -d "Safely flash QMK firmware to TADA68 keyboard"
 
     if test ! -d "$mount_dir"
         _error "Volume not mounted at '$mount_dir'"
+        return 1
     end
 
     if test ! -d "$qmk_dir"
         _error "QMK directory '$qmk_dir' does not exist"
+        return 1
     else
-        cd $qmk_dir; or _error "Failed to change directory to '$qmk_dir'"
+        if not cd $qmk_dir
+            _error "Failed to change directory to '$qmk_dir'"
+            return 1
+        end
     end
 
     if git remote -v | not grep "qmk_firmware" >/dev/null
         _error "Invalid QMK directory: '$qmk_dir'"
+        return 1
     end
 
     if not command -s nix-shell >/dev/null
         _error "Nix not installed"
+        return 1
     else
         nix-shell --arg arm false --command "make tada68:evanrelf"
         if test $status -ne 0
             _error "Failed to compile firmware"
+            return 1
         end
     end
 
@@ -29,15 +37,18 @@ function keeb -d "Safely flash QMK firmware to TADA68 keyboard"
         command rm -rf "$mount_dir/$file"
         if test $status -ne 0
             _error "Failed to remove '$file' from volume"
+            return 1
         end
     end
 
     if test ! -e "tada68_evanrelf.bin"
         _error "Firmware file 'tada68_evanrelf.bin' does not exist"
+        return 1
     else
         cp "tada68_evanrelf.bin" "$mount_dir/FLASH.BIN"
         if test $status -ne 0
             _error "Failed to copy firmware to volume"
+            return 1
         end
     end
 

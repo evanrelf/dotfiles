@@ -12,7 +12,6 @@ function _error
     set_color red
     echo -e "ERROR: $argv" >&2
     set_color normal
-    return 1
 end
 
 function _silently

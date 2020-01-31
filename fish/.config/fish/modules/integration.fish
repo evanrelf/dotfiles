@@ -9,7 +9,7 @@
 
 # hg-root
 # if ! _exists hg-root && _exists hg 2>&1
-#     _error "Your prompt may be slow if you don't have hg-root installed\nhttps://github.com/evanrelf/hg-root"
+#     _warn "Your prompt may be slow if you don't have hg-root installed\nhttps://github.com/evanrelf/hg-root"
 # end
 
 # direnv
@@ -43,7 +43,7 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
     if type -q bass
         bass source $HOME/.nix-profile/etc/profile.d/nix.sh
     else
-        _error "Nix isn't working because you don't have bass"
+        _warn "Nix isn't working because you don't have bass"
     end
 end
 # if _exists any-nix-shell
@@ -86,9 +86,11 @@ if test (uname) = "Darwin"
                 end
             else
                 _error "No .DS_Store files found"
+                return 1
             end
         else
             _error "fd not installed"
+            return 1
         end
     end
 
@@ -101,6 +103,7 @@ if test (uname) = "Darwin"
             end
         else
             _error "No ISO files specified"
+            return 1
         end
     end
     complete --command iso2img --require-parameter

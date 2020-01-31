@@ -101,6 +101,7 @@ function rc -d "Open the specified program's configuration file"
 
             case "*"
                 _error "No config defined for '$argv[1]'"
+                return 1
         end
     else
         fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --exact | xargs -o $EDITOR

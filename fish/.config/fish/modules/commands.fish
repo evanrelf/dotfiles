@@ -81,22 +81,33 @@ end
 
 # Nix
 function do
-    if test -z "$argv"
-        _error "do what?"
-    end
     if not _exists "nix-shell"
         _error "Nix isn't installed"
+        return 1
     end
-    if test -f "shell.nix" || test -f "default.nix"
-        _log "Running '$argv' in a Nix shell..."
-        nix-shell --run "$argv"
-    else
+    if not test -f "shell.nix" || not test -f "default.nix"
         _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
+        return 1
+    end
+    _log "Entering Nix shell..."
+    if test -z "$argv"
+        command nix-shell
+    else
+        command nix-shell --command "$argv; return"
     end
 end
 
-function nixpkgs-sha256
-    nix-prefetch-url --type sha256 "https://github.com/nixos/nixpkgs/archive/$argv[1].tar.gz" --unpack
+function with
+    if not _exists "nix-shell"
+        _error "Nix isn't installed"
+        return 1
+    end
+    if test -z "$argv"
+        _error "with what?"
+        return 1
+    end
+    _log "Entering Nix shell..."
+    command nix-shell --packages $argv
 end
 
 # Other
@@ -112,18 +123,19 @@ if status --is-interactive
     end
 end
 function fn -d "Search for Haskell/PureScript function definition"
-    set -l match (rg --with-filename --ignore-case --line-number --multiline "^\s*(,|\{|let|where)?\s*\w*$argv[1]\w*\s+:: " -g "*.hs" -g "*.purs" | fzf -1 -0 --height 50% --exact)
-    set -l file (echo $match | cut -d ':' -f 1)
-    set -l line (echo $match | cut -d ':' -f 2)
+    set -l match (command rg --with-filename --ignore-case --line-number --multiline "^\s*(,|\{|let|where)?\s*\w*$argv[1]\w*\s+:: " -g "*.hs" -g "*.purs" | command fzf -1 -0 --height 50% --exact)
+    set -l file (echo $match | command cut -d ':' -f 1)
+    set -l line (echo $match | command cut -d ':' -f 2)
     if test -e $file
         eval $EDITOR $file +$line +"norm zz"
     else
         _error "No results found"
+        return 1
     end
 end
 function rgl -d "Pipe ripgrep output to less"
-    rg --color always --heading --line-number --smart-case $argv | less --raw-control-chars
+    command rg --color always --heading --line-number --smart-case $argv | less --raw-control-chars
 end
 function treel -d "Pipe exa --tree output to less"
-    exa --color always --tree $argv | less --raw-control-chars
+    command exa --color always --tree $argv | less --raw-control-chars
 end
