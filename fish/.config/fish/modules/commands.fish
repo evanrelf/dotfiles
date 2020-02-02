@@ -53,29 +53,31 @@ end
 complete --command kakc --wraps kak
 
 # nnn (from https://github.com/jarun/nnn/blob/master/misc/quitcd/quitcd.fish)
-function nnn --description 'support nnn quit and change directory'
-    # Block nesting of nnn in subshells
-    if test -n "$NNNLVL"
-        if test "$NNNLVL" -ge 1
-            _log "nnn is already running"
-            return
+if _exists nnn
+    function nnn --description 'support nnn quit and change directory'
+        # Block nesting of nnn in subshells
+        if test -n "$NNNLVL"
+            if test "$NNNLVL" -ge 1
+                _log "nnn is already running"
+                return
+            end
         end
-    end
 
-    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, export NNN_TMPFILE after the call to nnn
-    # NOTE: NNN_TMPFILE is fixed, should not be modified
-    if test -n "$XDG_CONFIG_HOME"
-        set -x NNN_TMPFILE "$XDG_CONFIG_HOME/nnn/.lastd"
-    else
-        set -x NNN_TMPFILE "$HOME/.config/nnn/.lastd"
-    end
+        # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+        # To cd on quit only on ^G, export NNN_TMPFILE after the call to nnn
+        # NOTE: NNN_TMPFILE is fixed, should not be modified
+        if test -n "$XDG_CONFIG_HOME"
+            set -x NNN_TMPFILE "$XDG_CONFIG_HOME/nnn/.lastd"
+        else
+            set -x NNN_TMPFILE "$HOME/.config/nnn/.lastd"
+        end
 
-    command nnn $argv
+        command nnn $argv
 
-    if test -e $NNN_TMPFILE
-        source $NNN_TMPFILE
-        rm $NNN_TMPFILE
+        if test -e $NNN_TMPFILE
+            source $NNN_TMPFILE
+            rm $NNN_TMPFILE
+        end
     end
 end
 
@@ -115,8 +117,12 @@ if _exists hub
     alias git "hub"
 end
 if status --is-interactive
-    abbr --add v "nvim"
-    abbr --add n "nnn"
+    if _exists nvim
+        abbr --add v "nvim"
+    end
+    if _exists nnn
+        abbr --add n "nnn"
+    end
     if _exists stack
         abbr --add sbf "stack build --fast"
         abbr --add cbf "cabal build -O0"

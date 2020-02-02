@@ -51,6 +51,15 @@ end
 #     any-nix-shell fish | source
 # end
 
+# home-manager
+if test -e $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+    if type -q bass
+        bass source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+    else
+        _warn "home-manager isn't working because you don't have bass"
+    end
+end
+
 # macOS
 if test (uname) = "Darwin"
     if status --is-interactive

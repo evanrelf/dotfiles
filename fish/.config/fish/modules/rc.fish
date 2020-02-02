@@ -90,6 +90,8 @@ function rc -d "Open the specified program's configuration file"
                 else
                   eval $EDITOR "/etc/nixos/configuration.nix"
                 end
+            case home-manager home
+                eval $EDITOR "$HOME/.config/nixpkgs/home.nix"
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
             case zathura
