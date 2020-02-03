@@ -30,7 +30,6 @@
     ripgrep
     shellcheck
     stack
-    stow
     tealdeer
     tectonic
     tmux
