@@ -1,3 +1,4 @@
+set -x SHELL (which fish)
 set -x EDITOR "kak"
 set -x VISUAL "$EDITOR"
 set -x NIXPKGS_ALLOW_UNFREE 1

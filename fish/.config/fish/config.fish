@@ -1,3 +1,6 @@
+if test -e "$HOME/.config/fish/local.fish"
+    source "$HOME/.config/fish/local.fish"
+end
 source "$HOME/.config/fish/prelude.fish"
 source "$HOME/.config/fish/modules/integration.fish"
 source "$HOME/.config/fish/modules/variables.fish"

@@ -43,7 +43,14 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
     if type -q bass
         bass source $HOME/.nix-profile/etc/profile.d/nix.sh
     else
-        _warn "Nix isn't working because you don't have bass"
+        _warn "Nix (single user) isn't working because you don't have bass"
+    end
+end
+if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    if type -q bass
+        bass source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    else
+        _warn "Nix (multi-user) isn't working because you don't have bass"
     end
 end
 # if _exists any-nix-shell
