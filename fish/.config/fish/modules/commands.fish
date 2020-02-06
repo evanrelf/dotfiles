@@ -82,12 +82,12 @@ if _exists nnn
 end
 
 # Nix
-function do
+function run
     if not _exists "nix-shell"
         _error "Nix isn't installed"
         return 1
     end
-    if not test -f "shell.nix" || not test -f "default.nix"
+    if not test -f "shell.nix" && not test -f "default.nix"
         _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
         return 1
     end
@@ -98,7 +98,6 @@ function do
         command nix-shell --command "$argv; return"
     end
 end
-
 function with
     if not _exists "nix-shell"
         _error "Nix isn't installed"
