@@ -3,7 +3,7 @@
 set -euo pipefail
 
 current_branch=$(git symbolic-ref HEAD | sed -e "s,.*/\(.*\),\1,")
-blacklist_regex='^(master)\$'
+blacklist_regex='^(master)$'
 delay=5
 
 if echo "$current_branch" | grep --quiet --extended-regexp $blacklist_regex; then
