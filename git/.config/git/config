@@ -18,8 +18,8 @@
 
   # COMMIT
   c = commit
-  amend = "!echo \"Modifying history in 5 seconds... (Ctrl-C to cancel)\"; sleep 5; git commit --amend --no-edit $@ #"
-  rename = "!echo \"Modifying history in 5 seconds... (Ctrl-C to cancel)\"; sleep 5; git commit --amend $@ #"
+  amend = commit --amend --no-edit
+  rename = commit --amend
   undo-commit = reset --soft HEAD~
 
   # DIFF
