@@ -123,6 +123,11 @@ hook global WinSetOption filetype=man %{
   remove-highlighter global/number-lines_-hlcursor
 }
 
+# Emacs Lisp
+hook global WinCreate .*\.el %{
+  set-option window filetype lisp
+}
+
 # Prettier
 hook global WinSetOption filetype=markdown %{ set-option window formatcmd "prettier --stdin --parser markdown" }
 hook global WinSetOption filetype=json %{ set-option window formatcmd "prettier --stdin --parser json" }

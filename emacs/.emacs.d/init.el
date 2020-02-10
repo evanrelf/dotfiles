@@ -5,13 +5,13 @@
 ;; (byte-recompile-directory "~/.emacs.d/" 0 t)
 
 ;; Increase garbage collection threshold from default 8 MB
-(setq-default gc-cons-threshold 32000000) ;; 32 MB
+(setq gc-cons-threshold 32000000) ;; 32 MB
 
 ;; Enable messages to detect thrashing
-(setq-default garbage-collection-messages t)
+(setq garbage-collection-messages t)
 
 ;; Increase recursion limit
-(setq-default max-lisp-eval-depth 2000)
+(setq max-lisp-eval-depth 2000)
 
 ;; Maximize GUI frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -19,35 +19,35 @@
 ;; Use dark window chrome in GUI
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
-;; Disable superfluous chrome in GUI
-(when (window-system)
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (horizontal-scroll-bar-mode -1)
-  (blink-cursor-mode -1)
-  (tooltip-mode -1)
-  (fringe-mode -1))
+;; Disable superfluous chrome
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
+(blink-cursor-mode -1)
+(tooltip-mode -1)
+(fringe-mode -1)
 
 ;; Enable mouse support in terminal
-(xterm-mouse-mode t)
-(setq-default scroll-step 3)
+(when (not window-system)
+  (xterm-mouse-mode t))
+(setq scroll-step 3)
 (unless window-system
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 
 ;; Disable audio bell
-(setq-default ring-bell-function 'ignore)
+(setq ring-bell-function 'ignore)
 
 ;; Disable customizations
-(setq-default custom-file "/dev/null")
+(setq custom-file "/dev/null")
 
 ;; Font
-(ignore-errors (set-frame-font "PragmataPro Liga-16"))
+(setq default-frame-alist '((font . "PragmataPro Liga-16")))
 (set-face-bold 'bold nil)
 
 ;; Smaller font size adjustment increments
-(setq-default text-scale-mode-step 1.1)
+(setq text-scale-mode-step 1.1)
 
 ;; UTF-8
 (prefer-coding-system 'utf-8)
@@ -59,19 +59,19 @@
 (global-font-lock-mode t)
 
 ;; Disable startup messages
-(setq-default initial-scratch-message nil)
-(setq-default inhibit-startup-message t)
-(setq-default inhibit-startup-echo-area-message "evanrelf")
+(setq initial-scratch-message nil)
+(setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message "evanrelf")
 
 ;; Disable clutter files
-(setq-default make-backup-files nil)
-(setq-default auto-save-default nil)
+(setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;; Use y/n prompts instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Follow symlinks when opening files under version control
-(setq-default vc-follow-symlinks t)
+(setq vc-follow-symlinks t)
 
 ;; Auto reload file when modified externally
 (global-auto-revert-mode t)
@@ -80,20 +80,20 @@
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 ;; Sentences shouldn't have to end with two spaces
-(setq-default sentence-end-double-space nil)
+(setq sentence-end-double-space nil)
 
 ;; Indent with 2 spaces
-(setq-default tab-width 2)
-(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+(setq indent-tabs-mode nil)
 
 ;; Control mini window sizing
-(setq-default resize-mini-windows t)
-(setq-default max-mini-window-height 10)
-(setq-default minibuffer-scroll-window t)
+(setq resize-mini-windows t)
+(setq max-mini-window-height 10)
+(setq minibuffer-scroll-window t)
 
 ;; Scroll line-by-line
-(setq-default scroll-step 1)
-(setq-default scroll-conservatively 10000)
+(setq scroll-step 1)
+(setq scroll-conservatively 10000)
 
 ;; Install straight.el
 (defvar bootstrap-version)
@@ -111,21 +111,18 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
-(setq-default straight-use-package-by-default t)
+(setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
+
+;; Easy keybindings
+(use-package general
+  :config
+  (general-evil-setup))
 
 ;; Theme
 (use-package doom-themes
   :config
-  (load-theme 'doom-one t))
-
-;; Other themes
-;; (use-package modus-operandi-theme
-;;   :config
-;;   (load-theme 'modus-operandi t))
-;; (use-package modus-vivendi-theme
-;;   :config
-;;   (load-theme 'modus-vivendi t))
+  (load-theme 'doom-challenger-deep t))
 
 ;; Modeline
 (use-package mood-line
@@ -136,15 +133,24 @@
 (use-package centaur-tabs
   :after all-the-icons
   :demand
+  :init
+  (setq centaur-tabs-set-bar 'over)
+  ;; (setq x-underline-at-descent-line t)
+  (setq centaur-tabs-height 28)
+  (setq centaur-tabs-gray-out-icons 'buffer)
+  (setq centaur-tabs-set-icons t)
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-close-button "✕")
+  ;; (setq centaur-tabs-modified-marker "⬤")
+  (setq centaur-tabs-modified-marker "●")
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-group-by-projectile-project)
-  (setq-default centaur-tabs-gray-out-icons 'buffer)
-  (setq-default centaur-tabs-style "bar")
-  (setq-default centaur-tabs-set-bar 'over)
-  (setq-default centaur-tabs-height 20)
-  (setq-default centaur-tabs-set-modified-marker t)
-  (setq-default centaur-tabs-modified-marker "●"))
+  (centaur-tabs-headline-match)
+  :general
+  (general-nmap
+    "g t" 'centaur-tabs-forward
+    "g T" 'centaur-tabs-backward))
 
 ;; Icons
 (use-package all-the-icons)
@@ -161,11 +167,22 @@
 
 ;; Vim keybindings
 (use-package evil
+  :demand
   :init
-  (setq-default evil-want-keybinding nil)
-  (setq-default evil-want-C-u-scroll t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  :general
+  (general-mmap
+    "j" 'evil-next-visual-line
+    "k" 'evil-previous-visual-line
+    ;; "gi" 'evil-first-non-blank
+    "gh" 'evil-beginning-of-line
+    "gj" 'evil-goto-line
+    "gk" 'evil-goto-first-line
+    "gl" 'evil-end-of-line)
+  )
 
 ;; Evil extras
 (use-package evil-collection
@@ -196,7 +213,7 @@
   :after evil
   :config
   (evil-goggles-mode)
-  (setq-default evil-goggles-duration 0.05))
+  (setq evil-goggles-duration 0.1))
 (use-package evil-escape
   :after evil
   :config
@@ -205,7 +222,7 @@
 ;; Auto-complete
 (use-package company
   :config
-  (setq-default company-idle-delay 0.1)
+  (setq company-idle-delay 0.1)
   :hook
   (after-init . global-company-mode))
 
@@ -226,11 +243,15 @@
 ;; Display errors
 (use-package flycheck
   :config
-  (setq-default flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))
+  (setq flycheck-disabled-checkers
+                '(emacs-lisp
+                  emacs-lisp-checkdoc
+                  haskell-stack-ghc
+                  haskell-ghc))
   ;; Only run flycheck on initial load and file saving
-  (setq-default flymake-no-changes-timeout nil)
-  (setq-default flymake-start-syntax-check-on-newline nil)
-  (setq-default flycheck-check-syntax-automatically '(save mode-enabled))
+  (setq flymake-no-changes-timeout nil)
+  (setq flymake-start-syntax-check-on-newline nil)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   :hook
   (after-init . global-flycheck-mode))
 (use-package flycheck-pos-tip
@@ -239,15 +260,18 @@
     (flycheck-pos-tip-mode)))
 
 ;; Amazing Git porcelain
-(use-package magit
-  :defer 2)
+(use-package magit)
 (use-package evil-magit
   :after (evil magit))
 
 ;; Projectile
 (use-package projectile
   :config
+  (setq projectile-completion-system 'ivy)
   (projectile-mode t))
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
 
 ;; Ivy
 (use-package ivy
@@ -278,18 +302,16 @@
 (use-package evil-anzu
   :after (evil anzu))
 
-;; Easy keybindings
-(use-package general
-  :config
-  (general-evil-setup))
-
 ;; Show available keybindings after a delay
 (use-package which-key
   :config
   (which-key-mode))
 
 ;; Zero-config jump-to-definition
-(use-package dumb-jump)
+(use-package dumb-jump
+  :config
+  (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-force-searcher 'rg))
 
 ;; Show Git changes in gutter
 (use-package git-gutter
@@ -313,50 +335,32 @@
   (global-hl-todo-mode t))
 
 ;; Languages
-(use-package haskell-mode
-  :defer)
-(use-package nix-mode
-  :defer)
+(use-package haskell-mode)
+(use-package nix-haskell-mode
+  :after haskell-mode
+  :hook (haskell-mode . nix-haskell-mode))
+(use-package nix-mode)
 (use-package purescript-mode
-  :defer
   :hook
   (purescript-mode . turn-on-purescript-indentation))
-(use-package dhall-mode
-  :defer)
-(use-package protobuf-mode
-  :defer)
-(use-package dockerfile-mode
-  :defer)
-(use-package web-mode
-  :defer)
-(use-package rust-mode
-  :defer)
-(use-package lua-mode
-  :defer)
-(use-package fish-mode
-  :defer)
-(use-package markdown-mode
-  :defer)
+(use-package dhall-mode)
+(use-package protobuf-mode)
+(use-package dockerfile-mode)
+(use-package web-mode)
+(use-package rust-mode)
+(use-package lua-mode)
+(use-package fish-mode)
+(use-package markdown-mode)
 (use-package yaml-mode
-  :defer
   :hook
   (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
-
-;; Keybindings
-(general-mmap
-  "j" 'evil-next-visual-line
-  "k" 'evil-previous-visual-line
-  ;; "gi" 'evil-first-non-blank
-  "gh" 'evil-beginning-of-line
-  "gj" 'evil-goto-line
-  "gk" 'evil-goto-first-line
-  "gl" 'evil-end-of-line)
 
 ;; Adjust text scale
 (defun text-scale-reset ()
   "Reset the text scale"
   (interactive)
   (text-scale-adjust 0))
-(bind-key "s-="	'text-scale-increase)
-(bind-key "s--"	'text-scale-decrease)
-(bind-key "s-0"	'text-scale-reset)
+(general-define-key
+  "s-="	'text-scale-increase
+  "s--"	'text-scale-decrease
+  "s-0"	'text-scale-reset)
