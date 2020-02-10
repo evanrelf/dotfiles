@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     autojump
     cabal-install
+    cabal2nix
     cachix
     direnv
     exa
@@ -16,6 +17,7 @@
     gitAndTools.diff-so-fancy
     gitAndTools.hub
     hadolint
+    haskellPackages.fast-tags
     htop
     jq
     kakoune
@@ -34,6 +36,7 @@
     tectonic
     tmux
     tokei
+    universal-ctags
     yarn
   ];
 

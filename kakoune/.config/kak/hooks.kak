@@ -1,12 +1,12 @@
 provide-module "user_hooks" %{
 
 # Display Git diff in gutter
-# hook global WinCreate .* %{ try %{
-#   git show-diff
-# }}
-# hook global BufWritePost .* %{ try %{
-#   git update-diff
-# }}
+hook global WinCreate .* %{ try %{
+  git show-diff
+}}
+hook global BufWritePost .* %{ try %{
+  git update-diff
+}}
 
 # Highlight trailing whitespace
 hook global ModeChange push:.*:insert %{
