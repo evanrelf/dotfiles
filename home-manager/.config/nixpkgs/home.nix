@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     autojump
+    borgbackup
     cabal-install
     cabal2nix
     cachix

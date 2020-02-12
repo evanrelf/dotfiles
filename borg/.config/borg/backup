@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -13,25 +13,48 @@ if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" 
   exit 1
 fi
 
+_notify() {
+  if command -v notify-send >/dev/null 2>&1; then
+    notify-send "$@"
+  fi
+}
+
+# Potential home directories to check for
+potential_homes=("/home/evanrelf" "/home/evan" "/Users/evanrelf" "/Users/evan")
+
+# Look through potential home directories
+for path in "${potential_homes[@]}"; do
+  if [ -d "$path" ]; then
+    home="$path"
+    break
+  fi
+done
+
+# Fail if home directory could not be inferred
+if [ -z "$home" ]; then
+  echo "Couldn't infer your home directory" >&2
+  exit 1
+fi
+
 # Wait for Wi-Fi connection when resuming
 ping -c 2 -w 30 rsync.net >/dev/null 2>&1 \
-  || (notify-send --urgency=critical "Borg" "Failed to connect to rsync.net"; exit 1)
+  || (_notify --urgency=critical "Borg" "Failed to connect to rsync.net"; exit 1)
 
 # Backup
-/usr/bin/borg \
+borg \
   --verbose \
   create \
   --stats \
-  --exclude-from "/home/evanrelf/.config/borg/exclude" \
+  --exclude-from "$home/.config/borg/exclude" \
   --compression zstd,10 \
   ::"$(hostname)-$(date "+%Y-%m-%d_%H-%M")" \
-  "/home/evanrelf" \
-  || (notify-send --urgency=critical "Borg" "Backup failed to complete"; exit 1)
+  "$home" \
+  || (_notify --urgency=critical "Borg" "Backup failed to complete"; exit 1)
 
-notify-send "Borg" "Backup finished successfully"
+_notify "Borg" "Backup finished successfully"
 
 # Prune
-/usr/bin/borg \
+borg \
   --verbose \
   prune \
   --stats \
@@ -40,4 +63,4 @@ notify-send "Borg" "Backup finished successfully"
   --keep-daily=30 \
   --keep-weekly=8 \
   --keep-monthly=12 \
-  || (notify-send --urgency=critical "Borg" "Pruning failed to complete"; exit 1)
+  || (_notify --urgency=critical "Borg" "Pruning failed to complete"; exit 1)

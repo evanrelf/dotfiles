@@ -167,22 +167,11 @@
 
 ;; Vim keybindings
 (use-package evil
-  :demand
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1)
-  :general
-  (general-mmap
-    "j" 'evil-next-visual-line
-    "k" 'evil-previous-visual-line
-    ;; "gi" 'evil-first-non-blank
-    "gh" 'evil-beginning-of-line
-    "gj" 'evil-goto-line
-    "gk" 'evil-goto-first-line
-    "gl" 'evil-end-of-line)
-  )
+  (evil-mode t))
 
 ;; Evil extras
 (use-package evil-collection
@@ -276,12 +265,12 @@
 ;; Ivy
 (use-package ivy
   :config
-  (ivy-mode 1))
+  (ivy-mode t))
 
 ;; Counsel
 (use-package counsel
   :config
-  (counsel-mode 1))
+  (counsel-mode t))
 
 ;; Sort and filter candidates
 (use-package prescient)
@@ -304,6 +293,8 @@
 
 ;; Show available keybindings after a delay
 (use-package which-key
+  :init
+  (setq which-key-idle-delay 0.2)
   :config
   (which-key-mode))
 
@@ -336,9 +327,6 @@
 
 ;; Languages
 (use-package haskell-mode)
-(use-package nix-haskell-mode
-  :after haskell-mode
-  :hook (haskell-mode . nix-haskell-mode))
 (use-package nix-mode)
 (use-package purescript-mode
   :hook
@@ -360,7 +348,71 @@
   "Reset the text scale"
   (interactive)
   (text-scale-adjust 0))
-(general-define-key
+(general-def
   "s-="	'text-scale-increase
   "s--"	'text-scale-decrease
   "s-0"	'text-scale-reset)
+
+;; Evil
+(general-def
+  :states '(normal visual)
+  "j" 'evil-next-visual-line
+  "k" 'evil-previous-visual-line
+  "g i" 'evil-first-non-blank
+  "g h" 'evil-beginning-of-line
+  "g j" 'evil-goto-line
+  "g k" 'evil-goto-first-line
+  "g l" 'evil-end-of-line)
+
+;; Leader
+(general-def
+  :states '(normal visual insert)
+  :prefix "SPC"
+  :non-normal-prefix "M-SPC"
+  "" '(nil :which-key "leader")
+  "ESC" '(evil-escape :which-key t)
+
+  "w" '(:ignore t :which-key "window")
+  "w ESC" '(evil-escape :which-key t)
+  "w -" '(evil-window-split :which-key "split")
+  "w \\" '(evil-window-vsplit :which-key "vsplit")
+  "w n" '(evil-window-next :which-key "next")
+  "w p" '(evil-window-prev :which-key "previous")
+  "w h" '(evil-window-left :which-key "left")
+  "w j" '(evil-window-down :which-key "down")
+  "w k" '(evil-window-up :which-key "up")
+  "w l" '(evil-window-right :which-key "right")
+  "w d" '(evil-window-delete :which-key "delete")
+
+  "t" '(:ignore t :which-key "tab")
+  "t ESC" '(evil-escape :which-key t)
+  "t n" '(centaur-tabs-forward-tab :which-key "next")
+  "t p" '(centaur-tabs-backward-tab :which-key "previous")
+
+  "t g" '(:ignore t :which-key "group")
+  "t g ESC" '(evil-escape :which-key t)
+  "t g n" '(centaur-tabs-forward-group :which-key "next")
+  "t g p" '(centaur-tabs-backward-group :which-key "previous")
+
+  "b" '(:ignore t :which-key "buffer")
+  "b ESC" '(evil-escape :which-key t)
+  "b n" '(evil-next-buffer :which-key "next")
+  "b p" '(evil-previous-buffer :which-key "previous")
+  "b d" '(evil-delete-buffer :which-key "delete")
+
+  "f" '(:ignore t :which-key "file")
+  "f ESC" '(evil-escape :which-key t)
+  "f s" '(save-buffer :which-key "save")
+
+  "p" '(:ignore t :which-key "project")
+  "p ESC" '(evil-escape :which-key t)
+  "p s" '(counsel-projectile-switch-project :which-key "switch")
+  "p f" '(counsel-projectile-find-file :which-key "find file")
+  "p d" '(projectile-dired :which-key "dired")
+
+  "g" '(:ignore t :which-key "git")
+  "g ESC" '(evil-escape :which-key t)
+  "g s" '(magit-status :which-key "status")
+
+  "," '((lambda () (interactive) (evil-edit "~/.emacs.d/init.el")) :which-key "edit config")
+  )

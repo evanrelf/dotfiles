@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -7,9 +7,10 @@ if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" 
   exit 1
 fi
 
-mkdir -p ~/.config/borg/
+mkdir -p "$HOME/.config/borg/"
+
 {
   echo "BORG_REPO=$BORG_REPO"
   echo "BORG_PASSPHRASE=$BORG_PASSPHRASE"
   echo "BORG_REMOTE_PATH=$BORG_REMOTE_PATH"
-} >> ~/.config/borg/env
+} >> "$HOME/.config/borg/env"

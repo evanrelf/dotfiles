@@ -82,6 +82,12 @@ hook global WinSetOption filetype=markdown %{
   set-option window comment_block_end " -->"
 }
 
+# HTML
+hook global WinSetOption filetype=html %{
+  set-option window comment_block_begin "<!-- "
+  set-option window comment_block_end " -->"
+}
+
 # Git
 hook global WinSetOption filetype=git-commit %{
   add-highlighter window/ column 51 default,black
