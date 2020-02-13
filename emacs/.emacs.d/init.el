@@ -31,7 +31,6 @@
 ;; Enable mouse support in terminal
 (when (not window-system)
   (xterm-mouse-mode t))
-(setq scroll-step 3)
 (unless window-system
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
@@ -44,7 +43,6 @@
 
 ;; Font
 (setq default-frame-alist '((font . "PragmataPro Liga-16")))
-(set-face-bold 'bold nil)
 
 ;; Smaller font size adjustment increments
 (setq text-scale-mode-step 1.1)
@@ -92,8 +90,12 @@
 (setq minibuffer-scroll-window t)
 
 ;; Scroll line-by-line
-(setq scroll-step 1)
 (setq scroll-conservatively 10000)
+
+;; Scroll 3 lines in GUI
+(when (window-system)
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
+  (setq mouse-wheel-progressive-speed nil))
 
 ;; Install straight.el
 (defvar bootstrap-version)
@@ -113,6 +115,11 @@
   (load bootstrap-file nil 'nomessage))
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
+
+;; Garbage collector magic hack
+(use-package gcmh
+  :config
+  (gcmh-mode t))
 
 ;; Easy keybindings
 (use-package general
@@ -138,7 +145,8 @@
   ;; (setq x-underline-at-descent-line t)
   (setq centaur-tabs-height 28)
   (setq centaur-tabs-gray-out-icons 'buffer)
-  (setq centaur-tabs-set-icons t)
+  (when (window-system)
+    (setq centaur-tabs-set-icons t))
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-close-button "✕")
   ;; (setq centaur-tabs-modified-marker "⬤")
@@ -200,9 +208,10 @@
   (evil-indent-plus-default-bindings))
 (use-package evil-goggles
   :after evil
+  :init
+  (setq evil-goggles-duration 0.1)
   :config
-  (evil-goggles-mode)
-  (setq evil-goggles-duration 0.1))
+  (evil-goggles-mode))
 (use-package evil-escape
   :after evil
   :config
@@ -210,7 +219,7 @@
 
 ;; Auto-complete
 (use-package company
-  :config
+  :init
   (setq company-idle-delay 0.1)
   :hook
   (after-init . global-company-mode))
@@ -226,37 +235,40 @@
 
 ;; Highlight pairs
 (use-package rainbow-delimiters
+  :commands (rainbow-delimiters-mode)
   :hook
   (emacs-lisp-mode . rainbow-delimiters-mode))
 
 ;; Display errors
 (use-package flycheck
-  :config
+  :init
   (setq flycheck-disabled-checkers
-                '(emacs-lisp
-                  emacs-lisp-checkdoc
-                  haskell-stack-ghc
-                  haskell-ghc))
+        '(emacs-lisp
+          emacs-lisp-checkdoc
+          haskell-stack-ghc
+          haskell-ghc))
   ;; Only run flycheck on initial load and file saving
   (setq flymake-no-changes-timeout nil)
   (setq flymake-start-syntax-check-on-newline nil)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   :hook
-  (after-init . global-flycheck-mode))
+  (global-flycheck-mode))
 (use-package flycheck-pos-tip
   :config
   (with-eval-after-load 'flycheck
     (flycheck-pos-tip-mode)))
 
 ;; Amazing Git porcelain
-(use-package magit)
+(use-package magit
+  :defer 5)
 (use-package evil-magit
   :after (evil magit))
 
 ;; Projectile
 (use-package projectile
-  :config
+  :init
   (setq projectile-completion-system 'ivy)
+  :config
   (projectile-mode t))
 (use-package counsel-projectile
   :config
@@ -300,9 +312,11 @@
 
 ;; Zero-config jump-to-definition
 (use-package dumb-jump
-  :config
+  :init
   (setq dumb-jump-selector 'ivy)
-  (setq dumb-jump-force-searcher 'rg))
+  (setq dumb-jump-force-searcher 'rg)
+  :config
+  (dumb-jump-mode))
 
 ;; Show Git changes in gutter
 (use-package git-gutter
@@ -326,20 +340,32 @@
   (global-hl-todo-mode t))
 
 ;; Languages
-(use-package haskell-mode)
-(use-package nix-mode)
+(use-package haskell-mode
+  :commands (haskell-mode))
+(use-package nix-mode
+  :commands (nix-mode))
 (use-package purescript-mode
+  :commands (purescript-mode)
   :hook
   (purescript-mode . turn-on-purescript-indentation))
-(use-package dhall-mode)
-(use-package protobuf-mode)
-(use-package dockerfile-mode)
-(use-package web-mode)
-(use-package rust-mode)
-(use-package lua-mode)
-(use-package fish-mode)
-(use-package markdown-mode)
+(use-package dhall-mode
+  :commands (dhall-mode))
+(use-package protobuf-mode
+  :commands (protobuf-mode))
+(use-package dockerfile-mode
+  :commands (dockerfile-mode))
+(use-package web-mode
+  :commands (web-mode))
+(use-package rust-mode
+  :commands (rust-mode))
+(use-package lua-mode
+  :commands (lua-mode))
+(use-package fish-mode
+  :commands (fish-mode))
+(use-package markdown-mode
+  :commands (markdown-mode))
 (use-package yaml-mode
+  :commands (yaml-mode)
   :hook
   (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
@@ -366,7 +392,7 @@
 
 ;; Leader
 (general-def
-  :states '(normal visual insert)
+  :states '(normal visual insert emacs)
   :prefix "SPC"
   :non-normal-prefix "M-SPC"
   "" '(nil :which-key "leader")
@@ -396,19 +422,27 @@
 
   "b" '(:ignore t :which-key "buffer")
   "b ESC" '(evil-escape :which-key t)
-  "b n" '(evil-next-buffer :which-key "next")
-  "b p" '(evil-previous-buffer :which-key "previous")
+  "b s" '(counsel-switch-buffer :which-key "switch")
+  "b n" '(next-buffer :which-key "next")
+  "b p" '(previous-buffer :which-key "previous")
   "b d" '(evil-delete-buffer :which-key "delete")
 
   "f" '(:ignore t :which-key "file")
   "f ESC" '(evil-escape :which-key t)
   "f s" '(save-buffer :which-key "save")
+  "f f" '(counsel-find-file :which-key "find")
 
   "p" '(:ignore t :which-key "project")
   "p ESC" '(evil-escape :which-key t)
   "p s" '(counsel-projectile-switch-project :which-key "switch")
   "p f" '(counsel-projectile-find-file :which-key "find file")
   "p d" '(projectile-dired :which-key "dired")
+
+  "p b" '(:ignore t :which-key "buffer")
+  "p b ESC" '(evil-escape :which-key t)
+  "p b s" '(counsel-projectile-switch-buffer :which-key "switch")
+  "p b n" '(projectile-next-project-buffer :which-key "next")
+  "p b p" '(projectile-previous-project-buffer :which-key "previous")
 
   "g" '(:ignore t :which-key "git")
   "g ESC" '(evil-escape :which-key t)

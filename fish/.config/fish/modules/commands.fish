@@ -52,6 +52,12 @@ function kakc
 end
 complete --command kakc --wraps kak
 
+# Emacs
+if test -e "$HOME/.terminfo"
+    alias emacs "env TERM=xterm-24bit emacs"
+    alias emacsclient "env TERM=xterm-24bit emacsclient"
+end
+
 # nnn (from https://github.com/jarun/nnn/blob/master/misc/quitcd/quitcd.fish)
 if _exists nnn
     function nnn --description 'support nnn quit and change directory'
