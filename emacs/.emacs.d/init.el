@@ -285,7 +285,9 @@
   (counsel-mode t))
 
 ;; Sort and filter candidates
-(use-package prescient)
+(use-package prescient
+  :config
+  (prescient-persist-mode))
 (use-package ivy-prescient
   :after (prescient counsel ivy)
   :config

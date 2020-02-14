@@ -100,6 +100,12 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/redshift/redshift.conf"
             case ghci
                 eval $EDITOR "$HOME/.ghci"
+            case broot
+                if test (uname) = "Darwin"
+                    eval $EDITOR "$HOME/Library/Preferences/org.dystroy.broot/conf.toml"
+                else
+                    _error "TODO: I don't know where the broot config lives on Linux..."
+                end
 
             case "*"
                 _error "No config defined for '$argv[1]'"
