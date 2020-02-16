@@ -4,17 +4,23 @@
 [alias]
   # ADD
   a = add
-  aa = "!cd -- ${GIT_PREFIX:-.} && git add --all $@ && git status --short #"
+  # TODO: This doesn't work with worktrees
+  ; aa = "!cd -- ${GIT_PREFIX:-.} && git add --all $@ && git status --short #"
+  aa = "!git add --all $@ && git status --short #"
   ap = add --patch
 
   # BRANCH
-  b = branch
+  b = branch --verbose
   bd = branch --delete
   bdf = branch --delete --force
 
   # CHECKOUT
   co = checkout
   cop = checkout --patch
+
+  # CLEAN
+  clean-ignored = clean -Xdf
+  clean-untracked = clean -xdi
 
   # COMMIT
   c = commit
@@ -85,9 +91,9 @@
   t = tag
   td = tag --delete
 
-  # CLEAN
-  clean-ignored = clean -Xdf
-  clean-untracked = clean -xdi
+  # WORKTREE
+  wt = worktree
+  # TODO: Make a script to create and switch between worktrees when switching branches
 
   # OTHER
   # Print the path to the root of the git repo

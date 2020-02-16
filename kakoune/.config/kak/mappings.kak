@@ -35,7 +35,6 @@ map global normal "#" ": comment-line<ret>"
 map global normal "<a-#>" ": comment-block<ret>"
 
 # Formatting
-map global normal "=" ": format-buffer<ret>"
 map global normal "<a-=>" ": format-selections<ret>"
 
 # Allow selecting by line in both directions
@@ -81,7 +80,7 @@ map global user "p" "<a-!>pbpaste<ret>" -docstring "Paste after from clipboard"
 map global user "P" "!pbpaste<ret>" -docstring "Paste before from clipboard"
 map global user "R" "|pbpaste<ret>" -docstring "Paste replace from clipboard"
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
-map global user "=" ":prompt math: %%{exec 'a%%val{text}<lt>esc>|bc<lt>ret>'}<ret>" -docstring "Insert calculation"
+map global user "=" ": format-buffer<ret>" -docstring "Format buffer"
 declare-user-mode filetype
 map global user "<space>" ": enter-user-mode filetype<ret>" -docstring "Filetype mode"
 

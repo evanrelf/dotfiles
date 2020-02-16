@@ -88,33 +88,28 @@ if _exists nnn
 end
 
 # Nix
-function run
-    if not _exists "nix-shell"
-        _error "Nix isn't installed"
-        return 1
+if _exists nix
+    function run
+        if not test -f "shell.nix" && not test -f "default.nix"
+            _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
+            return 1
+        end
+        _log "Entering Nix shell..."
+        if test -z "$argv"
+            command nix-shell
+        else
+            command nix-shell --command "$argv; return"
+        end
     end
-    if not test -f "shell.nix" && not test -f "default.nix"
-        _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
-        return 1
+    function with
+        if test -z "$argv"
+            _error "with what?"
+            return 1
+        end
+        _log "Entering Nix shell..."
+        command nix-shell --packages $argv
     end
-    _log "Entering Nix shell..."
-    if test -z "$argv"
-        command nix-shell
-    else
-        command nix-shell --command "$argv; return"
-    end
-end
-function with
-    if not _exists "nix-shell"
-        _error "Nix isn't installed"
-        return 1
-    end
-    if test -z "$argv"
-        _error "with what?"
-        return 1
-    end
-    _log "Entering Nix shell..."
-    command nix-shell --packages $argv
+    alias nix-stray-roots "nix-store --gc --print-roots | grep -vE '^(/nix/var/|\{censored)'"
 end
 
 # Other

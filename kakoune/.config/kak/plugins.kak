@@ -9,8 +9,7 @@ plug "andreyorst/plug.kak" noload
 # }
 
 # Automatically complete pairs
-plug "alexherbo2/auto-pairs.kak" \
-commit "800ad6ce448a5c06a1920ba992bab4e998bd028b" %{
+plug "alexherbo2/auto-pairs.kak" %{
   hook global WinCreate .* %{ auto-pairs-enable }
 }
 
