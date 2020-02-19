@@ -2,7 +2,7 @@
 call plug#begin()
 
 " Appearance
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
@@ -44,8 +44,8 @@ call plug#end()
 
 " SETTINGS {{{1
 " Appearance {{{2
-set background=dark
-colorscheme palenight
+set background=light
+colorscheme base16-gruvbox-light-hard
 set termguicolors
 set number
 set relativenumber

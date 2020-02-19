@@ -2,6 +2,7 @@ provide-module "user_options" %{
 
 # Appearance
 colorscheme palenight
+# colorscheme lucius
 add-highlighter global/ number-lines -hlcursor
 add-highlighter global/ show-matching
 add-highlighter global/ dynregex "%%reg{/}" 0:+u

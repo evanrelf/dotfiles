@@ -126,10 +126,13 @@
   :config
   (general-evil-setup))
 
-;; Theme
+;; Themes
 (use-package doom-themes
   :config
   (load-theme 'doom-challenger-deep t))
+;; (use-package base16-theme
+;;   :config
+;;   (load-theme 'base16-gruvbox-light-hard t))
 
 ;; Modeline
 (use-package mood-line
