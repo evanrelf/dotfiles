@@ -35,7 +35,15 @@ plug "alexherbo2/move-line.kak" %{
 }
 
 # More text objects
-plug "Delapouite/kakoune-text-objects"
+plug "Delapouite/kakoune-text-objects" %{
+  # Text object for paragraphs separated by two blank lines (like Elm)
+  define-command -hidden text-object-spaced-paragraph %{
+    execute-keys "<a-i>c\n\n\n,\n\n\n<ret>" %sh{
+      [ "$kak_opt_objects_last_mode" = "<a-a>" ] && echo "JJ"
+    }
+  }
+  map global object "<a-p>" "<esc>: text-object-spaced-paragraph<ret>" -docstring "spaced paragraph"
+}
 
 # Syntax highlighting for Graphviz
 plug "jwhett/graphviz-kak"

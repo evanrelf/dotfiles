@@ -24,8 +24,8 @@
 
   # COMMIT
   c = commit
-  amend = commit --amend --no-edit
-  rename = commit --amend
+  amend = "!echo 'Use git-revise' >&2; exit 1 #"
+  rename = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to rename while dirty' >&2; exit 1; fi #"
   undo-commit = reset --soft HEAD~
 
   # DIFF
