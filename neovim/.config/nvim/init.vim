@@ -44,8 +44,8 @@ call plug#end()
 
 " SETTINGS {{{1
 " Appearance {{{2
-set background=light
-colorscheme base16-gruvbox-light-hard
+set background=dark
+colorscheme base16-gruvbox-dark-hard
 set termguicolors
 set number
 set relativenumber

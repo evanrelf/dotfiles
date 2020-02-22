@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     autojump
     borgbackup
+    broot
     cabal-install
     cabal2nix
     cachix
@@ -31,6 +32,7 @@
     pandoc
     reattach-to-user-namespace
     ripgrep
+    rsync
     shellcheck
     stack
     tealdeer
