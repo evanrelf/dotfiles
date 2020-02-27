@@ -127,12 +127,11 @@
   (general-evil-setup))
 
 ;; Themes
-(use-package doom-themes
-  :config
-  (load-theme 'doom-challenger-deep t))
-;; (use-package base16-theme
-;;   :config
-;;   (load-theme 'base16-gruvbox-light-hard t))
+(use-package doom-themes)
+(use-package base16-theme)
+(use-package color-theme-sanityinc-tomorrow)
+(use-package modus-operandi-theme)
+(load-theme 'base16-one-light t)
 
 ;; Modeline
 (use-package mood-line
@@ -346,7 +345,11 @@
 
 ;; Languages
 (use-package haskell-mode
-  :commands (haskell-mode))
+  :commands (haskell-mode)
+  :hook
+  (haskell-mode . (lambda ()
+		    (setq-local paragraph-separate "[ \t\f]*$")
+		    (setq-local paragraph-start "\f\\|[ \t]*$"))))
 (use-package nix-mode
   :commands (nix-mode))
 (use-package purescript-mode

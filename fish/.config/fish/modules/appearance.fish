@@ -1,6 +1,6 @@
 # Prompt
 set -g fish_greeting ""
-set -g fish_prompt_pwd_dir_length 3
+set -g fish_prompt_pwd_dir_length 1
 set __fish_git_prompt_showdirtystate "true"
 set __fish_git_prompt_showuntrackedfiles "true"
 set __fish_git_prompt_showstashstate "true"
