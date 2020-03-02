@@ -130,8 +130,7 @@
 (use-package doom-themes)
 (use-package base16-theme)
 (use-package color-theme-sanityinc-tomorrow)
-(use-package modus-operandi-theme)
-(load-theme 'base16-one-light t)
+(load-theme 'doom-challenger-deep t)
 
 ;; Modeline
 (use-package mood-line
@@ -299,6 +298,10 @@
   :config
   (company-prescient-mode))
 
+;; ripgrep
+(use-package ripgrep)
+(use-package deadgrep)
+
 ;; Display current match and show count when searching
 (use-package anzu
   :config
@@ -451,6 +454,8 @@
   "p b s" '(counsel-projectile-switch-buffer :which-key "switch")
   "p b n" '(projectile-next-project-buffer :which-key "next")
   "p b p" '(projectile-previous-project-buffer :which-key "previous")
+
+  "j" '(dumb-jump-go :which-key "dumb-jump")
 
   "g" '(:ignore t :which-key "git")
   "g ESC" '(evil-escape :which-key t)

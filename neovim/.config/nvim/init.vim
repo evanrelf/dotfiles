@@ -2,6 +2,7 @@
 call plug#begin()
 
 " Appearance
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'chriskempson/base16-vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -45,7 +46,7 @@ call plug#end()
 " SETTINGS {{{1
 " Appearance {{{2
 set background=dark
-colorscheme base16-gruvbox-dark-hard
+colorscheme challenger_deep
 set termguicolors
 set number
 set relativenumber
@@ -95,12 +96,16 @@ set keywordprg=:help
 scriptencoding 'utf-8'
 
 
+" COMMANDS {{{1
+command! V edit ~/.config/nvim/init.vim
+
+
 " MAPPINGS {{{1
 noremap Y y$
 noremap j gj
 
-" nnoremap > >>
-" nnoremap < <<
+nnoremap > >>
+nnoremap < <<
 xnoremap < <gv
 xnoremap > >gv
 

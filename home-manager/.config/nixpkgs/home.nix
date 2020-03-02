@@ -20,6 +20,7 @@
     gitAndTools.hub
     hadolint
     haskellPackages.fast-tags
+    haskellPackages.wai-app-static
     htop
     jq
     kakoune
