@@ -5,8 +5,8 @@
     autojump
     borgbackup
     broot
-    cabal-install
     cabal2nix
+    cabal-install
     cachix
     direnv
     exa
@@ -15,10 +15,10 @@
     fzf
     ghcid
     git
-    git-revise
     gitAndTools.diff-so-fancy
     gitAndTools.hub
-    hadolint
+    git-revise
+    # hadolint
     haskellPackages.fast-tags
     haskellPackages.wai-app-static
     htop
@@ -29,9 +29,9 @@
     neovim
     nix-prefetch-git
     nodejs
-    ormolu
+    # ormolu
     pandoc
-    reattach-to-user-namespace
+    python3
     ripgrep
     rsync
     shellcheck
@@ -48,7 +48,17 @@
       url = "https://github.com/target/lorri/archive/6ead8867a245de69f218071fa5db9edbd2864613.tar.gz";
       sha256 = "1i1b8iki424ypa49sxnf4q0agxlysvg0cah7hz5996s1kgb7ymc3";
     }) {})
-  ];
+  ] ++ (if pkgs.stdenv.isLinux then with pkgs; [
+    chromium
+    dmenu
+    gnupg
+    kitty
+    spotify
+    xclip
+    xorg.xrdb
+  ] else if pkgs.stdenv.isDarwin then with pkgs; [
+    reattach-to-user-namespace
+  ] else []);
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

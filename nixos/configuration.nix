@@ -1,45 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  # IMPORTS
+  imports = [
+    <nixos-hardware/lenovo/thinkpad/x1/6th-gen>
+    ./hardware-configuration.nix
+  ];
+
 
   # PROGRAMS {{{1
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-
-    autojump
     binutils
-    cabal-install
-    chromium
-    direnv
-    dmenu
-    exa
-    fd
-    fzf
-    git
-    gitAndTools.diff-so-fancy
-    git-revise
-    gnupg
-    haskellPackages.ghcid
-    hlint
-    kakoune
-    kitty
-    lorri
-    neovim
-    nnn
-    nodejs
-    pandoc
-    ripgrep
-    shellcheck
-    spotify
-    stack
-    stow
-    tealdeer
-    tectonic
-    tmux
-    xclip
-    xorg.xrdb
-
   ];
   programs.fish.enable = true;
   programs.mosh.enable = true;
@@ -99,6 +71,10 @@
       xterm.enable = false;
       # default = "elementary";
     };
+  };
+  services.compton = {
+    enable = true;
+    vSync = true;
   };
   services.xbanish.enable = true;
 
