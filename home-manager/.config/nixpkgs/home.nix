@@ -22,9 +22,9 @@
     haskellPackages.fast-tags
     haskellPackages.wai-app-static
     htop
+    httpie
     jq
     kakoune
-    lorri
     mosh
     neovim
     nix-prefetch-git
@@ -42,6 +42,12 @@
     tokei
     universal-ctags
     yarn
+  ] ++ [
+    (pkgs.callPackage (builtins.fetchTarball {
+      # lorri 1.0 (master on 2020-03-02)
+      url = "https://github.com/target/lorri/archive/6ead8867a245de69f218071fa5db9edbd2864613.tar.gz";
+      sha256 = "1i1b8iki424ypa49sxnf4q0agxlysvg0cah7hz5996s1kgb7ymc3";
+    }) {})
   ];
 
   # Let Home Manager install and manage itself.

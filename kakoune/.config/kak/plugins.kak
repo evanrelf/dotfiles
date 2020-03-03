@@ -3,33 +3,42 @@ provide-module "user_plugins" %{
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
+# NOTE: alexherbo2 always changes their plugins' APIs, so it's best to pin their
+# plugins to specific commits for stability. I've had my Kakoune config break
+# multiple times because of this...
+
 # Toggle between relative and absolute line numbers depending on mode
 # plug "evanrelf/number-toggle.kak" %{
 #   set-option global number_toggle_params -hlcursor
 # }
 
 # Automatically complete pairs
-plug "alexherbo2/auto-pairs.kak" %{
+plug "alexherbo2/auto-pairs.kak" \
+commit "11fbd7c44f04c6092b5197419d669ec505a02f01" %{
   hook global WinCreate .* %{ auto-pairs-enable }
 }
 
 # Snippets
-plug "alexherbo2/snippets.kak" %{
+plug "alexherbo2/snippets.kak" \
+commit "7616a810739590c03a216ad13e601ea923b1e552" %{
   hook global WinCreate .* %{ snippets-enable }
 }
 
 # Replace mode
-plug "alexherbo2/replace-mode.kak" %{
+plug "alexherbo2/replace-mode.kak" \
+commit "a569d3df8311a0447e65348a7d48c2dea5415df0" %{
   map global normal "<a-r>" ": enter-replace-mode<ret><c-o>"
 }
 
 # Create parent directories if missing
-plug "alexherbo2/mkdir.kak" %{
+plug "alexherbo2/mkdir.kak" \
+commit "cb7848045390d7c4d7b729327971acd11d026866" %{
   hook global BufWritePre .* %{ mkdir-current-buffer }
 }
 
 # Move selections
-plug "alexherbo2/move-line.kak" %{
+plug "alexherbo2/move-line.kak" \
+commit "00221c1ddb2d9ef984facfbdc71b56b789daddaf" %{
   map global normal "<up>" ": move-line-above<ret>"
   map global normal "<down>"  ": move-line-below<ret>"
 }
