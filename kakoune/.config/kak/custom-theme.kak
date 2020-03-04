@@ -1,5 +1,3 @@
-# dubious theme
-
 evaluate-commands %sh{
   lightest=rgb:eeeeee
   lighter=rgb:cccccc

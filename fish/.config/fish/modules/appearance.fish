@@ -1,10 +1,11 @@
 # Prompt
 set -g fish_greeting ""
 set -g fish_prompt_pwd_dir_length 1
-set __fish_git_prompt_showdirtystate "true"
-set __fish_git_prompt_showuntrackedfiles "true"
-set __fish_git_prompt_showstashstate "true"
+# set __fish_git_prompt_showdirtystate "true"
+# set __fish_git_prompt_showuntrackedfiles "true"
+# set __fish_git_prompt_showstashstate "true"
 
+# Add blank line between prompts, but not when the screen is cleared
 function newline_after --on-event fish_postexec
     echo
 end
@@ -121,7 +122,7 @@ function fish_prompt
     if test $exit_code -ne 0
         set_color red
     end
-    # Smart newline
+    # Split prompt onto two lines when it gets too long
     # if test (math (tput cols) - \((echo \(prompt_pwd\)" $git_branch" | wc -c)\)) -lt 40
     #     echo
     # end
@@ -132,12 +133,6 @@ function fish_prompt
     # Ring bell
     # printf '\a'
 end
-
-# function fish_right_prompt
-#   set_color black
-#   date +%r
-#   set_color normal
-# end
 
 # Colors
 set fish_color_autosuggestion black

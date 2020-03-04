@@ -1,4 +1,5 @@
 try %{ source "%val{config}/purescript.kak" }
+try %{ source "%val{config}/haskell2.kak" }
 
 source "%val{config}/commands.kak"
 source "%val{config}/filetype.kak"
@@ -13,5 +14,3 @@ require-module "user_hooks"
 require-module "user_mappings"
 require-module "user_options"
 require-module "user_plugins"
-
-# source "%val{config}/enough.kak"

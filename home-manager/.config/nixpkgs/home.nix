@@ -5,8 +5,8 @@
     autojump
     borgbackup
     broot
-    cabal2nix
     cabal-install
+    cabal2nix
     cachix
     direnv
     exa
@@ -15,11 +15,12 @@
     fzf
     ghcid
     git
+    git-revise
     gitAndTools.diff-so-fancy
     gitAndTools.hub
-    git-revise
-    # hadolint
     haskellPackages.fast-tags
+    haskellPackages.hadolint
+    haskellPackages.ormolu
     haskellPackages.wai-app-static
     htop
     httpie
@@ -29,7 +30,6 @@
     neovim
     nix-prefetch-git
     nodejs
-    # ormolu
     pandoc
     python3
     ripgrep
@@ -42,7 +42,6 @@
     tokei
     universal-ctags
     yarn
-  ] ++ [
     (pkgs.callPackage (builtins.fetchTarball {
       # lorri 1.0 (master on 2020-03-02)
       url = "https://github.com/target/lorri/archive/6ead8867a245de69f218071fa5db9edbd2864613.tar.gz";

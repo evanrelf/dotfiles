@@ -3,9 +3,9 @@ provide-module "user_plugins" %{
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
-# NOTE: alexherbo2 always changes their plugins' APIs, so it's best to pin their
-# plugins to specific commits for stability. I've had my Kakoune config break
-# multiple times because of this...
+# NOTE: alexherbo2 frequently changes their plugins' APIs, so it's best to pin
+# their plugins to specific commits for stability. I've had my Kakoune config
+# break multiple times because of this...
 
 # Toggle between relative and absolute line numbers depending on mode
 # plug "evanrelf/number-toggle.kak" %{
