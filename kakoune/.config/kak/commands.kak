@@ -1,5 +1,19 @@
 provide-module "user_commands" %{
 
+# Remove buffer when quitting from Kakoune client
+define-command -docstring "quit-client" -override \
+quit-client -params 0..1 %{
+  # TODO: Don't delete *debug* or *scratch* buffers
+  try %{
+    delete-buffer
+  } catch %{
+    echo "Failed to delete buffer when quitting client"
+  }
+  quit %arg{@}
+}
+alias global q quit-client
+
+# Snippets
 define-command -docstring "add-snippet" \
 add-snippet -params 3 %{ evaluate-commands %sh{
   scope=$1
