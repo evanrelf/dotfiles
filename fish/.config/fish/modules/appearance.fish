@@ -63,8 +63,8 @@ function fish_prompt
     echo -n (prompt_pwd)" "
     set_color normal
     set -l git_branch ""
-    # set -l hg_root_cmd (if command -v hg-root >/dev/null 2>&1; echo "hg-root"; else; echo "hg root"; end)
-    if git rev-parse --git-dir >/dev/null 2>&1
+    # set -l hg_root_cmd (if _exists hg-root; echo "hg-root"; else; echo "hg root"; end)
+    if _silently git rev-parse --git-dir
         # Git
         set git_branch (git symbolic-ref --short HEAD --quiet; or git branch | head -n 1 | awk '{print $NF}' | tr -d ')')
         if test -n "$git_branch"
@@ -93,8 +93,8 @@ function fish_prompt
             end
             set_color normal
         end
-    # else if command -v hg >/dev/null 2>&1
-    #     if eval "$hg_root_cmd" >/dev/null 2>&1
+    # else if _exists hg
+    #     if _silently "$hg_root_cmd"
     #         # Mercurial
     #         set -l hg_info (hg prompt "{branch};{status};{status|unknown}")
     #         set -l hg_branch (echo $hg_info | cut -d ';' -f 1)

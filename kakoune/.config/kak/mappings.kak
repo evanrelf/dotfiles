@@ -87,9 +87,8 @@ evaluate-commands %sh{
   "
 }
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
+map global user "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstring "Insert with count"
 map global user "=" ": format-buffer<ret>" -docstring "Format buffer"
-declare-user-mode filetype
-map global user "<space>" ": enter-user-mode filetype<ret>" -docstring "Filetype mode"
 
 # Disabled
 map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"

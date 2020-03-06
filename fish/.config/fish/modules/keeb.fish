@@ -17,12 +17,12 @@ function keeb -d "Safely flash QMK firmware to TADA68 keyboard"
         end
     end
 
-    if git remote -v | not grep "qmk_firmware" >/dev/null
+    if git remote -v | not grep "qmk_firmware" >/dev/null 2>&1
         _error "Invalid QMK directory: '$qmk_dir'"
         return 1
     end
 
-    if not command -s nix-shell >/dev/null
+    if not _exists nix-shell
         _error "Nix not installed"
         return 1
     else

@@ -14,37 +14,37 @@ plug "andreyorst/plug.kak" noload
 
 # Automatically complete pairs
 plug "alexherbo2/auto-pairs.kak" \
-commit "11fbd7c44f04c6092b5197419d669ec505a02f01" %{
+commit "11fbd7c44f04c6092b5197419d669ec505a02f01" config %{
   hook global WinCreate .* %{ auto-pairs-enable }
 }
 
 # Snippets
 plug "alexherbo2/snippets.kak" \
-commit "7616a810739590c03a216ad13e601ea923b1e552" %{
+commit "7616a810739590c03a216ad13e601ea923b1e552" config %{
   hook global WinCreate .* %{ snippets-enable }
 }
 
 # Replace mode
 plug "alexherbo2/replace-mode.kak" \
-commit "a569d3df8311a0447e65348a7d48c2dea5415df0" %{
+commit "a569d3df8311a0447e65348a7d48c2dea5415df0" config %{
   map global normal "<a-r>" ": enter-replace-mode<ret><c-o>"
 }
 
 # Create parent directories if missing
 plug "alexherbo2/mkdir.kak" \
-commit "cb7848045390d7c4d7b729327971acd11d026866" %{
+commit "cb7848045390d7c4d7b729327971acd11d026866" config %{
   hook global BufWritePre .* %{ mkdir-current-buffer }
 }
 
 # Move selections
 plug "alexherbo2/move-line.kak" \
-commit "00221c1ddb2d9ef984facfbdc71b56b789daddaf" %{
+commit "00221c1ddb2d9ef984facfbdc71b56b789daddaf" config %{
   map global normal "<up>" ": move-line-above<ret>"
   map global normal "<down>"  ": move-line-below<ret>"
 }
 
 # More text objects
-plug "Delapouite/kakoune-text-objects" %{
+plug "Delapouite/kakoune-text-objects" config %{
   # Text object for paragraphs separated by two blank lines (like Elm)
   define-command -hidden text-object-spaced-paragraph %{
     execute-keys "<a-i>c\n\n\n,\n\n\n<ret>" %sh{
@@ -58,20 +58,27 @@ plug "Delapouite/kakoune-text-objects" %{
 plug "jwhett/graphviz-kak"
 
 # Manipulate buffers more quickly
-plug "Delapouite/kakoune-buffers" %{
+plug "Delapouite/kakoune-buffers" config %{
   map global normal "b" ": enter-user-mode buffers<ret>"
   map global normal "B" ": enter-user-mode -lock buffers<ret>"
 }
 
 # Change directory
-plug "Delapouite/kakoune-cd" %{
+plug "Delapouite/kakoune-cd" config %{
   alias global cd change-directory-current-buffer
   alias global r change-directory-project-root
   alias global pwd print-working-directory
 }
 
 # FZF integration
-plug "andreyorst/fzf.kak" %{
+plug "andreyorst/fzf.kak" do %{
+  git checkout .
+  # Remove lingering info popups
+  for file in rc/modules/*.kak; do sed -i "" "s/info -title/nop/g" "$file"; done
+  # Improve latency
+  sed -i "" "s|'\${fzfcmd}'|env \${fzfcmd} < /dev/null > /dev/null 2>\&1|" "rc/fzf.kak"
+
+} config %{
   map global user "f" ": fzf-mode<ret>" -docstring "FZF mode"
 } defer "fzf" %{
   set-option global fzf_file_command "fd --type f --follow --hidden"
@@ -82,7 +89,7 @@ plug "andreyorst/fzf.kak" %{
 }
 
 # Surround selections with brackets
-plug "h-youhei/kakoune-surround" %{
+plug "h-youhei/kakoune-surround" config %{
   map global user "s" ": enter-user-mode surround<ret>" -docstring "Surround mode"
   declare-user-mode "surround"
   map global surround "s" ": select-surround<ret>" -docstring "Select surround"
@@ -100,7 +107,7 @@ plug "h-youhei/kakoune-surround" %{
 # Language Server Protocol support
 # plug "ul/kak-lsp" noload do %{
 #   cargo install --locked --force --path .
-# } %{
+# } config %{
 #   hook global WinSetOption filetype=(haskell) %{
 #     eval %sh{kak-lsp --kakoune -s $kak_session --config ~/.config/kak-lsp/kak-lsp.toml}
 #     set-option window lsp_diagnostic_line_error_sign "!"

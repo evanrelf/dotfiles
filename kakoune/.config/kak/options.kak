@@ -3,7 +3,7 @@ provide-module "user_options" %{
 # Appearance
 try %{
   colorscheme challenger-deep
-  add-highlighter global/80 column 81 default,rgb:222135
+  add-highlighter global/80 column 81 default,rgb:252438
 } catch %{
   colorscheme palenight
   set-face global PrimaryCursor rgb:292d3e,rgb:ffcb6b+fg
