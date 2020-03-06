@@ -41,20 +41,9 @@ map global normal "<a-=>" ": format-selections<ret>"
 map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
 
-# # Move viewport with arrow keys
-# map global normal "<left>" "vh"
-# map global normal "<down>" "vj"
-# map global normal "<up>" "vk"
-# map global normal "<right>" "vl"
-# map global insert "<left>" "<a-;>vh"
-# map global insert "<down>" "<a-;>vj"
-# map global insert "<up>" "<a-;>vk"
-# map global insert "<right>" "<a-;>vl"
-
 # Center viewport when moving through jump list
 map global normal "<c-i>" "<c-i>vc"
 map global normal "<c-o>" "<c-o>vc"
-
 
 # Insert and delete spaces for indentation
 map global insert "<tab>" "<a-;><a-gt>"
@@ -75,20 +64,32 @@ hook global InsertDelete ' ' %{ try %{
 map global user "t" "<a-i>w: ctags-search<ret>;<space>" -docstring "Jump to tag under cursor"
 
 # User mode
-map global user "y" "<a-|>pbcopy<ret>" -docstring "Yank to clipboard"
-map global user "p" "<a-!>pbpaste<ret>" -docstring "Paste after from clipboard"
-map global user "P" "!pbpaste<ret>" -docstring "Paste before from clipboard"
-map global user "R" "|pbpaste<ret>" -docstring "Paste replace from clipboard"
+evaluate-commands %sh{
+  case "$(uname)" in
+    "Darwin")
+      copy="pbcopy"
+      paste="pbpaste"
+      ;;
+    "Linux")
+      copy="xclip"
+      paste="xclip -o"
+      ;;
+    *)
+      copy="false"
+      paste="false"
+      ;;
+  esac
+  printf "%s" "
+  map global user 'y' '<a-|>$copy<ret>' -docstring 'Yank to clipboard'
+  map global user 'p' '<a-!>$paste<ret>' -docstring 'Paste after from clipboard'
+  map global user 'P' '!$paste<ret>' -docstring 'Paste before from clipboard'
+  map global user 'R' '|$paste<ret>' -docstring 'Paste replace from clipboard'
+  "
+}
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
 map global user "=" ": format-buffer<ret>" -docstring "Format buffer"
 declare-user-mode filetype
 map global user "<space>" ": enter-user-mode filetype<ret>" -docstring "Filetype mode"
-
-# # Escape with jk
-# hook global InsertChar "k" %{ try %{
-#   execute-keys -draft "hH <a-k>jk<ret> d"
-#   execute-keys "<esc>"
-# }}
 
 # Disabled
 map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"

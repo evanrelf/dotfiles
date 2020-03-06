@@ -31,10 +31,9 @@ end
 
 # Kakoune
 if status --is-interactive
-    # abbr --add k "kak"
-    # abbr --add kc "kakc"
-    abbr --add k "kakc"
-    abbr --add K "kak"
+    abbr --add k "kak"
+    # abbr --add k "kakc"
+    abbr --add kc "kakc"
 end
 function kakd
     kak -c daemon -e 'kill'

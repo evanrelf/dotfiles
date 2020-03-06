@@ -2,26 +2,39 @@ provide-module "user_filetype" %{
 
 # Haskell
 define-command -hidden haskell-language-pragma -params 0 %{
-  prompt -shell-script-candidates "ghc --supported-extensions" "extension: " %{
+  # Cache GHC language extensions for times when GHC isn't available (e.g. outside Nix shell)
+  nop %sh{
+    mkdir -p "$HOME/.local/share/kak"
+    if command -v ghc >/dev/null 2>&1; then
+      ghc --supported-extensions > "$HOME/.local/share/kak/ghc-language-extensions"
+    fi
+  }
+  prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-language-extensions" "extension: " %{
     execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"
+    execute-keys "<esc>"
   }
 }
 define-command -hidden haskell-options-pragma -params 0 %{
-  prompt -shell-script-candidates "ghc --show-options" "option: " %{
+  # Cache GHC options for times when GHC isn't available (e.g. outside Nix shell)
+  nop %sh{
+    mkdir -p "$HOME/.local/share/kak"
+    if command -v ghc >/dev/null 2>&1; then
+      ghc --show-options > "$HOME/.local/share/kak/ghc-options"
+    fi
+  }
+  prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-options" "option: " %{
     execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"
+    execute-keys "<esc>"
   }
 }
 hook global WinSetOption filetype=haskell %{
   set-option window lintcmd "hlint"
-  # set-option window lintcmd "sleep 0.5; ghcid-format /tmp/ghcid"
   hook window -group lint BufWritePost .* %{ lint }
   lint-enable
-  # set-option window formatcmd "ormolu -o -XTypeApplications"
   set-option window formatcmd "sort-imports"
   add-snippet window "forall" "∀"
   add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
   add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
-  # add-highlighter shared/haskell/quasiquote region \[\b[_a-z]['\w]*#?\| \|\] regex \[\b[_a-z]['\w]*#?\|(.*?)\|\] 1:string
 }
 
 # PureScript
@@ -41,10 +54,6 @@ hook global WinSetOption filetype=elm %{
   set-option window indentwidth 4
   set-option window formatcmd "elm-format --stdin"
   hook window -group format BufWritePre .* %{ format-buffer }
-  # Improve bad syntax highlighting
-  # add-highlighter shared/elm/code/ regex ^\h*(?:let\h+)?([_a-z]\w*)\s+:\s 1:function
-  # add-highlighter shared/elm/code/ regex \b([A-Z]['\w]*\.)*[A-Z]['\w]*(?!['\w])(?![.a-z]) 0:variable
-  # add-highlighter shared/elm/code/ regex (?<![~<=>|!?/.@$*&#%+\^\-\\])[~<=>|!?/.@$*&#%+\^\-\\]+ 0:operator
 }
 
 # Rust
@@ -69,14 +78,12 @@ hook global WinSetOption filetype=sh %{
 
 # Fish
 hook global WinSetOption filetype=fish %{
-  # set-option window lintcmd "fish --no-execute"
   set-option window indentwidth 4
 }
 
 # Markdown
 hook global WinSetOption filetype=markdown %{
   remove-hooks window markdown-indent
-  map window filetype "=" "|fmt -w 80<ret>" -docstring "Wrap to 80 columns"
   add-highlighter shared/markdown/comment region -recurse <!-- <!-- --> fill comment
   set-option window comment_block_begin "<!-- "
   set-option window comment_block_end " -->"
@@ -88,10 +95,17 @@ hook global WinSetOption filetype=html %{
   set-option window comment_block_end " -->"
 }
 
+# CSS
+hook global WinSetOption filetype=css %{
+  set-option window comment_block_begin "/* "
+  set-option window comment_block_end " */"
+}
+
 # Git
 hook global WinSetOption filetype=git-commit %{
-  add-highlighter window/ column 51 default,black
-  add-highlighter window/ column 73 default,black
+  remove-highlighter global/80
+  add-highlighter window/ column 51 default,rgb:222135
+  add-highlighter window/ column 73 default,rgb:222135
   add-snippet window "date" '<a-;>!date +%Y-%m-%d<ret><backspace>'
 }
 hook global WinCreate git-revise-todo %{
@@ -110,15 +124,6 @@ hook global WinSetOption filetype=makefile %{
   set-option window indentwidth 0
 }
 
-# # SQL
-# hook global WinSetOption filetype=sql %{
-#   hook window WinClose .* %{ psql-disable }
-#   map window filetype "s" ": query-selection<ret>" -docstring "Query selection"
-#   map window filetype "b" ": query-buffer<ret>" -docstring "Query buffer"
-#   # map window filetype "c" ": nop %%sh{ echo '' > /tmp/$kak_opt_psql_tmpfile }<ret>" -docstring "Clear query history"
-#   psql-enable
-# }
-
 # Kakoune
 hook global BufCreate \*scratch\* %{
   execute-keys '%d'
@@ -126,7 +131,7 @@ hook global BufCreate \*scratch\* %{
 
 # Man
 hook global WinSetOption filetype=man %{
-  remove-highlighter global/number-lines_-hlcursor
+  try %{ remove-highlighter global/number-lines_-hlcursor }
 }
 
 # Emacs Lisp
@@ -135,13 +140,19 @@ hook global WinCreate .*\.el %{
 }
 
 # Prettier
-hook global WinSetOption filetype=markdown %{ set-option window formatcmd "prettier --stdin --parser markdown" }
-hook global WinSetOption filetype=json %{ set-option window formatcmd "prettier --stdin --parser json" }
-hook global WinSetOption filetype=yaml %{ set-option window formatcmd "prettier --stdin --parser yaml" }
-hook global WinSetOption filetype=javascript %{ set-option window formatcmd "prettier --stdin --parser javascript" }
-hook global WinSetOption filetype=typescript %{ set-option window formatcmd "prettier --stdin --parser typescript" }
-hook global WinSetOption filetype=css %{ set-option window formatcmd "prettier --stdin --parser css" }
-hook global WinSetOption filetype=scss %{ set-option window formatcmd "prettier --stdin --parser scss" }
-hook global WinSetOption filetype=less %{ set-option window formatcmd "prettier --stdin --parser less" }
+evaluate-commands %sh{
+  if command -v prettier >/dev/null 2>&1; then
+    printf "%s" "
+    hook global WinSetOption filetype=markdown %{ set-option window formatcmd 'prettier --stdin --parser markdown' }
+    hook global WinSetOption filetype=json %{ set-option window formatcmd 'prettier --stdin --parser json' }
+    hook global WinSetOption filetype=yaml %{ set-option window formatcmd 'prettier --stdin --parser yaml' }
+    hook global WinSetOption filetype=javascript %{ set-option window formatcmd 'prettier --stdin --parser javascript' }
+    hook global WinSetOption filetype=typescript %{ set-option window formatcmd 'prettier --stdin --parser typescript' }
+    hook global WinSetOption filetype=css %{ set-option window formatcmd 'prettier --stdin --parser css' }
+    hook global WinSetOption filetype=scss %{ set-option window formatcmd 'prettier --stdin --parser scss' }
+    hook global WinSetOption filetype=less %{ set-option window formatcmd 'prettier --stdin --parser less' }
+    "
+  fi
+}
 
 }
