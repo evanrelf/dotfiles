@@ -76,7 +76,7 @@ plug "andreyorst/fzf.kak" do %{
   # Remove lingering info popups
   for file in rc/modules/*.kak; do sed -i "" "s/info -title/nop/g" "$file"; done
   # Improve latency
-  sed -i "" "s|'\${fzfcmd}'|env \${fzfcmd} < /dev/null > /dev/null 2>\&1|" "rc/fzf.kak"
+  # sed -i "" "s|'\${fzfcmd}'|env \${fzfcmd} < /dev/null > /dev/null 2>\&1|" "rc/fzf.kak"
 
 } config %{
   map global user "f" ": fzf-mode<ret>" -docstring "FZF mode"

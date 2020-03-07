@@ -36,6 +36,9 @@ hook global WinSetOption filetype=haskell %{
   add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
   add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
 }
+hook global WinCreate (.*\.hs-boot) %{
+  set-option window filetype haskell
+}
 
 # PureScript
 hook global WinSetOption filetype=purescript %{
