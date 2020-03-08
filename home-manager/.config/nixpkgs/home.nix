@@ -34,6 +34,7 @@
     python3
     ripgrep
     rsync
+    rustup
     shellcheck
     stack
     tealdeer
@@ -42,6 +43,7 @@
     tokei
     universal-ctags
     yarn
+  ] ++ [
     (pkgs.callPackage (builtins.fetchTarball {
       # lorri 1.0 (master on 2020-03-02)
       url = "https://github.com/target/lorri/archive/6ead8867a245de69f218071fa5db9edbd2864613.tar.gz";

@@ -15,7 +15,7 @@
 :set -Wwarn
 
 -- Hoogle
-:def! hoogle (\arg -> return $ ":! hoogle --color \'" ++ arg ++ "\'")
-:def! haddocks (\arg -> return $ ":! hoogle --color --info \'" ++ arg ++ "\'")
+-- :def! hoogle (\arg -> return $ ":! hoogle --color \'" ++ arg ++ "\'")
+-- :def! haddocks (\arg -> return $ ":! hoogle --color --info \'" ++ arg ++ "\'")
 
 -- https://github.com/github/semantic/blob/master/.ghci.sample

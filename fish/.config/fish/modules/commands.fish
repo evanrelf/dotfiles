@@ -113,6 +113,11 @@ if _exists nix
     alias nix-stray-roots "nix-store --gc --print-roots | grep -vE '^(/nix/var/|\{censored)'"
 end
 
+# brain
+if test \( -d "$HOME/brain" \) -a \( -f "$HOME/brain/new" \)
+    alias new "$HOME/brain/new"
+end
+
 # Other
 if _exists hub
     alias git "hub"

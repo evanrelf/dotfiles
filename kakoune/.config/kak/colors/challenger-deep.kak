@@ -32,30 +32,37 @@ evaluate-commands %sh{
   }
 
   printf "%s\n" "
-  face global attribute          $(c default        default)
-  face global block              $(c default        default)
-  face global bold               $(c default        default)
-  face global builtin            $(c default        default)
-  face global bullet             $(c default        default)
-  face global comment            $(c $black         default)
-  face global error              $(c $red           default)
-  face global function           $(c default        default)
-  face global header             $(c default        default)
-  face global identifier         $(c default        default)
-  face global italic             $(c default        default)
-  face global keyword            $(c $magenta       default)
-  face global link               $(c default        default)
-  face global list               $(c default        default)
-  face global meta               $(c default        default)
-  face global module             $(c $green         default)
-  face global mono               $(c default        default)
-  face global operator           $(c $cyan          default)
-  face global string             $(c $yellow        default)
+  # Code
   face global title              $(c default        default)
-  face global type               $(c $blue          default)
-  face global value              $(c default        default)
-  face global variable           $(c default        default)
+  face global header             $(c default        default)
+  face global bold               $(c default        default)
+  face global italic             $(c default        default)
+  face global mono               $(c default        default)
+  face global block              $(c default        default)
+  face global link               $(c default        default)
+  face global bullet             $(c default        default)
+  face global list               $(c default        default)
 
+  # Markup
+  face global value              $(c $brightyellow  default)
+  face global type               $(c $blue          default)
+  face global variable           $(c default        default)
+  face global module             $(c $green         default)
+  face global function           $(c default        default)
+  face global string             $(c $yellow        default)
+  face global keyword            $(c $magenta       default)
+  face global operator           $(c $cyan          default)
+  face global attribute          $(c default        default)
+  face global comment            $(c $black         default)
+  face global documentation      $(c default        default)
+  face global meta               $(c default        default)
+  face global builtin            $(c default        default)
+
+  # Deprecated?
+  face global error              $(c $red           default)
+  face global identifier         $(c default        default)
+
+  # Interface
   face global Default            $(c default        default)
 
   face global Error              $(c $red           default)
