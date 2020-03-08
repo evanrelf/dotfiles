@@ -55,7 +55,7 @@ evaluate-commands %sh{
   face global attribute          $(c default        default)
   face global comment            $(c $black         default)
   face global documentation      $(c default        default)
-  face global meta               $(c default        default)
+  face global meta               $(c $red           default)
   face global builtin            $(c default        default)
 
   # Deprecated?

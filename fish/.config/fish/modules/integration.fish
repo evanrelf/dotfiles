@@ -127,15 +127,4 @@ if test (uname) = "Darwin"
     if test -e "/Applications/Marked 2.app"
         alias marked "open -a 'Marked 2.app'"
     end
-
-    if test -e /usr/local/share/autojump/autojump.fish
-        source /usr/local/share/autojump/autojump.fish
-    end
-end
-
-# Arch
-if uname -a | grep -q ARCH
-    if test -e /usr/share/autojump/autojump.fish
-        source /usr/share/autojump/autojump.fish
-    end
 end

@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    autojump
     borgbackup
     broot
     cabal-install
