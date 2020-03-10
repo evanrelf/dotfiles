@@ -35,13 +35,19 @@ add-highlighter shared/haskell2/quasiquote-exp region \[\| \|\] regex \[\|(.*?)\
 add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\| \|\] regex \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\|(.*?)\|\] 1:string
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
 add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['\w\d\\])' 0:string
+# TODO: The period (.) shouldn't be highlighted as an operator when it's in a qualified function name (e.g. Data.Maybe.fromMaybe)
 add-highlighter shared/haskell2/code/operator regex (?<!['\[])((?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+\./<>?@\^\-~:]))(?!['\]]) 1:operator
 add-highlighter shared/haskell2/code/keyword group
+# TODO: `proc` shouldn't always be highlighted (e.g. System.Process.Typed.proc is valid)
 add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|\b(?:case|class|data|default|deriving|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderiving\b\s+\b(stock|anyclass)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+[a-z_][\w']*)+\s*(\.|->) 1:keyword 2:keyword
+# TODO: This is highlighted incorrectly: (\() -> f x)
+# TODO: This is highlighted incorrectly: Aeson.decode @(Set Text)
+# TODO: This is highlighted incorrectly: (1+2)+3*(4+5)
+# TODO: Maybe I can highlight the lambda backslash? (e.g. f = even $ \x y -> x + y)
 add-highlighter shared/haskell2/code/keyword/symbols regex (::|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\{\}\(\)\[\],\;](?!')|=>|->|<-)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b(?!\.) 1:type
 add-highlighter shared/haskell2/code/infix-identifier regex `(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*` 0:operator
