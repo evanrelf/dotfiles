@@ -34,6 +34,7 @@ add-highlighter shared/haskell2/quasiquote-texp region \[\|\| \|\|\] regex \[\|\
 add-highlighter shared/haskell2/quasiquote-exp region \[\| \|\] regex \[\|(.*?)\|\] 1:string
 add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\| \|\] regex \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\|(.*?)\|\] 1:string
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
+# TODO: This breaks highlighting (but is valid): '\"' (it's the same as '"')
 add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['\w\d\\])' 0:string
 # TODO: The period (.) shouldn't be highlighted as an operator when it's in a qualified function name (e.g. Data.Maybe.fromMaybe)
 add-highlighter shared/haskell2/code/operator regex (?<!['\[])((?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+\./<>?@\^\-~:]))(?!['\]]) 1:operator
@@ -48,6 +49,7 @@ add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+
 # TODO: This is highlighted incorrectly: Aeson.decode @(Set Text)
 # TODO: This is highlighted incorrectly: (1+2)+3*(4+5)
 # TODO: Maybe I can highlight the lambda backslash? (e.g. f = even $ \x y -> x + y)
+# TODO: This is highlighted incorrectly: SQEnv{..}
 add-highlighter shared/haskell2/code/keyword/symbols regex (::|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\{\}\(\)\[\],\;](?!')|=>|->|<-)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b(?!\.) 1:type
 add-highlighter shared/haskell2/code/infix-identifier regex `(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*` 0:operator

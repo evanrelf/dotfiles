@@ -27,11 +27,10 @@ define-command -hidden haskell-options-pragma -params 0 %{
     execute-keys "<esc>"
   }
 }
-hook global WinSetOption filetype=haskell %{
+hook global WinSetOption filetype=(haskell|haskell2) %{
   set-option window lintcmd "hlint"
-  hook window -group lint BufWritePost .* %{ lint }
-  lint-enable
-  set-option window formatcmd "sort-imports"
+  # hook window -group lint BufWritePost .* %{ lint }
+  # lint-enable
   add-snippet window "forall" "∀"
   add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
   add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
@@ -39,6 +38,9 @@ hook global WinSetOption filetype=haskell %{
 hook global WinCreate (.*\.hs-boot) %{
   set-option window filetype haskell
 }
+# hook global WinSetOption filetype=haskell %{
+#   try %{ set-option window filetype haskell2 }
+# }
 
 # PureScript
 hook global WinSetOption filetype=purescript %{
