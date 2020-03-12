@@ -2,16 +2,41 @@
 
 set -e
 
-# This assumes you have the following environment variables set correctly:
-# - BORG_REMOTE_PATH
-# - BORG_REPO
-# - BORG_PASSPHRASE
+exclude_file="$HOME/.config/borg/exclude"
+archive_name=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+archive_root="$HOME"
 
+# Check that borg is installed
+command -v borg >/dev/null 2>&1 \
+  || (echo "borg is not installed, or is not in your PATH" >&2; exit 1)
+
+# Check that environment variables are configured
+[ -n "$BORG_REMOTE_PATH" ] \
+  || (echo "BORG_REMOTE_PATH has not been configured" >&2; exit 1)
+[ -n "$BORG_REPO" ] \
+  || (echo "BORG_REPO has not been configured" >&2; exit 1)
+[ -n "$BORG_PASSPHRASE" ] \
+  || (echo "BORG_PASSPHRASE has not been configured" >&2; exit 1)
+
+# Check that paths exist
+[ -f "$exclude_file" ] \
+  || (echo "Exclude file '$exclude_file' does not exist, or is not a file" >&2; exit 1)
+[ -d "$archive_root" ] \
+  || (echo "Archive root '$archive_root' does not exist, or is not a directory" >&2; exit 1)
+
+# Check connection to rsync.net
+wait=$(if [ "$(uname)" = "Darwin" ]; then echo "-W"; else echo "-w"; fi)
+ping -c 2 "$wait" 30 rsync.net >/dev/null 2>&1 \
+  || (echo "Failed to connect to rsync.net" >&2; exit 1)
+
+# Create archive
+echo "Connecting..." >&2
 borg \
-  --verbose \
   create \
+  --verbose \
+  --progress \
   --stats \
-  --exclude-from "$HOME/.config/borg/exclude" \
+  --exclude-from "$exclude_file" \
   --compression zstd,10 \
-  ::"$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
-  "$HOME"
+  ::"$archive_name" \
+  "$archive_root"

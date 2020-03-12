@@ -80,6 +80,14 @@ hook global WinSetOption filetype=sh %{
   hook window -group lint BufWritePost .* %{ lint }
   lint-enable
 }
+hook global WinSetOption filetype= %{ try %{
+  execute-keys -draft "x<a-k>#!(/bin/sh|/bin/bash|/usr/bin/env bash)<ret>"
+  set-option window filetype sh
+} catch %{
+  execute-keys -draft "x<a-k>#!/usr/bin/env nix-shell<ret>"
+  execute-keys -draft "/#!nix-shell<ret>xs-i (bash|sh)<ret>"
+  set-option window filetype sh
+}}
 
 # Fish
 hook global WinSetOption filetype=fish %{
