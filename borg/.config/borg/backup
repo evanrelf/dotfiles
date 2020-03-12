@@ -1,66 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -euo pipefail
+set -e
 
-# Requires that the following environment variables are set:
-# - BORG_REPO="username@host:borg/repo/path"
-# - BORG_PASSPHRASE="hunter2"
-# - BORG_REMOTE_PATH="/path/to/remote/borg"
+# This assumes you have the following environment variables set correctly:
+# - BORG_REMOTE_PATH
+# - BORG_REPO
+# - BORG_PASSPHRASE
 
-# Check that environment variables are set
-if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" ]; then
-  echo "Environment variables are not configured correctly" >&2
-  exit 1
-fi
-
-_notify() {
-  if command -v notify-send >/dev/null 2>&1; then
-    notify-send "$@"
-  fi
-}
-
-# Potential home directories to check for
-potential_homes=("/home/evanrelf" "/home/evan" "/Users/evanrelf" "/Users/evan")
-
-# Look through potential home directories
-for path in "${potential_homes[@]}"; do
-  if [ -d "$path" ]; then
-    home="$path"
-    break
-  fi
-done
-
-# Fail if home directory could not be inferred
-if [ -z "$home" ]; then
-  echo "Couldn't infer your home directory" >&2
-  exit 1
-fi
-
-# Wait for Wi-Fi connection when resuming
-ping -c 2 -w 30 rsync.net >/dev/null 2>&1 \
-  || (_notify --urgency=critical "Borg" "Failed to connect to rsync.net"; exit 1)
-
-# Backup
 borg \
   --verbose \
   create \
   --stats \
-  --exclude-from "$home/.config/borg/exclude" \
+  --exclude-from "$HOME/.config/borg/exclude" \
   --compression zstd,10 \
-  ::"$(hostname)-$(date "+%Y-%m-%d_%H-%M")" \
-  "$home" \
-  || (_notify --urgency=critical "Borg" "Backup failed to complete"; exit 1)
-
-_notify "Borg" "Backup finished successfully"
-
-# Prune
-borg \
-  --verbose \
-  prune \
-  --stats \
-  --save-space \
-  --keep-hourly=24 \
-  --keep-daily=30 \
-  --keep-weekly=8 \
-  --keep-monthly=12 \
-  || (_notify --urgency=critical "Borg" "Pruning failed to complete"; exit 1)
+  ::"$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+  "$HOME"

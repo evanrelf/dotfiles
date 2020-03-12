@@ -144,6 +144,11 @@ hook global WinCreate .*\.el %{
   set-option window filetype lisp
 }
 
+# plist
+hook global WinCreate .*\.plist %{
+  set-option window filetype xml
+}
+
 # Prettier
 evaluate-commands %sh{
   if command -v prettier >/dev/null 2>&1; then
