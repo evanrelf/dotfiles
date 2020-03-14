@@ -67,7 +67,8 @@
   rh = reset --hard
 
   # REVISE
-  rv = "!if [ -z \"$1\" ]; then git lookup | xargs git revise; else git revise $@; fi #"
+  rv = "!if [ -z \"$1\" ]; then git lookup | xargs git revise; else git revise $@; fi; echo \"Don't forget to resign commits with git sign\" #"
+  sign = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend --no-edit --gpg-sign; else echo 'Refusing to sign while dirty' >&2; exit 1; fi #"
 
   # SHOW
   sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
