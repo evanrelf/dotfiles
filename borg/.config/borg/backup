@@ -2,35 +2,42 @@
 
 set -e
 
+_log() { echo "$@" >&2; }
+_fail() { _log "$@"; exit 1; }
+
 exclude_file="$HOME/.config/borg/exclude"
 archive_name=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 archive_root="$HOME"
 
 # Check that borg is installed
 command -v borg >/dev/null 2>&1 \
-  || (echo "borg is not installed, or is not in your PATH" >&2; exit 1)
+  || (_fail "borg is not installed, or is not in your PATH")
 
 # Check that environment variables are configured
 [ -n "$BORG_REMOTE_PATH" ] \
-  || (echo "BORG_REMOTE_PATH has not been configured" >&2; exit 1)
+  || (_fail "BORG_REMOTE_PATH has not been configured")
 [ -n "$BORG_REPO" ] \
-  || (echo "BORG_REPO has not been configured" >&2; exit 1)
+  || (_fail "BORG_REPO has not been configured")
 [ -n "$BORG_PASSPHRASE" ] \
-  || (echo "BORG_PASSPHRASE has not been configured" >&2; exit 1)
+  || (_fail "BORG_PASSPHRASE has not been configured")
 
 # Check that paths exist
 [ -f "$exclude_file" ] \
-  || (echo "Exclude file '$exclude_file' does not exist, or is not a file" >&2; exit 1)
+  || (_fail "Exclude file '$exclude_file' does not exist, or is not a file")
 [ -d "$archive_root" ] \
-  || (echo "Archive root '$archive_root' does not exist, or is not a directory" >&2; exit 1)
+  || (_fail "Archive root '$archive_root' does not exist, or is not a directory")
 
 # Check connection to rsync.net
 wait=$(if [ "$(uname)" = "Darwin" ]; then echo "-W"; else echo "-w"; fi)
 ping -c 2 "$wait" 30 rsync.net >/dev/null 2>&1 \
-  || (echo "Failed to connect to rsync.net" >&2; exit 1)
+  || (_fail "Failed to connect to rsync.net")
 
 # Create archive
-echo "Connecting..." >&2
+_log "Connecting to rsync.net..."
+_log "(O)riginal size"
+_log "(C)ompressed size"
+_log "(D)eduplicated size"
+_log "(N)umber of files processed"
 borg \
   create \
   --verbose \

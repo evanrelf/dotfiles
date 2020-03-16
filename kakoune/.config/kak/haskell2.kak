@@ -51,6 +51,7 @@ add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+
 # TODO: Maybe I can highlight the lambda backslash? (e.g. f = even $ \x y -> x + y)
 # TODO: This is highlighted incorrectly: SQEnv{..}
 add-highlighter shared/haskell2/code/keyword/symbols regex (::|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\{\}\(\)\[\],\;](?!')|=>|->|<-)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
+# TODO: Highlight infix type constructors as operators (e.g. lhs `TH.AppT` rhs)
 add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b(?!\.) 1:type
 add-highlighter shared/haskell2/code/infix-identifier regex `(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
