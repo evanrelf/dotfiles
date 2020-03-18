@@ -27,6 +27,10 @@ define-command -hidden haskell-options-pragma -params 0 %{
     execute-keys "<esc>"
   }
 }
+hook global WinSetOption filetype=haskell %{
+  map window user "1" ": set-option window filetype haskell<ret>"
+  map window user "2" ": set-option window filetype haskell2<ret>"
+}
 hook global WinSetOption filetype=(haskell|haskell2) %{
   set-option window lintcmd "hlint"
   # hook window -group lint BufWritePost .* %{ lint }
@@ -83,11 +87,11 @@ hook global WinSetOption filetype=sh %{
 hook global WinSetOption filetype= %{ try %{
   execute-keys -draft "x<a-k>#!(/bin/sh|/bin/bash|/usr/bin/env bash)<ret>"
   set-option window filetype sh
-} catch %{
+} catch %{ try %{
   execute-keys -draft "x<a-k>#!/usr/bin/env nix-shell<ret>"
   execute-keys -draft "/#!nix-shell<ret>xs-i (bash|sh)<ret>"
   set-option window filetype sh
-}}
+}}}
 
 # Fish
 hook global WinSetOption filetype=fish %{

@@ -50,6 +50,7 @@ add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+
 # TODO: This is highlighted incorrectly: (1+2)+3*(4+5)
 # TODO: Maybe I can highlight the lambda backslash? (e.g. f = even $ \x y -> x + y)
 # TODO: This is highlighted incorrectly: SQEnv{..}
+# TODO: The inner parens are not highlighted as keywords: import Data.Function ((&))
 add-highlighter shared/haskell2/code/keyword/symbols regex (::|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\{\}\(\)\[\],\;](?!')|=>|->|<-)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 # TODO: Highlight infix type constructors as operators (e.g. lhs `TH.AppT` rhs)
 add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b(?!\.) 1:type
