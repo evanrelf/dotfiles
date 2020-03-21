@@ -35,6 +35,7 @@ add-highlighter shared/haskell2/quasiquote-exp region \[\| \|\] regex \[\|(.*?)\
 add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\| \|\] regex \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\|(.*?)\|\] 1:string
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
 # TODO: This breaks highlighting (but is valid): '\"' (it's the same as '"')
+# TODO: Numbers are highlighted in characters: '5'
 add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['\w\d\\])' 0:string
 # TODO: The period (.) shouldn't be highlighted as an operator when it's in a qualified function name (e.g. Data.Maybe.fromMaybe)
 add-highlighter shared/haskell2/code/operator regex (?<!['\[])((?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+\./<>?@\^\-~:]))(?!['\]]) 1:operator
