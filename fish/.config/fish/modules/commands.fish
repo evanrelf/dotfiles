@@ -112,6 +112,9 @@ if _exists nix
     end
     alias nix-stray-roots "nix-store --gc --print-roots | grep -vE '^(/nix/var/|\{censored)'"
 end
+if _exists cached-nix-shell
+    alias "nix-shell" "cached-nix-shell"
+end
 
 # brain
 if test \( -d "$HOME/brain" \) -a \( -f "$HOME/brain/new" \)

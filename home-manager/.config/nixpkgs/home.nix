@@ -1,11 +1,13 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz") { inherit config; };
+in
 {
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     borgbackup
-    broot
-    cabal-install
     cabal2nix
+    cabal-install
     cachix
     direnv
     exa
@@ -14,17 +16,14 @@
     fzf
     ghcid
     git
-    git-revise
     gitAndTools.diff-so-fancy
     gitAndTools.hub
+    git-revise
     haskellPackages.fast-tags
-    haskellPackages.hadolint
-    haskellPackages.ormolu
     haskellPackages.wai-app-static
     htop
     httpie
     jq
-    kakoune
     mosh
     neovim
     nix-prefetch-git
@@ -38,11 +37,14 @@
     stack
     tealdeer
     tectonic
-    tmux
     tokei
     universal-ctags
     yarn
-  ] ++ [
+  ]) ++ (with unstable; [
+    kakoune
+    ormolu
+    tmux
+  ]) ++ [
     (pkgs.callPackage (builtins.fetchTarball {
       # lorri 1.0 (master on 2020-03-02)
       url = "https://github.com/target/lorri/archive/6ead8867a245de69f218071fa5db9edbd2864613.tar.gz";

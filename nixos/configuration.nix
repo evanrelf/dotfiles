@@ -39,7 +39,6 @@
     sensitivity = 100; # 0-255 (default 128)
     speed = 80; # 0-255 (default 97)
   };
-  # services.pantheon.contractor.enable = true;
   services.xserver = {
     enable = true;
     dpi = 144;
@@ -59,24 +58,15 @@
         enableContribAndExtras = true;
       };
     };
-    displayManager.lightdm = {
-      enable = true;
-      autoLogin = {
-        enable = true;
-        user = "evanrelf";
-      };
-    };
-    desktopManager = {
-      pantheon.enable = true;
-      xterm.enable = false;
-      # default = "elementary";
-    };
+    desktopManager.xterm.enable = false;
+    displayManager.lightdm.enable = true;
   };
   services.compton = {
     enable = true;
     vSync = true;
   };
   services.xbanish.enable = true;
+  services.physlock.enable = true;
 
 
   # SOUND {{{1

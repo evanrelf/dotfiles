@@ -44,6 +44,8 @@ function update -d "Run all update commands"
 
     if _exists npm
         _log "Updating NPM packages"
+        # Fix error from missing lib directory
+        test -d "$npm_config_prefix/lib" || mkdir "$npm_config_prefix/lib"
         npm update -g
     end
 
