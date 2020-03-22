@@ -50,15 +50,22 @@ in
       url = "https://github.com/target/lorri/archive/6ead8867a245de69f218071fa5db9edbd2864613.tar.gz";
       sha256 = "1i1b8iki424ypa49sxnf4q0agxlysvg0cah7hz5996s1kgb7ymc3";
     }) {})
-  ] ++ (if pkgs.stdenv.isLinux then with pkgs; [
+  ] ++ (if pkgs.stdenv.isLinux then (with pkgs; [
+    acpi
     chromium
     dmenu
+    feh
     gnupg
+    grim
     kitty
+    mako
+    slurp
     spotify
+    wl-clipboard
     xclip
+    xorg.xeyes
     xorg.xrdb
-  ] else if pkgs.stdenv.isDarwin then with pkgs; [
+  ]) else if pkgs.stdenv.isDarwin then with pkgs; [
     reattach-to-user-namespace
   ] else []);
 

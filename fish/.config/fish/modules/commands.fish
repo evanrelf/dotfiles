@@ -97,9 +97,9 @@ if _exists nix
         end
         _log "Entering Nix shell..."
         if test -z "$argv"
-            command nix-shell
+            nix-shell
         else
-            command nix-shell --command "$argv; return"
+            nix-shell --command "$argv; return"
         end
     end
     function with
@@ -108,7 +108,7 @@ if _exists nix
             return 1
         end
         _log "Entering Nix shell..."
-        command nix-shell --packages $argv
+        nix-shell --packages $argv
     end
     alias nix-stray-roots "nix-store --gc --print-roots | grep -vE '^(/nix/var/|\{censored)'"
 end

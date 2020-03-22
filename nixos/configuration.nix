@@ -14,7 +14,6 @@
     binutils
   ];
   programs.fish.enable = true;
-  programs.mosh.enable = true;
   programs.light.enable = true;
   services.openssh.enable = true;
 
@@ -22,9 +21,7 @@
   # FONTS {{{1
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [
-      iosevka-bin
-    ];
+    fonts = with pkgs; [ iosevka-bin ];
     fontconfig.ultimate = {
       enable = true;
       preset = "osx";
@@ -36,8 +33,12 @@
   hardware.trackpoint = {
     enable = true;
     emulateWheel = true;
-    sensitivity = 100; # 0-255 (default 128)
+    sensitivity = 255; # 0-255 (default 128)
     speed = 80; # 0-255 (default 97)
+  };
+  programs.sway = {
+    enable = true;
+    extraPackages = with pkgs; [ swaylock swayidle xwayland ];
   };
   services.xserver = {
     enable = true;
@@ -59,11 +60,6 @@
       };
     };
     desktopManager.xterm.enable = false;
-    displayManager.lightdm.enable = true;
-  };
-  services.compton = {
-    enable = true;
-    vSync = true;
   };
   services.xbanish.enable = true;
   services.physlock.enable = true;
@@ -94,9 +90,9 @@
   hardware.u2f.enable = true;
 
 
-  # NETWORK {{{1
-  hardware.bluetooth.enable = true;
-  networking.hostName = "evanrelf-nixos";
+  # NETWORKING {{{1
+  hardware.bluetooth.enable = false;
+  networking.hostName = "sienna";
   networking.networkmanager = {
     enable = true;
     wifi.powersave = true;
@@ -108,18 +104,19 @@
     "keyswap" = {
       description = "Key swap";
       enable = true;
+      wantedBy = [ "multi-user.target" ];
       script = ''
         export PATH=/run/current-system/sw/bin:$PATH
         setkeycodes 3a 1
         setkeycodes 38 125
         setkeycodes e05b 56
       '';
-      wantedBy = [ "multi-user.target" ];
     };
   };
 
 
   # USERS {{{1
+  nix.trustedUsers = [ "root" "@wheel" ];
   users.users."evanrelf" = {
     description = "Evan Relf";
     isNormalUser = true;
@@ -142,14 +139,12 @@
       enable = true;
       editor = false;
     };
-    initrd.luks.devices = [
-      {
-        name = "root";
-        device = "/dev/disk/by-uuid/424daca7-06a2-429a-85e1-1f0a17799bed";
-        preLVM = true;
-        allowDiscards = true;
-      }
-    ];
+    initrd.luks.devices = [{
+      name = "root";
+      device = "/dev/disk/by-uuid/424daca7-06a2-429a-85e1-1f0a17799bed";
+      preLVM = true;
+      allowDiscards = true;
+    }];
     extraModulePackages = with pkgs.linuxPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" ];
   };
