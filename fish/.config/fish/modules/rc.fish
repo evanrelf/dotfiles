@@ -81,6 +81,8 @@ function rc -d "Open the specified program's configuration file"
                 eval $EDITOR "$HOME/.config/alacritty/alacritty.yml"
             case kitty
                 eval $EDITOR "$HOME/.config/kitty/kitty.conf"
+            case kitty-local
+                eval $EDITOR "$HOME/.config/kitty/local.conf"
             case nixos
                 if test -e "$HOME/dotfiles/nixos/configuration.nix"
                   eval $EDITOR "$HOME/dotfiles/nixos/configuration.nix"
@@ -115,4 +117,4 @@ function rc -d "Open the specified program's configuration file"
         fd --type f --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --exact | xargs -o $EDITOR
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs spacemacs doom fish fisher fishfile zsh bash bash-profile xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon mpd ncmpcpp xresources xprofile xinit tmux git git-local mercurial hg alacritty kitty nixos ranger zathura redshift ghci"
+complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs spacemacs doom fish fisher fishfile zsh bash bash-profile xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon mpd ncmpcpp xresources xprofile xinit tmux git git-local mercurial hg alacritty kitty kitty-local nixos ranger zathura redshift ghci"

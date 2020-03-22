@@ -54,6 +54,7 @@ in
     acpi
     chromium
     dmenu
+    emacs
     feh
     gnupg
     grim
@@ -65,6 +66,7 @@ in
     xclip
     xorg.xeyes
     xorg.xrdb
+    zathura
   ]) else if pkgs.stdenv.isDarwin then with pkgs; [
     reattach-to-user-namespace
   ] else []);
