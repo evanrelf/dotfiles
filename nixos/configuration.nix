@@ -33,35 +33,35 @@
   hardware.trackpoint = {
     enable = true;
     emulateWheel = true;
-    sensitivity = 255; # 0-255 (default 128)
-    speed = 80; # 0-255 (default 97)
+    sensitivity = 200; # 0-255 (default 128)
+    speed = 125; # 0-255 (default 97)
   };
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [ swaylock swayidle xwayland ];
   };
-  services.xserver = {
-    enable = true;
-    dpi = 144;
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 35;
-    libinput = {
-      enable = true;
-      naturalScrolling = true;
-      tappingDragLock = false;
-      middleEmulation = false;
-      accelSpeed = "0.7";
-    };
-    windowManager = {
-      default = "xmonad";
-      xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
-    };
-    desktopManager.xterm.enable = false;
-  };
-  services.xbanish.enable = true;
+  # services.xserver = {
+  #   enable = true;
+  #   dpi = 144;
+  #   autoRepeatDelay = 200;
+  #   autoRepeatInterval = 35;
+  #   libinput = {
+  #     enable = true;
+  #     naturalScrolling = true;
+  #     tappingDragLock = false;
+  #     middleEmulation = false;
+  #     accelSpeed = "0.7";
+  #   };
+  #   windowManager = {
+  #     default = "xmonad";
+  #     xmonad = {
+  #       enable = true;
+  #       enableContribAndExtras = true;
+  #     };
+  #   };
+  #   desktopManager.xterm.enable = false;
+  # };
+  # services.xbanish.enable = true;
   services.physlock.enable = true;
 
 

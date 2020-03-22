@@ -15,6 +15,8 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term kitty
+# Your preferred web browser
+set $browser chromium --enable-features=WebUIDarkMode --force-dark-mode
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
@@ -34,7 +36,14 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
     # output * bg ~/Pictures/moon.jpg fill
 
     # Scale internal display
-    output "Unknown 0x2036 0x00000000" scale 1
+    output "Unknown 0x2036 0x00000000" {
+        scale 1
+        subpixel bgr
+    }
+
+    output "Dell Inc. DELL U2718Q 4K8X78AM0CML" {
+        subpixel rgb
+    }
 
 ### Idle configuration
 #
@@ -98,6 +107,9 @@ exec swayidle -w \
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+
+    # Start a web browser
+    bindsym $mod+Shift+Return exec $browser
 
     # Kill focused window
     bindsym $mod+Shift+q kill

@@ -1,5 +1,9 @@
 # Prompt
-set -g fish_greeting ""
+function fish_greeting
+    if test (uname) = "Linux" && _exists sway && test (tty) = "/dev/tty1"
+        exec sway
+    end
+end
 set -g fish_prompt_pwd_dir_length 1
 # set __fish_git_prompt_showdirtystate "true"
 # set __fish_git_prompt_showuntrackedfiles "true"
