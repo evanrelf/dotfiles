@@ -27,17 +27,4 @@ hook global InsertCompletionHide .* %{
   unmap window insert "<s-tab>" "<c-p>"
 }
 
-# Highlight current selection
-# declare-option -hidden regex current_selection
-# set-face global CurrentSelection default,rgb:4d4d4d
-# hook global NormalIdle .* %{
-#   evaluate-commands -draft %{ try %{
-#     execute-keys <a-k>.{2,}<ret>
-#     set-option buffer current_selection "(?i)\Q%val{selection}\E"
-#   } catch %{
-#     set-option buffer current_selection ""
-#   }}
-# }
-# add-highlighter global/current_selection dynregex "%%opt{current_selection}" 0:CurrentSelection
-
 }

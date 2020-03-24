@@ -46,6 +46,7 @@ add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderivin
 add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+[a-z_][\w']*)+\s*(\.|->) 1:keyword 2:keyword
+# TODO: This is highlighted incorrectly: w ::: Text <?> "Lorem ipsum"
 # TODO: This is highlighted incorrectly: (\() -> f x)
 # TODO: This is highlighted incorrectly: Aeson.decode @(Set Text)
 # TODO: This is highlighted incorrectly: (1+2)+3*(4+5)

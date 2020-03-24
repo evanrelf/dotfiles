@@ -14,8 +14,8 @@ let
   packages = {
     universal = (with stable; [
       borgbackup
-      cabal2nix
       cabal-install
+      cabal2nix
       cachix
       direnv
       exa
@@ -24,16 +24,19 @@ let
       fzf
       ghcid
       git
+      git-revise
       gitAndTools.diff-so-fancy
       gitAndTools.hub
-      git-revise
       haskellPackages.fast-tags
+      haskellPackages.hadolint
+      haskellPackages.nix-derivation
       haskellPackages.wai-app-static
       htop
       httpie
       jq
       mosh
       neovim
+      nix-diff
       nix-prefetch-git
       nodejs
       pandoc

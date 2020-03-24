@@ -48,6 +48,10 @@
   # LOOKUP (script)
   k = lookup
 
+  # PULL
+  pullff = pull --ff-only
+  pullrb = pull --rebase
+
   # PUSH
   p = "!bash $HOME/.config/git/hooks/pre-push && git push $@ #"
   pf = "!bash $HOME/.config/git/hooks/pre-push && git push --force-with-lease $@ #"
