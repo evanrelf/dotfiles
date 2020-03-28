@@ -28,8 +28,8 @@ define-command -hidden haskell-options-pragma -params 0 %{
   }
 }
 hook global WinSetOption filetype=haskell %{
-  map window user "1" ": set-option window filetype haskell<ret>"
-  map window user "2" ": set-option window filetype haskell2<ret>"
+  map window user "1" ": set-option window filetype haskell<ret>" -docstring "Use old Haskell filetype"
+  map window user "2" ": set-option window filetype haskell2<ret>" -docstring "Use new Haskell filetype"
 }
 hook global WinSetOption filetype=(haskell|haskell2) %{
   set-option window lintcmd "hlint"
@@ -42,9 +42,9 @@ hook global WinSetOption filetype=(haskell|haskell2) %{
 hook global WinCreate (.*\.hs-boot) %{
   set-option window filetype haskell
 }
-# hook global WinSetOption filetype=haskell %{
-#   try %{ set-option window filetype haskell2 }
-# }
+hook global WinSetOption filetype=haskell %{
+  try %{ set-option window filetype haskell2 }
+}
 
 # PureScript
 hook global WinSetOption filetype=purescript %{

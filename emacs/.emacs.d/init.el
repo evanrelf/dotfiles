@@ -29,11 +29,14 @@
 (fringe-mode -1)
 
 ;; Enable mouse support in terminal
-(when (not window-system)
-  (xterm-mouse-mode t))
 (unless window-system
+  (xterm-mouse-mode t)
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
+
+;; Fix hard-to-see cursor on Linux
+(when window-system
+  (set-mouse-color "white"))
 
 ;; Disable audio bell
 (setq ring-bell-function 'ignore)
