@@ -46,8 +46,8 @@ add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderivin
 add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+[a-z_][\w']*)+\s*(\.|->) 1:keyword 2:keyword
-# TODO: This is highlighted incorrectly: w ::: Text <?> "Lorem ipsum"
 # TODO: This is highlighted incorrectly: (\() -> f x)
+# TODO: This is highlighted incorrectly: w ::: Text <?> "Lorem ipsum"
 # TODO: This is highlighted incorrectly: Aeson.decode @(Set Text)
 # TODO: This is highlighted incorrectly: (1+2)+3*(4+5)
 # TODO: Maybe I can highlight the lambda backslash? (e.g. f = even $ \x y -> x + y)
@@ -59,7 +59,7 @@ add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w'
 add-highlighter shared/haskell2/code/infix-identifier regex `(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
 # TODO: -XPackageImports breaks this for some reason
-add-highlighter shared/haskell2/code/module/import regex import\s+(?:(".*?")\s+)?(?:(qualified)\s+)?([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(hiding)\s+\(.*?\))?(?:\s+(as)\s([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:string 2:keyword 3:module 4:keyword 5:keyword 6:module
+add-highlighter shared/haskell2/code/module/import regex import\s+(?:(".*?")\s+)?(?:(qualified)\s+)?([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(hiding)\s+\(.*?\))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:string 2:keyword 3:module 4:keyword 5:keyword 6:module
 add-highlighter shared/haskell2/code/module/declaration regex \bmodule\b\s+\b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b 1:module
 add-highlighter shared/haskell2/code/numbers group
 add-highlighter shared/haskell2/code/numbers/decimal regex (?<!\.)\b([0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-][0-9]+)?)\b(?!\.) 1:value
