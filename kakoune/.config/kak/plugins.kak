@@ -43,6 +43,36 @@ commit "00221c1ddb2d9ef984facfbdc71b56b789daddaf" config %{
   map global normal "<down>"  ": move-line-below<ret>"
 }
 
+# Phantom selections
+plug "occivink/kakoune-phantom-selection" %{
+  define-command -hidden phantom-group %{
+    phantom-selection-add-selection
+    map buffer normal "<tab>" ": phantom-selection-iterate-next<ret>"
+    map buffer insert "<tab>" "<esc>: phantom-selection-iterate-next<ret>i"
+    map buffer normal "<s-tab>" ": phantom-selection-iterate-prev<ret>"
+    map buffer insert "<s-tab>" "<esc>: phantom-selection-iterate-prev<ret>i"
+    map buffer normal "<c-g>" ": phantom-ungroup<ret>"
+    map buffer insert "<c-g>" "<esc>: phantom-ungroup<ret>i"
+    # Select a phantom selection
+    phantom-selection-iterate-next
+    phantom-selection-iterate-prev
+  }
+  define-command -hidden phantom-ungroup %{
+    phantom-selection-select-all
+    phantom-selection-clear
+    unmap buffer normal "<tab>" ": phantom-selection-iterate-next<ret>"
+    # map buffer insert "<tab>" "<tab>"
+    unmap buffer insert "<tab>" "<esc>: phantom-selection-iterate-next<ret>i"
+    unmap buffer normal "<s-tab>" ": phantom-selection-iterate-prev<ret>"
+    unmap buffer insert "<s-tab>" "<esc>: phantom-selection-iterate-prev<ret>i"
+    unmap buffer normal "<c-g>" ": phantom-ungroup<ret>"
+    unmap buffer insert "<c-g>" "<esc>: phantom-ungroup<ret>i"
+  }
+  map global normal "<c-g>" ": phantom-group<ret><space>"
+  map global insert "<c-g>" "<a-;>: phantom-group<ret><a-;><space>"
+  set-face global PhantomSelection default,rgb:393848
+}
+
 # More text objects
 plug "Delapouite/kakoune-text-objects" config %{
   # Text object for paragraphs separated by two blank lines (like Elm)
@@ -70,14 +100,14 @@ plug "Delapouite/kakoune-cd" config %{
   alias global pwd print-working-directory
 }
 
+# UNIX-y commands (mv, rename, cp, mkdir, chmod, and rm)
+plug "matthias-margush/tug"
+
 # FZF integration
 plug "andreyorst/fzf.kak" do %{
   git checkout .
   # Remove lingering info popups
   for file in rc/modules/*.kak; do sed -i "" "s/info -title/nop/g" "$file"; done
-  # Improve latency
-  # sed -i "" "s|'\${fzfcmd}'|env \${fzfcmd} < /dev/null > /dev/null 2>\&1|" "rc/fzf.kak"
-
 } config %{
   map global user "f" ": fzf-mode<ret>" -docstring "FZF mode"
 } defer "fzf" %{

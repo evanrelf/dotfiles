@@ -46,16 +46,15 @@ map global normal "<c-i>" "<c-i>vc"
 map global normal "<c-o>" "<c-o>vc"
 
 # Insert and delete spaces for indentation
-map global insert "<tab>" "<a-;><a-gt>"
-map global insert "<s-tab>" "<a-;><a-lt>"
-# hook global InsertChar \t %{
-#   try %{
-#     execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
-#   } catch %{
-#     # execute-keys -draft "<esc>h%opt{indentwidth}@"
-#     execute-keys -draft "<esc>hd>"
-#   }
-# }
+hook global InsertChar \t %{
+  try %{
+    execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+  } catch %{
+    # execute-keys -draft "<esc>h%opt{indentwidth}@"
+    # execute-keys -draft "<esc>hd>"
+    execute-keys -draft "<esc>hd"
+  }
+}
 hook global InsertDelete ' ' %{ try %{
   execute-keys -draft 'hGh<a-k>\A\h+\z<ret>i<space><esc><lt>'
 }}
@@ -71,8 +70,8 @@ evaluate-commands %sh{
       paste="pbpaste"
       ;;
     "Linux")
-      copy="xclip"
-      paste="xclip -o"
+      copy="wl-copy || xclip"
+      paste="wl-paste || xclip -o"
       ;;
     *)
       copy="false"

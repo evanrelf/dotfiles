@@ -90,8 +90,8 @@
   # stdd = stash clear
 
   # STATUS
-  s = status --short
-  ss = status --show-stash
+  s = status --show-stash
+  ss = status --short
 
   # TAG
   t = tag

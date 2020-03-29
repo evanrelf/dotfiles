@@ -11,7 +11,7 @@ try %{
   set-face global SecondarySelection default,rgb:434758+g
   add-highlighter global/ column 81 default,rgb:2c3344
 }
-add-highlighter global/ number-lines -hlcursor
+add-highlighter global/ number-lines -hlcursor -relative
 add-highlighter global/ show-matching
 add-highlighter global/ dynregex "%%reg{/}" 0:+u
 add-highlighter global/ regex "\b(TODO|FIXME|NOTE)\b" 0:default+r

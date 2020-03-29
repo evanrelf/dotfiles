@@ -28,72 +28,81 @@ evaluate-commands %sh{
   selection=rgb:393848
 
   c() {
-    echo "$1,$2"
+    fg="$1"
+    bg="$2"
+    attrs="$3"
+
+    [ -n "$fg" ] && printf "%s" "$fg"
+    [ -n "$bg" ] && printf "%s" ",$bg"
+    [ -n "$attrs" ] && printf "%s" "+$attrs"
   }
 
   printf "%s\n" "
   # Code
-  face global title              $(c default        default)
-  face global header             $(c default        default)
-  face global bold               $(c default        default)
-  face global italic             $(c default        default)
-  face global mono               $(c default        default)
-  face global block              $(c default        default)
-  face global link               $(c default        default)
-  face global bullet             $(c default        default)
-  face global list               $(c default        default)
+  set-face global title              $(c default        default)
+  set-face global header             $(c default        default)
+  set-face global bold               $(c default        default)
+  set-face global italic             $(c default        default)
+  set-face global mono               $(c default        default)
+  set-face global block              $(c default        default)
+  set-face global link               $(c default        default)
+  set-face global bullet             $(c default        default)
+  set-face global list               $(c default        default)
 
   # Markup
-  face global value              $(c $brightyellow  default)
-  face global type               $(c $blue          default)
-  face global variable           $(c default        default)
-  face global module             $(c $green         default)
-  face global function           $(c default        default)
-  face global string             $(c $yellow        default)
-  face global keyword            $(c $magenta       default)
-  face global operator           $(c $cyan          default)
-  face global attribute          $(c default        default)
-  face global comment            $(c $black         default)
-  face global documentation      $(c default        default)
-  face global meta               $(c $red           default)
-  face global builtin            $(c default        default)
+  set-face global value              $(c $brightyellow  default)
+  set-face global type               $(c $blue          default)
+  set-face global variable           $(c default        default)
+  set-face global module             $(c $green         default)
+  set-face global function           $(c default        default)
+  set-face global string             $(c $yellow        default)
+  set-face global keyword            $(c $magenta       default)
+  set-face global operator           $(c $cyan          default)
+  set-face global attribute          $(c default        default)
+  set-face global comment            $(c $black         default)
+  set-face global documentation      $(c default        default)
+  set-face global meta               $(c $red           default)
+  set-face global builtin            $(c default        default)
 
   # Deprecated?
-  face global error              $(c $red           default)
-  face global identifier         $(c default        default)
+  set-face global error              $(c $red           default)
+  set-face global identifier         $(c default        default)
 
   # Interface
-  face global Default            $(c default        default)
+  set-face global Default            $(c default        default)
 
-  face global Error              $(c $red           default)
+  set-face global Error              $(c $red           default)
 
-  face global LineNumberCursor   $(c default        default)
-  face global LineNumbers        $(c $black         default)
-  face global LineNumbersWrapped $(c default        default)
-  face global BufferPadding      $(c $black         default)
+  set-face global LineNumberCursor   $(c default        default)
+  set-face global LineNumbers        $(c $black         default)
+  set-face global LineNumbersWrapped $(c default        default)
+  set-face global BufferPadding      $(c $black         default)
 
-  face global MatchingChar       $(c default        $black)
+  set-face global MatchingChar       $(c default        $black)
 
-  face global MenuBackground     $(c $brightblack   $foreground)
-  face global MenuForeground     $(c default        $brightblack)
-  face global MenuInfo           $(c $black         default)
-  face global Information        $(c default        $brightblack)
+  set-face global MenuBackground     $(c $brightblack   $foreground)
+  set-face global MenuForeground     $(c default        $brightblack)
+  set-face global MenuInfo           $(c $black         default)
+  set-face global Information        $(c default        $brightblack)
 
-  face global PrimaryCursor      $(c $background    $yellow)
-  face global PrimaryCursorEol   $(c $background    $brightyellow)
-  face global PrimarySelection   $(c default        $selection)
-  face global SecondaryCursor    $(c $background    $foreground)
-  face global SecondaryCursorEol $(c $background    $brightwhite)
-  face global SecondarySelection $(c default        $selection)
-  face global StatusCursor       $(c $background    $yellow)
+  set-face global PrimaryCursor      $(c $background    $yellow)
+  set-face global PrimaryCursorEol   $(c $background    $brightyellow)
+  set-face global PrimarySelection   $(c default        $selection)
+  set-face global SecondaryCursor    $(c $background    $foreground)
+  set-face global SecondaryCursorEol $(c $background    $brightwhite)
+  set-face global SecondarySelection $(c default        $selection)
+  set-face global StatusCursor       $(c $background    $yellow)
 
-  face global StatusLine         $(c default        default)
-  face global StatusLineInfo     $(c default        $brightblack)
-  face global StatusLineMode     $(c default        $brightblack)
-  face global StatusLineValue    $(c $background    $yellow)
-  face global Prompt             $(c default        default)
+  set-face global StatusLine         $(c default        default)
+  set-face global StatusLineInfo     $(c default        $brightblack)
+  set-face global StatusLineMode     $(c default        $brightblack)
+  set-face global StatusLineValue    $(c $background    $yellow)
+  set-face global Prompt             $(c default        default)
 
-  face global Whitespace         $(c default        default)
-  face global WrapMarker         $(c default        default)
+  set-face global Whitespace         $(c default        default)
+  set-face global WrapMarker         $(c default        default)
+
+  # Plugins (may need to apply these manually)
+  # set-face global PhantomSelection   $(c default        $selection)
   "
 }
