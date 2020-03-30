@@ -8,9 +8,15 @@ plug "andreyorst/plug.kak" noload
 # break multiple times because of this...
 
 # Toggle between relative and absolute line numbers depending on mode
-# plug "evanrelf/number-toggle.kak" %{
+# plug "evanrelf/number-toggle.kak" config %{
 #   set-option global number_toggle_params -hlcursor
 # }
+
+# set-option window indentwidth 8
+plug "evanrelf/rounded-indentation.kak" config %{
+  map global normal ">" ": rounded-indentation-increase<ret>"
+  map global normal "<" ": rounded-indentation-decrease<ret>"
+}
 
 # Automatically complete pairs
 plug "alexherbo2/auto-pairs.kak" \
@@ -28,12 +34,6 @@ commit "7616a810739590c03a216ad13e601ea923b1e552" config %{
 plug "alexherbo2/replace-mode.kak" \
 commit "a569d3df8311a0447e65348a7d48c2dea5415df0" config %{
   map global normal "<a-r>" ": enter-replace-mode<ret><c-o>"
-}
-
-# Create parent directories if missing
-plug "alexherbo2/mkdir.kak" \
-commit "cb7848045390d7c4d7b729327971acd11d026866" config %{
-  hook global BufWritePre .* %{ mkdir-current-buffer }
 }
 
 # Move selections

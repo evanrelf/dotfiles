@@ -30,6 +30,10 @@ map global normal "S" '"sS'
 map global normal "<a-s>" '"s<a-s>'
 map global normal "<a-S>" '"s<a-S>'
 
+# Drop selection when entering insert mode
+map global normal "i" ";i"
+map global normal "a" ";a"
+
 # Commenting
 map global normal "#" ": comment-line<ret>"
 map global normal "<a-#>" ": comment-block<ret>"
@@ -51,8 +55,8 @@ hook global InsertChar \t %{
     execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
   } catch %{
     # execute-keys -draft "<esc>h%opt{indentwidth}@"
-    # execute-keys -draft "<esc>hd>"
-    execute-keys -draft "<esc>hd"
+    execute-keys -draft "<esc>hd<gt>"
+    # execute-keys -draft "<esc>hd"
   }
 }
 hook global InsertDelete ' ' %{ try %{
@@ -96,7 +100,9 @@ map global goto "g" "<esc>: echo -markup '{Error}Use gk{Default}'<ret>" -docstri
 map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstring "Use vc"
 map global normal "b" ": echo -markup '{Error}Use q{Default}'<ret>" -docstring "Use q"
 map global normal "B" ": echo -markup '{Error}Use Q{Default}'<ret>" -docstring "Use Q"
-map global normal "<a-b>" ": echo -markup '{Error}Use ⌥q{Default}'<ret>" -docstring "Use ⌥q"
-map global normal "<a-B>" ": echo -markup '{Error}Use ⌥Q{Default}'<ret>" -docstring "Use ⌥Q"
+map global normal "<a-b>" ": echo -markup '{Error}Use a-q{Default}'<ret>" -docstring "Use ⌥q"
+map global normal "<a-B>" ": echo -markup '{Error}Use a-Q{Default}'<ret>" -docstring "Use ⌥Q"
+map global insert "<c-n>" "<a-;>: echo -markup '{Error}Use tab{Default}'<ret>" -docstring "Use ⌥Q"
+map global insert "<c-p>" "<a-;>: echo -markup '{Error}Use s-tab{Default}'<ret>" -docstring "Use ⌥Q"
 
 }
