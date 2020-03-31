@@ -1,18 +1,12 @@
-provide-module "user_plugins" %{
-
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
-# NOTE: alexherbo2 frequently changes their plugins' APIs, so it's best to pin
-# their plugins to specific commits for stability. I've had my Kakoune config
-# break multiple times because of this...
-
 # Toggle between relative and absolute line numbers depending on mode
-# plug "evanrelf/number-toggle.kak" config %{
-#   set-option global number_toggle_params -hlcursor
-# }
+plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
+  set-option global number_toggle_params -hlcursor
+}
 
-# set-option window indentwidth 8
+# Round indentation to nearest indent level
 plug "evanrelf/rounded-indentation.kak" config %{
   map global normal ">" ": rounded-indentation-increase<ret>"
   map global normal "<" ": rounded-indentation-decrease<ret>"
@@ -95,9 +89,9 @@ plug "Delapouite/kakoune-buffers" config %{
 
 # Change directory
 plug "Delapouite/kakoune-cd" config %{
-  alias global cd change-directory-current-buffer
-  alias global r change-directory-project-root
-  alias global pwd print-working-directory
+  alias global "cd" "change-directory-current-buffer"
+  alias global "r" "change-directory-project-root"
+  alias global "pwd" "print-working-directory"
 }
 
 # UNIX-y commands (mv, rename, cp, mkdir, chmod, and rm)
@@ -149,5 +143,3 @@ plug "h-youhei/kakoune-surround" config %{
 #   hook global KakEnd .* lsp-exit
 #   # set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\s,=;*(){}\[\]]\z<ret>'"
 # }
-
-}

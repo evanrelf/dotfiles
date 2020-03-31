@@ -1,5 +1,3 @@
-provide-module "user_mappings" %{
-
 # Use q for backwards word movement
 map global normal "q" "b"
 map global normal "Q" "B"
@@ -49,20 +47,6 @@ map global normal "X" ": extend-line-up %%val{count}<ret>"
 map global normal "<c-i>" "<c-i>vc"
 map global normal "<c-o>" "<c-o>vc"
 
-# Insert and delete spaces for indentation
-hook global InsertChar \t %{
-  try %{
-    execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
-  } catch %{
-    # execute-keys -draft "<esc>h%opt{indentwidth}@"
-    execute-keys -draft "<esc>hd<gt>"
-    # execute-keys -draft "<esc>hd"
-  }
-}
-hook global InsertDelete ' ' %{ try %{
-  execute-keys -draft 'hGh<a-k>\A\h+\z<ret>i<space><esc><lt>'
-}}
-
 # Tags
 map global user "t" "<a-i>w: ctags-search<ret>;<space>" -docstring "Jump to tag under cursor"
 
@@ -104,5 +88,3 @@ map global normal "<a-b>" ": echo -markup '{Error}Use a-q{Default}'<ret>" -docst
 map global normal "<a-B>" ": echo -markup '{Error}Use a-Q{Default}'<ret>" -docstring "Use ⌥Q"
 map global insert "<c-n>" "<a-;>: echo -markup '{Error}Use tab{Default}'<ret>" -docstring "Use ⌥Q"
 map global insert "<c-p>" "<a-;>: echo -markup '{Error}Use s-tab{Default}'<ret>" -docstring "Use ⌥Q"
-
-}

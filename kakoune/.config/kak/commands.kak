@@ -1,4 +1,7 @@
-provide-module "user_commands" %{
+define-command -docstring "Source configuration lazily (after NormalIdle)" \
+defer -params 1 %{
+  hook -once global NormalIdle .* %arg{1}
+}
 
 # Remove buffer when quitting from Kakoune client
 define-command -docstring "quit-client" -override \
@@ -107,6 +110,4 @@ strip-whitespace %{
 define-command -docstring "filetype: change filetype" \
 filetype -params 1 %{
   set-option window filetype %arg{1}
-}
-
 }

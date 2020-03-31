@@ -1,20 +1,10 @@
-try %{ source "%val{config}/purescript.kak" }
-try %{ source "%val{config}/nix.kak" }
-try %{ source "%val{config}/haskell2.kak" }
-
 source "%val{config}/commands.kak"
 source "%val{config}/filetype.kak"
 source "%val{config}/hooks.kak"
 source "%val{config}/mappings.kak"
 source "%val{config}/options.kak"
-source "%val{config}/plugins.kak"
-
-require-module "user_commands"
-require-module "user_filetype"
-require-module "user_hooks"
-require-module "user_mappings"
-require-module "user_options"
-require-module "user_plugins"
+try %{ source "%val{config}/haskell2.kak" }
+defer %{ source "%val{config}/plugins.kak" }
 
 # TODO:
 # - Remove leading comment character when joining comment lines

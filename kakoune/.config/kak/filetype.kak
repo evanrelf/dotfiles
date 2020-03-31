@@ -1,5 +1,3 @@
-provide-module "user_filetype" %{
-
 # Haskell
 define-command -hidden haskell-language-pragma -params 0 %{
   # Cache GHC language extensions for times when GHC isn't available (e.g. outside Nix shell)
@@ -134,6 +132,9 @@ hook global WinCreate git-revise-todo %{
 # Docker
 hook global WinCreate (Dockerfile.*|.*\.dockerfile) %{
   set-option window filetype dockerfile
+  # set-option window lintcmd "hadolint"
+  # hook window -group lint BufWritePost .* %{ lint }
+  # lint-enable
 }
 
 # Makefile
@@ -143,13 +144,11 @@ hook global WinSetOption filetype=makefile %{
 }
 
 # Kakoune
+hook global WinCreate .*\.kak %{
+  add-highlighter shared/kakrc/code/ regex add-snippet 0:keyword
+}
 hook global BufCreate \*scratch\* %{
   execute-keys '%d'
-}
-
-# Man
-hook global WinSetOption filetype=man %{
-  try %{ remove-highlighter global/number-lines_-hlcursor }
 }
 
 # Emacs Lisp
@@ -176,6 +175,4 @@ evaluate-commands %sh{
     hook global WinSetOption filetype=less %{ set-option window formatcmd 'prettier --stdin --parser less' }
     "
   fi
-}
-
 }

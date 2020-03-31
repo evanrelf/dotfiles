@@ -1,5 +1,3 @@
-provide-module "user_options" %{
-
 # Appearance
 try %{
   colorscheme challenger-deep
@@ -22,6 +20,5 @@ set-option global ui_options \
 # Options
 set-option global indentwidth 2
 set-option global grepcmd "rg --column --smart-case"
-set-option global startup_info_version 20191210
-
-}
+set-option global startup_info_version 99999999
+set-option global spell_lang "en-US"

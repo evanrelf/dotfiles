@@ -1,31 +1,33 @@
-evaluate-commands %sh{
-  black=rgb:565575
-  brightblack=rgb:100e23
+try %{
+  source "%val{config}/colors/challenger-deep-cached.kak"
+} catch %{ evaluate-commands %sh{
+  black="rgb:565575"
+  brightblack="rgb:100e23"
 
-  red=rgb:ff8080
-  brightred=rgb:ff5458
+  red="rgb:ff8080"
+  brightred="rgb:ff5458"
 
-  green=rgb:95ffa4
-  brightgreen=rgb:62d196
+  green="rgb:95ffa4"
+  brightgreen="rgb:62d196"
 
-  yellow=rgb:ffe9aa
-  brightyellow=rgb:ffb378
+  yellow="rgb:ffe9aa"
+  brightyellow="rgb:ffb378"
 
-  blue=rgb:91ddff
-  brightblue=rgb:65b2ff
+  blue="rgb:91ddff"
+  brightblue="rgb:65b2ff"
 
-  magenta=rgb:c991e1
-  brightmagenta=rgb:906cff
+  magenta="rgb:c991e1"
+  brightmagenta="rgb:906cff"
 
-  cyan=rgb:aaffe4
-  brightcyan=rgb:63f2f1
+  cyan="rgb:aaffe4"
+  brightcyan="rgb:63f2f1"
 
-  white=rgb:cbe3e7
-  brightwhite=rgb:a6b3cc
+  white="rgb:cbe3e7"
+  brightwhite="rgb:a6b3cc"
 
-  foreground=$white
-  background=rgb:1e1c31
-  selection=rgb:393848
+  foreground="$white"
+  background="rgb:1e1c31"
+  selection="rgb:393848"
 
   c() {
     fg="$1"
@@ -37,6 +39,7 @@ evaluate-commands %sh{
     [ -n "$attrs" ] && printf "%s" "+$attrs"
   }
 
+  mkdir -p "$kak_config/colors"
   printf "%s\n" "
   # Code
   set-face global title              $(c default        default)
@@ -104,5 +107,5 @@ evaluate-commands %sh{
 
   # Plugins (may need to apply these manually)
   # set-face global PhantomSelection   $(c default        $selection)
-  "
-}
+  " | tee "$kak_config/colors/challenger-deep-cached.kak"
+}}

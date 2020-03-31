@@ -1,12 +1,13 @@
-provide-module "user_hooks" %{
-
 # Display Git diff in gutter
-hook global WinCreate .* %{ try %{
-  git show-diff
-}}
-hook global BufWritePost .* %{ try %{
-  git update-diff
-}}
+hook global WinCreate .* %{
+  hook -once window NormalIdle .* %{ try %{
+    try %{ _number-toggle-refresh }
+    git show-diff
+    hook window BufWritePost .* %{ try %{
+      git update-diff
+    }}
+  }}
+}
 
 # Highlight trailing whitespace
 hook global ModeChange push:.*:insert %{
@@ -27,4 +28,16 @@ hook global InsertCompletionHide .* %{
   unmap window insert "<s-tab>" "<c-p>"
 }
 
+# Insert and delete spaces for indentation
+hook global InsertChar \t %{
+  try %{
+    execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+  } catch %{
+    # execute-keys -draft "<esc>h%opt{indentwidth}@"
+    execute-keys -draft "<esc>hd<gt>"
+    # execute-keys -draft "<esc>hd"
+  }
 }
+hook global InsertDelete ' ' %{ try %{
+  execute-keys -draft 'hGh<a-k>\A\h+\z<ret>i<space><esc><lt>'
+}}
