@@ -5,6 +5,7 @@ source "%val{config}/mappings.kak"
 source "%val{config}/options.kak"
 try %{ source "%val{config}/haskell2.kak" }
 defer %{ source "%val{config}/plugins.kak" }
+# source "%val{config}/plugins.kak"
 
 # TODO:
 # - Remove leading comment character when joining comment lines

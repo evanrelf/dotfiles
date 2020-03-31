@@ -3,27 +3,6 @@ defer -params 1 %{
   hook -once global NormalIdle .* %arg{1}
 }
 
-# Remove buffer when quitting from Kakoune client
-define-command -docstring "quit-client" -override \
-quit-client -params 0..1 %{
-  # TODO: Delete all buffers that are not open in other windows
-  try %{
-    evaluate-commands %sh{
-      if echo "$kak_bufname" | grep -qvE '^\*.+\*$'; then
-        echo "delete-buffer"
-      fi
-    }
-    quit %arg{@}
-  } catch %{ evaluate-commands %sh{
-    if [ "$kak_modified" = "true" ]; then
-      echo "echo -markup '{Error}buffer is modified{Default}'"
-    else
-      echo "echo -markup '{Error}%val{error}{Default}'"
-    fi
-  }}
-}
-# alias global q quit-client
-
 # Snippets
 define-command -docstring "add-snippet" \
 add-snippet -params 3 %{ evaluate-commands %sh{
@@ -31,8 +10,12 @@ add-snippet -params 3 %{ evaluate-commands %sh{
   snippet=$2
   expansion=$3
   printf "%s" "
-  set-option -add $scope static_words '$2'
-  set-option -add $scope snippets '$2' '$3'
+  try %{
+    set-option -add $scope snippets '$2' '$3'
+    set-option -add $scope static_words '$2'
+  } catch %{
+    echo -debug 'add-snippet: Unable to add snippet because snippets.kak not loaded ($snippet to $expansion)'
+  }
   "
 }}
 
@@ -66,14 +49,12 @@ softwrap-disable %{
 # tmux splits
 define-command -docstring "split <filename>: open file in horizontal tmux split" \
 split -params 0.. -file-completion %{
-  # tmux-terminal-vertical sh -c "kak -c %val{session} %arg{@}; fish"
   tmux-terminal-vertical kak -c %val{session} %arg{@}
 }
 alias global sp split
 
 define-command -docstring "vsplit <filename>: open file in vertical tmux split" \
 vsplit -params 0.. -file-completion %{
-  # tmux-terminal-horizontal sh -c "kak -c %val{session} %arg{@}; fish"
   tmux-terminal-horizontal kak -c %val{session} %arg{@}
 }
 alias global vs vsplit
@@ -111,3 +92,22 @@ define-command -docstring "filetype: change filetype" \
 filetype -params 1 %{
   set-option window filetype %arg{1}
 }
+
+# Daemon helpers
+define-command -hidden daemon-init %{
+  rename-session "daemon-%sh{shuf -i 1-1000 -n 1}"
+  define-command -hidden client-init %{ rename-client "client-%val{session}" }
+  define-command -hidden write-kill -params 0.. %{ write %arg{@}; kill }
+  define-command -hidden write-kill-all -params 0.. %{ write-all %arg{@}; kill }
+  define-command -hidden write-kill-force -params 0.. %{ write %arg{@}; kill! }
+  define-command -hidden write-kill-all-force -params 0.. %{ write-all %arg{@}; kill! }
+  alias global q kill
+  alias global wq write-kill
+  alias global wqa write-kill-all
+  alias global waq write-kill-all
+  alias global q! kill!
+  alias global wq! write-kill-force
+  alias global wqa! write-kill-all-force
+  alias global waq! write-kill-all-force
+}
+

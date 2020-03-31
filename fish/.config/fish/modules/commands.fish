@@ -32,25 +32,27 @@ end
 # Kakoune
 if status --is-interactive
     abbr --add k "kak"
-    # abbr --add k "kakc"
-    abbr --add kc "kakc"
 end
-function kakd
-    kak -c daemon -e 'kill'
-    kak -d -s daemon 2>/dev/null
-end
-function kakc
-    if test (count $argv) -eq 0
-        kak -c daemon -e 'buffer *scratch*'
-    else
-        kak -c daemon $argv
-    end
-    if test $status -eq 255
-        _log "Starting Kakoune daemon"
-        kakd
-        kakc $argv
-    end
-end
+# function kakd-start
+#     if command kak -l | grep "daemon" 2>&1 >/dev/null
+#         _error "Daemon already running"
+#     else
+#         command kak -d -s daemon -ui dummy -E "daemon-init"
+#     end
+# end
+# function kakd-stop
+#     if command kak -l | grep "daemon" 2>&1 >/dev/null
+#         command kak -c daemon -ui dummy -e "kill"
+#     else
+#         _error "Daemon not running"
+#     end
+# end
+# function kakc
+#     command kak -c daemon -e "client-init" $argv
+#     if test $status -eq 255
+#         _error "Daemon not running"
+#     end
+# end
 complete --command kakc --wraps kak
 
 # Emacs
