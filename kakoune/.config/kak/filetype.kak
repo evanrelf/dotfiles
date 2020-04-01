@@ -38,11 +38,13 @@ hook global WinSetOption filetype=(haskell|haskell2) %{
   add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
   map window user "o" "|ormolu<ret>"
 }
-hook global WinCreate (.*\.hs-boot) %{
+hook global WinCreate .*\.hs-boot %{
   set-option window filetype haskell
 }
-hook global WinSetOption filetype=haskell %{
-  try %{ set-option window filetype haskell2 }
+hook global WinCreate .*\.hs %{
+  hook -once window WinSetOption filetype=haskell %{
+    try %{ set-option window filetype haskell2 }
+  }
 }
 
 # PureScript

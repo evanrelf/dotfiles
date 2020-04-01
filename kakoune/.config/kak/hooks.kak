@@ -34,8 +34,8 @@ hook global InsertChar \t %{
     execute-keys -draft "hGh<a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
   } catch %{
     # execute-keys -draft "<esc>h%opt{indentwidth}@"
-    execute-keys -draft "<esc>hd<gt>"
-    # execute-keys -draft "<esc>hd"
+    # execute-keys -draft "<esc>hd<gt>"
+    execute-keys -draft "<esc>hd"
   }
 }
 hook global InsertDelete ' ' %{ try %{

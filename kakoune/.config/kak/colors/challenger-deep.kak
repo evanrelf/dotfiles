@@ -57,7 +57,7 @@ try %{
   set-face global type               $(c $blue          default)
   set-face global variable           $(c default        default)
   set-face global module             $(c $green         default)
-  set-face global function           $(c default        default)
+  set-face global function           $(c $cyan          default)
   set-face global string             $(c $yellow        default)
   set-face global keyword            $(c $magenta       default)
   set-face global operator           $(c $cyan          default)

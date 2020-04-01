@@ -1,6 +1,9 @@
 # Resources:
 # - Indentation: https://en.wikibooks.org/wiki/Haskell/Indentation
 
+# TODO: Compare against existing Haskell syntax highlighting, CORRECTED to use
+# the same faces
+
 hook -group haskell2-highlight global BufCreate .*[.](hs2) %{
   set-option buffer filetype haskell2
 }
@@ -33,20 +36,18 @@ add-highlighter shared/haskell2/quasiquote-texp region \[\|\| \|\|\] regex (\[\|
 add-highlighter shared/haskell2/quasiquote-exp region \[\| \|\] regex (\[\|)(.*?)(\|\]) 1:keyword 2:string 3:keyword
 add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\| \|\] regex (\[)\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?(\|)(.*?)(\|\]) 1:keyword 2:keyword 3:string 4:keyword
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
-# TODO: The period (.) shouldn't be highlighted as an operator when it's in a qualified function name (e.g. Data.Maybe.fromMaybe)
-add-highlighter shared/haskell2/code/operator regex (?<!['\[])((?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+\./<>?@\^\-~:]))(?!['\]]) 1:operator
+add-highlighter shared/haskell2/code/operator regex (?<!['\[])((?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]]) 1:operator
+add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)\s+ 1:function
 add-highlighter shared/haskell2/code/keyword group
 add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|(?<!\.)\b(?:case|class|data|default|deriving|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderiving\b\s+\b(stock|anyclass)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+[a-z_][\w']*)+\s*(\.|->) 1:keyword 2:keyword
-# TODO: Maybe I can highlight the lambda backslash? (e.g. f = even $ \x y -> x + y)
-# TODO: Maybe highlight the .. in this (but not when used as an operator)?: SQEnv{..}
-add-highlighter shared/haskell2/code/keyword/symbols regex ([\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\{\}\(\)\[\],\;](?!')|=>|->|<-|::)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
-# TODO: Maybe highlight infix type/data constructors as operators? (e.g. lhs `TH.AppT` rhs)
+add-highlighter shared/haskell2/code/keyword/symbols regex (!(?=\w)|(?<![\w'])_(?![\w'])|[\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\\@~](?!')|=>|->|<-|::|\.\.)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b(?!\.) 1:type
-add-highlighter shared/haskell2/code/infix-identifier regex `(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*` 0:operator
+add-highlighter shared/haskell2/code/type-unit regex \(\) 0:type
+add-highlighter shared/haskell2/code/infix regex `(?:(?:[A-Z][\w']*\.)*)\w[\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
 # TODO: -XPackageImports breaks this for some reason
 add-highlighter shared/haskell2/code/module/import regex (import)\s+(?:(".*?")\s+)?(?:(qualified)\s+)?([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(hiding)\s+\(.*?\))?(?:\s+((?:qualified\s+)?as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:keyword 2:string 3:keyword 4:module 5:keyword 6:keyword 7:module
@@ -57,12 +58,10 @@ add-highlighter shared/haskell2/code/numbers/hexadecimal regex \b(0x[0-9a-f_]*[0
 add-highlighter shared/haskell2/code/numbers/binary regex \b(0b[01_+]*[01])\b 1:value
 add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['"\w\d\\])' 0:string
 
+# TODO: -XDataKinds (e.g. 'Promoted, '[Foo, Bar, Baz], '(Promoted Arg)) (tick should be highlighted with type)
 # TODO: -XTemplateHaskell splices (e.g. $(makeLenses ''MyType))
 # TODO: -XForeignFunctionInterface keywords (e.g. foreign, ccall, prim, capi, interruptible, etc.)
-# TODO: -XTypeApplications (@)
-# TODO: -XMagicHash (#)
-# TODO: -XBangPatterns/-XStrict (! and ~)
-# TODO: As patterns (e.g. thing@(Thing x y))
+# TODO: -XMagicHash / -XOverloadedLabels (#)
 
 # TODO: Write your own indentation logic
 define-command -hidden haskell2-trim-indent %{
