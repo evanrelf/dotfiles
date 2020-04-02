@@ -66,6 +66,7 @@ let
       neovim
       nix-diff
       nix-prefetch-git
+      nodePackages.prettier
       nodejs
       pandoc
       python3
