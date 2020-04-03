@@ -27,7 +27,8 @@ provide-module haskell2 %§
 
 add-highlighter shared/haskell2 regions
 add-highlighter shared/haskell2/code default-region group
-# TODO: This is broken now: '"' (this still works: '\"')
+# TODO: This is broken: '"' (this still works: '\"')
+# TODO: This is broken: "\""
 add-highlighter shared/haskell2/string region '(?<![\\])"' (?<!\\)(\\\\)*" fill string
 add-highlighter shared/haskell2/comment region -recurse \{-(?!#) \{-(?!#) (?<!#)-\} fill comment
 add-highlighter shared/haskell2/line_comment region --(?:[^!#$%&*+./<=>?@\\\^|-~:]) $ fill comment
