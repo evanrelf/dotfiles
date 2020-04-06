@@ -42,7 +42,7 @@ add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)\s+ 1:fu
 add-highlighter shared/haskell2/code/keyword group
 add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|(?<!\.)\b(?:case|class|data|default|deriving|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderiving\b\s+\b(stock|anyclass)\b 1:keyword
-add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+\s+\b(via)\b 1:keyword
+add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+?\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+[a-z_][\w']*)+\s*(\.|->) 1:keyword 2:keyword
 add-highlighter shared/haskell2/code/keyword/symbols regex (!(?=\w)|(?<![\w'])_(?![\w'])|[\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\\@~](?!')|=>|->|<-|::|\.\.)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword

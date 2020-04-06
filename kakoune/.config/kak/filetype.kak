@@ -48,16 +48,20 @@ hook global WinCreate .*\.hs %{
 }
 
 # PureScript
-hook global WinSetOption filetype=purescript %{
-  # Highlight function name in type signatures
-  add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
-  # Replace 'forall' with '∀'
-  add-highlighter shared/purescript/code/ regex ∀ 0:keyword
+hook global WinCreate .*\.purs %{
+  set-option window filetype haskell2
   add-snippet window "forall" "∀"
-  set-option window comment_line "--"
-  set-option window comment_block_begin "{-"
-  set-option window comment_block_end "-}"
 }
+# hook global WinSetOption filetype=purescript %{
+#   # Highlight function name in type signatures
+#   add-highlighter shared/purescript/code/ regex ^\h*(?:(?:where|let)\h+)?([_a-z]['\w]*)\s+::\s 1:meta
+#   # Replace 'forall' with '∀'
+#   add-highlighter shared/purescript/code/ regex ∀ 0:keyword
+#   add-snippet window "forall" "∀"
+#   set-option window comment_line "--"
+#   set-option window comment_block_begin "{-"
+#   set-option window comment_block_end "-}"
+# }
 
 # Elm
 hook global WinSetOption filetype=elm %{

@@ -1,6 +1,4 @@
-try %{
-  source "%val{config}/colors/challenger-deep-cached.kak"
-} catch %{ evaluate-commands %sh{
+evaluate-commands %sh{
   black="rgb:565575"
   brightblack="rgb:100e23"
 
@@ -108,4 +106,4 @@ try %{
   # Plugins (may need to apply these manually)
   # set-face global PhantomSelection   $(c default        $selection)
   " | tee "$kak_config/colors/challenger-deep-cached.kak"
-}}
+}

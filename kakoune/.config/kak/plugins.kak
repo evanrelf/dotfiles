@@ -97,6 +97,12 @@ plug "Delapouite/kakoune-cd" config %{
 # UNIX-y commands (mv, rename, cp, mkdir, chmod, and rm)
 plug "matthias-margush/tug"
 
+# Create parent directories if missing
+plug "alexherbo2/mkdir.kak" \
+commit "cb7848045390d7c4d7b729327971acd11d026866" config %{
+  hook global BufWritePre .* %{ mkdir-current-buffer }
+}
+
 # FZF integration
 plug "andreyorst/fzf.kak" do %{
   git checkout .

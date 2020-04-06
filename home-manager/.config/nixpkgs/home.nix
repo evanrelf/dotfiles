@@ -48,7 +48,6 @@ let
       direnv
       exa
       fd
-      fish
       fzf
       ghcid
       git
@@ -79,8 +78,9 @@ let
       tectonic
       tokei
       universal-ctags
-      yarn
+      youtube-dl
     ]) ++ (with unstable; [
+      fish
       hlint
       lorri
       ormolu
