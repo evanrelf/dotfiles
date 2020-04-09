@@ -1,6 +1,8 @@
 # Resources:
 # - Indentation: https://en.wikibooks.org/wiki/Haskell/Indentation
 
+# TODO: infixr, infixl, etc. https://wiki.haskell.org/Keywords
+
 # TODO: Compare against existing Haskell syntax highlighting, CORRECTED to use
 # the same faces
 

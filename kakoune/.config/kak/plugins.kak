@@ -94,9 +94,6 @@ plug "Delapouite/kakoune-cd" config %{
   alias global "pwd" "print-working-directory"
 }
 
-# UNIX-y commands (mv, rename, cp, mkdir, chmod, and rm)
-plug "matthias-margush/tug"
-
 # Create parent directories if missing
 plug "alexherbo2/mkdir.kak" \
 commit "cb7848045390d7c4d7b729327971acd11d026866" config %{

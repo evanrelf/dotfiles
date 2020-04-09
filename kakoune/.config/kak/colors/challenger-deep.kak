@@ -105,5 +105,5 @@ evaluate-commands %sh{
 
   # Plugins (may need to apply these manually)
   # set-face global PhantomSelection   $(c default        $selection)
-  " | tee "$kak_config/colors/challenger-deep-cached.kak"
+  "
 }
