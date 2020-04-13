@@ -2,6 +2,7 @@
 # - Indentation: https://en.wikibooks.org/wiki/Haskell/Indentation
 
 # TODO: infixr, infixl, etc. https://wiki.haskell.org/Keywords
+# TODO: -XStandaloneDeriving via (via keyword is located differently)
 
 # TODO: Compare against existing Haskell syntax highlighting, CORRECTED to use
 # the same faces
