@@ -117,6 +117,9 @@ end
 if _exists cached-nix-shell
     alias "nix-shell" "cached-nix-shell"
 end
+if _exists lorri
+    abbr --add losh "lorri shell"
+end
 
 # brain
 if test \( -d "$HOME/brain" \) -a \( -f "$HOME/brain/new" \)

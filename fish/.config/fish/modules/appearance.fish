@@ -10,55 +10,30 @@ set -g fish_prompt_pwd_dir_length 1
 # set __fish_git_prompt_showstashstate "true"
 
 # Add blank line between prompts, but not when the screen is cleared
-function newline_after --on-event fish_postexec
-    echo
-end
-
-# function fish_right_prompt
-#     # nnn
-#     if test -n "$NNNLVL"
-#         set_color black
-#         echo -n " "
-#         echo -n "nnn"
-#         if test "$NNNLVL" != "1"
-#             echo -n "$NNNLVL"
-#         end
-#         set_color normal
-#     end
-#     # Nix
-#     if test \( -n "$IN_NIX_SHELL" \) -a \( -n "$DIRENV_DIR" \)
-#         # Project uses lorri
-#         if pgrep -q "lorri"
-#             # lorri daemon is running
-#             set_color cyan
-#             echo -n " lorri"
-#             set_color normal
-#         else
-#             set -l envrc (echo "$DIRENV_DIR/.envrc" | sed 's/^-//')
-#             if test -f "$envrc" && cat "$envrc" | grep -q "lorri direnv"
-#                 # lorri daemon is not running
-#                 set_color red
-#                 echo -n " lorri"
-#                 set_color normal
-#             end
-#         end
-#     else
-#         # Project does not use lorri
-#         if test -n "$IN_NIX_SHELL"
-#             # In Nix shell
-#             set_color cyan
-#             echo -n " nix-shell"
-#             set_color normal
-#         end
-#         if test -n "$DIRENV_DIR"
-#             # Using direnv
-#             set_color cyan
-#             echo -n " direnv"
-#             set_color normal
-#         end
-#     end
-#     set_color normal
+# function newline_after --on-event fish_postexec
+#     echo
 # end
+
+function fish_right_prompt
+    # # nnn
+    # if test -n "$NNNLVL"
+    #     set_color black
+    #     echo -n " "
+    #     echo -n "nnn"
+    #     if test "$NNNLVL" != "1"
+    #         echo -n "$NNNLVL"
+    #     end
+    #     set_color normal
+    # end
+    # Nix
+    if test -n "$IN_NIX_SHELL"
+        # In Nix shell
+        set_color cyan
+        echo -n " nix-shell"
+        set_color normal
+    end
+    set_color normal
+end
 
 function fish_prompt
     set -l exit_code $status

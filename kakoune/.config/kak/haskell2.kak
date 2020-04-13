@@ -3,7 +3,7 @@
 
 # TODO: infixr, infixl, etc. https://wiki.haskell.org/Keywords
 # TODO: -XStandaloneDeriving via (via keyword is located differently)
-
+# TODO: [1 .. 10] works, but [1..10] doesn't
 # TODO: Compare against existing Haskell syntax highlighting, CORRECTED to use
 # the same faces
 

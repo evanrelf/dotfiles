@@ -36,6 +36,15 @@ let
               export version="${version}"
             '';
           });
+      lorri =
+        let
+          rev = "cb966b0d4ab7f4b5861d79a19822eca6b6a50e82";
+          sha256 = "1q01cjmvd1shxlwzjsi4gzdn0sx5a132bqql3xksbnhaj7ka6j3f";
+        in
+          unstable.callPackage (builtins.fetchTarball {
+            url = "https://github.com/target/lorri/archive/${rev}.tar.gz";
+            inherit sha256;
+          }) {};
     };
 
   packages = {
@@ -82,11 +91,11 @@ let
     ]) ++ (with unstable; [
       fish
       hlint
-      lorri
       ormolu
       tmux
     ]) ++ (with custom; [
       kakoune
+      lorri
     ]);
     linux = (with stable; [
       acpi
