@@ -80,6 +80,8 @@ map global user "=" ": format-buffer<ret>" -docstring "Format buffer"
 # Disabled
 map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
 map global normal "<a-l>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
+map global normal "<a-H>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
+map global normal "<a-L>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
 map global goto "g" "<esc>: echo -markup '{Error}Use gk{Default}'<ret>" -docstring "Use gk"
 map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstring "Use vc"
 map global normal "b" ": echo -markup '{Error}Use q{Default}'<ret>" -docstring "Use q"

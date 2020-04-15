@@ -49,6 +49,7 @@ let
 
   packages = {
     universal = (with stable; [
+      # haskellPackages.hadolint # broken
       aspell
       borgbackup
       cabal-install
@@ -63,8 +64,9 @@ let
       git-revise
       gitAndTools.diff-so-fancy
       gitAndTools.hub
+      graphviz
+      haskellPackages.cabal-plan
       haskellPackages.fast-tags
-      # haskellPackages.hadolint # broken
       haskellPackages.nix-derivation
       haskellPackages.wai-app-static
       htop

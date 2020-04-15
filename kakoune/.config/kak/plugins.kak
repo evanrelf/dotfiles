@@ -37,6 +37,14 @@ commit "00221c1ddb2d9ef984facfbdc71b56b789daddaf" config %{
   map global normal "<down>"  ": move-line-below<ret>"
 }
 
+# EasyMotion
+plug "danr/kakoune-easymotion" config %{
+  map global user "e" ": enter-user-mode easymotion<ret>" -docstring "EasyMotion mode"
+  map global easymotion "s" ": easy-motion-on-selections<ret>" -docstring "selection"
+  map global normal "'" ": easy-motion-f<ret>"
+  map global normal "<a-'>" ": easy-motion-alt-f<ret>"
+}
+
 # Phantom selections
 plug "occivink/kakoune-phantom-selection" %{
   define-command -hidden phantom-group %{

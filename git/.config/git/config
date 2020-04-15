@@ -4,8 +4,6 @@
 [alias]
   # ADD
   a = add
-  # TODO: This doesn't work with worktrees
-  ; aa = "!cd -- ${GIT_PREFIX:-.} && git add --all $@ && git status --short #"
   aa = "!git add --all $@ && git status --short #"
   ap = add --patch
 
@@ -25,25 +23,22 @@
   # COMMIT
   c = commit
   amend = commit --amend --no-edit -S
-  # amend = "!echo 'Use git-revise' >&2; exit 1 #"
   rename = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to rename while dirty' >&2; exit 1; fi #"
   undo-commit = reset --soft HEAD~
 
   # DIFF
   d = diff
   ds = diff --staged
-  # dx = "!if [ -z \"$1\" ]; then exit 1; else git diff origin/$1 ${@:2}; fi #"
 
   # FETCH
   f = fetch
   ff = fetch --force
 
   # LOG
-  l = log --max-count=10 --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-  # Full log
-  ll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-  # Only show commits ahead of branch on origin
-  # lx = "!git log origin/${1:-master}.. --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' ${@:2} #"
+  l = lll --max-count=10
+  ll = lll --max-count=100
+  lll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
+  signed = log --graph --max-count=10 --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset'
 
   # LOOKUP (script)
   k = lookup
@@ -54,12 +49,11 @@
 
   # PUSH
   p = "!bash $HOME/.config/git/hooks/pre-push && git push $@ #"
-  pf = "!bash $HOME/.config/git/hooks/pre-push && git push --force-with-lease $@ #"
+  pf = p --force-with-lease
 
   # REBASE
   rb = rebase
   rbi = "!if [ -z \"$1\" ]; then git lookup | xargs -o git rebase-back; else git rebase-back $@; fi #" # script
-  # rbix = "!git lx $1 | wc -l | xargs -o git rebase-back #"
   undo-rebase = reset --hard ORIG_HEAD
   cont = rebase --continue
   skip = rebase --skip
@@ -76,7 +70,7 @@
   sign = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend --no-edit --gpg-sign; else echo 'Refusing to sign while dirty' >&2; exit 1; fi #"
 
   # SHOW
-  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
+  sh = shd --name-only
   shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
   # STASH
@@ -99,7 +93,6 @@
 
   # WORKTREE
   wt = worktree
-  # TODO: Make a script to create and switch between worktrees when switching branches
 
   # OTHER
   # Print the path to the root of the git repo

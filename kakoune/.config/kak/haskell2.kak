@@ -6,6 +6,8 @@
 # TODO: [1 .. 10] works, but [1..10] doesn't
 # TODO: Compare against existing Haskell syntax highlighting, CORRECTED to use
 # the same faces
+# TODO: makeLenses is highlighted like a top-level declaration
+# TODO: Labels should be highlighted differently
 
 hook -group haskell2-highlight global BufCreate .*[.](hs2) %{
   set-option buffer filetype haskell2
@@ -55,7 +57,7 @@ add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w'
 add-highlighter shared/haskell2/code/infix regex `(?:(?:[A-Z][\w']*\.)*)\w[\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
 # TODO: -XPackageImports breaks this for some reason
-add-highlighter shared/haskell2/code/module/import regex (import)\s+(?:(".*?")\s+)?(?:(qualified)\s+)?([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(hiding)\s+\(.*?\))?(?:\s+((?:qualified\s+)?as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:keyword 2:string 3:keyword 4:module 5:keyword 6:keyword 7:module
+add-highlighter shared/haskell2/code/module/import regex (import)\s+(?:(".*?")\s+)?(?:(qualified)\s+)?([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(qualified))?(?:\s+(hiding)\s+\(.*?\))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:keyword 2:string 3:keyword 4:module 5:keyword 6:keyword 7:keyword 8:module
 add-highlighter shared/haskell2/code/module/declaration regex \bmodule\b\s+\b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b 1:module
 add-highlighter shared/haskell2/code/numbers group
 add-highlighter shared/haskell2/code/numbers/decimal regex (?<!\.)\b([0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-][0-9]+)?)\b(?!\.) 1:value
