@@ -88,7 +88,7 @@ set wildignorecase
 " Miscellaneous {{{2
 set mouse=a
 set hidden
-set virtualedit=block
+set virtualedit=block,onemore
 set lazyredraw
 set updatetime=250
 set inccommand=nosplit
@@ -100,21 +100,86 @@ scriptencoding 'utf-8'
 command! V edit ~/.config/nvim/init.vim
 
 
-" MAPPINGS {{{1
-noremap Y y$
-noremap j gj
-
-nnoremap > >>
-nnoremap < <<
-xnoremap < <gv
-xnoremap > >gv
-
-noremap gh 0
-noremap gi ^
-noremap gj G
-noremap ge G$
-noremap gk gg
-noremap gl g_
-
-nmap # gcc
-xmap # gcgv
+" " MAPPINGS {{{1
+" " noremap Y y$
+" " noremap j gj
+"
+" nnoremap > >>
+" nnoremap < <<
+" xnoremap < <gv
+" xnoremap > >gv
+"
+" nnoremap gh 0
+" nnoremap gi ^
+" nnoremap gj G
+" nnoremap ge G$
+" nnoremap gk gg
+" nnoremap gl g_
+" vnoremap gh <esc>0v
+" vnoremap gi <esc>^v
+" vnoremap gj <esc>Gv
+" vnoremap ge <esc>G$v
+" vnoremap gk <esc>ggv
+" vnoremap gl <esc>g_v
+" nnoremap Gh 0
+" nnoremap Gi ^
+" nnoremap Gj G
+" nnoremap Ge G$
+" nnoremap Gk gg
+" nnoremap Gl g_
+" vnoremap Gh 0
+" vnoremap Gi ^
+" vnoremap Gj G
+" vnoremap Ge G$
+" vnoremap Gk gg
+" vnoremap Gl g_
+"
+" nmap # gcc
+" xmap # gcgv
+"
+" " Normal mode
+"
+" augroup always_visual
+"   autocmd!
+"   autocmd VimEnter * normal! v
+"   autocmd InsertLeave * normal! v
+" augroup END
+"
+" nnoremap <esc> v
+" xnoremap <esc> <nop>
+"
+" " Insert mode
+"
+" " Visual mode
+"
+" xnoremap ` ugv
+" xnoremap ~ Ugv
+" xnoremap q <esc>vb
+" xnoremap Q b
+" xnoremap w <esc>vw
+" xnoremap W w
+" xnoremap e <esc>ve
+" xnoremap E e
+" xnoremap r rgv
+" xnoremap t <esc>vt
+" xnoremap T t
+" xnoremap y ygv
+" xnoremap Y <nop>
+" xnoremap u u
+" xnoremap U <C-r>
+" xnoremap i <esc>i
+" xnoremap I <esc>I
+" xnoremap o o
+" xnoremap O O
+" xnoremap h <esc>ghv
+" xnoremap H gh
+" xnoremap j <esc>gjv
+" xnoremap J gj
+" xnoremap k <esc>gkv
+" xnoremap K gk
+" xnoremap l <esc>glv
+" xnoremap L gl
+" xnoremap : :<C-u>
+" xnoremap <A-;> o
+" xnoremap x j$
+" xnoremap X k$

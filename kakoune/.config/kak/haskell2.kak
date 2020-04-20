@@ -57,7 +57,7 @@ add-highlighter shared/haskell2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w'
 add-highlighter shared/haskell2/code/infix regex `(?:(?:[A-Z][\w']*\.)*)\w[\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
 # TODO: -XPackageImports breaks this for some reason
-add-highlighter shared/haskell2/code/module/import regex (import)\s+(?:(".*?")\s+)?(?:(qualified)\s+)?([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(qualified))?(?:\s+(hiding)\s+\(.*?\))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:keyword 2:string 3:keyword 4:module 5:keyword 6:keyword 7:keyword 8:module
+add-highlighter shared/haskell2/code/module/import regex (import)(?:\s+(qualified))?(?:\s+("[\w-]*?"))?\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(qualified))?(?:\s+(hiding)\s+\(.*?\))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:keyword 2:keyword 3:string 4:module 5:keyword 6:keyword 7:keyword 8:module
 add-highlighter shared/haskell2/code/module/declaration regex \bmodule\b\s+\b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b 1:module
 add-highlighter shared/haskell2/code/numbers group
 add-highlighter shared/haskell2/code/numbers/decimal regex (?<!\.)\b([0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-][0-9]+)?)\b(?!\.) 1:value
@@ -68,7 +68,7 @@ add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['"\w\d\
 # TODO: -XDataKinds (e.g. 'Promoted, '[Foo, Bar, Baz], '(Promoted Arg)) (tick should be highlighted with type)
 # TODO: -XTemplateHaskell splices (e.g. $(makeLenses ''MyType))
 # TODO: -XForeignFunctionInterface keywords (e.g. foreign, ccall, prim, capi, interruptible, etc.)
-# TODO: -XMagicHash / -XOverloadedLabels (#)
+# TODO: -XMagicHash / -XOverloadedLabels (#) (needs to highlight when against other stuff, like [#name :- primary])
 
 # TODO: Write your own indentation logic
 define-command -hidden haskell2-trim-indent %{
