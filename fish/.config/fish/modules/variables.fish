@@ -1,3 +1,4 @@
+set -U fish_features stderr-nocaret
 set -x SHELL (which fish)
 set -x EDITOR "kak"
 set -x VISUAL "$EDITOR"
