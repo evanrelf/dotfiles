@@ -105,7 +105,8 @@
   exec = "!exec "
   blank = "!if [ -z \"$1\" ]; then exit 1; else git checkout --orphan $1 && git rm --cached -r .; fi #"
 [core]
-  pager = diff-so-fancy | less --tabs=8 -RFX
+  # pager = diff-so-fancy | less --tabs=8 -RFX
+  pager = delta --hunk-style=plain --highlight-removed --keep-plus-minus-markers --tabs=8 --theme=Nord --file-color=yellow --file-style=box
   excludesfile = ~/.config/git/ignore
 [status]
   showUntrackedFiles = all

@@ -8,7 +8,7 @@ verbosity = 2
 timeout = 1800 # seconds = 30 minutes
 
 [language.haskell]
-filetypes = ["haskell"]
+filetypes = ["haskell", "haskell2"]
 roots = ["cabal.project", "*.cabal", "stack.yaml", "package.yaml", "Setup.hs"]
 command = "ghcide"
 args = ["--lsp"]

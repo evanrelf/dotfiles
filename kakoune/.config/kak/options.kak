@@ -13,12 +13,12 @@ add-highlighter global/ number-lines -hlcursor -relative
 add-highlighter global/ show-matching
 add-highlighter global/ dynregex "%%reg{/}" 0:+u
 add-highlighter global/ regex "\b(TODO|FIXME|NOTE)\b" 0:default+r
+# Options
 # set-option global autoinfo command
 set-option global ui_options \
   ncurses_assistant=none \
   ncurses_enable_mouse=true
 
-# Options
 set-option global indentwidth 2
 set-option global grepcmd "rg --column --smart-case"
 set-option global startup_info_version 99999999

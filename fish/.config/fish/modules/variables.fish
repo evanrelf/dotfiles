@@ -3,6 +3,8 @@ set -x SHELL (which fish)
 set -x EDITOR "kak"
 set -x VISUAL "$EDITOR"
 set -x NIXPKGS_ALLOW_UNFREE 1
+set -x BAT_STYLE "plain"
+set -x BAT_THEME "Monokai Extended Bright"
 # if _exists kak
 #     set -x MANPAGER "col -b -x | kak -e 'set-option buffer filetype man'"
 # else

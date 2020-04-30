@@ -139,6 +139,20 @@ plug "h-youhei/kakoune-surround" config %{
   map global surround-tag "d" ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
 }
 
+plug "ul/kak-lsp" noload do %{
+  cargo install --locked --force --path .
+} config %{
+  eval %sh{kak-lsp --kakoune -s $kak_session --config ~/.config/kak-lsp/kak-lsp.toml}
+  set-option global lsp_diagnostic_line_error_sign "▍"
+  set-face global LineFlagWarnings yellow
+  set-option global lsp_diagnostic_line_warning_sign "{LineFlagWarnings}?"
+  set-option global lsp_hover_anchor true
+  hook global WinSetOption filetype=(haskell2) %{
+    lsp-enable-window
+    map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+  }
+}
+
 # Language Server Protocol support
 # plug "ul/kak-lsp" noload do %{
 #   cargo install --locked --force --path .

@@ -10,6 +10,7 @@
 # TODO: Labels should be highlighted differently
 # TODO: Top-level operator definitions aren't highlighted correctly (e.g. `f $ x`)
 # TODO: Promoted operators aren't highlighted as operators (e.g. x ': xs)
+# TODO: Type annotations with promoted data constructors (e.g. @'Head)
 
 hook -group haskell2-highlight global BufCreate .*[.](hs2) %{
   set-option buffer filetype haskell2

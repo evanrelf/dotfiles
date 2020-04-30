@@ -11,8 +11,8 @@ let
           sha256 = "1d895i1lc25d2akniaqg2n1jrg2rcd1gih8rpmhyrlv4lpggfmsx";
         };
       "nixos-unstable" = mkChannel
-        { rev = "ae6bdcc53584aaf20211ce1814bea97ece08a248";
-          sha256 = "0hjhznns1cxgl3hww2d5si6vhy36pnm53hms9h338v6r633dcy77";
+        { rev = "7c399a4ee080f33cc500a3fda33af6fccfd617bd";
+          sha256 = "0vqljvz5yrc8i3nj3d5xiiv475yydscckfc9z0hpran9q2rh4md1";
         };
     };
 
@@ -80,6 +80,7 @@ let
       # haskellPackages.hadolint # broken
       # rust-analyzer
       aspell
+      bat
       borgbackup
       cabal-install
       cabal2nix
@@ -121,6 +122,7 @@ let
       youtube-dl
     ]) ++ (with unstable; [
       fish
+      gitAndTools.delta
       hlint
       ormolu
       tmux
