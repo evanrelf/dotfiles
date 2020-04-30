@@ -2,8 +2,7 @@
 call plug#begin()
 
 " Appearance
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'chriskempson/base16-vim'
+Plug 'Lokaltog/vim-monotone'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
@@ -16,6 +15,7 @@ Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Completion
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'tmsvg/pear-tree'
 
 " Formatting
@@ -33,6 +33,7 @@ Plug 'vmchale/dhall-vim'
 " Files
 Plug 'junegunn/fzf.vim' | Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'tpope/vim-eunuch'
+Plug 'airblade/vim-gitgutter'
 
 " Miscellaneous
 Plug 'moll/vim-bbye'
@@ -43,11 +44,28 @@ Plug 'tpope/vim-repeat'
 call plug#end()
 
 
+" PLUGIN SETTINGS {{{1
+
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+
+let g:polyglot_disabled = ['purescript']
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_new_list_item_indent = 0
+let g:haskell_indent_if = 2
+let g:haskell_indent_in = 0
+let g:purescript_indent_if = 2
+let g:purescript_indent_in = 0
+
+let g:gitgutter_map_keys = 0
+
+
 " SETTINGS {{{1
 " Appearance {{{2
 set background=dark
-colorscheme challenger_deep
 set termguicolors
+colorscheme monotone
 set number
 set relativenumber
 set colorcolumn=81
@@ -55,6 +73,8 @@ set noshowmode
 set title
 set splitbelow
 set splitright
+set shortmess=filmxTWIcF
+set signcolumn=yes
 
 " Indentation {{{2
 set expandtab
@@ -98,88 +118,32 @@ scriptencoding 'utf-8'
 
 " COMMANDS {{{1
 command! V edit ~/.config/nvim/init.vim
+command! Cd setlocal autochdir! | setlocal autochdir!
 
 
-" " MAPPINGS {{{1
-" " noremap Y y$
-" " noremap j gj
-"
-" nnoremap > >>
-" nnoremap < <<
-" xnoremap < <gv
-" xnoremap > >gv
-"
-" nnoremap gh 0
-" nnoremap gi ^
-" nnoremap gj G
-" nnoremap ge G$
-" nnoremap gk gg
-" nnoremap gl g_
-" vnoremap gh <esc>0v
-" vnoremap gi <esc>^v
-" vnoremap gj <esc>Gv
-" vnoremap ge <esc>G$v
-" vnoremap gk <esc>ggv
-" vnoremap gl <esc>g_v
-" nnoremap Gh 0
-" nnoremap Gi ^
-" nnoremap Gj G
-" nnoremap Ge G$
-" nnoremap Gk gg
-" nnoremap Gl g_
-" vnoremap Gh 0
-" vnoremap Gi ^
-" vnoremap Gj G
-" vnoremap Ge G$
-" vnoremap Gk gg
-" vnoremap Gl g_
-"
-" nmap # gcc
-" xmap # gcgv
-"
-" " Normal mode
-"
-" augroup always_visual
-"   autocmd!
-"   autocmd VimEnter * normal! v
-"   autocmd InsertLeave * normal! v
-" augroup END
-"
-" nnoremap <esc> v
-" xnoremap <esc> <nop>
-"
-" " Insert mode
-"
-" " Visual mode
-"
-" xnoremap ` ugv
-" xnoremap ~ Ugv
-" xnoremap q <esc>vb
-" xnoremap Q b
-" xnoremap w <esc>vw
-" xnoremap W w
-" xnoremap e <esc>ve
-" xnoremap E e
-" xnoremap r rgv
-" xnoremap t <esc>vt
-" xnoremap T t
-" xnoremap y ygv
-" xnoremap Y <nop>
-" xnoremap u u
-" xnoremap U <C-r>
-" xnoremap i <esc>i
-" xnoremap I <esc>I
-" xnoremap o o
-" xnoremap O O
-" xnoremap h <esc>ghv
-" xnoremap H gh
-" xnoremap j <esc>gjv
-" xnoremap J gj
-" xnoremap k <esc>gkv
-" xnoremap K gk
-" xnoremap l <esc>glv
-" xnoremap L gl
-" xnoremap : :<C-u>
-" xnoremap <A-;> o
-" xnoremap x j$
-" xnoremap X k$
+" MAPPINGS {{{1
+noremap Y y$
+noremap j gj
+noremap k gk
+nnoremap J m`J``
+nnoremap > >>
+nnoremap < <<
+xnoremap < <gv
+xnoremap > >gv
+noremap n nzz
+noremap N Nzz
+noremap <silent> <Backspace> :<C-u>nohlsearch<CR>
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+imap <Space> <Plug>(PearTreeSpace)
+
+noremap gh 0
+noremap gi ^
+noremap gj G
+noremap ge G$
+noremap gk gg
+noremap gl g_
+" noremap U <C-r>
+" noremap ' `
+" nnoremap ~ vU
+" nnoremap ` vu

@@ -13,6 +13,7 @@ add-highlighter global/ number-lines -hlcursor -relative
 add-highlighter global/ show-matching
 add-highlighter global/ dynregex "%%reg{/}" 0:+u
 add-highlighter global/ regex "\b(TODO|FIXME|NOTE)\b" 0:default+r
+# set-option global autoinfo command
 set-option global ui_options \
   ncurses_assistant=none \
   ncurses_enable_mouse=true

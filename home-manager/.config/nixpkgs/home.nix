@@ -45,11 +45,40 @@ let
             url = "https://github.com/target/lorri/archive/${rev}.tar.gz";
             inherit sha256;
           }) {};
+      # ormolu =
+      #   let
+      #     rev = "0.0.5.0";
+      #     sha256 = "1pn5nydxsz4kip60cmlcf0k4w6nf1b699dsamp26w47cjfrfax0b";
+
+      #     patch = drv:
+      #       unstable.haskell.lib.overrideCabal drv (old: {
+      #         patches = (old.patches or []) ++ [
+      #           (builtins.toFile "" ''
+      #             diff --git a/ormolu.cabal b/ormolu.cabal
+      #             index ce2d61e..3eb7e9e 100644
+      #             --- a/ormolu.cabal
+      #             +++ b/ormolu.cabal
+      #             @@ -166,5 +166,5 @@ executable ormolu
+      #                                     -Wincomplete-uni-patterns
+      #                                     -Wnoncanonical-monad-instances
+      #                 else
+      #             -    ghc-options:      -O2 -Wall -rtsopts
+      #             +    ghc-options:      -O2 -Wall -rtsopts -optP-Wno-nonportable-include-path
+      #                 default-language:   Haskell2010
+      #           '')
+      #         ];
+      #       });
+      #   in
+      #     patch ((import (builtins.fetchTarball {
+      #       url = "https://github.com/tweag/ormolu/archive/${rev}.tar.gz";
+      #       inherit sha256;
+      #     }) {}).ormolu);
     };
 
   packages = {
     universal = (with stable; [
       # haskellPackages.hadolint # broken
+      # rust-analyzer
       aspell
       borgbackup
       cabal-install
@@ -98,6 +127,7 @@ let
     ]) ++ (with custom; [
       kakoune
       lorri
+      # ormolu
     ]);
     linux = (with stable; [
       acpi
