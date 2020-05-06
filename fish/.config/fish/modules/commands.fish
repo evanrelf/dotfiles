@@ -141,6 +141,10 @@ if status --is-interactive
         abbr --add sbf "stack build --fast"
         abbr --add cbf "cabal build -O0"
     end
+
+    if _exists nix-env
+        abbr --add pkgs "nix-env --install --file $HOME/.config/nixpkgs/packages.nix"
+    end
 end
 function fn -d "Search for Haskell/PureScript function definition"
     set -l match (command rg --with-filename --ignore-case --line-number --multiline "^\s*(,|\{|let|where)?\s*\w*$argv[1]\w*\s+:: " -g "*.hs" -g "*.purs" | command fzf -1 -0 --height 50% --exact)

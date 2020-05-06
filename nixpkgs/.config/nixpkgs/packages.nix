@@ -1,8 +1,16 @@
-{ config, ... }:
-
 let
+  fetchGitHub = { owner, repo, rev, sha256 }:
+    builtins.fetchTarball {
+      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+      inherit sha256;
+    };
+
   mkChannel = { rev, sha256 }:
-    import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz") { inherit config; };
+    import (fetchGitHub {
+      owner = "nixos";
+      repo = "nixpkgs";
+      inherit rev sha256;
+    }) { config = {}; };
 
   channels =
     { "nixos-19.09" = mkChannel
@@ -21,30 +29,33 @@ let
   custom =
     { kakoune =
         unstable.kakoune-unwrapped.overrideAttrs (old:
-          let
-            rev = "c585107ab5e7155f7da648c3752cf360f7156177";
-            sha256 = "1rjnhkzwrwxkbi78rpbl06d815jdkpkfpfcv5ppclvpwyqfd98zc";
-          in
-            rec {
-              version = "HEAD";
-              src = builtins.fetchTarball {
-                url = "https://github.com/mawww/kakoune/archive/${rev}.tar.gz";
-                inherit sha256;
-              };
-              preConfigure = ''
-                ${old.preConfigure}
-                export version="${version}"
-              '';
-            });
+          rec {
+            version = "HEAD";
+            src = fetchGitHub {
+              owner = "mawww";
+              repo = "kakoune";
+              rev = "c585107ab5e7155f7da648c3752cf360f7156177";
+              sha256 = "1rjnhkzwrwxkbi78rpbl06d815jdkpkfpfcv5ppclvpwyqfd98zc";
+            };
+            preConfigure = ''
+              ${old.preConfigure}
+              export version="${version}"
+            '';
+          });
       lorri =
-        let
+        unstable.callPackage (fetchGitHub {
+          owner = "target";
+          repo = "lorri";
           rev = "cb966b0d4ab7f4b5861d79a19822eca6b6a50e82";
           sha256 = "1q01cjmvd1shxlwzjsi4gzdn0sx5a132bqql3xksbnhaj7ka6j3f";
-        in
-          unstable.callPackage (builtins.fetchTarball {
-            url = "https://github.com/target/lorri/archive/${rev}.tar.gz";
-            inherit sha256;
-          }) {};
+        }) {};
+      ghcide =
+        (import (fetchGitHub {
+          owner = "cachix";
+          repo = "ghcide-nix";
+          rev = "f940ec611cc6914693874ee5e024eba921cab19e";
+          sha256 = "0vri0rivdzjvxrh6lzlwwkh8kzxsn82jp1c2w5rqzhp87y6g2k8z";
+        }) {}).ghcide-ghc865;
       ormolu =
         let
           haskellPackages =
@@ -55,6 +66,13 @@ let
             });
         in
           unstable.haskell.lib.justStaticExecutables haskellPackages.ormolu_0_0_5_0;
+      comma =
+        stable.callPackage (fetchGitHub {
+          owner = "shopify";
+          repo = "comma";
+          rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
+          sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
+        }) {};
     };
 
   packages = {
@@ -108,6 +126,8 @@ let
       hlint
       tmux
     ]) ++ (with custom; [
+      comma
+      ghcide
       kakoune
       lorri
       ormolu
@@ -145,10 +165,10 @@ let
     ]);
   };
 in
-{
-  programs.home-manager.enable = true;
-  home.stateVersion = "19.09";
-  home.packages =
+
+unstable.symlinkJoin {
+  name = "packages";
+  paths =
     packages.universal ++
     (if stable.stdenv.isLinux then
       packages.linux
