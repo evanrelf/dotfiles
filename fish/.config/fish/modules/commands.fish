@@ -143,7 +143,7 @@ if status --is-interactive
     end
 
     if _exists nix-env
-        abbr --add pkgs "nix-env --install --file $HOME/.config/nixpkgs/packages.nix"
+        abbr --add pkgs "nix-env --install --file $HOME/.config/nix/packages.nix"
     end
 end
 function fn -d "Search for Haskell/PureScript function definition"

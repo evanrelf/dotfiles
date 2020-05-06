@@ -97,7 +97,7 @@ function rc -d "Open the specified program's configuration file"
             case nix-darwin darwin
                 eval $EDITOR "$HOME/.nixpkgs/darwin-configuration.nix"
             case packages pkgs
-                eval $EDITOR "$HOME/.config/nixpkgs/packages.nix"
+                eval $EDITOR "$HOME/.config/nix/packages.nix"
             case ranger
                 eval $EDITOR "$HOME/.config/ranger/rc.conf"
             case zathura
