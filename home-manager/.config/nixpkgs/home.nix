@@ -4,15 +4,14 @@ let
   mkChannel = { rev, sha256 }:
     import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz") { inherit config; };
 
-  # Updated 2020-03-30
   channels =
     { "nixos-19.09" = mkChannel
         { rev = "856dbd1a5c7fd826cf3668ff12a7389be0686f41";
           sha256 = "1d895i1lc25d2akniaqg2n1jrg2rcd1gih8rpmhyrlv4lpggfmsx";
         };
       "nixos-unstable" = mkChannel
-        { rev = "7c399a4ee080f33cc500a3fda33af6fccfd617bd";
-          sha256 = "0vqljvz5yrc8i3nj3d5xiiv475yydscckfc9z0hpran9q2rh4md1";
+        { rev = "fce7562cf46727fdaf801b232116bc9ce0512049";
+          sha256 = "14rvi69ji61x3z88vbn17rg5vxrnw2wbnanxb7y0qzyqrj7spapx";
         };
     };
 
@@ -20,22 +19,23 @@ let
   unstable = channels."nixos-unstable";
 
   custom =
-    { kakoune = unstable.kakoune-unwrapped.overrideAttrs (old:
-        let
-          rev = "c585107ab5e7155f7da648c3752cf360f7156177";
-          sha256 = "1rjnhkzwrwxkbi78rpbl06d815jdkpkfpfcv5ppclvpwyqfd98zc";
-        in
-          rec {
-            version = "HEAD";
-            src = builtins.fetchTarball {
-              url = "https://github.com/mawww/kakoune/archive/${rev}.tar.gz";
-              inherit sha256;
-            };
-            preConfigure = ''
-              ${old.preConfigure}
-              export version="${version}"
-            '';
-          });
+    { kakoune =
+        unstable.kakoune-unwrapped.overrideAttrs (old:
+          let
+            rev = "c585107ab5e7155f7da648c3752cf360f7156177";
+            sha256 = "1rjnhkzwrwxkbi78rpbl06d815jdkpkfpfcv5ppclvpwyqfd98zc";
+          in
+            rec {
+              version = "HEAD";
+              src = builtins.fetchTarball {
+                url = "https://github.com/mawww/kakoune/archive/${rev}.tar.gz";
+                inherit sha256;
+              };
+              preConfigure = ''
+                ${old.preConfigure}
+                export version="${version}"
+              '';
+            });
       lorri =
         let
           rev = "cb966b0d4ab7f4b5861d79a19822eca6b6a50e82";
@@ -45,40 +45,26 @@ let
             url = "https://github.com/target/lorri/archive/${rev}.tar.gz";
             inherit sha256;
           }) {};
-      # ormolu =
-      #   let
-      #     rev = "0.0.5.0";
-      #     sha256 = "1pn5nydxsz4kip60cmlcf0k4w6nf1b699dsamp26w47cjfrfax0b";
-
-      #     patch = drv:
-      #       unstable.haskell.lib.overrideCabal drv (old: {
-      #         patches = (old.patches or []) ++ [
-      #           (builtins.toFile "" ''
-      #             diff --git a/ormolu.cabal b/ormolu.cabal
-      #             index ce2d61e..3eb7e9e 100644
-      #             --- a/ormolu.cabal
-      #             +++ b/ormolu.cabal
-      #             @@ -166,5 +166,5 @@ executable ormolu
-      #                                     -Wincomplete-uni-patterns
-      #                                     -Wnoncanonical-monad-instances
-      #                 else
-      #             -    ghc-options:      -O2 -Wall -rtsopts
-      #             +    ghc-options:      -O2 -Wall -rtsopts -optP-Wno-nonportable-include-path
-      #                 default-language:   Haskell2010
-      #           '')
-      #         ];
-      #       });
-      #   in
-      #     patch ((import (builtins.fetchTarball {
-      #       url = "https://github.com/tweag/ormolu/archive/${rev}.tar.gz";
-      #       inherit sha256;
-      #     }) {}).ormolu);
+      ormolu =
+        let
+          haskellPackages =
+            unstable.haskellPackages.override (old: {
+              overrides = haskellPackagesOld: haskellPackagesNew: {
+                ghc-lib-parser = haskellPackagesOld.ghc-lib-parser_8_10_1_20200412;
+              };
+            });
+        in
+          unstable.haskell.lib.justStaticExecutables haskellPackages.ormolu_0_0_5_0;
     };
 
   packages = {
     universal = (with stable; [
       # haskellPackages.hadolint # broken
       # rust-analyzer
+      (haskell.lib.justStaticExecutables haskellPackages.cabal-plan)
+      (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
+      (haskell.lib.justStaticExecutables haskellPackages.nix-derivation)
+      (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
       aspell
       bat
       borgbackup
@@ -95,10 +81,6 @@ let
       gitAndTools.diff-so-fancy
       gitAndTools.hub
       graphviz
-      haskellPackages.cabal-plan
-      haskellPackages.fast-tags
-      haskellPackages.nix-derivation
-      haskellPackages.wai-app-static
       htop
       httpie
       jq
@@ -124,12 +106,11 @@ let
       fish
       gitAndTools.delta
       hlint
-      ormolu
       tmux
     ]) ++ (with custom; [
       kakoune
       lorri
-      # ormolu
+      ormolu
     ]);
     linux = (with stable; [
       acpi

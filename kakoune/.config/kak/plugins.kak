@@ -145,12 +145,12 @@ plug "ul/kak-lsp" noload do %{
   eval %sh{kak-lsp --kakoune -s $kak_session --config ~/.config/kak-lsp/kak-lsp.toml}
   set-option global lsp_diagnostic_line_error_sign "▍"
   set-face global LineFlagWarnings yellow
-  set-option global lsp_diagnostic_line_warning_sign "{LineFlagWarnings}?"
+  set-option global lsp_diagnostic_line_warning_sign "{LineFlagWarnings}▍"
   set-option global lsp_hover_anchor true
-  hook global WinSetOption filetype=(haskell2) %{
-    lsp-enable-window
-    map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
-  }
+  # hook global WinSetOption filetype=(haskell2) %{
+  #   lsp-enable-window
+  #   map window user "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+  # }
 }
 
 # Language Server Protocol support
