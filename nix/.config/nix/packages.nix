@@ -77,14 +77,10 @@ let
 
   packages = {
     universal = (with stable; [
-      # haskellPackages.hadolint # broken
-      # rust-analyzer
       (haskell.lib.justStaticExecutables haskellPackages.cabal-plan)
       (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
       (haskell.lib.justStaticExecutables haskellPackages.nix-derivation)
       (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
-      aspell
-      bat
       borgbackup
       cabal-install
       cabal2nix
@@ -96,17 +92,12 @@ let
       ghcid
       git
       git-revise
-      gitAndTools.diff-so-fancy
-      gitAndTools.hub
-      graphviz
       htop
       httpie
       jq
-      mosh
       neovim
       nix-diff
       nix-prefetch-git
-      nodePackages.prettier
       nodejs
       pandoc
       python3
