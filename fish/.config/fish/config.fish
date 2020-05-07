@@ -1,7 +1,7 @@
 # Core
 source "$HOME/.config/fish/prelude.fish"
-source "$HOME/.config/fish/path.fish"
 source "$HOME/.config/fish/nix.fish"
+source "$HOME/.config/fish/path.fish"
 
 # Customization
 source "$HOME/.config/fish/editor.fish"

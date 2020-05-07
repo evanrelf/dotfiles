@@ -73,6 +73,30 @@ let
           rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
           sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
         }) {};
+      iosevka =
+        # To install on macOS:
+        # 1. cd $(nix-env --query packages --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"
+        # 2. open .
+        # 3. Select all
+        # 4. Open
+        unstable.callPackage (import "${unstable.path}/pkgs/data/fonts/iosevka") {
+          set = "pro";
+          privateBuildPlan = {
+            family = "Iosevka Pro";
+            design = [
+              # PragmataPro style
+              "ss08"
+              # Make "Term" variant
+              "sp-term"
+              # Add Haskell ligatures
+              "ligset-haskell"
+              # Add != and !== ligatures
+              "calt-exeq"
+              # Add <!-- and <!--- ligatures
+              "calt-html-comment"
+            ];
+          };
+        };
     };
 
   packages = {
@@ -119,6 +143,7 @@ let
     ]) ++ (with custom; [
       comma
       ghcide
+      iosevka
       kakoune
       lorri
       ormolu

@@ -1,4 +1,4 @@
-set --global fish_greeting
+set fish_greeting
 
 function fish_prompt
     set --local exit_code "$status"
