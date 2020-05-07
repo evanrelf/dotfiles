@@ -1,16 +1,27 @@
-if test -e "$HOME/.config/fish/local.fish"
+# Core
+source "$HOME/.config/fish/prelude.fish"
+source "$HOME/.config/fish/path.fish"
+source "$HOME/.config/fish/nix.fish"
+
+# Customization
+source "$HOME/.config/fish/editor.fish"
+source "$HOME/.config/fish/colors.fish"
+source "$HOME/.config/fish/cursor-shape.fish"
+source "$HOME/.config/fish/prompt.fish"
+source "$HOME/.config/fish/aliases.fish"
+
+# Plugins and integrations
+source "$HOME/.config/fish/install-fisher.fish"
+source "$HOME/.config/fish/fzf.fish"
+source "$HOME/.config/fish/zoxide.fish"
+source "$HOME/.config/fish/direnv.fish"
+
+# Functions
+source "$HOME/.config/fish/rc.fish"
+source "$HOME/.config/fish/darwin.fish"
+
+set --global fish_features "stderr-nocaret"
+
+if test -f "$HOME/.config/fish/local.fish"
     source "$HOME/.config/fish/local.fish"
 end
-source "$HOME/.config/fish/prelude.fish"
-source "$HOME/.config/fish/modules/integration.fish"
-source "$HOME/.config/fish/modules/variables.fish"
-
-source "$HOME/.config/fish/modules/plugins.fish"
-source "$HOME/.config/fish/modules/appearance.fish"
-source "$HOME/.config/fish/modules/commands.fish"
-source "$HOME/.config/fish/modules/bindings.fish"
-
-source "$HOME/.config/fish/modules/keeb.fish"
-source "$HOME/.config/fish/modules/rc.fish"
-source "$HOME/.config/fish/modules/update.fish"
-source "$HOME/.config/fish/modules/wireguard.fish"
