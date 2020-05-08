@@ -1,7 +1,7 @@
-define-command -docstring "Source configuration lazily (after NormalIdle)" \
-defer -params 1 %{
-  hook -once global NormalIdle .* %arg{1}
-}
+# define-command -docstring "Source configuration lazily (after NormalIdle)" \
+# defer -params 1 %{
+#   hook -once global NormalIdle .* %arg{1}
+# }
 
 # Snippets
 define-command -docstring "add-snippet" \
@@ -93,21 +93,21 @@ filetype -params 1 %{
   set-option window filetype %arg{1}
 }
 
-# Daemon helpers
-define-command -hidden daemon-init %{
-  rename-session "daemon-%sh{shuf -i 1-1000 -n 1}"
-  define-command -hidden client-init %{ rename-client "client-%val{session}" }
-  define-command -hidden write-kill -params 0.. %{ write %arg{@}; kill }
-  define-command -hidden write-kill-all -params 0.. %{ write-all %arg{@}; kill }
-  define-command -hidden write-kill-force -params 0.. %{ write %arg{@}; kill! }
-  define-command -hidden write-kill-all-force -params 0.. %{ write-all %arg{@}; kill! }
-  alias global q kill
-  alias global wq write-kill
-  alias global wqa write-kill-all
-  alias global waq write-kill-all
-  alias global q! kill!
-  alias global wq! write-kill-force
-  alias global wqa! write-kill-all-force
-  alias global waq! write-kill-all-force
-}
+# # Daemon helpers
+# define-command -hidden daemon-init %{
+#   rename-session "daemon-%sh{shuf -i 1-1000 -n 1}"
+#   define-command -hidden client-init %{ rename-client "client-%val{session}" }
+#   define-command -hidden write-kill -params 0.. %{ write %arg{@}; kill }
+#   define-command -hidden write-kill-all -params 0.. %{ write-all %arg{@}; kill }
+#   define-command -hidden write-kill-force -params 0.. %{ write %arg{@}; kill! }
+#   define-command -hidden write-kill-all-force -params 0.. %{ write-all %arg{@}; kill! }
+#   alias global q kill
+#   alias global wq write-kill
+#   alias global wqa write-kill-all
+#   alias global waq write-kill-all
+#   alias global q! kill!
+#   alias global wq! write-kill-force
+#   alias global wqa! write-kill-all-force
+#   alias global waq! write-kill-all-force
+# }
 

@@ -4,9 +4,9 @@ map global normal "Q" "B"
 map global normal "<a-q>" "<a-b>"
 map global normal "<a-Q>" "<a-B>"
 
-# Use caret for macros
-map global normal "^" "q"
-map global normal "<a-^>" "Q"
+# Use quotes for macros
+map global normal "'" "q"
+map global normal '"' "Q"
 
 # Space is my leader
 map global normal "," "<space>"
@@ -36,21 +36,19 @@ map global normal "a" ";a"
 map global normal "#" ": comment-line<ret>"
 map global normal "<a-#>" ": comment-block<ret>"
 
-# Formatting
-map global normal "<a-=>" ": format-selections<ret>"
-
 # Allow selecting by line in both directions
 map global normal "x" ": extend-line-down %%val{count}<ret>"
 map global normal "X" ": extend-line-up %%val{count}<ret>"
 
-# Center viewport when moving through jump list
+# Center viewport when jumping around
 map global normal "<c-i>" "<c-i>vc"
 map global normal "<c-o>" "<c-o>vc"
+map global normal "n" "nvc"
+map global normal "N" "Nvc"
+map global normal "<a-n>" "<a-n>vc"
+map global normal "<a-N>" "<a-N>vc"
 
-# Tags
-map global user "t" "<a-i>w: ctags-search<ret>;<space>" -docstring "Jump to tag under cursor"
-
-# User mode
+# Share clipboard with OS
 evaluate-commands %sh{
   case "$(uname)" in
     "Darwin")
@@ -67,15 +65,29 @@ evaluate-commands %sh{
       ;;
   esac
   printf "%s" "
-  map global user 'y' '<a-|>$copy<ret>' -docstring 'Yank to clipboard'
-  map global user 'p' '<a-!>$paste<ret>' -docstring 'Paste after from clipboard'
-  map global user 'P' '!$paste<ret>' -docstring 'Paste before from clipboard'
-  map global user 'R' '|$paste<ret>' -docstring 'Paste replace from clipboard'
+  define-command yank -docstring 'Yank to clipboard' %{
+    execute-keys '<a-|>$copy<ret>'
+  }
+
+  define-command paste-after -docstring 'Paste after from clipboard' %{
+    execute-keys '<a-!>$paste<ret>'
+  }
+  alias global paste paste-after
+
+  define-command paste-before -docstring 'Paste before from clipboard' %{
+    execute-keys '!$paste<ret>'
+  }
+
+  define-command paste-replace -docstring 'Paste replace from clipboard' %{
+    execute-keys '|$paste<ret>'
+  }
+  alias global replace paste-replace
   "
 }
+
+# User mode
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
 map global user "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstring "Insert with count"
-map global user "=" ": format-buffer<ret>" -docstring "Format buffer"
 
 # Disabled
 map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
@@ -90,3 +102,7 @@ map global normal "<a-b>" ": echo -markup '{Error}Use a-q{Default}'<ret>" -docst
 map global normal "<a-B>" ": echo -markup '{Error}Use a-Q{Default}'<ret>" -docstring "Use ⌥Q"
 map global insert "<c-n>" "<a-;>: echo -markup '{Error}Use tab{Default}'<ret>" -docstring "Use ⌥Q"
 map global insert "<c-p>" "<a-;>: echo -markup '{Error}Use s-tab{Default}'<ret>" -docstring "Use ⌥Q"
+map global user "y" ": echo -markup '{Error}Use yank{Default}'<ret>" -docstring "Use yank"
+map global user "p" ": echo -markup '{Error}Use paste-before{Default}'<ret>" -docstring "Use paste-before"
+map global user "P" ": echo -markup '{Error}Use paste-after{Default}'<ret>" -docstring "Use paste-after"
+map global user "R" ": echo -markup '{Error}Use paste-replace{Default}'<ret>" -docstring "Use paste-replace"

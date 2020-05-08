@@ -1,14 +1,11 @@
 # Appearance
-try %{
-  colorscheme challenger-deep
-  add-highlighter global/80 column 81 default,rgb:252438
-} catch %{
-  colorscheme palenight
-  set-face global PrimaryCursor rgb:292d3e,rgb:ffcb6b+fg
-  set-face global PrimarySelection default,rgb:5c6071+g
-  set-face global SecondarySelection default,rgb:434758+g
-  add-highlighter global/ column 81 default,rgb:2c3344
-}
+colorscheme challenger-deep
+add-highlighter global/80 column 81 default,rgb:252438
+# colorscheme palenight
+# set-face global PrimaryCursor rgb:292d3e,rgb:ffcb6b+fg
+# set-face global PrimarySelection default,rgb:5c6071+g
+# set-face global SecondarySelection default,rgb:434758+g
+# add-highlighter global/ column 81 default,rgb:2c3344
 add-highlighter global/ number-lines -hlcursor -relative
 add-highlighter global/ show-matching
 add-highlighter global/ dynregex "%%reg{/}" 0:+u

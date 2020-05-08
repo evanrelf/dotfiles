@@ -19,7 +19,7 @@ function update -d "Run all update commands"
             end
 
             if _exists brew
-                _log "Updating Homebrew formulas"
+                _log "Updating Homebrew formulae"
                 brew update
                 brew upgrade
 

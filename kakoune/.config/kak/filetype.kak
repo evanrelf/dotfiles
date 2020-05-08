@@ -63,23 +63,10 @@ hook global WinCreate .*\.purs %{
 #   set-option window comment_block_end "-}"
 # }
 
-# Elm
-hook global WinSetOption filetype=elm %{
-  set-option window indentwidth 4
-  set-option window formatcmd "elm-format --stdin"
-  hook window -group format BufWritePre .* %{ format-buffer }
-}
-
 # Rust
 hook global WinSetOption filetype=rust %{
   set-option window indentwidth 4
   set-option window formatcmd "rustfmt --emit stdout"
-  hook window -group format BufWritePre .* %{ format-buffer }
-}
-
-# C++
-hook global WinSetOption filetype=cpp %{
-  set-option window formatcmd "clang-format"
   hook window -group format BufWritePre .* %{ format-buffer }
 }
 
@@ -94,7 +81,7 @@ hook global WinSetOption filetype= %{ try %{
   set-option window filetype sh
 } catch %{ try %{
   execute-keys -draft "x<a-k>#!/usr/bin/env nix-shell<ret>"
-  execute-keys -draft "/#!nix-shell<ret>xs-i (bash|sh)<ret>"
+  execute-keys -draft "/#!\s*nix-shell<ret>xs-i (bash|sh)<ret>"
   set-option window filetype sh
 }}}
 
@@ -167,18 +154,18 @@ hook global WinCreate .*\.plist %{
   set-option window filetype xml
 }
 
-# Prettier
-evaluate-commands %sh{
-  if command -v prettier >/dev/null 2>&1; then
-    printf "%s" "
-    hook global WinSetOption filetype=markdown %{ set-option window formatcmd 'prettier --stdin --parser markdown' }
-    hook global WinSetOption filetype=json %{ set-option window formatcmd 'prettier --stdin --parser json' }
-    hook global WinSetOption filetype=yaml %{ set-option window formatcmd 'prettier --stdin --parser yaml' }
-    hook global WinSetOption filetype=javascript %{ set-option window formatcmd 'prettier --stdin --parser javascript' }
-    hook global WinSetOption filetype=typescript %{ set-option window formatcmd 'prettier --stdin --parser typescript' }
-    hook global WinSetOption filetype=css %{ set-option window formatcmd 'prettier --stdin --parser css' }
-    hook global WinSetOption filetype=scss %{ set-option window formatcmd 'prettier --stdin --parser scss' }
-    hook global WinSetOption filetype=less %{ set-option window formatcmd 'prettier --stdin --parser less' }
-    "
-  fi
-}
+# # Prettier
+# evaluate-commands %sh{
+#   if command -v prettier >/dev/null 2>&1; then
+#     printf "%s" "
+#     hook global WinSetOption filetype=markdown %{ set-option window formatcmd 'prettier --stdin --parser markdown' }
+#     hook global WinSetOption filetype=json %{ set-option window formatcmd 'prettier --stdin --parser json' }
+#     hook global WinSetOption filetype=yaml %{ set-option window formatcmd 'prettier --stdin --parser yaml' }
+#     hook global WinSetOption filetype=javascript %{ set-option window formatcmd 'prettier --stdin --parser javascript' }
+#     hook global WinSetOption filetype=typescript %{ set-option window formatcmd 'prettier --stdin --parser typescript' }
+#     hook global WinSetOption filetype=css %{ set-option window formatcmd 'prettier --stdin --parser css' }
+#     hook global WinSetOption filetype=scss %{ set-option window formatcmd 'prettier --stdin --parser scss' }
+#     hook global WinSetOption filetype=less %{ set-option window formatcmd 'prettier --stdin --parser less' }
+#     "
+#   fi
+# }
