@@ -63,6 +63,17 @@ hook global WinCreate .*\.purs %{
 #   set-option window comment_block_end "-}"
 # }
 
+# Dhall
+hook global WinSetOption filetype=(dhall|dhall2) %{
+  set-option window formatcmd "dhall format"
+  # hook window -group format BufWritePre .* %{ format-buffer }
+}
+hook global WinCreate .*\.dhall %{
+  hook -once window WinSetOption filetype=dhall %{
+    try %{ set-option window filetype dhall2 }
+  }
+}
+
 # Rust
 hook global WinSetOption filetype=rust %{
   set-option window indentwidth 4

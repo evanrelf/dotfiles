@@ -136,6 +136,8 @@ let
       universal-ctags
       youtube-dl
     ]) ++ (with unstable; [
+      dhall
+      dhall-json
       fish
       gitAndTools.delta
       hlint

@@ -4,4 +4,5 @@ source "%val{config}/hooks.kak"
 source "%val{config}/mappings.kak"
 source "%val{config}/options.kak"
 try %{ source "%val{config}/haskell2.kak" }
+try %{ source "%val{config}/dhall2.kak" }
 source "%val{config}/plugins.kak"

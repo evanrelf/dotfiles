@@ -18,17 +18,16 @@ hook -group haskell2-highlight global BufCreate .*[.](hs2) %{
 
 hook -group haskell2-highlight global WinSetOption filetype=haskell2 %{
   require-module haskell2
+
   set-option buffer extra_word_chars '_' "'"
   hook -once -always window WinSetOption filetype=.* %{ remove-hooks window haskell2-.+ }
+
+  add-highlighter window/haskell2 ref haskell2
+  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/haskell2 }
 
   # TODO: Write your own indentation logic
   hook -group haskell2-trim-indent window ModeChange pop:insert:.* haskell2-trim-indent
   hook -group haskell2-indent window InsertChar \n haskell2-indent-on-new-line
-}
-
-hook -group haskell2-highlight global WinSetOption filetype=haskell2 %{
-  add-highlighter window/haskell2 ref haskell2
-  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/haskell2 }
 }
 
 provide-module haskell2 %§
@@ -89,7 +88,7 @@ define-command -hidden haskell2-indent-on-new-line %{
     # align to first clause
     try %{ execute-keys -draft <semicolon> k x X s ^\h*(if|then|else)?\h*(([\w']+\h+)+=)?\h*(case\h+[\w']+\h+of|do|let|where)\h+\K.* <ret> s \A|.\z <ret> & }
     # filter previous line
-    try %{ execute-keys -draft k : haskell-trim-indent <ret> }
+    try %{ execute-keys -draft k : haskell2-trim-indent <ret> }
     # indent after lines beginning with condition or ending with expression or =(
     try %{ execute-keys -draft <semicolon> k x <a-k> ^\h*(if)|(case\h+[\w']+\h+of|do|let|where|[=(])$ <ret> j <a-gt> }
   }
