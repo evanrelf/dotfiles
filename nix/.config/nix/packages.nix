@@ -1,43 +1,13 @@
 let
-  # Not using pkgs.fetchFromGitHub because it depends on Nixpkgs, which means
-  # changing pinned versions rebuilds otherwise unchanged packages.
-  fetchGitHub = { owner, repo, rev, sha256 }:
-    builtins.fetchTarball {
-      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
-      inherit sha256;
-    };
+  lib = import ./lib.nix;
 
-  mkChannel = { rev, sha256 }:
-    import (fetchGitHub {
-      owner = "nixos";
-      repo = "nixpkgs";
-      inherit rev sha256;
-    }) { config = {}; };
-
-  channels =
-    { "nixos-19.09" = mkChannel # ↓ Don't change this revision
-        { rev = "856dbd1a5c7fd826cf3668ff12a7389be0686f41";
-          sha256 = "1d895i1lc25d2akniaqg2n1jrg2rcd1gih8rpmhyrlv4lpggfmsx";
-        };
-      "nixos-20.03" = mkChannel
-        { rev = "5adf2a6c11646898742b0c08f7e94101620ba707";
-          sha256 = "0wf7pwma2qyfak39b242mcq8z7cdj65sds7hcjxchy0448shapzi";
-        };
-      "nixpkgs-unstable" = mkChannel
-        { rev = "6bcb1dec8ea16f20e6404631668cf69e76424eef";
-          sha256 = "04x750byjr397d3mfwkl09b2cz7z71fcykhvn8ypxrck8w7kdi1h";
-        };
-    };
-
-  legacy = channels."nixos-19.09";
-  stable = channels."nixos-20.03";
-  unstable = channels."nixpkgs-unstable";
+  inherit (import ./nixpkgs.nix) legacy stable unstable;
 
   custom =
     { kakoune =
         unstable.kakoune-unwrapped.overrideAttrs (old: rec {
           version = "HEAD";
-          src = fetchGitHub {
+          src = lib.fetchGitHub {
             owner = "mawww";
             repo = "kakoune";
             rev = "c585107ab5e7155f7da648c3752cf360f7156177";
@@ -49,14 +19,14 @@ let
           '';
         });
       lorri =
-        import (fetchGitHub {
+        import (lib.fetchGitHub {
           owner = "target";
           repo = "lorri";
           rev = "896391ed257e6f3cd5bf7a2e802d2761c3be1ff5";
           sha256 = "143ds2cdvxf1sj8g4aw6jaglg719sqb278j6kfclb7q0ykdhirr3";
         }) {};
       ghcide =
-        (import (fetchGitHub {
+        (import (lib.fetchGitHub {
           owner = "cachix";
           repo = "ghcide-nix";
           rev = "f940ec611cc6914693874ee5e024eba921cab19e";
@@ -73,7 +43,7 @@ let
         in
           unstable.haskell.lib.justStaticExecutables haskellPackages.ormolu_0_0_5_0;
       comma =
-        import (fetchGitHub {
+        import (lib.fetchGitHub {
           owner = "shopify";
           repo = "comma";
           rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
@@ -107,6 +77,7 @@ let
 
   packages = {
     universal = (with stable; [
+      nix-linter
     ]) ++ (with unstable; [
       (haskell.lib.justStaticExecutables haskellPackages.cabal-plan)
       (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
@@ -134,10 +105,12 @@ let
       neovim
       nix-diff
       nix-prefetch-git
+      nixpkgs-fmt
       nodejs
       pandoc
       python3
       ripgrep
+      rnix-lsp
       rsync
       rustup
       shellcheck

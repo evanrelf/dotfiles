@@ -13,6 +13,10 @@ roots = ["cabal.project", "*.cabal", "stack.yaml", "package.yaml", "Setup.hs"]
 command = "ghcide"
 args = ["--lsp"]
 
+[language.nix]
+filetypes = ["nix"]
+command = "rnix-lsp"
+
 # [language.rust]
 # filetypes = ["rust"]
 # roots = ["Cargo.toml"]

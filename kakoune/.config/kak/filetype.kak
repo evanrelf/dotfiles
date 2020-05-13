@@ -36,7 +36,6 @@ hook global WinSetOption filetype=(haskell|haskell2) %{
   add-snippet window "forall" "∀"
   add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
   add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
-  map window user "o" "|ormolu<ret>" -docstring "Format selection with ormolu"
 }
 hook global WinCreate .*\.hs-boot %{
   set-option window filetype haskell
@@ -45,6 +44,14 @@ hook global WinCreate .*\.hs %{
   hook -once window WinSetOption filetype=haskell %{
     try %{ set-option window filetype haskell2 }
   }
+}
+
+# Nix
+hook global WinSetOption filetype=nix %{
+  # set-option window lintcmd "nix-linter"
+  # hook window -group lint BufWritePost .* %{ lint }
+  # lint-enable
+  set-option window formatcmd "nixpkgs-fmt"
 }
 
 # PureScript
