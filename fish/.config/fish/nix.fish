@@ -33,8 +33,17 @@ if test -d "/nix"
     set --export NIX_USER_PROFILE_DIR
     nix_source_configs
     set --export NIXPKGS_ALLOW_UNFREE 1
-    set --prepend NIX_PATH "$HOME/.nix-defexpr/channels"
-    set --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
+    # How to set up declarative channels:
+    # mkdir -p "$HOME/.local/share/nix/"
+    # nix-build "$HOME/.config/nix/channels.nix" --out-link "$HOME/.local/share/nix/channels"
+    if test -d "$HOME/.local/share/nix/channels/"
+        set --prepend NIX_PATH "$HOME/.local/share/nix/channels"
+        set --prepend NIX_PATH "nixpkgs=$HOME/.local/share/nix/channels/unstable"
+    else
+        _warn "Using imperative Nix channels"
+        set --prepend NIX_PATH "$HOME/.nix-defexpr/channels"
+        set --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
+    end
 end
 
 if _exists nix-shell
