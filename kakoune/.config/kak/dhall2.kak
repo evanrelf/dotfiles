@@ -22,7 +22,7 @@ add-highlighter shared/dhall2/text region '(?<![\\])"' (?<!\\)(\\\\)*" fill stri
 add-highlighter shared/dhall2/multiline_text region "''" "''" fill string
 add-highlighter shared/dhall2/comment region --(?:[^!#$%&*+./<=>?@\\\^|-~:]) $ fill comment
 add-highlighter shared/dhall2/multiline_comment region -recurse \{-(?!#) \{-(?!#) (?<!#)-\} fill comment
-add-highlighter shared/dhall2/code/keyword_words regex (:?\b(let|in|with|as|if|then|else|forall|assert)\b) 1:keyword
+add-highlighter shared/dhall2/code/keyword_words regex (:?\b(let|in|with|as|if|then|else|forall|assert|missing)\b) 1:keyword
 add-highlighter shared/dhall2/code/keyword_symbols regex ([\{\}\(\)\[\],:`=\|<>^\?\\λ∀→⫽≡]|->|//|::) 1:keyword
 add-highlighter shared/dhall2/code/type regex \b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b(?!\.) 1:type
 add-highlighter shared/dhall2/code/environment_variable regex \b(env:)\b(\w+)\b 1:keyword 2:string

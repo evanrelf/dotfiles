@@ -26,7 +26,7 @@ function git_prompt_segment
             if test -z "$dirty"
                 # Clean
                 set_color green
-            else if echo "$dirty" | grep --invert-match --quiet "\?\?"
+            else if echo "$dirty" | grep --quiet --invert-match "??"
                 # Dirty
                 set_color yellow
             else
