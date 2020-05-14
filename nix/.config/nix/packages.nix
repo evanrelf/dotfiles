@@ -25,13 +25,13 @@ let
           rev = "896391ed257e6f3cd5bf7a2e802d2761c3be1ff5";
           sha256 = "143ds2cdvxf1sj8g4aw6jaglg719sqb278j6kfclb7q0ykdhirr3";
         }) {};
-      ghcide =
-        (import (lib.fetchGitHub {
-          owner = "cachix";
-          repo = "ghcide-nix";
-          rev = "f940ec611cc6914693874ee5e024eba921cab19e";
-          sha256 = "0vri0rivdzjvxrh6lzlwwkh8kzxsn82jp1c2w5rqzhp87y6g2k8z";
-        }) {}).ghcide-ghc865;
+      comma =
+        import (lib.fetchGitHub {
+          owner = "shopify";
+          repo = "comma";
+          rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
+          sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
+        }) {};
       ormolu =
         let
           haskellPackages =
@@ -42,13 +42,21 @@ let
             });
         in
           unstable.haskell.lib.justStaticExecutables haskellPackages.ormolu_0_0_5_0;
-      comma =
-        import (lib.fetchGitHub {
-          owner = "shopify";
-          repo = "comma";
-          rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
-          sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
-        }) {};
+      ghcide =
+        (import (lib.fetchGitHub {
+          owner = "cachix";
+          repo = "ghcide-nix";
+          rev = "f940ec611cc6914693874ee5e024eba921cab19e";
+          sha256 = "0vri0rivdzjvxrh6lzlwwkh8kzxsn82jp1c2w5rqzhp87y6g2k8z";
+        }) {}).ghcide-ghc865;
+      cabal-plan =
+        unstable.haskell.lib.justStaticExecutables
+          (unstable.haskell.lib.overrideCabal unstable.haskellPackages.cabal-plan (old: {
+            configureFlags =
+              (old.configureFlags or []) ++ [ "-flicense-report" ];
+            executableHaskellDepends =
+              (old.executableHaskellDepends or []) ++ (with unstable.haskellPackages; [ tar zlib ]);
+          }));
       iosevka =
         # To install on macOS:
         # 1. cd $(nix-env --query packages --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"
@@ -79,7 +87,6 @@ let
     universal = (with stable; [
       nix-linter
     ]) ++ (with unstable; [
-      (haskell.lib.justStaticExecutables haskellPackages.cabal-plan)
       (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
       (haskell.lib.justStaticExecutables haskellPackages.nix-derivation)
       (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
@@ -124,6 +131,7 @@ let
       youtube-dl
     ]) ++ (with custom; [
       # iosevka
+      cabal-plan
       comma
       ghcide
       kakoune
