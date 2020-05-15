@@ -6,12 +6,6 @@ plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
   set-option global number_toggle_params -hlcursor
 }
 
-# # Automatically complete pairs
-# plug "alexherbo2/auto-pairs.kak" \
-# commit "11fbd7c44f04c6092b5197419d669ec505a02f01" config %{
-#   hook global WinCreate .* %{ auto-pairs-enable }
-# }
-
 # Snippets
 plug "alexherbo2/snippets.kak" \
 commit "7616a810739590c03a216ad13e601ea923b1e552" config %{

@@ -3,7 +3,6 @@
 
 # TODO: infixr, infixl, etc. https://wiki.haskell.org/Keywords
 # TODO: -XStandaloneDeriving via (via keyword is located differently)
-# TODO: [1 .. 10] works, but [1..10] doesn't
 # TODO: Compare against existing Haskell syntax highlighting, CORRECTED to use
 # the same faces
 # TODO: makeLenses is highlighted like a top-level declaration
@@ -33,7 +32,6 @@ provide-module haskell2 %§
 add-highlighter shared/haskell2 regions
 add-highlighter shared/haskell2/code default-region group
 # TODO: This is broken: '"' (this still works: '\"')
-# TODO: This is broken: "\""
 add-highlighter shared/haskell2/string region '(?<![\\])"' (?<!\\)(\\\\)*" fill string
 add-highlighter shared/haskell2/comment region -recurse \{-(?!#) \{-(?!#) (?<!#)-\} fill comment
 add-highlighter shared/haskell2/line_comment region --(?:[^!#$%&*+./<=>?@\\\^|-~:]) $ fill comment
@@ -45,7 +43,7 @@ add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
 add-highlighter shared/haskell2/code/operator regex (?<![\[])('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]]) 1:operator
 add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)\s+ 1:function
 add-highlighter shared/haskell2/code/keyword group
-add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|(?<!\.)\b(?:case|class|data|default|deriving|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
+add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|(?<!\.)\b(?:case|class|data|default|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderiving\b\s+\b(stock|anyclass)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+?\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
@@ -61,7 +59,7 @@ add-highlighter shared/haskell2/code/module group
 add-highlighter shared/haskell2/code/module/import regex (import)(?:\s+(qualified))?(?:\s+("[\w-]*?"))?\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(qualified))?(?:\s+(hiding)\s+\(.*?\))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))? 1:keyword 2:keyword 3:string 4:module 5:keyword 6:keyword 7:keyword 8:module
 add-highlighter shared/haskell2/code/module/declaration regex \bmodule\b\s+\b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b 1:module
 add-highlighter shared/haskell2/code/numbers group
-add-highlighter shared/haskell2/code/numbers/decimal regex (?<!\.)\b([0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-][0-9]+)?)\b(?!\.) 1:value
+add-highlighter shared/haskell2/code/numbers/decimal regex (-?[0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-]?[0-9]+)?)\b 1:value
 add-highlighter shared/haskell2/code/numbers/hexadecimal regex \b(0x[0-9a-f_]*[0-9a-f])\b 1:value
 add-highlighter shared/haskell2/code/numbers/binary regex \b(0b[01_+]*[01])\b 1:value
 add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['"\w\d\\])' 0:string

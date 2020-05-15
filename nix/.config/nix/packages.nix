@@ -1,7 +1,7 @@
 let
   lib = import ./lib.nix;
 
-  inherit (import ./nixpkgs.nix) legacy stable unstable;
+  inherit (import ./nixpkgs.nix) legacy stable unstable sources;
 
   custom =
     { kakoune =
@@ -117,11 +117,10 @@ let
       pandoc
       python3
       ripgrep
-      rnix-lsp
       rsync
       rustup
+      sd
       shellcheck
-      skopeo
       stack
       tealdeer
       tectonic
@@ -170,16 +169,35 @@ let
       reattach-to-user-namespace
     ]);
   };
-in
 
-stable.symlinkJoin {
-  name = "packages";
-  paths =
-    packages.universal ++
-    (if stable.stdenv.isLinux then
-      packages.linux
-    else if stable.stdenv.isDarwin then
-      packages.darwin
-    else
-      []);
-}
+  declarative-packages =
+    stable.symlinkJoin
+      { name = "declarative-packages";
+        paths =
+          packages.universal ++
+          (if stable.stdenv.isLinux then
+            packages.linux
+          else if stable.stdenv.isDarwin then
+            packages.darwin
+          else
+            []);
+      };
+
+  declarative-channels =
+    let
+      farm =
+        stable.linkFarm "declarative-channels-farm"
+          (stable.lib.mapAttrsToList
+            (name: value: { inherit name; path = value; })
+            sources);
+    in
+      stable.runCommandLocal "declarative-channels" {} ''
+        mkdir -p $out
+        ln -s ${farm} $out/channels
+      '';
+in
+  { inherit
+      declarative-packages
+      declarative-channels
+    ;
+  }

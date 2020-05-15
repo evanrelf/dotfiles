@@ -17,10 +17,11 @@ let
     };
   };
 
-  aliases = {
+  aliases = rec {
     legacy = revisions."nixos-19.09";
     stable = revisions."nixos-20.03";
     unstable = revisions."nixpkgs-unstable";
+    default = unstable;
   };
 
   sources =
@@ -38,6 +39,5 @@ let
     builtins.mapAttrs
       (_: source: import source { config = {}; })
       sources;
-
 in
   derivations // { inherit sources; }
