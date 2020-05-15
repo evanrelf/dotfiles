@@ -1,105 +1,82 @@
 #!/usr/bin/env nix-shell
-#!nix-shell --packages stow -i sh
-# shellcheck shell=sh
+#!nix-shell --pure --packages curl git stow -i bash
+# shellcheck shell=bash
 
-log() {
-  echo "$*" >&2
-}
+set -euo pipefail
 
-error() {
-  log "ERROR: $*"
+log() { echo "$*" >&2; }
+warn() { log "WARN: $*"; }
+error() { log "ERROR: $*"; }
+
+if [ ! "$#" -gt 0 ]; then
+  error "No packages specified"
+  echo
+  log "Usage: ./install [PACKAGE]"
   exit 1
-}
-
-command -v stow >/dev/null 2>&1 || error "stow is not installed"
-
-if [ $# -gt 0 ]; then
-  for i in "$@"; do
-    i=$(echo "$i" | sed 's|/||g')
-    if [ ! -e "$i" ]; then
-      error "Package '$i' doesn't exist"
-    fi
-    log "Installing '$i'..."
-    if [ -f "$i/stow-ignore" ]; then
-      log "Cannot auto-install package '$i'"
-    elif [ -f "$i/install" ]; then
-      bash "$i/install"
-    else
-      if [ -f "$i/init" ]; then
-        log "Running init script for package '$i'"
-        bash "$i/init"
-      fi
-      case $i in
-        bash )
-          if [ ! -f "$HOME/local/share/bash/sensible.bash" ]; then
-            log "Installing Sensible Bash..."
-            command -v curl >/dev/null 2>&1 || error "curl is not installed"
-            curl -Lo "$HOME/local/share/bash/sensible.bash" --create-dirs \
-              "https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash"
-          else
-            log "Sensible Bash already installed"
-          fi
-          ;;
-        # fish )
-        #   if [ ! -f "$HOME/.config/fish/conf.d/iterm.fish" ] && [ "$(uname)" = "Darwin" ]; then
-        #     log "Installing iTerm Shell Integration for Fish..."
-        #     command -v curl >/dev/null 2>&1 || error "curl is not installed"
-        #     curl -Lo "$HOME/.config/fish/conf.d/iterm.fish" --create-dirs \
-        #       "https://iterm2.com/shell_integration/fish"
-        #   else
-        #     log "iTerm Shell Integration for Fish already installed"
-        #   fi
-        #   ;;
-        kakoune | kakoune2 )
-          if [ ! -e "$HOME/.config/kak/plugins/plug.kak/" ]; then
-            command -v git >/dev/null 2>&1 || error "git is not installed"
-            log "Installing plug.kak..."
-            git clone --depth 1 "https://github.com/andreyorst/plug.kak.git" \
-              "$HOME/.config/kak/plugins/plug.kak"
-          else
-            log "plug.kak already installed"
-          fi
-          ;;
-        neovim )
-          if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
-            log "Installing vim-plug..."
-            command -v curl >/dev/null 2>&1 || error "curl is not installed"
-            curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-              "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-          else
-            log "vim-plug already installed"
-          fi
-          ;;
-        spacemacs )
-          if [ ! -d "$HOME/.emacs.d" ]; then
-            log "Cloning Spacemacs..."
-            command -v git >/dev/null 2>&1 || error "git is not installed"
-            git clone -b develop "https://github.com/syl20bnr/spacemacs" "$HOME/.emacs.d"
-          else
-            log "Spacemacs already cloned"
-          fi
-          ;;
-        # doom-emacs )
-        #   if [ ! -d "$HOME/.emacs.d" ]; then
-        #     log "Cloning Doom Emacs..."
-        #     command -v git >/dev/null 2>&1 || error "git is not installed"
-        #     git clone --depth 1 "https://github.com/hlissner/doom-emacs" "$HOME/.emacs.d"
-        #     "$HOME/.emacs.d/bin/doom" install
-        #   else
-        #     log "Doom Emacs already cloned"
-        #   fi
-        #   ;;
-        tmux )
-          if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-            git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-          else
-            log "Tmux Plugin Manager already installed"
-          fi
-          ;;
-      esac
-      stow --no-folding --target "$HOME" -S "$i" --ignore "init" --ignore "install"
-    fi
-  done
-else
-  error "No packages specified\\nUsage: ./install [PACKAGES]"
 fi
+
+for i in "$@"; do
+  # shellcheck disable=SC2001
+  package=$(echo "$i" | sed 's|/||')
+
+  if [ ! -d "$package" ]; then
+    warn "[$package] Config doesn't exist"
+    continue
+  fi
+
+  if [ -f "$package/stow-ignore" ]; then
+    warn "[$package] Config must be installed manually"
+    continue
+  fi
+
+  case "$package" in
+    kakoune )
+      if [ ! -e "$HOME/.config/kak/plugins/plug.kak/" ]; then
+        log "[kakoune] Installing plug.kak"
+        git clone \
+          --depth 1 \
+          "https://github.com/andreyorst/plug.kak.git" \
+          "$HOME/.config/kak/plugins/plug.kak"
+      else
+        log "[kakoune] plug.kak already installed"
+      fi
+      ;;
+    tmux )
+      if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+        log "[tmux] Installing Tmux Plugin Manager"
+        git clone \
+          --depth 1 \
+          "https://github.com/tmux-plugins/tpm" \
+          "$HOME/.tmux/plugins/tpm"
+      else
+        log "[tmux] Tmux Plugin Manager already installed"
+      fi
+      ;;
+    neovim )
+      if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+        log "[neovim] Installing vim-plug..."
+        curl \
+          --location \
+          --fail \
+          --create-dirs \
+          "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+          --output "$HOME/.local/share/nvim/site/autoload/plug.vim"
+      else
+        log "[neovim] vim-plug already installed"
+      fi
+      ;;
+  esac
+
+  if [ -f "$package/install" ]; then
+    log "[$package] Running custom install script"
+    sh "$package/install"
+  else
+    log "[$package] Installing config"
+    stow \
+      --verbose=2 \
+      --target "$HOME" \
+      --no-folding \
+      --ignore "init" \
+      --stow "$package"
+  fi
+done
