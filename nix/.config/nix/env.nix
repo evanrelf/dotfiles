@@ -33,15 +33,10 @@ let
           sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
         }) {};
       ormolu =
-        let
-          haskellPackages =
-            unstable.haskellPackages.override (old: {
-              overrides = haskellPackagesOld: haskellPackagesNew: {
-                ghc-lib-parser = haskellPackagesOld.ghc-lib-parser_8_10_1_20200412;
-              };
-            });
-        in
-          unstable.haskell.lib.justStaticExecutables haskellPackages.ormolu_0_0_5_0;
+        unstable.haskell.lib.justStaticExecutables
+          (unstable.haskellPackages.ormolu_0_0_5_0.override {
+            ghc-lib-parser = unstable.haskellPackages.ghc-lib-parser_8_10_1_20200412;
+          });
       cabal-plan =
         unstable.haskell.lib.justStaticExecutables
           (unstable.haskell.lib.overrideCabal unstable.haskellPackages.cabal-plan (old: {
@@ -56,7 +51,7 @@ let
         # 2. open .
         # 3. Select all
         # 4. Open
-        unstable.callPackage (import "${unstable.path}/pkgs/data/fonts/iosevka") {
+        unstable.iosevka.override {
           set = "pro";
           privateBuildPlan = {
             family = "Iosevka Pro";
@@ -74,6 +69,10 @@ let
             ];
           };
         };
+      gcoreutils = unstable.coreutils.override {
+        singleBinary = false;
+        withPrefix = true;
+      };
     };
 
   packages = {
@@ -160,6 +159,8 @@ let
     ]);
     darwin = (with stable; [
       reattach-to-user-namespace
+    ]) ++ (with custom; [
+      gcoreutils
     ]);
   };
 
