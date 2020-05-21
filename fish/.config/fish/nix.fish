@@ -5,9 +5,9 @@ function nix_source_configs
         # "Cached" version to speed up startup time
         set --append NIX_PATH "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs"
         set --append NIX_PATH "/nix/var/nix/profiles/per-user/root/channels"
-        set NIX_PROFILES "/nix/var/nix/profiles/default /Users/$USER/.nix-profile"
-        set NIX_SSL_CERT_FILE "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt"
-        set NIX_USER_PROFILE_DIR "/nix/var/nix/profiles/per-user/$USER"
+        set --append NIX_PROFILES "/nix/var/nix/profiles/default /Users/$USER/.nix-profile"
+        set --append NIX_SSL_CERT_FILE "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt"
+        set --append NIX_USER_PROFILE_DIR "/nix/var/nix/profiles/per-user/$USER"
         set --export --prepend PATH "/nix/var/nix/profiles/default/bin"
         set --export --prepend PATH "/Users/$USER/.nix-profile/bin"
         # if _exists bass
@@ -27,11 +27,14 @@ function nix_source_configs
 end
 
 if test -d "/nix"
-    set --export --path NIX_PATH
-    set --export NIX_PROFILES
-    set --export NIX_SSL_CERT_FILE
-    set --export NIX_USER_PROFILE_DIR
-    nix_source_configs
+    # This isn't necessary on NixOS
+    if test -z "$__NIXOS_SET_ENVIRONMENT_DONE" || not _exists nixos-version
+        set --export --path NIX_PATH "$NIX_PATH"
+        set --export NIX_PROFILES "$NIX_PROFILES"
+        set --export NIX_SSL_CERT_FILE "$NIX_SSL_CERT_FILE"
+        set --export NIX_USER_PROFILE_DIR "$NIX_USER_PROFILE_DIR"
+        nix_source_configs
+    end
     set --export NIXPKGS_ALLOW_UNFREE 1
     if test -d "$HOME/.nix-profile/channels/"
         set --prepend NIX_PATH "$HOME/.nix-profile/channels"
@@ -69,6 +72,16 @@ end
 
 if _exists nix-store
     alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof)'"
+end
+
+if _exists nix-env
+    function env-rebuild
+        set --local pkgs "$HOME/.config/nix/env.nix"
+        _log "Building derivation..."
+        nix build --no-link --file "$pkgs"
+        _log "Installing derivation..."
+        nix-env --install --file "$pkgs"
+    end
 end
 
 if test -n "$IN_NIX_SHELL"

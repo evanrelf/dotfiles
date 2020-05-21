@@ -59,8 +59,8 @@ function rc -d "Open the specified program's configuration file"
             case nix
                 cd "$HOME/.config/nix/"
                 ls -l
-            case packages pkgs
-                eval "$EDITOR" "$HOME/.config/nix/packages.nix"
+            case env
+                eval "$EDITOR" "$HOME/.config/nix/env.nix"
             case home-manager home
                 eval "$EDITOR" "$HOME/.config/nixpkgs/home.nix"
             case nix-darwin darwin
@@ -133,7 +133,7 @@ function rc -d "Open the specified program's configuration file"
         fd --type file --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --exact | xargs -o "$EDITOR"
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs spacemacs doom fish fisher fishfile zshrc zsh bashrc bash bash-profile git git-local mercurial hg alacritty kitty kitty-local nixos packages pkgs home-manager home nix-darwin darwin xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon redshift tmux xresources xprofile xinit mpd ncmpcpp ranger broot ghci zathura"
+complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs spacemacs doom fish fisher fishfile zshrc zsh bashrc bash bash-profile git git-local mercurial hg alacritty kitty kitty-local nixos env home-manager home nix-darwin darwin xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon redshift tmux xresources xprofile xinit mpd ncmpcpp ranger broot ghci zathura"
 
 function rc_generate_completions
     cat "$HOME/.config/fish/rc.fish" \

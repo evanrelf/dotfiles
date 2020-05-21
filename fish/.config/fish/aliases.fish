@@ -25,10 +25,6 @@ if _exists git
     end
 end
 
-if _exists nix-env
-    abbr --add pkgs "nix-env --install --file $HOME/.config/nix/packages.nix"
-end
-
 if _exists brew
     abbr --add cask "brew cask"
 end
