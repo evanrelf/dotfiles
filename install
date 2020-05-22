@@ -40,7 +40,7 @@ fi
 
 for i in "$@"; do
   # shellcheck disable=SC2001
-  package=$(echo "$i" | sed 's|/||')
+  package=$(echo "$i" | sed 's|/||g')
 
   if [ ! -d "$package" ]; then
     warn "[$package] Config doesn't exist"
@@ -99,7 +99,7 @@ for i in "$@"; do
       --verbose=2 \
       --target "$HOME" \
       --no-folding \
-      --ignore "init" \
+      --ignore "install" \
       --stow "$package"
   fi
 done
