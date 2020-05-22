@@ -129,7 +129,7 @@ let
       lorri
       ormolu
     ]);
-    linux = (with legacy; [
+    linux = (with unstable; [
       acpi
       chromium
       dmenu

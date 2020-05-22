@@ -15,6 +15,7 @@
   ];
   programs.fish.enable = true;
   programs.light.enable = true;
+  programs.gnupg.agent.enable = true;
   services.openssh.enable = true;
 
 
@@ -22,10 +23,6 @@
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [ iosevka-bin ];
-    fontconfig.ultimate = {
-      enable = true;
-      preset = "osx";
-    };
   };
 
 
@@ -139,12 +136,13 @@
       enable = true;
       editor = false;
     };
-    initrd.luks.devices = [{
-      name = "root";
-      device = "/dev/disk/by-uuid/424daca7-06a2-429a-85e1-1f0a17799bed";
-      preLVM = true;
-      allowDiscards = true;
-    }];
+    initrd.luks.devices = {
+      root = {
+        device = "/dev/disk/by-uuid/424daca7-06a2-429a-85e1-1f0a17799bed";
+        preLVM = true;
+        allowDiscards = true;
+      };
+    };
     extraModulePackages = with pkgs.linuxPackages; [ acpi_call ];
     kernelModules = [ "acpi_call" ];
   };
@@ -155,7 +153,7 @@
   time.timeZone = "America/Los_Angeles";
   services.timesyncd.enable = true;
   services.printing.enable = true;
-  system.stateVersion = "19.09";
+  system.stateVersion = "20.03";
 
 
   # }}}1

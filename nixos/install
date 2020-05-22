@@ -4,7 +4,7 @@ source_path="${1:-$HOME/dotfiles/nixos/configuration.nix}"
 destination_path="/etc/nixos/configuration.nix"
 
 if ! diff "$destination_path" "$source_path" >/dev/null; then
-  diff -u "$destination_path"  "$source_path" | diff-so-fancy
+  diff -u "$destination_path"  "$source_path" | delta
   sudo cp -v "$destination_path" "$destination_path.old"
   sudo cp -v "$source_path" "$destination_path"
 fi
