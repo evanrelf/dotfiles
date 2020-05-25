@@ -1,11 +1,3 @@
 # dotfiles
 
-Managed using [GNU Stow](https://www.gnu.org/software/stow/)
-
-## Install
-
-```bash
-git clone https://github.com/evanrelf/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./install [PACKAGES]
-```
+My personal dotfiles. Feel free to steal anything you find useful!

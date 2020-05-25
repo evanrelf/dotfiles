@@ -108,6 +108,7 @@ let
       nixpkgs-fmt
       nodejs
       pandoc
+      pijul
       python3
       ripgrep
       rsync
