@@ -131,8 +131,12 @@ hook global WinSetOption filetype=css %{
 # Git
 hook global WinSetOption filetype=git-commit %{
   remove-highlighter global/80
-  add-highlighter window/ column 51 default,rgb:252438
-  add-highlighter window/ column 73 default,rgb:252438
+  # challenger-deep
+  # add-highlighter window/ column 51 default,rgb:252438
+  # add-highlighter window/ column 73 default,rgb:252438
+  # primer
+  add-highlighter window/ column 51 default,rgb:f6f8fa
+  add-highlighter window/ column 73 default,rgb:f6f8fa
   add-snippet window "date" '<a-;>!date +%Y-%m-%d<ret><backspace>'
 }
 hook global WinCreate git-revise-todo %{

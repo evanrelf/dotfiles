@@ -1,6 +1,8 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
+plug "evanrelf/primer.kak" theme
+
 # Toggle between relative and absolute line numbers depending on mode
 plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
   set-option global number_toggle_params -hlcursor

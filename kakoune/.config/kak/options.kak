@@ -1,6 +1,8 @@
 # Appearance
-colorscheme challenger-deep
-add-highlighter global/80 column 81 default,rgb:252438
+colorscheme primer
+add-highlighter global/80 column 81 default,rgb:f6f8fa
+# colorscheme challenger-deep
+# add-highlighter global/80 column 81 default,rgb:252438
 # colorscheme palenight
 # set-face global PrimaryCursor rgb:292d3e,rgb:ffcb6b+fg
 # set-face global PrimarySelection default,rgb:5c6071+g

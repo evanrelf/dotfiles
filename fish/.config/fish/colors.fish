@@ -1,4 +1,4 @@
-set fish_color_autosuggestion black
+set fish_color_autosuggestion white
 set fish_color_command green
 set fish_color_comment black
 set fish_color_cwd blue
