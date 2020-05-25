@@ -3,11 +3,10 @@ function nix_source_configs
     set --local single_user_path "$HOME/.nix-profile/etc/profile.d/nix.sh"
     if test -f "$multi_user_path"
         # "Cached" version to speed up startup time
-        set --append NIX_PATH "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs"
-        set --append NIX_PATH "/nix/var/nix/profiles/per-user/root/channels"
-        set --append NIX_PROFILES "/nix/var/nix/profiles/default /Users/$USER/.nix-profile"
-        set --append NIX_SSL_CERT_FILE "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt"
-        set --append NIX_USER_PROFILE_DIR "/nix/var/nix/profiles/per-user/$USER"
+        set --export --path NIX_PATH "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs:/nix/var/nix/profiles/per-user/root/channels"
+        set --export NIX_PROFILES "/nix/var/nix/profiles/default /Users/$USER/.nix-profile"
+        set --export NIX_SSL_CERT_FILE "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt"
+        set --export NIX_USER_PROFILE_DIR "/nix/var/nix/profiles/per-user/$USER"
         set --export --prepend PATH "/nix/var/nix/profiles/default/bin"
         set --export --prepend PATH "/Users/$USER/.nix-profile/bin"
         # if _exists bass
@@ -28,21 +27,17 @@ end
 
 if test -d "/nix"
     # This isn't necessary on NixOS
-    if test -z "$__NIXOS_SET_ENVIRONMENT_DONE" || not _exists nixos-version
-        set --export --path NIX_PATH "$NIX_PATH"
-        set --export NIX_PROFILES "$NIX_PROFILES"
-        set --export NIX_SSL_CERT_FILE "$NIX_SSL_CERT_FILE"
-        set --export NIX_USER_PROFILE_DIR "$NIX_USER_PROFILE_DIR"
+    if not _exists nixos-version
         nix_source_configs
     end
     set --export NIXPKGS_ALLOW_UNFREE 1
     if test -d "$HOME/.nix-profile/channels/"
-        set --prepend NIX_PATH "$HOME/.nix-profile/channels"
-        set --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/default"
+        set --export --prepend --path NIX_PATH "$HOME/.nix-profile/channels"
+        set --export --prepend --path NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/default"
     else
         _warn "Using imperative Nix channels"
-        set --prepend NIX_PATH "$HOME/.nix-defexpr/channels"
-        set --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
+        set --export --prepend --path NIX_PATH "$HOME/.nix-defexpr/channels"
+        set --export --prepend --path NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
     end
 end
 

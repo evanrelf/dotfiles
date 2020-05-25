@@ -72,7 +72,7 @@ hook global WinCreate .*\.purs %{
 
 # Dhall
 hook global WinSetOption filetype=(dhall|dhall2) %{
-  set-option window formatcmd "dhall format"
+  set-option window formatcmd "dhall format --ascii"
   # hook window -group format BufWritePre .* %{ format-buffer }
 }
 hook global WinCreate .*\.dhall %{

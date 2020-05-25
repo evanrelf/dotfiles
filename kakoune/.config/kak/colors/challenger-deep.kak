@@ -37,7 +37,6 @@ evaluate-commands %sh{
     [ -n "$attrs" ] && printf "%s" "+$attrs"
   }
 
-  mkdir -p "$kak_config/colors"
   printf "%s\n" "
   # Code
   set-face global title              $(c default        default)
