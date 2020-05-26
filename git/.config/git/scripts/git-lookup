@@ -15,5 +15,6 @@ git log \
   --ansi \
   --no-sort \
   --query "$*" \
+  --color light \
 | cut -d ' ' -f 1 \
 | xargs git rev-parse --verify --quiet
