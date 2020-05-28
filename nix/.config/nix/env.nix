@@ -83,6 +83,7 @@ let
       (haskell.lib.justStaticExecutables haskellPackages.ghcide)
       (haskell.lib.justStaticExecutables haskellPackages.nix-derivation)
       (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
+      (aspellWithDicts (d: with d; [ en en-computers en-science ]))
       borgbackup
       cabal-install
       cabal2nix

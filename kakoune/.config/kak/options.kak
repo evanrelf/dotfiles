@@ -1,6 +1,8 @@
 # Appearance
-colorscheme primer
-add-highlighter global/80 column 81 default,rgb:f6f8fa
+try %{
+  colorscheme primer
+  add-highlighter global/80 column 81 default,rgb:f6f8fa
+}
 # colorscheme challenger-deep
 # add-highlighter global/80 column 81 default,rgb:252438
 # colorscheme palenight

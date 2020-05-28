@@ -73,6 +73,10 @@
   sh = shd --name-only
   shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
+  # SPARSE-CHECKOUT
+  sc = sparse-checkout
+  sce = "!file=\"$(git root)/.git/info/sparse-checkout\"; if [ -f \"$file\" ]; then $EDITOR $file; else echo 'Sparse checkout file does not exist' >&2; exit 1; fi #"
+
   # STASH
   st = stash push
   stu = stash push --include-untracked
