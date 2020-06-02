@@ -45,6 +45,10 @@ hook global WinCreate .*\.hs %{
     try %{ set-option window filetype haskell2 }
   }
 }
+hook global WinSetOption filetype=cabal %{
+  add-snippet window "lang" "<a-;>: haskell-language-pragma<ret>"
+  add-snippet window "opt" "<a-;>: haskell-options-pragma<ret>"
+}
 
 # Nix
 hook global WinSetOption filetype=nix %{

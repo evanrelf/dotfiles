@@ -19,6 +19,7 @@ source "$HOME/.config/fish/direnv.fish"
 # Functions
 source "$HOME/.config/fish/rc.fish"
 source "$HOME/.config/fish/update.fish"
+source "$HOME/.config/fish/edit-matches.fish"
 source "$HOME/.config/fish/darwin.fish"
 
 set --global fish_features "stderr-nocaret"

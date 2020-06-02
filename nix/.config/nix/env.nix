@@ -37,6 +37,13 @@ let
           (unstable.haskellPackages.ormolu_0_0_5_0.override {
             ghc-lib-parser = unstable.haskellPackages.ghc-lib-parser_8_10_1_20200412;
           });
+      ghcide =
+        (import (lib.fetchGitHub {
+          owner = "cachix";
+          repo = "ghcide-nix";
+          rev = "f940ec611cc6914693874ee5e024eba921cab19e";
+          sha256 = "0vri0rivdzjvxrh6lzlwwkh8kzxsn82jp1c2w5rqzhp87y6g2k8z";
+        }) {}).ghcide-ghc865;
       cabal-plan =
         unstable.haskell.lib.justStaticExecutables
           (unstable.haskell.lib.overrideCabal unstable.haskellPackages.cabal-plan (old: {
@@ -79,11 +86,11 @@ let
     universal = (with stable; [
       nix-linter
     ]) ++ (with unstable; [
+      # (haskell.lib.justStaticExecutables haskellPackages.ghcide)
+      (aspellWithDicts (d: with d; [ en en-computers en-science ]))
       (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
-      (haskell.lib.justStaticExecutables haskellPackages.ghcide)
       (haskell.lib.justStaticExecutables haskellPackages.nix-derivation)
       (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
-      (aspellWithDicts (d: with d; [ en en-computers en-science ]))
       borgbackup
       cabal-install
       cabal2nix
@@ -127,6 +134,7 @@ let
       # iosevka
       cabal-plan
       comma
+      ghcide
       kakoune
       lorri
       ormolu

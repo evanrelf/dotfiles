@@ -1,3 +1,6 @@
+# Temporary
+map global user "<space>" "<a-i>p|stylish-haskell<ret>:wq"
+
 # Use q for backwards word movement
 map global normal "q" "b"
 map global normal "Q" "B"
@@ -47,43 +50,6 @@ map global normal "n" "nvc"
 map global normal "N" "Nvc"
 map global normal "<a-n>" "<a-n>vc"
 map global normal "<a-N>" "<a-N>vc"
-
-# Share clipboard with OS
-evaluate-commands %sh{
-  case "$(uname)" in
-    "Darwin")
-      copy="pbcopy"
-      paste="pbpaste"
-      ;;
-    "Linux")
-      copy="wl-copy || xclip"
-      paste="wl-paste || xclip -o"
-      ;;
-    *)
-      copy="false"
-      paste="false"
-      ;;
-  esac
-  printf "%s" "
-  define-command yank -docstring 'Yank to clipboard' %{
-    execute-keys '<a-|>$copy<ret>'
-  }
-
-  define-command paste-after -docstring 'Paste after from clipboard' %{
-    execute-keys '<a-!>$paste<ret>'
-  }
-  alias global paste paste-after
-
-  define-command paste-before -docstring 'Paste before from clipboard' %{
-    execute-keys '!$paste<ret>'
-  }
-
-  define-command paste-replace -docstring 'Paste replace from clipboard' %{
-    execute-keys '|$paste<ret>'
-  }
-  alias global replace paste-replace
-  "
-}
 
 # User mode
 map global user "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
