@@ -2,9 +2,10 @@
 define-command -hidden haskell-language-pragma -params 0 %{
   # Cache GHC language extensions for times when GHC isn't available (e.g. outside Nix shell)
   nop %sh{
+    file="$HOME/.local/share/kak/ghc-language-extensions"
     mkdir -p "$HOME/.local/share/kak"
-    if command -v ghc >/dev/null 2>&1; then
-      ghc --supported-extensions > "$HOME/.local/share/kak/ghc-language-extensions"
+    if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
+      ghc --supported-extensions > "$file"
     fi
   }
   prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-language-extensions" "extension: " %{
@@ -15,9 +16,10 @@ define-command -hidden haskell-language-pragma -params 0 %{
 define-command -hidden haskell-options-pragma -params 0 %{
   # Cache GHC options for times when GHC isn't available (e.g. outside Nix shell)
   nop %sh{
+    file="$HOME/.local/share/kak/ghc-options"
     mkdir -p "$HOME/.local/share/kak"
-    if command -v ghc >/dev/null 2>&1; then
-      ghc --show-options > "$HOME/.local/share/kak/ghc-options"
+    if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
+      ghc --show-options > "$file"
     fi
   }
   prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-options" "option: " %{

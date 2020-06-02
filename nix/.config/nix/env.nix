@@ -41,8 +41,8 @@ let
         (import (lib.fetchGitHub {
           owner = "cachix";
           repo = "ghcide-nix";
-          rev = "f940ec611cc6914693874ee5e024eba921cab19e";
-          sha256 = "0vri0rivdzjvxrh6lzlwwkh8kzxsn82jp1c2w5rqzhp87y6g2k8z";
+          rev = "67493b873e1a5e5d53837401ab6b128b20e8a989";
+          sha256 = "1zq5g7ka99vcyqbg5l1bx0rliq3ihig37nzczk0wdwidjyxjghf9";
         }) {}).ghcide-ghc865;
       cabal-plan =
         unstable.haskell.lib.justStaticExecutables
