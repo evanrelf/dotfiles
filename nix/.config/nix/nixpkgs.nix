@@ -12,8 +12,8 @@ let
       sha256 = "0wf7pwma2qyfak39b242mcq8z7cdj65sds7hcjxchy0448shapzi";
     };
     "nixpkgs-unstable" = {
-      rev = "6bcb1dec8ea16f20e6404631668cf69e76424eef";
-      sha256 = "04x750byjr397d3mfwkl09b2cz7z71fcykhvn8ypxrck8w7kdi1h";
+      rev = "c27e54de99df793756a5314f8fd5dd3e49d31927";
+      sha256 = "0289m555hpmml5g6idicg1bckphww22p87s8qca2k046zkz0ykx0";
     };
   };
 

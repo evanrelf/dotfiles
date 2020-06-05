@@ -34,8 +34,8 @@ let
         }) { pkgs = unstable; };
       ormolu =
         unstable.haskell.lib.justStaticExecutables
-          (unstable.haskellPackages.ormolu_0_0_5_0.override {
-            ghc-lib-parser = unstable.haskellPackages.ghc-lib-parser_8_10_1_20200412;
+          (unstable.haskellPackages.ormolu_0_1_0_0.override {
+            ghc-lib-parser = unstable.haskellPackages.ghc-lib-parser_8_10_1_20200523;
           });
       ghcide =
         (import (lib.fetchGitHub {
@@ -93,6 +93,7 @@ let
       (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
       borgbackup
       cabal-install
+      nnn
       cabal2nix
       cachix
       dhall
