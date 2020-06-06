@@ -2,7 +2,6 @@
 call plug#begin()
 
 " Appearance
-Plug 'Lokaltog/vim-monotone'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Movement
@@ -63,9 +62,9 @@ let g:gitgutter_map_keys = 0
 
 " SETTINGS {{{1
 " Appearance {{{2
-set background=dark
+colorscheme default
+set background=light
 set termguicolors
-colorscheme monotone
 set number
 set relativenumber
 set colorcolumn=81
@@ -101,7 +100,6 @@ set gdefault
 set report=0
 
 " Wild mode {{{2
-set wildmode=longest:full,full
 set wildignore+=*/.git/*,.DS_Store
 set wildignorecase
 

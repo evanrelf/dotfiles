@@ -6,8 +6,8 @@ if test (uname) = "Darwin"
             if test (count $files) -gt 0
                 for i in $files
                     rm "$i"
-                    and _log "Removed $i"
-                    or _warn "* Failed to remove $i"
+                    and _log "Removed '$i'"
+                    or _warn "* Failed to remove '$i'"
                 end
             else
                 _error "No .DS_Store files found"

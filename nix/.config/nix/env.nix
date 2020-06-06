@@ -92,6 +92,7 @@ let
       (haskell.lib.justStaticExecutables haskellPackages.nix-derivation)
       (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
       borgbackup
+      broot
       cabal-install
       nnn
       cabal2nix
@@ -115,6 +116,7 @@ let
       nix-diff
       nix-prefetch-git
       nixpkgs-fmt
+      nnn
       nodejs
       pandoc
       pijul
