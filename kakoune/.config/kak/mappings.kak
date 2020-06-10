@@ -1,6 +1,3 @@
-# Temporary
-map global user "<space>" "<a-i>p|stylish-haskell<ret>:wq"
-
 # Use q for backwards word movement
 map global normal "q" "b"
 map global normal "Q" "B"

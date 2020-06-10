@@ -52,6 +52,18 @@ let
             executableHaskellDepends =
               (old.executableHaskellDepends or []) ++ (with unstable.haskellPackages; [ tar zlib ]);
           }));
+      lf =
+        unstable.buildGoModule {
+          pname = "lf";
+          version = "r14";
+          src = lib.fetchGitHub {
+            owner = "gokcehan";
+            repo = "lf";
+            rev = "r14";
+            sha256 = "0kl9yrgph1i0jbxhlg3k0411436w80xw1s8dzd7v7h2raygkb4is";
+          };
+          vendorSha256 = "1zb2z3c2w4gnq9cjczg1y7r7jg4mlrm2hsb12dqd9w8mh44rvr37";
+        };
       iosevka =
         # To install on macOS:
         # 1. cd $(nix-env --query packages --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"
@@ -108,6 +120,8 @@ let
       git
       git-revise
       gitAndTools.delta
+      gitAndTools.gh
+      gitAndTools.hub
       hlint
       htop
       httpie
@@ -139,6 +153,7 @@ let
       comma
       ghcide
       kakoune
+      lf
       lorri
       ormolu
     ]);
