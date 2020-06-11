@@ -106,7 +106,6 @@ let
       borgbackup
       broot
       cabal-install
-      nnn
       cabal2nix
       cachix
       dhall
@@ -114,6 +113,7 @@ let
       direnv
       exa
       fd
+      ffmpeg-full
       fish
       fzf
       ghcid
@@ -126,6 +126,7 @@ let
       htop
       httpie
       jq
+      moreutils
       neovim
       nix-diff
       nix-prefetch-git
@@ -186,7 +187,6 @@ let
       zathura
     ]);
     darwin = (with stable; [
-      reattach-to-user-namespace
     ]) ++ (with custom; [
       gcoreutils
     ]);
