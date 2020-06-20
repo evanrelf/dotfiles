@@ -73,9 +73,9 @@ if _exists nix-env
     function env-rebuild
         set --local pkgs "$HOME/.config/nix/env.nix"
         _log "Building derivation..."
-        nix build --no-link --file "$pkgs" || return 1
+        nix build --no-link --file "$pkgs" $argv || return 1
         _log "Installing derivation..."
-        nix-env --install --file "$pkgs" || return 1
+        nix-env --install --file "$pkgs" $argv || return 1
     end
 end
 

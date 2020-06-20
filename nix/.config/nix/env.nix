@@ -1,7 +1,9 @@
+{ nixUnstable ? false }:
+
 let
   lib = import ./lib.nix;
 
-  inherit (import ./nixpkgs.nix) legacy stable unstable sources;
+  inherit (import ./nixpkgs.nix) stable unstable master sources;
 
   custom =
     { kakoune =
@@ -135,6 +137,7 @@ let
       nodejs
       pandoc
       pijul
+      pv
       python3
       ripgrep
       rsync
@@ -148,7 +151,12 @@ let
       tokei
       universal-ctags
       youtube-dl
-    ]) ++ (with custom; [
+    ]) ++ [
+      (if nixUnstable then
+        builtins.trace "Using nixUnstable; here be dragons!" master.nixUnstable
+      else
+        unstable.nix)
+    ] ++ (with custom; [
       # iosevka
       cabal-plan
       comma
@@ -186,7 +194,7 @@ let
       xorg.xrdb
       zathura
     ]);
-    darwin = (with stable; [
+    darwin = (with unstable; [
     ]) ++ (with custom; [
       gcoreutils
     ]);

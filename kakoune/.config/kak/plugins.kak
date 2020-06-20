@@ -1,10 +1,13 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
-plug "andreyorst/plug.kak" noload
+plug "andreyorst/plug.kak" \
+commit "926f66a0d0657cd5971cf5d6be7da2fab034361b" noload
 
-plug "evanrelf/primer.kak" theme
+plug "evanrelf/primer.kak" \
+commit "285ded087af0514cd47b7049282a214507f0943b" theme
 
 # Toggle between relative and absolute line numbers depending on mode
-plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
+plug "evanrelf/number-toggle.kak" branch "override-highlighter" \
+commit "0b287a5c1fdb3562e9a5bfe40a10c0d2b5c856ad" config %{
   set-option global number_toggle_params -hlcursor
 }
 
@@ -21,16 +24,19 @@ commit "a569d3df8311a0447e65348a7d48c2dea5415df0" config %{
 }
 
 # Syntax highlighting for Graphviz
-plug "jwhett/graphviz-kak"
+plug "jwhett/graphviz-kak" \
+commit "04613be57e317b7d173c1beae4e91369831497c6"
 
 # Manipulate buffers more quickly
-plug "Delapouite/kakoune-buffers" config %{
+plug "Delapouite/kakoune-buffers" \
+commit "7d505129a12a915383a27fa3929773e42bf4b531" config %{
   map global normal "b" ": enter-user-mode buffers<ret>"
   map global normal "B" ": enter-user-mode -lock buffers<ret>"
 }
 
 # Change directory
-plug "Delapouite/kakoune-cd" config %{
+plug "Delapouite/kakoune-cd" \
+commit "0f775fe20431393b803c461f080c02e870731a81" config %{
   alias global "cd" "change-directory-current-buffer"
   alias global "r" "change-directory-project-root"
   alias global "pwd" "print-working-directory"
@@ -43,7 +49,8 @@ commit "cb7848045390d7c4d7b729327971acd11d026866" config %{
 }
 
 # Surround selections with brackets
-plug "h-youhei/kakoune-surround" config %{
+plug "h-youhei/kakoune-surround" \
+commit "efe74c6f434d1e30eff70d4b0d737f55bf6c5022" config %{
   map global user "s" ": enter-user-mode surround<ret>" -docstring "Surround mode"
   declare-user-mode "surround"
   map global surround "s" ": select-surround<ret>" -docstring "Select surround"
