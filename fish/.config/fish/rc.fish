@@ -92,7 +92,7 @@ function rc -d "Open the specified program's configuration file"
             case redshift
                 eval "$EDITOR $HOME/.config/redshift/redshift.conf"
             case tmux
-                eval "$EDITOR $HOME/.tmux.conf"
+                eval "$EDITOR $HOME/.config/tmux/tmux.conf"
 
             # Xorg
             case xresources

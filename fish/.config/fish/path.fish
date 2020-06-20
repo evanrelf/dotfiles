@@ -7,7 +7,7 @@ if _exists emacs && test -d "$HOME/.emacs.d/bin"
 end
 
 if _exists npm
-    set --export npm_config_prefix "$HOME/.node_modules"
+    set --export npm_config_prefix "$HOME/.local/share/node_modules"
     set --prepend PATH "$npm_config_prefix/bin"
 end
 

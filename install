@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell --pure --keep PRETTY_PLEASE --packages curl git stow -i bash
+#!nix-shell --keep PRETTY_PLEASE --packages curl git stow -i bash
 # shellcheck shell=bash
 
 set -euo pipefail
@@ -65,12 +65,12 @@ for i in "$@"; do
       fi
       ;;
     tmux )
-      if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+      if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
         log "[tmux] Installing Tmux Plugin Manager"
         git clone \
           --depth 1 \
-          "https://github.com/tmux-plugins/tpm" \
-          "$HOME/.tmux/plugins/tpm"
+          "https://github.com/tmux-plugins/tpm.git" \
+          "$HOME/.config/tmux/plugins/tpm"
       else
         log "[tmux] Tmux Plugin Manager already installed"
       fi
@@ -88,6 +88,12 @@ for i in "$@"; do
         log "[neovim] vim-plug already installed"
       fi
       ;;
+    hammerspoon )
+      defaults write \
+        org.hammerspoon.Hammerspoon \
+        MJConfigFile \
+        "$HOME/.config/hammerspoon/init.lua"
+      ;;
   esac
 
   if [ -f "$package/install" ]; then
@@ -96,7 +102,6 @@ for i in "$@"; do
   else
     log "[$package] Installing config"
     stow \
-      --verbose=2 \
       --target "$HOME" \
       --no-folding \
       --ignore "install" \
