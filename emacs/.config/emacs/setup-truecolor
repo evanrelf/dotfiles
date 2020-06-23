@@ -22,6 +22,6 @@ echo "Now you need to run Emacs with TERM=xterm-24bit"
 # EOF
 # echo "Now you need to run Emacs with TERM=xterm-24bits"
 
-tic -x -o "$HOME/.terminfo" "$tmp"
+tic -x -o "$HOME/.local/share/terminfo" "$tmp"
 
 rm -f "$tmp"

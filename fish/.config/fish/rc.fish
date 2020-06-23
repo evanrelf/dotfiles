@@ -10,7 +10,7 @@ function rc -d "Open the specified program's configuration file"
                 cd "$HOME/.config/kak/"
                 ls -l
             case emacs
-                eval "$EDITOR $HOME/.emacs.d/init.el"
+                eval "$EDITOR $HOME/.config/emacs/init.el"
             case spacemacs
                 eval "$EDITOR $HOME/.spacemacs"
             case doom
@@ -68,7 +68,7 @@ function rc -d "Open the specified program's configuration file"
 
             # Window managers and related tools
             case xmonad
-                eval "$EDITOR $HOME/.xmonad/xmonad.hs"
+                eval "$EDITOR $HOME/.config/xmonad/xmonad.hs"
             case xmobar
                 eval "$EDITOR $HOME/.config/xmobar/xmobarrc"
             case taffybar
@@ -88,7 +88,7 @@ function rc -d "Open the specified program's configuration file"
             case compton
                 eval "$EDITOR $HOME/.config/compton.conf"
             case hammerspoon
-                eval "$EDITOR $HOME/.hammerspoon/init.lua"
+                eval "$EDITOR $HOME/.config/hammerspoon/init.lua"
             case redshift
                 eval "$EDITOR $HOME/.config/redshift/redshift.conf"
             case tmux

@@ -68,6 +68,9 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+;; Start in org-mode
+(setq initial-major-mode 'org-mode)
+
 ;; Use y/n prompts instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -130,10 +133,13 @@
   (general-evil-setup))
 
 ;; Themes
-(use-package doom-themes)
-(use-package base16-theme)
-(use-package color-theme-sanityinc-tomorrow)
-(load-theme 'doom-challenger-deep t)
+;; (use-package doom-themes)
+;; (use-package base16-theme)
+;; (use-package color-theme-sanityinc-tomorrow)
+;; (use-package leuven-theme)
+;; (load-theme 'doom-challenger-deep t)
+(use-package modus-operandi-theme)
+(load-theme 'modus-operandi t)
 
 ;; Modeline
 (use-package mood-line
@@ -141,28 +147,28 @@
   (mood-line-mode))
 
 ;; Tabs
-(use-package centaur-tabs
-  :after all-the-icons
-  :demand
-  :init
-  (setq centaur-tabs-set-bar 'over)
-  ;; (setq x-underline-at-descent-line t)
-  (setq centaur-tabs-height 28)
-  (setq centaur-tabs-gray-out-icons 'buffer)
-  (when (window-system)
-    (setq centaur-tabs-set-icons t))
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-close-button "✕")
-  ;; (setq centaur-tabs-modified-marker "⬤")
-  (setq centaur-tabs-modified-marker "●")
-  :config
-  (centaur-tabs-mode t)
-  (centaur-tabs-group-by-projectile-project)
-  (centaur-tabs-headline-match)
-  :general
-  (general-nmap
-    "g t" 'centaur-tabs-forward
-    "g T" 'centaur-tabs-backward))
+;; (use-package centaur-tabs
+;;   :after all-the-icons
+;;   :demand
+;;   :init
+;;   (setq centaur-tabs-set-bar 'over)
+;;   ;; (setq x-underline-at-descent-line t)
+;;   (setq centaur-tabs-height 28)
+;;   (setq centaur-tabs-gray-out-icons 'buffer)
+;;   (when (window-system)
+;;     (setq centaur-tabs-set-icons t))
+;;   (setq centaur-tabs-set-modified-marker t)
+;;   (setq centaur-tabs-close-button "✕")
+;;   ;; (setq centaur-tabs-modified-marker "⬤")
+;;   (setq centaur-tabs-modified-marker "●")
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   (centaur-tabs-group-by-projectile-project)
+;;   (centaur-tabs-headline-match)
+;;   :general
+;;   (general-nmap
+;;     "g t" 'centaur-tabs-forward
+;;     "g T" 'centaur-tabs-backward))
 
 ;; Icons
 (use-package all-the-icons)
@@ -236,12 +242,6 @@
   :after (evil smartparens)
   :hook
   (smartparens-enabled . evil-smartparens-mode))
-
-;; Highlight pairs
-(use-package rainbow-delimiters
-  :commands (rainbow-delimiters-mode)
-  :hook
-  (emacs-lisp-mode . rainbow-delimiters-mode))
 
 ;; Display errors
 (use-package flycheck
@@ -464,5 +464,5 @@
   "g ESC" '(evil-escape :which-key t)
   "g s" '(magit-status :which-key "status")
 
-  "," '((lambda () (interactive) (evil-edit "~/.emacs.d/init.el")) :which-key "edit config")
+  "," '((lambda () (interactive) (evil-edit "~/.config/emacs/init.el")) :which-key "edit config")
   )
