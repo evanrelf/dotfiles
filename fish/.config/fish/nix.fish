@@ -43,7 +43,7 @@ end
 
 if _exists nix-shell
     function run
-        if not test -f "shell.nix" && not test -f "default.nix"
+        if test ! -f "shell.nix" && test ! -f "default.nix"
             _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
             return 1
         end

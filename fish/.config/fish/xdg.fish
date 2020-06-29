@@ -10,6 +10,14 @@ if _exists aws-cli
     set --export AWS_CONFIG_FILE "$XDG_CONFIG_HOME/aws/config"
 end
 
+# bash
+if _exists bash
+    set --export HISTFILE "$XDG_DATA_HOME/bash/history"
+    if test ! -d "$XDG_DATA_HOME/bash"
+        mkdir -p "$XDG_DATA_HOME/bash"
+    end
+end
+
 # cargo
 if _exists cargo
     set --export CARGO_HOME "$XDG_DATA_HOME/cargo"
@@ -53,7 +61,9 @@ end
 
 # taskwarrior
 if _exists task
-    mkdir -p "$XDG_DATA_HOME/task"
     set --export TASKDATA "$XDG_DATA_HOME/task"
     set --export TASKRC "$XDG_CONFIG_HOME/task/taskrc"
+    if test ! -d "$TASKDATA"
+        mkdir -p "$TASKDATA"
+    end
 end
