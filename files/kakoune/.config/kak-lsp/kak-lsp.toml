@@ -1,0 +1,46 @@
+snippet_support = false
+verbosity = 2
+
+[server]
+# exit session if no requests were received during given period in seconds
+# works only in unix sockets mode (-s/--session)
+# set to 0 to disable
+timeout = 1800 # seconds = 30 minutes
+
+[language.haskell]
+filetypes = ["haskell", "haskell2"]
+roots = ["cabal.project", "*.cabal", "stack.yaml", "package.yaml", "Setup.hs"]
+command = "ghcide"
+args = ["--lsp"]
+
+[language.nix]
+filetypes = ["nix"]
+command = "rnix-lsp"
+
+# [language.rust]
+# filetypes = ["rust"]
+# roots = ["Cargo.toml"]
+# command = "rls"
+
+# [language.javascript]
+# filetypes = ["javascript"]
+# roots = ["package.json"]
+# command = "javascript-typescript-stdio"
+# args = ["--strict"]
+
+# [language.haskell]
+# filetypes = ["haskell"]
+# roots = ["package.yaml", "*.cabal", "stack.yaml", "cabal.project", "Setup.hs"]
+# command = "hie-wrapper"
+# args = ["--lsp"]
+
+# [language.haskell.initialization_options]
+# hlintOn = true
+# maxNumberOfProblems = 10
+# formatOnImportOn = false
+
+[language.purescript]
+filetypes = ["purescript"]
+command = "purescript-language-server"
+roots = ["bower.json", "psc-package.json", "spago.dhall"]
+args = ["--stdio"]
