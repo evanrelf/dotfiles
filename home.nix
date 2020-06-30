@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 { imports = [
     ./modules/programs/coin.nix
@@ -13,6 +13,16 @@
   nixpkgs.overlays = [ (import ./overlay.nix) ];
 
   programs.coin.enable = true;
+
+  home.file =
+    let
+      link = name: _: {
+        source = ./files + "/${name}";
+        target = ".";
+        recursive = true;
+      };
+    in
+      lib.mapAttrs link (builtins.readDir ./files);
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
