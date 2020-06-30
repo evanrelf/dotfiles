@@ -1,9 +1,0 @@
-[Unit]
-Description=Trigger Borg backup
-
-[Timer]
-OnCalendar=hourly
-Persistent=true
-
-[Install]
-WantedBy=timers.target

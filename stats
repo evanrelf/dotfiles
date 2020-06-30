@@ -1,7 +1,0 @@
-#!/usr/bin/env nix-shell
-#!nix-shell --pure --packages less tokei -i bash
-# shellcheck shell=bash
-
-set -euo pipefail
-
-tokei --hidden --files --sort code | less
