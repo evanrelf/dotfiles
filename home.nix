@@ -16,13 +16,40 @@
 
   home.file =
     let
-      link = name: _: {
+      enabled = [
+        # "borg"
+        # "doom-emacs"
+        # "emacs"
+        "fish"
+        "git"
+        "hammerspoon"
+        "haskell"
+        "kakoune"
+        "karabiner"
+        "kitty"
+        # "neovim"
+        "nix"
+        # "nixos"
+        "npm"
+        # "spacemacs"
+        # "sway"
+        "tmux"
+        # "xmonad"
+        # "xorg"
+      ];
+
+      configs =
+        lib.filterAttrs
+          (name: _: builtins.elem name enabled)
+          (builtins.readDir ./files);
+
+      symlink = name: _: {
         source = ./files + "/${name}";
         target = ".";
         recursive = true;
       };
     in
-      lib.mapAttrs link (builtins.readDir ./files);
+      lib.mapAttrs symlink configs;
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
