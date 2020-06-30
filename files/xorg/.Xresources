@@ -1,0 +1,58 @@
+Xft.dpi: 144
+
+!! moonfly colors
+!! *background:  #080808
+!! *foreground:  #b2b2b2
+!! *cursorColor: #9e9e9e
+!! *colorBD:     #eeeeee
+!! *color0:      #373c40
+!! *color1:      #ff5454
+!! *color2:      #8cc85f
+!! *color3:      #e3c78a
+!! *color4:      #80a0ff
+!! *color5:      #ce76e8
+!! *color6:      #7ee0ce
+!! *color7:      #de935f
+!! *color8:      #f09479
+!! *color9:      #f74782
+!! *color10:     #42cf89
+!! *color11:     #cfcfb0
+!! *color12:     #78c2ff
+!! *color13:     #ae81ff
+!! *color14:     #85dc85
+!! *color15:     #e2637f
+
+!! challenger-deep
+*.foreground:   #cbe3e7
+*.background:   #1e1c31
+*.cursorColor: #fbfcfc
+*.color0:       #565575
+*.color1:       #ff8080
+*.color2:       #95ffa4
+*.color3:       #ffe9aa
+*.color4:       #91ddff
+*.color5:       #c991e1
+*.color6:       #aaffe4
+*.color7:       #cbe3e7
+*.color8:       #100e23
+*.color9:       #ff5458
+*.color10:      #62d196
+*.color11:      #ffb378
+*.color12:      #65b2ff
+*.color13:      #906cff
+*.color14:      #63f2f1
+*.color15:      #a6b3cc
+
+!! st
+st.font:        PragmataPro Mono Liga:style=Regular:size=15:antialias=true:autohint=true
+st.bold_font:   0
+st.borderpx:    2
+st.termname:    xterm-256color
+st.bellvolume:  0
+
+!! rofi
+rofi.font: PragmataPro Mono Liga 15
+rofi.show-icons: true
+rofi.hide-scrollbar: true
+rofi.separator-style: none
+rofi.lines: 10

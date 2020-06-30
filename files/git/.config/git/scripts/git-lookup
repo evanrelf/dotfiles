@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+command -v fzf >/dev/null 2>&1 || (echo "fzf not installed"; exit 1)
+
+git log \
+  --oneline \
+  --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' \
+  --color=always \
+| fzf -1 -0 \
+  --exact \
+  --height 50% \
+  --reverse \
+  --ansi \
+  --no-sort \
+  --query "$*" \
+  --color light \
+| cut -d ' ' -f 1 \
+| xargs git rev-parse --verify --quiet

@@ -1,0 +1,23 @@
+*/.Trash
+*/.local/share/Trash
+*/.cache
+*/.stack
+*/.stack-work
+*/dist-newstyle
+*/dist
+*/.cabal
+*/.ghc*
+*/.elm
+*/elm-stuff
+*/.npm
+*/.node_modules
+*/node_modules
+*/.rustup
+*/.rustup
+*/.cargo
+*/.cargo
+/Users/*/Downloads/*.iso
+/home/*/Downloads/*.iso
+*/Virtual Machines.localized
+*/Photos Library.photoslibrary
+/Users/*/Library
