@@ -1,10 +1,18 @@
 { pkgs, ... }:
 
-{ home.stateVersion = "20.03";
+{ imports = [
+    ./modules/programs/coin.nix
+  ];
+
+  home.stateVersion = "20.03";
 
   news.display = "silent";
 
+  manual.html.enable = true;
+
   nixpkgs.overlays = [ (import ./overlay.nix) ];
+
+  programs.coin.enable = true;
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
