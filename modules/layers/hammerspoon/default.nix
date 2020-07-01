@@ -16,5 +16,13 @@ in
         target = ".";
         recursive = true;
       };
+
+      home.activation."hammerspoon" =
+        config.lib.dag.entryAfter [ "writeBoundary" ] ''
+          defaults write \
+            org.hammerspoon.Hammerspoon \
+            MJConfigFile \
+            "$HOME/.config/hammerspoon/init.lua"
+        '';
     };
   }
