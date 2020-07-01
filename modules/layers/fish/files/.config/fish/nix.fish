@@ -69,16 +69,6 @@ if _exists nix-store
     alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof)'"
 end
 
-if _exists nix-env
-    function env-rebuild
-        set --local pkgs "$HOME/.config/nix/env.nix"
-        _log "Building derivation..."
-        nix build --no-link --file "$pkgs" $argv || return 1
-        _log "Installing derivation..."
-        nix-env --install --file "$pkgs" $argv || return 1
-    end
-end
-
 if test -n "$IN_NIX_SHELL"
     set --local nix_paths
     set --local non_nix_paths
