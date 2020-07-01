@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 
 { imports = [
+    ./modules/layers/borg
     ./modules/layers/fish
     ./modules/layers/git
     ./modules/layers/kakoune
@@ -32,7 +33,6 @@
   home.file =
     let
       enabled = [
-        # "borg"
         # "doom-emacs"
         # "emacs"
         "hammerspoon"
@@ -64,7 +64,6 @@
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
     (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
     (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
-    borgbackup
     cabal-install
     cabal-plan
     cabal2nix
