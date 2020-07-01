@@ -19,7 +19,7 @@ in
 
       home.activation."hammerspoon" =
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
-          defaults write \
+          $DRY_RUN_CMD defaults write \
             org.hammerspoon.Hammerspoon \
             MJConfigFile \
             "$HOME/.config/hammerspoon/init.lua"
