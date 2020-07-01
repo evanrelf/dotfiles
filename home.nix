@@ -4,6 +4,7 @@
     ./modules/layers/fish
     ./modules/layers/git
     ./modules/layers/kakoune
+    ./modules/layers/kitty
     ./modules/programs/coin.nix
   ];
 
@@ -21,6 +22,7 @@
     fish.enable = true;
     git.enable = true;
     kakoune.enable = true;
+    kitty.enable = true;
   };
 
   home.file =
@@ -32,7 +34,6 @@
         "hammerspoon"
         "haskell"
         "karabiner"
-        "kitty"
         # "neovim"
         "nix"
         # "nixos"
