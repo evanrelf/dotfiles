@@ -10,6 +10,7 @@
     ./modules/layers/karabiner
     ./modules/layers/kitty
     ./modules/layers/nix
+    ./modules/layers/nodejs
     ./modules/layers/tmux
     ./modules/programs/coin.nix
   ];
@@ -33,6 +34,7 @@
     karabiner.enable = true;
     kitty.enable = true;
     nix.enable = true;
+    nodejs.enable = true;
     tmux.enable = true;
   };
 
@@ -43,7 +45,6 @@
         # "emacs"
         # "neovim"
         # "nixos"
-        "npm"
         # "spacemacs"
         # "sway"
         # "xmonad"
@@ -78,7 +79,6 @@
     jq
     moreutils
     neovim
-    nodejs
     pandoc
     python3
     ripgrep
