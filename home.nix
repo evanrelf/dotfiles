@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 { imports = [
     ./modules/layers/borg
@@ -12,7 +12,6 @@
     ./modules/layers/nix
     ./modules/layers/nodejs
     ./modules/layers/tmux
-    ./modules/programs/coin.nix
   ];
 
   home.stateVersion = "20.03";
@@ -22,8 +21,6 @@
   manual.html.enable = true;
 
   nixpkgs.overlays = [ (import ./overlay.nix) ];
-
-  programs.coin.enable = true;
 
   layers.fish.enable = true;
 
@@ -48,6 +45,7 @@
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
     (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
+    coin
     dhall
     dhall-json
     exa
