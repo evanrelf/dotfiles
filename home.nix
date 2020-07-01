@@ -3,6 +3,7 @@
 { imports = [
     ./modules/layers/fish
     ./modules/layers/git
+    ./modules/layers/kakoune
     ./modules/programs/coin.nix
   ];
 
@@ -19,6 +20,7 @@
   layers = {
     fish.enable = true;
     git.enable = true;
+    kakoune.enable = true;
   };
 
   home.file =
@@ -29,7 +31,6 @@
         # "emacs"
         "hammerspoon"
         "haskell"
-        "kakoune"
         "karabiner"
         "kitty"
         # "neovim"
@@ -79,7 +80,6 @@
     htop
     httpie
     jq
-    kakoune
     lorri
     moreutils
     neovim
