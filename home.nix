@@ -4,6 +4,7 @@
     ./modules/layers/borg
     ./modules/layers/fish
     ./modules/layers/git
+    ./modules/layers/hammerspoon
     ./modules/layers/kakoune
     ./modules/layers/kitty
     ./modules/layers/nix
@@ -24,6 +25,7 @@
   layers = {
     fish.enable = true;
     git.enable = true;
+    hammerspoon.enable = true;
     kakoune.enable = true;
     kitty.enable = true;
     nix.enable = true;
@@ -35,7 +37,6 @@
       enabled = [
         # "doom-emacs"
         # "emacs"
-        "hammerspoon"
         "haskell"
         "karabiner"
         # "neovim"
