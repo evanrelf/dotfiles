@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 
 { imports = [
+    ./modules/layers/fish
     ./modules/programs/coin.nix
   ];
 
@@ -14,13 +15,14 @@
 
   programs.coin.enable = true;
 
+  layers.fish.enable = true;
+
   home.file =
     let
       enabled = [
         # "borg"
         # "doom-emacs"
         # "emacs"
-        "fish"
         "git"
         "hammerspoon"
         "haskell"
@@ -66,7 +68,6 @@
     exa
     fd
     ffmpeg-full
-    fish
     fzf
     gcoreutils
     ghcid
