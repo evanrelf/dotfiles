@@ -25,44 +25,25 @@
 
   programs.coin.enable = true;
 
-  layers = {
-    fish.enable = true;
-    git.enable = true;
-    hammerspoon.enable = true;
-    haskell.enable = true;
-    kakoune.enable = true;
-    karabiner.enable = true;
-    kitty.enable = true;
-    nix.enable = true;
-    nodejs.enable = true;
-    tmux.enable = true;
-  };
+  layers.fish.enable = true;
 
-  home.file =
-    let
-      enabled = [
-        # "doom-emacs"
-        # "emacs"
-        # "neovim"
-        # "nixos"
-        # "spacemacs"
-        # "sway"
-        # "xmonad"
-        # "xorg"
-      ];
+  layers.git.enable = true;
 
-      configs =
-        lib.filterAttrs
-          (name: _: builtins.elem name enabled)
-          (builtins.readDir ./files);
+  layers.hammerspoon.enable = true;
 
-      symlink = name: _: {
-        source = ./files + "/${name}";
-        target = ".";
-        recursive = true;
-      };
-    in
-      lib.mapAttrs symlink configs;
+  layers.haskell.enable = true;
+
+  layers.kakoune.enable = true;
+
+  layers.karabiner.enable = true;
+
+  layers.kitty.enable = true;
+
+  layers.nix.enable = true;
+
+  layers.nodejs.enable = true;
+
+  layers.tmux.enable = true;
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
