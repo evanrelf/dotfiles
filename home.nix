@@ -5,6 +5,7 @@
     ./modules/layers/fish
     ./modules/layers/git
     ./modules/layers/hammerspoon
+    ./modules/layers/haskell
     ./modules/layers/kakoune
     ./modules/layers/karabiner
     ./modules/layers/kitty
@@ -27,6 +28,7 @@
     fish.enable = true;
     git.enable = true;
     hammerspoon.enable = true;
+    haskell.enable = true;
     kakoune.enable = true;
     karabiner.enable = true;
     kitty.enable = true;
@@ -39,7 +41,6 @@
       enabled = [
         # "doom-emacs"
         # "emacs"
-        "haskell"
         # "neovim"
         # "nixos"
         "npm"
@@ -64,11 +65,7 @@
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
-    (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
     (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
-    cabal-install
-    cabal-plan
-    cabal2nix
     dhall
     dhall-json
     exa
@@ -76,16 +73,12 @@
     ffmpeg-full
     fzf
     gcoreutils
-    ghcid
-    ghcide
-    hlint
     htop
     httpie
     jq
     moreutils
     neovim
     nodejs
-    ormolu
     pandoc
     python3
     ripgrep
