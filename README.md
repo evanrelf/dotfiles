@@ -1,3 +1,6 @@
 # dotfiles
 
-My personal dotfiles. Feel free to steal anything you find useful!
+My personal dotfiles, built with [Nix][nix] and [`home-manager`][home-manager].
+
+[nix]: https://nixos.org
+[home-manager]: https://github.com/rycee/home-manager
