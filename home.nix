@@ -6,6 +6,7 @@
     ./modules/layers/git
     ./modules/layers/hammerspoon
     ./modules/layers/kakoune
+    ./modules/layers/karabiner
     ./modules/layers/kitty
     ./modules/layers/nix
     ./modules/layers/tmux
@@ -27,6 +28,7 @@
     git.enable = true;
     hammerspoon.enable = true;
     kakoune.enable = true;
+    karabiner.enable = true;
     kitty.enable = true;
     nix.enable = true;
     tmux.enable = true;
@@ -38,7 +40,6 @@
         # "doom-emacs"
         # "emacs"
         "haskell"
-        "karabiner"
         # "neovim"
         # "nixos"
         "npm"
