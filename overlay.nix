@@ -43,6 +43,27 @@ self: super:
       sha256 = "1zq5g7ka99vcyqbg5l1bx0rliq3ihig37nzczk0wdwidjyxjghf9";
     }) {}).ghcide-ghc865;
 
+  # gormolu =
+  #   let
+  #     source =
+  #       super.fetchFromGitHub {
+  #         owner = "tweag";
+  #         repo = "ormolu";
+  #         rev = "b1fc69265f8688490b16de83bb235d29aa25bcb0";
+  #         sha256 = "1yk3yh0rg0gcnhyd52jwqgah09yczbk21gb80xhrighacmvdsnwn";
+  #       };
+  #     haskellPackage =
+  #       (import source { pkgs = self; }).ormolu.override {
+  #         ghc-lib-parser = self.haskellPackages.ghc-lib-parser_8_10_1_20200523;
+  #       };
+  #     executable =
+  #       super.haskell.lib.justStaticExecutables haskellPackage;
+  #   in
+  #     super.runCommandLocal "gormolu" {} ''
+  #       mkdir -p $out/bin
+  #       ln -s ${executable}/bin/ormolu $out/bin/gormolu
+  #     '';
+
   kakoune =
     super.kakoune-unwrapped.overrideAttrs (old: rec {
       version = "HEAD";
