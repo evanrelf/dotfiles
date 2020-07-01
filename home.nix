@@ -5,6 +5,7 @@
     ./modules/layers/git
     ./modules/layers/kakoune
     ./modules/layers/kitty
+    ./modules/layers/tmux
     ./modules/programs/coin.nix
   ];
 
@@ -23,6 +24,7 @@
     git.enable = true;
     kakoune.enable = true;
     kitty.enable = true;
+    tmux.enable = true;
   };
 
   home.file =
@@ -40,7 +42,6 @@
         "npm"
         # "spacemacs"
         # "sway"
-        "tmux"
         # "xmonad"
         # "xorg"
       ];
@@ -95,7 +96,6 @@
     sd
     shellcheck
     tealdeer
-    tmux
     tokei
     universal-ctags
     youtube-dl
