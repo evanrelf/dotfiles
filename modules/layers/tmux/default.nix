@@ -18,5 +18,14 @@ in
         target = ".";
         recursive = true;
       };
+
+      home.activation."tmux" = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+          $DRY_RUN_CMD ${pkgs.git}/bin/git clone \
+            --depth 1 \
+            "https://github.com/tmux-plugins/tpm.git" \
+            "$HOME/.config/tmux/plugins/tpm"
+        fi
+      '';
     };
   }
