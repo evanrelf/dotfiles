@@ -5,6 +5,7 @@
     ./modules/layers/git
     ./modules/layers/kakoune
     ./modules/layers/kitty
+    ./modules/layers/nix
     ./modules/layers/tmux
     ./modules/programs/coin.nix
   ];
@@ -24,6 +25,7 @@
     git.enable = true;
     kakoune.enable = true;
     kitty.enable = true;
+    nix.enable = true;
     tmux.enable = true;
   };
 
@@ -37,7 +39,6 @@
         "haskell"
         "karabiner"
         # "neovim"
-        "nix"
         # "nixos"
         "npm"
         # "spacemacs"
@@ -67,8 +68,6 @@
     cabal-install
     cabal-plan
     cabal2nix
-    cachix
-    comma
     dhall
     dhall-json
     exa
@@ -82,11 +81,8 @@
     htop
     httpie
     jq
-    lorri
     moreutils
     neovim
-    nix-diff
-    nix-prefetch-git
     nodejs
     ormolu
     pandoc
