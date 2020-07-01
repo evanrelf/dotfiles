@@ -18,5 +18,15 @@ in
         target = ".";
         recursive = true;
       };
+
+      home.activation."kakoune" =
+        config.lib.dag.entryAfter [ "writeBoundary" ] ''
+          if [ ! -d "$HOME/.config/kak/plugins/plug.kak" ]; then
+            $DRY_RUN_CMD ${pkgs.git}/bin/git clone \
+              --depth 1 \
+              "https://github.com/andreyorst/plug.kak.git" \
+              "$HOME/.config/kak/plugins/plug.kak"
+          fi
+        '';
     };
   }
