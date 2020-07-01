@@ -2,6 +2,7 @@
 
 { imports = [
     ./modules/layers/fish
+    ./modules/layers/git
     ./modules/programs/coin.nix
   ];
 
@@ -15,7 +16,10 @@
 
   programs.coin.enable = true;
 
-  layers.fish.enable = true;
+  layers = {
+    fish.enable = true;
+    git.enable = true;
+  };
 
   home.file =
     let
@@ -23,7 +27,6 @@
         # "borg"
         # "doom-emacs"
         # "emacs"
-        "git"
         "hammerspoon"
         "haskell"
         "kakoune"
@@ -72,9 +75,6 @@
     gcoreutils
     ghcid
     ghcide
-    git
-    gitAndTools.delta
-    gitAndTools.hub
     hlint
     htop
     httpie
