@@ -11,12 +11,26 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-      home.packages = with pkgs; [ tmux ];
+      programs.tmux = {
+        enable = true;
 
-      home.file."tmux" = {
-        source = ./files;
-        target = ".";
-        recursive = true;
+        terminal = "xterm-256color";
+
+        baseIndex = 1;
+
+        keyMode = "vi";
+
+        newSession = true;
+
+        shortcut = "s";
+
+        aggressiveResize = true;
+
+        escapeTime = 0;
+
+        historyLimit = 5000;
+
+        extraConfig = builtins.readFile ./tmux.conf;
       };
 
       home.activation."tmux" = config.lib.dag.entryAfter [ "writeBoundary" ] ''
