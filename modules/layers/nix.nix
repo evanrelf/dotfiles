@@ -41,6 +41,7 @@ in
         pkgs.nix
         pkgs.nix-diff
         pkgs.nix-prefetch-git
+        pkgs.nixdu
       ];
     };
   }
