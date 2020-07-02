@@ -3,6 +3,7 @@
 { imports = [
     ./modules/layers/borg
     ./modules/layers/fish
+    ./modules/layers/fun.nix
     ./modules/layers/git
     ./modules/layers/hammerspoon
     ./modules/layers/haskell
@@ -23,6 +24,8 @@
   nixpkgs.overlays = [ (import ./overlay.nix) ];
 
   layers.fish.enable = true;
+
+  layers.fun.enable = true;
 
   layers.git.enable = true;
 
@@ -77,7 +80,6 @@
     fd
     ffmpeg-full
     fzf
-    gay
     gcoreutils
     htop
     httpie
