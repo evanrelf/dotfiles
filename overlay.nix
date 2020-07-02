@@ -29,6 +29,16 @@ self: super:
       sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
     }) { pkgs = self; };
 
+  gay =
+    super.python3Packages.buildPythonPackage rec {
+      pname = "gay";
+      version = "1.1.0";
+      src = super.python3Packages.fetchPypi {
+        inherit pname version;
+        sha256 = "1hizmxy99jjnfk715zbnr1dzk58qys4mqqjnbc8g1wrmq5rfypya";
+      };
+    };
+
   gcoreutils =
     super.coreutils.override {
       singleBinary = false;

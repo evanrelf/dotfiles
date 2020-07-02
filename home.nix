@@ -77,6 +77,7 @@
     fd
     ffmpeg-full
     fzf
+    gay
     gcoreutils
     htop
     httpie
