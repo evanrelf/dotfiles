@@ -70,8 +70,8 @@ self: super:
       src = super.fetchFromGitHub {
         owner = "mawww";
         repo = "kakoune";
-        rev = "c585107ab5e7155f7da648c3752cf360f7156177";
-        sha256 = "1rjnhkzwrwxkbi78rpbl06d815jdkpkfpfcv5ppclvpwyqfd98zc";
+        rev = "d79b0053239047525c1a8d659a7179c09dee47b8";
+        sha256 = "1c4xfavlax5mhjlvqrg2zkqs1zqh9kdxrp661giwvlll2sizbk7x";
       };
       preConfigure = ''
         ${old.preConfigure}
