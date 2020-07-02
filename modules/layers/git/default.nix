@@ -12,8 +12,23 @@ in
     };
 
     config = lib.mkIf cfg.enable {
+      programs.git = {
+        enable = true;
+
+        userName = "Evan Relf";
+
+        aliases = import ./aliases.nix;
+
+        ignores = import ./ignores.nix;
+
+        attributes = import ./attributes.nix;
+
+        extraConfig = import ./extra-config.nix;
+
+        includes = [ { path = "~/.config/git/local"; } ];
+      };
+
       home.packages = with pkgs; [
-        git
         gitAndTools.delta
         gitAndTools.hub
       ];
