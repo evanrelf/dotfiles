@@ -11,10 +11,13 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-      home.file."kitty" = {
-        source = ./files;
-        target = ".";
-        recursive = true;
+      # TODO: Don't add `pkgs.kitty` to `home.packages`
+      programs.kitty = {
+        enable = true;
+
+        settings = import ./settings.nix;
+
+        keybindings = import ./keybindings.nix;
       };
     };
   }
