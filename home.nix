@@ -21,7 +21,7 @@
 
   manual.html.enable = true;
 
-  nixpkgs.overlays = [ (import ./overlay.nix) ];
+  nixpkgs.overlays = import ./overlays;
 
   layers.fish.enable = true;
 
