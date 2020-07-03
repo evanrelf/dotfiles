@@ -1,7 +1,9 @@
 path:
 
 let
-  pkgs = import ../nixpkgs.nix {};
+  # Need to set overlays explicitly here to avoid infinite recursion segfault
+  # See this issue for more info: https://github.com/NixOS/nix/issues/3780
+  pkgs = import ../nixpkgs.nix { overlays = []; };
 
   lib = pkgs.lib;
 
