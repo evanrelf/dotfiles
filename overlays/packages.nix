@@ -121,13 +121,13 @@ self: super:
       sha256 = "0wbkx8hmikngfp6fp0y65yla22f3k0jszq8a6pas80q0b33llwm5";
     }) { pkgs = self; };
 
-  nixdu =
+  nix-tree =
     (import (super.fetchFromGitHub {
       owner = "utdemir";
-      repo = "nixdu";
-      rev = "71b9a13e1725aa6f1a80e78c50ad79d02a62bb90";
-      sha256 = "0yarmazkly9r2yd3hmfk74i06sggim115chyi4y3ivggyfyrxar7";
-    })).nixdu;
+      repo = "nix-tree";
+      rev = "c3c77ede124e91c3275a994f9e57cab360e6a13a";
+      sha256 = "0nyln9cxybqdcp9pdh5qjhhmbl0bn8f9ghh4cn0q2wmsldqpl0ai";
+    })).nix-tree;
 
   ormolu =
     super.haskell.lib.justStaticExecutables
