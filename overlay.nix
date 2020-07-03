@@ -32,10 +32,10 @@ self: super:
   gay =
     super.python3Packages.buildPythonPackage rec {
       pname = "gay";
-      version = "1.1.0";
+      version = "1.2.1";
       src = super.python3Packages.fetchPypi {
         inherit pname version;
-        sha256 = "1hizmxy99jjnfk715zbnr1dzk58qys4mqqjnbc8g1wrmq5rfypya";
+        sha256 = "0kjraippbkm1fgmky7dfww4an2yj53y4fcsganps1dhgn1mfs2ks";
       };
     };
 
