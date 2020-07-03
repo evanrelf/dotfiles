@@ -1,19 +1,6 @@
 { pkgs, ... }:
 
-{ imports = [
-    ./modules/layers/borg
-    ./modules/layers/fish
-    ./modules/layers/fun.nix
-    ./modules/layers/git
-    ./modules/layers/hammerspoon
-    ./modules/layers/haskell
-    ./modules/layers/kakoune
-    ./modules/layers/karabiner
-    ./modules/layers/kitty
-    ./modules/layers/nix.nix
-    ./modules/layers/nodejs
-    ./modules/layers/tmux
-  ];
+{ imports = import ./modules/layers;
 
   home.stateVersion = "20.03";
 
