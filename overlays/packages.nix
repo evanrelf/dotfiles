@@ -74,17 +74,6 @@ self: super:
   #       ln -s ${executable}/bin/ormolu $out/bin/gormolu
   #     '';
 
-  home-manager =
-    super.home-manager.overrideAttrs (old: {
-      version = "HEAD";
-      src = super.fetchFromGitHub {
-        owner = "rycee";
-        repo = "home-manager";
-        rev = "7f7348b47049e8d25fb5b98db1d6215f8f643f0d";
-        sha256 = "1s8j8h42k354xzwlqizbzxlqvsagx7yrxl20qfxgxmx522ajw63p";
-      };
-    });
-
   kakoune =
     super.kakoune-unwrapped.overrideAttrs (old: rec {
       version = "HEAD";

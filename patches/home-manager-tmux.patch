@@ -1,0 +1,27 @@
+diff --git a/modules/programs/tmux.nix b/modules/programs/tmux.nix
+index a71c302..15daf6a 100644
+--- a/modules/programs/tmux.nix
++++ b/modules/programs/tmux.nix
+@@ -97,7 +97,7 @@ let
+         }
+     )];
+ 
+-    home.file.".tmux.conf".text = ''
++    home.file.".config/tmux/tmux.conf".text = ''
+       # ============================================= #
+       # Load plugins with Home Manager                #
+       # --------------------------------------------- #
+@@ -307,10 +307,10 @@ in
+         };
+       })
+ 
+-      # config file ~/.tmux.conf
+-      { home.file.".tmux.conf".text = mkBefore tmuxConf; }
++      # config file ~/.config/tmux/tmux.conf
++      { home.file.".config/tmux/tmux.conf".text = mkBefore tmuxConf; }
+       (mkIf (cfg.plugins != []) configPlugins)
+-      { home.file.".tmux.conf".text = mkAfter cfg.extraConfig; }
++      { home.file.".config/tmux/tmux.conf".text = mkAfter cfg.extraConfig; }
+     ])
+   );
+ }
