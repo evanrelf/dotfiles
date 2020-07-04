@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 { imports = import ./modules/layers;
 
@@ -56,6 +56,30 @@
   layers.nodejs.enable = true;
 
   layers.tmux.enable = true;
+
+  home.file =
+    let
+      enabled = [
+        # "doom-emacs"
+        # "emacs"
+        # "neovim"
+        # "nixos"
+        # "spacemacs"
+        # "sway"
+        # "xmonad"
+        # "xorg"
+      ];
+      configs =
+        lib.filterAttrs
+          (name: _: builtins.elem name enabled)
+          (builtins.readDir ./files);
+      symlink = name: _: {
+        source = ./files + "/${name}";
+        target = ".";
+        recursive = true;
+      };
+    in
+      lib.mapAttrs symlink configs;
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
