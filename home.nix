@@ -22,6 +22,8 @@ let
 
     layers.kitty.enable = true;
 
+    layers.neovim.enable = true;
+
     layers.nix.enable = true;
     # layers.nix.declarativeChannels =
     #   let
@@ -64,7 +66,6 @@ let
       httpie
       jq
       moreutils
-      neovim
       pandoc
       python3
       ripgrep
