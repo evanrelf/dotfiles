@@ -1,5 +1,3 @@
-{ ... }:
-
 let
   common = { pkgs, ... }: {
     imports = import ./modules/layers;
@@ -99,6 +97,7 @@ let
         enabled = [
           # "nixos"
           "sway"
+          # "xmonad"
           "xorg"
         ];
         configs =
@@ -116,9 +115,7 @@ let
 
 in
   {
-    imports = [
-      common
-      personal
-      darwin
-    ];
+    auburn = { ... }: { imports = [ common personal darwin ]; };
+    indigo = { ... }: { imports = [ common darwin ]; };
+    sienna = { ... }: { imports = [ common personal linux ]; };
   }
