@@ -1,3 +1,10 @@
 #!/bin/sh
 
-nix-shell --run "home-manager $*"
+case "$1" in
+  shell)
+    nix-shell
+    ;;
+  *)
+    nix-shell --command "home-manager $* || { echo 'Failed; dropping into shell'; return; }"
+    ;;
+esac
