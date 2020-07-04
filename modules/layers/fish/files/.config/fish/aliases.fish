@@ -1,5 +1,7 @@
 alias reload "source $HOME/.config/fish/config.fish"
 
+abbr --add mv "mv -i"
+
 if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa --long --group-directories-first"
