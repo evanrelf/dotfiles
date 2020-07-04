@@ -30,7 +30,7 @@ in
 
         escapeTime = 0;
 
-        historyLimit = 5000;
+        historyLimit = 100000;
 
         extraConfig = builtins.readFile ./tmux.conf;
       };
