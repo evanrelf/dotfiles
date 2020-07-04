@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 
-{ imports = import ./modules/layers;
+{
+  imports = import ./modules/layers;
 
   home.stateVersion = "20.03";
 
@@ -52,8 +53,6 @@
   #     };
   #   in
   #     revisions // aliases;
-
-  layers.nodejs.enable = true;
 
   layers.tmux.enable = true;
 
