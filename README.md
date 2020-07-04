@@ -5,7 +5,7 @@ My personal dotfiles, built with [Nix][nix] and [`home-manager`][home-manager].
 ## Usage
 
 ```
-$ ./switch
+$ ./dotfiles switch
 ```
 
 [nix]: https://nixos.org
