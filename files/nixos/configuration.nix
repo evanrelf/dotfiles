@@ -8,7 +8,7 @@
   ];
 
 
-  # PROGRAMS {{{1
+  # PROGRAMS
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     binutils
@@ -19,14 +19,14 @@
   services.openssh.enable = true;
 
 
-  # FONTS {{{1
+  # FONTS
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [ iosevka-bin ];
   };
 
 
-  # DESKTOP {{{1
+  # DESKTOP
   hardware.trackpoint = {
     enable = true;
     emulateWheel = true;
@@ -62,7 +62,7 @@
   services.physlock.enable = true;
 
 
-  # SOUND {{{1
+  # SOUND
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
@@ -71,7 +71,7 @@
   };
 
 
-  # POWER {{{1
+  # POWER
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   services.tlp.enable = true;
@@ -83,11 +83,11 @@
   };
 
 
-  # SECURITY {{{1
+  # SECURITY
   hardware.u2f.enable = true;
 
 
-  # NETWORKING {{{1
+  # NETWORKING
   hardware.bluetooth.enable = false;
   networking.hostName = "sienna";
   networking.networkmanager = {
@@ -96,7 +96,7 @@
   };
 
 
-  # SERVICES {{{1
+  # SERVICES
   systemd.services = {
     "keyswap" = {
       description = "Key swap";
@@ -112,7 +112,7 @@
   };
 
 
-  # USERS {{{1
+  # USERS
   nix.trustedUsers = [ "root" "@wheel" ];
   users.users."evanrelf" = {
     description = "Evan Relf";
@@ -128,7 +128,7 @@
   };
 
 
-  # BOOT {{{1
+  # BOOT
   boot = {
     tmpOnTmpfs = true;
     loader.efi.canTouchEfiVariables = true;
@@ -148,15 +148,10 @@
   };
 
 
-  # MISCELLANEOUS {{{1
+  # MISCELLANEOUS
   hardware.cpu.intel.updateMicrocode = true;
   time.timeZone = "America/Los_Angeles";
   services.timesyncd.enable = true;
   services.printing.enable = true;
   system.stateVersion = "20.03";
-
-
-  # }}}1
 }
-
-# vim: foldenable foldmethod=marker

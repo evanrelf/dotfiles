@@ -1,5 +1,4 @@
 ;; -*- lexical-binding: t; -*-
-;; vim: ft=lisp
 
 ;; How to byte-compile ~/.emacs.d:
 ;; (byte-recompile-directory "~/.emacs.d/" 0 t)
