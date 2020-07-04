@@ -15,6 +15,7 @@ in
         aalib
         asciiquarium
         cmatrix
+        coin
         cowsay
         fortune
         gay
