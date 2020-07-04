@@ -19,6 +19,7 @@ in
 
       home.activation."hammerspoon" =
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
+          echo "Changing default Hammerspoon config file location"
           $DRY_RUN_CMD defaults write \
             org.hammerspoon.Hammerspoon \
             MJConfigFile \

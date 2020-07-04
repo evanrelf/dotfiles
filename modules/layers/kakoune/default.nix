@@ -22,6 +22,7 @@ in
       home.activation."kakoune" =
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -d "$HOME/.config/kak/plugins/plug.kak" ]; then
+            echo "Downloading plug.kak"
             $DRY_RUN_CMD ${pkgs.git}/bin/git clone \
               --depth 1 \
               "https://github.com/andreyorst/plug.kak.git" \

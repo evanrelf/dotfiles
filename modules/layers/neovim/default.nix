@@ -22,6 +22,7 @@ in
       home.activation."neovim" =
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+            echo "Downloading plug.vim"
             $DRY_RUN_CMD ${pkgs.curl}/bin/curl \
               --location \
               --fail \

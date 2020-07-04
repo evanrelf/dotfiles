@@ -37,6 +37,7 @@ in
 
       home.activation."tmux" = config.lib.dag.entryAfter [ "writeBoundary" ] ''
         if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+          echo "Downloading tmux plugin manager"
           $DRY_RUN_CMD ${pkgs.git}/bin/git clone \
             --depth 1 \
             "https://github.com/tmux-plugins/tpm.git" \
