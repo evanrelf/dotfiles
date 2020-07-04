@@ -1,10 +1,14 @@
 #!/bin/sh
 
-case "$1" in
-  shell)
-    nix-shell
-    ;;
-  *)
-    nix-shell --command "home-manager $* || { echo 'Failed; dropping into shell'; return; }"
-    ;;
-esac
+if [ -n "$IN_NIX_SHELL" ]; then
+  home-manager "$@"
+else
+  case "$1" in
+    shell)
+      nix-shell
+      ;;
+    *)
+      nix-shell --command "home-manager $* || { echo 'Failed; dropping into shell'; return; }"
+      ;;
+  esac
+fi
