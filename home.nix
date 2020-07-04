@@ -91,7 +91,7 @@ let
     layers.karabiner.enable = true;
   };
 
-  linux = { lib, ... }: {
+  linux = { lib, pkgs, ... }: {
     home.file =
       let
         enabled = [
@@ -111,6 +111,33 @@ let
         };
       in
         lib.mapAttrs symlink configs;
+
+    home.packages = with pkgs; [
+      acpi
+      chromium
+      dmenu
+      feh
+      gnome3.cheese
+      gnome3.eog
+      gnome3.evince
+      gnome3.gnome-boxes
+      gnome3.gnome-disk-utility
+      gnome3.gnome-system-monitor
+      gnome3.nautilus
+      gnupg
+      grim
+      kitty
+      mako
+      mpv
+      slurp
+      spotify
+      unar
+      wl-clipboard
+      xclip
+      xorg.xeyes
+      xorg.xrdb
+      zathura
+    ];
   };
 
 in
