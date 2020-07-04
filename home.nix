@@ -1,7 +1,7 @@
-{ lib, pkgs, ... }:
+{ ... }:
 
 let
-  common = {
+  common = { pkgs, ... }: {
     imports = import ./modules/layers;
 
     home.stateVersion = "20.03";
@@ -76,7 +76,7 @@ let
     ];
   };
 
-  personal = {
+  personal = { pkgs, ... }: {
     layers.fun.enable = true;
 
     home.packages = with pkgs; [
@@ -86,13 +86,13 @@ let
     ];
   };
 
-  darwin = {
+  darwin = { ... }: {
     layers.hammerspoon.enable = true;
 
     layers.karabiner.enable = true;
   };
 
-  linux = {
+  linux = { lib, ... }: {
     home.file =
       let
         enabled = [
@@ -114,4 +114,10 @@ let
   };
 
 in
-  common // personal // darwin
+  {
+    imports = [
+      common
+      personal
+      darwin
+    ];
+  }
