@@ -22,8 +22,6 @@ in
 
         keyMode = "vi";
 
-        newSession = true;
-
         shortcut = "s";
 
         aggressiveResize = true;
