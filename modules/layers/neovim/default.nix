@@ -11,12 +11,9 @@ in
     };
 
     config = lib.mkIf cfg.enable {
-      home.packages = with pkgs; [ neovim ];
-
-      home.file."neovim" = {
-        source = ./files;
-        target = ".";
-        recursive = true;
+      programs.neovim = {
+        enable = true;
+        extraConfig = builtins.readFile ./init.vim;
       };
 
       home.activation."neovim" =
