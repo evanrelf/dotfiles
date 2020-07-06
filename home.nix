@@ -72,6 +72,7 @@ let
       tealdeer
       tokei
       universal-ctags
+      zoxide
     ];
   };
 
