@@ -1,4 +1,4 @@
-function nix_source_configs
+function __nix_source_configs
     set --local multi_user_path "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
     set --local single_user_path "$HOME/.nix-profile/etc/profile.d/nix.sh"
     if test -f "$multi_user_path"
@@ -28,7 +28,7 @@ end
 if test -d "/nix"
     # This isn't necessary on NixOS
     if not _exists nixos-version
-        nix_source_configs
+        __nix_source_configs
     end
     set --export NIXPKGS_ALLOW_UNFREE 1
     if test -d "$HOME/.nix-profile/channels/"
@@ -39,6 +39,10 @@ if test -d "/nix"
         set --export --prepend --path NIX_PATH "$HOME/.nix-defexpr/channels"
         set --export --prepend --path NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
     end
+end
+
+if _exists nix-build
+    alias nix-build "nix-build --no-out-link"
 end
 
 if _exists nix-shell
