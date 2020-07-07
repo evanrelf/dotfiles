@@ -51,8 +51,6 @@ in
       nix-prefetch-git
       nix-tree
 
-      aalib
-      asciiquarium
       cmatrix
       coin
       cowsay
