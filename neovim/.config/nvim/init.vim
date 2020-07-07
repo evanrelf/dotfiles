@@ -30,6 +30,8 @@ let g:pear_tree_smart_backspace = 1
 set termguicolors
 set background=light
 colorscheme seoul256
+highlight! link StatusLine CursorLineNr
+highlight! link StatusLineNC LineNr
 set number
 set relativenumber
 set colorcolumn=81
