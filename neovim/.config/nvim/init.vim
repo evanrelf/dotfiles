@@ -58,6 +58,8 @@ set inccommand=nosplit
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
+vnoremap < <gv
+vnoremap > >gv
 noremap <silent> <Backspace> :<C-u>setlocal hlsearch!<CR>
 noremap <silent> <A-o> :<C-u>Files<CR>
 imap <Space> <Plug>(PearTreeSpace)

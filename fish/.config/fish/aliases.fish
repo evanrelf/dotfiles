@@ -1,3 +1,7 @@
+for a in (abbr --list)
+    abbr --erase "$a"
+end
+
 alias reload "source $HOME/.config/fish/config.fish"
 
 abbr --add mv "mv -i"
@@ -12,6 +16,10 @@ end
 
 if _exists kak
     abbr --add k "kak"
+end
+
+if _exists nvim
+    abbr --add v "nvim"
 end
 
 if _exists git
@@ -30,3 +38,5 @@ end
 if _exists brew
     abbr --add cask "brew cask"
 end
+
+alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
