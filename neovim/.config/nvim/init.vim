@@ -11,6 +11,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'machakann/vim-sandwich'
 Plug 'tmsvg/pear-tree'
+Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release', 'for': ['racket']}
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'

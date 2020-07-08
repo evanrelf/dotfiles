@@ -71,6 +71,9 @@ in
       kakoune
       tmux
       nix
+
+      zsh
+      racket-minimal
     ]
     # ++ [
     #   acpi

@@ -3,6 +3,7 @@ set --local config "$HOME/.config/fish"
 # Core
 source "$config/prelude.fish"
 source "$config/nix.fish"
+source "$config/xdg.fish"
 source "$config/path.fish"
 
 # Customization
@@ -11,7 +12,6 @@ source "$config/colors.fish"
 source "$config/cursor-shape.fish"
 source "$config/prompt.fish"
 source "$config/aliases.fish"
-source "$config/xdg.fish"
 
 # Plugins and integrations
 source "$config/install-fisher.fish"

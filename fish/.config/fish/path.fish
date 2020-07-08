@@ -6,11 +6,6 @@ if _exists emacs && test -d "$HOME/.emacs.d/bin"
     set --prepend PATH "$HOME/.emacs.d/bin"
 end
 
-if _exists npm
-    set --export npm_config_prefix "$HOME/.local/share/node_modules"
-    set --prepend PATH "$npm_config_prefix/bin"
-end
-
 if _exists rustup
     set --export RUSTUP_HOME "$HOME/.config/rustup"
 end
@@ -18,6 +13,7 @@ end
 if _exists cargo
     set --export CARGO_HOME "$HOME/.config/cargo"
     set --prepend PATH "$CARGO_HOME/bin"
+    set --prepend PATH "$HOME/.local/share/cargo/bin"
 end
 
 if _exists cabal
