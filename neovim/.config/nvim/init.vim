@@ -17,7 +17,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'sickill/vim-pasta'
 Plug 'tpope/vim-sleuth'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'moll/vim-bbye', {'on': 'Bdelete'}
 Plug 'critiqjo/husk-x.vim'
 call plug#end()
 
@@ -67,13 +66,7 @@ imap <Space> <Plug>(PearTreeSpace)
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-function! CommandCabbr(abbreviation, expansion) abort
-  silent execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
-endfunction
-command! -nargs=+ Command call CommandCabbr(<f-args>)
-Command bd Bd
-
 augroup autocmds
   autocmd!
-  autocmd FileType gitcommit setlocal colorcolumn=51,73
+  autocmd FileType gitcommit setlocal spell colorcolumn=51,73
 augroup END
