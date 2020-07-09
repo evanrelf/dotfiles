@@ -2,23 +2,45 @@
 
 #lang racket
 
-(define dry-run (make-parameter #f))
+(define/contract dry-run
+  (parameter/c boolean?)
+  (make-parameter #f))
 
-(define (run command)
+(define/contract packages
+  (listof string?)
+  (command-line
+    #:program "install"
+    #:once-each
+    [("--dry-run") "Run in dry run mode" (dry-run #t)]
+    #:args ps
+    (map (lambda (s) (string-replace s "/" "")) ps)))
+
+(define/contract (home path)
+  (-> string? string?)
+  (string-append (path->string (find-system-path 'home-dir)) "/" path))
+
+(define/contract (run command)
+  (-> string? any)
   (if (dry-run)
     (printf "dry-run> ~a\n" command)
     (unless (system command) (exit 1))))
 
-(define (home/ path)
-  (define home (path->string (find-system-path 'home-dir)))
-  (string-append home "/" path))
-
-(define (check-installed executable)
+(define/contract (check-installed executable)
+  (-> string? any)
   (unless (find-executable-path executable)
     (printf "Missing executable: ~a\n" executable)
     (exit 1)))
 
-(define (prepare-hammerspoon)
+(define/contract (discard-nonexistent packages)
+  (-> (listof string?) (listof string?))
+  (define-values (existent nonexistent) (partition directory-exists? packages))
+  (for-each
+    (curry printf "[~a] Configuration doesn't exist\n")
+    nonexistent)
+  existent)
+
+(define/contract (prepare-hammerspoon)
+  (-> any)
   (printf "[hammerspoon] Changing config file location\n")
   (check-installed "defaults")
   (run
@@ -26,8 +48,9 @@
       "defaults write org.hammerspoon.Hammerspoon MJConfigFile"
       "$HOME/.config/hammerspoon/init.lua")))
 
-(define (prepare-kakoune)
-  (unless (directory-exists? (home/".config/kak/plugins/plug.kak"))
+(define/contract (prepare-kakoune)
+  (-> any)
+  (unless (directory-exists? (home ".config/kak/plugins/plug.kak"))
     (printf "[kakoune] Installing plug.kak\n")
     (check-installed "git")
     (run
@@ -35,8 +58,9 @@
         "git clone --depth=1 https://github.com/andreyorst/plug.kak.git"
         "$HOME/.config/kak/plugins/plug.kak"))))
 
-(define (prepare-neovim)
-  (unless (file-exists? (home/".local/share/nvim/site/autoload/plug.vim"))
+(define/contract (prepare-neovim)
+  (-> any)
+  (unless (file-exists? (home ".local/share/nvim/site/autoload/plug.vim"))
     (printf "[neovim] Installing vim-plug\n")
     (check-installed "curl")
     (run
@@ -45,8 +69,9 @@
         "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         "--output=\"$HOME/.local/share/nvim/site/autoload/plug.vim\""))))
 
-(define (prepare-tmux)
-  (unless (directory-exists? (home/".config/tmux/plugins/tpm"))
+(define/contract (prepare-tmux)
+  (-> any)
+  (unless (directory-exists? (home ".config/tmux/plugins/tpm"))
     (printf "[tmux] Installing tpm\n")
     (check-installed "git")
     (run
@@ -54,44 +79,30 @@
         "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git'"
         "$HOME/.config/tmux/plugins/tpm"))))
 
-(define (prepare package)
+(define/contract (prepare package)
+  (-> string? any)
   (case package
     [("hammerspoon") (prepare-hammerspoon)]
     [("kakoune") (prepare-kakoune)]
     [("neovim") (prepare-neovim)]
     [("tmux") (prepare-tmux)]))
 
-(define (stow package)
+(define/contract (stow package)
+  (-> string? any)
   (printf "[~a] Stowing configuration\n" package)
   (check-installed "stow")
   (run (format "stow --stow --target=$HOME --no-folding ~a" package)))
 
-(define (install package)
+(define/contract (install package)
+  (-> string? any)
   (prepare package)
   (stow package))
 
-(define (discard-nonexistent packages)
-  (define-values (existent nonexistent) (partition directory-exists? packages))
-  (for-each
-    (lambda (x) (printf "[~a] Configuration doesn't exist\n" x))
-    nonexistent)
-  existent)
-
-(define packages
-  (command-line
-    #:program "install"
-    #:once-each
-    [("--dry-run") "Run in dry run mode" (dry-run #t)]
-    #:args ps
-    (map (lambda (s) (string-replace s "/" "")) ps)))
-
-(define (main)
+(define/contract (main)
+  (-> any)
   (when (empty? packages)
     (printf "No packages specified\n")
     (exit 1))
-
-  (define existent-packages (discard-nonexistent packages))
-
-  (for-each install existent-packages))
+  (for-each install (discard-nonexistent packages)))
 
 (main)
