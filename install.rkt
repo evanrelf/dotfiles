@@ -2,37 +2,83 @@
 
 #lang racket
 
-(define verbose (make-parameter #f))
 (define dry-run (make-parameter #f))
+
+(define (run command)
+  (if (dry-run)
+    (printf "dry-run> ~a\n" command)
+    (unless (system command) (exit 1))))
+
+(define (home/ path)
+  (define home (path->string (find-system-path 'home-dir)))
+  (string-append home "/" path))
+
+(define (check-installed executable)
+  (unless (find-executable-path executable)
+    (printf "Missing executable: ~a\n" executable)
+    (unless (dry-run) (exit 1))))
+
+(define (prepare-hammerspoon)
+  (printf "[hammerspoon] Changing config file location\n")
+  (check-installed "defaults")
+  (run "defaults write org.hammerspoon.Hammerspoon MJConfigFile \"$HOME/.config/hammerspoon/init.lua\""))
+
+(define (prepare-kakoune)
+  (unless (directory-exists? (home/".config/kak/plugins/plug.kak"))
+    (printf "[kakoune] Installing plug.kak\n")
+    (check-installed "git")
+    (run "git clone --depth=1 https://github.com/andreyorst/plug.kak.git \"$HOME/.config/kak/plugins/plug.kak\"")))
+
+(define (prepare-neovim)
+  (unless (file-exists? (home/".local/share/nvim/site/autoload/plug.vim"))
+    (printf "[neovim] Installing vim-plug\n")
+    (check-installed "curl")
+    (run "curl --location --fail --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' --output \"$HOME/.local/share/nvim/site/autoload/plug.vim\"")))
+
+(define (prepare-tmux)
+  (unless (directory-exists? (home/".config/tmux/plugins/tpm"))
+    (printf "[tmux] Installing tpm\n")
+    (check-installed "git")
+    (run "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git' \"$HOME/.config/tmux/plugins/tpm\"")))
+
+(define (prepare package)
+  (case package
+    [("hammerspoon") (prepare-hammerspoon)]
+    [("kakoune") (prepare-kakoune)]
+    [("neovim") (prepare-neovim)]
+    [("tmux") (prepare-tmux)]))
+
+(define (stow package)
+  (printf "[~a] Stowing configuration\n" package)
+  (check-installed "stow")
+  (run (format "stow --stow --target=$HOME --no-folding ~a" package)))
+
+(define (install package)
+  (prepare package)
+  (stow package))
+
+(define (discard-nonexistent packages)
+  (define-values (existent nonexistent) (partition directory-exists? packages))
+  (for-each
+    (lambda (x) (printf "[~a] Configuration doesn't exist\n" x))
+    nonexistent)
+  existent)
 
 (define packages
   (command-line
     #:program "install"
     #:once-each
-    [("--verbose") "Print verbose output" (verbose #t)]
     [("--dry-run") "Run in dry run mode" (dry-run #t)]
     #:args ps
     (map (lambda (s) (string-replace s "/" "")) ps)))
 
-(define (pre-install package)
-  (when (verbose) (printf "Running pre-install step for ~a" package))
-  (case package
-    [("hammerspoon") (void)]
-    [("kakoune") (void)]
-    [("neovim") (void)]
-    [("tmux") (void)]))
+(define (main)
+  (when (empty? packages)
+    (printf "No packages specified\n")
+    (exit 1))
 
-(define (stow package)
-  (when (verbose) (printf "Stowing ~a\n" package))
-  (system (format "stow --target=$HOME --no-folding --stow=~a" package)))
+  (define existent-packages (discard-nonexistent packages))
 
-(define (install package)
-  (if (dry-run)
-    (printf "Pretending to install ~a\n" package)
-    (printf "This would actually install ~a\n" package)))
+  (for-each install existent-packages))
 
-(when (empty? packages)
-  (printf "No packages specified\n")
-  (exit 1))
-
-(for-each install packages)
+(main)
