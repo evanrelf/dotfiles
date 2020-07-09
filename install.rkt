@@ -9,11 +9,11 @@
 (define/contract packages
   (listof string?)
   (command-line
-    #:program "install"
-    #:once-each
-    [("--dry-run") "Run in dry run mode" (dry-run #t)]
-    #:args ps
-    (map (lambda (s) (string-replace s "/" "")) ps)))
+   #:program "install"
+   #:once-each
+   [("--dry-run") "Run in dry run mode" (dry-run #t)]
+   #:args ps
+   (map (lambda (s) (string-replace s "/" "")) ps)))
 
 (define/contract (home path)
   (-> string? string?)
@@ -22,8 +22,8 @@
 (define/contract (run command)
   (-> string? any)
   (if (dry-run)
-    (printf "dry-run> ~a\n" command)
-    (unless (system command) (exit 1))))
+      (printf "dry-run> ~a\n" command)
+      (unless (system command) (exit 1))))
 
 (define/contract (check-installed executable)
   (-> string? any)
@@ -35,8 +35,8 @@
   (-> (listof string?) (listof string?))
   (define-values (existent nonexistent) (partition directory-exists? packages))
   (for-each
-    (curry printf "[~a] Configuration doesn't exist\n")
-    nonexistent)
+   (curry printf "[~a] Configuration doesn't exist\n")
+   nonexistent)
   existent)
 
 (define/contract (prepare-hammerspoon)
@@ -44,9 +44,9 @@
   (printf "[hammerspoon] Changing config file location\n")
   (check-installed "defaults")
   (run
-    (format "~a ~s"
-      "defaults write org.hammerspoon.Hammerspoon MJConfigFile"
-      "$HOME/.config/hammerspoon/init.lua")))
+   (string-append
+    "defaults write org.hammerspoon.Hammerspoon MJConfigFile"
+    "\"$HOME/.config/hammerspoon/init.lua\"")))
 
 (define/contract (prepare-kakoune)
   (-> any)
@@ -54,9 +54,9 @@
     (printf "[kakoune] Installing plug.kak\n")
     (check-installed "git")
     (run
-      (format "~a ~s"
-        "git clone --depth=1 https://github.com/andreyorst/plug.kak.git"
-        "$HOME/.config/kak/plugins/plug.kak"))))
+     (string-append
+      "git clone --depth=1 https://github.com/andreyorst/plug.kak.git"
+      "\"$HOME/.config/kak/plugins/plug.kak"\"))))
 
 (define/contract (prepare-neovim)
   (-> any)
@@ -64,10 +64,10 @@
     (printf "[neovim] Installing vim-plug\n")
     (check-installed "curl")
     (run
-      (format "~a ~s ~a"
-        "curl --location --fail --create-dirs"
-        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-        "--output=\"$HOME/.local/share/nvim/site/autoload/plug.vim\""))))
+     (string-append
+      "curl --location --fail --create-dirs"
+      "'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
+      "--output=\"$HOME/.local/share/nvim/site/autoload/plug.vim\""))))
 
 (define/contract (prepare-tmux)
   (-> any)
@@ -75,9 +75,9 @@
     (printf "[tmux] Installing tpm\n")
     (check-installed "git")
     (run
-      (format "~a ~s"
-        "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git'"
-        "$HOME/.config/tmux/plugins/tpm"))))
+     (string-append
+      "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git'"
+      "\"$HOME/.config/tmux/plugins/tpm"\"))))
 
 (define/contract (prepare package)
   (-> string? any)
