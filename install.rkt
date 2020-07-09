@@ -16,30 +16,43 @@
 (define (check-installed executable)
   (unless (find-executable-path executable)
     (printf "Missing executable: ~a\n" executable)
-    (unless (dry-run) (exit 1))))
+    (exit 1)))
 
 (define (prepare-hammerspoon)
   (printf "[hammerspoon] Changing config file location\n")
   (check-installed "defaults")
-  (run "defaults write org.hammerspoon.Hammerspoon MJConfigFile \"$HOME/.config/hammerspoon/init.lua\""))
+  (run
+    (format "~a ~s"
+      "defaults write org.hammerspoon.Hammerspoon MJConfigFile"
+      "$HOME/.config/hammerspoon/init.lua")))
 
 (define (prepare-kakoune)
   (unless (directory-exists? (home/".config/kak/plugins/plug.kak"))
     (printf "[kakoune] Installing plug.kak\n")
     (check-installed "git")
-    (run "git clone --depth=1 https://github.com/andreyorst/plug.kak.git \"$HOME/.config/kak/plugins/plug.kak\"")))
+    (run
+      (format "~a ~s"
+        "git clone --depth=1 https://github.com/andreyorst/plug.kak.git"
+        "$HOME/.config/kak/plugins/plug.kak"))))
 
 (define (prepare-neovim)
   (unless (file-exists? (home/".local/share/nvim/site/autoload/plug.vim"))
     (printf "[neovim] Installing vim-plug\n")
     (check-installed "curl")
-    (run "curl --location --fail --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' --output \"$HOME/.local/share/nvim/site/autoload/plug.vim\"")))
+    (run
+      (format "~a ~s ~a"
+        "curl --location --fail --create-dirs"
+        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        "--output=\"$HOME/.local/share/nvim/site/autoload/plug.vim\""))))
 
 (define (prepare-tmux)
   (unless (directory-exists? (home/".config/tmux/plugins/tpm"))
     (printf "[tmux] Installing tpm\n")
     (check-installed "git")
-    (run "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git' \"$HOME/.config/tmux/plugins/tpm\"")))
+    (run
+      (format "~a ~s"
+        "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git'"
+        "$HOME/.config/tmux/plugins/tpm"))))
 
 (define (prepare package)
   (case package
