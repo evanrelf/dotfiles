@@ -5,7 +5,7 @@ Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'sheerun/vim-polyglot'
-Plug 'dense-analysis/ale', {'for': ['nix', 'sh']}
+Plug 'dense-analysis/ale', {'for': ['nix', 'racket', 'sh']}
 Plug 'sbdchd/neoformat', {'on': 'Neoformat'}
 Plug 'junegunn/fzf.vim', {'on': 'Files'} | Plug 'junegunn/fzf'
 Plug 'tpope/vim-vinegar'
@@ -22,7 +22,7 @@ Plug 'critiqjo/husk-x.vim'
 call plug#end()
 
 let g:seoul256_background = 256
-let b:ale_linters = {'nix': ['nix'], 'sh': ['shellcheck']}
+let b:ale_linters = {'nix': ['nix'], 'racket': ['raco'], 'sh': ['shellcheck']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:neoformat_only_msg_on_error = 1

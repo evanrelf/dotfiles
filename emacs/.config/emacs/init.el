@@ -58,6 +58,10 @@
 ;; Always apply syntax highlighting
 (global-font-lock-mode t)
 
+;; Highlight matching parenthesis
+(show-paren-mode t)
+(setq show-paren-delay 0)
+
 ;; Disable startup messages
 (setq initial-scratch-message nil)
 (setq inhibit-startup-message t)
@@ -218,7 +222,7 @@
 (use-package evil-goggles
   :after evil
   :init
-  (setq evil-goggles-duration 0.1)
+  (setq evil-goggles-duration 0.05)
   :config
   (evil-goggles-mode))
 (use-package evil-escape
@@ -242,6 +246,19 @@
   :hook
   (smartparens-enabled . evil-smartparens-mode))
 
+;; Balance parenthesis automatically
+(use-package parinfer-rust-mode
+  :straight
+  (parinfer-rust-mode
+    :type git
+    :host github
+    :repo "justinbarclay/parinfer-rust-mode")
+  :init
+  (setq parinfer-rust-auto-download t)
+  :hook
+  (emacs-lisp-mode . parinfer-rust-mode)
+  (racket-mode . parinfer-rust-mode))
+
 ;; Display errors
 (use-package flycheck
   :init
@@ -254,7 +271,7 @@
   (setq flymake-no-changes-timeout nil)
   (setq flymake-start-syntax-check-on-newline nil)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  :hook
+  :config
   (global-flycheck-mode))
 (use-package flycheck-pos-tip
   :config
@@ -353,8 +370,8 @@
   :commands (haskell-mode)
   :hook
   (haskell-mode . (lambda ()
-		    (setq-local paragraph-separate "[ \t\f]*$")
-		    (setq-local paragraph-start "\f\\|[ \t]*$"))))
+                   (setq-local paragraph-separate "[ \t\f]*$")
+                   (setq-local paragraph-start "\f\\|[ \t]*$"))))
 (use-package nix-mode
   :commands (nix-mode))
 (use-package purescript-mode
@@ -373,6 +390,8 @@
   :commands (rust-mode))
 (use-package lua-mode
   :commands (lua-mode))
+(use-package racket-mode
+  :commands (racket-mode))
 (use-package fish-mode
   :commands (fish-mode))
 (use-package markdown-mode
@@ -388,9 +407,9 @@
   (interactive)
   (text-scale-adjust 0))
 (general-def
-  "s-="	'text-scale-increase
-  "s--"	'text-scale-decrease
-  "s-0"	'text-scale-reset)
+  "s-=" 'text-scale-increase
+  "s--" 'text-scale-decrease
+  "s-0" 'text-scale-reset)
 
 ;; Evil
 (general-def
@@ -463,5 +482,5 @@
   "g ESC" '(evil-escape :which-key t)
   "g s" '(magit-status :which-key "status")
 
-  "," '((lambda () (interactive) (evil-edit "~/.config/emacs/init.el")) :which-key "edit config")
-  )
+  "," '((lambda () (interactive) (evil-edit "~/.config/emacs/init.el")) :which-key "edit config"))
+  
