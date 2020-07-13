@@ -74,6 +74,7 @@ in
 
       zsh
       racket-minimal
+      deno
     ]
     # ++ [
     #   acpi

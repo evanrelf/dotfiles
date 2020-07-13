@@ -44,7 +44,7 @@
   (printf "[hammerspoon] Changing config file location\n")
   (check-installed "defaults")
   (run
-   (string-append
+   (string-join
     "defaults write org.hammerspoon.Hammerspoon MJConfigFile"
     "\"$HOME/.config/hammerspoon/init.lua\"")))
 
@@ -54,9 +54,9 @@
     (printf "[kakoune] Installing plug.kak\n")
     (check-installed "git")
     (run
-     (string-append
+     (string-join
       "git clone --depth=1 https://github.com/andreyorst/plug.kak.git"
-      "\"$HOME/.config/kak/plugins/plug.kak"\"))))
+      "\"$HOME/.config/kak/plugins/plug.kak\""))))
 
 (define/contract (prepare-neovim)
   (-> any)
@@ -64,7 +64,7 @@
     (printf "[neovim] Installing vim-plug\n")
     (check-installed "curl")
     (run
-     (string-append
+     (string-join
       "curl --location --fail --create-dirs"
       "'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
       "--output=\"$HOME/.local/share/nvim/site/autoload/plug.vim\""))))
@@ -75,9 +75,9 @@
     (printf "[tmux] Installing tpm\n")
     (check-installed "git")
     (run
-     (string-append
-      "git clone --depth 1 'https://github.com/tmux-plugins/tpm.git'"
-      "\"$HOME/.config/tmux/plugins/tpm"\"))))
+     (string-join
+      "git clone --depth=1 'https://github.com/tmux-plugins/tpm.git'"
+      "\"$HOME/.config/tmux/plugins/tpm\""))))
 
 (define/contract (prepare package)
   (-> string? any)
@@ -91,7 +91,7 @@
   (-> string? any)
   (printf "[~a] Stowing configuration\n" package)
   (check-installed "stow")
-  (run (format "stow --stow --target=$HOME --no-folding ~a" package)))
+  (run (format "stow --stow --target=\"$HOME\" --no-folding ~a" package)))
 
 (define/contract (install package)
   (-> string? any)

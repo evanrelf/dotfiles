@@ -5,7 +5,7 @@ Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'sheerun/vim-polyglot'
-Plug 'dense-analysis/ale', {'for': ['nix', 'racket', 'sh']}
+Plug 'dense-analysis/ale', {'for': ['nix', 'sh']}
 Plug 'sbdchd/neoformat', {'on': 'Neoformat'}
 Plug 'junegunn/fzf.vim', {'on': 'Files'} | Plug 'junegunn/fzf'
 Plug 'tpope/vim-vinegar'
@@ -22,10 +22,11 @@ Plug 'critiqjo/husk-x.vim'
 call plug#end()
 
 let g:seoul256_background = 256
-let b:ale_linters = {'nix': ['nix'], 'racket': ['raco'], 'sh': ['shellcheck']}
+let b:ale_linters = {'nix': ['nix'], 'sh': ['shellcheck']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:neoformat_only_msg_on_error = 1
+let g:neoformat_enabled_typescript = ['denofmt']
 let g:fzf_preview_window = ''
 let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_smart_openers = 1
@@ -74,5 +75,5 @@ xmap ga <Plug>(EasyAlign)
 augroup autocmds
   autocmd!
   autocmd FileType gitcommit setlocal spell colorcolumn=51,73
-  autocmd BufWritePre *.dhall,*.fish,*.rs,*.tf undojoin | Neoformat
+  autocmd BufWritePre *.dhall,*.fish,*.rs,*.tf,*.ts undojoin | Neoformat
 augroup END
