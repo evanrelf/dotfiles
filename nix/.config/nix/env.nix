@@ -75,6 +75,7 @@ in
       zsh
       racket-minimal
       deno
+      rust-analyzer
     ]
     # ++ [
     #   acpi
