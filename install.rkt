@@ -55,7 +55,7 @@
     (check-installed "git")
     (run
      (string-join
-      "git clone --depth=1 https://github.com/andreyorst/plug.kak.git"
+      "git clone --depth=1 'https://github.com/andreyorst/plug.kak.git'"
       "\"$HOME/.config/kak/plugins/plug.kak\""))))
 
 (define/contract (prepare-neovim)

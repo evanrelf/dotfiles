@@ -74,6 +74,28 @@ self: super:
   #       ln -s ${executable}/bin/ormolu $out/bin/gormolu
   #     '';
 
+  iosevka-pro =
+    # To install on macOS:
+    # $ open $(nix-env --query env --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"*
+    super.iosevka.override {
+      set = "pro";
+      privateBuildPlan = {
+        family = "Iosevka Pro";
+        design = [
+          # PragmataPro style
+          "ss08"
+          # Make "Term" variant
+          "sp-term"
+          # Add Haskell ligatures
+          "ligset-haskell"
+          # Add != and !== ligatures
+          "calt-exeq"
+          # Add <!-- and <!--- ligatures
+          "calt-html-comment"
+        ];
+      };
+    };
+
   kakoune =
     super.kakoune-unwrapped.overrideAttrs (old: rec {
       version = "HEAD";

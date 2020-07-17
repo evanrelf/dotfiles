@@ -76,6 +76,7 @@ in
       racket-minimal
       deno
       rust-analyzer
+      iosevka-pro
     ]
     # ++ [
     #   acpi
