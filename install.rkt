@@ -45,8 +45,8 @@
   (check-installed "defaults")
   (run
    (string-join
-    "defaults write org.hammerspoon.Hammerspoon MJConfigFile"
-    "\"$HOME/.config/hammerspoon/init.lua\"")))
+    '("defaults write org.hammerspoon.Hammerspoon MJConfigFile"
+      "\"$HOME/.config/hammerspoon/init.lua\""))))
 
 (define/contract (prepare-kakoune)
   (-> any)
@@ -55,8 +55,8 @@
     (check-installed "git")
     (run
      (string-join
-      "git clone --depth=1 'https://github.com/andreyorst/plug.kak.git'"
-      "\"$HOME/.config/kak/plugins/plug.kak\""))))
+      '("git clone --depth=1 'https://github.com/andreyorst/plug.kak.git'"
+        "\"$HOME/.config/kak/plugins/plug.kak\"")))))
 
 (define/contract (prepare-neovim)
   (-> any)
@@ -65,9 +65,9 @@
     (check-installed "curl")
     (run
      (string-join
-      "curl --location --fail --create-dirs"
-      "'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
-      "--output=\"$HOME/.local/share/nvim/site/autoload/plug.vim\""))))
+      '("curl --location --fail --create-dirs"
+        "'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
+        "-o \"$HOME/.local/share/nvim/site/autoload/plug.vim\"")))))
 
 (define/contract (prepare-tmux)
   (-> any)
@@ -76,8 +76,8 @@
     (check-installed "git")
     (run
      (string-join
-      "git clone --depth=1 'https://github.com/tmux-plugins/tpm.git'"
-      "\"$HOME/.config/tmux/plugins/tpm\""))))
+      '("git clone --depth=1 'https://github.com/tmux-plugins/tpm.git'"
+        "\"$HOME/.config/tmux/plugins/tpm\"")))))
 
 (define/contract (prepare package)
   (-> string? any)

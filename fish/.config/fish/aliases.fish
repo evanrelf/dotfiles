@@ -5,11 +5,12 @@ end
 alias reload "source $HOME/.config/fish/config.fish"
 
 abbr --add mv "mv -i"
+abbr --add cp "cp -i"
 
 if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa --long --group-directories-first"
-    alias tree "exa --tree --group-directories-first --ignore-glob '.git|dist-newstyle|node_modules'"
+    # alias tree "exa --tree --group-directories-first --ignore-glob '.git|dist-newstyle|node_modules'"
 else
     alias ls "command ls -AFGh"
 end

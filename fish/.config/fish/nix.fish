@@ -64,8 +64,24 @@ if _exists nix-shell
             _error "with what?"
             return 1
         end
-        _log "Entering Nix shell..."
-        nix-shell --packages $argv
+        # TODO: This is really hacky
+        set -l packages ""
+        set -l command ""
+        for arg in $argv
+            if test $arg != "run" -a -z $command
+                set packages "$packages $arg"
+            else
+                if test -z $command
+                    set command "--run '"
+                else
+                    set command "$command $arg"
+                end
+            end
+        end
+        if test -n $command
+            set command "$command'"
+        end
+        eval "nix-shell --packages $packages $command"
     end
 end
 

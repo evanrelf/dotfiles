@@ -1,108 +1,88 @@
 let
   pkgs = import ./nixpkgs.nix { overlays = [ (import ./overlay.nix) ]; };
 
+  declarative-channels =
+    pkgs.runCommandLocal "declarative-channels" {} ''
+      mkdir -p $out/channels
+      ln -s ${pkgs.path} $out/channels/nixpkgs
+      ln -s $out/channels/nixpkgs $out/channels/default
+    '';
+
 in
   pkgs.buildEnv {
     name = "env";
     paths = with pkgs; [
       (aspellWithDicts (d: with d; [ en en-computers en-science ]))
-      (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
-      dhall
-      dhall-json
-      exa
-      fd
-      fish
-      fzf
-      gcoreutils
-      htop
-      httpie
-      jq
-      moreutils
-      pandoc
-      python3
-      ripgrep
-      sd
-      shellcheck
-      tealdeer
-      tokei
-      universal-ctags
-      zoxide
-
       (haskell.lib.justStaticExecutables haskellPackages.fast-tags)
+      (haskell.lib.justStaticExecutables haskellPackages.wai-app-static)
+      borgbackup
       cabal-install
       cabal-plan
       cabal2nix
+      cachix
+      cmatrix
+      coin
+      comma
+      cowsay
+      declarative-channels
+      deno
+      dhall
+      dhall-json
+      emacs
+      exa
+      fd
+      ffmpeg-full
+      fish
+      fortune
+      fzf
+      gay
+      gcoreutils
       ghcid
-      ghcide
-      hlint
-      ormolu
-
-      nodejs
-
+      # ghcide
       git
       gitAndTools.delta
       gitAndTools.hub
-
-      cachix
-      comma
+      gti
+      hlint
+      htop
+      httpie
+      iosevka-pro
+      jq
+      kakoune
+      lolcat
       lorri
+      moreutils
+      neovim
+      nix
       nix
       nix-diff
       nix-prefetch-git
       nix-tree
-
-      cmatrix
-      coin
-      cowsay
-      fortune
-      gay
-      gti
-      lolcat
+      nodejs
+      ormolu
+      pandoc
       pipes
-      sl
-      toilet
-
-      borgbackup
-      ffmpeg-full
-      rustup
-      youtube-dl
-
-      neovim
-      kakoune
-      tmux
-      nix
-
-      zsh
+      python3
       racket-minimal
-      deno
+      ripgrep
       rust-analyzer
-      iosevka-pro
-    ]
-    # ++ [
-    #   acpi
-    #   chromium
-    #   dmenu
-    #   feh
-    #   gnome3.cheese
-    #   gnome3.eog
-    #   gnome3.evince
-    #   gnome3.gnome-boxes
-    #   gnome3.gnome-disk-utility
-    #   gnome3.gnome-system-monitor
-    #   gnome3.nautilus
-    #   gnupg
-    #   grim
-    #   kitty
-    #   mako
-    #   mpv
-    #   slurp
-    #   spotify
-    #   unar
-    #   wl-clipboard
-    #   xclip
-    #   xorg.xeyes
-    #   xorg.xrdb
-    #   zathura
-    # ]
-    ;
+      rustup
+      sd
+      shellcheck
+      sl
+      tealdeer
+      tmux
+      toilet
+      tokei
+      tree
+      universal-ctags
+      youtube-dl
+      zoxide
+      zsh
+    ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
+      acpi
+      dmenu
+      firefox
+      kitty
+    ]);
   }

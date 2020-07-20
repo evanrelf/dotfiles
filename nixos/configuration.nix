@@ -1,75 +1,79 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  # IMPORTS
-  imports = [
-    <nixos-hardware/lenovo/thinkpad/x1/6th-gen>
-    ./hardware-configuration.nix
-  ];
+  # KERNEL
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-intel" ];
 
+  # BOOT
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  # PROGRAMS
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-    binutils
-  ];
-  programs.fish.enable = true;
-  programs.light.enable = true;
-  programs.gnupg.agent.enable = true;
-  services.openssh.enable = true;
-
-
-  # FONTS
-  fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [ iosevka-bin ];
+  # FILESYSTEMS
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/d64ccaed-c06d-4859-88b4-d1876270c9b9";
+  boot.zfs.devNodes = "/dev/vg/root";
+  networking.hostId = "9633d744";
+  boot.tmpOnTmpfs = true;
+  fileSystems = {
+    "/boot" = { device = "/dev/disk/by-uuid/197C-84DE"; fsType = "vfat"; };
+    "/" = { device = "rpool/local/root"; fsType = "zfs"; };
+    "/nix" = { device = "rpool/local/nix"; fsType = "zfs"; };
+    "/persist" = { device = "rpool/safe/persist"; fsType = "zfs"; };
+    "/home" = { device = "rpool/safe/home"; fsType = "zfs"; };
   };
-
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/96a91dd6-c5e6-4e87-a90a-4b960ae6a42d"; }
+  ];
 
   # DESKTOP
+  services.xserver.enable = true;
+  services.xserver.dpi = 144;
+  services.xserver.displayManager.startx.enable = true;
+  services.xserver.windowManager.xmonad = {
+    enable = true;
+    enableContribAndExtras = true;
+  };
+  services.xbanish.enable = true;
+
+  # INPUT DEVICES
+  services.xserver.autoRepeatDelay = 200;
+  services.xserver.autoRepeatInterval = 35;
+  systemd.services.keyswap = {
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+      PATH=/run/current-system/sw/bin:$PATH
+      setkeycodes 3a 1
+      setkeycodes 38 125
+      setkeycodes e05b 56
+    '';
+  };
   hardware.trackpoint = {
     enable = true;
     emulateWheel = true;
-    sensitivity = 200; # 0-255 (default 128)
-    speed = 125; # 0-255 (default 97)
+    sensitivity = 200; # 0-255, default 128
+    speed = 125; # 0-255, default 97
   };
-  programs.sway = {
-    enable = true;
-    extraPackages = with pkgs; [ swaylock swayidle xwayland ];
-  };
-  # services.xserver = {
-  #   enable = true;
-  #   dpi = 144;
-  #   autoRepeatDelay = 200;
-  #   autoRepeatInterval = 35;
-  #   libinput = {
-  #     enable = true;
-  #     naturalScrolling = true;
-  #     tappingDragLock = false;
-  #     middleEmulation = false;
-  #     accelSpeed = "0.7";
-  #   };
-  #   windowManager = {
-  #     default = "xmonad";
-  #     xmonad = {
-  #       enable = true;
-  #       enableContribAndExtras = true;
-  #     };
-  #   };
-  #   desktopManager.xterm.enable = false;
-  # };
-  # services.xbanish.enable = true;
-  services.physlock.enable = true;
 
+  # VIDEO
+  # TODO: See if tearing persists with "intel" video driver but not "TearFree"
+  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.deviceSection = ''Option "TearFree" "true"'';
+  programs.light.enable = true;
 
   # SOUND
   sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-  };
+  hardware.pulseaudio.enable = true;
 
+  # NETWORKING
+  networking.hostName = "sienna";
+  networking.networkmanager.enable = true;
+  networking.useDHCP = false;
+  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking.interfaces.wlp2s0.useDHCP = true;
 
   # POWER
   powerManagement.enable = true;
@@ -81,77 +85,70 @@
     coreOffset = "-50";
     gpuOffset = "-50";
   };
-
+  networking.networkmanager.wifi.powersave = true;
 
   # SECURITY
+  services.openssh.enable = true;
+  programs.gnupg.agent.enable = true;
+  services.physlock.enable = true;
   hardware.u2f.enable = true;
+  security.sudo.extraConfig = "Defaults lecture = never";
 
+  # NIX
+  nix.trustedUsers = [ "root" "@wheel" ];
+  nix.maxJobs = 8;
+  nixpkgs.config.allowUnfree = true;
 
-  # NETWORKING
-  hardware.bluetooth.enable = false;
-  networking.hostName = "sienna";
-  networking.networkmanager = {
-    enable = true;
-    wifi.powersave = true;
-  };
+  # PACKAGES
+  programs.fish.enable = true;
+  environment.systemPackages = with pkgs; [
+    binutils
+    firefox
+    kitty
+    neovim
+    tmux
+  ];
 
+  # FONTS
+  fonts.enableDefaultFonts = true;
+  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
-  # SERVICES
-  systemd.services = {
-    "keyswap" = {
-      description = "Key swap";
-      enable = true;
-      wantedBy = [ "multi-user.target" ];
-      script = ''
-        export PATH=/run/current-system/sw/bin:$PATH
-        setkeycodes 3a 1
-        setkeycodes 38 125
-        setkeycodes e05b 56
-      '';
-    };
-  };
-
+  # HARDWARE
+  hardware.enableRedistributableFirmware = true;
+  hardware.cpu.intel.updateMicrocode = true;
 
   # USERS
-  nix.trustedUsers = [ "root" "@wheel" ];
-  users.users."evanrelf" = {
-    description = "Evan Relf";
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "audio"
-      "video"
-      "networkmanager"
-    ];
-    initialPassword = "banana";
-    shell = pkgs.fish;
+  users.mutableUsers = false;
+  users.users = {
+    root.initialPassword = "alpine";
+    evanrelf = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "networkmanager" "video" ];
+      initialPassword = "banana";
+      shell = pkgs.fish;
+    };
   };
 
-
-  # BOOT
-  boot = {
-    tmpOnTmpfs = true;
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot = {
-      enable = true;
-      editor = false;
-    };
-    initrd.luks.devices = {
-      root = {
-        device = "/dev/disk/by-uuid/424daca7-06a2-429a-85e1-1f0a17799bed";
-        preLVM = true;
-        allowDiscards = true;
-      };
-    };
-    extraModulePackages = with pkgs.linuxPackages; [ acpi_call ];
-    kernelModules = [ "acpi_call" ];
+  # STATE
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r rpool/local/root@blank
+  '';
+  environment.etc = {
+    "nixos".source = "/persist/etc/nixos";
+    "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
+    "ssh/ssh_host_ed25519_key".source = "/persist/etc/ssh/ssh_host_ed25519_key";
+    "ssh/ssh_host_ed25519_key.pub".source = "/persist/etc/ssh/ssh_host_ed25519_key.pub";
+    "ssh/ssh_host_rsa_key".source = "/persist/etc/ssh/ssh_host_rsa_key";
+    "ssh/ssh_host_rsa_key.pub".source = "/persist/etc/ssh/ssh_host_rsa_key.pub";
   };
-
+  systemd.tmpfiles.rules = [
+    "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
+    "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
+    "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
+  ];
 
   # MISCELLANEOUS
-  hardware.cpu.intel.updateMicrocode = true;
-  time.timeZone = "America/Los_Angeles";
-  services.timesyncd.enable = true;
   services.printing.enable = true;
+  time.timeZone = "America/Los_Angeles";
   system.stateVersion = "20.03";
 }
