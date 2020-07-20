@@ -16,7 +16,7 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/d64ccaed-c06d-4859-88b4-d1876270c9b9";
   boot.zfs.devNodes = "/dev/vg/root";
-  networking.hostId = "9633d744";
+  networking.hostId = "978145c5"; # old: "9633d744";
   boot.tmpOnTmpfs = true;
   fileSystems = {
     "/boot" = { device = "/dev/disk/by-uuid/197C-84DE"; fsType = "vfat"; };
@@ -40,6 +40,14 @@
   services.xbanish.enable = true;
 
   # INPUT DEVICES
+  services.xserver.libinput = {
+    enable = true;
+    naturalScrolling = true;
+    tapping = false;
+    tappingDragLock = false;
+    middleEmulation = false;
+    accelSpeed = "0.7";
+  };
   services.xserver.autoRepeatDelay = 200;
   services.xserver.autoRepeatInterval = 35;
   systemd.services.keyswap = {
@@ -135,6 +143,7 @@
   '';
   environment.etc = {
     "nixos".source = "/persist/etc/nixos";
+    "machine-id".source = "/persist/etc/machine-id";
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
     "ssh/ssh_host_ed25519_key".source = "/persist/etc/ssh/ssh_host_ed25519_key";
     "ssh/ssh_host_ed25519_key.pub".source = "/persist/etc/ssh/ssh_host_ed25519_key.pub";

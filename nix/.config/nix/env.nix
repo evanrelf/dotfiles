@@ -84,5 +84,6 @@ in
       dmenu
       firefox
       kitty
+      xclip
     ]);
   }

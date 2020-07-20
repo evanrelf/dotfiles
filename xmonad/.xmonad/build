@@ -3,6 +3,6 @@
 set -e
 
 realdir=$(dirname "$(realpath "$0")")
-result=$(nix-build "$realdir/my-xmonad" --no-out-link)
+result=$(nix-build --no-link "$realdir")
 rm -f "$1"
 ln -s "$result/bin/xmonad" "$1"

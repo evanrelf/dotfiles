@@ -10,14 +10,15 @@ function rc -d "Open the specified program's configuration file"
                 cd "$HOME/.config/kak/"
                 ls -l
             case emacs
-                eval "$EDITOR $HOME/.config/emacs/init.el"
+                eval "$EDITOR $HOME/.emacs.d/init.el"
+                # eval "$EDITOR $HOME/.config/emacs/init.el"
             case spacemacs
                 eval "$EDITOR $HOME/.spacemacs"
             case doom
                 cd "$HOME/.doom.d/"
                 ls -l
 
-            # Shells
+                # Shells
             case fish
                 cd "$HOME/.config/fish/"
                 ls -l
@@ -30,7 +31,7 @@ function rc -d "Open the specified program's configuration file"
             case bash-profile
                 eval "$EDITOR $HOME/.bash_profile"
 
-            # Version control
+                # Version control
             case git
                 eval "$EDITOR $HOME/.config/git/config"
             case git-local
@@ -38,7 +39,7 @@ function rc -d "Open the specified program's configuration file"
             case mercurial hg
                 eval "$EDITOR $HOME/.hgrc"
 
-            # Terminal emulators
+                # Terminal emulators
             case alacritty
                 eval "$EDITOR $HOME/.config/alacritty/alacritty.yml"
             case kitty
@@ -46,15 +47,15 @@ function rc -d "Open the specified program's configuration file"
             case kitty-local
                 eval "$EDITOR $HOME/.config/kitty/local.conf"
 
-            # Nix
+                # Nix
             case nixos
                 if test -e "$HOME/dotfiles/nixos/configuration.nix"
-                  eval "$EDITOR $HOME/dotfiles/nixos/configuration.nix"
-                  and if _exists nixos-version
-                      bash "$HOME/dotfiles/nixos/install"
-                  end
+                    eval "$EDITOR $HOME/dotfiles/nixos/configuration.nix"
+                    and if _exists nixos-version
+                        bash "$HOME/dotfiles/nixos/install"
+                    end
                 else
-                  eval "$EDITOR /etc/nixos/configuration.nix"
+                    eval "$EDITOR /etc/nixos/configuration.nix"
                 end
             case nix
                 cd "$HOME/.config/nix/"
@@ -66,9 +67,10 @@ function rc -d "Open the specified program's configuration file"
             case nix-darwin darwin
                 eval "$EDITOR $HOME/.nixpkgs/darwin-configuration.nix"
 
-            # Window managers and related tools
+                # Window managers and related tools
             case xmonad
-                eval "$EDITOR $HOME/.config/xmonad/xmonad.hs"
+                eval "$EDITOR $HOME/.xmonad/xmonad.hs"
+                # eval "$EDITOR $HOME/.config/xmonad/xmonad.hs"
             case xmobar
                 eval "$EDITOR $HOME/.config/xmobar/xmobarrc"
             case taffybar
@@ -94,7 +96,7 @@ function rc -d "Open the specified program's configuration file"
             case tmux
                 eval "$EDITOR $HOME/.config/tmux/tmux.conf"
 
-            # Xorg
+                # Xorg
             case xresources
                 eval "$EDITOR $HOME/.Xresources"
             case xprofile
@@ -102,13 +104,13 @@ function rc -d "Open the specified program's configuration file"
             case xinit
                 eval "$EDITOR $HOME/.xinitrc"
 
-            # Music players
+                # Music players
             case mpd
                 eval "$EDITOR $HOME/.config/mpd/mpd.conf"
             case ncmpcpp
                 eval "$EDITOR $HOME/.config/ncmpcpp/config"
 
-            # File browsers
+                # File browsers
             case ranger
                 eval "$EDITOR $HOME/.config/ranger/rc.conf"
             case broot
@@ -118,13 +120,13 @@ function rc -d "Open the specified program's configuration file"
                     _error "TODO: I don't know where the broot config lives on Linux..."
                 end
 
-            # Other
+                # Other
             case ghci
                 eval "$EDITOR $HOME/.ghci"
             case zathura
                 eval "$EDITOR $HOME/.config/zathura/zathurarc"
 
-            # Unknown
+                # Unknown
             case "*"
                 _error "No config defined for '$argv[1]'"
                 return 1

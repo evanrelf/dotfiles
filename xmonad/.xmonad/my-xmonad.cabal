@@ -1,0 +1,40 @@
+cabal-version: 2.2
+
+name: my-xmonad
+version: 0.0.0.0
+
+executable xmonad
+  main-is: xmonad.hs
+  build-depends:
+    , base
+    , relude
+    , xmonad
+    , xmonad-contrib
+  mixins:
+    , base hiding (Prelude)
+    , relude (Relude as Prelude)
+  default-language: Haskell2010
+  default-extensions:
+    BlockArguments
+    DeriveAnyClass
+    DeriveFunctor
+    DeriveGeneric
+    DerivingStrategies
+    DerivingVia
+    GeneralizedNewtypeDeriving
+    LambdaCase
+    OverloadedStrings
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Werror=incomplete-record-updates
+    -Werror=incomplete-uni-patterns
+    -Werror=missing-fields
+    -Werror=partial-fields
+    -Widentities
+    -Wmissing-home-modules
+    -Wredundant-constraints
+    -fshow-warning-groups
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
