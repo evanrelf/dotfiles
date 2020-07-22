@@ -5,6 +5,7 @@ import qualified XMonad.Actions.CycleWS as CycleWS
 import qualified XMonad.Util.EZConfig as EZConfig
 import qualified XMonad.Util.Run as Run
 
+
 main :: IO ()
 main = xmonad
   . myKeys
@@ -12,15 +13,16 @@ main = xmonad
   . myConfig
   $ def
 
+
 myConfig :: XConfig l -> XConfig l
 myConfig xconfig = xconfig
   { terminal = "kitty"
   , modMask = mod4Mask
   , focusFollowsMouse = False
   , clickJustFocuses = True
-  , borderWidth = 2
-  , normalBorderColor = "#333333"
-  , focusedBorderColor = "#999999"
+  , borderWidth = 4
+  , normalBorderColor = "#777777"
+  , focusedBorderColor = "#BB77FF"
   , workspaces = fmap show [1 .. 10 :: Int]
   -- , startupHook = undefined
   -- , logHook = undefined
@@ -29,11 +31,13 @@ myConfig xconfig = xconfig
   -- , handleEventHook = undefined
   }
 
+
 myRemoveKeys :: XConfig l -> XConfig l
 myRemoveKeys xconfig = EZConfig.removeKeysP xconfig
   -- Focus previous window
   [ "M-S-<Tab>"
   ]
+
 
 myKeys :: XConfig l -> XConfig l
 myKeys xconfig = EZConfig.additionalKeysP xconfig

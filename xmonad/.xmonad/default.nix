@@ -16,4 +16,5 @@ let
     };
 
 in
-  pkgs.haskellPackages.callCabal2nix "my-xmonad" src {}
+  pkgs.haskell.lib.justStaticExecutables
+    (pkgs.haskellPackages.callCabal2nix "my-xmonad" src {})

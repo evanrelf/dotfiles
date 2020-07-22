@@ -7,16 +7,23 @@ destination_path="/persist/etc/nixos/configuration.nix"
 
 if ! diff "$destination_path" "$source_path" >/dev/null; then
   diff -u "$destination_path"  "$source_path" | eval "$(git config core.pager)" || true
-  read -p "Copy new configuration? [yN]" -n 1 -r >&2 < /dev/tty
+  read -p "Copy new configuration? [yN] " -n 1 -r >&2 < /dev/tty
   echo
   if echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'; then
     sudo cp -v "$destination_path" "$destination_path.old"
     sudo cp -v "$source_path" "$destination_path"
-    exit 0
   else
-    exit 1
+    exit 0
   fi
 else
   echo "No change between configurations" >&2
   exit 1
+fi
+
+read -p "Switch to new configuration? [yN] " -n 1 -r >&2 < /dev/tty
+echo
+if echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'; then
+  sudo nixos-rebuild switch
+else
+  exit 0
 fi

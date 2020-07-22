@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [
+    <nixos-hardware/lenovo/thinkpad/x1/6th-gen>
+  ];
+
   # KERNEL
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
@@ -14,9 +18,11 @@
 
   # FILESYSTEMS
   boot.supportedFilesystems = [ "zfs" ];
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/d64ccaed-c06d-4859-88b4-d1876270c9b9";
+  boot.initrd.luks.devices."cryptroot".device =
+    "/dev/disk/by-uuid/d64ccaed-c06d-4859-88b4-d1876270c9b9";
   boot.zfs.devNodes = "/dev/vg/root";
-  networking.hostId = "978145c5"; # old: "9633d744";
+  boot.zfs.forceImportAll = false;
+  networking.hostId = "978145c5";
   boot.tmpOnTmpfs = true;
   fileSystems = {
     "/boot" = { device = "/dev/disk/by-uuid/197C-84DE"; fsType = "vfat"; };
@@ -28,16 +34,19 @@
   swapDevices = [
     { device = "/dev/disk/by-uuid/96a91dd6-c5e6-4e87-a90a-4b960ae6a42d"; }
   ];
+  services.zfs.trim.enable = true;
+  services.zfs.autoScrub = {
+    enable = true;
+    interval = "daily";
+  };
 
   # DESKTOP
   services.xserver.enable = true;
-  services.xserver.dpi = 144;
   services.xserver.displayManager.startx.enable = true;
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
   };
-  services.xbanish.enable = true;
 
   # INPUT DEVICES
   services.xserver.libinput = {
@@ -48,10 +57,12 @@
     middleEmulation = false;
     accelSpeed = "0.7";
   };
-  services.xserver.autoRepeatDelay = 200;
-  services.xserver.autoRepeatInterval = 35;
   systemd.services.keyswap = {
     wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      RemainAfterExit = "yes";
+      Type = "oneshot";
+    };
     script = ''
       PATH=/run/current-system/sw/bin:$PATH
       setkeycodes 3a 1
@@ -67,7 +78,6 @@
   };
 
   # VIDEO
-  # TODO: See if tearing persists with "intel" video driver but not "TearFree"
   services.xserver.videoDrivers = [ "intel" ];
   services.xserver.deviceSection = ''Option "TearFree" "true"'';
   programs.light.enable = true;
@@ -100,7 +110,6 @@
   programs.gnupg.agent.enable = true;
   services.physlock.enable = true;
   hardware.u2f.enable = true;
-  security.sudo.extraConfig = "Defaults lecture = never";
 
   # NIX
   nix.trustedUsers = [ "root" "@wheel" ];
@@ -119,6 +128,7 @@
 
   # FONTS
   fonts.enableDefaultFonts = true;
+  console.earlySetup = true;
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   # HARDWARE
@@ -127,14 +137,11 @@
 
   # USERS
   users.mutableUsers = false;
-  users.users = {
-    root.initialPassword = "alpine";
-    evanrelf = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "video" ];
-      initialPassword = "banana";
-      shell = pkgs.fish;
-    };
+  users.users.evanrelf = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "video" ];
+    initialPassword = "banana";
+    shell = pkgs.fish;
   };
 
   # STATE
@@ -155,6 +162,7 @@
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
   ];
+  security.sudo.extraConfig = "Defaults lecture = never";
 
   # MISCELLANEOUS
   services.printing.enable = true;

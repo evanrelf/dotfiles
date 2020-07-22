@@ -58,7 +58,7 @@ in
       nix-diff
       nix-prefetch-git
       nix-tree
-      nodejs
+      # nodejs
       ormolu
       pandoc
       pipes

@@ -3,13 +3,11 @@ cabal-version: 2.2
 name: my-xmonad
 version: 0.0.0.0
 
-executable xmonad
-  main-is: xmonad.hs
+
+common common
   build-depends:
     , base
     , relude
-    , xmonad
-    , xmonad-contrib
   mixins:
     , base hiding (Prelude)
     , relude (Relude as Prelude)
@@ -35,6 +33,25 @@ executable xmonad
     -Wmissing-home-modules
     -Wredundant-constraints
     -fshow-warning-groups
+
+
+common executable
+  ghc-options:
     -threaded
     -rtsopts
     -with-rtsopts=-N
+
+
+executable xmonad
+  import: common, executable
+  main-is: xmonad.hs
+  build-depends:
+    , xmonad
+    , xmonad-contrib
+
+
+executable xmobar
+  import: common, executable
+  main-is: xmobar.hs
+  build-depends:
+    , xmobar
