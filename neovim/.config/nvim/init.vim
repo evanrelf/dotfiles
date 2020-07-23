@@ -81,5 +81,5 @@ xmap ga <Plug>(EasyAlign)
 augroup autocmds
   autocmd!
   autocmd FileType gitcommit setlocal spell colorcolumn=51,73
-  autocmd BufWritePre *.dhall,*.fish,*.rs,*.tf,*.ts undojoin | Neoformat
+  autocmd BufWritePre *.dhall,*.rs,*.tf,*.ts undojoin | Neoformat
 augroup END

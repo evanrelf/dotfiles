@@ -53,12 +53,13 @@ in
       lorri
       moreutils
       neovim
-      nix
-      nix
       nix-diff
+      nix-index
       nix-prefetch-git
       nix-tree
       # nodejs
+      nix
+      # nixUnstable
       ormolu
       pandoc
       pipes

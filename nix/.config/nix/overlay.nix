@@ -132,6 +132,17 @@ self: super:
       sha256 = "0wbkx8hmikngfp6fp0y65yla22f3k0jszq8a6pas80q0b33llwm5";
     }) { pkgs = self; };
 
+  nixUnstable =
+    super.nixUnstable.overrideAttrs (old: {
+      name = "nix-2.4";
+      src = super.fetchFromGitHub {
+        owner = "NixOS";
+        repo = "nix";
+        rev = "3f01fa1c9c1b5ce0ffd701f8eeb1b16e57aa86d5";
+        sha256 = "1lgpi7xzalf4wpgg3yw72v579cmrplgjhpn1l648bxzwjjp3x7pn";
+      };
+    });
+
   nix-tree =
     (import (super.fetchFromGitHub {
       owner = "utdemir";
