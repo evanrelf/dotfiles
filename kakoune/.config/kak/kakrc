@@ -1,12 +1,78 @@
-source "%val{config}/commands.kak"
-source "%val{config}/filetype.kak"
-source "%val{config}/hooks.kak"
-source "%val{config}/mappings.kak"
-source "%val{config}/options.kak"
-try %{ source "%val{config}/haskell2.kak" }
-try %{ source "%val{config}/dhall2.kak" }
-source "%val{config}/plugins.kak"
+# Use space as leader
+map global normal "," "<space>"
+map global normal "<space>" ","
+map global normal "<a-,>" "<a-space>"
+map global normal "<a-space>" "<a-,>"
 
-# TODO: Remove comment character when joining lines
-# TODO: Fix this in Markdown syntax highlighter (isn't highlighted as bold):
-#       **Foo bar `baz`**
+# Discourage non-mnemonic keys
+map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
+map global normal "<a-l>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
+map global normal "<a-H>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
+map global normal "<a-L>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
+map global goto "g" "<esc>: echo -markup '{Error}Use gk{Default}'<ret>" -docstring "Use gk"
+map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstring "Use vc"
+map global insert "<c-n>" "<a-;>: echo -markup '{Error}Use tab{Default}'<ret>" -docstring "Use tab"
+map global insert "<c-p>" "<a-;>: echo -markup '{Error}Use s-tab{Default}'<ret>" -docstring "Use s-tab"
+
+# Show line numbers
+add-highlighter global/number-lines number-lines -relative -hlcursor
+
+# Underline search matches
+add-highlighter global/matches dynregex "%%reg{/}" 0:+u
+
+# Highlight TODO/FIXME/NOTE
+add-highlighter global/todo regex "\b(TODO|FIXME|NOTE)\b" 0:default+r
+
+# Strip trailing whitespace
+define-command -docstring "strip-whitespace: strip trailing whitespace" \
+strip-whitespace %{
+  execute-keys -draft "%%s\h+$<ret>d"
+}
+
+# Use spaces for indentation
+set-option global indentwidth 2
+hook global InsertChar \t %{ try %{
+  execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
+  execute-keys -draft "h%opt{indentwidth}@"
+} catch %{
+  execute-keys -draft "hd"
+}}
+hook global InsertDelete ' ' %{ try %{
+  execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
+  execute-keys -draft "i<space><esc><lt>"
+}}
+
+# Use Tab in autocomplete menu
+hook global InsertCompletionShow .* %{ try %{
+  execute-keys -draft "h<a-K>\h<ret>"
+  map window insert "<tab>" "<c-n>"
+  map window insert "<s-tab>" "<c-p>"
+}}
+hook global InsertCompletionHide .* %{
+  unmap window insert "<tab>" "<c-n>"
+  unmap window insert "<s-tab>" "<c-p>"
+}
+
+# Highlight trailing whitespace
+hook global ModeChange pop:insert:.* %{
+  add-highlighter window/trailing-whitespace regex \h+$ 0:red+u
+}
+hook global ModeChange push:.*:insert %{
+  remove-highlighter window/trailing-whitespace
+}
+
+# Show Git diff
+hook global WinCreate .* %{
+  hook -once window NormalIdle .* %{ try %{
+    git show-diff
+    hook window BufWritePost .* %{ try %{
+      git update-diff
+    }}
+  }}
+}
+
+# Evaluate selection
+define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
+evaluate-selection %{
+  execute-keys -itersel -draft ": <c-r>.<ret>"
+}
