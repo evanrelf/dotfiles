@@ -1,3 +1,3 @@
-/dist-newstyle/
-/result
-/result-*
+/xmonad
+/*.hi
+/*.o

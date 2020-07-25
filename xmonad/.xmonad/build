@@ -1,8 +1,27 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 realdir=$(dirname "$(realpath "$0")")
-result=$(nix-build --no-link "$realdir")
-rm -f "$1"
-ln -s "$result/bin/xmonad" "$1"
+
+cd "$realdir"
+
+args=()
+args+=("-Wall")
+args+=("-Wcompat")
+args+=("-Werror=incomplete-record-updates")
+args+=("-Werror=incomplete-uni-patterns")
+args+=("-Werror=missing-fields")
+args+=("-Werror=partial-fields")
+args+=("-Widentities")
+args+=("-Wmissing-home-modules")
+args+=("-Wredundant-constraints")
+args+=("-fshow-warning-groups")
+args+=("-O0")
+args+=("-threaded")
+args+=("-rtsopts")
+args+=("-with-rtsopts=-N")
+
+nix-shell --run "ghc ${args[*]} xmonad.hs -o ${1:-xmonad}"
+
+rm -f ./*.hi ./*.o
