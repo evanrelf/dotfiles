@@ -47,6 +47,7 @@
     enable = true;
     enableContribAndExtras = true;
   };
+  services.xbanish.enable = true;
 
   # INPUT DEVICES
   services.xserver.libinput = {

@@ -174,8 +174,7 @@
   :init (setq evil-goggles-duration 0.05)
   :config (evil-goggles-mode))
 (use-package evil-escape
-  :after evil
-  :config (evil-escape-mode))
+  :after evil)
 
 ;; Auto-complete
 (use-package company
@@ -369,6 +368,7 @@
   "b" '(:ignore t :which-key "buffer")
   "b C-g" '(evil-escape :which-key t)
   "b ESC" '(evil-escape :which-key t)
+  "b c" '(evil-buffer-new :which-key "create")
   "b l" '(ibuffer :which-key "list")
   "b s" '(counsel-ibuffer :which-key "switch")
   "b n" '(next-buffer :which-key "next")

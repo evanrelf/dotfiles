@@ -7,6 +7,13 @@ else
     set --export EDITOR "vi"
 end
 
+if _exists emacs
+    set --export ALTERNATE_EDITOR ""
+    alias emacs "env TERM=xterm-24bit emacs"
+    alias emacsclient "env TERM=xterm-24bit emacsclient"
+    alias evil "env TERM=xterm-24bit emacsclient --tty"
+end
+
 # Better support for Emacs' vterm package
 function vterm_printf
     if [ -n "$TMUX" ]

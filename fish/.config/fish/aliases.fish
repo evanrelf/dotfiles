@@ -23,6 +23,10 @@ if _exists nvim
     abbr --add v "nvim"
 end
 
+if _exists emacs
+    abbr --add e "evil"
+end
+
 if _exists git
     abbr --add g "git"
 
