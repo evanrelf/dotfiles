@@ -1,8 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-;; How to byte-compile ~/.emacs.d:
-;; (byte-recompile-directory "~/.emacs.d/" 0 t)
-
 ;; Increase garbage collection threshold from default 8 MB
 (setq gc-cons-threshold 32000000) ;; 32 MB
 
@@ -15,9 +12,6 @@
 ;; Maximize GUI frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;; Use dark window chrome in GUI
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
-
 ;; Disable superfluous chrome
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -28,14 +22,10 @@
 (fringe-mode -1)
 
 ;; Enable mouse support in terminal
-(unless window-system
+(unless (display-graphic-p)
   (xterm-mouse-mode t)
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
-
-;; Fix hard-to-see cursor on Linux
-(when window-system
-  (set-mouse-color "white"))
 
 ;; Disable audio bell
 (setq ring-bell-function 'ignore)
@@ -102,7 +92,7 @@
 (setq scroll-conservatively 10000)
 
 ;; Scroll 3 lines in GUI
-(when (window-system)
+(when (display-graphic-p)
   (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
   (setq mouse-wheel-progressive-speed nil))
 
@@ -110,15 +100,15 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
-         "straight/repos/straight.el/bootstrap.el"
-         user-emacs-directory))
+	"straight/repos/straight.el/bootstrap.el"
+	user-emacs-directory))
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-          'silent
-          'inhibit-cookies)
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent
+	 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -127,13 +117,11 @@
 
 ;; Garbage collector magic hack
 (use-package gcmh
-  :config
-  (gcmh-mode t))
+  :config (gcmh-mode t))
 
 ;; Easy keybindings
 (use-package general
-  :config
-  (general-evil-setup))
+  :config (general-evil-setup))
 
 ;; Themes
 ;; (use-package doom-themes)
@@ -146,35 +134,7 @@
 
 ;; Modeline
 (use-package mood-line
-  :config
-  (mood-line-mode))
-
-;; Tabs
-;; (use-package centaur-tabs
-;;   :after all-the-icons
-;;   :demand
-;;   :init
-;;   (setq centaur-tabs-set-bar 'over)
-;;   ;; (setq x-underline-at-descent-line t)
-;;   (setq centaur-tabs-height 28)
-;;   (setq centaur-tabs-gray-out-icons 'buffer)
-;;   (when (window-system)
-;;     (setq centaur-tabs-set-icons t))
-;;   (setq centaur-tabs-set-modified-marker t)
-;;   (setq centaur-tabs-close-button "✕")
-;;   ;; (setq centaur-tabs-modified-marker "⬤")
-;;   (setq centaur-tabs-modified-marker "●")
-;;   :config
-;;   (centaur-tabs-mode t)
-;;   (centaur-tabs-group-by-projectile-project)
-;;   (centaur-tabs-headline-match)
-;;   :general
-;;   (general-nmap
-;;     "g t" 'centaur-tabs-forward
-;;     "g T" 'centaur-tabs-backward))
-
-;; Icons
-(use-package all-the-icons)
+  :config (mood-line-mode))
 
 ;; Prevent plugins from polluting ~/.emacs.d/ or my $HOME
 (use-package no-littering)
@@ -191,88 +151,58 @@
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  :config
-  (evil-mode t))
+  :config (evil-mode t))
 
 ;; Evil extras
 (use-package evil-collection
   :after evil
-  :config
-  (evil-collection-init))
-(use-package evil-vimish-fold
-  :after evil
-  :config
-  (evil-vimish-fold-mode t))
+  :config (evil-collection-init))
 (use-package evil-matchit
   :after evil
-  :config
-  (global-evil-matchit-mode t))
+  :config (global-evil-matchit-mode t))
 (use-package evil-surround
   :after evil
-  :config
-  (global-evil-surround-mode t))
+  :config (global-evil-surround-mode t))
 (use-package evil-commentary
   :after evil
-  :config
-  (evil-commentary-mode))
+  :config (evil-commentary-mode))
 (use-package evil-indent-plus
   :after evil
-  :config
-  (evil-indent-plus-default-bindings))
+  :config (evil-indent-plus-default-bindings))
 (use-package evil-goggles
   :after evil
-  :init
-  (setq evil-goggles-duration 0.05)
-  :config
-  (evil-goggles-mode))
+  :init (setq evil-goggles-duration 0.05)
+  :config (evil-goggles-mode))
 (use-package evil-escape
   :after evil
-  :config
-  (evil-escape-mode))
+  :config (evil-escape-mode))
 
 ;; Auto-complete
 (use-package company
-  :init
-  (setq company-idle-delay 0.1)
-  :hook
-  (after-init . global-company-mode))
+  :init (setq company-idle-delay 0.1)
+  :hook (after-init . global-company-mode))
 
 ;; Automatically insert and manage closing pairs
 (use-package smartparens
-  :config
-  (smartparens-global-mode t))
+  :config (smartparens-global-mode t))
 (use-package evil-smartparens
   :after (evil smartparens)
-  :hook
-  (smartparens-enabled . evil-smartparens-mode))
-
-;; Balance parenthesis automatically
-(use-package parinfer-rust-mode
-  :straight
-  (parinfer-rust-mode
-    :type git
-    :host github
-    :repo "justinbarclay/parinfer-rust-mode")
-  :init
-  (setq parinfer-rust-auto-download t)
-  :hook
-  (emacs-lisp-mode . parinfer-rust-mode)
-  (racket-mode . parinfer-rust-mode))
+  :hook (smartparens-enabled . evil-smartparens-mode))
 
 ;; Display errors
 (use-package flycheck
   :init
   (setq flycheck-disabled-checkers
-        '(emacs-lisp
-          emacs-lisp-checkdoc
-          haskell-stack-ghc
-          haskell-ghc))
+	'(emacs-lisp
+	  emacs-lisp-checkdoc
+	  haskell-ghc
+	  haskell-stack-ghc
+	  racket))
   ;; Only run flycheck on initial load and file saving
   (setq flymake-no-changes-timeout nil)
   (setq flymake-start-syntax-check-on-newline nil)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  :config
-  (global-flycheck-mode))
+  :config (global-flycheck-mode))
 (use-package flycheck-pos-tip
   :config
   (with-eval-after-load 'flycheck
@@ -286,36 +216,30 @@
 
 ;; Projectile
 (use-package projectile
-  :init
-  (setq projectile-completion-system 'ivy)
-  :config
-  (projectile-mode t))
+  :init (setq projectile-completion-system 'ivy)
+  :config (projectile-mode t))
 (use-package counsel-projectile
-  :config
-  (counsel-projectile-mode))
+  :config (counsel-projectile-mode))
 
 ;; Ivy
 (use-package ivy
-  :config
-  (ivy-mode t))
+  :config (ivy-mode t))
+(use-package ivy-rich
+  :config (ivy-rich-mode t))
 
 ;; Counsel
 (use-package counsel
-  :config
-  (counsel-mode t))
+  :config (counsel-mode t))
 
 ;; Sort and filter candidates
 (use-package prescient
-  :config
-  (prescient-persist-mode))
+  :config (prescient-persist-mode))
 (use-package ivy-prescient
   :after (prescient counsel ivy)
-  :config
-  (ivy-prescient-mode))
+  :config (ivy-prescient-mode))
 (use-package company-prescient
   :after (prescient company)
-  :config
-  (company-prescient-mode))
+  :config (company-prescient-mode))
 
 ;; ripgrep
 (use-package ripgrep)
@@ -331,10 +255,8 @@
 
 ;; Show available keybindings after a delay
 (use-package which-key
-  :init
-  (setq which-key-idle-delay 0.2)
-  :config
-  (which-key-mode))
+  :init (setq which-key-idle-delay 0.2)
+  :config (which-key-mode))
 
 ;; Zero-config jump-to-definition
 (use-package dumb-jump
@@ -342,6 +264,7 @@
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg)
   :config
+  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
   (dumb-jump-mode))
 
 ;; Show Git changes in gutter
@@ -352,54 +275,49 @@
 
 ;; Stop the Emacs and system clipboards from mixing
 (use-package simpleclip
-  :config
-  (simpleclip-mode t))
+  :config (simpleclip-mode t))
 
 ;; Clean up whitespace on lines I've modified
 (use-package ws-butler
-  :config
-  (ws-butler-global-mode))
+  :config (ws-butler-global-mode))
 
 ;; Highlight TODO, FIXME, etc.
 (use-package hl-todo
-  :config
-  (global-hl-todo-mode t))
+  :config (global-hl-todo-mode t))
 
 ;; Languages
 (use-package haskell-mode
   :commands (haskell-mode)
   :hook
   (haskell-mode . (lambda ()
-                   (setq-local paragraph-separate "[ \t\f]*$")
-                   (setq-local paragraph-start "\f\\|[ \t]*$"))))
+		    (setq-local paragraph-separate "[ \t\f]*$")
+		    (setq-local paragraph-start "\f\\|[ \t]*$"))))
 (use-package nix-mode
   :commands (nix-mode))
+(use-package rust-mode
+  :commands (rust-mode))
 (use-package purescript-mode
   :commands (purescript-mode)
-  :hook
-  (purescript-mode . turn-on-purescript-indentation))
+  :hook (purescript-mode . turn-on-purescript-indentation))
 (use-package dhall-mode
   :commands (dhall-mode))
+(use-package racket-mode
+  :commands (racket-mode))
 (use-package protobuf-mode
   :commands (protobuf-mode))
 (use-package dockerfile-mode
   :commands (dockerfile-mode))
 (use-package web-mode
   :commands (web-mode))
-(use-package rust-mode
-  :commands (rust-mode))
 (use-package lua-mode
   :commands (lua-mode))
-(use-package racket-mode
-  :commands (racket-mode))
 (use-package fish-mode
   :commands (fish-mode))
 (use-package markdown-mode
   :commands (markdown-mode))
 (use-package yaml-mode
   :commands (yaml-mode)
-  :hook
-  (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+  :hook (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 ;; Adjust text scale
 (defun text-scale-reset ()
@@ -415,22 +333,21 @@
 (general-def
   :states '(normal visual)
   "j" 'evil-next-visual-line
-  "k" 'evil-previous-visual-line
-  "g i" 'evil-first-non-blank
-  "g h" 'evil-beginning-of-line
-  "g j" 'evil-goto-line
-  "g k" 'evil-goto-first-line
-  "g l" 'evil-end-of-line)
+  "k" 'evil-previous-visual-line)
 
 ;; Leader
 (general-def
-  :states '(normal visual insert emacs)
   :prefix "SPC"
   :non-normal-prefix "M-SPC"
+  :states '(normal visual insert emacs)
+  :keymaps 'override
   "" '(nil :which-key "leader")
   "ESC" '(evil-escape :which-key t)
+  "C-g" '(evil-escape :which-key t)
+  "SPC" '(counsel-M-x :which-key "M-x")
 
   "w" '(:ignore t :which-key "window")
+  "w C-g" '(evil-escape :which-key t)
   "w ESC" '(evil-escape :which-key t)
   "w -" '(evil-window-split :which-key "split")
   "w \\" '(evil-window-vsplit :which-key "vsplit")
@@ -442,45 +359,48 @@
   "w l" '(evil-window-right :which-key "right")
   "w d" '(evil-window-delete :which-key "delete")
 
-  "t" '(:ignore t :which-key "tab")
-  "t ESC" '(evil-escape :which-key t)
-  "t n" '(centaur-tabs-forward-tab :which-key "next")
-  "t p" '(centaur-tabs-backward-tab :which-key "previous")
-
-  "t g" '(:ignore t :which-key "group")
-  "t g ESC" '(evil-escape :which-key t)
-  "t g n" '(centaur-tabs-forward-group :which-key "next")
-  "t g p" '(centaur-tabs-backward-group :which-key "previous")
-
   "b" '(:ignore t :which-key "buffer")
+  "b C-g" '(evil-escape :which-key t)
   "b ESC" '(evil-escape :which-key t)
-  "b s" '(counsel-switch-buffer :which-key "switch")
+  "b l" '(ibuffer :which-key "list")
+  "b s" '(counsel-ibuffer :which-key "switch")
   "b n" '(next-buffer :which-key "next")
   "b p" '(previous-buffer :which-key "previous")
   "b d" '(evil-delete-buffer :which-key "delete")
 
   "f" '(:ignore t :which-key "file")
+  "f C-g" '(evil-escape :which-key t)
   "f ESC" '(evil-escape :which-key t)
   "f s" '(save-buffer :which-key "save")
   "f f" '(counsel-find-file :which-key "find")
 
   "p" '(:ignore t :which-key "project")
+  "p C-g" '(evil-escape :which-key t)
   "p ESC" '(evil-escape :which-key t)
   "p s" '(counsel-projectile-switch-project :which-key "switch")
   "p f" '(counsel-projectile-find-file :which-key "find file")
   "p d" '(projectile-dired :which-key "dired")
 
   "p b" '(:ignore t :which-key "buffer")
+  "p b C-g" '(evil-escape :which-key t)
   "p b ESC" '(evil-escape :which-key t)
+  "p b l" '(projectile-ibuffer :which-key "list")
   "p b s" '(counsel-projectile-switch-buffer :which-key "switch")
   "p b n" '(projectile-next-project-buffer :which-key "next")
   "p b p" '(projectile-previous-project-buffer :which-key "previous")
 
-  "j" '(dumb-jump-go :which-key "dumb-jump")
-
   "g" '(:ignore t :which-key "git")
+  "g C-g" '(evil-escape :which-key t)
   "g ESC" '(evil-escape :which-key t)
   "g s" '(magit-status :which-key "status")
 
-  "," '((lambda () (interactive) (evil-edit "~/.config/emacs/init.el")) :which-key "edit config"))
-  
+  "h" '(:ignore t :which-key "help")
+  "h C-g" '(evil-escape :which-key t)
+  "h ESC" '(evil-escape :which-key t)
+  "h v" '(describe-variable :which-key "variable")
+  "h f" '(describe-function :which-key "function")
+  "h k" '(describe-key :which-key "key")
+  "h m" '(describe-mode :which-key "mode")
+  "h p" '(describe-package :which-key "package")
+
+  "," '((lambda () (interactive) (evil-edit "~/.emacs.d/init.el")) :which-key "edit config"))

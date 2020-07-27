@@ -118,6 +118,7 @@
 
   # PACKAGES
   programs.fish.enable = true;
+  services.emacs.enable = true;
   environment.systemPackages = with pkgs; [
     binutils
     firefox

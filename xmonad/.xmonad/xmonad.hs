@@ -2,13 +2,13 @@
 
 module Main (main) where
 
+import Data.Function ((&))
 import XMonad (XConfig (..), def, mod4Mask, xmonad)
 import qualified XMonad.Actions.CycleWS as CycleWS
-import qualified XMonad.Util.EZConfig as EZConfig
-import qualified XMonad.Util.Run as Run
 import XMonad.Layout.Decoration (Theme (..))
 import XMonad.Layout.NoFrillsDecoration (noFrillsDeco, shrinkText)
-import Data.Function ((&))
+import qualified XMonad.Util.EZConfig as EZConfig
+import qualified XMonad.Util.Run as Run
 
 
 main = xmonad $ def
@@ -30,19 +30,26 @@ main = xmonad $ def
   & myKeys
 
 
-myLayoutHook = noFrillsDeco shrinkText myTheme (layoutHook def)
+myLayoutHook = layoutHook def
+  & noFrillsDeco shrinkText myTheme
 
 
 myRemoveKeys xconfig = EZConfig.removeKeysP xconfig
+  -- Resize viewed windows to the correct size (?)
+  [ "M-n"
+  -- Focus next window
+  , "M-<Tab>"
   -- Focus previous window
-  [ "M-S-<Tab>"
+  , "M-S-<Tab>"
+  -- Launch gmrun
+  , "M-S-p"
   ]
 
 
 myKeys xconfig = EZConfig.additionalKeysP xconfig
-  -- Launching
-  [ ("M-d", Run.safeSpawnProg "dmenu_run")
-  -- Workspaces
+  -- Open new Emacs frame
+  [ ("M-S-;", Run.safeSpawn "emacsclient" ["--create-frame", "--no-wait"])
+  -- Switch to last workspace
   , ("M-<Tab>", CycleWS.toggleWS)
   -- Brightness
   , ("<XF86MonBrightnessDown>", Run.safeSpawn "light" ["-U", "3"])
@@ -59,12 +66,13 @@ myInactiveColor = "#555555"
 
 
 myTheme = def
-  { activeColor = myActiveColor
+  { fontName = "xft:Terminus:style=Regular:size=10:antialias=true"
+  , decoHeight = 10
+  , activeColor = myActiveColor
   , inactiveColor = myInactiveColor
   , activeTextColor = myActiveColor
   , inactiveTextColor = myInactiveColor
   , activeBorderWidth = 0
   , inactiveBorderWidth = 0
   , urgentBorderWidth = 0
-  , decoHeight = 10
   }
