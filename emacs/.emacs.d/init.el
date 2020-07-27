@@ -208,6 +208,13 @@
   (with-eval-after-load 'flycheck
     (flycheck-pos-tip-mode)))
 
+;; Terminal
+(use-package vterm
+  :init
+  (setq vterm-shell "fish")
+  (setq vterm-max-scrollback 10000))
+(use-package multi-vterm)
+
 ;; Amazing Git porcelain
 (use-package magit
   :defer 5)
@@ -374,12 +381,21 @@
   "f s" '(save-buffer :which-key "save")
   "f f" '(counsel-find-file :which-key "find")
 
+  "t" '(:ignore t :which-key "terminal")
+  "t C-g" '(evil-escape :which-key t)
+  "t ESC" '(evil-escape :which-key t)
+  "t c" '(multi-vterm :which-key "create")
+  "t t" '(multi-vterm-dedicated-toggle :which-key "toggle")
+  "t n" '(multi-vterm-next :which-key "next")
+  "t p" '(multi-vterm-prev :which-key "previous")
+
   "p" '(:ignore t :which-key "project")
   "p C-g" '(evil-escape :which-key t)
   "p ESC" '(evil-escape :which-key t)
   "p s" '(counsel-projectile-switch-project :which-key "switch")
   "p f" '(counsel-projectile-find-file :which-key "find file")
   "p d" '(projectile-dired :which-key "dired")
+  "p t" '(multi-vterm-projectile :which-key "terminal")
 
   "p b" '(:ignore t :which-key "buffer")
   "p b C-g" '(evil-escape :which-key t)

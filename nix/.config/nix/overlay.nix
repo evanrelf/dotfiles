@@ -29,6 +29,9 @@ self: super:
       sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
     }) { pkgs = self; };
 
+  emacs =
+    super.emacsWithPackages [ super.emacsPackages.vterm ];
+
   gay =
     super.python3Packages.buildPythonPackage rec {
       pname = "gay";
