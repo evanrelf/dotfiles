@@ -1,4 +1,3 @@
-;; -*- lexical-binding: t; -*-
 (provide 'init-everything)
 
 ;; Increase garbage collection threshold from default 8 MB
@@ -46,19 +45,8 @@
 (use-package gcmh
   :config (gcmh-mode t))
 
-;; Modeline
-(use-package mood-line
-  :config (mood-line-mode))
-
 ;; Prevent plugins from polluting ~/.emacs.d/ or my $HOME
 (use-package no-littering)
-
-;; Get PATH variable from shell
-(use-package exec-path-from-shell
-  :after no-littering
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
 
 ;; LSP
 (use-package lsp-mode
@@ -97,7 +85,9 @@
 
 ;; Amazing Git porcelain
 (use-package magit
-  :defer 5)
+  :defer 5
+  :config
+  (setq git-commit-summary-max-length 50))
 (use-package magit-delta
   :config (magit-delta-mode))
 
@@ -166,7 +156,3 @@
 ;; Clean up whitespace on lines I've modified
 (use-package ws-butler
   :config (ws-butler-global-mode))
-
-;; Highlight TODO, FIXME, etc.
-(use-package hl-todo
-  :config (global-hl-todo-mode t))

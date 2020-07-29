@@ -12,6 +12,10 @@
 (use-package modus-operandi-theme)
 (load-theme 'modus-operandi t)
 
+;; Modeline
+(use-package mood-line
+  :config (mood-line-mode))
+
 ;; Display line numbers
 (global-display-line-numbers-mode)
 
@@ -21,6 +25,10 @@
 ;; Highlight matching parenthesis
 (show-paren-mode t)
 (setq show-paren-delay 0)
+
+;; Highlight TODO, FIXME, etc.
+(use-package hl-todo
+  :config (global-hl-todo-mode t))
 
 ;; Disable startup messages
 (setq initial-scratch-message nil)

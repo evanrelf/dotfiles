@@ -36,4 +36,9 @@
     :init
     (setq vterm-shell "fish")
     (setq vterm-max-scrollback 10000))
-  (use-package multi-vterm))
+  (use-package multi-vterm)
+
+  ;; Get PATH variable from shell
+  (use-package exec-path-from-shell
+    :after no-littering
+    :config (exec-path-from-shell-initialize)))

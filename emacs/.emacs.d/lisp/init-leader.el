@@ -80,6 +80,4 @@
   "q" '(:ignore t :which-key "help")
   "q C-g" '(evil-escape :which-key t)
   "q q" '(evil-quit :which-key "quit")
-  "q k" '(save-buffers-kill-emacs :which-key "kill")
-
-  "," '((lambda () (interactive) (evil-edit "~/.emacs.d/init.el")) :which-key "edit config"))
+  "q k" '(save-buffers-kill-emacs :which-key "kill"))
