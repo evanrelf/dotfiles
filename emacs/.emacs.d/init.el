@@ -128,6 +128,8 @@
 ;; (use-package base16-theme)
 ;; (use-package color-theme-sanityinc-tomorrow)
 ;; (use-package leuven-theme)
+;; (use-package seoul256-theme
+;;   :init (setq seoul256-background 256))
 ;; (load-theme 'doom-challenger-deep t)
 (use-package modus-operandi-theme)
 (load-theme 'modus-operandi t)
@@ -151,6 +153,12 @@
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
+  (setq evil-want-Y-yank-to-eol t)
+  (setq evil-shift-width 2)
+  (setq evil-move-beyond-eol t)
+  (setq evil-split-window-below t)
+  (setq evil-vsplit-window-right t)
+  (setq evil-echo-state t)
   :config (evil-mode t))
 
 ;; Evil extras
@@ -175,10 +183,21 @@
   :config (evil-goggles-mode))
 (use-package evil-escape
   :after evil)
+(use-package evil-terminal-cursor-changer
+  :after evil
+  :init
+  (setq evil-motion-state-cursor 'box)
+  (setq evil-visual-state-cursor 'box)
+  (setq evil-normal-state-cursor 'box)
+  (setq evil-insert-state-cursor 'bar)
+  (setq evil-emacs-state-cursor 'hbar)
+  :config
+  (unless (display-graphic-p)
+    (evil-terminal-cursor-changer-activate)))
 
 ;; Auto-complete
 (use-package company
-  :init (setq company-idle-delay 0.1)
+  :init (setq company-idle-delay 0.2)
   :hook (after-init . global-company-mode))
 
 ;; Automatically insert and manage closing pairs
@@ -208,17 +227,20 @@
     (flycheck-pos-tip-mode)))
 
 ;; Terminal
-(use-package vterm
-  :init
-  (setq vterm-shell "fish")
-  (setq vterm-max-scrollback 10000))
-(use-package multi-vterm)
+(when (display-graphic-p)
+  (use-package vterm
+    :init
+    (setq vterm-shell "fish")
+    (setq vterm-max-scrollback 10000))
+  (use-package multi-vterm))
 
 ;; Amazing Git porcelain
 (use-package magit
   :defer 5)
 (use-package evil-magit
   :after (evil magit))
+(use-package magit-delta
+  :config (magit-delta-mode))
 
 ;; Projectile
 (use-package projectile
@@ -261,7 +283,8 @@
 
 ;; Show available keybindings after a delay
 (use-package which-key
-  :init (setq which-key-idle-delay 0.2)
+  :init
+  (setq which-key-idle-delay 0.5)
   :config (which-key-mode))
 
 ;; Zero-config jump-to-definition
@@ -418,5 +441,10 @@
   "h k" '(describe-key :which-key "key")
   "h m" '(describe-mode :which-key "mode")
   "h p" '(describe-package :which-key "package")
+
+  "q" '(:ignore t :which-key "help")
+  "q C-g" '(evil-escape :which-key t)
+  "q q" '(evil-quit :which-key "quit")
+  "q k" '(kill-emacs :which-key "kill daemon")
 
   "," '((lambda () (interactive) (evil-edit "~/.emacs.d/init.el")) :which-key "edit config"))

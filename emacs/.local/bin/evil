@@ -1,0 +1,3 @@
+#!/bin/sh
+
+TERM=xterm-24bit exec emacsclient --tty "$@"

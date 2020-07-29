@@ -23,7 +23,7 @@ if _exists nvim
     abbr --add v "nvim"
 end
 
-if _exists emacs
+if _exists evil
     abbr --add e "evil"
 end
 
