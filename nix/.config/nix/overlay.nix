@@ -1,6 +1,14 @@
 self: super:
 
 {
+  # cabal-edit =
+  #   (import (super.fetchFromGitHub {
+  #     owner = "sdiehl";
+  #     repo = "cabal-edit";
+  #     rev = "0000000000000000000000000000000000000000";
+  #     sha256 = "0000000000000000000000000000000000000000000000000000";
+  #   }) { pkgs = self; });
+
   cabal-plan =
     super.haskell.lib.justStaticExecutables
       (super.haskell.lib.overrideCabal super.haskellPackages.cabal-plan (old: {

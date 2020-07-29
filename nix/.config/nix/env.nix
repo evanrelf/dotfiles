@@ -26,6 +26,7 @@ in
       jq
       kakoune
       neovim
+      nix-index
       nix-prefetch-git
       ripgrep
       rust-analyzer
