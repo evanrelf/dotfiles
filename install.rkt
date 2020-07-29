@@ -39,6 +39,11 @@
    nonexistent)
   existent)
 
+(define/contract (prepare-emacs)
+  (-> any)
+  (printf "[emacs] Setting up truecolor support\n")
+  (run "$HOME/dotfiles/emacs/.emacs.d/setup-truecolor"))
+
 (define/contract (prepare-hammerspoon)
   (-> any)
   (printf "[hammerspoon] Changing config file location\n")
@@ -82,6 +87,7 @@
 (define/contract (prepare package)
   (-> string? any)
   (case package
+    [("emacs") (prepare-emacs)]
     [("hammerspoon") (prepare-hammerspoon)]
     [("kakoune") (prepare-kakoune)]
     [("neovim") (prepare-neovim)]

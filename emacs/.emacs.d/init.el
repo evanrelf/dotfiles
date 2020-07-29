@@ -124,13 +124,10 @@
   :config (general-evil-setup))
 
 ;; Themes
-;; (use-package doom-themes)
-;; (use-package base16-theme)
-;; (use-package color-theme-sanityinc-tomorrow)
-;; (use-package leuven-theme)
-;; (use-package seoul256-theme
-;;   :init (setq seoul256-background 256))
-;; (load-theme 'doom-challenger-deep t)
+(use-package doom-themes)
+(use-package leuven-theme)
+(use-package seoul256-theme
+  :init (setq seoul256-background 256))
 (use-package modus-operandi-theme)
 (load-theme 'modus-operandi t)
 
@@ -158,7 +155,7 @@
   (setq evil-move-beyond-eol t)
   (setq evil-split-window-below t)
   (setq evil-vsplit-window-right t)
-  (setq evil-echo-state t)
+  (setq evil-echo-state nil)
   :config (evil-mode t))
 
 ;; Evil extras
@@ -194,6 +191,13 @@
   :config
   (unless (display-graphic-p)
     (evil-terminal-cursor-changer-activate)))
+
+;; LSP
+(use-package lsp-mode
+  :hook
+  ((rust-mode . lsp-deferred)
+   (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred))
 
 ;; Auto-complete
 (use-package company
@@ -233,6 +237,15 @@
     (setq vterm-shell "fish")
     (setq vterm-max-scrollback 10000))
   (use-package multi-vterm))
+
+;; Org mode
+(use-package org
+  :commands (org-mode))
+(use-package evil-org
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :init (setq evil-want-C-i-jump nil)
+  :config (evil-org-set-key-theme))
 
 ;; Amazing Git porcelain
 (use-package magit
@@ -323,8 +336,9 @@
 		    (setq-local paragraph-start "\f\\|[ \t]*$"))))
 (use-package nix-mode
   :commands (nix-mode))
-(use-package rust-mode
-  :commands (rust-mode))
+(use-package rustic
+  :commands (rustic-mode)
+  :init (setq rustic-format-on-save t))
 (use-package purescript-mode
   :commands (purescript-mode)
   :hook (purescript-mode . turn-on-purescript-indentation))
@@ -445,6 +459,6 @@
   "q" '(:ignore t :which-key "help")
   "q C-g" '(evil-escape :which-key t)
   "q q" '(evil-quit :which-key "quit")
-  "q k" '(kill-emacs :which-key "kill daemon")
+  "q k" '(save-buffers-kill-emacs :which-key "kill")
 
   "," '((lambda () (interactive) (evil-edit "~/.emacs.d/init.el")) :which-key "edit config"))
