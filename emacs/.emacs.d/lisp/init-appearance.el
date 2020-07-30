@@ -2,25 +2,20 @@
 
 ;; Disable superfluous chrome
 (menu-bar-mode -1)
-(tool-bar-mode -1)
 
 ;; Theme
-(use-package doom-themes)
-(use-package leuven-theme)
-(use-package seoul256-theme
-  :init (setq seoul256-background 256))
 (use-package modus-operandi-theme)
 (load-theme 'modus-operandi t)
 
 ;; Modeline
 (use-package mood-line
-  :config (mood-line-mode))
+  :config (mood-line-mode +1))
 
 ;; Display line numbers
-(global-display-line-numbers-mode)
+(global-display-line-numbers-mode +1)
 
 ;; Always apply syntax highlighting
-(global-font-lock-mode t)
+(global-font-lock-mode +1)
 
 ;; Highlight matching parenthesis
 (show-paren-mode t)
