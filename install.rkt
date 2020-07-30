@@ -42,7 +42,7 @@
 (define/contract (prepare-emacs)
   (-> any)
   (printf "[emacs] Setting up truecolor support\n")
-  (run "$HOME/dotfiles/emacs/.emacs.d/setup-truecolor"))
+  (run "$HOME/dotfiles/emacs/.config/emacs/setup-truecolor"))
 
 (define/contract (prepare-hammerspoon)
   (-> any)

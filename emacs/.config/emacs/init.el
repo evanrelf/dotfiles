@@ -105,9 +105,7 @@
 
 (use-package no-littering)
 
-(use-package esup
-  :commands (esup))
-
+;; Avoid garbage collection until idle
 (use-package gcmh
   :config (gcmh-mode +1))
 
