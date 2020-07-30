@@ -29,6 +29,9 @@
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
 
+;; Disable audio bell
+(setq ring-bell-function 'ignore)
+
 ;; Shorten yes/no prompts to y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -76,6 +79,11 @@
   ;; Font
   (setq default-frame-alist '((font . "PragmataPro Liga-16")))
 
+  ;; Get rid of weird fonts in org-mode
+  (set-face-font 'default "PragmataPro Liga-16")
+  (copy-face 'default 'fixed-pitch)
+  (copy-face 'default 'variable-pitch)
+
   ;; Smaller font size adjustment increments
   (setq text-scale-mode-step 1.1))
 
@@ -110,8 +118,7 @@
   :config (gcmh-mode +1))
 
 ;; Keybindings
-(use-package general
-  :config (general-evil-setup))
+(use-package general)
 
 ;; Theme
 (use-package modus-operandi-theme)
@@ -129,6 +136,8 @@
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
+  (unless (display-graphic-p)
+    (setq evil-want-C-i-jump nil))
   (setq evil-want-Y-yank-to-eol t)
   (setq evil-shift-width 2)
   (setq evil-move-beyond-eol t)
@@ -136,9 +145,17 @@
   (setq evil-vsplit-window-right t)
   (setq evil-echo-state nil)
   (general-def
-    :states '(normal visual)
+    :states '(normal visual motion)
+    ;; Don't skip over wrapped lines
     "j" 'evil-next-visual-line
-    "k" 'evil-previous-visual-line)
+    "k" 'evil-previous-visual-line
+    ;; Kakoune keys for convenience
+    "gi" 'evil-first-non-blank
+    "ge" '(lambda () (interactive) (evil-goto-line) (evil-end-of-line))
+    "gh" 'evil-beginning-of-line
+    "gj" 'evil-goto-line
+    "gk" 'evil-goto-first-line
+    "gl" 'evil-last-non-blank)
   :config (evil-mode +1))
 
 (use-package evil-collection
@@ -187,10 +204,20 @@
    (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
 
+;; Zero-config jump-to-definition
+(use-package dumb-jump
+  :after ivy
+  :init
+  (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-force-searcher 'rg)
+  :config
+  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
+  (dumb-jump-mode +1))
+
 ;; Auto-complete
 (use-package company
   :init (setq company-idle-delay 0.2)
-  :hook (after-init . global-company-mode))
+  :hook (prog-mode . company-mode))
 
 ;; Display errors
 (use-package flycheck
@@ -224,8 +251,18 @@
   :commands (org-mode))
 (use-package evil-org
   :after (evil org)
-  :hook (org-mode . evil-org-mode)
-  :config (evil-org-set-key-theme))
+  :init
+  (setq org-adapt-indentation nil)
+  (setq org-src-tab-acts-natively t)
+  :config
+  (general-def
+    :keymaps 'evil-org-mode-map
+    :states 'normal
+    "TAB" 'org-cycle)
+  (evil-org-set-key-theme)
+  :hook
+  ((org-mode . evil-org-mode)
+   (evil-org-mode . (lambda () (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))))))
 
 ;; Show search result count in modeline
 (use-package anzu
@@ -236,10 +273,15 @@
 (use-package ivy
   :config (ivy-mode +1))
 
+(use-package counsel
+  :config (counsel-mode +1))
+(use-package counsel-projectile
+  :config (counsel-projectile-mode +1))
+
 (use-package prescient
   :config (prescient-persist-mode +1))
 (use-package ivy-prescient
-  :after (ivy present)
+  :after (ivy counsel prescient)
   :config (ivy-prescient-mode +1))
 
 ;; ;; Terminals in GUI
@@ -364,7 +406,7 @@
   "b ESC" '(evil-escape :which-key t)
   "b c" '(evil-buffer-new :which-key "create")
   "b l" '(ibuffer :which-key "list")
-  "b s" '(ibuffer :which-key "switch")
+  "b s" '(counsel-ibuffer :which-key "switch")
   "b n" '(next-buffer :which-key "next")
   "b p" '(previous-buffer :which-key "previous")
   "b d" '(evil-delete-buffer :which-key "delete")
@@ -389,6 +431,7 @@
   "p s" '(projectile-switch-project :which-key "switch")
   "p f" '(projectile-find-file :which-key "find file")
   "p d" '(projectile-dired :which-key "dired")
+  "p D" '(projectile-dired-other-window :which-key "dired split")
   "p t" '(multi-vterm-projectile :which-key "terminal")
 
   "p b" '(:ignore t :which-key "buffer")
@@ -411,6 +454,7 @@
   "h f" '(describe-function :which-key "function")
   "h k" '(describe-key :which-key "key")
   "h m" '(describe-mode :which-key "mode")
+  "h M" '(which-key-show-major-mode :which-key "which-key major mode")
   "h p" '(describe-package :which-key "package")
 
   "q" '(:ignore t :which-key "help")
