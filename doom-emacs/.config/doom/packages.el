@@ -5,44 +5,59 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
+(package! modus-operandi-theme)
+(package! mood-line)
+(package! evil-terminal-cursor-changer)
+(package! magit-delta)
+(package! simpleclip)
+
 (disable-packages!
+ ;; :completion ivy
  amx
- counsel-css
+ wgrep
+
+ ;; :editor evil
  evil-args
  evil-easymotion
  evil-embrace
  evil-exchange
  evil-mc
  evil-quick-diff
- evil-snipe
  exato
- github-review
- haml-mode
- htmlize
- ivy-rich
+
+ ;; :lang json
  json-snatcher
- less-css-mode
- magit-gitflow
+
+ ;; :lang org
+ htmlize
  org-cliplink
  org-yt
  orgit
  ox-clip
- pug-mode
+
+ ;; :lang rust
  racer
+
+ ;; :lang web
+ counsel-css
+ haml-mode
+ less-css-mode
+ pug-mode
  rainbow-mode
- request
  sass-mode
  slim-mode
- solaire
  stylus-mode
  sws-mode
- wgrep)
 
-(package! modus-operandi-theme)
-(package! mood-line)
-(package! evil-terminal-cursor-changer)
-(package! magit-delta)
-(package! simpleclip)
+ ;; :tools lookup
+ request
+
+ ;; :tools magit
+ github-review
+ magit-gitflow
+
+ ;; :ui doom
+ solaire)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

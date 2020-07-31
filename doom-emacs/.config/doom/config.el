@@ -3,6 +3,9 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(when (version< emacs-version "27")
+  (error "Please use Emacs 27 or newer"))
+
 (use-package! mood-line
   :config (mood-line-mode +1))
 
@@ -42,10 +45,6 @@
 
 (use-package! git-gutter
   :config (custom-set-variables '(git-gutter:modified-sign "~")))
-
-(use-package! simpleclip
-  :when (display-graphic-p)
-  :config (simpleclip-mode +1))
 
 (use-package! which-key
   :init (setq which-key-idle-delay 0.5))

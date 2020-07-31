@@ -6,6 +6,10 @@ if _exists emacs && test -d "$HOME/.emacs.d/bin"
     set --prepend PATH "$HOME/.emacs.d/bin"
 end
 
+if _exists emacs && test -d "$HOME/.config/emacs/bin"
+    set --prepend PATH "$HOME/.config/emacs/bin"
+end
+
 if _exists rustup
     set --export RUSTUP_HOME "$HOME/.config/rustup"
 end

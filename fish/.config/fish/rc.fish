@@ -14,7 +14,7 @@ function rc -d "Open the specified program's configuration file"
             case spacemacs
                 eval "$EDITOR $HOME/.spacemacs"
             case doom
-                cd "$HOME/.doom.d/"
+                cd "$HOME/.config/doom/"
                 ls -l
 
                 # Shells

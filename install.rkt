@@ -39,21 +39,6 @@
    nonexistent)
   existent)
 
-(define/contract (prepare-doom-emacs)
-  (-> any)
-  (if (directory-exists? (home ".emacs.d"))
-      (printf "[doom-emacs] Leaving existing installation of Emacs at ~~/.emacs.d alone\n")
-      (lambda ()
-        (printf "[doom-emacs] Downloading Doom Emacs\n")
-        (check-installed "git")
-        (run
-         (string-join
-          '("git clone --depth 1 'https://github.com/hlissner/doom-emacs'"
-            "\"$HOME/.emacs.d\"")))
-        (printf "[doom-emacs] Remember to run ~~/.emacs.d/bin/doom install"))))
-;; (printf "[doom-emacs] Installing Doom Emacs\n")
-;; (run "~/.emacs.d/bin/doom install")))
-
 (define/contract (prepare-emacs)
   (-> any)
   (printf "[emacs] Setting up truecolor support\n")
@@ -102,7 +87,7 @@
 (define/contract (prepare package)
   (-> string? any)
   (case package
-    [("doom-emacs") (prepare-doom-emacs)]
+    [("doom-emacs") (prepare-emacs)]
     [("emacs") (prepare-emacs)]
     [("hammerspoon") (prepare-hammerspoon)]
     [("kakoune") (prepare-kakoune)]

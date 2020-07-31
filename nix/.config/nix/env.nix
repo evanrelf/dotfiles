@@ -17,6 +17,7 @@ in
       declarative-channels
       exa
       fd
+      findutils
       fish
       fzf
       gcoreutils
