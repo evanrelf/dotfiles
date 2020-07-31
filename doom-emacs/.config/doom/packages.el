@@ -54,7 +54,7 @@
 
  ;; :tools magit
  github-review
- magit-gitflow
+ ;; magit-gitflow ;; TODO: I need this enabled for the ? popup
 
  ;; :ui doom
  solaire)
