@@ -50,6 +50,10 @@
 ;; Sentences shouldn't have to end with two spaces
 (setq sentence-end-double-space nil)
 
+;; Show ruler at 80 columns
+(setq-default fill-column 81)
+(global-display-fill-column-indicator-mode +1)
+
 ;; Indent with 2 spaces
 (setq tab-width 2)
 (setq indent-tabs-mode nil)
@@ -128,10 +132,6 @@
 (use-package mood-line
   :config (mood-line-mode +1))
 
-;; Highlight TODO, NOTE, FIXME, etc.
-(use-package hl-todo
-  :config (global-hl-todo-mode +1))
-
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
@@ -146,21 +146,17 @@
   (setq evil-echo-state nil)
   (general-def
     :states '(normal visual motion)
-    ;; Don't skip over wrapped lines
     "j" 'evil-next-visual-line
-    "k" 'evil-previous-visual-line
-    ;; Kakoune keys for convenience
-    "gi" 'evil-first-non-blank
-    "ge" '(lambda () (interactive) (evil-goto-line) (evil-end-of-line))
-    "gh" 'evil-beginning-of-line
-    "gj" 'evil-goto-line
-    "gk" 'evil-goto-first-line
-    "gl" 'evil-last-non-blank)
+    "k" 'evil-previous-visual-line)
   :config (evil-mode +1))
 
 (use-package evil-collection
   :after evil
   :config (evil-collection-init))
+
+(use-package evil-multiedit
+  :after evil
+  :config (evil-multiedit-default-keybinds))
 
 ;; Change cursor shape in terminal based on mode
 (use-package evil-terminal-cursor-changer
@@ -190,12 +186,15 @@
   :commands (evil-escape)
   :after evil)
 
+(use-package vimish-fold
+  :after evil)
+(use-package evil-vimish-fold
+  :after vimish-fold
+  :config (global-evil-vimish-fold-mode +1))
+
 (use-package smartparens
   :init (setq sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
-(use-package evil-smartparens
-  :after (evil smartparens)
-  :hook (smartparens-enabled . evil-smartparens-mode))
 
 ;; LSP
 (use-package lsp-mode
@@ -213,6 +212,9 @@
   :config
   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
   (dumb-jump-mode +1))
+
+;; ripgrep
+(use-package deadgrep)
 
 ;; Auto-complete
 (use-package company
@@ -234,7 +236,9 @@
   :config (global-flycheck-mode +1))
 
 (use-package magit
-  :init (setq git-commit-summary-max-length 50))
+  :init
+  (setq git-commit-summary-max-length 50)
+  (add-hook 'git-commit-mode-hook #'(lambda () (setq-local fill-column 73))))
 (use-package magit-delta
   :after magit
   :config (magit-delta-mode +1))
@@ -387,6 +391,7 @@
   "ESC" '(evil-escape :which-key t)
   "C-g" '(evil-escape :which-key t)
   "SPC" '(execute-extended-command :which-key "M-x")
+  "/" '(deadgrep :which-key "ripgrep")
 
   "w" '(:ignore t :which-key "window")
   "w C-g" '(evil-escape :which-key t)
