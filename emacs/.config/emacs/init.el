@@ -101,9 +101,9 @@
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -208,7 +208,7 @@
   :after ivy
   :init
   (setq dumb-jump-selector 'ivy)
-  (setq dumb-jump-force-searcher 'rg)
+  (setq dumb-jump-prefer-searcher 'rg)
   :config
   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
   (dumb-jump-mode +1))
@@ -225,11 +225,11 @@
 (use-package flycheck
   :init
   (setq flycheck-disabled-checkers
-	'(emacs-lisp
-	  emacs-lisp-checkdoc
-	  haskell-ghc
-	  haskell-stack-ghc
-	  racket))
+        '(emacs-lisp
+          emacs-lisp-checkdoc
+          haskell-ghc
+          haskell-stack-ghc
+          racket))
   (setq flymake-no-changes-timeout nil)
   (setq flymake-start-syntax-check-on-newline nil)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
@@ -323,8 +323,8 @@
   :commands (haskell-mode)
   :hook
   (haskell-mode . (lambda ()
-		    (setq-local paragraph-separate "[ \t\f]*$")
-		    (setq-local paragraph-start "\f\\|[ \t]*$"))))
+                    (setq-local paragraph-separate "[ \t\f]*$")
+                    (setq-local paragraph-start "\f\\|[ \t]*$"))))
 
 (use-package nix-mode
   :commands (nix-mode))
