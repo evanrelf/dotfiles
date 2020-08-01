@@ -13,6 +13,11 @@ I'll use the [[https://github.com/raxod502/apheleia][apheleia]] plugin, and conf
 *** TODO Document my configuration
 *** TODO Find simpler way of mapping =gj= and =gk=
 [[file:doom-emacs/.config/doom/config.el::;; TODO: Clean this up][Section in config.el I'm referring to]]
+*** TODO Change Org mode bullet symbols
+I don't like the stars and flowers and stuff. I'd rather have them all be circles; filled when collapsed, and an outline when expanded.
+*** TODO Visually wrap Org mode text at 80 columns
+But don't actually insert newlines, otherwise the raw plaintext won't be properly wrapped due to the =outline-mode= stuff.
+The solution might be something like =visual-line-mode=, but I couldn't get it to work in the ~2 minutes I tried.
 ** Nix
 *** TODO Fix broken channels on NixOS
 I get errors like this when trying to use =nix-env= or =nix-shell= with the =nixpkgs= channel from =declarative-channels=:
