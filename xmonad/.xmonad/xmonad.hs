@@ -79,8 +79,8 @@ myKeys xconfig = EZConfig.additionalKeysP xconfig
   ]
 
 
-myActiveColor = "#1A11A1"
-myInactiveColor = "#555555"
+myActiveColor = "#5577FF"
+myInactiveColor = "#333333"
 
 
 myTheme = def
