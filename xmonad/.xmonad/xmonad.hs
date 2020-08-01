@@ -6,10 +6,10 @@ import Data.Function ((&))
 import XMonad
 import qualified XMonad.Actions.CycleWS as CycleWS
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
-import XMonad.Layout.Decoration (Theme (..))
+import XMonad.Layout.Decoration (Theme (..), shrinkText)
 import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.NoFrillsDecoration (noFrillsDeco, shrinkText)
-import XMonad.Layout.Tabbed (shrinkText, tabbedAlways)
+import XMonad.Layout.Spacing (Border (..), spacingRaw)
+import XMonad.Layout.Tabbed (tabbedAlways)
 import qualified XMonad.Util.EZConfig as EZConfig
 import qualified XMonad.Util.Run as Run
 
@@ -33,20 +33,27 @@ main = xmonad $ def
   & ewmh
 
 
-myLayoutHook =
-  let
-    ratio = 1 / 2
-
-    resizeIncrement = 3 / 100
-
-    tall =
+myLayoutHook = tall ||| tabs ||| Full & spaced & smartBorders
+  where
+    tall = do
+      let ratio = 1 / 2
+      let resizeIncrement = 3 / 100
       Tall 1 resizeIncrement ratio
-      & noFrillsDeco shrinkText myTheme
 
     tabs = tabbedAlways shrinkText myTheme
-  in
-    tall ||| tabs ||| Full
-    & smartBorders
+
+    spaced = do
+      let smartBorder = True
+      let screenBorder = Border 0 0 0 0
+      let screenBorderEnabled = False
+      let windowBorder = Border 5 5 5 5
+      let windowBorderEnabled = True
+      spacingRaw
+        smartBorder
+        screenBorder
+        screenBorderEnabled
+        windowBorder
+        windowBorderEnabled
 
 
 myRemoveKeys xconfig = EZConfig.removeKeysP xconfig
