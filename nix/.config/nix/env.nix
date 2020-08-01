@@ -52,6 +52,7 @@ in
       zoxide
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
       acpi
+      autocutsel
       dmenu
       emacsGcc
       firefox

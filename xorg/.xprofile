@@ -5,4 +5,5 @@ xsetroot -cursor_name left_ptr
 xset r rate 200 30
 redshift -l 33.6216:-117.7025 &
 xbanish &
+autocutsel &
 exec xmonad
