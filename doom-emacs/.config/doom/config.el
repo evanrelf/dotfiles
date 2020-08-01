@@ -92,7 +92,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(if (eq system-type 'darwin)
+(if IS-MAC
   (setq doom-font (font-spec :family "PragmataPro Liga" :size 16)
         doom-big-font (font-spec :family "PragmataPro Liga" :size 20)
         doom-variable-pitch-font (font-spec :family "PragmataPro Liga" :size 16))
