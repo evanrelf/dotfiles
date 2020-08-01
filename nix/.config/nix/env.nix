@@ -57,7 +57,9 @@ in
       firefox
       iosevka-pro
       kitty
+      redshift
       spotify
+      xbanish
       xclip
     ]);
   }
