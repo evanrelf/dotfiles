@@ -13,6 +13,8 @@
   :pin "b49ca4")
 (package! magit-delta
   :pin "d988ab")
+(package! git-gutter
+  :pin "2c3242")
 
 (disable-packages!
  ;; :completion ivy
@@ -59,7 +61,10 @@
  ;; magit-gitflow ;; TODO: I need this enabled for the ? popup
 
  ;; :ui doom
- solaire)
+ solaire
+
+ ;; :ui vc-gutter
+ git-gutter-fringe)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
