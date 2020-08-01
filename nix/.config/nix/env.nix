@@ -55,7 +55,7 @@ in
       autocutsel
       chromium
       dmenu
-      emacsGcc
+      emacsGccVterm
       firefox
       iosevka-pro
       kitty
