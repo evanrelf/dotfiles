@@ -53,6 +53,7 @@ in
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
       acpi
       autocutsel
+      chromium
       dmenu
       emacsGcc
       firefox
