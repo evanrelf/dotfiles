@@ -5,11 +5,14 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
-(package! modus-operandi-theme)
-(package! mood-line)
-(package! evil-terminal-cursor-changer)
-(package! magit-delta)
-(package! simpleclip)
+(package! modus-operandi-theme
+  :pin "c376b0")
+(package! mood-line
+  :pin "64cbd6")
+(package! evil-terminal-cursor-changer
+  :pin "b49ca4")
+(package! magit-delta
+  :pin "d988ab")
 
 (disable-packages!
  ;; :completion ivy
