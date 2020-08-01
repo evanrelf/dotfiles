@@ -64,9 +64,9 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +ranger) ; making dired pretty [functional]
+       dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       ibuffer         ; interactive buffer management
+       ibuffer           ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
@@ -77,7 +77,7 @@
        ;;vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
+       syntax            ; tasing you for every semicolon you forget
        (spell +aspell)   ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
