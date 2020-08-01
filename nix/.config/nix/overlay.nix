@@ -161,10 +161,4 @@ self: super:
       rev = "c3c77ede124e91c3275a994f9e57cab360e6a13a";
       sha256 = "0nyln9cxybqdcp9pdh5qjhhmbl0bn8f9ghh4cn0q2wmsldqpl0ai";
     })).nix-tree;
-
-  ormolu =
-    super.haskell.lib.justStaticExecutables
-      (super.haskellPackages.ormolu_0_1_0_0.override {
-        ghc-lib-parser = self.haskellPackages.ghc-lib-parser_8_10_1_20200523;
-      });
 }

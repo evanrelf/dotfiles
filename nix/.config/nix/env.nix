@@ -41,6 +41,7 @@ in
       neovim
       nix-index
       nix-prefetch-git
+      ormolu
       ripgrep
       rust-analyzer
       rustup
