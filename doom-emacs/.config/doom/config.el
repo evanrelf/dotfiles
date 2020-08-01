@@ -66,6 +66,9 @@
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 
+(setq-default fill-column 81)
+(global-display-fill-column-indicator-mode +1)
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Evan Relf"
