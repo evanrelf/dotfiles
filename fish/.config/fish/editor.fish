@@ -1,6 +1,5 @@
 if _exists evil
     set --export EDITOR "evil"
-    set --export ALTERNATE_EDITOR ""
 else if _exists nvim
     set --export EDITOR "nvim"
 else if _exists kak
