@@ -5,16 +5,11 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
-(package! modus-operandi-theme
-  :pin "c376b0")
-(package! mood-line
-  :pin "64cbd6")
-(package! evil-terminal-cursor-changer
-  :pin "b49ca4")
-(package! magit-delta
-  :pin "d988ab")
-(package! git-gutter
-  :pin "2c3242")
+(package! evil-terminal-cursor-changer :pin "b49ca4")
+(package! git-gutter :pin "2c3242")
+(package! magit-delta :pin "d988ab")
+(package! modus-operandi-theme :pin "c376b0")
+(package! mood-line :pin "64cbd6")
 
 (disable-packages!
  ;; :completion ivy
