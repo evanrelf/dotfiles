@@ -5,6 +5,7 @@ module Main (main) where
 import Data.Function ((&))
 import XMonad
 import qualified XMonad.Actions.CycleWS as CycleWS
+import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Layout.Decoration (Theme (..))
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.NoFrillsDecoration (noFrillsDeco, shrinkText)
@@ -25,10 +26,11 @@ main = xmonad $ def
   -- , logHook = undefined
   , layoutHook = myLayoutHook
   -- , manageHook = undefined
-  -- , handleEventHook = undefined
+  , handleEventHook = handleEventHook def <> fullscreenEventHook
   }
   & myRemoveKeys
   & myKeys
+  & ewmh
 
 
 myLayoutHook =
