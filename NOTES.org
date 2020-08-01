@@ -1,0 +1,27 @@
+* Notes
+** Doom Emacs
+*** TODO Add code formatting
+Languages:
+- Dhall
+- Rust
+- Terraform
+- JavaScript (=deno fmt=)
+- TypeScript (=deno fmt=)
+- Fish?
+- Emacs Lisp?
+I'll use the [[https://github.com/raxod502/apheleia][apheleia]] plugin, and configure formatters manually in a whitelist.
+*** TODO Document my configuration
+*** TODO Find simpler way of mapping =gj= and =gk=
+[[file:doom-emacs/.config/doom/config.el::;; TODO: Clean this up][Section in config.el I'm referring to]]
+** Nix
+*** TODO Fix broken channels on NixOS
+I get errors like this when trying to use =nix-env= or =nix-shell= with the =nixpkgs= channel from =declarative-channels=:
+
+#+begin_src
+$ nix-env -iA nixpkgs.hello
+error: attribute 'nixpkgs' in selection path 'nixpkgs.hello' not found
+#+end_src
+
+Using the =nixos= channel works though.
+
+This isn't an issue on macOS, and I'm using the same =declarative-channels= derivation.

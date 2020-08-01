@@ -38,8 +38,8 @@
  :m "k" 'evil-previous-visual-line)
 
 ;; Use regular, 3-levels of cycling, instead of Doom's default of 2-levels
-(after! evil-org
-  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+;; (after! evil-org
+;;   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 (use-package! flycheck
   :init
