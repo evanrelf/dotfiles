@@ -24,7 +24,6 @@
  evil-easymotion
  evil-embrace
  evil-exchange
- evil-mc
  evil-quick-diff
  exato
 
