@@ -56,6 +56,7 @@ in
       firefox
       iosevka-pro
       kitty
+      spotify
       xclip
     ]);
   }
