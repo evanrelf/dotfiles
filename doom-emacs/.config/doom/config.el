@@ -66,6 +66,12 @@
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 
+(defun text-scale-reset ()
+  "Reset the text scale"
+  (interactive)
+  (text-scale-set 0))
+(map! "C-0" 'text-scale-reset)
+
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
@@ -86,8 +92,10 @@
 ;; font string. You generally only need these two:
 (if (eq system-type 'darwin)
   (setq doom-font (font-spec :family "PragmataPro Liga" :size 16)
+        doom-big-font (font-spec :family "PragmataPro Liga" :size 20)
         doom-variable-pitch-font (font-spec :family "PragmataPro Liga" :size 16))
   (setq doom-font (font-spec :family "Iosevka Pro" :size 27)
+        doom-big-font (font-spec :family "Iosevka Pro" :size 40)
         doom-variable-pitch-font (font-spec :family "Iosevka Pro" :size 27)))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
