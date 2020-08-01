@@ -56,7 +56,9 @@
   :config (custom-set-variables '(git-gutter:modified-sign "~")))
 
 (use-package! which-key
-  :init (setq which-key-idle-delay 0.5))
+  :init
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-idle-secondary-delay 0.05))
 
 ;; Scroll 3 lines at a time
 (when (display-graphic-p)
