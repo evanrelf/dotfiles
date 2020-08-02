@@ -97,6 +97,9 @@
     (command-error-default-function data context caller)))
 (setq command-error-function #'quieter-command-error-function)
 
+;; Make files with a shebang executable when saving
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Evan Relf"
