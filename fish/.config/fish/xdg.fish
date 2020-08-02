@@ -67,3 +67,8 @@ if _exists task
         mkdir -p "$TASKDATA"
     end
 end
+
+# xorg
+if _exists startx
+    set --export XAUTHORITY "$XDG_RUNTIME_DIR/Xauthority"
+end
