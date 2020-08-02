@@ -2,12 +2,15 @@
 
 * Emacs
 ** TODO Get ~gccemacs~ working on macOS
-The ~emacs~ derivation in Nixpkgs has support for ~gccemacs~ on Linux, but not macOS due to its dependence on ~glibc~.
-[[https://github.com/NixOS/nixpkgs/pull/93716#issuecomment-665689045][Someone left a comment]] on the pull request which added support for the ~feature/native-comp~ branch about attempting to get it building on macOS, but it doesn't look like there's been any progress so far.
+The ~emacs~ derivation in Nixpkgs has support for ~gccemacs~ on Linux, but not
+macOS due to its dependence on ~glibc~. [[https://github.com/NixOS/nixpkgs/pull/93716#issuecomment-665689045][Someone left a comment]] on the pull
+request which added support for the ~feature/native-comp~ branch about attempting
+to get it building on macOS, but it doesn't look like there's been any progress
+so far.
 
 ** TODO Get ~vterm~ working on macOS
-I believe I can do this now that I know how to override the ~emacs~ derivation in ~emacsWithPackages~.
-[[file:nix/.config/nix/overlays/personal.nix::(super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: \[ p.vterm \]);][Link to overlay.nix]]
+I believe I can do this now that I know how to override the ~emacs~ derivation in
+~emacsWithPackages~. [[file:nix/.config/nix/overlays/personal.nix::(super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: \[ p.vterm \]);][Link to overlay.nix]]
 
 * Doom Emacs
 ** TODO Add code formatting
@@ -26,41 +29,47 @@ I'll use the [[https://github.com/raxod502/apheleia][apheleia]] plugin, and conf
 [[file:doom/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
 
 ** DONE Change Org mode bullet symbols
-I don't like the stars and flowers and stuff. I'd rather have them all be circles; filled when collapsed, and an outline when expanded.
+I don't like the stars and flowers and stuff. I'd rather have them all be
+circles; filled when collapsed, and an outline when expanded.
 
 ** DONE Visually wrap Org mode text at 80 columns
-But don't actually insert newlines, otherwise the raw plaintext won't be properly wrapped due to the ~outline-mode~ stuff.
-The solution might be something like ~visual-line-mode~, but I couldn't get it to work in the ~2 minutes I tried.
+But don't actually insert newlines, otherwise the raw plaintext won't be properly
+wrapped due to the ~outline-mode~ stuff. The solution might be something like
+~visual-line-mode~, but I couldn't get it to work in the ~2 minutes I tried.
 
 * Nix
 ** TODO Fix broken channels +on NixOS+
-I get errors like this when trying to use ~nix-env~ +or ~nix-shell~+ with the ~nixpkgs~ channel from ~declarative-channels~:
+I get errors like this when trying to use ~nix-env~ +or ~nix-shell~+ with the
+~nixpkgs~ channel from ~declarative-channels~:
 
 #+begin_src
-$ nix-env -iA nixpkgs.hello
-error: attribute 'nixpkgs' in selection path 'nixpkgs.hello' not found
-#+end_src
+$ nix-env -iA nixpkgs.hello error: attribute 'nixpkgs' in selection path
+'nixpkgs.hello' not found #+end_src
 
 Using the ~nixos~ channel works though.
 
-+This isn't an issue on macOS, and I'm using the same ~declarative-channels~ derivation.+
++This isn't an issue on macOS, and I'm using the same ~declarative-channels~
+derivation.+
 
-This does seem to be an issue on macOS as well, however it was hidden from me because the root user also has a ~nixpkgs~ channel, which I was unknowingly falling back on.
+This does seem to be an issue on macOS as well, however it was hidden from me
+because the root user also has a ~nixpkgs~ channel, which I was unknowingly
+falling back on.
 
 For example, take the following ways of running ~starship --version~:
 
 #+begin_src
-$ nix-env -iA nixpkgs.starship && starship --version; nix-env -e starship
-$ nix-shell -p starship --run 'starship --version'
-$ , starship --version
-#+end_src
+$ nix-env -iA nixpkgs.starship && starship --version; nix-env -e starship $
+nix-shell -p starship --run 'starship --version' $ , starship --version #+end_src
 
-The ~nix-env~ command gets me ~starship~ version 0.41.3, whereas the latter two commands get me ~0.44.0~.
+The ~nix-env~ command gets me ~starship~ version 0.41.3, whereas the latter two
+commands get me ~0.44.0~.
 
 I also went ahead and created a ~pkgs.nix~ file so I can run this:
 
 #+begin_src
-$ nix-env --file nix/.config/nix/pkgs.nix --install --attr starship
-#+end_src
+$ nix-env --file nix/.config/nix/pkgs.nix --install --attr starship #+end_src
 
-I think I have something wrong with how I'm installing channels or something - maybe conflicting names or something - so I should probably move away from using them altogether and set up a convenient shell alias for specifying the file explicitly.
+I think I have something wrong with how I'm installing channels or something -
+maybe conflicting names or something - so I should probably move away from using
+them altogether and set up a convenient shell alias for specifying the file
+explicitly.

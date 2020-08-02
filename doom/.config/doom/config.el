@@ -85,6 +85,7 @@
 
 (after! org
   (setq org-startup-indented nil)
+  (setq org-adapt-indentation nil)
   (setq org-hide-leading-stars nil)
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
@@ -104,9 +105,9 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (if IS-MAC
-  (setq doom-font (font-spec :family "PragmataPro Liga" :size 16)
-        doom-big-font (font-spec :family "PragmataPro Liga" :size 20)
-        doom-variable-pitch-font (font-spec :family "PragmataPro Liga" :size 16))
+    (setq doom-font (font-spec :family "PragmataPro Liga" :size 16)
+          doom-big-font (font-spec :family "PragmataPro Liga" :size 20)
+          doom-variable-pitch-font (font-spec :family "PragmataPro Liga" :size 16))
   (setq doom-font (font-spec :family "Iosevka Pro" :size 27)
         doom-big-font (font-spec :family "Iosevka Pro" :size 40)
         doom-variable-pitch-font (font-spec :family "Iosevka Pro" :size 27)))
