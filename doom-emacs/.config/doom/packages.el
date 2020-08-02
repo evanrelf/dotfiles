@@ -30,6 +30,7 @@
  ;; :lang org
  htmlize
  org-cliplink
+ org-superstar
  org-yt
  orgit
  ox-clip

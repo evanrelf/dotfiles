@@ -77,6 +77,10 @@
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
+(after! org
+  (setq org-startup-indented nil)
+  (setq org-hide-leading-stars nil))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Evan Relf"
