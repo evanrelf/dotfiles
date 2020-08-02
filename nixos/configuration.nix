@@ -118,13 +118,6 @@
 
   # PACKAGES
   programs.fish.enable = true;
-  environment.systemPackages = with pkgs; [
-    binutils
-    firefox
-    kitty
-    neovim
-    tmux
-  ];
 
   # FONTS
   fonts.enableDefaultFonts = true;
