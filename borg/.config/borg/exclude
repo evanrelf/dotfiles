@@ -16,8 +16,9 @@
 */.rustup
 */.cargo
 */.cargo
-/Users/*/Downloads/*.iso
-/home/*/Downloads/*.iso
+*.iso
+*.img
+*.dmg
 */Virtual Machines.localized
 */Photos Library.photoslibrary
 /Users/*/Library

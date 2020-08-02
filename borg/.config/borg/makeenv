@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -euo pipefail
+set -e
 
+# Check if environment variables have been configured
 if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" ]; then
   echo "Environment variables are not configured correctly" >&2
   exit 1
@@ -9,6 +10,7 @@ fi
 
 mkdir -p "$HOME/.config/borg/"
 
+# Write environment variables to file
 {
   echo "BORG_REPO=$BORG_REPO"
   echo "BORG_PASSPHRASE=$BORG_PASSPHRASE"

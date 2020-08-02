@@ -1,36 +1,42 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-_log() { echo "$@" >&2; }
-_fail() { _log "$@"; exit 1; }
+_log() { echo -e "$@" >&2; }
+_fail() { _log "Error: $*"; exit 1; }
 
 exclude_file="$HOME/.config/borg/exclude"
-archive_name=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+archive_name=${1:-$(date -u +'%Y-%m-%dT%H:%M:%SZ')}
 archive_root="$HOME"
 
 # Check that borg is installed
 command -v borg >/dev/null 2>&1 \
-  || (_fail "borg is not installed, or is not in your PATH")
+  || _fail "borg is not installed, or is not in your PATH"
 
 # Check that environment variables are configured
 [ -n "$BORG_REMOTE_PATH" ] \
-  || (_fail "BORG_REMOTE_PATH has not been configured")
+  || _fail "BORG_REMOTE_PATH has not been configured"
 [ -n "$BORG_REPO" ] \
-  || (_fail "BORG_REPO has not been configured")
+  || _fail "BORG_REPO has not been configured"
 [ -n "$BORG_PASSPHRASE" ] \
-  || (_fail "BORG_PASSPHRASE has not been configured")
+  || _fail "BORG_PASSPHRASE has not been configured"
 
 # Check that paths exist
 [ -f "$exclude_file" ] \
-  || (_fail "Exclude file '$exclude_file' does not exist, or is not a file")
+  || _fail "Exclude file '$exclude_file' does not exist, or is not a file"
 [ -d "$archive_root" ] \
-  || (_fail "Archive root '$archive_root' does not exist, or is not a directory")
+  || _fail "Archive root '$archive_root' does not exist, or is not a directory"
 
 # Check connection to rsync.net
 wait=$(if [ "$(uname)" = "Darwin" ]; then echo "-W"; else echo "-w"; fi)
 ping -c 2 "$wait" 30 rsync.net >/dev/null 2>&1 \
-  || (_fail "Failed to connect to rsync.net")
+  || _fail "Failed to connect to rsync.net"
+
+if [ -n "$1" ]; then
+  _log "Resuming archive named '$archive_name'"
+else
+  _log "Creating archive named '$archive_name'"
+fi
 
 # Create archive
 _log "Connecting to rsync.net..."
@@ -46,4 +52,6 @@ borg \
   --exclude-from "$exclude_file" \
   --compression zstd,10 \
   ::"$archive_name" \
-  "$archive_root"
+  "$archive_root" \
+  || _fail "Failed to create archive '$archive_name'\n\
+Resume backup by passing the name of this incomplete archive as an argument"
