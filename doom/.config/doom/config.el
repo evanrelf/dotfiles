@@ -11,7 +11,8 @@
   (setq evil-echo-state nil)
   (setq evil-move-beyond-eol t)
   (setq evil-split-window-below t)
-  (setq evil-vsplit-window-right t))
+  (setq evil-vsplit-window-right t)
+  (setq +evil-want-o/O-to-continue-comments nil))
 
 (use-package! evil-terminal-cursor-changer
   :unless (display-graphic-p)
