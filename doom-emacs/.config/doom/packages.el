@@ -13,6 +13,9 @@
 (package! visual-fill-column :pin "64d38b")
 
 (disable-packages!
+ ;; core
+ hl-line
+
  ;; :completion ivy
  amx
  wgrep
