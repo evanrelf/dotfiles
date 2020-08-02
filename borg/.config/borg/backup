@@ -32,11 +32,7 @@ wait=$(if [ "$(uname)" = "Darwin" ]; then echo "-W"; else echo "-w"; fi)
 ping -c 2 "$wait" 30 rsync.net >/dev/null 2>&1 \
   || _fail "Failed to connect to rsync.net"
 
-if [ -n "$1" ]; then
-  _log "Resuming archive named '$archive_name'"
-else
-  _log "Creating archive named '$archive_name'"
-fi
+_log "Creating archive named '$archive_name'"
 
 # Create archive
 _log "Connecting to rsync.net..."
@@ -52,6 +48,5 @@ borg \
   --exclude-from "$exclude_file" \
   --compression zstd,10 \
   ::"$archive_name" \
-  "$archive_root" \
-  || _fail "Failed to create archive '$archive_name'\n\
-Resume backup by passing the name of this incomplete archive as an argument"
+  "$archive_root"
+_log "Finished creating archive"
