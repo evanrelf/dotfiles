@@ -22,6 +22,7 @@
 
  ;; :editor evil
  evil-args
+ evil-easymotion
  evil-embrace
  evil-exchange
  evil-quick-diff
