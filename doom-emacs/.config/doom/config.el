@@ -77,6 +77,9 @@
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
+;; (use-package! visual-fill-column
+;;   :hook (org-indent-mode . visual-fill-column-mode))
+
 (after! org
   (setq org-startup-indented nil)
   (setq org-hide-leading-stars nil))
