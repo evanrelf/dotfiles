@@ -50,3 +50,16 @@ borg \
   ::"$archive_name" \
   "$archive_root"
 _log "Finished creating archive"
+
+# Prune
+_log "Pruning"
+borg \
+  prune \
+  --verbose \
+  --stats \
+  --save-space \
+  --keep-hourly=24 \
+  --keep-daily=30 \
+  --keep-weekly=8 \
+  --keep-monthly=12
+_log "Pruned"
