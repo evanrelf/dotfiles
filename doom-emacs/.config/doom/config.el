@@ -6,11 +6,9 @@
 (when (version< emacs-version "27")
   (error "Please use Emacs 27 or newer"))
 
-(use-package! mood-line
-  :config (mood-line-mode +1))
+(mood-line-mode +1)
 
-(use-package! evil
-  :init
+(after! evil
   (setq evil-echo-state nil)
   (setq evil-move-beyond-eol t)
   (setq evil-split-window-below t)
@@ -48,15 +46,13 @@
         '(emacs-lisp
           emacs-lisp-checkdoc)))
 
-(use-package! magit-delta
-  :after magit
-  :config (magit-delta-mode +1))
+(after! magit
+  (magit-delta-mode +1))
 
-(use-package! git-gutter
-  :config (custom-set-variables '(git-gutter:modified-sign "~")))
+(after! git-gutter
+  (custom-set-variables '(git-gutter:modified-sign "~")))
 
-(use-package! which-key
-  :init
+(after! which-key
   (setq which-key-idle-delay 0.5)
   (setq which-key-idle-secondary-delay 0.05))
 
