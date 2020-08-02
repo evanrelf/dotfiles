@@ -22,7 +22,7 @@ I'll use the [[https://github.com/raxod502/apheleia][apheleia]] plugin, and conf
 
 *** TODO Document my configuration
 *** TODO Find simpler way of mapping ~gj~ and ~gk~
-[[file:doom-emacs/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
+[[file:doom/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
 
 *** TODO Change Org mode bullet symbols
 I don't like the stars and flowers and stuff. I'd rather have them all be circles; filled when collapsed, and an outline when expanded.

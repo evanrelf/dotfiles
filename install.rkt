@@ -87,7 +87,7 @@
 (define/contract (prepare package)
   (-> string? any)
   (case package
-    [("doom-emacs") (prepare-emacs)]
+    [("doom") (prepare-emacs)]
     [("emacs") (prepare-emacs)]
     [("hammerspoon") (prepare-hammerspoon)]
     [("kakoune") (prepare-kakoune)]
