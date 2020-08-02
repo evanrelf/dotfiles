@@ -35,9 +35,10 @@
  :m "j" 'evil-next-visual-line
  :m "k" 'evil-previous-visual-line)
 
-;; Use regular, 3-levels of cycling, instead of Doom's default of 2-levels
-;; (after! evil-org
-;;   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+;; Use regular, 3-levels of cycling, instead of Doom's default of 2-levels. This
+;; matches the behavior in `markdown-mode'.
+(after! evil-org
+  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 (use-package! flycheck
   :init
