@@ -3,8 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(when (version< emacs-version "27")
-  (error "Please use Emacs 27 or newer"))
+(unless EMACS27+ (error "Please use Emacs 27 or newer"))
 
 (mood-line-mode +1)
 
