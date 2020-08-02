@@ -1,11 +1,11 @@
 * Notes
 ** Emacs
-*** TODO Get =gccemacs= working on macOS
-The =emacs= derivation in Nixpkgs has support for =gccemacs= on Linux, but not macOS due to its dependence on =glibc=.
-[[https://github.com/NixOS/nixpkgs/pull/93716#issuecomment-665689045][Someone left a comment]] on the pull request which added support for the =feature/native-comp= branch about attempting to get it building on macOS, but it doesn't look like there's been any progress so far.
+*** TODO Get ~gccemacs~ working on macOS
+The ~emacs~ derivation in Nixpkgs has support for ~gccemacs~ on Linux, but not macOS due to its dependence on ~glibc~.
+[[https://github.com/NixOS/nixpkgs/pull/93716#issuecomment-665689045][Someone left a comment]] on the pull request which added support for the ~feature/native-comp~ branch about attempting to get it building on macOS, but it doesn't look like there's been any progress so far.
 
-*** TODO Get =vterm= working on macOS
-I believe I can do this now that I know how to override the =emacs= derivation in =emacsWithPackages=.
+*** TODO Get ~vterm~ working on macOS
+I believe I can do this now that I know how to override the ~emacs~ derivation in ~emacsWithPackages~.
 [[file:nix/.config/nix/overlay.nix::(super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: \[ p.vterm \]);][Link to overlay.nix]]
 
 ** Doom Emacs
@@ -14,32 +14,32 @@ Languages:
 - Dhall
 - Rust
 - Terraform
-- JavaScript (=deno fmt=)
-- TypeScript (=deno fmt=)
+- JavaScript (~deno fmt~)
+- TypeScript (~deno fmt~)
 - Fish?
 - Emacs Lisp?
 I'll use the [[https://github.com/raxod502/apheleia][apheleia]] plugin, and configure formatters manually in a whitelist.
 
 *** TODO Document my configuration
-*** TODO Find simpler way of mapping =gj= and =gk=
+*** TODO Find simpler way of mapping ~gj~ and ~gk~
 [[file:doom-emacs/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
 
 *** TODO Change Org mode bullet symbols
 I don't like the stars and flowers and stuff. I'd rather have them all be circles; filled when collapsed, and an outline when expanded.
 
 *** TODO Visually wrap Org mode text at 80 columns
-But don't actually insert newlines, otherwise the raw plaintext won't be properly wrapped due to the =outline-mode= stuff.
-The solution might be something like =visual-line-mode=, but I couldn't get it to work in the ~2 minutes I tried.
+But don't actually insert newlines, otherwise the raw plaintext won't be properly wrapped due to the ~outline-mode~ stuff.
+The solution might be something like ~visual-line-mode~, but I couldn't get it to work in the ~2 minutes I tried.
 
 ** Nix
 *** TODO Fix broken channels on NixOS
-I get errors like this when trying to use =nix-env= or =nix-shell= with the =nixpkgs= channel from =declarative-channels=:
+I get errors like this when trying to use ~nix-env~ +or ~nix-shell~+ with the ~nixpkgs~ channel from ~declarative-channels~:
 
 #+begin_src
 $ nix-env -iA nixpkgs.hello
 error: attribute 'nixpkgs' in selection path 'nixpkgs.hello' not found
 #+end_src
 
-Using the =nixos= channel works though.
+Using the ~nixos~ channel works though.
 
-This isn't an issue on macOS, and I'm using the same =declarative-channels= derivation.
+This isn't an issue on macOS, and I'm using the same ~declarative-channels~ derivation.
