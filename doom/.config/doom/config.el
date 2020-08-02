@@ -89,6 +89,13 @@
   (setq org-hide-leading-stars nil)
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
+;; Make Emacs shut up (https://emacs.stackexchange.com/a/20039)
+(defun quieter-command-error-function (data context caller)
+  (when (not (memq (car data) '(beginning-of-buffer
+                                end-of-buffer)))
+    (command-error-default-function data context caller)))
+(setq command-error-function #'quieter-command-error-function)
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Evan Relf"
