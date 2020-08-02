@@ -68,6 +68,7 @@
   "Reset the text scale"
   (interactive)
   (text-scale-set 0))
+
 (map! "C-0" 'text-scale-reset)
 
 (setq-default fill-column 81)
@@ -76,9 +77,16 @@
 ;; (use-package! visual-fill-column
 ;;   :hook (org-indent-mode . visual-fill-column-mode))
 
+(defun force-org-hide-leading-stars ()
+  "See issue for more info: https://github.com/hlissner/doom-emacs/issues/3076"
+  (setq org-hide-leading-stars nil)
+  (font-lock-mode -1)
+  (font-lock-mode +1))
+
 (after! org
   (setq org-startup-indented nil)
-  (setq org-hide-leading-stars nil))
+  (setq org-hide-leading-stars nil)
+  (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
