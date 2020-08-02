@@ -13,6 +13,7 @@ in
     name = "env";
     paths = with pkgs; [
       (aspellWithDicts (d: with d; [ en en-computers en-science ]))
+      borgbackup
       cabal-install
       comma
       declarative-channels
@@ -31,6 +32,7 @@ in
       nix-index
       nix-prefetch-git
       ormolu
+      rclone
       ripgrep
       rust-analyzer
       rustup
