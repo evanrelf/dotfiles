@@ -40,7 +40,7 @@ function rc -d "Open the specified program's configuration file"
 
                 # Terminal emulators
             case alacritty
-                eval "$EDITOR $HOME/.config/alacritty/alacritty.yml"
+                eval "$EDITOR $HOME/.config/alacritty.yml"
             case kitty
                 eval "$EDITOR $HOME/.config/kitty/kitty.conf"
             case kitty-local
