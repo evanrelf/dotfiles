@@ -26,6 +26,7 @@ in
       ghcid
       git
       gitAndTools.delta
+      graphviz # For org-roam
       jq
       kakoune
       neovim
@@ -38,6 +39,7 @@ in
       rustup
       sd
       shellcheck
+      sqlite # For org-roam
       tealdeer
       tmux
       zoxide
