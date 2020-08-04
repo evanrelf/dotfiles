@@ -42,7 +42,7 @@ I get errors like this when trying to use ~nix-env~ +or ~nix-shell~+ with the
 
 #+begin_src
 $ nix-env -iA nixpkgs.hello error: attribute 'nixpkgs' in selection path
-'nixpkgs.hello' not found #+end_src
+'nixpkgs.hello' not found
 #+end_src
 
 Using the ~nixos~ channel works though.
@@ -58,7 +58,7 @@ For example, take the following ways of running ~starship --version~:
 
 #+begin_src
 $ nix-env -iA nixpkgs.starship && starship --version; nix-env -e starship $
-nix-shell -p starship --run 'starship --version' $ , starship --version #+end_src
+nix-shell -p starship --run 'starship --version' $ , starship --version
 #+end_src
 
 The ~nix-env~ command gets me ~starship~ version 0.41.3, whereas the latter two
@@ -67,7 +67,7 @@ commands get me ~0.44.0~.
 I also went ahead and created a ~pkgs.nix~ file so I can run this:
 
 #+begin_src
-$ nix-env --file nix/.config/nix/pkgs.nix --install --attr starship #+end_src
+$ nix-env --file nix/.config/nix/pkgs.nix --install --attr starship
 #+end_src
 
 I think I have something wrong with how I'm installing channels or something -
