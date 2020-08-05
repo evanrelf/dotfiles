@@ -5,6 +5,7 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
+(package! apheleia :pin "6aff83d" :recipe (:host github :repo "raxod502/apheleia"))
 (package! evil-terminal-cursor-changer :pin "b49ca4")
 (package! git-gutter :pin "2c3242")
 (package! magit-delta :pin "d988ab")

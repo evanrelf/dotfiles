@@ -12,7 +12,13 @@ so far.
 I believe I can do this now that I know how to override the =emacs= derivation in
 =emacsWithPackages=. [[file:nix/.config/nix/overlays/personal.nix::(super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: \[ p.vterm \]);][Link to overlay.nix]]
 * Doom Emacs
-** TODO Add code formatting
+** TODO Document my configuration
+** TODO Find simpler way of mapping =gj= and =gk=
+[[file:doom/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
+** TODO Stop using system clipboard
+It should be separate, like in Vim. But I also need a way of writing to the
+system clipboard, like with =" * y= or =" + y=.
+** DONE Add code formatting
 Languages:
 - Dhall
 - Rust
@@ -22,12 +28,6 @@ Languages:
 - Fish?
 - Emacs Lisp?
 I'll use the [[https://github.com/raxod502/apheleia][apheleia]] plugin, and configure formatters manually in a whitelist.
-** TODO Document my configuration
-** TODO Find simpler way of mapping =gj= and =gk=
-[[file:doom/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
-** TODO Stop using system clipboard
-It should be separate, like in Vim. But I also need a way of writing to the
-system clipboard, like with =" * y= or =" + y=.
 ** DONE Change Org mode bullet symbols
 I don't like the stars and flowers and stuff. I'd rather have them all be
 circles; filled when collapsed, and an outline when expanded.

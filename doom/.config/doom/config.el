@@ -47,6 +47,11 @@
         '(emacs-lisp
           emacs-lisp-checkdoc)))
 
+(after! apheleia
+  (setq apheleia-formatters '((deno . ("deno" "fmt" "-"))))
+  (setq apheleia-mode-alist '((typescript-mode . deno)))
+  (apheleia-global-mode +1))
+
 (after! magit
   (magit-delta-mode +1))
 
