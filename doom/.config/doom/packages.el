@@ -29,6 +29,15 @@
  evil-snipe
  exato
 
+ ;; :lang javascript
+ coffee-mode
+ js2-refactor
+ nodejs-repl
+ npm-mode
+ rjsx-mode
+ skewer-mode
+ tide
+
  ;; :lang json
  json-snatcher
 

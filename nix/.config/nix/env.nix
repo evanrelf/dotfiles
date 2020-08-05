@@ -17,6 +17,7 @@ in
       cabal-install
       comma
       declarative-channels
+      deno
       exa
       fd
       findutils
