@@ -25,15 +25,10 @@
   (setq evil-emacs-state-cursor 'hbar)
   :config (evil-terminal-cursor-changer-activate))
 
-;; TODO: Clean this up
 (map!
  :after evil
- :n "j" 'evil-next-visual-line
- :n "k" 'evil-previous-visual-line
- :v "j" 'evil-next-visual-line
- :v "k" 'evil-previous-visual-line
- :m "j" 'evil-next-visual-line
- :m "k" 'evil-previous-visual-line)
+ :nvm "j" 'evil-next-visual-line
+ :nvm "k" 'evil-previous-visual-line)
 
 ;; Use regular, 3-levels of cycling, instead of Doom's default of 2-levels. This
 ;; matches the behavior in `markdown-mode'.
