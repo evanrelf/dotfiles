@@ -47,9 +47,13 @@
         '(emacs-lisp
           emacs-lisp-checkdoc)))
 
-(after! apheleia
-  (setq apheleia-formatters '((deno . ("deno" "fmt" "-"))))
-  (setq apheleia-mode-alist '((typescript-mode . deno)))
+(use-package! apheleia
+  :init
+  (setq apheleia-formatters '((deno . ("deno" "fmt" "-"))
+                              (rustfmt . ("rustfmt"))))
+  (setq apheleia-mode-alist '((typescript-mode . deno)
+                              (rustic-mode . rustfmt)))
+  :config
   (apheleia-global-mode +1))
 
 (after! magit
