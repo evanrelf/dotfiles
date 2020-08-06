@@ -30,6 +30,11 @@
  :nvm "j" 'evil-next-visual-line
  :nvm "k" 'evil-previous-visual-line)
 
+(map!
+ (:map evil-window-map
+       "-" #'+evil-window-split-a
+       "\\" #'+evil-window-vsplit-a))
+
 ;; Use regular, 3-levels of cycling, instead of Doom's default of 2-levels. This
 ;; matches the behavior in `markdown-mode'.
 (after! evil-org
