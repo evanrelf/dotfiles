@@ -29,6 +29,9 @@
  evil-snipe
  exato
 
+ ;; :emacs undo
+ undo-fu-session
+
  ;; :lang javascript
  coffee-mode
  js2-refactor
