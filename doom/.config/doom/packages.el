@@ -11,6 +11,7 @@
 (package! magit-delta :pin "d988ab")
 (package! modus-operandi-theme :pin "c376b0")
 (package! mood-line :pin "64cbd6")
+;;(package! kaolin-themes :pin "84f38e1")
 
 (disable-packages!
  ;; core
