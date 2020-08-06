@@ -91,12 +91,14 @@
   (font-lock-mode +1))
 
 (after! org
+  (setq org-directory "~/brain")
   (setq org-startup-indented nil)
   (setq org-adapt-indentation nil)
   (setq org-hide-leading-stars nil)
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
 (use-package! org-roam
+  :after org
   :init (setq org-roam-directory "~/brain/notes"))
 
 ;; Make Emacs shut up (https://emacs.stackexchange.com/a/20039)
