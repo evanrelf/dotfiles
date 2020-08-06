@@ -84,9 +84,6 @@
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
-;; (use-package! visual-fill-column
-;;   :hook (org-indent-mode . visual-fill-column-mode))
-
 (defun force-org-hide-leading-stars ()
   "See issue for more info: https://github.com/hlissner/doom-emacs/issues/3076"
   (setq org-hide-leading-stars nil)

@@ -11,7 +11,6 @@
 (package! magit-delta :pin "d988ab")
 (package! modus-operandi-theme :pin "c376b0")
 (package! mood-line :pin "64cbd6")
-(package! visual-fill-column :pin "64d38b")
 
 (disable-packages!
  ;; core
