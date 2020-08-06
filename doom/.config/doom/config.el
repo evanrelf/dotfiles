@@ -85,11 +85,13 @@
   (font-lock-mode -1)
   (font-lock-mode +1))
 
-(after! org
+(use-package! org
+  :init
   (setq org-directory "~/brain")
   (setq org-startup-indented nil)
   (setq org-adapt-indentation nil)
   (setq org-hide-leading-stars nil)
+  :config
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
 (use-package! org-roam
@@ -141,7 +143,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;; (setq org-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
