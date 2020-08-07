@@ -12,6 +12,7 @@
 (package! modus-operandi-theme :pin "c376b0")
 (package! mood-line :pin "64cbd6")
 ;;(package! kaolin-themes :pin "84f38e1")
+;;(package! leuven-theme :pin "a116202")
 
 (disable-packages!
  ;; core
