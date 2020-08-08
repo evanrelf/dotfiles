@@ -1,4 +1,5 @@
 #+title: Notes
+#+startup: fold
 
 * Emacs
 ** TODO Get =gccemacs= working on macOS
@@ -13,11 +14,11 @@ I believe I can do this now that I know how to override the =emacs= derivation i
 =emacsWithPackages=. [[file:nix/.config/nix/overlays/personal.nix::(super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: \[ p.vterm \]);][Link to overlay.nix]]
 * Doom Emacs
 ** TODO Document my configuration
-** TODO Find simpler way of mapping =gj= and =gk=
-[[file:doom/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
 ** TODO Stop using system clipboard
 It should be separate, like in Vim. But I also need a way of writing to the
 system clipboard, like with =" * y= or =" + y=.
+** DONE Find simpler way of mapping =gj= and =gk=
+[[file:doom/.config/doom/config.el::;; TODO: Clean this up][Link to config.el]]
 ** DONE Add code formatting
 Languages:
 - Dhall

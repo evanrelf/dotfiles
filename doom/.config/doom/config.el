@@ -111,7 +111,7 @@
 (setq command-error-function #'quieter-command-error-function)
 
 ;; Make files with a shebang executable when saving
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+(add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
 ;; Fix error about `-Z' flag
 (use-package! rustic
