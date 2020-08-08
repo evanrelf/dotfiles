@@ -93,10 +93,10 @@
 (use-package! org
   :init
   (setq org-directory "~/brain")
+  :config
   (setq org-startup-indented nil)
   (setq org-adapt-indentation nil)
   (setq org-hide-leading-stars nil)
-  :config
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
 (use-package! org-roam
