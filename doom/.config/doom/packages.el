@@ -17,6 +17,7 @@
 (disable-packages!
  ;; core
  hl-line
+ saveplace
 
  ;; :completion ivy
  amx
