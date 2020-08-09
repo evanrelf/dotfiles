@@ -16,10 +16,8 @@
 
 (map!
  :after evil
- :nvm "j" 'evil-next-visual-line
- :nvm "k" 'evil-previous-visual-line)
-
-(map!
+ :nv "j" 'evil-next-visual-line
+ :nv "k" 'evil-previous-visual-line
  (:map evil-window-map
        "-" #'+evil-window-split-a
        "\\" #'+evil-window-vsplit-a))
