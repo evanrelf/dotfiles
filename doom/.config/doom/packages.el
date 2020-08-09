@@ -76,7 +76,7 @@
  ;; magit-gitflow ;; TODO: I need this enabled for the ? popup
 
  ;; :ui doom
- solaire
+ solaire-mode
 
  ;; :ui vc-gutter
  git-gutter-fringe)
