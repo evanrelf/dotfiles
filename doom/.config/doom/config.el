@@ -5,7 +5,9 @@
 
 (unless EMACS27+ (error "Please use Emacs 27 or newer"))
 
-(mood-line-mode +1)
+(use-package! mood-line
+  :config (mood-line-mode +1))
+
 (setq +default-want-RET-continue-comments nil)
 
 (after! evil
@@ -18,6 +20,7 @@
 
 (after! evil-escape
   (evil-escape-mode -1))
+
 (map!
  :after evil
  :nv "j" 'evil-next-visual-line
@@ -28,7 +31,7 @@
 
 ;; Use regular, 3-levels of cycling, instead of Doom's default of 2-levels. This
 ;; matches the behavior in `markdown-mode'.
-(after! evil-org
+(after! (org evil-org)
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 (use-package! flycheck
@@ -40,17 +43,20 @@
 
 (after! projectile
   (append projectile-ignored-projects '("~/.config/emacs")))
+
 (use-package! apheleia
   :init
-  (setq apheleia-formatters '((deno . ("deno" "fmt" "-"))
-                              (rustfmt . ("rustfmt"))))
-  (setq apheleia-mode-alist '((typescript-mode . deno)
-                              (rustic-mode . rustfmt)))
-  :config
-  (apheleia-global-mode +1))
+  (setq apheleia-formatters
+        '((deno . ("deno" "fmt" "-"))
+          (rustfmt . ("rustfmt"))))
+  (setq apheleia-mode-alist
+        '((typescript-mode . deno)
+          (rustic-mode . rustfmt)))
+  :config (apheleia-global-mode +1))
 
-(after! magit
-  (magit-delta-mode +1))
+(use-package! magit-delta
+  :after magit
+  :config (magit-delta-mode +1))
 
 (after! git-gutter
   (custom-set-variables '(git-gutter:modified-sign "~")))
@@ -67,21 +73,15 @@
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 
-(defun text-scale-reset ()
-  "Reset the text scale"
-  (interactive)
-  (text-scale-set 0))
-
-(map! "C-0" 'text-scale-reset)
+(when (display-graphic-p)
+  (defun text-scale-reset ()
+    "Reset the text scale"
+    (interactive)
+    (text-scale-set 0))
+  (map! "C-0" 'text-scale-reset))
 
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
-
-(defun force-org-hide-leading-stars ()
-  "See issue for more info: https://github.com/hlissner/doom-emacs/issues/3076"
-  (setq org-hide-leading-stars nil)
-  (font-lock-mode -1)
-  (font-lock-mode +1))
 
 (use-package! org
   :init
@@ -90,6 +90,11 @@
   (setq org-startup-indented nil)
   (setq org-adapt-indentation nil)
   (setq org-hide-leading-stars nil)
+  (defun force-org-hide-leading-stars ()
+    "See issue for more info: https://github.com/hlissner/doom-emacs/issues/3076"
+    (setq org-hide-leading-stars nil)
+    (font-lock-mode -1)
+    (font-lock-mode +1))
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
 (use-package! org-roam
