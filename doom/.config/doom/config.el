@@ -6,6 +6,7 @@
 (unless EMACS27+ (error "Please use Emacs 27 or newer"))
 
 (mood-line-mode +1)
+(setq +default-want-RET-continue-comments nil)
 
 (after! evil
   (setq evil-want-fine-undo t)
