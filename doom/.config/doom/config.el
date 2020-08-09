@@ -14,6 +14,8 @@
   (setq evil-vsplit-window-right t)
   (setq +evil-want-o/O-to-continue-comments nil))
 
+(after! evil-escape
+  (evil-escape-mode -1))
 (map!
  :after evil
  :nv "j" 'evil-next-visual-line
