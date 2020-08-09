@@ -44,6 +44,17 @@
 (after! projectile
   (append projectile-ignored-projects '("~/.config/emacs")))
 
+(use-package! lsp-mode
+  :hook
+  ((rust-mode . lsp-deferred)
+   ;;(haskell-mode . lsp-deferred)
+   (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred)
+  :config (setq lsp-enable-snippet nil))
+
+;; (use-package! lsp-haskell
+;;   :config (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+
 (use-package! apheleia
   :init
   (setq apheleia-formatters
@@ -111,9 +122,10 @@
 ;; Make files with a shebang executable when saving
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
-;; Fix error about `-Z' flag
-(use-package! rustic
-  :init (setq rustic-flycheck-clippy-params "--message-format=json"))
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer)
+  ;; Fix error about `-Z' flag
+  (setq rustic-flycheck-clippy-params "--message-format=json"))
 
 ;; Ask for buffer when splitting window
 (after! ivy

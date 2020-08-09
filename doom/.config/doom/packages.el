@@ -46,6 +46,9 @@
  ;; :lang json
  json-snatcher
 
+ ;; :lang nix
+ company-nixos-options
+
  ;; :lang org
  htmlize
  org-cliplink
@@ -67,6 +70,9 @@
  slim-mode
  stylus-mode
  sws-mode
+
+ ;; :tools lsp
+ lsp-ui
 
  ;; :tools magit
  github-review
