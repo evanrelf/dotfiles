@@ -115,6 +115,16 @@
 (use-package! rustic
   :init (setq rustic-flycheck-clippy-params "--message-format=json"))
 
+;; Ask for buffer when splitting window
+(after! ivy
+  (setq +ivy-buffer-preview t)
+  (defadvice! prompt-for-buffer (&rest _)
+    :after '(+evil-window-split-a
+             +evil-window-vsplit-a
+             evil-window-split
+             evil-window-vsplit)
+    (+ivy/projectile-find-file)))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Evan Relf"
