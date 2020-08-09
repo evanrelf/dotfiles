@@ -14,17 +14,6 @@
   (setq evil-vsplit-window-right t)
   (setq +evil-want-o/O-to-continue-comments nil))
 
-(use-package! evil-terminal-cursor-changer
-  :unless (display-graphic-p)
-  :after evil
-  :init
-  (setq evil-motion-state-cursor 'box)
-  (setq evil-visual-state-cursor 'box)
-  (setq evil-normal-state-cursor 'box)
-  (setq evil-insert-state-cursor 'bar)
-  (setq evil-emacs-state-cursor 'hbar)
-  :config (evil-terminal-cursor-changer-activate))
-
 (map!
  :after evil
  :nvm "j" 'evil-next-visual-line
