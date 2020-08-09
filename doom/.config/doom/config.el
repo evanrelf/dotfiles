@@ -36,6 +36,8 @@
         '(emacs-lisp
           emacs-lisp-checkdoc)))
 
+(after! projectile
+  (append projectile-ignored-projects '("~/.config/emacs")))
 (use-package! apheleia
   :init
   (setq apheleia-formatters '((deno . ("deno" "fmt" "-"))
