@@ -68,9 +68,6 @@
  stylus-mode
  sws-mode
 
- ;; :tools lookup
- request
-
  ;; :tools magit
  github-review
  ;; magit-gitflow ;; TODO: I need this enabled for the ? popup
