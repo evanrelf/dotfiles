@@ -11,7 +11,6 @@
 (setq +default-want-RET-continue-comments nil)
 
 (after! evil
-  (setq evil-want-fine-undo t)
   (setq evil-echo-state nil)
   (setq evil-move-beyond-eol t)
   (setq evil-split-window-below t)
