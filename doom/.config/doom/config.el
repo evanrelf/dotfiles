@@ -162,4 +162,4 @@
 (setq modus-operandi-theme-org-blocks 'greyscale)
 (setq doom-theme 'modus-operandi)
 
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
