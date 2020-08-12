@@ -34,6 +34,7 @@ in
       nix-index
       nix-prefetch-git
       ormolu
+      pandoc
       rclone
       ripgrep
       rust-analyzer
