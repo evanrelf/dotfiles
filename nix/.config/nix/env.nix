@@ -30,9 +30,13 @@ in
       graphviz # For org-roam
       jq
       kakoune
+      lorri
+      moreutils
       neovim
       nix-index
       nix-prefetch-git
+      nix-top
+      nix-tree
       ormolu
       pandoc
       rclone
