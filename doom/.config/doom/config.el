@@ -36,9 +36,7 @@
 (use-package! flycheck
   :init
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (setq flycheck-disabled-checkers
-        '(emacs-lisp
-          emacs-lisp-checkdoc)))
+  (setq flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
 
 (after! projectile
   (append projectile-ignored-projects '("~/.config/emacs")))
@@ -162,4 +160,4 @@
 (setq modus-operandi-theme-org-blocks 'greyscale)
 (setq doom-theme 'modus-operandi)
 
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
