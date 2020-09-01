@@ -1,12 +1,10 @@
 # dotfiles
 
-Currently I'm using:
-
 - Editor: [Doom Emacs][doom-emacs]
 - Shell: [fish][fish]
 - Terminal: [kitty][kitty]
 - Window Manager: [Amethyst][amethyst] on macOS, [XMonad][xmonad] on NixOS
-- Package Manager: [Nix][nix]
+- Package Manager: [Nix][nix], [Homebrew](homebrew) (for GUI apps on macOS)
 - OS: macOS, [NixOS][nixos]
 
 [doom-emacs]: https://github.com/hlissner/doom-emacs
@@ -16,3 +14,4 @@ Currently I'm using:
 [xmonad]: https://xmonad.org/
 [nix]: https://nixos.org/
 [nixos]: https://nixos.org/
+[homebrew]: https://brew.sh/
