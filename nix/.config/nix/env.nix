@@ -24,6 +24,7 @@ in
       fish
       fzf
       gcoreutils
+      ggrep
       ghcid
       git
       gitAndTools.delta

@@ -43,6 +43,15 @@ self: super:
       sha256 = "1zq5g7ka99vcyqbg5l1bx0rliq3ihig37nzczk0wdwidjyxjghf9";
     }) {}).ghcide-ghc865;
 
+  ggrep =
+    super.runCommandLocal "ggrep" {} ''
+      mkdir -p "$out/bin"
+      for bin in ${self.gnugrep}/bin/*; do
+        ln -s "$bin" "$out/bin/g$(basename $bin)"
+      done
+      ln -s ${self.gnugrep}/share "$out/share"
+    '';
+
   iosevka-pro =
     # To install on macOS:
     # $ open $(nix-env --query env --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"*
