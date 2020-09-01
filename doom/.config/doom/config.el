@@ -62,6 +62,10 @@
           (rustic-mode . rustfmt)))
   :config (apheleia-global-mode +1))
 
+(after! magit
+  ;; I don't want to wait for massive diffs to load when writing commit messages
+  (remove-hook 'server-switch-hook 'magit-commit-diff))
+
 (use-package! magit-delta
   :after magit
   :config (magit-delta-mode +1))
