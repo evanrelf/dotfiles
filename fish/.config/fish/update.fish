@@ -24,7 +24,7 @@ function update -d "Run all update commands"
                 brew upgrade
 
                 _log "Updating Homebrew casks"
-                brew cask upgrade
+                brew upgrade --cask
             end
     end
 
@@ -62,15 +62,21 @@ function update -d "Run all update commands"
         rustup update
     end
 
-    if _exists nvim -a -e $HOME/.local/share/nvim/site/autoload/plug.vim
-        _log "Updating Neovim plugins"
-        nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
-    end
+    # if _exists nvim -a -e $HOME/.local/share/nvim/site/autoload/plug.vim
+    #     _log "Updating Neovim plugins"
+    #     nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
+    # end
 
     # TODO
     # if _exists kak -a -e $HOME/.config/kak/plugins/plug.kak/
     #   _log "Updating Kakoune plugins"
     #   kak -e "plug-update"
+    # end
+
+    # if _exists doom
+    #     doom upgrade --yes
+    #     doom sync
+    #     doom build
     # end
 
     if _exists tldr
