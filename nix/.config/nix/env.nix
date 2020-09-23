@@ -17,7 +17,6 @@ in
       cabal-install
       comma
       declarative-channels
-      deno
       direnv
       exa
       fd
