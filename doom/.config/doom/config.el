@@ -90,7 +90,8 @@
     "Reset the text scale"
     (interactive)
     (text-scale-set 0))
-  (map! "C-0" 'text-scale-reset))
+  (map! "C-0" 'text-scale-reset)
+  (map! "s-0" 'doom/reset-font-size))
 
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
@@ -124,7 +125,6 @@
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
 (after! rustic
-  (setq rustic-lsp-server 'rust-analyzer)
   ;; Fix error about `-Z' flag
   (setq rustic-flycheck-clippy-params "--message-format=json"))
 

@@ -18,6 +18,7 @@ in
       comma
       declarative-channels
       deno
+      direnv
       exa
       fd
       findutils
@@ -29,16 +30,19 @@ in
       git
       gitAndTools.delta
       graphviz # For org-roam
+      idris2
       jq
       kakoune
       lorri
       moreutils
       neovim
       nix-diff
+      nix-direnv
       nix-index
       nix-prefetch-git
       nix-top
       nix-tree
+      nnn
       ormolu
       pandoc
       rclone

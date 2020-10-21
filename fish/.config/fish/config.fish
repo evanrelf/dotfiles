@@ -18,6 +18,7 @@ source "$config/install-fisher.fish"
 source "$config/fzf.fish"
 source "$config/zoxide.fish"
 source "$config/direnv.fish"
+source "$config/nnn.fish"
 
 # Functions
 source "$config/rc.fish"
