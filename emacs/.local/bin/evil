@@ -4,4 +4,6 @@ export ALTERNATE_EDITOR=""
 
 export TERM=xterm-24bit
 
-exec emacsclient -s tty --tty "$@"
+emacsclient=$(greadlink -f "$(which emacsclient)")
+
+exec "$emacsclient" -s tty --tty "$@"
