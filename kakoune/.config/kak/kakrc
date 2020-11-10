@@ -20,8 +20,11 @@ map global normal "#" ": comment-line<ret>"
 # Show line numbers
 add-highlighter global/number-lines number-lines -hlcursor
 
+# Highlight matching delimiters
+add-highlighter global/show-matching show-matching
+
 # Underline search matches
-add-highlighter global/matches dynregex "%%reg{/}" 0:+u
+add-highlighter global/search-matches dynregex "%%reg{/}" 0:+u
 
 # Highlight TODO/FIXME/NOTE
 add-highlighter global/todo regex "\b(TODO|FIXME|NOTE)\b" 0:default+r
@@ -32,9 +35,8 @@ strip-whitespace %{
   execute-keys -draft "%%s\h+$<ret>d"
 }
 
-set-option global indentwidth 2
-
 # Use spaces for indentation
+set-option global indentwidth 2
 hook global InsertChar \t %{ try %{
   # Assert cursor is at beginning of line
   execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
@@ -91,12 +93,29 @@ evaluate-selection %{
   execute-keys -itersel -draft ": <c-r>.<ret>"
 }
 
+# Better syntax highlighting
+try %{
+  colorscheme primer
+  add-highlighter global/80 column 81 default,rgb:f6f8fa
+} catch %{ nop %sh{
+  # Download if colorscheme not installed
+  mkdir -p "$kak_config/colors"
+  curl -L "https://raw.githubusercontent.com/evanrelf/primer.kak/master/colors/primer.kak" -o "$kak_config/colors/primer.kak"
+}}
+
 # Better Haskell syntax
 try %{
   source "%val{config}/haskell2.kak"
+  # Set filetype to `haskell2` only once (allows switching back to `haskell` filetype)
   hook global WinCreate .*\.hs %{
     hook -once window WinSetOption filetype=haskell %{
       set-option window filetype haskell2
     }
   }
 }
+
+# Use ripgrep
+set-option global grepcmd "rg --column --smart-case"
+
+# Use `en-US` for `:spell` command
+set-option global spell_lang "en-US"
