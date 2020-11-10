@@ -1,21 +1,4 @@
-# Use space as leader
-map global normal "," "<space>"
-map global normal "<space>" ","
-map global normal "<a-,>" "<a-space>"
-map global normal "<a-space>" "<a-,>"
-
-# Discourage non-mnemonic keys
-map global normal "<a-h>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
-map global normal "<a-l>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
-map global normal "<a-H>" ": echo -markup '{Error}Use Gh{Default}'<ret>" -docstring "Use Gh"
-map global normal "<a-L>" ": echo -markup '{Error}Use Gl{Default}'<ret>" -docstring "Use Gl"
-map global goto "g" "<esc>: echo -markup '{Error}Use gk{Default}'<ret>" -docstring "Use gk"
-map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstring "Use vc"
-map global insert "<c-n>" "<a-;>: echo -markup '{Error}Use tab{Default}'<ret>" -docstring "Use tab"
-map global insert "<c-p>" "<a-;>: echo -markup '{Error}Use s-tab{Default}'<ret>" -docstring "Use s-tab"
-
-# Custom keys
-map global normal "#" ": comment-line<ret>"
+source "%val{config}/mappings.kak"
 
 # Show line numbers
 add-highlighter global/number-lines number-lines -hlcursor
