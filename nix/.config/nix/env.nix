@@ -22,6 +22,7 @@ in
       fd
       findutils
       fish
+      fourmolu
       fzf
       gcoreutils
       ggrep

@@ -29,6 +29,19 @@ self: super:
   emacsGccVterm =
     (super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
 
+  fourmolu =
+    super.haskell.lib.justStaticExecutables
+      (super.haskell.lib.doJailbreak
+        (super.haskellPackages.callCabal2nix
+          "fourmolu"
+          (super.fetchFromGitHub {
+            owner = "parsonsmatt";
+            repo = "fourmolu";
+            rev = "45a8478b8e6ba48b4ce228d4aaee3cb9f5aa08f6"; # 0.3.0.0
+            sha256 = "0w4m887pr2ad303a35dl9gs03xza2fy6mnbgl65s0yal78mfw0zv";
+          })
+          {}));
+
   gcoreutils =
     super.coreutils.override {
       singleBinary = false;
