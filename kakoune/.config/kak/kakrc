@@ -14,8 +14,11 @@ map global view "v" "<esc>: echo -markup '{Error}Use vc{Default}'<ret>" -docstri
 map global insert "<c-n>" "<a-;>: echo -markup '{Error}Use tab{Default}'<ret>" -docstring "Use tab"
 map global insert "<c-p>" "<a-;>: echo -markup '{Error}Use s-tab{Default}'<ret>" -docstring "Use s-tab"
 
+# Custom keys
+map global normal "#" ": comment-line<ret>"
+
 # Show line numbers
-add-highlighter global/number-lines number-lines -relative -hlcursor
+add-highlighter global/number-lines number-lines -hlcursor
 
 # Underline search matches
 add-highlighter global/matches dynregex "%%reg{/}" 0:+u
@@ -29,26 +32,37 @@ strip-whitespace %{
   execute-keys -draft "%%s\h+$<ret>d"
 }
 
-# Use spaces for indentation
 set-option global indentwidth 2
+
+# Use spaces for indentation
 hook global InsertChar \t %{ try %{
+  # Assert cursor is at beginning of line
   execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
+  # Replace tab character with spaces
   execute-keys -draft "h%opt{indentwidth}@"
 } catch %{
+  # Delete tab character when cursor is not at beginning of line
   execute-keys -draft "hd"
 }}
+
+# De-indent when deleting a line's leading whitespace
 hook global InsertDelete ' ' %{ try %{
+  # Assert cursor is at beginning of line
   execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
+  # De-indent line
   execute-keys -draft "i<space><esc><lt>"
 }}
 
 # Use Tab in autocomplete menu
 hook global InsertCompletionShow .* %{ try %{
+  # Assert previous character is not a space
   execute-keys -draft "h<a-K>\h<ret>"
+  # Bind tab keys to control completion menu
   map window insert "<tab>" "<c-n>"
   map window insert "<s-tab>" "<c-p>"
 }}
 hook global InsertCompletionHide .* %{
+  # Bind tab keys back to inserting tab character
   unmap window insert "<tab>" "<c-n>"
   unmap window insert "<s-tab>" "<c-p>"
 }
@@ -75,4 +89,14 @@ hook global WinCreate .* %{
 define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
 evaluate-selection %{
   execute-keys -itersel -draft ": <c-r>.<ret>"
+}
+
+# Better Haskell syntax
+try %{
+  source "%val{config}/haskell2.kak"
+  hook global WinCreate .*\.hs %{
+    hook -once window WinSetOption filetype=haskell %{
+      set-option window filetype haskell2
+    }
+  }
 }
