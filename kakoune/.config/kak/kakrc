@@ -53,8 +53,14 @@ hook global InsertCompletionHide .* %{
 }
 
 # Highlight trailing whitespace
+define-command -hidden add-highlighter-trailing-whitespace %{
+  add-highlighter window/trailing-whitespace regex \h+$ 0:red+r
+}
+hook global WinCreate .* %{
+  add-highlighter-trailing-whitespace
+}
 hook global ModeChange pop:insert:.* %{
-  add-highlighter window/trailing-whitespace regex \h+$ 0:red+u
+  try %{ add-highlighter-trailing-whitespace }
 }
 hook global ModeChange push:.*:insert %{
   remove-highlighter window/trailing-whitespace
