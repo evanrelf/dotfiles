@@ -52,6 +52,9 @@
 ;; (use-package! lsp-haskell
 ;;   :config (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
+(after! haskell
+  (setq haskell-process-type 'cabal-new-repl))
+
 (use-package! apheleia
   :init
   (setq apheleia-formatters
