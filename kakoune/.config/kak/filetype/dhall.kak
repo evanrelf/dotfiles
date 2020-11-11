@@ -1,13 +1,11 @@
 # Better Dhall syntax
-try %{
-  source "%val{config}/syntax/dhall2.kak"
+source "%val{config}/syntax/dhall2.kak"
 
-  # Set filetype to `dhall2` only once (allows switching back to `dhall`
-  # filetype)
-  hook global WinCreate .*\.hs %{
-    hook -once window WinSetOption filetype=dhall %{
-      set-option window filetype dhall2
-    }
+# Set filetype to `dhall2` only once (allows switching back to `dhall`
+# filetype)
+hook global WinCreate .*\.hs %{
+  hook -once window WinSetOption filetype=dhall %{
+    set-option window filetype dhall2
   }
 }
 

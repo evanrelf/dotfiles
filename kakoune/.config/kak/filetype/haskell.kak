@@ -1,13 +1,11 @@
 # Better Haskell syntax
-try %{
-  source "%val{config}/syntax/haskell2.kak"
+source "%val{config}/syntax/haskell2.kak"
 
-  # Set filetype to `haskell2` only once (allows switching back to `haskell`
-  # filetype)
-  hook global WinCreate .*\.hs %{
-    hook -once window WinSetOption filetype=haskell %{
-      set-option window filetype haskell2
-    }
+# Set filetype to `haskell2` only once (allows switching back to `haskell`
+# filetype)
+hook global WinCreate .*\.hs %{
+  hook -once window WinSetOption filetype=haskell %{
+    set-option window filetype haskell2
   }
 }
 
