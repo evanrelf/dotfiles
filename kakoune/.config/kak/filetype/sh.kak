@@ -1,6 +1,6 @@
 hook global WinSetOption filetype=sh %{
   set-option window lintcmd "shellcheck -f gcc"
-  hook window -group lint BufWritePost .* %{ lint-buffer }
+  hook window BufWritePost .* %{ lint-buffer }
 }
 
 # Check for shebangs
