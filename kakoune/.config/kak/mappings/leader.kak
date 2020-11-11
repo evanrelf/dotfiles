@@ -37,6 +37,7 @@ define-command -hidden user-file-save %{
 # Lint
 declare-user-mode "lint"
 map global "user" "l" ": enter-user-mode lint<ret>" -docstring "Lint..."
+map global "lint" "l" ": lint-buffer<ret>" -docstring "Lint"
 map global "lint" "n" ": lint-next-message<ret>" -docstring "Next message"
 map global "lint" "p" ": lint-previous-message<ret>" -docstring "Previous message"
 
