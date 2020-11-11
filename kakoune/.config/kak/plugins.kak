@@ -6,11 +6,11 @@ plug "evanrelf/primer.kak" theme config %{
   declare-option str column_color "rgb:f6f8fa"
 }
 
-plug "evanrelf/expand-line.kak"
+plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
+  set-option global number_toggle_params -hlcursor
+}
 
-# plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
-#   set-option global number_toggle_params -hlcursor
-# }
+plug "evanrelf/expand-line.kak"
 
 plug "h-youhei/kakoune-surround" \
 commit "efe74c6f434d1e30eff70d4b0d737f55bf6c5022" config %{
