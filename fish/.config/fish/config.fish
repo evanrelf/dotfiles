@@ -1,33 +1,31 @@
-set --local config "$HOME/.config/fish"
-
 # Core
-source "$config/prelude.fish"
-source "$config/nix.fish"
-source "$config/xdg.fish"
-source "$config/path.fish"
+source "$__fish_config_dir/prelude.fish"
+source "$__fish_config_dir/nix.fish"
+source "$__fish_config_dir/xdg.fish"
+source "$__fish_config_dir/path.fish"
 
 # Customization
-source "$config/editor.fish"
-source "$config/colors.fish"
-source "$config/cursor-shape.fish"
-source "$config/prompt.fish"
-source "$config/aliases.fish"
+source "$__fish_config_dir/editor.fish"
+source "$__fish_config_dir/colors.fish"
+source "$__fish_config_dir/cursor-shape.fish"
+source "$__fish_config_dir/prompt.fish"
+source "$__fish_config_dir/aliases.fish"
 
 # Plugins and integrations
-source "$config/install-fisher.fish"
-source "$config/fzf.fish"
-source "$config/zoxide.fish"
-source "$config/direnv.fish"
-source "$config/nnn.fish"
+source "$__fish_config_dir/install-fisher.fish"
+source "$__fish_config_dir/fzf.fish"
+source "$__fish_config_dir/zoxide.fish"
+source "$__fish_config_dir/direnv.fish"
+source "$__fish_config_dir/nnn.fish"
 
 # Functions
-source "$config/rc.fish"
-source "$config/update.fish"
-source "$config/edit-matches.fish"
-source "$config/darwin.fish"
+source "$__fish_config_dir/rc.fish"
+source "$__fish_config_dir/update.fish"
+source "$__fish_config_dir/edit-matches.fish"
+source "$__fish_config_dir/darwin.fish"
 
 set --global fish_features "stderr-nocaret"
 
-if test -f "$config/local.fish"
-    source "$config/local.fish"
+if test -f "$__fish_config_dir/local.fish"
+    source "$__fish_config_dir/local.fish"
 end

@@ -6,5 +6,5 @@ if not _exists fisher
         --create-dirs \
         --output "$HOME/.config/fish/functions/fisher.fish"
     source "$HOME/.config/fish/functions/fisher.fish"
-    fisher
+    fisher update
 end
