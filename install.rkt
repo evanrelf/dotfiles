@@ -60,7 +60,7 @@
     (check-installed "git")
     (run
      (string-join
-      '("git clone --depth=1 'https://github.com/andreyorst/plug.kak.git'"
+      '("git clone --depth=1 'https://github.com/robertmeta/plug.kak.git'"
         "\"$HOME/.config/kak/plugins/plug.kak\"")))))
 
 (define/contract (prepare-neovim)
@@ -90,7 +90,7 @@
     [("doom") (prepare-emacs)]
     [("emacs") (prepare-emacs)]
     [("hammerspoon") (prepare-hammerspoon)]
-    ;; [("kakoune") (prepare-kakoune)]
+    [("kakoune") (prepare-kakoune)]
     [("neovim") (prepare-neovim)]
     [("tmux") (prepare-tmux)]))
 

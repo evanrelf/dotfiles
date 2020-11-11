@@ -1,4 +1,4 @@
-source "%val{config}/colorscheme.kak"
+source "%val{config}/plugins.kak"
 source "%val{config}/mappings.kak"
 source "%val{config}/filetype.kak"
 source "%val{config}/trailing-whitespace.kak"

@@ -5,14 +5,6 @@ source "%val{config}/mappings/search.kak"
 source "%val{config}/mappings/registers.kak"
 source "%val{config}/mappings/disabled.kak"
 
-try %{
-  source "%val{config}/plugins/expand-line.kak"
-} catch %{ try %{ nop %sh{
-  # Download if plugin not installed
-  mkdir -p "$kak_config/plugins"
-  curl -L "https://raw.githubusercontent.com/evanrelf/expand-line.kak/main/rc/expand-line.kak" -o "$kak_config/plugins/expand-line.kak"
-}}}
-
 # Use q for backwards word movement
 map global "normal" "q" "b"
 map global "normal" "Q" "B"
