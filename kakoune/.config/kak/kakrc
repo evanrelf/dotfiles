@@ -1,4 +1,11 @@
+source "%val{config}/colorscheme.kak"
 source "%val{config}/mappings.kak"
+source "%val{config}/filetype.kak"
+source "%val{config}/trailing-whitespace.kak"
+source "%val{config}/git-diff.kak"
+source "%val{config}/clipboard.kak"
+
+set-option global indentwidth 2
 
 # Show line numbers
 add-highlighter global/number-lines number-lines -hlcursor
@@ -12,99 +19,29 @@ add-highlighter global/search-matches dynregex "%%reg{/}" 0:+u
 # Highlight TODO/FIXME/NOTE
 add-highlighter global/todo regex "\b(TODO|FIXME|NOTE)\b" 0:default+r
 
-# Strip trailing whitespace
-define-command -docstring "strip-whitespace: strip trailing whitespace" \
-strip-whitespace %{
-  execute-keys -draft "%%s\h+$<ret>d"
-}
-
-# Use spaces for indentation
-set-option global indentwidth 2
-hook global InsertChar \t %{ try %{
-  # Assert cursor is at beginning of line
-  execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
-  # Replace tab character with spaces
-  execute-keys -draft "h%opt{indentwidth}@"
-} catch %{
-  # Delete tab character when cursor is not at beginning of line
-  execute-keys -draft "hd"
-}}
-
-# De-indent when deleting a line's leading whitespace
-hook global InsertDelete ' ' %{ try %{
-  # Assert cursor is at beginning of line
-  execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
-  # De-indent line
-  execute-keys -draft "i<space><esc><lt>"
-}}
-
-# Use Tab in autocomplete menu
-hook global InsertCompletionShow .* %{ try %{
-  # Assert previous character is not a space
-  execute-keys -draft "h<a-K>\h<ret>"
-  # Bind tab keys to control completion menu
-  map window insert "<tab>" "<c-n>"
-  map window insert "<s-tab>" "<c-p>"
-}}
-hook global InsertCompletionHide .* %{
-  # Bind tab keys back to inserting tab character
-  unmap window insert "<tab>" "<c-n>"
-  unmap window insert "<s-tab>" "<c-p>"
-}
-
-# Highlight trailing whitespace
-define-command -hidden add-highlighter-trailing-whitespace %{
-  add-highlighter window/trailing-whitespace regex \h+$ 0:red+r
-}
-hook global WinCreate .* %{
-  add-highlighter-trailing-whitespace
-}
-hook global ModeChange pop:insert:.* %{
-  try %{ add-highlighter-trailing-whitespace }
-}
-hook global ModeChange push:.*:insert %{
-  remove-highlighter window/trailing-whitespace
-}
-
-# Show Git diff
-hook global WinCreate .* %{
-  hook -once window NormalIdle .* %{ try %{
-    git show-diff
-    hook window BufWritePost .* %{ try %{
-      git update-diff
-    }}
-  }}
-}
-
-# Evaluate selection
-define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
-evaluate-selection %{
-  execute-keys -itersel -draft ": <c-r>.<ret>"
-}
-
-# Better syntax highlighting
-try %{
-  colorscheme primer
-  add-highlighter global/80 column 81 default,rgb:f6f8fa
-} catch %{ nop %sh{
-  # Download if colorscheme not installed
-  mkdir -p "$kak_config/colors"
-  curl -L "https://raw.githubusercontent.com/evanrelf/primer.kak/master/colors/primer.kak" -o "$kak_config/colors/primer.kak"
-}}
-
-# Better Haskell syntax
-try %{
-  source "%val{config}/haskell2.kak"
-  # Set filetype to `haskell2` only once (allows switching back to `haskell` filetype)
-  hook global WinCreate .*\.hs %{
-    hook -once window WinSetOption filetype=haskell %{
-      set-option window filetype haskell2
-    }
-  }
-}
-
 # Use ripgrep
 set-option global grepcmd "rg --column --smart-case"
 
 # Use `en-US` for `:spell` command
 set-option global spell_lang "en-US"
+
+# Toggle soft wrapping
+define-command -docstring "softwrap-enable: enable soft wrapping" \
+softwrap-enable %{
+  add-highlighter window/softwrap wrap
+}
+define-command -docstring "softwrap-disable: disable soft wrapping" \
+softwrap-disable %{
+  remove-highlighter window/softwrap
+}
+
+# Evaluate commands
+define-command -docstring "evaluate-buffer: evaluate buffer commands as if entered by user" \
+evaluate-buffer %{
+  execute-keys -draft "%: <c-r>.<ret>"
+}
+define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
+evaluate-selection %{
+  execute-keys -itersel -draft ": <c-r>.<ret>"
+}
+

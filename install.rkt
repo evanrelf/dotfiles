@@ -90,7 +90,7 @@
     [("doom") (prepare-emacs)]
     [("emacs") (prepare-emacs)]
     [("hammerspoon") (prepare-hammerspoon)]
-    [("kakoune") (prepare-kakoune)]
+    ;; [("kakoune") (prepare-kakoune)]
     [("neovim") (prepare-neovim)]
     [("tmux") (prepare-tmux)]))
 
