@@ -4,6 +4,7 @@ source "%val{config}/filetype/sh.kak"
 source "%val{config}/filetype/fish.kak"
 source "%val{config}/filetype/dhall.kak"
 source "%val{config}/filetype/rust.kak"
+source "%val{config}/filetype/git-commit.kak"
 
 define-command -docstring "filetype: change filetype" \
 filetype -params 1 %{

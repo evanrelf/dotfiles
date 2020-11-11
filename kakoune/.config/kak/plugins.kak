@@ -3,16 +3,7 @@ plug "robertmeta/plug.kak" noload
 
 plug "evanrelf/primer.kak" theme config %{
   colorscheme primer
-
-  hook global WinSetOption autowrap_column=.* %{
-    add-highlighter -override window/wrap-column column %sh{ echo $((kak_opt_autowrap_column + 1)) } default,rgb:f6f8fa
-  }
-
-  hook global WinSetOption filetype=git-commit %{
-    set-option window autowrap_column 72
-    autowrap-enable
-    add-highlighter window/subject-column column 51 default,rgb:f6f8fa
-  }
+  declare-option str column_color "rgb:f6f8fa"
 }
 
 plug "evanrelf/expand-line.kak"
