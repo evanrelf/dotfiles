@@ -36,3 +36,19 @@ commit "efe74c6f434d1e30eff70d4b0d737f55bf6c5022" config %{
   map global surround-tag "r" ": change-surrounding-tag<ret>" -docstring "Replace surrounding tag"
   map global surround-tag "d" ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
 }
+
+plug "andreyorst/fzf.kak" \
+commit "f23daa698ad95493fbd675ae153e3cac13ef34e9" do %{
+  # Remove lingering info popups
+  git checkout .
+  for file in rc/modules/*.kak; do sed -i "" "s/info -title/nop/g" "$file"; done
+} config %{
+  map global "user" "z" ": fzf-mode<ret>" -docstring "FZF..."
+  map global "normal" "<a-o>" ": fzf-file<ret>"
+} defer "fzf" %{
+  set-option global fzf_file_command "fd --type f --follow --hidden --exclude .git"
+  set-option global fzf_preview false
+  set-option global fzf_file_preview false
+  set-option global fzf_vertical_map "ctrl-x"
+  set-option global fzf_horizontal_map "ctrl-v"
+}

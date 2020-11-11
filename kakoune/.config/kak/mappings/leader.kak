@@ -10,11 +10,28 @@ map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "Buffer..."
 map global "buffer" "n" ": buffer-next<ret>" -docstring "Next buffer"
 map global "buffer" "p" ": buffer-previous<ret>" -docstring "Previous buffer"
 map global "buffer" "d" ": delete-buffer<ret>" -docstring "Delete buffer"
+try %{
+  require-module "fzf"
+  map global "buffer" "b" ": fzf-buffer<ret>" -docstring "Switch buffer"
+}
 
 # File
 declare-user-mode "file"
 map global "user" "f" ": enter-user-mode file<ret>" -docstring "File..."
 map global "file" "s" ": user-file-save<ret>" -docstring "Save file"
+try %{
+  require-module "fzf"
+  map global "file" "f" ": fzf-file<ret>" -docstring "Find file"
+}
+
+# Git
+declare-user-mode "git"
+map global "user" "g" ": enter-user-mode git<ret>" -docstring "Git..."
+try %{
+  require-module "fzf"
+  require-module "fzf_vcs"
+  map global "git" "f" ": fzf-vcs<ret>" -docstring "Find file"
+}
 
 define-command -hidden user-file-save %{
   try %{ evaluate-commands %sh{
