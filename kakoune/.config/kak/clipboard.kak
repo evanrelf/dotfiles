@@ -37,3 +37,8 @@ evaluate-commands %sh{
   alias global R paste-replace
   "
 }
+
+map global "user" "y" ": yank<ret>" -docstring "Yank"
+map global "user" "p" ": paste-after<ret>" -docstring "Paste after"
+map global "user" "P" ": paste-before<ret>" -docstring "Paste before"
+map global "user" "R" ": paste-replace<ret>" -docstring "Paste replace"

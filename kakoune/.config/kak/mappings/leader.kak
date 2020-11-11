@@ -40,14 +40,6 @@ map global "user" "l" ": enter-user-mode lint<ret>" -docstring "Lint..."
 map global "lint" "n" ": lint-next-message<ret>" -docstring "Next message"
 map global "lint" "p" ": lint-previous-message<ret>" -docstring "Previous message"
 
-# Clipboard
-declare-user-mode "clipboard"
-map global "user" "c" ": enter-user-mode clipboard<ret>" -docstring "Clipboard..."
-map global "clipboard" "y" ": yank<ret>" -docstring "Yank"
-map global "clipboard" "p" ": paste-after<ret>" -docstring "Paste after"
-map global "clipboard" "P" ": paste-before<ret>" -docstring "Paste before"
-map global "clipboard" "R" ": paste-replace<ret>" -docstring "Paste replace"
-
 # Quit
 declare-user-mode "quit"
 map global "user" "q" ": enter-user-mode quit<ret>" -docstring "Quit..."
