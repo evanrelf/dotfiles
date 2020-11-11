@@ -25,6 +25,7 @@ end
 
 if _exists evil
     abbr --add e "evil"
+    abbr --add m "magit"
 end
 
 if _exists git

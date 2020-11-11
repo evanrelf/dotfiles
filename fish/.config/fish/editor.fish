@@ -1,11 +1,18 @@
-if _exists evil
+if _exists kak
+    set --export EDITOR "kak"
+else if _exists evil
     set --export EDITOR "evil"
 else if _exists nvim
     set --export EDITOR "nvim"
-else if _exists kak
-    set --export EDITOR "kak"
 else
     set --export EDITOR "vi"
+end
+
+# Magit as a standalone command, for use alongside other editors
+if _exists evil
+    function magit
+        evil --eval "(magit-status)" $argv
+    end
 end
 
 # Better support for Emacs' vterm package
