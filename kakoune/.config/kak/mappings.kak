@@ -26,3 +26,7 @@ map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstrin
 # Comment out line
 map global "normal" "#" ": comment-line<ret>"
 map global "normal" "<a-#>" ": comment-block<ret>"
+
+# Use <c-n> and <c-p> in command mode
+map global "prompt" "<c-n>" "<tab>"
+map global "prompt" "<c-p>" "<s-tab>"
