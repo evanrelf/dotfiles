@@ -74,6 +74,16 @@
         "'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
         "-o \"$HOME/.local/share/nvim/site/autoload/plug.vim\"")))))
 
+(define/contract (prepare-nix)
+  (-> any)
+  (printf "[nix] Installing profile\n")
+  (check-installed "nix-env")
+  (run
+   (string-join
+    '("nix-env --install"
+      "--file nix/.config/nix/env.nix "
+      "--argstr hostname \"$(hostname)\""))))
+
 (define/contract (prepare-tmux)
   (-> any)
   (unless (directory-exists? (home ".config/tmux/plugins/tpm"))
@@ -92,6 +102,7 @@
     [("hammerspoon") (prepare-hammerspoon)]
     [("kakoune") (prepare-kakoune)]
     [("neovim") (prepare-neovim)]
+    [("nix") (prepare-nix)]
     [("tmux") (prepare-tmux)]))
 
 (define/contract (stow package)

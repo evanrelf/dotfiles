@@ -56,6 +56,15 @@ self: super:
       sha256 = "1zq5g7ka99vcyqbg5l1bx0rliq3ihig37nzczk0wdwidjyxjghf9";
     }) {}).ghcide-ghc865;
 
+  gfind =
+    super.runCommandLocal "gfind" {} ''
+      mkdir -p "$out/bin"
+      for bin in ${self.findutils}/bin/*; do
+        ln -s "$bin" "$out/bin/g$(basename $bin)"
+      done
+      ln -s ${self.findutils}/share "$out/share"
+    '';
+
   ggrep =
     super.runCommandLocal "ggrep" {} ''
       mkdir -p "$out/bin"

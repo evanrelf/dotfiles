@@ -1,3 +1,5 @@
+{ hostname }:
+
 let
   pkgs = import ./nixpkgs.nix { overlays = import ./overlays; };
 
@@ -13,24 +15,21 @@ in
     name = "env";
     paths = with pkgs; [
       (aspellWithDicts (d: with d; [ en en-computers en-science ]))
-      borgbackup
       cabal-install
       comma
       declarative-channels
       direnv
       exa
       fd
-      findutils
       fish
       fourmolu
       fzf
       gcoreutils
+      gfind
       ggrep
       ghcid
       git
       gitAndTools.delta
-      graphviz # For org-roam
-      idris2
       jq
       kakoune
       lorri
@@ -42,16 +41,11 @@ in
       nix-prefetch-git
       nix-top
       nix-tree
-      nnn
       ormolu
       pandoc
-      rclone
       ripgrep
-      rust-analyzer
-      rustup
       sd
       shellcheck
-      sqlite # For org-roam
       tealdeer
       tmux
       zoxide
@@ -68,5 +62,11 @@ in
       spotify
       xbanish
       xclip
+    ]) ++ (pkgs.lib.optionals (builtins.elem hostname [ "auburn" "sienna" ]) [
+      borgbackup
+      idris2
+      rclone
+      rust-analyzer
+      rustup
     ]);
   }
