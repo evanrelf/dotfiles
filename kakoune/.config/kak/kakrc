@@ -51,3 +51,8 @@ evaluate-selection %{
   execute-keys -itersel -draft ": <c-r>.<ret>"
 }
 
+define-command -docstring "client-quit: delete buffer and quit" \
+client-quit %{
+  delete-buffer
+  quit
+}

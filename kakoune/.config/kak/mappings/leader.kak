@@ -61,4 +61,6 @@ map global "lint" "p" ": lint-previous-message<ret>" -docstring "Previous messag
 # Quit
 declare-user-mode "quit"
 map global "user" "q" ": enter-user-mode quit<ret>" -docstring "Quit..."
-map global "quit" "q" ": quit<ret>" -docstring "Quit"
+map global "quit" "q" ": client-quit<ret>" -docstring "Quit"
+map global "quit" "s" ": write<ret>: client-quit<ret>" -docstring "Save and quit"
+map global "quit" "k" ": kill<ret>" -docstring "Kill daemon"
