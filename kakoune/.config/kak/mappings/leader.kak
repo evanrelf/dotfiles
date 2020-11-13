@@ -4,6 +4,9 @@ map global "normal" "<space>" ","
 map global "normal" "<a-,>" "<a-space>"
 map global "normal" "<a-space>" "<a-,>"
 
+# Uncategorized
+map global "user" "`" "ga" -docstring "Last buffer"
+
 # Buffer
 declare-user-mode "buffer"
 map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "Buffer..."

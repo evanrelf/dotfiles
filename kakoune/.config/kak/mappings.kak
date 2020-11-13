@@ -5,6 +5,10 @@ source "%val{config}/mappings/search.kak"
 source "%val{config}/mappings/registers.kak"
 source "%val{config}/mappings/disabled.kak"
 
+# # Swap : and ;
+# map global "normal" ":" ";"
+# map global "normal" ";" ":"
+
 # Use q for backwards word movement
 map global "normal" "q" "b"
 map global "normal" "Q" "B"
