@@ -47,6 +47,7 @@ in
       sd
       shellcheck
       tealdeer
+      teip
       tmux
       zoxide
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [

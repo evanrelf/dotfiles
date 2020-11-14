@@ -118,4 +118,19 @@ self: super:
       rev = "c3c77ede124e91c3275a994f9e57cab360e6a13a";
       sha256 = "0nyln9cxybqdcp9pdh5qjhhmbl0bn8f9ghh4cn0q2wmsldqpl0ai";
     })).nix-tree;
+
+  teip =
+    super.rustPlatform.buildRustPackage {
+      pname = "teip";
+      version = "1.2.1";
+      src = super.fetchFromGitHub {
+        owner = "greymd";
+        repo = "teip";
+        rev = "52b7a8b4a6cbf354a3620936cec7add257e2f483";
+        sha256 = "0s6ks6vdjrqri9cp48zgddjhmap9l81mygyrz6pa7xhcs48zaj23";
+      };
+      cargoPatches = [ ./teip-cargo-lock.patch ];
+      cargoSha256 = "1mk00s1yfrgw4q1rsl81b45bcv1gk216czvb4xvm8f5d4shk17l7";
+      doCheck = false;
+    };
 }
