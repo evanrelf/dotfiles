@@ -1,4 +1,5 @@
-{ hostname }:
+{ hostname ? throw "Please specify your machine's hostname (e.g. `--argstr $(hostname)`)"
+}:
 
 let
   pkgs = import ./nixpkgs.nix { overlays = import ./overlays; };
