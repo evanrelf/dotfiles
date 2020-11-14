@@ -19,6 +19,8 @@ hook global WinSetOption filetype=(haskell|haskell2) %{
   map window "user" "," ": enter-user-mode haskell<ret>" -docstring "Haskell..."
   map window "haskell" "l" ": haskell-insert-language-pragma<ret>" -docstring "Insert LANGUAGE pragma"
   map window "haskell" "o" ": haskell-insert-options-pragma<ret>" -docstring "Insert OPTIONS_GHC pragma"
+  map window "haskell" "f" "|ormolu<ret>" -docstring "Format (ormolu)"
+  map window "haskell" "F" "|stylish-haskell<ret>" -docstring "Format (stylish-haskell)"
 }
 
 hook global WinSetOption filetype=cabal %{
