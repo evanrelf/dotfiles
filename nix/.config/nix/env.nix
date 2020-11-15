@@ -34,19 +34,20 @@ in
       (aspellWithDicts (d: with d; [ en en-computers en-science ]))
       cabal-install
       comma
+      coreutils-gprefix
       declarative-channels
       direnv
       exa
       fd
+      findutils-gprefix
       fish
       fourmolu
       fzf
-      gcoreutils
-      gfind
-      ggrep
+      gawk-gprefix
       ghcid
       git
       gitAndTools.delta
+      gnugrep-gprefix
       jq
       kakoune
       lorri

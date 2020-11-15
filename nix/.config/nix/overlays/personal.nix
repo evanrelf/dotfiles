@@ -1,6 +1,16 @@
 self: super:
 
-{
+let
+  gprefix = drv:
+    super.runCommandLocal "gprefix-${drv.name}" {} ''
+      mkdir -p "$out/bin"
+      for bin in ${drv}/bin/*; do
+        ln -s "$bin" "$out/bin/g$(basename $bin)"
+      done
+      ln -s ${drv}/share "$out/share"
+    '';
+
+in {
   # cabal-edit =
   #   (import (super.fetchFromGitHub {
   #     owner = "sdiehl";
@@ -26,8 +36,16 @@ self: super:
       sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
     }) { pkgs = self; };
 
+  coreutils-gprefix =
+    super.coreutils.override {
+      singleBinary = false;
+      withPrefix = true;
+    };
+
   emacsGccVterm =
     (super.emacsPackagesGen self.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
+
+  findutils-gprefix = gprefix self.findutils;
 
   fourmolu =
     super.haskell.lib.justStaticExecutables
@@ -42,11 +60,7 @@ self: super:
           })
           {}));
 
-  gcoreutils =
-    super.coreutils.override {
-      singleBinary = false;
-      withPrefix = true;
-    };
+  gawk-gprefix = gprefix self.gawk;
 
   ghcide =
     (import (super.fetchFromGitHub {
@@ -56,23 +70,7 @@ self: super:
       sha256 = "1zq5g7ka99vcyqbg5l1bx0rliq3ihig37nzczk0wdwidjyxjghf9";
     }) {}).ghcide-ghc865;
 
-  gfind =
-    super.runCommandLocal "gfind" {} ''
-      mkdir -p "$out/bin"
-      for bin in ${self.findutils}/bin/*; do
-        ln -s "$bin" "$out/bin/g$(basename $bin)"
-      done
-      ln -s ${self.findutils}/share "$out/share"
-    '';
-
-  ggrep =
-    super.runCommandLocal "ggrep" {} ''
-      mkdir -p "$out/bin"
-      for bin in ${self.gnugrep}/bin/*; do
-        ln -s "$bin" "$out/bin/g$(basename $bin)"
-      done
-      ln -s ${self.gnugrep}/share "$out/share"
-    '';
+  gnugrep-gprefix = gprefix self.gnugrep;
 
   iosevka-pro =
     # To install on macOS:
