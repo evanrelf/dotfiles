@@ -1,6 +1,9 @@
 # Better Haskell syntax
 source "%val{config}/syntax/haskell2.kak"
 
+declare-user-mode "haskell"
+declare-user-mode "cabal"
+
 # Set filetype to `haskell2` only once (allows switching back to `haskell`
 # filetype)
 hook global WinCreate .*\.hs %{
@@ -15,7 +18,6 @@ hook global WinCreate .*\.hs-boot %{
 }
 
 hook global WinSetOption filetype=(haskell|haskell2) %{
-  declare-user-mode "haskell"
   map window "user" "," ": enter-user-mode haskell<ret>" -docstring "Haskell..."
   map window "haskell" "l" ": haskell-insert-language-pragma<ret>" -docstring "Insert LANGUAGE pragma"
   map window "haskell" "o" ": haskell-insert-options-pragma<ret>" -docstring "Insert OPTIONS_GHC pragma"
@@ -24,7 +26,6 @@ hook global WinSetOption filetype=(haskell|haskell2) %{
 }
 
 hook global WinSetOption filetype=cabal %{
-  declare-user-mode "cabal"
   map window "user" "," ": enter-user-mode cabal<ret>" -docstring "Cabal..."
   map window "cabal" "l" ": haskell-insert-language-extension<ret>" -docstring "Insert language extension"
   map window "cabal" "o" ": haskell-insert-option<ret>" -docstring "Insert GHC option"
