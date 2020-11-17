@@ -16,6 +16,7 @@ source "$__fish_config_dir/install-fisher.fish"
 source "$__fish_config_dir/fzf.fish"
 source "$__fish_config_dir/zoxide.fish"
 source "$__fish_config_dir/direnv.fish"
+source "$__fish_config_dir/broot.fish"
 source "$__fish_config_dir/nnn.fish"
 
 # Functions
