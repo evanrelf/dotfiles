@@ -43,3 +43,8 @@ commit "f23daa698ad95493fbd675ae153e3cac13ef34e9" do %{
   set-option global fzf_vertical_map "ctrl-x"
   set-option global fzf_horizontal_map "ctrl-v"
 }
+
+plug "kak-lsp/kak-lsp" \
+commit "354b46e3cf56f0da35b444941a701ca4c1135aa8" do %{
+  ln -sf target/release/kak-lsp "$(command -v kak-lsp)"
+} noload
