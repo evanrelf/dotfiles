@@ -5,20 +5,14 @@
 
 {-# LANGUAGE ApplicativeDo #-}
 {-# LANGUAGE BlockArguments #-}
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveFunctor #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DerivingVia #-}
 {-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TupleSections #-}
-{-# LANGUAGE TypeApplications #-}
 
 {-# OPTIONS_GHC -Wall #-}
 {-# OPTIONS_GHC -Wcompat #-}
@@ -37,13 +31,15 @@
 
 module Main (main) where
 
-import Data.String.Interpolate (i)
+import Data.String.Interpolate (i, iii)
 import Relude
 
 import qualified Data.List.NonEmpty as NonEmpty
 import qualified Options.Applicative as Options
 import qualified Relude.Extra.Bifunctor as Bifunctor
 import qualified System.Directory as Directory
+import qualified System.Environment as Environment
+import qualified System.IO.Unsafe as IO.Unsafe
 import qualified System.Process as Process
 
 
@@ -54,11 +50,20 @@ import qualified System.Process as Process
 
 main :: IO ()
 main = do
-  cliOptions@CliOptions{packages} <- getCliOptions
+  rawOptions@Options{packages = rawPackages} <- getOptions
 
-  existentPackages <- discardNonexistent packages
+  let stripSlashes = filter (/= '/')
 
-  mapM_ (usingReaderT cliOptions . install) existentPackages
+  existentPackages <- discardNonexistent (fmap stripSlashes rawPackages)
+
+  case nonEmpty existentPackages of
+    Nothing ->
+      die "No packages specified"
+
+    Just packages -> do
+      let options = rawOptions{packages}
+
+      mapM_ (usingReaderT options . install) packages
 
 
 discardNonexistent :: MonadIO m => NonEmpty FilePath -> m [FilePath]
@@ -72,7 +77,7 @@ discardNonexistent packages = do
   pure existent
 
 
-install :: (MonadIO m, MonadReader CliOptions m) => FilePath -> m ()
+install :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
 install package = do
   prepare package
   stow package
@@ -83,21 +88,21 @@ install package = do
 --------------------------------------------------------------------------------
 
 
-data CliOptions = CliOptions
+data Options = Options
   { packages :: NonEmpty FilePath
   , dryRun :: Bool
   } deriving stock Show
 
 
-getCliOptions :: MonadIO m => m CliOptions
-getCliOptions = liftIO do
+getOptions :: MonadIO m => m Options
+getOptions = liftIO do
   let parserPrefs = Options.prefs Options.showHelpOnError
-  let parserInfo = Options.info (Options.helper <*> parseCliOptions) mempty
+  let parserInfo = Options.info (Options.helper <*> parseOptions) mempty
   Options.customExecParser parserPrefs parserInfo
 
 
-parseCliOptions :: Options.Parser CliOptions
-parseCliOptions = do
+parseOptions :: Options.Parser Options
+parseOptions = do
   packages <-
     fmap fromList $ some $ Options.strArgument $ mconcat
       [ Options.metavar "PACKAGE"
@@ -109,15 +114,15 @@ parseCliOptions = do
       , Options.help "Run in dry run mode"
       ]
 
-  pure CliOptions{packages, dryRun}
+  pure Options{packages, dryRun}
 
 
 --------------------------------------------------------------------------------
--- PREPARE
+-- PREPARE PACKAGES
 --------------------------------------------------------------------------------
 
 
-prepare :: (MonadIO m, MonadReader CliOptions m) => FilePath -> m ()
+prepare :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
 prepare = \case
   "doom" -> prepareEmacs
   "emacs" -> prepareEmacs
@@ -129,97 +134,96 @@ prepare = \case
   _ -> pass
 
 
-prepareEmacs :: (MonadIO m, MonadReader CliOptions m) => m ()
+prepareEmacs :: (MonadIO m, MonadReader Options m) => m ()
 prepareEmacs = do
   putStrLn "[emacs] Setting up truecolor support"
+
   run "$HOME/dotfiles/emacs/.config/emacs/setup-truecolor"
 
 
-prepareHammerspoon :: (MonadIO m, MonadReader CliOptions m) => m ()
+prepareHammerspoon :: (MonadIO m, MonadReader Options m) => m ()
 prepareHammerspoon = do
-  undefined
+  putStrLn "[hammerspoon] Changing config file location"
+
+  checkInstalled "defaults"
+
+  run [iii|
+    defaults write org.hammerspoon.Hammerspoon MJConfigFile
+      "$HOME/.config/hammerspoon/init.lua"
+  |]
 
 
-prepareKakoune :: (MonadIO m, MonadReader CliOptions m) => m ()
+prepareKakoune :: (MonadIO m, MonadReader Options m) => m ()
 prepareKakoune = do
-  undefined
+  let plugKak = [i|#{home}/.config/kak/plugins/plug.kak|]
+
+  unlessM (liftIO $ Directory.doesDirectoryExist plugKak) do
+    putStrLn "[kakoune] Installing plug.kak"
+
+    checkInstalled "git"
+
+    run [iii|
+      git clone --depth=1 "https://github.com/robertmeta/plug.kak.git"
+        "$HOME/.config/kak/plugins/plug.kak"
+    |]
 
 
-prepareNeovim :: (MonadIO m, MonadReader CliOptions m) => m ()
+prepareNeovim :: (MonadIO m, MonadReader Options m) => m ()
 prepareNeovim = do
-  undefined
+  let plugVim = [i|#{home}/.local/share/nvim/site/autoload/plug.vim|]
+
+  unlessM (liftIO $ Directory.doesFileExist plugVim) do
+    putStrLn "Installing vim-plug"
+
+    checkInstalled "curl"
+
+    run [iii|
+      curl --location --fail --create-dirs
+        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        -o "$HOME/.local/share/nvim/site/autoload/plug.vim"
+    |]
 
 
-prepareNix :: (MonadIO m, MonadReader CliOptions m) => m ()
+prepareNix :: (MonadIO m, MonadReader Options m) => m ()
 prepareNix = do
-  undefined
+  putStrLn "[nix] Installing profile"
+
+  checkInstalled "nix-env"
+
+  run [iii|
+    nix-env
+      --install
+      --file nix/.config/nix/env.nix
+      --argstr hostname "$(hostname)"
+  |]
 
 
-prepareTmux :: (MonadIO m, MonadReader CliOptions m) => m ()
+prepareTmux :: (MonadIO m, MonadReader Options m) => m ()
 prepareTmux = do
-  undefined
+  let pluginsDirectory = [i|#{home}/.config/tmux/plugins/tpm|]
 
+  unlessM (liftIO $ Directory.doesDirectoryExist pluginsDirectory) do
+    putStrLn "[tmux] Installing tpm"
 
--- (define/contract (prepare-hammerspoon)
---   (-> any)
---   (printf "[hammerspoon] Changing config file location\n")
---   (check-installed "defaults")
---   (run
---    (string-join
---     '("defaults write org.hammerspoon.Hammerspoon MJConfigFile"
---       "\"$HOME/.config/hammerspoon/init.lua\""))))
+    checkInstalled "git"
 
--- (define/contract (prepare-kakoune)
---   (-> any)
---   (unless (directory-exists? (home ".config/kak/plugins/plug.kak"))
---     (printf "[kakoune] Installing plug.kak\n")
---     (check-installed "git")
---     (run
---      (string-join
---       '("git clone --depth=1 'https://github.com/robertmeta/plug.kak.git'"
---         "\"$HOME/.config/kak/plugins/plug.kak\"")))))
-
--- (define/contract (prepare-neovim)
---   (-> any)
---   (unless (file-exists? (home ".local/share/nvim/site/autoload/plug.vim"))
---     (printf "[neovim] Installing vim-plug\n")
---     (check-installed "curl")
---     (run
---      (string-join
---       '("curl --location --fail --create-dirs"
---         "'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
---         "-o \"$HOME/.local/share/nvim/site/autoload/plug.vim\"")))))
-
--- (define/contract (prepare-nix)
---   (-> any)
---   (printf "[nix] Installing profile\n")
---   (check-installed "nix-env")
---   (run
---    (string-join
---     '("nix-env --install"
---       "--file nix/.config/nix/env.nix "
---       "--argstr hostname \"$(hostname)\""))))
-
--- (define/contract (prepare-tmux)
---   (-> any)
---   (unless (directory-exists? (home ".config/tmux/plugins/tpm"))
---     (printf "[tmux] Installing tpm\n")
---     (check-installed "git")
---     (run
---      (string-join
---       '("git clone --depth=1 'https://github.com/tmux-plugins/tpm.git'"
---         "\"$HOME/.config/tmux/plugins/tpm\"")))))
+    run [iii|
+      git clone --depth=1 "https://github.com/tmux-plugins/tpm.git"
+        "$HOME/.config/tmux/plugins/tpm"
+    |]
 
 
 --------------------------------------------------------------------------------
--- STOW
+-- STOW PACKAGES' CONFIGURATIONS
 --------------------------------------------------------------------------------
 
 
-stow :: (MonadIO m, MonadReader CliOptions m) => FilePath -> m ()
+stow :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
 stow package = do
   putStrLn [i|[#{package}] Stowing configuration|]
-  assertExecutableExists "stow"
+
+  checkInstalled "stow"
+
   run [i|stow --stow --target "$HOME" --no-folding #{package}|]
 
 
@@ -228,19 +232,28 @@ stow package = do
 --------------------------------------------------------------------------------
 
 
-run :: (MonadIO m, MonadReader CliOptions m) => String -> m ()
+{-# NOINLINE home #-}
+home :: FilePath
+home = IO.Unsafe.unsafePerformIO do
+  Environment.lookupEnv "HOME" `whenNothingM`
+    fail "Failed to get HOME environment variable"
+
+
+run :: (MonadIO m, MonadReader Options m) => String -> m ()
 run command = do
-  CliOptions{dryRun} <- ask
+  Options{dryRun} <- ask
 
-  if dryRun
-    then putStrLn [i|dry-run> #{command}|]
-    else liftIO $ Process.callCommand command
+  if dryRun then
+    putStrLn [i|dry-run> #{command}|]
+
+  else
+    liftIO $ Process.callCommand command
 
 
-assertExecutableExists :: MonadIO m => FilePath -> m ()
-assertExecutableExists executable = liftIO do
+checkInstalled :: MonadIO m => FilePath -> m ()
+checkInstalled executable = liftIO do
   Directory.findExecutable executable `whenNothingM_`
-    fail ("Missing " <> executable)
+    fail [i|Missing executable: #{executable}|]
 
 
 partitionM :: Monad m => (a -> m Bool) -> NonEmpty a -> m ([a], [a])
