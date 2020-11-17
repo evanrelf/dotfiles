@@ -44,7 +44,13 @@ commit "f23daa698ad95493fbd675ae153e3cac13ef34e9" do %{
   set-option global fzf_horizontal_map "ctrl-v"
 }
 
-plug "kak-lsp/kak-lsp" \
-commit "354b46e3cf56f0da35b444941a701ca4c1135aa8" do %{
-  ln -sf target/release/kak-lsp "$(command -v kak-lsp)"
-} noload
+# plug "kak-lsp/kak-lsp" \
+# commit "354b46e3cf56f0da35b444941a701ca4c1135aa8" noload config %{
+#   evaluate-commands %sh{kak-lsp --kakoune -s "$kak_session" --config=$HOME/.config/kak-lsp/kak-lsp.toml}
+#   set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log --config=$HOME/.config/kak-lsp/kak-lsp.toml"
+#   hook global WinSetOption filetype=(haskell) %{
+#     echo -debug "Enabling LSP for filetype %opt{filetype}"
+#     lsp-enable-window
+#   }
+#   hook global KakEnd .* %{ lsp-exit }
+# }
