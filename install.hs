@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -I nixpkgs=nix/.config/nix/nixpkgs.nix
+#!nix-shell -I nixpkgs=nix/.config/nix/pkgs.nix
 #!nix-shell -p stow "haskellPackages.ghcWithPackages (p: with p; [ directory optparse-applicative process relude string-interpolate ])"
 #!nix-shell -i runghc
 
@@ -194,7 +194,7 @@ prepareNix = do
     nix-env
       --install
       --file nix/.config/nix/env.nix
-      --argstr hostname "$(hostname)"
+      --argstr hostname "$(hostname -s)"
   |]
 
 

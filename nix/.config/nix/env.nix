@@ -2,7 +2,7 @@
 }:
 
 let
-  pkgs = import ./nixpkgs.nix { overlays = import ./overlays; };
+  pkgs = import ./pkgs.nix {};
 
   declarative-channels =
     pkgs.runCommandLocal "declarative-channels" {} ''
@@ -10,6 +10,22 @@ let
       ln -s ${pkgs.path} $out/channels/nixpkgs
       ln -s $out/channels/nixpkgs $out/channels/default
     '';
+
+  isPersonalMachine =
+    if builtins.elem hostname [ "auburn" "sienna" ] then
+      builtins.trace
+        "Installing extra packages for personal machine '${hostname}'"
+        true
+    else
+      false;
+
+  isWorkMachine =
+    if builtins.elem hostname [ "indigo" ] then
+      builtins.trace
+        "Installing extra packages for work machine '${hostname}'"
+        true
+    else
+      false;
 
 in
   pkgs.buildEnv {
@@ -64,11 +80,13 @@ in
       spotify
       xbanish
       xclip
-    ]) ++ (pkgs.lib.optionals (builtins.elem hostname [ "auburn" "sienna" ]) [
+    ]) ++ (pkgs.lib.optionals isPersonalMachine [
       borgbackup
       idris2
       rclone
       rust-analyzer
       rustup
+    ]) ++ (pkgs.lib.optionals isWorkMachine [
+      dhall
     ]);
   }
