@@ -49,6 +49,7 @@ in
       gitAndTools.delta
       gnugrep-gprefix
       jq
+      kak-lsp
       kakoune
       lorri
       moreutils

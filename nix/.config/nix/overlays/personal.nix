@@ -94,6 +94,19 @@ in {
       };
     };
 
+  kak-lsp =
+    super.rustPlatform.buildRustPackage {
+      pname = "kak-lsp";
+      version = "HEAD";
+      src = super.fetchFromGitHub {
+        owner = "kak-lsp";
+        repo = "kak-lsp";
+        rev = "354b46e3cf56f0da35b444941a701ca4c1135aa8";
+        sha256 = "00hwf7pgrhrk0d572xp4k82pama09ph7k8s63cg28ixsmzhpaiji";
+      };
+      cargoSha256 = "0zn0y68fs4hgr4ypym4rqcr7ipsh3nxxhlrky5n43mp3qkbgyahs";
+    };
+
   kakoune =
     super.kakoune-unwrapped.overrideAttrs (old: rec {
       version = "HEAD";
