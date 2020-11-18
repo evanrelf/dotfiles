@@ -3,10 +3,10 @@
 set -euo pipefail
 
 current_branch=$(git symbolic-ref HEAD | sed -e "s,.*/\(.*\),\1,")
-blacklist_regex='^(master)$'
+blacklist_regex='^(master|main|release-.*)$'
 delay=5
 
-if echo "$current_branch" | grep --quiet --extended-regexp $blacklist_regex; then
+if echo "$current_branch" | grep --quiet --extended-regexp "$blacklist_regex"; then
   read -p "You're about to push to branch '$current_branch'. Is that what you intended? [yN] " -n 1 -r < /dev/tty
   echo
   if echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'; then
