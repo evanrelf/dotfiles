@@ -6,7 +6,7 @@ plug "evanrelf/primer.kak" theme config %{
   declare-option str column_color "rgb:f6f8fa"
 }
 
-plug "evanrelf/number-toggle.kak" branch "override-highlighter" config %{
+plug "evanrelf/number-toggle.kak" config %{
   set-option global number_toggle_params -hlcursor
 }
 
