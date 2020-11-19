@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
+IFS=$'\n\t'
 
 command -v fzf >/dev/null 2>&1 || (echo "fzf not installed"; exit 1)
 

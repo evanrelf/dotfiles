@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
+IFS=$'\n\t'
 
 if [ -n "$1" ]; then
   echo "Hello $1!"
