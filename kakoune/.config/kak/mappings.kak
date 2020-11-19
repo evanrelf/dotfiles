@@ -31,5 +31,5 @@ map global "normal" "#" ": comment-line<ret>"
 map global "normal" "<a-#>" ": comment-block<ret>"
 
 # Use <c-n> and <c-p> in command mode
-map global "prompt" "<c-n>" "<tab>"
-map global "prompt" "<c-p>" "<s-tab>"
+map global "prompt" "<c-n>" "<down>"
+map global "prompt" "<c-p>" "<up>"
