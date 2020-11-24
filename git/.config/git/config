@@ -14,6 +14,7 @@
 
   # CHECKOUT
   co = checkout
+  cob = checkout -b
   cop = checkout --patch
 
   # CLEAN
@@ -85,7 +86,10 @@
 
   # STATUS
   s = status --show-stash
-  ss = status --short
+
+  # SWITCH
+  sw = switch
+  swc = switch --create
 
   # TAG
   t = tag
