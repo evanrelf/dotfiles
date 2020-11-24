@@ -1,6 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -I nixpkgs=nix/.config/nix/pkgs.nix
-#!nix-shell -p stow "haskellPackages.ghcWithPackages (p: with p; [ directory optparse-applicative process relude string-interpolate ])"
+#!nix-shell -p stow "haskellPackages.ghcWithPackages (p: with p; [ ansi-terminal directory optparse-applicative process relude string-interpolate ])"
 #!nix-shell -i runghc
 
 {-# LANGUAGE ApplicativeDo #-}
@@ -37,6 +37,7 @@ import Relude
 import qualified Data.List.NonEmpty as NonEmpty
 import qualified Options.Applicative as Options
 import qualified Relude.Extra.Bifunctor as Bifunctor
+import qualified System.Console.ANSI as Ansi
 import qualified System.Directory as Directory
 import qualified System.Environment as Environment
 import qualified System.IO.Unsafe as IO.Unsafe
@@ -58,21 +59,20 @@ main = do
 
   case nonEmpty existentPackages of
     Nothing ->
-      die "No packages specified"
+      panic "No packages specified"
 
     Just packages -> do
       let options = rawOptions{packages}
-
       mapM_ (usingReaderT options . install) packages
 
 
 discardNonexistent :: MonadIO m => NonEmpty FilePath -> m [FilePath]
 discardNonexistent packages = do
-  (existent, nonexistent) <-
-    partitionM (liftIO . Directory.doesDirectoryExist) packages
+  (existent, nonexistent) <- liftIO do
+    partitionM Directory.doesDirectoryExist packages
 
   forM_ nonexistent \package ->
-    putStrLn [i|[#{package}] Configuration doesn't exist|]
+    warn [i|[#{package}] Configuration doesn't exist|]
 
   pure existent
 
@@ -136,18 +136,18 @@ prepare = \case
 
 prepareEmacs :: (MonadIO m, MonadReader Options m) => m ()
 prepareEmacs = do
-  putStrLn "[emacs] Setting up truecolor support"
+  log "[emacs] Setting up truecolor support"
 
-  run "$HOME/dotfiles/emacs/.config/emacs/setup-truecolor"
+  sh "$HOME/dotfiles/emacs/.config/emacs/setup-truecolor"
 
 
 prepareHammerspoon :: (MonadIO m, MonadReader Options m) => m ()
 prepareHammerspoon = do
-  putStrLn "[hammerspoon] Changing config file location"
+  log "[hammerspoon] Changing config file location"
 
-  checkInstalled "defaults"
+  assertExecutableExists "defaults"
 
-  run [iii|
+  sh [iii|
     defaults write org.hammerspoon.Hammerspoon MJConfigFile
       "$HOME/.config/hammerspoon/init.lua"
   |]
@@ -158,11 +158,11 @@ prepareKakoune = do
   let plugKak = [i|#{home}/.config/kak/plugins/plug.kak|]
 
   unlessM (liftIO $ Directory.doesDirectoryExist plugKak) do
-    putStrLn "[kakoune] Installing plug.kak"
+    log "[kakoune] Installing plug.kak"
 
-    checkInstalled "git"
+    assertExecutableExists "git"
 
-    run [iii|
+    sh [iii|
       git clone --depth=1 "https://github.com/robertmeta/plug.kak.git"
         "$HOME/.config/kak/plugins/plug.kak"
     |]
@@ -173,11 +173,11 @@ prepareNeovim = do
   let plugVim = [i|#{home}/.local/share/nvim/site/autoload/plug.vim|]
 
   unlessM (liftIO $ Directory.doesFileExist plugVim) do
-    putStrLn "Installing vim-plug"
+    log "Installing vim-plug"
 
-    checkInstalled "curl"
+    assertExecutableExists "curl"
 
-    run [iii|
+    sh [iii|
       curl --location --fail --create-dirs
         "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         -o "$HOME/.local/share/nvim/site/autoload/plug.vim"
@@ -186,11 +186,11 @@ prepareNeovim = do
 
 prepareNix :: (MonadIO m, MonadReader Options m) => m ()
 prepareNix = do
-  putStrLn "[nix] Installing profile"
+  log "[nix] Installing profile"
 
-  checkInstalled "nix-env"
+  assertExecutableExists "nix-env"
 
-  run [iii|
+  sh [iii|
     nix-env
       --install
       --file nix/.config/nix/env.nix
@@ -203,11 +203,11 @@ prepareTmux = do
   let pluginsDirectory = [i|#{home}/.config/tmux/plugins/tpm|]
 
   unlessM (liftIO $ Directory.doesDirectoryExist pluginsDirectory) do
-    putStrLn "[tmux] Installing tpm"
+    log "[tmux] Installing tpm"
 
-    checkInstalled "git"
+    assertExecutableExists "git"
 
-    run [iii|
+    sh [iii|
       git clone --depth=1 "https://github.com/tmux-plugins/tpm.git"
         "$HOME/.config/tmux/plugins/tpm"
     |]
@@ -220,11 +220,11 @@ prepareTmux = do
 
 stow :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
 stow package = do
-  putStrLn [i|[#{package}] Stowing configuration|]
+  log [i|[#{package}] Stowing configuration|]
 
-  checkInstalled "stow"
+  assertExecutableExists "stow"
 
-  run [i|stow --stow --target "$HOME" --no-folding #{package}|]
+  sh [i|stow --stow --target "$HOME" --no-folding #{package}|]
 
 
 --------------------------------------------------------------------------------
@@ -236,24 +236,46 @@ stow package = do
 home :: FilePath
 home = IO.Unsafe.unsafePerformIO do
   Environment.lookupEnv "HOME" `whenNothingM`
-    fail "Failed to get HOME environment variable"
+    panic "Failed to get HOME environment variable"
 
 
-run :: (MonadIO m, MonadReader Options m) => String -> m ()
-run command = do
+sh :: (MonadIO m, MonadReader Options m) => String -> m ()
+sh command = do
   Options{dryRun} <- ask
 
   if dryRun then
-    putStrLn [i|dry-run> #{command}|]
+    log [i|dry-run> #{command}|]
 
-  else
+  else do
+    log [i|+ #{command}|]
     liftIO $ Process.callCommand command
 
 
-checkInstalled :: MonadIO m => FilePath -> m ()
-checkInstalled executable = liftIO do
+assertExecutableExists :: MonadIO m => FilePath -> m ()
+assertExecutableExists executable = liftIO do
   Directory.findExecutable executable `whenNothingM_`
-    fail [i|Missing executable: #{executable}|]
+    panic [i|Missing executable: #{executable}|]
+
+
+putStrLnColored :: MonadIO m => Ansi.Color -> String -> m ()
+putStrLnColored color message = do
+  let colored = Ansi.setSGRCode [Ansi.SetColor Ansi.Foreground Ansi.Dull color]
+  let reset = Ansi.setSGRCode [Ansi.Reset]
+  putStrLn (colored <> message <> reset)
+
+
+log :: MonadIO m => String -> m ()
+log = putStrLnColored Ansi.Magenta
+
+
+warn :: MonadIO m => String -> m ()
+warn = putStrLnColored Ansi.Yellow
+
+
+panic :: MonadIO m => String -> m a
+panic message = do
+  putStrLnColored Ansi.Red message
+  exitFailure
 
 
 partitionM :: Monad m => (a -> m Bool) -> NonEmpty a -> m ([a], [a])
