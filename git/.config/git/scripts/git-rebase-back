@@ -11,7 +11,7 @@ elif echo "$1" | grep -Eq '^[0-9]+$'; then
   ref="HEAD~$1"
 else
   # If it's not a number, treat it like a normal ref
-  ref="$1"
+  ref="$1~1"
 fi
 
 # Verify it's a valid ref
