@@ -59,54 +59,41 @@ if _exists nix-shell
         end
     end
 
-    function with
+    set -g with_packages ""
+    set -g with_command ""
+
+    function __with
         if test -z "$argv"
             _error "with what?"
             return 1
         end
         # TODO: This is really hacky
-        set -l packages ""
-        set -l command ""
+        set with_packages ""
+        set with_command ""
         for arg in $argv
-            if test $arg != "run" -a -z $command
-                set packages "$packages $arg"
+            if test $arg != "run" -a -z $with_command
+                set with_packages "$with_packages $arg"
             else
-                if test -z $command
-                    set command "--run '"
+                if test -z $with_command
+                    set with_command "--run '"
                 else
-                    set command "$command $arg"
+                    set with_command "$with_command $with_arg"
                 end
             end
         end
-        if test -n $command
-            set command "$command'"
+        if test -n $with_command
+            set with_command "$with_command'"
         end
-        eval "nix-shell --packages $packages $command"
+    end
+
+    function with
+        __with $argv || return 1
+        eval "nix-shell --packages $with_packages $with_command"
     end
 
     function with-ghc
-        if test -z "$argv"
-            _error "with what?"
-            return 1
-        end
-        # TODO: This is really hacky
-        set -l packages ""
-        set -l command ""
-        for arg in $argv
-            if test $arg != "run" -a -z $command
-                set packages "$packages $arg"
-            else
-                if test -z $command
-                    set command "--run '"
-                else
-                    set command "$command $arg"
-                end
-            end
-        end
-        if test -n $command
-            set command "$command'"
-        end
-        eval "nix-shell --packages 'haskellPackages.ghcWithPackages (p: with p; [ $packages ])' $command"
+        __with $argv || return 1
+        eval "nix-shell --packages 'haskellPackages.ghcWithPackages (p: with p; [ $with_packages ])' $with_command"
     end
 end
 
