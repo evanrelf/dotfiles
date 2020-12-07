@@ -72,6 +72,18 @@ in {
 
   gnugrep-gprefix = gprefix self.gnugrep;
 
+  headroom =
+    super.haskell.lib.justStaticExecutables
+      (super.haskellPackages.callCabal2nix
+        "headroom"
+        (super.fetchFromGitHub {
+          owner = "vaclavsvejcar";
+          repo = "headroom";
+          rev = "v0.3.2.0";
+          sha256 = "1nk98ng7pfacr0f27z314qf4m3fas8a0nbrax0r0bhjvwzg6i73r";
+        })
+        {});
+
   iosevka-pro =
     # To install on macOS:
     # $ open $(nix-env --query env --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"*

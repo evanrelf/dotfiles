@@ -48,6 +48,7 @@ in
       git
       gitAndTools.delta
       gnugrep-gprefix
+      headroom
       jq
       kak-lsp
       kakoune
