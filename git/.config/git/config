@@ -11,6 +11,7 @@
   b = branch --verbose
   bd = branch --delete
   bdf = branch --delete --force
+  master-to-main = branch --move --force main
 
   # CHECKOUT
   co = checkout
