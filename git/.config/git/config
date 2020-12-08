@@ -54,7 +54,7 @@
 
   # REBASE
   rb = rebase
-  rbi = "!if [ -z \"$1\" ]; then git lookup | xargs -o git rebase-back; else git rebase-back $@; fi #" # script
+  rbi = "!if [ -z \"$1\" ]; then git rebase-back $(git lookup); else git rebase-back $@; fi #" # script
   undo-rebase = reset --hard ORIG_HEAD
   rbc = rebase --continue
   rbs = rebase --skip
