@@ -67,21 +67,20 @@ if _exists nix-shell
             _error "with what?"
             return 1
         end
-        # TODO: This is really hacky
         set with_packages ""
         set with_command ""
         for arg in $argv
-            if test $arg != "run" -a -z $with_command
+            if test "$arg" = "run"
+                set with_command "--run '"
+                continue
+            end
+            if test -z "$with_command"
                 set with_packages "$with_packages $arg"
             else
-                if test -z $with_command
-                    set with_command "--run '"
-                else
-                    set with_command "$with_command $with_arg"
-                end
+                set with_command "$with_command $arg"
             end
         end
-        if test -n $with_command
+        if test -n "$with_command"
             set with_command "$with_command'"
         end
     end
