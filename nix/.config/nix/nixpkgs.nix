@@ -3,6 +3,7 @@ args:
 let
   # master on 2020-11-17
   rev = "87aa3671e803f32617e899980c72dd7bc308cd1e";
+
   nixpkgs =
     builtins.fetchTarball {
       name = "nixpkgs-unstable";

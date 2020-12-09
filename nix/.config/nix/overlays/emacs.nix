@@ -1,5 +1,6 @@
 let
   rev = "43c916bc555d9531142e1b5e912b4c7639dde916";
+
 in
   import (builtins.fetchTarball {
     url = "https://github.com/nix-community/emacs-overlay/archive/${rev}.tar.gz";
