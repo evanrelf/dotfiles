@@ -1,2 +1,6 @@
-historyDuplicates: IgnoreAll
+historyDuplicates: IgnoreConsecutive
 maxHistorySize: Nothing
+keyseq: "\ESC[1;3D" meta-left
+keyseq: "\ESC[1;3C" meta-right
+bind: meta-left meta-b
+bind: meta-right meta-f
