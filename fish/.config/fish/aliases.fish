@@ -41,10 +41,6 @@ if _exists git
     end
 end
 
-if _exists brew
-    abbr --add cask "brew cask"
-end
-
 alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
 
 alias deathrow "sudo tree -x -C --prune / | grep -vE '(/etc/static|/persist|/nix/store)' | less -R"
