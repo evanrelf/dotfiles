@@ -14,9 +14,7 @@
   master-to-main = branch --move --force main
 
   # CHECKOUT
-  co = checkout
-  cob = checkout -b
-  cop = checkout --patch
+  co = "!echo \"Prefer using 'switch' and 'restore'\" >&2; exit 1 #"
 
   # CLEAN
   clean-ignored = clean -Xdf
@@ -66,6 +64,10 @@
   rp = reset --patch
   rs = reset --soft
   rh = reset --hard
+
+  # RESTORE
+  re = restore
+  rep = restore --patch
 
   # SHOW
   sh = shd --name-only
