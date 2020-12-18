@@ -21,7 +21,7 @@
   clean-untracked = clean -xdi
 
   # COMMIT
-  c = commit
+  c = commit -S
   amend = commit --amend --no-edit -S
   rename = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to rename while dirty' >&2; exit 1; fi #"
   undo-commit = reset --soft HEAD~
