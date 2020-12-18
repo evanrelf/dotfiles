@@ -148,13 +148,13 @@ in {
     })).nix-tree;
 
   teip =
-    pkgsPrev.rustPlatform.buildRustPackage {
+    pkgsPrev.rustPlatform.buildRustPackage rec {
       pname = "teip";
       version = "1.2.1";
       src = pkgsPrev.fetchFromGitHub {
         owner = "greymd";
         repo = "teip";
-        rev = "52b7a8b4a6cbf354a3620936cec7add257e2f483";
+        rev = "v${version}";
         sha256 = "0s6ks6vdjrqri9cp48zgddjhmap9l81mygyrz6pa7xhcs48zaj23";
       };
       cargoPatches = [ ./teip-cargo-lock.patch ];
