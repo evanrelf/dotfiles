@@ -70,7 +70,7 @@
   rep = restore --patch
 
   # SHOW
-  sh = shd --name-only
+  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
   shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
   # SPARSE-CHECKOUT
