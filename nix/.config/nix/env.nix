@@ -69,6 +69,7 @@ in
       tealdeer
       teip
       tmux
+      vis
       zoxide
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
       acpi
