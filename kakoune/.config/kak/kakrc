@@ -6,7 +6,7 @@ source "%val{config}/git-diff.kak"
 source "%val{config}/clipboard.kak"
 
 set-option global indentwidth 2
-set-option global startup_info_version 99999999
+set-option global startup_info_version 99991231
 
 # Show line numbers
 add-highlighter global/number-lines number-lines -hlcursor
