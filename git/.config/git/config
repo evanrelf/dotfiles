@@ -93,6 +93,7 @@
   # SWITCH
   sw = switch
   swc = switch --create
+  swd = switch --detach
 
   # TAG
   t = tag
