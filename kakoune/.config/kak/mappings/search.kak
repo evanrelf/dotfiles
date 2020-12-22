@@ -4,9 +4,6 @@ map global "normal" "?" "?(?i)"
 map global "normal" "<a-/>" "<a-/>(?i)"
 map global "normal" "<a-?>" "<a-?>(?i)"
 
-# Search without regex
-map global "user" "/" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
-
 # Center viewport when jumping around
 map global "normal" "<c-i>" "<c-i>vc"
 map global "normal" "<c-o>" "<c-o>vc"

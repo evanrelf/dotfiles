@@ -7,12 +7,20 @@ map global "normal" "<a-space>" "<a-,>"
 # Uncategorized
 map global "user" "`" "ga" -docstring "Last buffer"
 
+# Search
+declare-user-mode "search"
+map global "user" "/" ": enter-user-mode search<ret>" -docstring "Search..."
+map global "search" "g" ": grep " -docstring "grep"
+map global "search" "q" ": execute-keys /<ret>\Q\E<left><left>" -docstring "Search without regex"
+
 # Buffer
 declare-user-mode "buffer"
 map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "Buffer..."
 map global "buffer" "n" ": buffer-next<ret>" -docstring "Next buffer"
 map global "buffer" "p" ": buffer-previous<ret>" -docstring "Previous buffer"
 map global "buffer" "d" ": delete-buffer<ret>" -docstring "Delete buffer"
+map global "buffer" "r" ": buffer *grep*<ret>" -docstring "grep buffer"
+map global "buffer" "u" ": buffer *debug*<ret>" -docstring "Debug buffer"
 try %{
   require-module "fzf"
   map global "buffer" "b" ": fzf-buffer<ret>" -docstring "Switch buffer"

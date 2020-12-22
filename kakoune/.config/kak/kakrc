@@ -21,7 +21,7 @@ add-highlighter global/search-matches dynregex "%%reg{/}" 0:+u
 add-highlighter global/todo regex "\b(TODO|FIXME|NOTE)\b" 0:default+r
 
 # Use ripgrep
-set-option global grepcmd "rg --column --smart-case"
+set-option global grepcmd "rg --column"
 
 # Use `en-US` for `:spell` command
 set-option global spell_lang "en-US"
