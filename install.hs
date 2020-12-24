@@ -48,8 +48,13 @@ import qualified Relude.Extra.Bifunctor as Bifunctor
 import qualified System.Console.ANSI as Ansi
 import qualified System.Directory as Directory
 import qualified System.Environment as Environment
-import qualified System.IO.Unsafe as IO.Unsafe
 import qualified System.Process as Process
+
+
+data Env = Env
+  { options :: Options
+  , home :: FilePath
+  } deriving stock Show
 
 
 --------------------------------------------------------------------------------
@@ -61,6 +66,10 @@ main :: IO ()
 main = do
   rawOptions@Options{packages = rawPackages} <- getOptions
 
+  home <-
+    Environment.lookupEnv "HOME" `whenNothingM`
+      panic "Failed to get HOME environment variable"
+
   let stripSlashes = filter (/= '/')
 
   existentPackages <- discardNonexistent (fmap stripSlashes rawPackages)
@@ -71,7 +80,8 @@ main = do
 
     Just packages -> do
       let options = rawOptions{packages}
-      mapM_ (usingReaderT options . install) packages
+      usingReaderT Env{options, home} do
+        mapM_ install packages
 
 
 discardNonexistent :: MonadIO m => NonEmpty FilePath -> m [FilePath]
@@ -85,7 +95,7 @@ discardNonexistent packages = do
   pure existent
 
 
-install :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
+install :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
 install package = do
   prepare package
   stow package
@@ -130,7 +140,7 @@ parseOptions = do
 --------------------------------------------------------------------------------
 
 
-prepare :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
+prepare :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
 prepare = \case
   "doom" -> prepareEmacs
   "emacs" -> prepareEmacs
@@ -142,14 +152,14 @@ prepare = \case
   _ -> pass
 
 
-prepareEmacs :: (MonadIO m, MonadReader Options m) => m ()
+prepareEmacs :: (MonadIO m, MonadReader Env m) => m ()
 prepareEmacs = do
   log "[emacs] Setting up truecolor support"
 
   sh "$HOME/dotfiles/emacs/.config/emacs/setup-truecolor"
 
 
-prepareHammerspoon :: (MonadIO m, MonadReader Options m) => m ()
+prepareHammerspoon :: (MonadIO m, MonadReader Env m) => m ()
 prepareHammerspoon = do
   log "[hammerspoon] Changing config file location"
 
@@ -161,8 +171,10 @@ prepareHammerspoon = do
   |]
 
 
-prepareKakoune :: (MonadIO m, MonadReader Options m) => m ()
+prepareKakoune :: (MonadIO m, MonadReader Env m) => m ()
 prepareKakoune = do
+  Env{home} <- ask
+
   let plugKak = [i|#{home}/.config/kak/plugins/plug.kak|]
 
   unlessM (liftIO $ Directory.doesDirectoryExist plugKak) do
@@ -176,8 +188,10 @@ prepareKakoune = do
     |]
 
 
-prepareNeovim :: (MonadIO m, MonadReader Options m) => m ()
+prepareNeovim :: (MonadIO m, MonadReader Env m) => m ()
 prepareNeovim = do
+  Env{home} <- ask
+
   let plugVim = [i|#{home}/.local/share/nvim/site/autoload/plug.vim|]
 
   unlessM (liftIO $ Directory.doesFileExist plugVim) do
@@ -192,7 +206,7 @@ prepareNeovim = do
     |]
 
 
-prepareNix :: (MonadIO m, MonadReader Options m) => m ()
+prepareNix :: (MonadIO m, MonadReader Env m) => m ()
 prepareNix = do
   log "[nix] Installing profile"
 
@@ -206,8 +220,10 @@ prepareNix = do
   |]
 
 
-prepareTmux :: (MonadIO m, MonadReader Options m) => m ()
+prepareTmux :: (MonadIO m, MonadReader Env m) => m ()
 prepareTmux = do
+  Env{home} <- ask
+
   let pluginsDirectory = [i|#{home}/.config/tmux/plugins/tpm|]
 
   unlessM (liftIO $ Directory.doesDirectoryExist pluginsDirectory) do
@@ -226,7 +242,7 @@ prepareTmux = do
 --------------------------------------------------------------------------------
 
 
-stow :: (MonadIO m, MonadReader Options m) => FilePath -> m ()
+stow :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
 stow package = do
   log [i|[#{package}] Stowing configuration|]
 
@@ -240,16 +256,9 @@ stow package = do
 --------------------------------------------------------------------------------
 
 
-{-# NOINLINE home #-}
-home :: FilePath
-home = IO.Unsafe.unsafePerformIO do
-  Environment.lookupEnv "HOME" `whenNothingM`
-    panic "Failed to get HOME environment variable"
-
-
-sh :: (MonadIO m, MonadReader Options m) => String -> m ()
+sh :: (MonadIO m, MonadReader Env m) => String -> m ()
 sh command = do
-  Options{dryRun} <- ask
+  Env{options = Options{dryRun}} <- ask
 
   if dryRun then
     log [i|dry-run> #{command}|]
