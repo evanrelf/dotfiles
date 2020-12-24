@@ -15,17 +15,17 @@ command -v borg >/dev/null 2>&1 \
   || _fail "borg is not installed, or is not in your PATH"
 
 # Check that environment variables are configured
-[ -n "$BORG_REMOTE_PATH" ] \
+test -n "$BORG_REMOTE_PATH" \
   || _fail "BORG_REMOTE_PATH has not been configured"
-[ -n "$BORG_REPO" ] \
+test -n "$BORG_REPO" \
   || _fail "BORG_REPO has not been configured"
-[ -n "$BORG_PASSPHRASE" ] \
+test -n "$BORG_PASSPHRASE" \
   || _fail "BORG_PASSPHRASE has not been configured"
 
 # Check that paths exist
-[ -f "$exclude_file" ] \
+test -f "$exclude_file" \
   || _fail "Exclude file '$exclude_file' does not exist, or is not a file"
-[ -d "$archive_root" ] \
+test -d "$archive_root" \
   || _fail "Archive root '$archive_root' does not exist, or is not a directory"
 
 # Check connection to rsync.net

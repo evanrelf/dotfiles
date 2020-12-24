@@ -1,9 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
 # Check if environment variables have been configured
-if [ -z "$BORG_REPO" ] || [ -z "$BORG_PASSPHRASE" ] || [ -z "$BORG_REMOTE_PATH" ]; then
+if [ -z "$BORG_REPO" ] \
+|| [ -z "$BORG_PASSPHRASE" ] \
+|| [ -z "$BORG_REMOTE_PATH" ]; then
   echo "Environment variables are not configured correctly" >&2
   exit 1
 fi
