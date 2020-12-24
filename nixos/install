@@ -6,11 +6,26 @@ IFS=$'\n\t'
 source_path="${1:-$HOME/dotfiles/nixos/configuration.nix}"
 destination_path="/persist/etc/nixos/configuration.nix"
 
+confirm() {
+  read -p "$1 [yN] " -n 1 -r >&2 < /dev/tty
+  echo
+  echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'
+}
+
+# Check that files exist
+
+test -e "$source_path" \
+  || (echo "Source path '$source_path' doesn't exist" >&2; exit 1)
+
+test -e "$destination_path" \
+  || (echo "Destination path '$destination_path' doesn't exist" >&2; exit 1)
+
+# Compute diff between files
+
 if ! diff "$destination_path" "$source_path" >/dev/null; then
   diff -u "$destination_path"  "$source_path" | eval "$(git config core.pager)" || true
-  read -p "Copy new configuration? [yN] " -n 1 -r >&2 < /dev/tty
-  echo
-  if echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'; then
+
+  if confirm "Copy new configuration?"; then
     sudo cp -v "$destination_path" "$destination_path.old"
     sudo cp -v "$source_path" "$destination_path"
   else
@@ -21,9 +36,9 @@ else
   exit 1
 fi
 
-read -p "Switch to new configuration? [yN] " -n 1 -r >&2 < /dev/tty
-echo
-if echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'; then
+# Switch to new configuration
+
+if confirm "Switch to new configuration?"; then
   sudo nixos-rebuild switch
 else
   exit 0

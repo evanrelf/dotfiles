@@ -51,7 +51,7 @@ function rc -d "Open the specified program's configuration file"
                 if test -e "$HOME/dotfiles/nixos/configuration.nix"
                     eval "$EDITOR $HOME/dotfiles/nixos/configuration.nix"
                     and if _exists nixos-version
-                        bash "$HOME/dotfiles/nixos/install"
+                        bash "$HOME/dotfiles/nixos/install.sh"
                     end
                 else
                     eval "$EDITOR /etc/nixos/configuration.nix"
