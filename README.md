@@ -4,7 +4,7 @@ My personal dotfiles
 
 ## Overview
 
-- Editor: [Kakoune][kakoune], [Doom Emacs][doom-emacs]
+- Editor: [Kakoune][kakoune]
 - Shell: [fish][fish]
 - Terminal: [kitty][kitty]
 - Window Manager: [tmux][tmux] in my terminal, [Amethyst][amethyst] on macOS,
@@ -24,7 +24,6 @@ $ ./install.hs [--dry-run] PACKAGE...
 ```
 
 [kakoune]: https://github.com/mawww/kakoune
-[doom-emacs]: https://github.com/hlissner/doom-emacs
 [fish]: https://fishshell.com/
 [kitty]: https://sw.kovidgoyal.net/kitty/
 [amethyst]: https://github.com/ianyh/Amethyst
