@@ -36,7 +36,7 @@
 
   # LOG
   l = lll --max-count=10
-  ll = lll --max-count=100
+  ll = lll --max-count=50
   lll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
   signed = log --graph --max-count=10 --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset'
 
