@@ -1,6 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -I nixpkgs=nix/.config/nix/pkgs.nix
-#!nix-shell -p stow "haskellPackages.ghcWithPackages (p: with p; [ ansi-terminal directory optparse-applicative process relude string-interpolate ])"
+#!nix-shell -p stow "haskellPackages.ghcWithPackages (p: with p; [ ansi-terminal optparse-applicative relude string-interpolate unliftio ])"
 #!nix-shell -i runghc
 
 {-# LANGUAGE ApplicativeDo #-}
@@ -46,9 +46,9 @@ import qualified Data.List.NonEmpty as NonEmpty
 import qualified Options.Applicative as Options
 import qualified Relude.Extra.Bifunctor as Bifunctor
 import qualified System.Console.ANSI as Ansi
-import qualified System.Directory as Directory
-import qualified System.Environment as Environment
-import qualified System.Process as Process
+import qualified UnliftIO.Directory as Directory
+import qualified UnliftIO.Environment as Environment
+import qualified UnliftIO.Process as Process
 
 
 data Env = Env
@@ -86,8 +86,7 @@ main = do
 
 discardNonexistent :: MonadIO m => NonEmpty FilePath -> m [FilePath]
 discardNonexistent packages = do
-  (existent, nonexistent) <- liftIO do
-    partitionM Directory.doesDirectoryExist packages
+  (existent, nonexistent) <- partitionM Directory.doesDirectoryExist packages
 
   forM_ nonexistent \package ->
     warn [i|[#{package}] Configuration doesn't exist|]
@@ -177,7 +176,7 @@ prepareKakoune = do
 
   let plugKak = [i|#{home}/.config/kak/plugins/plug.kak|]
 
-  unlessM (liftIO $ Directory.doesDirectoryExist plugKak) do
+  unlessM (Directory.doesDirectoryExist plugKak) do
     log "[kakoune] Installing plug.kak"
 
     assertExecutableExists "git"
@@ -194,7 +193,7 @@ prepareNeovim = do
 
   let plugVim = [i|#{home}/.local/share/nvim/site/autoload/plug.vim|]
 
-  unlessM (liftIO $ Directory.doesFileExist plugVim) do
+  unlessM (Directory.doesFileExist plugVim) do
     log "Installing vim-plug"
 
     assertExecutableExists "curl"
@@ -226,7 +225,7 @@ prepareTmux = do
 
   let pluginsDirectory = [i|#{home}/.config/tmux/plugins/tpm|]
 
-  unlessM (liftIO $ Directory.doesDirectoryExist pluginsDirectory) do
+  unlessM (Directory.doesDirectoryExist pluginsDirectory) do
     log "[tmux] Installing tpm"
 
     assertExecutableExists "git"
@@ -265,11 +264,11 @@ sh command = do
 
   else do
     log [i|+ #{command}|]
-    liftIO $ Process.callCommand command
+    Process.callCommand command
 
 
 assertExecutableExists :: MonadIO m => FilePath -> m ()
-assertExecutableExists executable = liftIO do
+assertExecutableExists executable = do
   Directory.findExecutable executable `whenNothingM_`
     panic [i|Missing executable: #{executable}|]
 
