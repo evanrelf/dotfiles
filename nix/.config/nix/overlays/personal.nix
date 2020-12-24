@@ -45,6 +45,28 @@ in {
       withPrefix = true;
     };
 
+  dhall =
+    let
+      version = "1.37.1";
+      fetch = { system, sha256 }:
+        pkgsPrev.fetchzip {
+          name = "dhall-${version}";
+          url = "https://github.com/dhall-lang/dhall-haskell/releases/download/${version}/dhall-${version}-x86_64-${system}.tar.bz2";
+          inherit sha256;
+          stripRoot = false;
+        };
+    in
+      if pkgsPrev.stdenv.isDarwin then
+        fetch {
+          system = "macos";
+          sha256 = "1hzzrrc7pqqxnm9abc5ixlfnsxi7rnszwdbgk9v75k0wz52jr1rk";
+        }
+      else
+        fetch {
+          system = "linux";
+          sha256 = "04ivmcxw7zzxr3q5svwg29y37wh60qkzvlan71k52hr12k4qnls9";
+        };
+
   emacsGccVterm =
     (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
 

@@ -36,6 +36,7 @@ in
       comma
       coreutils-gprefix
       declarative-channels
+      dhall
       direnv
       exa
       fd
@@ -91,6 +92,5 @@ in
       rust-analyzer
       rustup
     ]) ++ (pkgs.lib.optionals isWorkMachine [
-      dhall
     ]);
   }
