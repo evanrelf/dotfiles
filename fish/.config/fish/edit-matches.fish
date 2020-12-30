@@ -20,9 +20,7 @@ function __edit_file_position
 end
 
 function rge -d "Edit file containing a matching regular expression"
-    set --local rg_cmd "rg --line-number --column --with-filename --color always $argv"
-    set --local fzf_cmd "fzf --exact -0"
-    set --local match (eval "$rg_cmd | $fzf_cmd")
+    set --local match (rg --line-number --column --with-filename --color always $argv | fzf --exact -0)
     __edit_file_position "$match" && rge $argv
 end
 
