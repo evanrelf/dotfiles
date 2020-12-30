@@ -50,6 +50,7 @@ in
       gitAndTools.delta
       gnugrep-gprefix
       headroom
+      httpie
       jq
       kak-lsp
       kakoune
