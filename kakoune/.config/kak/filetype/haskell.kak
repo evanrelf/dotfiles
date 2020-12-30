@@ -33,8 +33,8 @@ hook global WinSetOption filetype=cabal %{
 
 define-command -hidden haskell-cache-language-extensions %{
   nop %sh{
-    file="$HOME/.local/share/kak/ghc-language-extensions"
-    mkdir -p "$HOME/.local/share/kak"
+    file="$HOME/.cache/kak/ghc-language-extensions"
+    mkdir -p "$HOME/.cache/kak"
     if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
       ghc --supported-extensions | grep --invert-match --extended-regexp "(^No|GeneralisedNewtypeDeriving)" > "$file"
     fi
@@ -43,8 +43,8 @@ define-command -hidden haskell-cache-language-extensions %{
 
 define-command -hidden haskell-cache-options %{
   nop %sh{
-    file="$HOME/.local/share/kak/ghc-options"
-    mkdir -p "$HOME/.local/share/kak"
+    file="$HOME/.cache/kak/ghc-options"
+    mkdir -p "$HOME/.cache/kak"
     if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
       ghc --show-options | grep --invert-match --extended-regexp "(^-X|-Wwarn=|-Werror=|-Wno-error=)" > "$file"
     fi
@@ -53,7 +53,7 @@ define-command -hidden haskell-cache-options %{
 
 define-command -hidden haskell-insert-language-pragma %{
   haskell-cache-language-extensions
-  prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-language-extensions" "extension: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions" "extension: " %{
     execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"
     execute-keys "<esc>"
   }
@@ -61,7 +61,7 @@ define-command -hidden haskell-insert-language-pragma %{
 
 define-command -hidden haskell-insert-options-pragma %{
   haskell-cache-options
-  prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-options" "option: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options" "option: " %{
     execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"
     execute-keys "<esc>"
   }
@@ -69,7 +69,7 @@ define-command -hidden haskell-insert-options-pragma %{
 
 define-command -hidden haskell-insert-language-extension %{
   haskell-cache-language-extensions
-  prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-language-extensions" "extension: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions" "extension: " %{
     execute-keys -draft "i%val{text}<esc>"
     execute-keys "<esc>"
   }
@@ -77,7 +77,7 @@ define-command -hidden haskell-insert-language-extension %{
 
 define-command -hidden haskell-insert-option %{
   haskell-cache-options
-  prompt -shell-script-candidates "cat $HOME/.local/share/kak/ghc-options" "option: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options" "option: " %{
     execute-keys -draft "i%val{text}<esc>"
     execute-keys "<esc>"
   }
