@@ -36,7 +36,7 @@ define-command -hidden haskell-cache-language-extensions %{
     file="$HOME/.cache/kak/ghc-language-extensions"
     mkdir -p "$HOME/.cache/kak"
     if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
-      ghc --supported-extensions | grep --invert-match --extended-regexp "(^No|GeneralisedNewtypeDeriving)" > "$file"
+      ghc --supported-extensions | grep --invert-match --extended-regexp "(^No|GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)" > "$file"
     fi
   }
 }
