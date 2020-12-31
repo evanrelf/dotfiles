@@ -162,12 +162,12 @@ in {
   gman = gprefix pkgsFinal.man;
 
   nix-tree =
-    (import (pkgsPrev.fetchFromGitHub {
+    import (pkgsPrev.fetchFromGitHub {
       owner = "utdemir";
       repo = "nix-tree";
-      rev = "c3c77ede124e91c3275a994f9e57cab360e6a13a";
-      sha256 = "0nyln9cxybqdcp9pdh5qjhhmbl0bn8f9ghh4cn0q2wmsldqpl0ai";
-    })).nix-tree;
+      rev = "498b3f9be4301abdc0cad1edf86521f8066a6451";
+      sha256 = "1bxbknf8szgisqyabwc2bxkhpn6b8x4q375rfxk7drfp75x61a9l";
+    });
 
   teip =
     pkgsPrev.rustPlatform.buildRustPackage rec {
