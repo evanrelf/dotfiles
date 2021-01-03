@@ -1,4 +1,4 @@
-{ hostname ? throw "Please specify your machine's hostname (e.g. `--argstr $(hostname)`)"
+{ hostname ? throw "Please specify your machine's hostname (e.g. `--argstr $(hostname -s)`)"
 }:
 
 let
