@@ -1,15 +1,14 @@
 args:
 
 let
-  # master on 2020-12-30
-  rev = "9b78f36021b3530773c4a2136c26862d32aef3f6";
+  # master on 2021-01-03
+  rev = "1d10a2af91d31e0da00b3259cc976c7c0033ba85";
+  sha256 = "05iday54fvsrpri8sdmib59w1kq2afwd2zxwgdrhwiaj77s676fc";
 
-  nixpkgs =
-    builtins.fetchTarball {
-      name = "nixpkgs";
-      url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
-      sha256 = "1b2apazjm9n4phh6gvq9dw6x6ziklvvqahz7wy5gmbmyaxk8yf1g";
-    };
+  nixpkgs = builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
+    inherit sha256;
+  };
 
 in
   import nixpkgs ({ config = {}; } // args)
