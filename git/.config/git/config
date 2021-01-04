@@ -113,8 +113,15 @@
   exec = "!exec "
   blank = "!if [ -z \"$1\" ]; then exit 1; else git checkout --orphan $1 && git rm --cached -r .; fi #"
 [core]
-  pager = delta --theme=GitHub --hunk-style=plain --highlight-removed --tabs=8 --file-color=yellow --file-style=box
   excludesfile = ~/.config/git/ignore
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  line-numbers = true
+  tabs = 8
+  syntax-theme = GitHub
+  hunk-header-style = omit
 [status]
   showUntrackedFiles = all
 [stash]
