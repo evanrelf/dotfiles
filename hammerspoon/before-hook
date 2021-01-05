@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+command -v defaults >/dev/null 2>&1 \
+  || (echo "Missing executable: defaults"; exit 1)
+
+echo "[hammerspoon] Changing config file location"
+defaults write org.hammerspoon.Hammerspoon \
+  MJConfigFile "$HOME/.config/hammerspoon/init.lua"

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+command -v nix-env >/dev/null 2>&1 \
+  || (echo "Missing executable: nix-env"; exit 1)
+
+echo "[nix] Installing profile"
+nix-env \
+  --install \
+  --file "nix/.config/nix/env.nix" \
+  --argstr hostname "$(hostname -s)"

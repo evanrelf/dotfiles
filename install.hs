@@ -41,6 +41,7 @@ module Main (main) where
 
 import Data.String.Interpolate (i, iii)
 import Relude
+import System.FilePath ((</>))
 
 import qualified Data.List.NonEmpty as NonEmpty
 import qualified Options.Applicative as Options
@@ -94,10 +95,44 @@ discardNonexistent packages = do
   pure existent
 
 
+--------------------------------------------------------------------------------
+-- INSTALL
+--------------------------------------------------------------------------------
+
+
 install :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
-install package = do
-  prepare package
-  stow package
+install package =
+  mapM_
+    ($ package)
+    [ hook "before"
+    , stow
+    , hook "after"
+    ]
+
+
+hook :: (MonadIO m, MonadReader Env m) => String -> FilePath -> m ()
+hook scriptPrefix package = do
+  let script = package </> scriptPrefix <> "-hook"
+
+  whenM (Directory.doesFileExist script) do
+    log [i|[#{package}] Running #{scriptPrefix} hook|]
+
+    sh [i|bash #{script}|]
+
+
+stow :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
+stow package = do
+  log [i|[#{package}] Stowing configuration|]
+
+  assertExecutableExists "stow"
+
+  sh [iii|
+    stow
+      --stow
+      --target "$HOME"
+      --no-folding #{package}
+      --ignore "-hook"
+  |]
 
 
 --------------------------------------------------------------------------------
@@ -132,122 +167,6 @@ parseOptions = do
       ]
 
   pure Options{packages, dryRun}
-
-
---------------------------------------------------------------------------------
--- PREPARE PACKAGES
---------------------------------------------------------------------------------
-
-
-prepare :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
-prepare = \case
-  "doom" -> prepareEmacs
-  "emacs" -> prepareEmacs
-  "hammerspoon" -> prepareHammerspoon
-  "kakoune" -> prepareKakoune
-  "neovim" -> prepareNeovim
-  "nix" -> prepareNix
-  "tmux" -> prepareTmux
-  _ -> pass
-
-
-prepareEmacs :: (MonadIO m, MonadReader Env m) => m ()
-prepareEmacs = do
-  log "[emacs] Setting up truecolor support"
-
-  sh "$HOME/dotfiles/emacs/.config/emacs/setup-truecolor"
-
-
-prepareHammerspoon :: (MonadIO m, MonadReader Env m) => m ()
-prepareHammerspoon = do
-  log "[hammerspoon] Changing config file location"
-
-  assertExecutableExists "defaults"
-
-  sh [iii|
-    defaults write org.hammerspoon.Hammerspoon MJConfigFile
-      "$HOME/.config/hammerspoon/init.lua"
-  |]
-
-
-prepareKakoune :: (MonadIO m, MonadReader Env m) => m ()
-prepareKakoune = do
-  Env{home} <- ask
-
-  let plugKak = [i|#{home}/.config/kak/plugins/plug.kak|]
-
-  unlessM (Directory.doesDirectoryExist plugKak) do
-    log "[kakoune] Installing plug.kak"
-
-    assertExecutableExists "git"
-
-    sh [iii|
-      git clone --depth=1 "https://github.com/robertmeta/plug.kak.git"
-        "$HOME/.config/kak/plugins/plug.kak"
-    |]
-
-
-prepareNeovim :: (MonadIO m, MonadReader Env m) => m ()
-prepareNeovim = do
-  Env{home} <- ask
-
-  let plugVim = [i|#{home}/.local/share/nvim/site/autoload/plug.vim|]
-
-  unlessM (Directory.doesFileExist plugVim) do
-    log "Installing vim-plug"
-
-    assertExecutableExists "curl"
-
-    sh [iii|
-      curl --location --fail --create-dirs
-        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-        -o "$HOME/.local/share/nvim/site/autoload/plug.vim"
-    |]
-
-
-prepareNix :: (MonadIO m, MonadReader Env m) => m ()
-prepareNix = do
-  log "[nix] Installing profile"
-
-  assertExecutableExists "nix-env"
-
-  sh [iii|
-    nix-env
-      --install
-      --file nix/.config/nix/env.nix
-      --argstr hostname "$(hostname -s)"
-  |]
-
-
-prepareTmux :: (MonadIO m, MonadReader Env m) => m ()
-prepareTmux = do
-  Env{home} <- ask
-
-  let pluginsDirectory = [i|#{home}/.config/tmux/plugins/tpm|]
-
-  unlessM (Directory.doesDirectoryExist pluginsDirectory) do
-    log "[tmux] Installing tpm"
-
-    assertExecutableExists "git"
-
-    sh [iii|
-      git clone --depth=1 "https://github.com/tmux-plugins/tpm.git"
-        "$HOME/.config/tmux/plugins/tpm"
-    |]
-
-
---------------------------------------------------------------------------------
--- STOW PACKAGES' CONFIGURATIONS
---------------------------------------------------------------------------------
-
-
-stow :: (MonadIO m, MonadReader Env m) => FilePath -> m ()
-stow package = do
-  log [i|[#{package}] Stowing configuration|]
-
-  assertExecutableExists "stow"
-
-  sh [i|stow --stow --target "$HOME" --no-folding #{package}|]
 
 
 --------------------------------------------------------------------------------

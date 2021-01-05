@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+command -v git >/dev/null 2>&1 \
+  || (echo "Missing executable: git"; exit 1)
+
+if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+  echo "[tmux] Installing tpm"
+  git clone --depth=1 \
+    "https://github.com/tmux-plugins/tpm.git" \
+    "$HOME/.config/tmux/plugins/tpm"
+fi

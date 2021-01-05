@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+echo "[doom] Setting up truecolor support"
+../emacs/.config/emacs/setup-truecolor
