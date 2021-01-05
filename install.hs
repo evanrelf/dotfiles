@@ -124,7 +124,7 @@ install package =
 
 runHook :: (MonadIO m, MonadReader Bool m) => String -> FilePath -> m ()
 runHook hookName package = do
-  let script = [i|package/#{hookName}-hook|]
+  let script = [i|#{package}/#{hookName}-hook|]
 
   whenM (Directory.doesFileExist script) do
     log [i|[#{package}] Running #{hookName} hook|]
