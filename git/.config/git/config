@@ -121,7 +121,6 @@
   line-numbers = true
   tabs = 8
   syntax-theme = GitHub
-  hunk-header-style = omit
 [status]
   showUntrackedFiles = all
 [stash]
