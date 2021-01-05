@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+command -v bash >/dev/null 2>&1 || (echo "Missing executable: curl"; exit 1)
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "[homebrew] Installing Homebrew"
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo "[homebrew] Installing packages"
+brew bundle --no-lock --file homebrew/Brewfile
