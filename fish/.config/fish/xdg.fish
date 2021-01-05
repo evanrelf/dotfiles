@@ -24,9 +24,9 @@ if _exists cargo
 end
 
 # gnupg
-if _exists gpg
-    set --export GNUPGHOME "$XDG_DATA_HOME/gnupg"
-end
+# if _exists gpg
+#     set --export GNUPGHOME "$XDG_DATA_HOME/gnupg"
+# end
 
 # go
 if _exists go
