@@ -159,7 +159,7 @@ in {
       '';
     });
 
-  gman = gprefix pkgsFinal.man;
+  man-gprefix = gprefix pkgsFinal.man;
 
   nix-tree =
     import (pkgsPrev.fetchFromGitHub {

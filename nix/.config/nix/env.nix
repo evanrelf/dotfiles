@@ -55,6 +55,7 @@ in
       kak-lsp
       kakoune
       lorri
+      man-gprefix
       moreutils
       neovim
       nix-diff
