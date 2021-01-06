@@ -32,6 +32,7 @@ in
     name = "env";
     paths = with pkgs; [
       (aspellWithDicts (d: with d; [ en en-computers en-science ]))
+      bash
       cabal-install
       comma
       coreutils-gprefix
