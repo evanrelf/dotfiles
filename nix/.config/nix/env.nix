@@ -72,6 +72,7 @@ in
       tealdeer
       teip
       tmux
+      tmux-xpanes
       vis
       zoxide
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
