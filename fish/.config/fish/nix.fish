@@ -41,11 +41,7 @@ if test -d "/nix"
     end
 end
 
-if _exists nix-build
-    alias nix-build "nix-build --no-out-link"
-end
-
-if _exists nix-shell
+if _exists nix
     function run
         if test ! -f "shell.nix" && test ! -f "default.nix"
             _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
@@ -94,29 +90,33 @@ if _exists nix-shell
         __with $argv || return 1
         eval "nix-shell --packages 'haskellPackages.ghcWithPackages (p: with p; [ $with_packages ])' $with_command"
     end
-end
 
-if _exists nix-store
+    function nix-show-drv
+        nix show-derivation $argv[1] | jq . --color-output | less -R
+    end
+
+    alias nix-build "nix-build --no-out-link"
     alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof)'"
-end
 
-if test -n "$IN_NIX_SHELL"
-    set --local nix_paths
-    set --local non_nix_paths
-    for p in "$PATH"
-        if test "$p" = "."
-            true
-        else if echo "$p" | grep --quiet "/nix/store"
-            set --append nix_paths "$p"
-        else
-            set --append non_nix_paths "$p"
+    if test -n "$IN_NIX_SHELL"
+        set --local nix_paths
+        set --local non_nix_paths
+        for p in "$PATH"
+            if test "$p" = "."
+                true
+            else if echo "$p" | grep --quiet "/nix/store"
+                set --append nix_paths "$p"
+            else
+                set --append non_nix_paths "$p"
+            end
+        end
+        set PATH
+        for p in "$nix_paths"
+            set --append PATH "$p"
+        end
+        for p in "$non_nix_paths"
+            set --append PATH "$p"
         end
     end
-    set PATH
-    for p in "$nix_paths"
-        set --append PATH "$p"
-    end
-    for p in "$non_nix_paths"
-        set --append PATH "$p"
-    end
+
 end
