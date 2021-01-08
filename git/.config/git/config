@@ -89,6 +89,7 @@
 
   # STATUS
   s = status --show-stash
+  ss = status --short --show-stash
 
   # SWITCH
   sw = switch
