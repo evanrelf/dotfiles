@@ -50,7 +50,6 @@ in
       git
       gitAndTools.delta
       gnugrep-gprefix
-      headroom
       httpie
       jq
       kak-lsp

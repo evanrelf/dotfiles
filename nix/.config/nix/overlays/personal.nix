@@ -11,14 +11,6 @@ let
     '';
 
 in {
-  # cabal-edit =
-  #   (import (pkgsPrev.fetchFromGitHub {
-  #     owner = "sdiehl";
-  #     repo = "cabal-edit";
-  #     rev = "0000000000000000000000000000000000000000";
-  #     sha256 = "0000000000000000000000000000000000000000000000000000";
-  #   }) { pkgs = pkgsFinal; });
-
   cabal-plan =
     pkgsPrev.haskell.lib.justStaticExecutables
       (pkgsPrev.haskell.lib.overrideCabal
@@ -87,27 +79,7 @@ in {
 
   gawk-gprefix = gprefix pkgsFinal.gawk;
 
-  ghcide =
-    (import (pkgsPrev.fetchFromGitHub {
-      owner = "cachix";
-      repo = "ghcide-nix";
-      rev = "67493b873e1a5e5d53837401ab6b128b20e8a989";
-      sha256 = "1zq5g7ka99vcyqbg5l1bx0rliq3ihig37nzczk0wdwidjyxjghf9";
-    }) {}).ghcide-ghc865;
-
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
-
-  headroom =
-    pkgsPrev.haskell.lib.justStaticExecutables
-      (pkgsPrev.haskellPackages.callCabal2nix
-        "headroom"
-        (pkgsPrev.fetchFromGitHub {
-          owner = "vaclavsvejcar";
-          repo = "headroom";
-          rev = "v0.3.2.0";
-          sha256 = "1nk98ng7pfacr0f27z314qf4m3fas8a0nbrax0r0bhjvwzg6i73r";
-        })
-        {});
 
   iosevka-pro =
     # To install on macOS:
@@ -129,19 +101,6 @@ in {
           "calt-html-comment"
         ];
       };
-    };
-
-  kak-lsp =
-    pkgsPrev.rustPlatform.buildRustPackage {
-      pname = "kak-lsp";
-      version = "HEAD";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "kak-lsp";
-        repo = "kak-lsp";
-        rev = "354b46e3cf56f0da35b444941a701ca4c1135aa8";
-        sha256 = "00hwf7pgrhrk0d572xp4k82pama09ph7k8s63cg28ixsmzhpaiji";
-      };
-      cargoSha256 = "0zn0y68fs4hgr4ypym4rqcr7ipsh3nxxhlrky5n43mp3qkbgyahs";
     };
 
   kakoune =
