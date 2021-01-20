@@ -65,6 +65,7 @@ in
       nix-prefetch-git
       nix-top
       nix-tree
+      nixUnstable
       ormolu
       pandoc
       ripgrep
