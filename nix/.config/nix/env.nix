@@ -20,7 +20,7 @@ let
       false;
 
   isWorkMachine =
-    if builtins.elem hostname [ "indigo" ] then
+    if builtins.elem hostname [ "indigo" "azure" ] then
       builtins.trace
         "Installing extra packages for work machine '${hostname}'"
         true
