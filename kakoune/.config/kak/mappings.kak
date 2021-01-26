@@ -33,3 +33,6 @@ map global "normal" "<a-#>" ": comment-block<ret>"
 # Use <c-n> and <c-p> in command mode
 map global "prompt" "<c-n>" "<down>"
 map global "prompt" "<c-p>" "<up>"
+
+# Format buffer
+map global "user" "=" ": format-buffer<ret>" -docstring "Format buffer"
