@@ -6,6 +6,7 @@
   a = add
   aa = "!git add --all $@ && git status --short #"
   ap = add --patch
+  ae = add --edit
 
   # BRANCH
   b = branch --verbose
