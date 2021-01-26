@@ -24,7 +24,8 @@
   # COMMIT
   c = commit
   amend = commit --amend --no-edit
-  rename = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to rename while dirty' >&2; exit 1; fi #"
+  rename = "!echo \"'rename' was renamed to 'reword' to follow rebase terminology\" >&2; exit 1 #"
+  reword = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to reword while dirty' >&2; exit 1; fi #"
   undo-commit = reset --soft HEAD~
 
   # DIFF
