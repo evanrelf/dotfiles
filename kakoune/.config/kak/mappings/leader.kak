@@ -61,6 +61,7 @@ define-command -hidden user-file-save %{
   }} catch %{
     fail "Failed to save %val{buffile}"
   }
+  git update-diff
 }
 
 # Lint
