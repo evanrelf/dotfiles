@@ -72,7 +72,7 @@ in
       ripgrep
       sd
       shellcheck
-      starship
+      head.starship
       tealdeer
       teip
       tmux
