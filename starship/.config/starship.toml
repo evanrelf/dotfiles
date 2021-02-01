@@ -6,6 +6,7 @@ format = """\
   $git_commit\
   $git_status\
   $git_state\
+  $nix_shell\
   $status\
   $character\
 """
@@ -59,6 +60,12 @@ deleted = '[×](red)'
 disabled = false
 format = '[\[$state( $progress_current/$progress_total)\]]($style) '
 style = 'cyan'
+
+[nix_shell]
+disabled = false
+format = 'via [${symbol}nix-shell]($style) '
+symbol = ' '
+style = 'blue'
 
 [status]
 disabled = false
