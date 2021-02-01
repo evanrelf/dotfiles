@@ -70,6 +70,7 @@ in
       ripgrep
       sd
       shellcheck
+      starship
       tealdeer
       teip
       tmux
