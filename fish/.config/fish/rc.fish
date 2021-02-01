@@ -17,7 +17,7 @@ function rc -d "Open the specified program's configuration file"
                 cd "$HOME/.config/doom/"
                 ls -l
 
-                # Shells
+            # Shells
             case fish
                 cd "$HOME/.config/fish/"
                 ls -l
@@ -30,7 +30,7 @@ function rc -d "Open the specified program's configuration file"
             case bash-profile
                 eval "$EDITOR $HOME/.bash_profile"
 
-                # Version control
+            # Version control
             case git
                 eval "$EDITOR $HOME/.config/git/config"
             case git-local
@@ -38,7 +38,7 @@ function rc -d "Open the specified program's configuration file"
             case mercurial hg
                 eval "$EDITOR $HOME/.hgrc"
 
-                # Terminal emulators
+            # Terminal emulators
             case alacritty
                 eval "$EDITOR $HOME/.config/alacritty.yml"
             case kitty
@@ -46,7 +46,7 @@ function rc -d "Open the specified program's configuration file"
             case kitty-local
                 eval "$EDITOR $HOME/.config/kitty/local.conf"
 
-                # Nix
+            # Nix
             case nixos
                 if test -e "$HOME/dotfiles/nixos/configuration.nix"
                     eval "$EDITOR $HOME/dotfiles/nixos/configuration.nix"
@@ -66,7 +66,7 @@ function rc -d "Open the specified program's configuration file"
             case nix-darwin darwin
                 eval "$EDITOR $HOME/.nixpkgs/darwin-configuration.nix"
 
-                # Window managers and related tools
+            # Window managers and related tools
             case xmonad
                 eval "$EDITOR $HOME/.xmonad/xmonad.hs"
                 # eval "$EDITOR $HOME/.config/xmonad/xmonad.hs"
@@ -95,7 +95,7 @@ function rc -d "Open the specified program's configuration file"
             case tmux
                 eval "$EDITOR $HOME/.config/tmux/tmux.conf"
 
-                # Xorg
+            # Xorg
             case xresources
                 eval "$EDITOR $HOME/.Xresources"
             case xprofile
@@ -103,13 +103,13 @@ function rc -d "Open the specified program's configuration file"
             case xinit
                 eval "$EDITOR $HOME/.xinitrc"
 
-                # Music players
+            # Music players
             case mpd
                 eval "$EDITOR $HOME/.config/mpd/mpd.conf"
             case ncmpcpp
                 eval "$EDITOR $HOME/.config/ncmpcpp/config"
 
-                # File browsers
+            # File browsers
             case ranger
                 eval "$EDITOR $HOME/.config/ranger/rc.conf"
             case broot
@@ -119,11 +119,13 @@ function rc -d "Open the specified program's configuration file"
                     _error "TODO: I don't know where the broot config lives on Linux..."
                 end
 
-                # Other
+            # Other
             case ghci
                 eval "$EDITOR $HOME/.ghci"
             case zathura
                 eval "$EDITOR $HOME/.config/zathura/zathurarc"
+            case starship
+                eval "$EDITOR $HOME/.config/starship.toml"
 
                 # Unknown
             case "*"
@@ -134,7 +136,7 @@ function rc -d "Open the specified program's configuration file"
         fd --type file --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --exact | xargs -o "$EDITOR"
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs spacemacs doom fish fisher fishfile zshrc zsh bashrc bash bash-profile git git-local mercurial hg alacritty kitty kitty-local nixos env home-manager home nix-darwin darwin xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon redshift tmux xresources xprofile xinit mpd ncmpcpp ranger broot ghci zathura"
+complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs evil spacemacs doom fish fisher fishfile zshrc zsh bashrc bash bash-profile git git-local mercurial hg alacritty kitty kitty-local nixos nix env home-manager home nix-darwin darwin xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon redshift tmux xresources xprofile xinit mpd ncmpcpp ranger broot ghci zathura starship"
 
 function rc_generate_completions
     cat "$HOME/.config/fish/rc.fish" \
