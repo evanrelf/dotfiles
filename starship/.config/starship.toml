@@ -14,7 +14,7 @@ add_newline = false
 
 [jobs]
 disabled = false
-format = '[+$number]($style) '
+format = '[ $number]($style) '
 style = 'cyan'
 threshold = 0
 
@@ -27,7 +27,8 @@ format = '[$read_only]($read_only_style)[$path]($style) '
 style = 'blue'
 read_only = ' '
 read_only_style = 'blue'
-truncation_length = 0
+truncation_length = 2
+truncate_to_repo = false
 fish_style_pwd_dir_length = 1
 
 [git_branch]
@@ -38,7 +39,7 @@ only_attached = true
 
 [git_commit]
 disabled = false
-format = '(at [$hash]($style)) '
+format = '(at [ $hash]($style)) '
 style = 'underline'
 
 [git_status]
@@ -64,7 +65,7 @@ style = 'cyan'
 [nix_shell]
 disabled = false
 format = 'via [${symbol}nix-shell]($style) '
-symbol = ' '
+symbol = ' '
 style = 'blue'
 
 [status]
