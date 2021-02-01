@@ -12,7 +12,6 @@ source "$__fish_config_dir/prompt.fish"
 source "$__fish_config_dir/aliases.fish"
 
 # Plugins and integrations
-source "$__fish_config_dir/install-fisher.fish"
 source "$__fish_config_dir/fzf.fish"
 source "$__fish_config_dir/zoxide.fish"
 source "$__fish_config_dir/direnv.fish"

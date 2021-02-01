@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+command -v curl >/dev/null 2>&1 || (echo "Missing executable: curl"; exit 1)
+command -v fish >/dev/null 2>&1 || (echo "Missing executable: fish"; exit 1)
+
+fisher_function="$HOME/.config/fish/functions/fisher.fish"
+if test ! -f "$fisher_function"; then
+  echo "[fish] Downloading Fisher"
+  curl --location "https://git.io/fisher" --output "$fisher_function"
+fi
+
+echo "[fish] Updating Fisher plugins"
+fish -c "fisher update"
