@@ -1,0 +1,61 @@
+format = """\
+  $jobs\
+  $username\
+  $directory\
+  $git_branch\
+  $git_commit\
+  $git_status\
+  $git_state\
+  $status\
+  $character\
+"""
+add_newline = false
+
+[jobs]
+disabled = false
+format = '[+$number]($style) '
+style = 'cyan'
+threshold = 0
+
+[username]
+disabled = false
+
+[directory]
+disabled = false
+format = '[$read_only]($read_only_style)[$path]($style) '
+style = 'blue'
+read_only = ' '
+read_only_style = 'blue'
+truncate_to_repo = false
+
+[git_branch]
+disabled = false
+format = 'on [ $branch]($style) '
+style = 'green'
+only_attached = true
+
+[git_commit]
+disabled = false
+format = '[$hash]($style) '
+style = 'green'
+
+[git_status]
+disabled = false
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = 'green'
+
+[git_state]
+disabled = false
+format = '[\[$state( $progress_current/$progress_total)\]]($style) '
+style = 'red'
+
+[status]
+disabled = false
+format = '[$status]($style) '
+style = 'red'
+recognize_signal_code = false
+
+[character]
+disabled = false
+success_symbol = 'λ'
+error_symbol = '[λ](red)'
