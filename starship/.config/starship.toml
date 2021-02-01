@@ -31,25 +31,25 @@ fish_style_pwd_dir_length = 1
 
 [git_branch]
 disabled = false
-format = 'on [ $branch]($style) '
-style = ''
+format = '(on [ $branch]($style)) '
+style = 'blue'
 only_attached = true
 
 [git_commit]
 disabled = false
-format = '[$hash]($style) '
-style = ''
+format = '(at [$hash]($style)) '
+style = 'underline'
 
 [git_status]
 disabled = false
-format = '([$all_status$ahead_behind]($style) )'
+format = '([\($conflicted$staged$modified$renamed$deleted$untracked$ahead_behind$stashed\)]($style) )'
 style = ''
-conflicted = '[=](cyan)'
-ahead = '⇡${count}'
-behind = '⇣${count}'
-diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+conflicted = '[=$count](cyan)'
+ahead = '[⇡$count](green)'
+behind = '[⇣$count](red)'
+diverged = '[⇡$ahead_count](green)[⇣$behind_count](red)'
 untracked = '[?](red)'
-stashed = '\$'
+stashed = '[\$](yellow)'
 modified = '[~](red)'
 staged = '[+](green)'
 renamed = '[»](red)'
