@@ -11,4 +11,4 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 echo "[homebrew] Installing packages"
-brew bundle --no-lock --file homebrew/Brewfile
+brew bundle --no-lock --file homebrew/.Brewfile
