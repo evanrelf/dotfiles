@@ -4,6 +4,8 @@
 let
   pkgs = import ./pkgs.nix {};
 
+  head = import ./nixpkgs-head.nix { overlays = import ./overlays; };
+
   declarative-channels =
     pkgs.runCommandLocal "declarative-channels" {} ''
       mkdir -p $out/channels
