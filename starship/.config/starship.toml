@@ -40,7 +40,7 @@ only_attached = true
 [git_commit]
 disabled = false
 format = '(at [ $hash]($style)) '
-style = 'underline'
+style = 'blue'
 
 [git_status]
 disabled = false
@@ -59,7 +59,7 @@ deleted = '[×](red)'
 
 [git_state]
 disabled = false
-format = '[\[$state( $progress_current/$progress_total)\]]($style) '
+format = '[\($state( $progress_current/$progress_total)\)]($style) '
 style = 'cyan'
 
 [nix_shell]
