@@ -96,8 +96,6 @@ in
       borgbackup
       idris2
       rclone
-      rust-analyzer
-      rustup
     ]) ++ (pkgs.lib.optionals isWorkMachine [
     ]);
   }
