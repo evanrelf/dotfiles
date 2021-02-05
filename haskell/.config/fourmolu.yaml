@@ -3,6 +3,6 @@ comma-style: leading
 record-brace-space: false
 indent-wheres: true
 diff-friendly-import-export: true
-respectful: false
+respectful: true
 haddock-style: single-line
 newlines-between-decls: 2
