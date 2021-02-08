@@ -169,19 +169,4 @@ in {
       rev = "8f32ee74f58bfba454e33a8459276795191be364";
       sha256 = "0m7fdxm1zl7p48dppxxg932fv3pc7idxi4jrp5qf66jccg6ihwhl";
     })).defaultPackage."${builtins.currentSystem}";
-
-  teip =
-    pkgsPrev.rustPlatform.buildRustPackage rec {
-      pname = "teip";
-      version = "1.2.1";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "greymd";
-        repo = "teip";
-        rev = "v${version}";
-        sha256 = "0s6ks6vdjrqri9cp48zgddjhmap9l81mygyrz6pa7xhcs48zaj23";
-      };
-      cargoPatches = [ ./teip-cargo-lock.patch ];
-      cargoSha256 = "1mk00s1yfrgw4q1rsl81b45bcv1gk216czvb4xvm8f5d4shk17l7";
-      doCheck = false;
-    };
 }

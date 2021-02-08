@@ -72,7 +72,6 @@ in
       shellcheck
       starship
       tealdeer
-      teip
       tmux
       tmux-xpanes
       vis
