@@ -46,7 +46,6 @@ in
       fish
       fourmolu
       fzf
-      gawk-gprefix
       ghcid
       git
       gitAndTools.delta
@@ -56,7 +55,6 @@ in
       kak-lsp
       kakoune
       lorri
-      man-gprefix
       moreutils
       neovim
       nix-diff

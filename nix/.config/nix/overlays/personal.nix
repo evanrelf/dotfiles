@@ -11,18 +11,6 @@ let
     '';
 
 in {
-  cabal-plan =
-    pkgsPrev.haskell.lib.justStaticExecutables
-      (pkgsPrev.haskell.lib.overrideCabal
-        pkgsPrev.haskellPackages.cabal-plan
-        (oldCabal: {
-          configureFlags =
-            (oldCabal.configureFlags or []) ++ [ "-flicense-report" ];
-          executableHaskellDepends =
-            (oldCabal.executableHaskellDepends or [])
-              ++ (with pkgsFinal.haskellPackages; [ tar zlib ]);
-        }) );
-
   comma =
     import (pkgsPrev.fetchFromGitHub {
       owner = "shopify";
@@ -119,31 +107,7 @@ in {
           })
           {}));
 
-  gawk-gprefix = gprefix pkgsFinal.gawk;
-
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
-
-  iosevka-pro =
-    # To install on macOS:
-    # $ open $(nix-env --query env --out-path | awk '{print $2}')"/share/fonts/iosevka-pro/"*
-    pkgsPrev.iosevka.override {
-      set = "pro";
-      privateBuildPlan = {
-        family = "Iosevka Pro";
-        design = [
-          # PragmataPro style
-          "ss08"
-          # Make "Term" variant
-          "sp-term"
-          # Add Haskell ligatures
-          "ligset-haskell"
-          # Add != and !== ligatures
-          "calt-exeq"
-          # Add <!-- and <!--- ligatures
-          "calt-html-comment"
-        ];
-      };
-    };
 
   kakoune =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (old: rec {
@@ -160,7 +124,6 @@ in {
       '';
     });
 
-  man-gprefix = gprefix pkgsFinal.man;
 
   nix-tree =
     (import (pkgsPrev.fetchFromGitHub {
