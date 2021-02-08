@@ -59,9 +59,6 @@ in {
           sha256 = "04ivmcxw7zzxr3q5svwg29y37wh60qkzvlan71k52hr12k4qnls9";
         };
 
-  emacsGccVterm =
-    (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
-
   evanPackages = {
     runghc =
       let

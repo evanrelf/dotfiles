@@ -82,7 +82,6 @@ in
       autocutsel
       chromium
       dmenu
-      emacsGccVterm
       firefox
       iosevka-pro
       kitty
