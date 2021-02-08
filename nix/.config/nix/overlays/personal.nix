@@ -124,6 +124,18 @@ in {
       '';
     });
 
+  neovim-unwrapped =
+    pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
+      version = "v0.5.0-dev+1075-g02a3c4179";
+      src =
+        pkgsPrev.fetchFromGitHub {
+          owner = "neovim";
+          repo = "neovim";
+          rev = "02a3c417945e7b7fc781906a78acbf88bd44c971";
+          sha256 = "16p69fgv1pr5n1rx1mnvj7j4c310ygn8xmiysivjsmvra6w93i6y";
+        };
+      buildInputs = (old.buildInputs or []) ++ [ pkgsFinal.tree-sitter ];
+    });
 
   nix-tree =
     (import (pkgsPrev.fetchFromGitHub {
