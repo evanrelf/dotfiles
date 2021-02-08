@@ -1,3 +1,3 @@
 args:
 
-import ./nixpkgs.nix ({ overlays = [ (import ./overlays/personal.nix) ]; } // args)
+import ./nixpkgs.nix ({ overlays = [ (import ./overlay.nix) ]; } // args)
