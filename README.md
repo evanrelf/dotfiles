@@ -7,19 +7,19 @@ My personal dotfiles
 - Editor: [Kakoune][kakoune]
 - Shell: [fish][fish]
 - Terminal: [kitty][kitty]
-- Window Manager: [tmux][tmux] in my terminal, [Amethyst][amethyst] on macOS,
-  [XMonad][xmonad] on NixOS
+- Window Manager: [tmux][tmux] in my terminal, [XMonad][xmonad] on NixOS
 - Package Manager: [Nix][nix], [Homebrew][homebrew] (for GUI apps on macOS)
 - OS: [macOS][macos], [NixOS][nixos]
 
-Dotfiles are managed using [GNU Stow][gnustow], which is run via [my install
-script](./install.hs).
+Dotfiles are managed using a combination of [GNU Stow][gnustow],
+`{before,after}-hook` shell scripts, and [my install script](./install.hs)
+written in Haskell.
 
 ## Usage
 
 You must have [Nix][nix] installed to run the install script.
 
-```shell
+```
 $ ./install.hs [--dry-run] PACKAGE...
 ```
 
