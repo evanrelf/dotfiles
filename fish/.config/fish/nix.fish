@@ -96,6 +96,7 @@ if _exists nix
     end
 
     alias nix-build "nix-build --no-out-link"
+    alias nix-instantiate "nix-instantiate --no-gc-warning"
     alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof)'"
 
     if test -n "$IN_NIX_SHELL"
