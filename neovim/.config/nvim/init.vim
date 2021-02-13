@@ -58,7 +58,7 @@ set noswapfile
 set nowritebackup
 set ignorecase
 set smartcase
-set wildignore+=*/.git/*,*/dist-newstyle/*
+set wildignore+=*/.git/*,*/dist/*,*/dist-newstyle/*
 set wildignorecase
 set gdefault
 set mouse=a
