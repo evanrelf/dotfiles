@@ -2,7 +2,6 @@ call plug#begin()
 Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
-Plug 'inkarkat/vim-visualrepeat'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'sheerun/vim-polyglot'
