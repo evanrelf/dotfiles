@@ -17,6 +17,7 @@ source "$__fish_config_dir/zoxide.fish"
 source "$__fish_config_dir/direnv.fish"
 source "$__fish_config_dir/broot.fish"
 source "$__fish_config_dir/nnn.fish"
+source "$__fish_config_dir/brew.fish"
 
 # Functions
 source "$__fish_config_dir/rc.fish"
