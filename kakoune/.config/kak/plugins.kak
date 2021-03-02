@@ -52,6 +52,12 @@ config %{
   map global "surround-tag" "d" ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
 }
 
+plug "listentolist/kakoune-fandt" \
+commit "6b035782c2437708917ff1e4d3c05e33678e42dc" \
+config %{
+  require-module fandt
+}
+
 plug "andreyorst/fzf.kak" \
 commit "f23daa698ad95493fbd675ae153e3cac13ef34e9" \
 do %{
