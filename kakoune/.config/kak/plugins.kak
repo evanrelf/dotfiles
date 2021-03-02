@@ -12,7 +12,10 @@ config %{
   set-option global number_toggle_params -hlcursor
 }
 
-plug "evanrelf/expand-line.kak"
+plug "evanrelf/byline.kak" \
+config %{
+  require-module "byline"
+}
 
 plug "alexherbo2/replace-mode.kak" \
 commit "5f4c73cdbaf5aeb964ee35ad4b9081b233af90c0" \
