@@ -43,7 +43,7 @@ end
 
 alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
 
-alias deathrow "sudo tree -x -C --prune / | grep -vE '(/etc/static|/persist|/nix/store)' | less -R"
+alias deathrow "sudo tree -x -C --prune / | grep -vE '(/etc/static|/persist|/nix/store)' | less"
 
 function rg
     if isatty stdout
@@ -52,6 +52,8 @@ function rg
         command rg $argv
     end
 end
+
+alias less "less -RMFXK"
 
 # Typos
 abbr --add gs "git s"
