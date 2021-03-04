@@ -55,6 +55,7 @@ in
       kak-lsp
       kakoune
       lorri
+      magic-wormhole
       moreutils
       neovim
       nix-diff
