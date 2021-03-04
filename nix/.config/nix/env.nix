@@ -47,8 +47,8 @@ in
       fourmolu
       fzf
       ghcid
-      git
       gitAndTools.delta
+      gitAndTools.gitFull
       gnugrep-gprefix
       httpie
       jq
