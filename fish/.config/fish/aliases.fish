@@ -45,5 +45,13 @@ alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
 
 alias deathrow "sudo tree -x -C --prune / | grep -vE '(/etc/static|/persist|/nix/store)' | less -R"
 
+function rg
+    if isatty stdout
+        command rg -p $argv | command less -RMFXK
+    else
+        command rg $argv
+    end
+end
+
 # Typos
 abbr --add gs "git s"
