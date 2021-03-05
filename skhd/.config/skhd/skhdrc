@@ -26,16 +26,16 @@ shift + ctrl + alt + cmd - l : yabai --message window --swap east
 # ctrl + alt + cmd - 9 : yabai --message space --focus 9
 # ctrl + alt + cmd - 0 : yabai --message space --focus 10
 # Hacky workaround
-ctrl + alt + cmd - 1 : skhd --key "ctrl - 1"
-ctrl + alt + cmd - 2 : skhd --key "ctrl - 2"
-ctrl + alt + cmd - 3 : skhd --key "ctrl - 3"
-ctrl + alt + cmd - 4 : skhd --key "ctrl - 4"
-ctrl + alt + cmd - 5 : skhd --key "ctrl - 5"
-ctrl + alt + cmd - 6 : skhd --key "ctrl - 6"
-ctrl + alt + cmd - 7 : skhd --key "ctrl - 7"
-ctrl + alt + cmd - 8 : skhd --key "ctrl - 8"
-ctrl + alt + cmd - 9 : skhd --key "ctrl - 9"
-ctrl + alt + cmd - 0 : skhd --key "ctrl - 0"
+# ctrl + alt + cmd - 1 : skhd --key "ctrl - 1"
+# ctrl + alt + cmd - 2 : skhd --key "ctrl - 2"
+# ctrl + alt + cmd - 3 : skhd --key "ctrl - 3"
+# ctrl + alt + cmd - 4 : skhd --key "ctrl - 4"
+# ctrl + alt + cmd - 5 : skhd --key "ctrl - 5"
+# ctrl + alt + cmd - 6 : skhd --key "ctrl - 6"
+# ctrl + alt + cmd - 7 : skhd --key "ctrl - 7"
+# ctrl + alt + cmd - 8 : skhd --key "ctrl - 8"
+# ctrl + alt + cmd - 9 : skhd --key "ctrl - 9"
+# ctrl + alt + cmd - 0 : skhd --key "ctrl - 0"
 
 # Send window to space
 shift + ctrl + alt + cmd - 1 : yabai --message window --space  1
