@@ -14,6 +14,7 @@ cask "zoom"
 
 tap "koekeishiya/formulae"
 brew "yabai"
+brew "skhd"
 
 brew "mas"
 mas "Affinity Photo", id: 824183456

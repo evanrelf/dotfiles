@@ -1,0 +1,49 @@
+# Focus window
+ctrl + alt + cmd - h : yabai --message window --focus west
+ctrl + alt + cmd - j : yabai --message window --focus south
+ctrl + alt + cmd - k : yabai --message window --focus north
+ctrl + alt + cmd - l : yabai --message window --focus east
+
+# Swap window
+shift + ctrl + alt + cmd - h : yabai --message window --swap west
+shift + ctrl + alt + cmd - j : yabai --message window --swap south
+shift + ctrl + alt + cmd - k : yabai --message window --swap north
+shift + ctrl + alt + cmd - l : yabai --message window --swap east
+
+# Focus space
+
+# Requires scripting addition
+# ctrl + alt + cmd - 1 : yabai --message space --focus 1
+# ctrl + alt + cmd - 2 : yabai --message space --focus 2
+# ctrl + alt + cmd - 3 : yabai --message space --focus 3
+# ctrl + alt + cmd - 4 : yabai --message space --focus 4
+# ctrl + alt + cmd - 5 : yabai --message space --focus 5
+# ctrl + alt + cmd - 6 : yabai --message space --focus 6
+# ctrl + alt + cmd - 7 : yabai --message space --focus 7
+# ctrl + alt + cmd - 8 : yabai --message space --focus 8
+# ctrl + alt + cmd - 9 : yabai --message space --focus 9
+# ctrl + alt + cmd - 0 : yabai --message space --focus 10
+
+# Hacky workaround
+ctrl + alt + cmd - 1 : skhd --key "ctrl - 1"
+ctrl + alt + cmd - 2 : skhd --key "ctrl - 2"
+ctrl + alt + cmd - 3 : skhd --key "ctrl - 3"
+ctrl + alt + cmd - 4 : skhd --key "ctrl - 4"
+ctrl + alt + cmd - 5 : skhd --key "ctrl - 5"
+ctrl + alt + cmd - 6 : skhd --key "ctrl - 6"
+ctrl + alt + cmd - 7 : skhd --key "ctrl - 7"
+ctrl + alt + cmd - 8 : skhd --key "ctrl - 8"
+ctrl + alt + cmd - 9 : skhd --key "ctrl - 9"
+ctrl + alt + cmd - 0 : skhd --key "ctrl - 0"
+
+# Send window to space
+shift + ctrl + alt + cmd - 1 : yabai --message window --space  1
+shift + ctrl + alt + cmd - 2 : yabai --message window --space  2
+shift + ctrl + alt + cmd - 3 : yabai --message window --space  3
+shift + ctrl + alt + cmd - 4 : yabai --message window --space  4
+shift + ctrl + alt + cmd - 5 : yabai --message window --space  5
+shift + ctrl + alt + cmd - 6 : yabai --message window --space  6
+shift + ctrl + alt + cmd - 7 : yabai --message window --space  7
+shift + ctrl + alt + cmd - 8 : yabai --message window --space  8
+shift + ctrl + alt + cmd - 9 : yabai --message window --space  9
+shift + ctrl + alt + cmd - 0 : yabai --message window --space 10
