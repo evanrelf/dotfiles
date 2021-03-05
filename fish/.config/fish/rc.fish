@@ -94,6 +94,10 @@ function rc -d "Open the specified program's configuration file"
                 eval "$EDITOR $HOME/.config/redshift/redshift.conf"
             case tmux
                 eval "$EDITOR $HOME/.config/tmux/tmux.conf"
+            case yabai
+                eval "$EDITOR $HOME/.config/yabai/yabairc"
+            case skhd
+                eval "$EDITOR $HOME/.config/skhd/skhdrc"
 
             # Xorg
             case xresources
@@ -136,7 +140,7 @@ function rc -d "Open the specified program's configuration file"
         fd --type file --hidden --exclude ".git" . "$HOME/dotfiles/" | fzf --exact | xargs -o "$EDITOR"
     end
 end
-complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs evil spacemacs doom fish fisher fishfile zshrc zsh bashrc bash bash-profile git git-local mercurial hg alacritty kitty kitty-local nixos nix env home-manager home nix-darwin darwin xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon redshift tmux xresources xprofile xinit mpd ncmpcpp ranger broot ghci zathura starship"
+complete --command rc --require-parameter --no-files --arguments "vim vi neovim nvim kakoune kak emacs evil spacemacs doom fish fisher fishfile zshrc zsh bashrc bash bash-profile git git-local mercurial hg alacritty kitty kitty-local nixos nix env home-manager home nix-darwin darwin xmonad xmobar taffybar awesome polybar bspwm sxhkd sway swaylock compton hammerspoon redshift tmux yabai skhd xresources xprofile xinit mpd ncmpcpp ranger broot ghci zathura starship"
 
 function rc_generate_completions
     cat "$HOME/.config/fish/rc.fish" \
