@@ -5,8 +5,8 @@ hook global WinSetOption filetype=sh %{
 }
 
 # Check for shebangs
-hook global WinSetOption filetype= %{ try %{
-  execute-keys -draft "x<a-k>#!(/bin/sh|/bin/bash|/usr/bin/env bash)<ret>"
+hook global WinSetOption filetype=(plain)? %{ try %{
+  execute-keys -draft "x<a-k>#!(/bin/sh|/bin/bash|/usr/bin/env bash|/usr/bin/env sh)<ret>"
   set-option window filetype sh
 } catch %{ try %{
   execute-keys -draft "x<a-k>#!/usr/bin/env nix-shell<ret>"
