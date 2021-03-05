@@ -12,6 +12,9 @@ cask "spotify"
 cask "the-unarchiver"
 cask "zoom"
 
+tap "koekeishiya/formulae"
+brew "yabai"
+
 brew "mas"
 mas "Affinity Photo", id: 824183456
 mas "Magnet", id: 441258766
