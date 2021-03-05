@@ -147,5 +147,11 @@
   pruneTags = true
 [interactive]
   singleKey = true
+[sendemail]
+  # https://git-send-email.io/
+  smtpserver = smtp.fastmail.com
+  smtpuser = evan@evanrelf.com
+  smtpencryption = tls
+  smtpserverport = 587
 [include]
   path = ~/.config/git/local
