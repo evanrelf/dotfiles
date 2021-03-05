@@ -38,7 +38,6 @@ in
       coreutils-gprefix
       declarative-channels
       dhall
-      direnv
       exa
       fd
       findutils-gprefix
@@ -51,16 +50,13 @@ in
       gnugrep-gprefix
       httpie
       jq
-      kak-lsp
       kakoune
       lorri
       magic-wormhole
       moreutils
       neovim
       nix-diff
-      nix-direnv
       nix-index
-      nix-prefetch-git
       nix-top
       nix-tree
       ormolu
@@ -71,8 +67,6 @@ in
       starship
       tealdeer
       tmux
-      tmux-xpanes
-      vis
       zoxide
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
       acpi
@@ -88,8 +82,8 @@ in
       xclip
     ]) ++ (pkgs.lib.optionals isPersonalMachine [
       borgbackup
-      idris2
       rclone
     ]) ++ (pkgs.lib.optionals isWorkMachine [
+      tmux-xpanes
     ]);
   }
