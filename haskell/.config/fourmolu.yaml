@@ -5,4 +5,4 @@ indent-wheres: true
 diff-friendly-import-export: true
 respectful: true
 haddock-style: single-line
-newlines-between-decls: 2
+newlines-between-decls: 1
