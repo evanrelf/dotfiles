@@ -1,3 +1,6 @@
+# Open kitty
+# ctrl + alt + cmd - return : kitty --single-instance --directory ~ &> /dev/null
+
 # Focus window
 ctrl + alt + cmd - h : yabai --message window --focus west
 ctrl + alt + cmd - j : yabai --message window --focus south
@@ -11,7 +14,6 @@ shift + ctrl + alt + cmd - k : yabai --message window --swap north
 shift + ctrl + alt + cmd - l : yabai --message window --swap east
 
 # Focus space
-
 # Requires scripting addition
 # ctrl + alt + cmd - 1 : yabai --message space --focus 1
 # ctrl + alt + cmd - 2 : yabai --message space --focus 2
@@ -23,7 +25,6 @@ shift + ctrl + alt + cmd - l : yabai --message window --swap east
 # ctrl + alt + cmd - 8 : yabai --message space --focus 8
 # ctrl + alt + cmd - 9 : yabai --message space --focus 9
 # ctrl + alt + cmd - 0 : yabai --message space --focus 10
-
 # Hacky workaround
 ctrl + alt + cmd - 1 : skhd --key "ctrl - 1"
 ctrl + alt + cmd - 2 : skhd --key "ctrl - 2"
@@ -47,3 +48,12 @@ shift + ctrl + alt + cmd - 7 : yabai --message window --space  7
 shift + ctrl + alt + cmd - 8 : yabai --message window --space  8
 shift + ctrl + alt + cmd - 9 : yabai --message window --space  9
 shift + ctrl + alt + cmd - 0 : yabai --message window --space 10
+
+# Fullscreen window
+ctrl + alt + cmd - f : yabai --message window --toggle zoom-fullscreen
+
+# Float window
+ctrl + alt + cmd - t : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2
+
+# Balance space
+ctrl + alt + cmd - b : yabai --message space --balance
