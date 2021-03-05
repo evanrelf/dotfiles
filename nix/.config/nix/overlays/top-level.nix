@@ -47,50 +47,51 @@ in {
           sha256 = "04ivmcxw7zzxr3q5svwg29y37wh60qkzvlan71k52hr12k4qnls9";
         };
 
-  evanPackages = {
-    runghc =
-      let
-        ghc = pkgsFinal.haskellPackages.ghcWithPackages (p: with p; [
-          relude
-          string-interpolate
-          unliftio
-        ]);
-      in
-        pkgsPrev.runCommandLocal "evans-runghc" {
-          buildInputs = [ pkgsFinal.makeWrapper ];
-        } ''
-          mkdir -p "$out/bin"
-          makeWrapper "${ghc}/bin/runghc" "$out/bin/evans-runghc" \
-            --add-flags "--ghc-arg='-XBlockArguments'" \
-            --add-flags "--ghc-arg='-XDeriveAnyClass'" \
-            --add-flags "--ghc-arg='-XDeriveFunctor'" \
-            --add-flags "--ghc-arg='-XDeriveGeneric'" \
-            --add-flags "--ghc-arg='-XDerivingStrategies'" \
-            --add-flags "--ghc-arg='-XDerivingVia'" \
-            --add-flags "--ghc-arg='-XGeneralizedNewtypeDeriving'" \
-            --add-flags "--ghc-arg='-XInstanceSigs'" \
-            --add-flags "--ghc-arg='-XLambdaCase'" \
-            --add-flags "--ghc-arg='-XNamedFieldPuns'" \
-            --add-flags "--ghc-arg='-XNoImplicitPrelude'" \
-            --add-flags "--ghc-arg='-XOverloadedStrings'" \
-            --add-flags "--ghc-arg='-XScopedTypeVariables'" \
-            --add-flags "--ghc-arg='-XTypeApplications'" \
-            --add-flags "--ghc-arg='-Wall'" \
-            --add-flags "--ghc-arg='-Wcompat'" \
-            --add-flags "--ghc-arg='-Werror=incomplete-record-updates'" \
-            --add-flags "--ghc-arg='-Werror=incomplete-uni-patterns'" \
-            --add-flags "--ghc-arg='-Werror=missing-fields'" \
-            --add-flags "--ghc-arg='-Werror=partial-fields'" \
-            --add-flags "--ghc-arg='-Widentities'" \
-            --add-flags "--ghc-arg='-Wmissing-home-modules'" \
-            --add-flags "--ghc-arg='-Wredundant-constraints'" \
-            --add-flags "--ghc-arg='-foptimal-applicative-do'" \
-            --add-flags "--ghc-arg='-fshow-warning-groups'" \
-            --add-flags "--ghc-arg='-threaded'" \
-            --add-flags "--ghc-arg='-rtsopts'" \
-            --add-flags "--ghc-arg='-with-rtsopts=-N'"
-        '';
-  };
+  evan-runghc =
+    let
+      ghc = pkgsFinal.haskellPackages.ghcWithPackages (p: with p; [
+        relude
+        string-interpolate
+        unliftio
+      ]);
+
+      ghcArgs = builtins.map (arg: ''--add-flags "--ghc-arg='${arg}'"'') [
+        "-XBlockArguments"
+        "-XDeriveAnyClass"
+        "-XDeriveFunctor"
+        "-XDeriveGeneric"
+        "-XDerivingStrategies"
+        "-XDerivingVia"
+        "-XGeneralizedNewtypeDeriving"
+        "-XInstanceSigs"
+        "-XLambdaCase"
+        "-XNamedFieldPuns"
+        "-XNoImplicitPrelude"
+        "-XOverloadedStrings"
+        "-XScopedTypeVariables"
+        "-XTypeApplications"
+        "-Wall"
+        "-Wcompat"
+        "-Werror=incomplete-record-updates"
+        "-Werror=incomplete-uni-patterns"
+        "-Werror=missing-fields"
+        "-Werror=partial-fields"
+        "-Widentities"
+        "-Wmissing-home-modules"
+        "-Wredundant-constraints"
+        "-foptimal-applicative-do"
+        "-fshow-warning-groups"
+        "-threaded"
+        "-rtsopts"
+        "-with-rtsopts=-N"
+      ];
+    in
+      pkgsPrev.runCommandLocal "evan-runghc" {
+        buildInputs = [ pkgsFinal.makeWrapper ];
+      } ''
+        mkdir -p "$out/bin"
+        makeWrapper "${ghc}/bin/runghc" "$out/bin/evans-runghc" ${ghcArgs}
+      '';
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
 

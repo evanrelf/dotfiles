@@ -39,7 +39,6 @@ in
       declarative-channels
       dhall
       direnv
-      evanPackages.runghc
       exa
       fd
       findutils-gprefix
