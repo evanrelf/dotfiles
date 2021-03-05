@@ -5,6 +5,7 @@ source "%val{config}/filetype/purescript.kak"
 source "%val{config}/filetype/fish.kak"
 source "%val{config}/filetype/dhall.kak"
 source "%val{config}/filetype/rust.kak"
+source "%val{config}/filetype/python.kak"
 source "%val{config}/filetype/markdown.kak"
 source "%val{config}/filetype/git-commit.kak"
 
