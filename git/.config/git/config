@@ -52,6 +52,7 @@
   # REBASE
   rb = rebase
   rbi = "!if [ -z \"$1\" ]; then git rebase-back \"$(git lookup)\"; else git rebase-back $@; fi #"
+  rbauto = "!GIT_SEQUENCE_EDITOR=true git rbi $@ #"
   rbc = rebase --continue
   rbs = rebase --skip
   rba = rebase --abort
