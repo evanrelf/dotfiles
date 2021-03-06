@@ -19,7 +19,7 @@
   # COMMIT
   c = commit
   cf = "!if [ -z \"$1\" ]; then git commit --fixup \"$(git lookup)\"; else git commit --fixup $@; fi #"
-  reword = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to reword while dirty' >&2; exit 1; fi #"
+  reword = with-stash "git commit --amend --quiet"
   amend = commit --amend --no-edit
 
   # DIFF
@@ -122,6 +122,7 @@
   gpgSign = true
 [rebase]
   autoSquash = true
+  autoStash = true
 [push]
   followTags = true
 [diff]

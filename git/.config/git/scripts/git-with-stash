@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+git stash push --include-untracked --quiet
+
+trap "git stash pop --index --quiet" EXIT
+
+eval "$@"
