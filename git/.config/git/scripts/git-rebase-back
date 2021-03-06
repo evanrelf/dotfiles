@@ -15,10 +15,10 @@ else
 fi
 
 # Verify it's a valid ref
-if git rev-parse "$ref" --verify --quiet >/dev/null 2>&1; then
-  echo "Invalid ref '$ref'"
+if git rev-parse "${ref}" --verify --quiet >/dev/null 2>&1; then
+  echo "Invalid ref '${ref}'"
   exit 1
 fi
 
 # Begin interactive rebase
-git rebase --interactive --gpg-sign "$ref" "${@:2}"
+git rebase --interactive --gpg-sign "${ref}" "${@:2}"

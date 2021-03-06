@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 realdir=$(dirname "$(realpath "$0")")
 
-cd "$realdir"
+cd "${realdir}"
 
 args=()
 args+=("-Wall")

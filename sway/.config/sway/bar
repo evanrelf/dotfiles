@@ -21,4 +21,4 @@ brightness=$(light -G | cut -d '.' -f 1)
 battery=$(cat /sys/class/power_supply/BAT0/capacity)
 date=$(date +'%Y-%m-%d %l:%M %p')
 
-echo "Volume: $volume | Brightness: $brightness% | Battery: $battery% | $date"
+echo "Volume: ${volume} | Brightness: ${brightness}% | Battery: ${battery}% | ${date}"

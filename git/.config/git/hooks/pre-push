@@ -7,14 +7,14 @@ current_branch=$(git symbolic-ref HEAD | sed -e "s,.*/\(.*\),\1,")
 blacklist_regex='^(master|main|trunk|release-.*)$'
 delay=5
 
-if echo "$current_branch" | grep --quiet --extended-regexp "$blacklist_regex"; then
-  read -p "You're about to push to branch '$current_branch'. Is that what you intended? [yN] " -n 1 -r < /dev/tty
+if echo "${current_branch}" | grep --quiet --extended-regexp "${blacklist_regex}"; then
+  read -p "You're about to push to branch '${current_branch}'. Is that what you intended? [yN] " -n 1 -r < /dev/tty
   echo
-  if echo "$REPLY" | grep --quiet --extended-regexp '^[Yy]$'; then
+  if echo "${REPLY}" | grep --quiet --extended-regexp '^[Yy]$'; then
     read -p "Type the name of the branch to confirm: " -r < /dev/tty
-      if [ "$REPLY" = "$current_branch" ]; then
-        echo "Pushing to branch '$current_branch' in $delay seconds... (Ctrl-C to cancel)"
-        sleep $delay
+      if [ "${REPLY}" = "${current_branch}" ]; then
+        echo "Pushing to branch '${current_branch}' in ${delay} seconds... (Ctrl-C to cancel)"
+        sleep "${delay}"
         exit 0
       else
         echo "Incorrect branch name"
