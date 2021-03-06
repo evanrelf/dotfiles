@@ -3,22 +3,23 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-if [ -z "$1" ]; then
-  # Fail when no arguments provided
+if [ -z "${1:-}" ]; then
+  # Fail when no argument provided
+  echo "Missing revision or offset"
   exit 1
 elif echo "$1" | grep -Eq '^[0-9]+$'; then
   # If it's a number, work backwards from HEAD
-  ref="HEAD~$1"
+  rev="HEAD~$1"
 else
-  # If it's not a number, treat it like a normal ref
-  ref="$1~1"
+  # If it's not a number, treat it like a normal revision
+  rev="$1~1"
 fi
 
-# Verify it's a valid ref
-if git rev-parse "${ref}" --verify --quiet >/dev/null 2>&1; then
-  echo "Invalid ref '${ref}'"
+# Verify it's a valid revision
+if git rev-parse "${rev}" --verify --quiet >/dev/null 2>&1; then
+  echo "Invalid revision '${rev}'"
   exit 1
 fi
 
 # Begin interactive rebase
-git rebase --interactive --gpg-sign "${ref}" "${@:2}"
+git rebase --interactive --gpg-sign "${rev}" "${@:2}"

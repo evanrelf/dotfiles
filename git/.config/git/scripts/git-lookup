@@ -9,13 +9,13 @@ git log \
   --oneline \
   --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' \
   --color=always \
-| fzf -1 -0 \
-  --exact \
-  --height 50% \
-  --reverse \
-  --ansi \
-  --no-sort \
-  --query "$*" \
-  --color light \
-| cut -d ' ' -f 1 \
-| xargs git rev-parse --verify --quiet
+  | fzf -1 -0 \
+    --exact \
+    --height 50% \
+    --reverse \
+    --ansi \
+    --no-sort \
+    --query "$*" \
+    --color light \
+  | cut -d ' ' -f 1 \
+  | xargs git rev-parse --verify --quiet
