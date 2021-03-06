@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -Eeuo pipefail
 IFS=$'\n\t'
 
 source_path="${1:-$HOME/dotfiles/nixos/configuration.nix}"

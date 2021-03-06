@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -Eeuo pipefail
 IFS=$'\n\t'
 
 if [ -z "$1" ]; then
