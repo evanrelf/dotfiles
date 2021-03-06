@@ -143,5 +143,7 @@
   smtpuser = evan@evanrelf.com
   smtpencryption = tls
   smtpserverport = 587
+  suppresscc = self
+  annotate = true
 [include]
   path = ~/.config/git/local
