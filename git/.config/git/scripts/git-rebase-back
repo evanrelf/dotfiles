@@ -7,7 +7,10 @@ if [ -z "${1:-}" ]; then
   # Fail when no argument provided
   echo "Missing revision or offset"
   exit 1
-elif echo "$1" | grep -Eq '^[0-9]+$'; then
+elif echo "$1" | grep --quiet --extended-regexp '^u(pstream)?$'; then
+  # Only use commits which haven't been pushed yet
+  rev="@{upstream}"
+elif echo "$1" | grep --quiet --extended-regexp '^[0-9]+$'; then
   # If it's a number, work backwards from HEAD
   rev="HEAD~$1"
 else
