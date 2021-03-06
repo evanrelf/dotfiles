@@ -1,49 +1,45 @@
-[user]
-  name = Evan Relf
-  useConfigOnly = true
 [alias]
   # ADD
   a = add
-  aa = "!git add --all $@ && git status --short #"
+  aa = add --all
   ap = add --patch
   ae = add --edit
+  ai = add --intent-to-add
 
   # BRANCH
-  b = branch --verbose
-  bd = branch --delete
-  bdf = branch --delete --force
+  b = branch
   master-to-main = branch --move --force main
-
-  # CHECKOUT
-  co = "!echo \"Prefer using 'switch' and 'restore'\" >&2; exit 1 #"
 
   # CLEAN
   clean-ignored = clean -Xdf
   clean-untracked = clean -xdi
+  cli = clean-ignored
+  clu = clean-untracked
 
   # COMMIT
   c = commit
-  amend = commit --amend --no-edit
-  rename = "!echo \"'rename' was renamed to 'reword' to follow rebase terminology\" >&2; exit 1 #"
+  cf = "!if [ -z \"$1\" ]; then git commit --fixup \"$(git lookup)\"; else git commit --fixup $@; fi #"
   reword = "!if [ -z \"$(git status --porcelain)\" ]; then git commit --amend; else echo 'Refusing to reword while dirty' >&2; exit 1; fi #"
-  undo-commit = reset --soft HEAD~
+  amend = commit --amend --no-edit
 
   # DIFF
   d = diff
   ds = diff --staged
 
-  # FETCH
-  f = fetch
-  ff = fetch --force
+  # LOOKUP
+  k = lookup
 
   # LOG
-  l = lll --max-count=10
+  l = lll --max-count=20
   ll = lll --max-count=50
   lll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
   signed = log --graph --max-count=10 --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset'
 
-  # LOOKUP (script)
-  k = lookup
+  # MERGE
+  m = merge
+  ms = merge --squash
+  mc = merge --continue
+  ma = merge --abort
 
   # PULL
   pullff = pull --ff-only
@@ -55,66 +51,60 @@
 
   # REBASE
   rb = rebase
-  rbi = "!if [ -z \"$1\" ]; then git rebase-back $(git lookup); else git rebase-back $@; fi #" # script
-  undo-rebase = reset --hard ORIG_HEAD
+  rbi = "!if [ -z \"$1\" ]; then git rebase-back \"$(git lookup)\"; else git rebase-back $@; fi #"
   rbc = rebase --continue
   rbs = rebase --skip
   rba = rebase --abort
 
   # RESET
-  r = reset
-  rp = reset --patch
-  rs = reset --soft
-  rh = reset --hard
+  undo-commit = reset --soft HEAD~1
 
   # RESTORE
   re = restore
   rep = restore --patch
+  res = restore --staged
+  resp = restore --staged --patch
 
   # SHOW
-  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show --name-only; else git show --name-only $@; fi #"
-  shd = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
-
-  # SPARSE-CHECKOUT
-  sc = sparse-checkout
-  sce = "!file=\"$(git root)/.git/info/sparse-checkout\"; if [ -f \"$file\" ]; then $EDITOR $file; else echo 'Sparse checkout file does not exist' >&2; exit 1; fi #"
+  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"" ]"
 
   # STASH
-  st = stash push
-  stu = stash push --include-untracked
-  sts = stash show
+  st = stash push --include-untracked
+  stp = stash pop --index
   sta = stash apply
-  stp = stash pop
+  sts = stash show
   stl = stash list
   std = stash drop
-  # stdd = stash clear
 
   # STATUS
-  s = status --show-stash
-  ss = status --short --show-stash
+  s = status --short
+  ss = status
 
   # SWITCH
   sw = switch
   swc = switch --create
   swd = switch --detach
-
-  # TAG
-  t = tag
-  td = tag --delete
+  empty = switch --orphan
 
   # WORKTREE
   wt = worktree
 
-  # OTHER
-  # Print the path to the root of the git repo
+  # MISCELLANEOUS
+  # Print the path for the root of the git repo
   root = rev-parse --show-toplevel
-  # Print the commit hash
-  hash = rev-parse --default HEAD
-  # Print current branch
-  current-branch = "!git symbolic-ref --short HEAD --quiet || git branch | head -n 1 | awk '{print $NF}' | tr -d ')' #"
+  # Print name of upstream branch
+  upstream = rev-parse --abbrev-ref @{upstream}
   # Run a command from the root of the git repo
   exec = "!exec "
-  blank = "!if [ -z \"$1\" ]; then exit 1; else git checkout --orphan $1 && git rm --cached -r .; fi #"
+
+  # DEPRECATED
+  co = "!echo \"Prefer using 'switch' and 'restore'\" >&2; exit 1 #"
+  r = "!echo \"Prefer using 'restore' and 'reset'-related aliases\" >&2; exit 1 #"
+  shd = "!echo \"'shd' deprecated\" >&2; exit 1 #"
+
+[user]
+  name = Evan Relf
+  useConfigOnly = true
 [core]
   excludesfile = ~/.config/git/ignore
   pager = delta
@@ -124,16 +114,15 @@
   line-numbers = true
   tabs = 8
   syntax-theme = GitHub
-[status]
-  showUntrackedFiles = all
 [stash]
   showPatch = true
   showStat = true
 [commit]
   template = ~/.config/git/template
   gpgSign = true
+[rebase]
+  autoSquash = true
 [push]
-  default = current
   followTags = true
 [diff]
   renames = copies

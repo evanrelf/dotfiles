@@ -22,4 +22,4 @@ if git rev-parse "${rev}" --verify --quiet >/dev/null 2>&1; then
 fi
 
 # Begin interactive rebase
-git rebase --interactive --gpg-sign "${rev}" "${@:2}"
+git rebase --interactive "${rev}" "${@:2}"
