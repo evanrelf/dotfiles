@@ -3,19 +3,19 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-command -v fzf >/dev/null 2>&1 || (echo "fzf not installed"; exit 1)
-
-git log \
+  git log \
   --oneline \
   --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' \
   --color=always \
-  | fzf -1 -0 \
-    --exact \
-    --height 50% \
-    --reverse \
-    --ansi \
-    --no-sort \
-    --query "$*" \
-    --color light \
-  | cut -d ' ' -f 1 \
-  | xargs git rev-parse --verify --quiet
+| fzf -1 -0 \
+  --exact \
+  --query "$*" \
+  --no-sort \
+  --reverse \
+  --height 100% \
+  --preview "echo {} | cut -d ' ' -f 1 | xargs git show --color=always | delta" \
+  --preview-window right:60%:noborder \
+  --ansi \
+  --color light \
+| cut -d ' ' -f 1 \
+| xargs git rev-parse --verify --quiet
