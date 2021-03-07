@@ -7,7 +7,8 @@ My personal dotfiles
 - Editor: [Kakoune][kakoune]
 - Shell: [fish][fish]
 - Terminal: [kitty][kitty]
-- Window Manager: [tmux][tmux] in my terminal, [XMonad][xmonad] on NixOS
+- Window Manager: [tmux][tmux] in my terminal, [yabai][yabai] on macOS,
+  [XMonad][xmonad] on NixOS
 - Package Manager: [Nix][nix], [Homebrew][homebrew] (for GUI apps on macOS)
 - OS: [macOS][macos], [NixOS][nixos]
 
@@ -29,6 +30,7 @@ $ ./install.hs [--dry-run] PACKAGE...
 [amethyst]: https://github.com/ianyh/Amethyst
 [xmonad]: https://xmonad.org/
 [tmux]: https://github.com/tmux/tmux
+[yabai]: https://github.com/koekeishiya/yabai
 [nix]: https://nixos.org/
 [homebrew]: https://brew.sh/
 [nixos]: https://nixos.org/
