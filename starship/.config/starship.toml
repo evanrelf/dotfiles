@@ -2,6 +2,7 @@ format = """\
   $jobs\
   $username\
   $directory\
+  $hg_branch\
   $git_branch\
   $git_commit\
   $git_status\
@@ -30,6 +31,11 @@ read_only_style = 'blue'
 truncation_length = 2
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
+
+[hg_branch]
+disabled = false
+format = '(on [ $branch]($style)) '
+style = 'blue'
 
 [git_branch]
 disabled = false

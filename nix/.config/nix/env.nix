@@ -82,6 +82,7 @@ in
       xclip
     ]) ++ (pkgs.lib.optionals isPersonalMachine [
       borgbackup
+      mercurialFull
       rclone
     ]) ++ (pkgs.lib.optionals isWorkMachine [
       tmux-xpanes
