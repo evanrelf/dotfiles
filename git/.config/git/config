@@ -105,41 +105,34 @@
   r = "!echo \"Prefer using 'restore' and 'reset'-related aliases\" >&2; exit 1 #"
   shd = "!echo \"'shd' deprecated\" >&2; exit 1 #"
 
-[user]
-  name = Evan Relf
-  useConfigOnly = true
+[color]
+  ui = true
+[commit]
+  gpgSign = true
+  template = ~/.config/git/template
 [core]
   excludesfile = ~/.config/git/ignore
   pager = delta
-[interactive]
-  diffFilter = delta --color-only
 [delta]
   line-numbers = true
   tabs = 8
   syntax-theme = GitHub
-[stash]
-  showPatch = true
-  showStat = true
-[commit]
-  template = ~/.config/git/template
-  gpgSign = true
-[rebase]
-  autoSquash = true
-  autoStash = true
-[push]
-  followTags = true
 [diff]
   renames = copies
   algorithm = patience
 [diff "nodiff"]
   command = true
-[color]
-  ui = true
 [fetch]
   prune = true
   pruneTags = true
 [interactive]
   singleKey = true
+  diffFilter = delta --color-only
+[push]
+  followTags = true
+[rebase]
+  autoSquash = true
+  autoStash = true
 [sendemail]
   # https://git-send-email.io/
   smtpserver = smtp.fastmail.com
@@ -148,5 +141,12 @@
   smtpserverport = 587
   suppresscc = self
   annotate = true
+[stash]
+  showPatch = true
+  showStat = true
+[user]
+  name = Evan Relf
+  useConfigOnly = true
+
 [include]
   path = ~/.config/git/local
