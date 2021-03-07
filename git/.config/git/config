@@ -44,7 +44,6 @@
   ma = merge --abort
 
   # PULL
-  pullff = pull --ff-only
   pullrb = pull --rebase
 
   # PUSH
@@ -128,6 +127,10 @@
 [interactive]
   singleKey = true
   diffFilter = delta --color-only
+[merge]
+  ff = only
+[pull]
+  ff = only
 [push]
   followTags = true
 [rebase]
