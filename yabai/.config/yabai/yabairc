@@ -7,10 +7,10 @@ command -v yabai >/dev/null 2>&1 \
   || (echo "Missing 'yabai'" >&2; exit 1)
 
 yabai -m config layout         bsp
-yabai -m config top_padding    02
-yabai -m config bottom_padding 02
-yabai -m config left_padding   02
-yabai -m config right_padding  02
-yabai -m config window_gap     02
+yabai -m config top_padding    0
+yabai -m config bottom_padding 0
+yabai -m config left_padding   0
+yabai -m config right_padding  0
+yabai -m config window_gap     0
 
 echo "Configured yabai!"
