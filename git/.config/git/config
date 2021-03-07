@@ -92,6 +92,10 @@
   wt = worktree
 
   # MISCELLANEOUS
+  # git git
+  git = "!exec git"
+  # git g
+  g = git
   # Print the path for the root of the git repo
   root = rev-parse --show-toplevel
   # Print name of upstream branch
