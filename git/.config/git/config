@@ -34,8 +34,8 @@
   l = lll --max-count=20
   lu = lll @{upstream}..
   ll = lll --max-count=50
-  lll = log --graph --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset'
-  signed = log --graph --max-count=10 --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset'
+  lll = log --graph --pretty=normal
+  signed = log --graph --max-count=10 --pretty=signed
 
   # MERGE
   m = merge
@@ -135,6 +135,9 @@
   ff = only
 [pull]
   ff = only
+[pretty]
+  normal = format:%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset
+  signed = format:%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset
 [push]
   followTags = true
 [rebase]
