@@ -4,6 +4,7 @@ set -Eeuo pipefail
 IFS=$'\n\t'
 
 # TODO: Test this in anger
+echo "TODO: Test this in concert with merge.autoStash"
 
 if [ "$(git remote | wc -l)" -gt 1 ]; then
   echo "Multiple remotes, not sure which one to use:" >&2

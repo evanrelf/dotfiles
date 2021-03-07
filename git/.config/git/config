@@ -110,6 +110,9 @@
 
 [color]
   ui = true
+[column]
+  # TODO: See what this does
+  ui = auto column
 [commit]
   gpgSign = true
   template = ~/.config/git/template
@@ -123,16 +126,23 @@
 [diff]
   renames = copies
   algorithm = patience
+  suppressBlankEmpty = true
 [diff "nodiff"]
   command = true
+[feature]
+  # TODO: See if this makes `git status` faster in `end-to-end`
+  manyFiles = true
 [fetch]
   prune = true
   pruneTags = true
+[init]
+  defaultBranch = main
 [interactive]
   singleKey = true
   diffFilter = delta --color-only
 [merge]
   ff = only
+  autoStash = true
 [pull]
   ff = only
 [pretty]
@@ -140,9 +150,14 @@
   signed = format:%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset
 [push]
   followTags = true
+  gpgSign = if-asked
 [rebase]
   autoSquash = true
   autoStash = true
+  missingCommitsCheck = error
+[rerere]
+  enabled = true
+  autoUpdate = true
 [sendemail]
   # https://git-send-email.io/
   smtpserver = smtp.fastmail.com
@@ -153,10 +168,12 @@
   annotate = true
 [stash]
   showPatch = true
-  showStat = true
+[tag]
+  gpgSign = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/
 [user]
   name = Evan Relf
   useConfigOnly = true
-
 [include]
   path = ~/.config/git/local
