@@ -11,15 +11,10 @@ if test -z "$IN_NIX_SHELL"
         set --prepend PATH "$HOME/.config/emacs/bin"
     end
 
-    if _exists rustup
-        set --export RUSTUP_HOME "$HOME/.config/rustup"
-    end
-
-    if _exists cargo
-        set --export CARGO_HOME "$HOME/.config/cargo"
-        set --prepend PATH "$CARGO_HOME/bin"
-        set --prepend PATH "$HOME/.local/share/cargo/bin"
-    end
+    set --export RUSTUP_HOME "$HOME/.config/rustup"
+    set --export CARGO_HOME "$HOME/.config/cargo"
+    set --prepend PATH "$CARGO_HOME/bin"
+    set --prepend PATH "$HOME/.local/share/cargo/bin"
 
     if _exists cabal
         set --prepend PATH "$HOME/.cabal/bin"
