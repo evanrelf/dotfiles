@@ -102,6 +102,8 @@
   upstream = rev-parse --abbrev-ref @{upstream}
   # Run a command from the root of the git repo
   exec = "!exec "
+  # `grep` through previous versions of a repository
+  grep-through-time = "!git rev-list --all | xargs git grep $@ #"
 
   # DEPRECATED
   co = "!echo \"Prefer using 'switch' and 'restore'\" >&2; exit 1 #"
