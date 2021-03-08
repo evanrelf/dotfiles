@@ -169,6 +169,8 @@
   annotate = true
 [stash]
   showPatch = true
+[status]
+  showUntrackedFiles = all
 [tag]
   gpgSign = true
 [url "git@github.com:"]
