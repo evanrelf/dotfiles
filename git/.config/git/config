@@ -126,7 +126,6 @@
 [diff]
   renames = copies
   algorithm = patience
-  suppressBlankEmpty = true
 [diff "nodiff"]
   command = true
 [feature]
