@@ -68,6 +68,7 @@ in
       starship
       tealdeer
       tmux
+      yj
       zoxide
     ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
       acpi
