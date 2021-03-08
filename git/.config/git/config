@@ -28,6 +28,9 @@
   ds = diff --staged
   da = diff HEAD
 
+  # FETCH
+  f = fetch
+
   # LOOKUP
   k = lookup
 
@@ -40,11 +43,11 @@
 
   # MERGE
   m = merge
-  ms = merge --squash
   mc = merge --continue
   ma = merge --abort
 
   # PULL
+  pullff = pull --ff-only
   pullrb = pull --rebase
 
   # PUSH
@@ -69,7 +72,7 @@
   resp = restore --staged --patch
 
   # SHOW
-  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"" ]"
+  sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
   # STASH
   st = stash push --include-untracked
@@ -114,7 +117,6 @@
 [color]
   ui = true
 [column]
-  # TODO: See what this does
   ui = auto column
 [commit]
   gpgSign = true
@@ -143,7 +145,6 @@
   singleKey = true
   diffFilter = delta --color-only
 [merge]
-  ff = only
   autoStash = true
 [pull]
   ff = only
