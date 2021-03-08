@@ -26,6 +26,7 @@
   # DIFF
   d = diff
   ds = diff --staged
+  da = diff HEAD
 
   # LOOKUP
   k = lookup
