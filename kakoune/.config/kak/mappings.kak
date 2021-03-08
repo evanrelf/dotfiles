@@ -21,7 +21,7 @@ map global "normal" "<a-B>" ": fail 'Use a-Q'<ret>" -docstring "Use a-Q"
 
 # Drop selection when going into insert mode
 map global "normal" "i" ";i"
-map global "normal" "a" ";a"
+map global "normal" "a" ";li"
 
 # Insert with count
 map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstring "Insert with count"
