@@ -3,6 +3,26 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
+columns=$(tput cols)
+lines=$(tput lines)
+
+if [ "${columns}" -lt 50 ] || [ "${lines}" -lt 30 ]; then
+  preview=()
+else
+  if [ "${columns}" -ge 150 ]; then
+    position="right"
+    size="60%"
+  else
+    position="down"
+    size="70%"
+  fi
+
+  preview=(\
+    --preview "echo {} | cut -d ' ' -f 1 | xargs git show --color=always | delta" \
+    --preview-window "${position}":"${size}":sharp \
+  )
+fi
+
   git log \
   --oneline \
   --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' \
@@ -13,8 +33,7 @@ IFS=$'\n\t'
   --no-sort \
   --reverse \
   --height 100% \
-  --preview "echo {} | cut -d ' ' -f 1 | xargs git show --color=always | delta" \
-  --preview-window right:60%:noborder \
+  "${preview[@]}" \
   --ansi \
   --color light \
 | cut -d ' ' -f 1 \
