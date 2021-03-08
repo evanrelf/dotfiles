@@ -3,8 +3,9 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-git stash push --include-untracked --quiet
-
-trap "git stash pop --index --quiet" EXIT
+if [ -n "$(git status --porcelain)" ]; then
+  git stash push --include-untracked --quiet
+  trap "git stash pop --index --quiet" EXIT
+fi
 
 eval "$@"
