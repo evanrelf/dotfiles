@@ -46,6 +46,7 @@ in
       fzf
       ghcid
       gitAndTools.delta
+      gitAndTools.gh
       gitAndTools.gitFull
       gnugrep-gprefix
       httpie
