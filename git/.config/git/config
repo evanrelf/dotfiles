@@ -28,6 +28,7 @@
 
   # DIFF
   d = diff
+  dd = diff --no-ext-diff
   ds = diff --staged
   da = diff HEAD
 
