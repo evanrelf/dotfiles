@@ -1,4 +1,7 @@
 [alias]
+  # ABSORB
+  ab = aborb
+
   # ADD
   a = add
   aa = add --all

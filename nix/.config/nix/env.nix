@@ -48,6 +48,7 @@ in
       ghcid
       gitAndTools.delta
       gitAndTools.gh
+      gitAndTools.git-absorb
       gitAndTools.gitFull
       gnugrep-gprefix
       httpie
