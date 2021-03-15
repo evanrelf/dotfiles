@@ -38,6 +38,7 @@ in
       coreutils-gprefix
       declarative-channels
       dhall
+      direnv
       exa
       fd
       findutils-gprefix
