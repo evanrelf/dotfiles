@@ -57,3 +57,6 @@ ctrl + alt + cmd - t : yabai -m window --toggle float && yabai -m window --grid 
 
 # Balance space
 ctrl + alt + cmd - b : yabai --message space --balance
+
+# Rotate space
+ctrl + alt + cmd - r : yabai --message space --rotate 90
