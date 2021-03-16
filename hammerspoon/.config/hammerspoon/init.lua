@@ -3,6 +3,7 @@
 hs.window.animationDuration = 0
 
 local fn = {"ctrl", "alt", "cmd"}
+local sfn = {"shift", "ctrl", "alt", "cmd"}
 
 --------------------------------------------------------------------------------
 -- FRAME HISTORY
@@ -115,14 +116,28 @@ end)
 hs.hotkey.bind(fn, "[", function()
   recordFrame()
   local window = hs.window.focusedWindow()
-  window:moveToUnit(hs.geometry.rect(0, 0, 0.5, 1))
+  window:moveToUnit(hs.geometry.rect(0, 0, 1/2, 1))
 end)
 
 -- Right 1/2
 hs.hotkey.bind(fn, "]", function()
   recordFrame()
   local window = hs.window.focusedWindow()
-  window:moveToUnit(hs.geometry.rect(0.5, 0, 0.5, 1))
+  window:moveToUnit(hs.geometry.rect(0.5, 0, 1/2, 1))
+end)
+
+-- Left 2/3
+hs.hotkey.bind(sfn, "[", function()
+  recordFrame()
+  local window = hs.window.focusedWindow()
+  window:moveToUnit(hs.geometry.rect(0, 0, 2/3, 1))
+end)
+
+-- Right 2/3
+hs.hotkey.bind(sfn, "]", function()
+  recordFrame()
+  local window = hs.window.focusedWindow()
+  window:moveToUnit(hs.geometry.rect(1/3, 0, 2/3, 1))
 end)
 
 --------------------------------------------------------------------------------
