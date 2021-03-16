@@ -5,6 +5,29 @@ hs.window.animationDuration = 0
 local fn = {"ctrl", "alt", "cmd"}
 
 --------------------------------------------------------------------------------
+-- FRAME HISTORY
+--------------------------------------------------------------------------------
+
+local frameHistory = {}
+
+function recordFrame(window)
+  local window = window or hs.window.focusedWindow()
+  frameHistory[window:id()] = window:frame()
+end
+
+function revertFrame(window)
+  local window = window or hs.window.focusedWindow()
+  if frameHistory[window:id()] then
+    window:setFrame(frameHistory[window:id()])
+    frameHistory[window:id()] = nil
+  else
+    hs.alert.show("No frame history for window " .. window:id())
+  end
+end
+
+hs.hotkey.bind(fn, "z", revertFrame)
+
+--------------------------------------------------------------------------------
 -- FOCUS
 --------------------------------------------------------------------------------
 
@@ -66,12 +89,14 @@ end)
 
 -- Center
 hs.hotkey.bind(fn, "c", function()
+  recordFrame()
   local window = hs.window.focusedWindow()
   window:centerOnScreen()
 end)
 
 -- Maximize
 hs.hotkey.bind(fn, "f", function()
+  recordFrame()
   local window = hs.window.focusedWindow()
   if window:isMaximizable() then
     window:maximize()
@@ -82,12 +107,14 @@ end)
 
 -- Left 1/2
 hs.hotkey.bind(fn, "[", function()
+  recordFrame()
   local window = hs.window.focusedWindow()
   window:moveToUnit(hs.geometry.rect(0, 0, 0.5, 1))
 end)
 
 -- Right 1/2
 hs.hotkey.bind(fn, "]", function()
+  recordFrame()
   local window = hs.window.focusedWindow()
   window:moveToUnit(hs.geometry.rect(0.5, 0, 0.5, 1))
 end)
