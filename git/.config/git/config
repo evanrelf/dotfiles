@@ -31,6 +31,7 @@
   dd = diff --no-ext-diff
   ds = diff --staged
   da = diff HEAD
+  du = diff @{upstream}..
 
   # FETCH
   f = fetch
@@ -47,6 +48,7 @@
 
   # MERGE
   m = merge
+  ms = merge --squash
   mc = merge --continue
   ma = merge --abort
 
@@ -56,6 +58,7 @@
 
   # PUSH
   p = "!bash $HOME/.config/git/hooks/pre-push && git push $@ #"
+  pu = "!git p -u origin \"$(git branch --show-current)\" #"
   pf = p --force-with-lease
 
   # REBASE
