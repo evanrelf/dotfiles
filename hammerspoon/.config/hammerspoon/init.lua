@@ -2,15 +2,14 @@
 
 hs.window.animationDuration = 0
 
-local meh = {"ctrl", "alt", "cmd"}
-local smeh = {"shift", "ctrl", "alt", "cmd"}
+local fn = {"ctrl", "alt", "cmd"}
 
 --------------------------------------------------------------------------------
 -- FOCUS
 --------------------------------------------------------------------------------
 
 -- Focus left
-hs.hotkey.bind(meh, "h", function()
+hs.hotkey.bind(fn, "h", function()
   local window = hs.window.focusedWindow()
   local westWindows = window:windowsToWest(nil, true, false)
   if next(westWindows) == nil then
@@ -23,7 +22,7 @@ hs.hotkey.bind(meh, "h", function()
 end)
 
 -- Focus down
-hs.hotkey.bind(meh, "j", function()
+hs.hotkey.bind(fn, "j", function()
   local window = hs.window.focusedWindow()
   local southWindows = window:windowsToSouth(nil, true, false)
   if next(southWindows) == nil then
@@ -36,7 +35,7 @@ hs.hotkey.bind(meh, "j", function()
 end)
 
 -- Focus up
-hs.hotkey.bind(meh, "k", function()
+hs.hotkey.bind(fn, "k", function()
   local window = hs.window.focusedWindow()
   local northWindows = window:windowsToNorth(nil, true, false)
   if next(northWindows) == nil then
@@ -49,7 +48,7 @@ hs.hotkey.bind(meh, "k", function()
 end)
 
 -- Focus right
-hs.hotkey.bind(meh, "l", function()
+hs.hotkey.bind(fn, "l", function()
   local window = hs.window.focusedWindow()
   local eastWindows = window:windowsToEast(nil, true, false)
   if next(eastWindows) == nil then
@@ -66,13 +65,13 @@ end)
 --------------------------------------------------------------------------------
 
 -- Center
-hs.hotkey.bind(meh, "c", function()
+hs.hotkey.bind(fn, "c", function()
   local window = hs.window.focusedWindow()
   window:centerOnScreen()
 end)
 
 -- Maximize
-hs.hotkey.bind(meh, "f", function()
+hs.hotkey.bind(fn, "f", function()
   local window = hs.window.focusedWindow()
   if window:isMaximizable() then
     window:maximize()
@@ -82,13 +81,13 @@ hs.hotkey.bind(meh, "f", function()
 end)
 
 -- Left 1/2
-hs.hotkey.bind(meh, "[", function()
+hs.hotkey.bind(fn, "[", function()
   local window = hs.window.focusedWindow()
   window:moveToUnit(hs.geometry.rect(0, 0, 0.5, 1))
 end)
 
 -- Right 1/2
-hs.hotkey.bind(meh, "]", function()
+hs.hotkey.bind(fn, "]", function()
   local window = hs.window.focusedWindow()
   window:moveToUnit(hs.geometry.rect(0.5, 0, 0.5, 1))
 end)
@@ -98,6 +97,6 @@ end)
 --------------------------------------------------------------------------------
 
 -- Reload config
-hs.hotkey.bind(meh, "r", hs.reload)
+hs.hotkey.bind(fn, "r", hs.reload)
 
 hs.alert.show("Hammerspoon loaded!")
