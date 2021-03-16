@@ -15,7 +15,11 @@ function recordFrame(window)
   if not frameHistory[window:id()] then
     frameHistory[window:id()] = {}
   end
-  table.insert(frameHistory[window:id()], window:frame())
+  local frame = window:frame()
+  local history = frameHistory[window:id()]
+  if history[#history] ~= frame then
+    table.insert(frameHistory[window:id()], frame)
+  end
 end
 
 function revertFrame(window)
