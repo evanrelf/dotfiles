@@ -25,9 +25,7 @@ end
 function revertFrame(window)
   local window = window or hs.window.focusedWindow()
   local history = frameHistory[window:id()]
-  if next(history) == nil then
-    hs.alert.show("No frame history for window " .. window:id())
-  else
+  if next(history) ~= nil then
     window:setFrame(history[#history])
     table.remove(history)
   end
