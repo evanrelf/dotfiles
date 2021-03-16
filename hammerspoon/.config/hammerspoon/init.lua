@@ -12,16 +12,20 @@ local frameHistory = {}
 
 function recordFrame(window)
   local window = window or hs.window.focusedWindow()
-  frameHistory[window:id()] = window:frame()
+  if not frameHistory[window:id()] then
+    frameHistory[window:id()] = {}
+  end
+  table.insert(frameHistory[window:id()], window:frame())
 end
 
 function revertFrame(window)
   local window = window or hs.window.focusedWindow()
-  if frameHistory[window:id()] then
-    window:setFrame(frameHistory[window:id()])
-    frameHistory[window:id()] = nil
-  else
+  local history = frameHistory[window:id()]
+  if next(history) == nil then
     hs.alert.show("No frame history for window " .. window:id())
+  else
+    window:setFrame(history[#history])
+    table.remove(history)
   end
 end
 
