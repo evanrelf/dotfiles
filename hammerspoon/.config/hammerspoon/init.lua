@@ -33,7 +33,7 @@ function revertFrame(window)
   end
 end
 
-hs.hotkey.bind(fn, "z", revertFrame)
+hs.hotkey.bind(fn, "z", revertFrame, nil, revertFrame)
 
 --------------------------------------------------------------------------------
 -- FOCUS
