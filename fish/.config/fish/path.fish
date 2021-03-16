@@ -1,4 +1,8 @@
 if test -z "$IN_NIX_SHELL"
+    if _exists luarocks
+        set --prepend PATH "$HOME/.luarocks/bin"
+    end
+
     if _exists brew
         set --prepend PATH "/usr/local/sbin"
     end
