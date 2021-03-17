@@ -123,8 +123,6 @@
 
 [color]
   ui = true
-[column]
-  ui = auto column
 [commit]
   gpgSign = true
   template = ~/.config/git/template
