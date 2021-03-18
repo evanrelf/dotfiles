@@ -110,7 +110,7 @@ in {
 
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
-  kakoune =
+  kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (old: rec {
       version = "HEAD";
       src = pkgsPrev.fetchFromGitHub {
@@ -127,13 +127,13 @@ in {
 
   neovim-unwrapped =
     pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
-      version = "v0.5.0-dev+1075-g02a3c4179";
+      version = "0.5.0-dev+1157-g0ab88c2ea";
       src =
         pkgsPrev.fetchFromGitHub {
           owner = "neovim";
           repo = "neovim";
-          rev = "02a3c417945e7b7fc781906a78acbf88bd44c971";
-          sha256 = "16p69fgv1pr5n1rx1mnvj7j4c310ygn8xmiysivjsmvra6w93i6y";
+          rev = "0ab88c2ea80caa7cda97b3a8479d0d32e4636ab6";
+          sha256 = "07jiv9c3032lrhmd3dvqv2v5l35bdn39jqi48qsjj220slrsrl53";
         };
       buildInputs = (old.buildInputs or []) ++ [ pkgsFinal.tree-sitter ];
     });
