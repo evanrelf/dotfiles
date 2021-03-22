@@ -1,5 +1,6 @@
 call plug#begin()
 Plug 'junegunn/seoul256.vim'
+Plug 'romgrk/barbar.nvim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
@@ -25,6 +26,12 @@ set background=light
 colorscheme seoul256-light
 highlight! link StatusLine CursorLineNr
 highlight! link StatusLineNC LineNr
+
+" romgrk/barbar.nvim
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.animation = v:false
+let bufferline.icons = v:false
+let bufferline.closable = v:false
 
 " dense-analysis/ale
 let b:ale_linters =
