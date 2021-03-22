@@ -6,9 +6,9 @@ IFS=$'\n\t'
 command -v git >/dev/null 2>&1 \
   || (echo "Missing executable: git"; exit 1)
 
-if [ ! -d "$HOME/.config/kak/plugins/plug.kak" ]; then
+if [ ! -d "${HOME}/.config/kak/plugins/plug.kak" ]; then
   echo "[kakoune] Installing plug.kak"
   git clone --depth=1 \
-    "https://github.com/robertmeta/plug.kak.git" \
-    "$HOME/.config/kak/plugins/plug.kak"
+    "https://github.com/andreyorst/plug.kak.git" \
+    "${HOME}/.config/kak/plugins/plug.kak"
 fi

@@ -1,5 +1,5 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
-plug "robertmeta/plug.kak" noload
+plug "andreyorst/plug.kak" noload
 
 plug "evanrelf/primer.kak" theme \
 config %{
