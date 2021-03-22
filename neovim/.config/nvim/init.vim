@@ -1,6 +1,6 @@
-lua require('plugins')
-lua require('options')
-lua require('mappings')
+lua require('evan.plugins')
+lua require('evan.options')
+lua require('evan.mappings')
 
 augroup autocmds
   autocmd!
