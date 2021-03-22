@@ -1,0 +1,7 @@
+vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
+vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
+vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
+vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true })
+vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Backspace>", ":<C-u>setlocal hlsearch!<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "U", ':<C-u>echoerr "Use \\<C-r\\>"<CR>', { noremap = true })

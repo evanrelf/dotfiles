@@ -1,15 +1,6 @@
 lua require('plugins')
 lua require('options')
-
-nnoremap Y y$
-nnoremap j gj
-nnoremap k gk
-xnoremap < <gv
-xnoremap > >gv
-noremap <silent> <Backspace> :<C-u>setlocal hlsearch!<CR>
-nnoremap \| :%!
-xnoremap \| :!
-noremap U :<C-u>echoerr "Use \<C-r\>"<CR>
+lua require('mappings')
 
 augroup autocmds
   autocmd!
