@@ -24,9 +24,15 @@ config %{
   map global "normal" "<a-r>" ": enter-replace-mode<ret>"
 }
 
+plug "listentolist/kakoune-fandt" \
+commit "6b035782c2437708917ff1e4d3c05e33678e42dc" \
+config %{
+  require-module fandt
+}
+
 # Dependency of `auto-pairs.kak`
-plug "alexherbo2/prelude.kak" \
-commit "f1e0f4d5cb62a36924e3f8ba6824d6aed8c19d23" \
+plug "kakounedotcom/prelude.kak" \
+commit "5dbdc020c546032885c1fdb463e366cc89fc15ad" \
 config %{
   require-module "prelude"
 }
@@ -55,39 +61,9 @@ config %{
   map global "surround-tag" "d" ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
 }
 
-plug "listentolist/kakoune-fandt" \
-commit "6b035782c2437708917ff1e4d3c05e33678e42dc" \
-config %{
-  require-module fandt
-}
-
-plug "andreyorst/fzf.kak" \
-commit "f23daa698ad95493fbd675ae153e3cac13ef34e9" \
-do %{
-  # Remove lingering info popups
-  git checkout .
-  for file in rc/modules/*.kak; do sed -i "" "s/info -title/nop/g" "$file"; done
-} \
-config %{
-  map global "user" "z" ": fzf-mode<ret>" -docstring "FZF..."
-  map global "normal" "<a-o>" ": fzf-file<ret>"
-} \
-defer "fzf" %{
-  set-option global fzf_file_command "fd --type f --follow --hidden --exclude .git"
-  set-option global fzf_preview false
-  set-option global fzf_file_preview false
-  set-option global fzf_vertical_map "ctrl-x"
-  set-option global fzf_horizontal_map "ctrl-v"
-}
-
-# plug "kak-lsp/kak-lsp" noload \
-# commit "354b46e3cf56f0da35b444941a701ca4c1135aa8" \
-# config %{
-#   evaluate-commands %sh{kak-lsp --kakoune -s "$kak_session" --config=$HOME/.config/kak-lsp/kak-lsp.toml}
-#   set-option global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log --config=$HOME/.config/kak-lsp/kak-lsp.toml"
-#   hook global WinSetOption filetype=(haskell) %{
-#     echo -debug "Enabling LSP for filetype %opt{filetype}"
-#     lsp-enable-window
-#   }
-#   hook global KakEnd .* %{ lsp-exit }
-# }
+# `alexherbo2` is a volatile plugin maintainer (random API changes with no
+# backwards compatibility, unnecessary dependencies, etc.) so if I don't pin
+# their plugins, things will break all the time.
+#
+# `auto-pairs.kak` should stay at `fd735ec` forever to avoid depending on
+# `kakoune.cr`.
