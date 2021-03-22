@@ -70,6 +70,9 @@
   rba = rebase --abort
 
   # RESET
+  r = reset --mixed
+  rs = reset --soft
+  rh = reset --hard
   undo-commit = reset --soft HEAD~1
 
   # RESTORE
