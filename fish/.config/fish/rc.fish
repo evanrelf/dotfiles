@@ -5,7 +5,8 @@ function rc -d "Open the specified program's configuration file"
             case vim vi
                 eval "$EDITOR $HOME/.vimrc"
             case neovim nvim
-                eval "$EDITOR $HOME/.config/nvim/init.vim"
+                cd "$HOME/.config/nvim/"
+                ls -l
             case kakoune kak
                 cd "$HOME/.config/kak/"
                 ls -l
