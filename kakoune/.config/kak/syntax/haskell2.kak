@@ -10,6 +10,14 @@
 # TODO: Top-level operator definitions aren't highlighted correctly (e.g. `f $ x`)
 # TODO: Operators next to `[]` aren't highlighted correctly (e.g. `[+ 1]`)
 
+declare-option str-list haskell2_static_words \
+  "anyclass" "as" "case" "class" "data" "deriving" "else" "forall" "import" \
+  "in" "instance" "let" "module" "newtype" "pattern" "qualified" "stock" \
+  "then" "type" "where" \
+  "Control.Monad"
+
+declare-option completions haskell2_completions
+
 hook -group haskell2-highlight global BufCreate .*[.](hs2) %{
   set-option buffer filetype haskell2
 }
@@ -26,6 +34,8 @@ hook -group haskell2-highlight global WinSetOption filetype=haskell2 %{
   # TODO: Write your own indentation logic
   hook -group haskell2-trim-indent window ModeChange pop:insert:.* haskell2-trim-indent
   hook -group haskell2-indent window InsertChar \n haskell2-indent-on-new-line
+
+  set-option window static_words %opt{haskell2_static_words}
 }
 
 provide-module haskell2 %§
