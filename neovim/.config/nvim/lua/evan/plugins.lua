@@ -25,14 +25,9 @@ return require("packer").startup(function()
   }
 
   use {
-    "romgrk/barbar.nvim",
+    "pacha/vem-tabline",
     config = function()
-      vim.api.nvim_exec([[
-        let bufferline = get(g:, 'bufferline', {})
-        let bufferline.animation = v:false
-        let bufferline.icons = v:false
-        let bufferline.closable = v:false
-      ]], false)
+      vim.g.vem_tabline_show_icon = false
     end
   }
 
