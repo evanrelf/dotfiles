@@ -8,7 +8,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale', {'for': ['fish', 'nix', 'rust', 'sh']}
 Plug 'sbdchd/neoformat', {'on': 'Neoformat'}
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'tmsvg/pear-tree'
 Plug 'tomtom/tcomment_vim'
 Plug 'machakann/vim-sandwich'
@@ -49,21 +48,6 @@ augroup neoformat
   autocmd!
   autocmd BufWritePre *.dhall,*.fish,*.rs undojoin | Neoformat
 augroup END
-
-" Shougo/deoplete.nvim
-set completeopt+=menuone,noselect
-set shortmess+=c
-let g:deoplete#enable_at_startup = v:true
-call deoplete#custom#option('max_list', 50)
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ deoplete#manual_complete()
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 
 " tmsvg/pear-tree
 let g:pear_tree_repeatable_expand = v:false
