@@ -1,7 +1,5 @@
 pkgsFinal: pkgsPrev:
 
-# TODO: Specify plugins' configurations in Nix!
-
 let
   sources = {
     "primer-kak" = {
