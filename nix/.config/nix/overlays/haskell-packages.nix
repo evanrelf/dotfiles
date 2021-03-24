@@ -6,6 +6,9 @@ import ../lib/override-haskell-packages.nix {
     ki = oldCabal: {
       broken = false;
     };
+    nix-diff = oldCabal: {
+      jailbreak = true;
+    };
   };
 
   hackage = {
