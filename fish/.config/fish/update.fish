@@ -67,12 +67,6 @@ function update -d "Run all update commands"
     #     nvim +PlugClean! +PlugUpgrade +"PlugUpdate --sync" +qa
     # end
 
-    # TODO
-    # if _exists kak -a -e $HOME/.config/kak/plugins/plug.kak/
-    #   _log "Updating Kakoune plugins"
-    #   kak -e "plug-update"
-    # end
-
     # if _exists doom
     #     doom upgrade --yes
     #     doom sync
