@@ -6,9 +6,10 @@ IFS=$'\n\t'
 input_nix=$(cat /dev/stdin)
 input_json=$(nix-instantiate --eval --json --expr "${input_nix}")
 
-owner=$(echo "${input_json}" | jq --raw-output '.owner')
-repo=$(echo "${input_json}" | jq --raw-output '.repo')
-input_rev=$(echo "${input_json}" | jq --raw-output '.rev')
+owner=$(echo "${input_json}" | jq --exit-status --raw-output '.owner')
+repo=$(echo "${input_json}" | jq --exit-status --raw-output '.repo')
+input_rev=$(echo "${input_json}" | jq --exit-status --raw-output '.rev')
+echo "${input_json}" | jq --exit-status --raw-output '.sha256' >/dev/null
 
 fetch_json=$(\
   nix-prefetch-git \
@@ -20,10 +21,6 @@ fetch_json=$(\
 rev=$(echo "${fetch_json}" | jq --raw-output '.rev')
 sha256=$(echo "${fetch_json}" | jq --raw-output '.sha256')
 
-nix-instantiate \
-  --eval \
-  --expr "${input_nix} // { rev = \"${rev}\"; sha256 = \"${sha256}\"; }" \
-| sed \
-  -e 's/{ /{\n  /' \
-  -e 's/;/;\n /g' \
-  -e 's/  }/}/'
+echo "${input_nix}" | sed -E \
+  -e "s|rev(.*)\".*\"(.*);|rev\1\"${rev}\"\2;|" \
+  -e "s|sha256(.*)\".*\"(.*);|sha256\1\"${sha256}\"\2;|" \
