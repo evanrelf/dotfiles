@@ -12,8 +12,8 @@ let
     "number-toggle-kak" = {
       owner = "evanrelf";
       repo = "number-toggle.kak";
-      rev = "a30158d1a7985de55c9fae2ea25f4b28288cb7b6";
-      sha256 = "16m2r03wfkbssgxyqhhp79fi5s4lj2l4xbp35q4xj652rfnabrli";
+      rev = "9e7642a6fb3656740d782c5d88a8aeb03dbdc065";
+      sha256 = "0q8874j128dl9xq4yfcgk4ny26ybn8ldbbl7shsszs658582dlly";
     };
 
     "byline-kak" = {

@@ -1,6 +1,4 @@
 # Better Dhall syntax
-source "%val{config}/syntax/dhall2.kak"
-
 # Set filetype to `dhall2` only once (allows switching back to `dhall`
 # filetype)
 hook global WinCreate .*\.dhall %{

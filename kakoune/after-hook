@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+echo "Remember to './install nix' to update plugins"
+
+if [ ! -L "${HOME}/.config/kak/autoload/runtime" ]; then
+  ln -s "${HOME}/.nix-profile/share/kak/autoload/" "${HOME}/.config/kak/autoload/runtime"
+fi

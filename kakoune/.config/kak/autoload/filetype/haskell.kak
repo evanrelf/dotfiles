@@ -1,6 +1,4 @@
 # Better Haskell syntax
-source "%val{config}/syntax/haskell2.kak"
-
 declare-user-mode "haskell"
 declare-user-mode "cabal"
 

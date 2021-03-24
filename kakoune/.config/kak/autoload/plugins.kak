@@ -1,10 +1,10 @@
-# Plugins are provided by Nix
+hook -once global KakBegin .* %{
 
 # evanrelf/primer.kak
-colorscheme primer
 declare-option str column_color "rgb:f6f8fa"
 
 # evanrelf/number-toggle.kak
+require-module "number-toggle"
 set-option global number_toggle_params -hlcursor
 
 # evanrelf/byline.kak
@@ -19,9 +19,6 @@ map global "normal" "a" ": reselect-a<ret>"
 require-module "replace-mode"
 map global "normal" "<a-r>" ": enter-replace-mode<ret>"
 
-# listentolist/kakoune-fandt
-# require-module "fandt"
-
 # h-youhei/kakoune-surround
 map global "user" "s" ": enter-user-mode surround<ret>" -docstring "Surround mode"
 declare-user-mode "surround"
@@ -35,3 +32,5 @@ map global "surround-tag" "t" ": select-surrounding-tag<ret>" -docstring "Select
 map global "surround-tag" "a" ": surround-with-tag<ret>" -docstring "Add surrounding tag"
 map global "surround-tag" "r" ": change-surrounding-tag<ret>" -docstring "Replace surrounding tag"
 map global "surround-tag" "d" ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
+
+}

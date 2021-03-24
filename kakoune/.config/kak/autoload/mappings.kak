@@ -1,10 +1,3 @@
-source "%val{config}/mappings/leader.kak"
-source "%val{config}/mappings/indentation.kak"
-source "%val{config}/mappings/tab-autocomplete.kak"
-source "%val{config}/mappings/search.kak"
-source "%val{config}/mappings/registers.kak"
-source "%val{config}/mappings/disabled.kak"
-
 # # Swap : and ;
 # map global "normal" ":" ";"
 # map global "normal" ";" ":"
