@@ -17,6 +17,13 @@ config %{
   require-module "byline"
 }
 
+plug "evanrelf/reselect.kak" \
+config %{
+  require-module "reselect"
+  map global "normal" "i" ": reselect<ret>;i"
+  map global "normal" "a" ": reselect-a<ret>"
+}
+
 plug "alexherbo2/replace-mode.kak" \
 commit "5f4c73cdbaf5aeb964ee35ad4b9081b233af90c0" \
 config %{
@@ -27,22 +34,22 @@ config %{
 plug "listentolist/kakoune-fandt" \
 commit "6b035782c2437708917ff1e4d3c05e33678e42dc" \
 config %{
-  require-module fandt
+  require-module "fandt"
 }
 
-# Dependency of `auto-pairs.kak`
-plug "kakounedotcom/prelude.kak" \
-commit "5dbdc020c546032885c1fdb463e366cc89fc15ad" \
-config %{
-  require-module "prelude"
-}
+# # Dependency of `auto-pairs.kak`
+# plug "kakounedotcom/prelude.kak" \
+# commit "5dbdc020c546032885c1fdb463e366cc89fc15ad" \
+# config %{
+#   require-module "prelude"
+# }
 
-plug "alexherbo2/auto-pairs.kak" \
-commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc" \
-config %{
-  require-module "auto-pairs"
-  auto-pairs-enable
-}
+# plug "alexherbo2/auto-pairs.kak" \
+# commit "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc" \
+# config %{
+#   require-module "auto-pairs"
+#   auto-pairs-enable
+# }
 
 plug "h-youhei/kakoune-surround" \
 commit "efe74c6f434d1e30eff70d4b0d737f55bf6c5022" \
