@@ -69,33 +69,14 @@ let
     };
   };
 
-  # Plugins set to `null` will use the existing source from
-  # `pkgsFinal.kakounePlugins`
-  sources = pkgsPrev.filterAttrs (_: value: value != null) plugins;
-
-  sourceToPlugin = name: github: {
-    inherit name;
-    value = pkgsPrev.kakouneUtils.buildKakounePlugin {
+  sourceToPlugin = name: github:
+    pkgsPrev.kakouneUtils.buildKakounePlugin {
       inherit name;
-      src = pkgsPrev.fetchFromGitHub ({
-        owner = "evanrelf";
-        rev = "main";
-      } // github);
+      src = pkgsPrev.fetchFromGitHub github;
     };
-  };
 
 in {
   kakoune = pkgsPrev.wrapKakoune pkgsFinal.kakoune-unwrapped {
-    plugins =
-      builtins.map
-        (name: pkgsFinal.kakounePlugins."${name}")
-        (builtins.attrNames plugins);
+    plugins = builtins.attrValues (builtins.mapAttrs sourceToPlugin sources);
   };
-
-  kakounePlugins = pkgsPrev.kakounePlugins.override (old: {
-    overrides =
-      pkgsPrev.lib.composeExtensions
-        (old.overrides or (_: _: {}))
-        (_: _: builtins.mapAttrs sourceToPlugin sources);
-  });
 }
