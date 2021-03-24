@@ -37,13 +37,6 @@ let
       sha256 = "1cmylx99bm7jwfb4hclb69sdc4n8f29ssyy2byjiw53ni9rnc8q0";
     };
 
-    "kakoune-fandt" = {
-      owner = "listentolist";
-      repo = "kakoune-fandt";
-      rev = "6b035782c2437708917ff1e4d3c05e33678e42dc";
-      sha256 = "0vmvlh1cw89dhd1v50bychszyk5ymh2mk891cg10nf47yb0paiv6";
-    };
-
     "kakoune-surround" = {
       owner = "h-youhei";
       repo = "kakoune-surround";
@@ -51,7 +44,16 @@ let
       sha256 = "09fd7qhlsazf4bcl3z7xh9z0fklw69c5j32hminphihq74qrry6h";
     };
 
+    "kakoune-fandt" = {
+      disabled = true;
+      owner = "listentolist";
+      repo = "kakoune-fandt";
+      rev = "6b035782c2437708917ff1e4d3c05e33678e42dc";
+      sha256 = "0vmvlh1cw89dhd1v50bychszyk5ymh2mk891cg10nf47yb0paiv6";
+    };
+
     "auto-pairs-kak" = {
+      disabled = true;
       owner = "alexherbo2";
       repo = "auto-pairs.kak";
       rev = "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc";
@@ -60,6 +62,7 @@ let
 
     # Dependency of `auto-pairs.kak`
     "prelude-kak" = {
+      disabled = true;
       owner = "kakounedotcom";
       repo = "prelude.kak";
       rev = "5dbdc020c546032885c1fdb463e366cc89fc15ad";
@@ -70,11 +73,19 @@ let
   sourceToPlugin = name: github:
     pkgsPrev.kakouneUtils.buildKakounePlugin {
       inherit name;
-      src = pkgsPrev.fetchFromGitHub github;
+      src =
+        pkgsPrev.fetchFromGitHub
+          (builtins.removeAttrs
+            github
+            [ "disabled" ]);
     };
 
 in {
   kakoune = pkgsPrev.wrapKakoune pkgsFinal.kakoune-unwrapped {
-    plugins = builtins.attrValues (builtins.mapAttrs sourceToPlugin sources);
+    plugins =
+      builtins.attrValues
+        (builtins.mapAttrs
+          sourceToPlugin
+          (pkgsPrev.lib.filterAttrs (_: x: !(x.disabled or false)) sources));
   };
 }
