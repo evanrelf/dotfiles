@@ -58,7 +58,7 @@ in
       magic-wormhole
       moreutils
       neovim
-      nix-diff
+      # nix-diff
       nix-index
       nix-top
       nix-tree
