@@ -60,6 +60,7 @@ in
       neovim
       # nix-diff
       nix-index
+      nix-prefetch-git
       nix-top
       nix-tree
       ormolu

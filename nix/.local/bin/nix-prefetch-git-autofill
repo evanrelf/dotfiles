@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+input_nix=$(cat /dev/stdin)
+input_json=$(nix-instantiate --eval --json --expr "${input_nix}")
+
+owner=$(echo "${input_json}" | jq --raw-output '.owner')
+repo=$(echo "${input_json}" | jq --raw-output '.repo')
+input_rev=$(echo "${input_json}" | jq --raw-output '.rev')
+
+fetch_json=$(\
+  nix-prefetch-git \
+    --url "https://github.com/${owner}/${repo}" \
+    --rev "${input_rev:-HEAD}" \
+    --quiet \
+)
+
+rev=$(echo "${fetch_json}" | jq --raw-output '.rev')
+sha256=$(echo "${fetch_json}" | jq --raw-output '.sha256')
+
+nix-instantiate \
+  --eval \
+  --expr "${input_nix} // { rev = \"${rev}\"; sha256 = \"${sha256}\"; }" \
+| sed \
+  -e 's/{ /{\n  /' \
+  -e 's/;/;\n /g' \
+  -e 's/  }/}/'
