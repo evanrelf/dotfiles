@@ -51,6 +51,7 @@
   ms = merge --squash
   mc = merge --continue
   ma = merge --abort
+  mom = "!git fetch && git merge origin/master -m 'Merge `origin/master`' #"
 
   # PULL
   pullff = pull --ff-only
