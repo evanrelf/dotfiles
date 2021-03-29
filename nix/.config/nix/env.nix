@@ -49,7 +49,6 @@ in
       ghcid
       gitAndTools.delta
       gitAndTools.gh
-      gitAndTools.git-absorb
       gitAndTools.gitFull
       gnugrep-gprefix
       httpie
@@ -66,6 +65,7 @@ in
       nix-tree
       ormolu
       pandoc
+      perlPackages.GitAutofixup
       ripgrep
       sd
       shellcheck
