@@ -11,6 +11,8 @@
 
   # BRANCH
   b = branch
+  bd = branch --delete
+  bdf = branch --delete --force
   master-to-main = branch --move --force main
 
   # CLEAN
