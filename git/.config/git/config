@@ -15,6 +15,12 @@
   bdf = branch --delete --force
   master-to-main = branch --move --force main
 
+  # CHERRY-PICK
+  ch = cherry-pick
+  chc = cherry-pick --continue
+  chs = cherry-pick --skip
+  cha = cherry-pick --abort
+
   # CLEAN
   clean-ignored = clean -Xdf
   clean-untracked = clean -xdi
