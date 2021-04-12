@@ -93,6 +93,9 @@
   # SHOW
   sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
 
+  # SPARSE-CHECKOUT
+  sc = sparse-checkout
+
   # STASH
   st = stash push --include-untracked
   stp = stash pop --index
