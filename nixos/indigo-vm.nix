@@ -1,5 +1,3 @@
-# "azure" referring to my work machine, not Microsoft's cloud :-)
-
 # TODO:
 # - Automate setup for substitution and distributed builds (for host and guest
 #   VM)
@@ -12,7 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "azure-vm";
+  networking.hostName = "indigo-vm";
   networking.useDHCP = false;
   networking.interfaces.ens33.useDHCP = true;
   networking.firewall.allowedTCPPorts = [ 5000 ];
