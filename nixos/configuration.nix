@@ -54,12 +54,7 @@ in
   };
 
   # DESKTOP
-  services.xserver.enable = true;
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
-  };
+  programs.sway.enable = true;
 
   # INPUT DEVICES
   services.xserver.libinput = {
