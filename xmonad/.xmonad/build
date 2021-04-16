@@ -7,22 +7,25 @@ realdir=$(dirname "$(realpath "$0")")
 
 cd "${realdir}"
 
-args=()
-args+=("-Wall")
-args+=("-Wcompat")
-args+=("-Werror=incomplete-record-updates")
-args+=("-Werror=incomplete-uni-patterns")
-args+=("-Werror=missing-fields")
-args+=("-Werror=partial-fields")
-args+=("-Widentities")
-args+=("-Wmissing-home-modules")
-args+=("-Wredundant-constraints")
-args+=("-fshow-warning-groups")
-args+=("-O0")
-args+=("-threaded")
-args+=("-rtsopts")
-args+=("-with-rtsopts=-N")
+args="\
+-Wall \
+-Wcompat \
+-Werror=incomplete-record-updates \
+-Werror=incomplete-uni-patterns \
+-Werror=missing-fields \
+-Werror=partial-fields \
+-Widentities \
+-Wmissing-home-modules \
+-Wredundant-constraints \
+-fshow-warning-groups \
+-O0 \
+-threaded \
+-rtsopts \
+-with-rtsopts=-N \
+"
 
-nix-shell --run "ghc ${args[*]} xmonad.hs -o ${1:-xmonad}"
+set -x
+
+nix-shell --run "ghc ${args} xmonad.hs -o ${1:-xmonad}"
 
 rm -f ./*.hi ./*.o
