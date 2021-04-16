@@ -4,7 +4,11 @@ set -Eeuo pipefail
 IFS=$'\n\t'
 
 source_path="${1:-${HOME}/dotfiles/nixos/configuration.nix}"
-destination_path="/persist/etc/nixos/configuration.nix"
+if [ -d "/persist" ]; then
+  destination_path="/persist/etc/nixos/configuration.nix"
+else
+  destination_path="/etc/nixos/configuration.nix"
+fi
 
 confirm() {
   read -p "$1 [yN] " -n 1 -r >&2 < /dev/tty
@@ -33,7 +37,7 @@ if ! diff "${destination_path}" "${source_path}" >/dev/null; then
   fi
 else
   echo "No change between configurations" >&2
-  exit 1
+  exit 0
 fi
 
 # Switch to new configuration
