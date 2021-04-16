@@ -1,0 +1,18 @@
+default_border pixel 2
+smart_borders on
+gaps inner 5
+smart_gaps on
+
+bar {
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while ~/.config/sway/bar; do sleep 10; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}

@@ -1,0 +1,9 @@
+# Internal display
+output "Unknown 0x2036 0x00000000" {
+  scale 1
+  subpixel bgr
+}
+
+output "Dell Inc. DELL U2718Q 4K8X78AM0CML" {
+  subpixel rgb
+}
