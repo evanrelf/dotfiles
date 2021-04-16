@@ -11,6 +11,14 @@ let
       ln -s $out/channels/nixpkgs $out/channels/default
     '';
 
+  isLinux =
+    if pkgs.stdenv.isLinux then
+      builtins.trace
+        "Installing extra packages for Linux machine"
+        true
+    else
+      false;
+
   isPersonalMachine =
     if builtins.elem hostname [ "auburn" "sienna" ] then
       builtins.trace
@@ -77,13 +85,13 @@ in
       tmux
       yj
       zoxide
-    ] ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [
+    ] ++ (pkgs.lib.optionals isLinux [
       acpi
       autocutsel
       chromium
       dmenu
       firefox
-      iosevka-pro
+      iosevka-bin
       kitty
       redshift
       spotify
