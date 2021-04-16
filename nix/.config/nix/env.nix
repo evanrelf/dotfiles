@@ -70,10 +70,10 @@ in
       neovim
       nix-diff
       nix-index
+      nixpkgs-fmt
       nix-prefetch-git
       nix-top
       nix-tree
-      nixpkgs-fmt
       ormolu
       pandoc
       perlPackages.GitAutofixup
@@ -88,8 +88,9 @@ in
     ] ++ (pkgs.lib.optionals isLinux [
       acpi
       autocutsel
+      bemenu
       chromium
-      dmenu
+      dmenu # keep for `dmenu_path | bemenu`
       firefox
       iosevka-bin
       kitty
