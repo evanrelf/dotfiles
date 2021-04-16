@@ -4,13 +4,15 @@ gaps inner 5
 smart_gaps on
 
 bar {
-    position top
+  position top
 
-    status_command ~/.config/sway/bar
+  status_command ~/.config/sway/bar
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+  font "Iosevka Extended 20px"
+
+  colors {
+      statusline #ffffff
+      background #323232
+      inactive_workspace #323232 #323232 #5c5c5c
+  }
 }

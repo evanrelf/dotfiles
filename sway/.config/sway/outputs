@@ -1,4 +1,4 @@
-# Internal display
+# ThinkPad X1 Carbon (Gen 6)'s internal display
 output "Unknown 0x2036 0x00000000" {
   scale 1
   subpixel bgr
