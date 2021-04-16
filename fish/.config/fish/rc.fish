@@ -84,7 +84,8 @@ function rc -d "Open the specified program's configuration file"
             case sxhkd
                 eval "$EDITOR $HOME/.config/sxhkd/sxhkdrc"
             case sway
-                eval "$EDITOR $HOME/.config/sway/config"
+                cd "$HOME/.config/sway/"
+                ls -l
             case swaylock
                 eval "$EDITOR $HOME/.config/swaylock/config"
             case compton
