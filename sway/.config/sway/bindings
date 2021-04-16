@@ -7,7 +7,7 @@ set $right l
 set $term kitty
 set $browser firefox
 # set $browser chromium --enable-features=WebUIDarkMode --force-dark-mode
-set $menu dmenu_path | bemenu | xargs swaymsg exec --
+set $menu dmenu_path | bemenu --fn $font | xargs swaymsg exec --
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec $browser

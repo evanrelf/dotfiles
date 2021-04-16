@@ -1,3 +1,5 @@
+set $font "Iosevka Extended 20px"
+
 include "inputs"
 include "outputs"
 include "bindings"

@@ -8,7 +8,7 @@ bar {
 
   status_command ~/.config/sway/bar
 
-  font "Iosevka Extended 20px"
+  font $font
 
   colors {
       statusline #ffffff
