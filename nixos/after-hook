@@ -16,6 +16,10 @@ confirm() {
   echo "${REPLY}" | grep --quiet --extended-regexp '^[Yy]$'
 }
 
+# Undo GNU Stow's symlink
+rm -f "${HOME}/configuration.nix"
+rm -f "${HOME}/indigo-vm.nix"
+
 # Check that files exist
 
 test -e "${source_path}" \
