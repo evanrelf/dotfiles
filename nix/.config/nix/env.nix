@@ -51,7 +51,9 @@ in
       gitAndTools.gh
       gitAndTools.gitFull
       gnugrep-gprefix
+      htop
       httpie
+      hyperfine
       jq
       kakoune
       lorri
