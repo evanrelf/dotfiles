@@ -100,8 +100,8 @@
   services.thermald.enable = true;
   services.undervolt = {
     enable = true;
-    coreOffset = "-50";
-    gpuOffset = "-50";
+    coreOffset = -50;
+    gpuOffset = -50;
   };
   networking.networkmanager.wifi.powersave = true;
 
@@ -109,7 +109,6 @@
   services.openssh.enable = true;
   programs.gnupg.agent.enable = true;
   services.physlock.enable = true;
-  hardware.u2f.enable = true;
 
   # NIX
   nix.trustedUsers = [ "root" "@wheel" ];
@@ -160,5 +159,5 @@
   # MISCELLANEOUS
   services.printing.enable = true;
   time.timeZone = "America/Los_Angeles";
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
 }
