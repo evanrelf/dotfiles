@@ -13,12 +13,16 @@ assert_exists head
 assert_exists light
 assert_exists date
 
-test -f "/sys/class/power_supply/BAT0/capacity" \
-  || (echo "can't find battery capacity" >&2; exit 1)
+main() {
+  test -f "/sys/class/power_supply/BAT0/capacity" \
+    || (echo "can't find battery capacity" >&2; exit 1)
 
-volume=$(amixer get Master | grep --extended-regexp --only-matching '[0-9]+%' | head -1)
-brightness=$(light -G | cut -d '.' -f 1)
-battery=$(cat /sys/class/power_supply/BAT0/capacity)
-date=$(date +'%Y-%m-%d %l:%M %p')
+  volume=$(amixer get Master | grep --extended-regexp --only-matching '[0-9]+%' | head -1)
+  brightness=$(light -G | cut -d '.' -f 1)
+  battery=$(cat /sys/class/power_supply/BAT0/capacity)
+  date=$(date +'%Y-%m-%d %l:%M %p')
 
-echo "Volume: ${volume} | Brightness: ${brightness}% | Battery: ${battery}% | ${date}"
+  echo "Volume: ${volume} | Brightness: ${brightness}% | Battery: ${battery}% | ${date}"
+}
+
+while main; do sleep 10; done
