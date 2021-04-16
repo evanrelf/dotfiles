@@ -69,11 +69,8 @@ myRemoveKeys xconfig = EZConfig.removeKeysP xconfig
 
 
 myKeys xconfig = EZConfig.additionalKeysP xconfig
-  -- Open new Emacs frame
-  [ ("M-S-;", Run.safeSpawn "sh" ["-c", "ALTERNATE_EDITOR='' emacsclient -s gui -nc"])
-
   -- Switch to last workspace
-  , ("M-<Tab>", CycleWS.toggleWS)
+  [ ("M-<Tab>", CycleWS.toggleWS)
 
   -- Brightness
   , ("<XF86MonBrightnessDown>", Run.safeSpawn "light" ["-U", "3"])
