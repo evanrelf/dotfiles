@@ -1,8 +1,21 @@
 { config, lib, pkgs, ... }:
 
+let
+  nixos-hardware =
+    let
+      # master on 2020-04-16
+      rev = "267d8b2d7f049d2cb9b7f4a7f981c123db19a868";
+      sha256 = "1ks1j9pkpjbz0sbwqrp4l0p9lfc1y17cdxjjk8sa8khf60l2cwzw";
+    in
+    builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixos-hardware/archive/${rev}.tar.gz";
+      inherit sha256;
+    };
+
+in
 {
   imports = [
-    <nixos-hardware/lenovo/thinkpad/x1/6th-gen>
+    "${nixos-hardware}/lenovo/thinkpad/x1/6th-gen"
   ];
 
   # KERNEL
