@@ -63,6 +63,7 @@ in
       nix-prefetch-git
       nix-top
       nix-tree
+      nixpkgs-fmt
       ormolu
       pandoc
       perlPackages.GitAutofixup
