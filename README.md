@@ -16,14 +16,6 @@ Dotfiles are managed using a combination of [GNU Stow][gnustow],
 `{before,after}-hook` shell scripts, and [my install script](./install.hs)
 written in Haskell.
 
-## Usage
-
-You must have [Nix][nix] installed to run the install script.
-
-```
-$ ./install.hs [--dry-run] PACKAGE...
-```
-
 [kakoune]: https://github.com/mawww/kakoune
 [fish]: https://fishshell.com/
 [kitty]: https://sw.kovidgoyal.net/kitty/
