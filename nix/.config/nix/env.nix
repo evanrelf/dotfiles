@@ -75,6 +75,7 @@ pkgs.buildEnv {
     starship
     tealdeer
     tmux
+    tree
     yj
     zoxide
   ] ++ (pkgs.lib.optionals isLinux [

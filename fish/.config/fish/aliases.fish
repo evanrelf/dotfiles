@@ -10,7 +10,9 @@ abbr --add cp "cp -i"
 if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa --long --group-directories-first"
-    alias tree "exa --tree --group-directories-first --ignore-glob '.git|dist-newstyle|node_modules'"
+    if not _exists tree
+        alias tree "exa --tree --group-directories-first --ignore-glob '.git|dist-newstyle|node_modules'"
+    end
 else
     alias ls "command ls -AFGh"
 end
