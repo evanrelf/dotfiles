@@ -4,4 +4,4 @@ set -Eeuo pipefail
 IFS=$'\n\t'
 
 echo "[doom] Setting up truecolor support"
-../emacs/.config/emacs/setup-truecolor
+emacs/.config/emacs/setup-truecolor
