@@ -14,5 +14,8 @@ cask "spotify"
 cask "the-unarchiver"
 cask "zoom"
 
+# tap "wez/wezterm"
+# brew "wezterm"
+
 brew "mas"
 mas "Affinity Photo", id: 824183456
