@@ -93,6 +93,7 @@ pkgs.buildEnv {
     xclip
   ]) ++ (pkgs.lib.optionals isPersonalMachine [
     borgbackup
+    go
     mercurialFull
     rclone
   ]) ++ (pkgs.lib.optionals isWorkMachine [
