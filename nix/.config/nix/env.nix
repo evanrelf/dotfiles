@@ -8,7 +8,6 @@ let
     pkgs.runCommandLocal "declarative-channels" {} ''
       mkdir -p $out/channels
       ln -s ${pkgs.path} $out/channels/nixpkgs
-      ln -s $out/channels/nixpkgs $out/channels/default
     '';
 
   isLinux =

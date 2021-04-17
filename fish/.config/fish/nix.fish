@@ -33,7 +33,7 @@ if test -d "/nix"
     set --export NIXPKGS_ALLOW_UNFREE 1
     if test -d "$HOME/.nix-profile/channels/"
         set --export --prepend --path NIX_PATH "$HOME/.nix-profile/channels"
-        set --export --prepend --path NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/default"
+        set --export --prepend --path NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/nixpkgs"
     else
         _warn "Using imperative Nix channels"
         set --export --prepend --path NIX_PATH "$HOME/.nix-defexpr/channels"
