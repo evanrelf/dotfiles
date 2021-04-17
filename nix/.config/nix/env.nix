@@ -36,7 +36,6 @@ pkgs.buildEnv {
     as-tree
     bashInteractive
     cabal-install
-    comma
     coreutils-gprefix
     declarative-channels
     dhall
