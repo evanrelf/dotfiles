@@ -59,11 +59,13 @@ in
   # INPUT DEVICES
   services.xserver.libinput = {
     enable = true;
-    naturalScrolling = true;
-    tapping = false;
-    tappingDragLock = false;
-    middleEmulation = false;
-    accelSpeed = "0.7";
+    touchpad = {
+      naturalScrolling = true;
+      tapping = false;
+      tappingDragLock = false;
+      middleEmulation = false;
+      accelSpeed = "0.7";
+    };
   };
   systemd.services.keyswap = {
     wantedBy = [ "multi-user.target" ];
