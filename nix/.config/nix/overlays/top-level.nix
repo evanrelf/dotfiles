@@ -18,53 +18,6 @@ in
       withPrefix = true;
     };
 
-  evan-runghc =
-    let
-      ghc = pkgsFinal.haskellPackages.ghcWithPackages (p: with p; [
-        relude
-        string-interpolate
-        unliftio
-      ]);
-
-      ghcArgs = builtins.map (arg: ''--add-flags "--ghc-arg='${arg}'"'') [
-        "-XBlockArguments"
-        "-XDeriveAnyClass"
-        "-XDeriveFunctor"
-        "-XDeriveGeneric"
-        "-XDerivingStrategies"
-        "-XDerivingVia"
-        "-XGeneralizedNewtypeDeriving"
-        "-XInstanceSigs"
-        "-XLambdaCase"
-        "-XNamedFieldPuns"
-        "-XNoImplicitPrelude"
-        "-XOverloadedStrings"
-        "-XScopedTypeVariables"
-        "-XTypeApplications"
-        "-Wall"
-        "-Wcompat"
-        "-Werror=incomplete-record-updates"
-        "-Werror=incomplete-uni-patterns"
-        "-Werror=missing-fields"
-        "-Werror=partial-fields"
-        "-Widentities"
-        "-Wmissing-home-modules"
-        "-Wredundant-constraints"
-        "-foptimal-applicative-do"
-        "-fshow-warning-groups"
-        "-threaded"
-        "-rtsopts"
-        "-with-rtsopts=-N"
-      ];
-    in
-    pkgsPrev.runCommandLocal "evan-runghc"
-      {
-        buildInputs = [ pkgsFinal.makeWrapper ];
-      } ''
-      mkdir -p "$out/bin"
-      makeWrapper "${ghc}/bin/runghc" "$out/bin/evans-runghc" ${ghcArgs}
-    '';
-
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
