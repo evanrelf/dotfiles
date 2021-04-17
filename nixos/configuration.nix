@@ -136,6 +136,7 @@ in
   # HARDWARE
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
+  services.hardware.bolt.enable = true;
 
   # USERS
   users.mutableUsers = false;
@@ -160,6 +161,7 @@ in
     "ssh/ssh_host_rsa_key.pub".source = "/persist/etc/ssh/ssh_host_rsa_key.pub";
   };
   systemd.tmpfiles.rules = [
+    "L /var/lib/boltd - - - - /persist/var/lib/boltd"
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
