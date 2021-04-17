@@ -47,7 +47,7 @@ fi
 # Switch to new configuration
 
 if confirm "Switch to new configuration?"; then
-  sudo nixos-rebuild switch
+  sudo nixos-rebuild -I nixpkgs="${HOME}/.nix-profile/channels/nixpkgs" switch
 else
   exit 0
 fi
