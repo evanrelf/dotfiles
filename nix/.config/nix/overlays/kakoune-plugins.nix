@@ -80,7 +80,8 @@ let
             [ "disabled" ]);
     };
 
-in {
+in
+{
   kakoune = pkgsPrev.wrapKakoune pkgsFinal.kakoune-unwrapped {
     plugins =
       builtins.attrValues

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
   ghc =
@@ -9,6 +9,6 @@ let
     ]);
 
 in
-  pkgs.mkShell {
-    buildInputs = [ ghc ];
-  }
+pkgs.mkShell {
+  buildInputs = [ ghc ];
+}

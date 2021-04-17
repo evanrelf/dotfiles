@@ -1,6 +1,5 @@
 import ../lib/override-haskell-packages.nix {
-  packages = {
-  };
+  packages = { };
 
   overrides = {
     ki = oldCabal: {

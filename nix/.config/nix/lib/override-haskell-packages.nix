@@ -1,5 +1,5 @@
-{ packages ? {} # Add or replace Haskell packages
-, overrides ? {} # Override existing Haskell packages
+{ packages ? { } # Add or replace Haskell packages
+, overrides ? { } # Override existing Haskell packages
 , hackage ? null # Specify revision of all-cabal-hashes
 }:
 
@@ -14,7 +14,7 @@ let
       applyOverride = name: fn:
         pkgsPrev.haskell.lib.overrideCabal haskellPackagesPrev."${name}" fn;
     in
-      pkgsPrev.lib.mapAttrs applyOverride overrides;
+    pkgsPrev.lib.mapAttrs applyOverride overrides;
 
 
   haskellPackages =
@@ -22,8 +22,9 @@ let
       overrides =
         pkgsPrev.lib.fold
           pkgsPrev.lib.composeExtensions
-          (old.overrides or (_: _: {}))
-          [ packagesExtension
+          (old.overrides or (_: _: { }))
+          [
+            packagesExtension
             overridesExtension
           ];
     });
@@ -44,8 +45,9 @@ let
         });
 
 in
-  { inherit
-      haskellPackages
-      all-cabal-hashes
+{
+  inherit
+    haskellPackages
+    all-cabal-hashes
     ;
-  }
+}

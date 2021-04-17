@@ -11,4 +11,4 @@ let
   };
 
 in
-  import nixpkgs ({ config = {}; } // args)
+import nixpkgs ({ config = { }; } // args)
