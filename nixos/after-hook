@@ -16,38 +16,42 @@ confirm() {
   echo "${REPLY}" | grep --quiet --extended-regexp '^[Yy]$'
 }
 
-# Undo GNU Stow's symlink
-rm -f "${HOME}/configuration.nix"
-rm -f "${HOME}/indigo-vm.nix"
+do_unstow() {
+  # Undo GNU Stow's symlink
+  rm -f "${HOME}/configuration.nix"
+  rm -f "${HOME}/indigo-vm.nix"
+}
 
-# Check that files exist
+do_exists() {
+  test -e "${source_path}" \
+    || (echo "Source path '${source_path}' doesn't exist" >&2; exit 1)
 
-test -e "${source_path}" \
-  || (echo "Source path '${source_path}' doesn't exist" >&2; exit 1)
+  test -e "${destination_path}" \
+    || (echo "Destination path '${destination_path}' doesn't exist" >&2; exit 1)
+}
 
-test -e "${destination_path}" \
-  || (echo "Destination path '${destination_path}' doesn't exist" >&2; exit 1)
+do_copy() {
+  if ! diff "${destination_path}" "${source_path}" >/dev/null; then
+    diff -u "${destination_path}" "${source_path}" | eval "$(git config core.pager)"
 
-# Compute diff between files
+    if confirm "Copy new configuration?"; then
+      sudo cp -v "${destination_path}" "${destination_path}.old"
+      sudo cp -v "${source_path}" "${destination_path}"
+    fi
+  else
+    echo "No change between configurations" >&2
+  fi
+}
 
-if ! diff "${destination_path}" "${source_path}" >/dev/null; then
-  diff -u "${destination_path}"  "${source_path}" | eval "$(git config core.pager)" || true
-
-  if confirm "Copy new configuration?"; then
-    sudo cp -v "${destination_path}" "${destination_path}.old"
-    sudo cp -v "${source_path}" "${destination_path}"
+do_switch() {
+  if confirm "Switch to configuration?"; then
+    sudo nixos-rebuild -I nixpkgs="${HOME}/.nix-profile/channels/nixpkgs" switch
   else
     exit 0
   fi
-else
-  echo "No change between configurations" >&2
-  exit 0
-fi
+}
 
-# Switch to new configuration
-
-if confirm "Switch to new configuration?"; then
-  sudo nixos-rebuild -I nixpkgs="${HOME}/.nix-profile/channels/nixpkgs" switch
-else
-  exit 0
-fi
+do_unstow
+do_exists
+do_copy
+do_switch
