@@ -25,4 +25,4 @@ main() {
   echo "Volume: ${volume} | Brightness: ${brightness}% | Battery: ${battery}% | ${date}"
 }
 
-while main; do sleep 10; done
+while main; do sleep 2; done
