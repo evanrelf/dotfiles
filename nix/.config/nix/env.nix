@@ -10,29 +10,23 @@ let
       ln -s ${pkgs.path} $out/channels/nixpkgs
     '';
 
+  traceIf = bool: message:
+    if bool then builtins.trace message true else false;
+
   isLinux =
-    if pkgs.stdenv.isLinux then
-      builtins.trace
-        "Installing extra packages for Linux machine"
-        true
-    else
-      false;
+    traceIf
+      pkgs.stdenv.isLinux
+      "Installing extra packages for Linux machine";
 
   isPersonalMachine =
-    if builtins.elem hostname [ "auburn" "sienna" ] then
-      builtins.trace
-        "Installing extra packages for personal machine '${hostname}'"
-        true
-    else
-      false;
+    traceIf
+      (builtins.elem hostname [ "auburn" "sienna" ])
+      "Installing extra packages for personal machine '${hostname}'";
 
   isWorkMachine =
-    if builtins.elem hostname [ "indigo" ] then
-      builtins.trace
-        "Installing extra packages for work machine '${hostname}'"
-        true
-    else
-      false;
+    traceIf
+      (builtins.elem hostname [ "indigo" ])
+      "Installing extra packages for work machine '${hostname}'";
 
 in
   pkgs.buildEnv {
