@@ -14,6 +14,9 @@ cask "spotify"
 cask "the-unarchiver"
 cask "zoom"
 
+tap "homebrew/cask-fonts"
+cask "font-iosevka-ss08"
+
 # tap "wez/wezterm"
 # brew "wezterm"
 
