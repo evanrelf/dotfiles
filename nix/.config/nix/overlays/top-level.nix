@@ -28,28 +28,6 @@ in
       withPrefix = true;
     };
 
-  dhall =
-    let
-      version = "1.37.1";
-      lookup = {
-        "x86_64-darwin" = {
-          system = "macos";
-          sha256 = "1hzzrrc7pqqxnm9abc5ixlfnsxi7rnszwdbgk9v75k0wz52jr1rk";
-        };
-        "x86_64-linux" = {
-          system = "linux";
-          sha256 = "04ivmcxw7zzxr3q5svwg29y37wh60qkzvlan71k52hr12k4qnls9";
-        };
-      };
-      inherit (lookup.${pkgsFinal.system}) system sha256;
-    in
-    pkgsPrev.fetchzip {
-      name = "dhall-${version}";
-      url = "https://github.com/dhall-lang/dhall-haskell/releases/download/${version}/dhall-${version}-x86_64-${system}.tar.bz2";
-      inherit sha256;
-      stripRoot = false;
-    };
-
   evan-runghc =
     let
       ghc = pkgsFinal.haskellPackages.ghcWithPackages (p: with p; [
@@ -99,19 +77,6 @@ in
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
-  fourmolu =
-    pkgsPrev.haskell.lib.justStaticExecutables
-      (pkgsPrev.haskell.lib.doJailbreak
-        (pkgsPrev.haskellPackages.callCabal2nix
-          "fourmolu"
-          (pkgsPrev.fetchFromGitHub {
-            owner = "parsonsmatt";
-            repo = "fourmolu";
-            rev = "45a8478b8e6ba48b4ce228d4aaee3cb9f5aa08f6"; # 0.3.0.0
-            sha256 = "0w4m887pr2ad303a35dl9gs03xza2fy6mnbgl65s0yal78mfw0zv";
-          })
-          { }));
-
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
   kakoune-unwrapped =
@@ -141,12 +106,4 @@ in
         };
       buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
     });
-
-  nix-tree =
-    (import (pkgsPrev.fetchFromGitHub {
-      owner = "utdemir";
-      repo = "nix-tree";
-      rev = "8f32ee74f58bfba454e33a8459276795191be364";
-      sha256 = "0m7fdxm1zl7p48dppxxg932fv3pc7idxi4jrp5qf66jccg6ihwhl";
-    })).defaultPackage."${builtins.currentSystem}";
 }

@@ -45,13 +45,13 @@ pkgs.buildEnv {
     fd
     findutils-gprefix
     fish
-    fourmolu
     fzf
     ghcid
     gitAndTools.delta
     gitAndTools.gh
     gitAndTools.gitFull
     gnugrep-gprefix
+    haskellPackages.fourmolu
     htop
     httpie
     hyperfine
