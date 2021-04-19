@@ -82,7 +82,6 @@ pkgs.buildEnv {
     acpi
     autocutsel
     bemenu
-    chromium
     dmenu # keep for `dmenu_path | bemenu`
     firefox
     iosevka-bin
