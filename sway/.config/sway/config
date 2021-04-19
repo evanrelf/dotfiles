@@ -1,4 +1,4 @@
-set $font "Iosevka Extended 20px"
+set $font "Iosevka SS08 Extended 20px"
 
 include "inputs"
 include "outputs"

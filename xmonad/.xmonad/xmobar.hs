@@ -9,7 +9,7 @@ main = xmobar config
 
 config :: Config
 config = defaultConfig
-  { font = "xft:Iosevka Pro-10"
+  { font = "xft:Iosevka Term SS08-10"
   , bgColor = "#777777"
   , fgColor = "#111111"
   , template = "%uname% } %hello% { %date%"

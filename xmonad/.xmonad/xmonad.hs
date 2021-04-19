@@ -88,7 +88,7 @@ myInactiveColor = "#333333"
 
 
 myTheme = def
-  { fontName = "xft:Iosevka Pro:style=Bold:size=11:antialias=true"
+  { fontName = "xft:Iosevka Term SS08:style=Bold:size=11:antialias=true"
   , decoHeight = 25
   , activeColor = myActiveColor
   , inactiveColor = myInactiveColor

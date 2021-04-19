@@ -22,6 +22,8 @@ in
 
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
+  iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
+
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (old: rec {
       version = "HEAD";

@@ -160,9 +160,9 @@
     (setq doom-font (font-spec :family "PragmataPro Liga" :size 16)
           doom-big-font (font-spec :family "PragmataPro Liga" :size 20)
           doom-variable-pitch-font (font-spec :family "PragmataPro Liga" :size 16))
-  (setq doom-font (font-spec :family "Iosevka Pro" :size 27)
-        doom-big-font (font-spec :family "Iosevka Pro" :size 40)
-        doom-variable-pitch-font (font-spec :family "Iosevka Pro" :size 27)))
+  (setq doom-font (font-spec :family "Iosevka Term SS08" :size 27)
+        doom-big-font (font-spec :family "Iosevka Term SS08" :size 40)
+        doom-variable-pitch-font (font-spec :family "Iosevka Term SS08" :size 27)))
 
 (setq modus-operandi-theme-org-blocks 'greyscale)
 (setq doom-theme 'modus-operandi)
