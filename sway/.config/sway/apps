@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+dmenu_path="${XDG_CACHE_HOME:-${HOME}/.cache}/dmenu_run"
+
+if [ ! -f "${dmenu_path}" ]; then
+  dmenu_path >/dev/null 2>&1
+fi
+
+cat <<EOF | sort -u | comm -12 - "${dmenu_path}"
+chromium
+emacs
+firefox
+kitty
+spotify
+EOF
