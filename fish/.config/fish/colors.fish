@@ -10,3 +10,6 @@ set fish_color_param normal
 set fish_color_quote yellow
 set fish_color_redirection cyan
 set fish_color_valid_path --underline
+
+# Default colors
+set --export LS_COLORS ""
