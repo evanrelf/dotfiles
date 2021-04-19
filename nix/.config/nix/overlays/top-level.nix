@@ -20,6 +20,56 @@ in
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
+  firefox = pkgsPrev.wrapFirefox pkgsPrev.firefox-unwrapped {
+    extraPolicies = {
+      # Personal preferences
+      SearchEngines.Default = "DuckDuckGo";
+      ShowHomeButton = false;
+
+      # Prevent tracking
+      DisableFirefoxStudies = true;
+      DisableTelemetry = true;
+      EnableTrackingProtection = {
+        Value = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+
+      # Disable annoyances
+      DontCheckDefaultBrowser = true;
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        SkipOnboarding = true;
+      };
+      NewTabPage = false;
+      NoDefaultBookmarks = true;
+
+      # Disable unused features
+      DisablePocket = true;
+      OfferToSaveLogins = false;
+      PasswordManagerEnabled = false;
+      DisableMasterPasswordCreation = true;
+      FirefoxHome = {
+        Pocket = false;
+        Snippets = false;
+      };
+    };
+    extraPrefs = ''
+      // Personal preferences
+      lockPref("browser.ctrlTab.recentlyUsedOrder", false)
+      // lockPref("browser.newtabpage.enabled", false);
+
+      // Scrolling
+      lockPref("general.smoothScroll", false);
+      lockPref("apz.gtk.kinetic_scroll.enabled", false);
+      lockPref("mousewheel.default.delta_multiplier_y", 50);
+
+      // Disable nags
+      lockPref("browser.aboutConfig.showWarning", false);
+      lockPref("browser.shell.checkDefaultBrowser", false);
+    '';
+  };
+
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
