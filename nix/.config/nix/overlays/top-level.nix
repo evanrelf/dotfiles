@@ -101,4 +101,6 @@ in
         };
       buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
     });
+
+  nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
 }

@@ -87,6 +87,7 @@ pkgs.buildEnv {
     firefox
     iosevka-bin
     kitty
+    nerdfonts
     redshift
     spotify
     xbanish
