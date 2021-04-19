@@ -88,6 +88,7 @@ pkgs.buildEnv {
     iosevka-bin
     kitty
     nerdfonts
+    noto-fonts
     redshift
     spotify
     xbanish
