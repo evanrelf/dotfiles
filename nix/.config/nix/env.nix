@@ -28,6 +28,8 @@ let
       (builtins.elem hostname [ "indigo" ])
       "Installing extra packages for work machine '${hostname}'";
 
+  # To install fonts on macOS:
+  # $ open ~/.nix-profile/share/fonts/truetype/**/*.{ttf,ttc}
 in
 pkgs.buildEnv {
   name = "env";
@@ -54,18 +56,20 @@ pkgs.buildEnv {
     htop
     httpie
     hyperfine
+    iosevka-bin
     jq
     kakoune
     lorri
     magic-wormhole
     moreutils
     neovim
+    nerdfonts
     nix-diff
     nix-index
-    nixpkgs-fmt
     nix-prefetch-git
     nix-top
     nix-tree
+    nixpkgs-fmt
     ormolu
     pandoc
     perlPackages.GitAutofixup
@@ -84,9 +88,7 @@ pkgs.buildEnv {
     bemenu
     dmenu # keep for `dmenu_path | bemenu`
     firefox
-    iosevka-bin
     kitty
-    nerdfonts
     noto-fonts
     redshift
     spotify
