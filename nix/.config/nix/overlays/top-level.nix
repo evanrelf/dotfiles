@@ -18,6 +18,8 @@ in
       withPrefix = true;
     };
 
+  emacsCustom = (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
+
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
   firefox = pkgsPrev.wrapFirefox pkgsPrev.firefox-unwrapped {

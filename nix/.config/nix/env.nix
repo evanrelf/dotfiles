@@ -87,6 +87,7 @@ pkgs.buildEnv {
     autocutsel
     bemenu
     dmenu # keep for `dmenu_path | bemenu`
+    emacsCustom
     firefox
     kitty
     noto-fonts
