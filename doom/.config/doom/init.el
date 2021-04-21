@@ -40,12 +40,16 @@
 
   :lang
   data
-  haskell
+  (go +lsp)
+  (haskell +lsp)
   json
   javascript
+  lua
   markdown
   nix
   org
+  purescript
+  python
   (rust +lsp)
   (sh +fish)
   web
