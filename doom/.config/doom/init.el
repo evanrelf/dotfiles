@@ -31,7 +31,6 @@
   :tools
   direnv
   lookup
-  lsp
   magit
   terraform
 
@@ -40,8 +39,8 @@
 
   :lang
   data
-  (go +lsp)
-  (haskell +lsp)
+  go
+  haskell
   json
   javascript
   lua
@@ -50,7 +49,7 @@
   org
   purescript
   python
-  (rust +lsp)
+  rust
   (sh +fish)
   web
   yaml
