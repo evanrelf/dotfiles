@@ -66,10 +66,10 @@ pkgs.buildEnv {
     nerdfonts
     nix-diff
     nix-index
+    nixpkgs-fmt
     nix-prefetch-git
     nix-top
     nix-tree
-    nixpkgs-fmt
     ormolu
     pandoc
     perlPackages.GitAutofixup
