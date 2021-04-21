@@ -48,7 +48,7 @@
   javascript
   markdown
   nix
-  (org +roam)
+  org
   racket
   (rust +lsp)
   (sh +fish)

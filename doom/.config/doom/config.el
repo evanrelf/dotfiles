@@ -113,10 +113,6 @@
     (font-lock-mode +1))
   (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
 
-(use-package! org-roam
-  :after org
-  :init (setq org-roam-directory "~/brain/notes"))
-
 ;; Make Emacs shut up (https://emacs.stackexchange.com/a/20039)
 (defun quieter-command-error-function (data context caller)
   (when (not (memq (car data) '(beginning-of-buffer
