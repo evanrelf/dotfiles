@@ -80,6 +80,7 @@ pkgs.buildEnv {
     tealdeer
     tmux
     tree
+    watchexec
     yj
     zoxide
   ] ++ (pkgs.lib.optionals isLinux [

@@ -55,7 +55,9 @@ function rg
     end
 end
 
-alias less "less -RMFXK"
+alias less "less -RMK"
+
+alias cargod "watchexec --exts rs --restart --clear -- cargo check --color=always '|&' less -RMK"
 
 # Typos
 abbr --add gs "git s"
