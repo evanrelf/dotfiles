@@ -95,7 +95,6 @@ if _exists nix
         nix show-derivation $argv[1] | jq . --color-output | less -R
     end
 
-    alias nix-build "nix-build --no-out-link"
     alias nix-instantiate "nix-instantiate --no-gc-warning"
     alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof)'"
 
