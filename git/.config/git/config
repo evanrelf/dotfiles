@@ -146,7 +146,6 @@
   excludesfile = ~/.config/git/ignore
   pager = delta
 [delta]
-  line-numbers = true
   tabs = 8
   syntax-theme = GitHub
 [diff]
