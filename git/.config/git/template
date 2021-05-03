@@ -1,5 +1,11 @@
 
 
+# Handy co-author trailers:
+# Co-authored-by: Gabriel Gonzalez <Gabriel439@gmail.com>
+# Co-authored-by: Ashlynn Anderson <pea@pea.sh>
+# Co-authored-by: Parnell Springmeyer <parnell@digitalmentat.com>
+# Co-authored-by: Joel Stanley <joel@awakesecurity.com>
+
 # 1. Separate subject from body with a blank line
 # 2. Limit the subject line to 50 characters
 # 3. Capitalize the subject line
