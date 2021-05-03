@@ -42,6 +42,7 @@ pkgs.buildEnv {
     declarative-channels
     dhall
     direnv
+    emacsCustom
     exa
     fd
     findutils-gprefix
@@ -88,7 +89,6 @@ pkgs.buildEnv {
     autocutsel
     bemenu
     dmenu # keep for `dmenu_path | bemenu`
-    emacsCustom
     firefox
     kitty
     noto-fonts

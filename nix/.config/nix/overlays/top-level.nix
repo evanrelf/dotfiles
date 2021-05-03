@@ -18,7 +18,22 @@ in
       withPrefix = true;
     };
 
-  emacsCustom = (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
+  emacsCustom =
+    let
+      emacsGccDarwin = (import (pkgsPrev.fetchFromGitHub {
+        owner = "twlz0ne";
+        repo = "nix-gccemacs-darwin";
+        rev = "088f97e2939f33d6983fb90649a9c51d572736ec";
+        sha256 = "0mdbgl82r0dpgsz71i2npfy6kyd16637sk7glagwwdz7l0zxxmwn";
+      })).emacsGccDarwin;
+
+      emacs =
+        builtins.getAttr builtins.currentSystem {
+          "x86_64-linux" = pkgsFinal.emacsGcc;
+          "x86_64-darwin" = emacsGccDarwin;
+        };
+    in
+    (pkgsPrev.emacsPackagesGen emacs).emacsWithPackages (p: [ p.vterm ]);
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
