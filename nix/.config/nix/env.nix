@@ -71,6 +71,7 @@ pkgs.buildEnv {
     nix-prefetch-git
     nix-top
     nix-tree
+    ormoloog
     ormolu
     pandoc
     perlPackages.GitAutofixup

@@ -106,6 +106,36 @@ in
       '';
     });
 
+  ormoloog =
+    let
+      ormolu =
+        pkgsPrev.ormolu.overrideAttrs (old: {
+          src = pkgsPrev.fetchFromGitHub {
+            owner = "google";
+            repo = "ormolu";
+            rev = "ffdf145bbdf917d54a3ef4951fc2655e35847ff0";
+            sha256 = "0m4azjy90knahcg6kpa8sxvkwv8vf8dlip2bcmz6p0x934183bxb";
+          };
+        });
+    in
+    pkgsPrev.runCommandLocal "ormoloog" { } ''
+      mkdir -p \
+        $out/bin/ \
+        $out/share/bash-completion/completions/ \
+        $out/share/fish/vendor_completions.d/ \
+        $out/share/zsh/vendor-completions/
+      ln -s ${ormolu.bin}/bin/ormolu $out/bin/ormoloog
+      ln -s \
+        ${ormolu.bin}/share/bash-completion/completions/ormolu \
+        $out/share/bash-completion/completions/ormoloog
+      ln -s \
+        ${ormolu.bin}/share/fish/vendor_completions.d/ormolu.fish \
+        $out/share/fish/vendor_completions.d/ormoloog.fish
+      ln -s \
+        ${ormolu.bin}/share/zsh/vendor-completions/_ormolu \
+        $out/share/zsh/vendor-completions/_ormoloog
+    '';
+
   neovim-unwrapped =
     pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
       version = "0.5.0-dev+1157-g0ab88c2ea";
