@@ -53,6 +53,7 @@ pkgs.buildEnv {
     gitAndTools.gh
     gitAndTools.gitFull
     gnugrep-gprefix
+    haskellPackages.cabal-plan
     haskellPackages.fourmolu
     htop
     httpie
@@ -79,8 +80,10 @@ pkgs.buildEnv {
     sd
     shellcheck
     starship
+    stylish-haskell
     tealdeer
     tmux
+    tokei
     tree
     watchexec
     yj
