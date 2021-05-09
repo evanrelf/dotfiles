@@ -57,7 +57,7 @@ end
 
 alias less "less -RMK"
 
-alias cargod "watchexec --exts rs --restart --clear -- cargo check --color=always '|&' less -RMK"
+alias cargod "watchexec --exts rs --restart --clear -- cargo check --color=always '|&' less -~cRMK"
 
 # Typos
 abbr --add gs "git s"
