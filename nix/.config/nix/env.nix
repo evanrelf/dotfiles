@@ -77,6 +77,7 @@ pkgs.buildEnv {
     pandoc
     perlPackages.GitAutofixup
     ripgrep
+    rlwrap
     sd
     shellcheck
     starship
@@ -102,10 +103,13 @@ pkgs.buildEnv {
     xclip
   ]) ++ (pkgs.lib.optionals isPersonalMachine [
     borgbackup
+    ffmpeg
     go
     mercurialFull
     rclone
+    youtube-dl
   ]) ++ (pkgs.lib.optionals isWorkMachine [
+    stylish-haskell
     tmux-xpanes
   ]);
 }
