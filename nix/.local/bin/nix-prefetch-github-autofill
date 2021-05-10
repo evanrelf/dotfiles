@@ -22,5 +22,5 @@ rev=$(echo "${fetch_json}" | jq --raw-output '.rev')
 sha256=$(echo "${fetch_json}" | jq --raw-output '.sha256')
 
 echo "${input_nix}" | sed -E \
-  -e "s|rev(.*)\".*\"(.*);|rev\1\"${rev}\"\2;|" \
+  -e "s|rev(.*)\".*\"(.*);|rev\1\"${input_rev:-${rev}}\"\2;|" \
   -e "s|sha256(.*)\".*\"(.*);|sha256\1\"${sha256}\"\2;|" \
