@@ -106,6 +106,21 @@ in
       '';
     });
 
+  neovim-unwrapped =
+    pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
+      version = "0.5.0-dev+1157-g0ab88c2ea";
+      src =
+        pkgsPrev.fetchFromGitHub {
+          owner = "neovim";
+          repo = "neovim";
+          rev = "0ab88c2ea80caa7cda97b3a8479d0d32e4636ab6";
+          sha256 = "07jiv9c3032lrhmd3dvqv2v5l35bdn39jqi48qsjj220slrsrl53";
+        };
+      buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
+    });
+
+  nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
+
   ormoloog =
     let
       ormolu =
@@ -136,18 +151,16 @@ in
         $out/share/zsh/vendor-completions/_ormoloog
     '';
 
-  neovim-unwrapped =
-    pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
-      version = "0.5.0-dev+1157-g0ab88c2ea";
-      src =
-        pkgsPrev.fetchFromGitHub {
-          owner = "neovim";
-          repo = "neovim";
-          rev = "0ab88c2ea80caa7cda97b3a8479d0d32e4636ab6";
-          sha256 = "07jiv9c3032lrhmd3dvqv2v5l35bdn39jqi48qsjj220slrsrl53";
-        };
-      buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
-    });
 
-  nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
+  tmux-thumbs = pkgsPrev.rustPlatform.buildRustPackage rec {
+    pname = "tmux-thumbs";
+    version = "0.5.1";
+    src = pkgsPrev.fetchFromGitHub {
+      owner = "fcsonline";
+      repo = pname;
+      rev = version;
+      sha256 = "0lack8x54ic52sj8wjg7ybwirs9m5zkxlqg7y22qmih9nsraskxd";
+    };
+    cargoSha256 = "1qyfp7kswd3ppbj4jwrkp2b2lhs5pi8f6mxrjffjxa2bsiz6spzw";
+  };
 }

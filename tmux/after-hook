@@ -12,3 +12,26 @@ if [ ! -d "${HOME}/.config/tmux/plugins/tpm" ]; then
     "https://github.com/tmux-plugins/tpm.git" \
     "${HOME}/.config/tmux/plugins/tpm"
 fi
+
+if [ -d "${HOME}/.config/tmux/plugins/tmux-thumbs" ]; then
+  command -v thumbs >/dev/null 2>&1 \
+    || (echo "Missing executable: thumbs"; exit 1)
+
+  command -v tmux-thumbs >/dev/null 2>&1 \
+    || (echo "Missing executable: tmux-thumbs"; exit 1)
+
+  if [ ! -d "${HOME}/.config/tmux/plugins/tmux-thumbs/target/release" ]; then
+    echo "[tmux] Symlinking 'thumbs' and 'tmux-thumbs'"
+
+    mkdir -p "${HOME}/.config/tmux/plugins/tmux-thumbs/target/release"
+
+    ln -s \
+      "$(command -v thumbs)" \
+      "${HOME}/.config/tmux/plugins/tmux-thumbs/target/release/thumbs"
+    ln -s \
+      "$(command -v tmux-thumbs)" \
+      "${HOME}/.config/tmux/plugins/tmux-thumbs/target/release/tmux-thumbs"
+  fi
+else
+  echo "Run 'tmux/after-hook' again after installing tmux plugins (prefix + I)"
+fi
