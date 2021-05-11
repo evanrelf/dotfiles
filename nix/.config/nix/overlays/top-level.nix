@@ -108,13 +108,13 @@ in
 
   neovim-unwrapped =
     pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
-      version = "0.5.0-dev+1157-g0ab88c2ea";
+      version = "0.5.0-dev";
       src =
         pkgsPrev.fetchFromGitHub {
           owner = "neovim";
           repo = "neovim";
-          rev = "0ab88c2ea80caa7cda97b3a8479d0d32e4636ab6";
-          sha256 = "07jiv9c3032lrhmd3dvqv2v5l35bdn39jqi48qsjj220slrsrl53";
+          rev = "133351cbf80d620513eb6eb1b63eae15312eaeed";
+          sha256 = "09dhvsm1wrif2193lbx9slagv46m4kgg9b9xyw8ihir030yc8sbw";
         };
       buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
     });
