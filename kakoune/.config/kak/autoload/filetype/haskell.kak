@@ -35,7 +35,7 @@ define-command -hidden haskell-cache-language-extensions %{
     file="$HOME/.cache/kak/ghc-language-extensions"
     mkdir -p "$HOME/.cache/kak"
     if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
-      ghc --supported-extensions | grep --invert-match --extended-regexp "(^No|GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)" > "$file"
+      ghc --supported-extensions > "$file"
     fi
   }
 }
@@ -45,14 +45,14 @@ define-command -hidden haskell-cache-options %{
     file="$HOME/.cache/kak/ghc-options"
     mkdir -p "$HOME/.cache/kak"
     if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
-      ghc --show-options | grep --invert-match --extended-regexp "(^-X|-Wwarn=|-Werror=|-Wno-error=)" > "$file"
+      ghc --show-options > "$file"
     fi
   }
 }
 
 define-command -hidden haskell-insert-language-pragma %{
   haskell-cache-language-extensions
-  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions" "extension: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'" "extension: " %{
     execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"
     execute-keys "<esc>"
   }
@@ -60,7 +60,7 @@ define-command -hidden haskell-insert-language-pragma %{
 
 define-command -hidden haskell-insert-options-pragma %{
   haskell-cache-options
-  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options" "option: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
     execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"
     execute-keys "<esc>"
   }
@@ -68,7 +68,7 @@ define-command -hidden haskell-insert-options-pragma %{
 
 define-command -hidden haskell-insert-language-extension %{
   haskell-cache-language-extensions
-  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions" "extension: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'" "extension: " %{
     execute-keys -draft "i%val{text}<esc>"
     execute-keys "<esc>"
   }
@@ -76,7 +76,7 @@ define-command -hidden haskell-insert-language-extension %{
 
 define-command -hidden haskell-insert-option %{
   haskell-cache-options
-  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options" "option: " %{
+  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
     execute-keys -draft "i%val{text}<esc>"
     execute-keys "<esc>"
   }
