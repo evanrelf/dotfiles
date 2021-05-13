@@ -32,20 +32,20 @@ hook global WinSetOption filetype=cabal %{
 
 define-command -hidden haskell-cache-language-extensions %{
   nop %sh{
-    file="$HOME/.cache/kak/ghc-language-extensions"
-    mkdir -p "$HOME/.cache/kak"
-    if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
-      ghc --supported-extensions > "$file"
+    file="${HOME}/.cache/kak/ghc-language-extensions"
+    mkdir -p "${HOME}/.cache/kak"
+    if command -v ghc >/dev/null 2>&1 && [ ! -f "${file}" ]; then
+      ghc --supported-extensions > "${file}"
     fi
   }
 }
 
 define-command -hidden haskell-cache-options %{
   nop %sh{
-    file="$HOME/.cache/kak/ghc-options"
-    mkdir -p "$HOME/.cache/kak"
-    if command -v ghc >/dev/null 2>&1 && [ ! -f "$file" ]; then
-      ghc --show-options > "$file"
+    file="${HOME}/.cache/kak/ghc-options"
+    mkdir -p "${HOME}/.cache/kak"
+    if command -v ghc >/dev/null 2>&1 && [ ! -f "${file}" ]; then
+      ghc --show-options > "${file}"
     fi
   }
 }

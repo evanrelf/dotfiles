@@ -47,16 +47,16 @@ try %{
 
 define-command -hidden user-file-save %{
   try %{ evaluate-commands %sh{
-    if [ "$kak_modified" = "true" ]; then
+    if [ "${kak_modified}" = "true" ]; then
       echo "write"
       if command -v grealpath >/dev/null 2>&1; then
-        file_path=$(grealpath --relative-to="$(pwd)" "$kak_buffile")
+        file_path=$(grealpath --relative-to="$(pwd)" "${kak_buffile}")
       elif command -v realpath >/dev/null 2>&1; then
-        file_path=$(realpath --relative-to="$(pwd)" "$kak_buffile")
+        file_path=$(realpath --relative-to="$(pwd)" "${kak_buffile}")
       else
-        file_path="$kak_buffile"
+        file_path="${kak_buffile}"
       fi
-      echo "echo 'Saved \"$file_path\"'"
+      echo "echo 'Saved \"${file_path}\"'"
     fi
   }} catch %{
     fail "Failed to save %val{buffile}"
