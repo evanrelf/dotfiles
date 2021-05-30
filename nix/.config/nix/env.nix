@@ -42,7 +42,7 @@ pkgs.buildEnv {
     declarative-channels
     dhall
     direnv
-    emacsCustom
+    # emacsCustom
     exa
     fd
     findutils-gprefix
