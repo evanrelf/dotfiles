@@ -1,5 +1,4 @@
 format = """\
-  $jobs\
   $username\
   $directory\
   $hg_branch\
@@ -13,11 +12,11 @@ format = """\
 """
 add_newline = false
 
-[jobs]
-disabled = false
-format = '[ $number]($style) '
-style = 'cyan'
-threshold = 0
+# [jobs]
+# disabled = false
+# format = '[ $number]($style) '
+# style = 'cyan'
+# threshold = 0
 
 [username]
 disabled = false
