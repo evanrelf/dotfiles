@@ -55,6 +55,7 @@ pkgs.buildEnv {
     gnugrep-gprefix
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
+    helix
     htop
     httpie
     hyperfine
