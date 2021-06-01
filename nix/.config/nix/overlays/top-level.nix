@@ -97,8 +97,8 @@ in
       src = pkgsPrev.fetchFromGitHub {
         owner = "mawww";
         repo = "kakoune";
-        rev = "ead12e11bdfc861c0f1decb9ff7e91582196fcfe";
-        sha256 = "0ww4s1jpr3gk23v4ij448bnhhvc1vlkz1krxv7j85qadjqvdi6aj";
+        rev = "d758bbf09b949f0fef88ef3c6762cc55098cdb95";
+        sha256 = "11zy3m6ak5cw87vwj97g9cyk3yns2m4vdp9d87mjzhvrfkvq2ma1";
       };
       preConfigure = ''
         ${old.preConfigure}
