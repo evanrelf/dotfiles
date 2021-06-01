@@ -7,6 +7,12 @@ alias reload "source $HOME/.config/fish/config.fish"
 abbr --add mv "mv -i"
 abbr --add cp "cp -i"
 
+if _exists fd && _exists as-tree
+    function fdtree
+        fd --hidden --exclude .git $argv | as-tree
+    end
+end
+
 if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa --long --group-directories-first"
