@@ -113,8 +113,8 @@ in
         pkgsPrev.fetchFromGitHub {
           owner = "neovim";
           repo = "neovim";
-          rev = "133351cbf80d620513eb6eb1b63eae15312eaeed";
-          sha256 = "09dhvsm1wrif2193lbx9slagv46m4kgg9b9xyw8ihir030yc8sbw";
+          rev = "3fe7a04704fdede0cef6b8f6dfaffffee6a287e5";
+          sha256 = "0c4r3vzqm6hla43115v9qrmv30p6izfcjfpvl1cxkkm4w6mfjq3b";
         };
       buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
     });
