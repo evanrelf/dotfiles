@@ -87,6 +87,12 @@ in
     '';
   };
 
+  gitAndTools = pkgsPrev.gitAndTools // {
+    gitFull = pkgsPrev.gitAndTools.gitFull.overrideAttrs (old: {
+      doInstallCheck = false;
+    });
+  };
+
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
