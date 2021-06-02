@@ -1,7 +1,6 @@
-# Better Haskell syntax
 declare-user-mode "haskell"
-declare-user-mode "cabal"
 
+# Better Haskell syntax
 # Set filetype to `haskell2` only once (allows switching back to `haskell`
 # filetype)
 hook global WinCreate .*\.hs %{
@@ -24,12 +23,6 @@ hook global WinSetOption filetype=(haskell|haskell2) %{
   map window "haskell" "I" ": haskell-insert-qualified-module-import<ret>" -docstring "Insert qualified module import"
   map window "haskell" "f" "|fourmolu -o -XBangPatterns -o -XTypeApplications<ret>" -docstring "Format (fourmolu)"
   map window "haskell" "F" "|stylish-haskell<ret>" -docstring "Format (stylish-haskell)"
-}
-
-hook global WinSetOption filetype=cabal %{
-  map window "user" "," ": enter-user-mode cabal<ret>" -docstring "Cabal..."
-  map window "cabal" "l" ": haskell-insert-language-extension<ret>" -docstring "Insert language extension"
-  map window "cabal" "o" ": haskell-insert-option<ret>" -docstring "Insert GHC option"
 }
 
 define-command -hidden haskell-cache-language-extensions %{
@@ -64,22 +57,6 @@ define-command -hidden haskell-insert-options-pragma %{
   haskell-cache-options
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
     execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"
-    execute-keys "<esc>"
-  }
-}
-
-define-command -hidden haskell-insert-language-extension %{
-  haskell-cache-language-extensions
-  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'" "extension: " %{
-    execute-keys -draft "i%val{text}<esc>"
-    execute-keys "<esc>"
-  }
-}
-
-define-command -hidden haskell-insert-option %{
-  haskell-cache-options
-  prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
-    execute-keys -draft "i%val{text}<esc>"
     execute-keys "<esc>"
   }
 }
