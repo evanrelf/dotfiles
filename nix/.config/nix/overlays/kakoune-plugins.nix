@@ -44,6 +44,13 @@ let
       sha256 = "09fd7qhlsazf4bcl3z7xh9z0fklw69c5j32hminphihq74qrry6h";
     };
 
+    "parinfer-rust" = {
+      owner = "eraserhd";
+      repo = "parinfer-rust";
+      rev = "afcacc8ef1fbf23d804d2c4eb01a419c50565e44";
+      sha256 = "1xwahgwjv1ylmy0bwbsisycjlz5r9i1gxz20392a8f8019zhjx90";
+    };
+
     "kakoune-fandt" = {
       disabled = true;
       owner = "listentolist";
@@ -71,7 +78,7 @@ let
   };
 
   sourceToPlugin = name: github:
-    pkgsPrev.kakouneUtils.buildKakounePlugin {
+    pkgsPrev.kakouneUtils.buildKakounePluginFrom2Nix {
       inherit name;
       src =
         pkgsPrev.fetchFromGitHub

@@ -33,4 +33,9 @@ map global "surround-tag" "a" ": surround-with-tag<ret>" -docstring "Add surroun
 map global "surround-tag" "r" ": change-surrounding-tag<ret>" -docstring "Replace surrounding tag"
 map global "surround-tag" "d" ": delete-surrounding-tag<ret>" -docstring "Delete surrounding tag"
 
+# eraserhd/parinfer-rust
+hook global WinSetOption filetype=(clojure|lisp|scheme|racket) %{
+  parinfer-enable-window -smart
+}
+
 }

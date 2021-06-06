@@ -76,6 +76,7 @@ pkgs.buildEnv {
     ormoloog
     ormolu
     pandoc
+    parinfer-rust
     perlPackages.GitAutofixup
     ripgrep
     rlwrap
