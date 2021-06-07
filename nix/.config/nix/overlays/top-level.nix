@@ -97,15 +97,15 @@ in
 
   helix = pkgsPrev.rustPlatform.buildRustPackage rec {
     pname = "helix";
-    version = "0.0.6";
+    version = "0.0.10";
     src = pkgsPrev.fetchFromGitHub {
       owner = "helix-editor";
       repo = pname;
       rev = "v${version}";
-      sha256 = "0hpp42km6c1kgd42b3h8xb5ddamp9hcblm91vmq5brs8rnr4q151";
+      sha256 = "0pa59spr4sxax8zrq0drwgwixyr2lpk4bmqfqaz2a9wzdz7fa9az";
       fetchSubmodules = true;
     };
-    cargoSha256 = "04mja13c7g5lyy36rpka5g35266bhwf1lmkfwwabi4k3v9v04fq6";
+    cargoSha256 = "0w6r9jff56prmmwswjkb6xqqcxzybdvav5gw5yrprc0ka085jvhs";
     doCheck = false;
   };
 
