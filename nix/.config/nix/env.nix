@@ -13,26 +13,39 @@ let
       ln -s ${pkgs.path} $out/channels/nixpkgs
     '';
 
-  commonPackages = with pkgs; [
-    (aspellWithDicts (d: with d; [ en en-computers en-science ]))
-    as-tree
-    bashInteractive
+  essentialPackages = with pkgs; [
     cabal-install
-    coreutils-gprefix
     declarative-channels
     delta
-    dhall
-    direnv
-    # emacsCustom
     exa
     fd
-    findutils-gprefix
     fish
     fzf
     ghcid
+    gitAndTools.gitFull
+    jq
+    kakoune
+    nix-diff
+    ripgrep
+    sd
+    shellcheck
+    starship
+    tealdeer
+    tmux
+    zoxide
+  ];
+
+  extraPackages = with pkgs; [
+    # emacsCustom
+    (aspellWithDicts (d: with d; [ en en-computers en-science ]))
+    as-tree
+    bashInteractive
+    coreutils-gprefix
+    dhall
+    direnv
+    findutils-gprefix
     gitAndTools.delta
     gitAndTools.gh
-    gitAndTools.gitFull
     gnugrep-gprefix
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
@@ -41,14 +54,11 @@ let
     httpie
     hyperfine
     iosevka-bin
-    jq
-    kakoune
     lorri
     magic-wormhole
     moreutils
     neovim
     nerdfonts
-    nix-diff
     nix-index
     nix-prefetch-git
     nix-top
@@ -59,20 +69,13 @@ let
     pandoc
     parinfer-rust
     perlPackages.GitAutofixup
-    ripgrep
     rlwrap
-    sd
-    shellcheck
-    starship
     stylish-haskell
-    tealdeer
-    tmux
     tmux-thumbs
     tokei
     tree
     watchexec
     yj
-    zoxide
   ];
 
   personalPackages = with pkgs; [
@@ -103,19 +106,26 @@ pkgs.buildEnv {
   name = "env";
   paths = pkgs.lib.concatLists (builtins.getAttr hostname {
     "auburn" = [
-      commonPackages
+      essentialPackages
+      extraPackages
       personalPackages
     ];
 
     "sienna" = [
-      commonPackages
+      essentialPackages
+      extraPackages
       personalPackages
       linuxPackages
     ];
 
     "indigo" = [
-      commonPackages
+      essentialPackages
+      extraPackages
       [ pkgs.tmux-xpanes ]
+    ];
+
+    "hydra-dev" = [
+      essentialPackages
     ];
   });
 }
