@@ -49,6 +49,7 @@ let
     gnugrep-gprefix
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
+    haskellPackages.retrie
     helix
     htop
     httpie
