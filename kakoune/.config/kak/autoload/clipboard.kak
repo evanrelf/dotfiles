@@ -9,8 +9,8 @@ hook -once global NormalIdle .* %{
         echo "set-option global clipboard_paste 'pbpaste'"
         ;;
       "Linux")
-        echo "set-option global clipboard_copy 'wl-copy || xclip'"
-        echo "set-option global clipboard_paste 'wl-paste || xclip -o'"
+        echo "set-option global clipboard_copy 'wl-copy || xclip || tmux load-buffer -'"
+        echo "set-option global clipboard_paste 'wl-paste || xclip -o || tmux save-buffer -'"
         ;;
     esac
   }
