@@ -60,7 +60,7 @@ add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderivin
 add-highlighter shared/haskell2/code/keyword/deriving-via regex \bderiving\b\s+.+?\s+\b(via)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/family regex \b(?:type|data)\b\s+\b(family)\b 1:keyword
 add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+[a-z_][\w']*)+\s*(\.|->) 1:keyword 2:keyword
-add-highlighter shared/haskell2/code/keyword/symbols regex (!(?=\w)|(?<![\w'])_(?![\w'])|[\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\\@~](?!')|=>|->|<-|::|\.\.)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
+add-highlighter shared/haskell2/code/keyword/symbols regex (!(?=\w)|(?<![\w'])_(?![\w'])|[\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\\@~](?!')|=>|->|<-|-<|-<<|::|\.\.)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 add-highlighter shared/haskell2/code/keyword/promotion regex ('\[|'\(|@') 1:keyword
 add-highlighter shared/haskell2/code/type regex (?<![\w'])('{0,2}(?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)(?![\.\w]) 1:type
 # TODO: Need to disambiguate unit from importing only instances, or not exporting anything
