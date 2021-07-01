@@ -53,7 +53,7 @@ add-highlighter shared/haskell2/quasiquote-exp region \[\| \|\] regex (\[\|)(.*?
 add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\| \|\] regex (\[)\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?(\|)(.*?)(\|\]) 1:keyword 2:keyword 3:string 4:keyword
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
 add-highlighter shared/haskell2/code/operator regex (?<![\[])('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]]) 1:operator
-add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)\s+ 1:function
+add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)#?\s+ 1:function
 add-highlighter shared/haskell2/code/keyword group
 add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|(?<!\.)\b(?:case|class|data|default|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderiving\b\s+\b(stock|anyclass)\b 1:keyword
