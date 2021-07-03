@@ -40,17 +40,17 @@ let
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
     as-tree
     bashInteractive
-    coreutils-gprefix
+    # coreutils-gprefix
     dhall
     direnv
-    findutils-gprefix
+    # findutils-gprefix
     gitAndTools.delta
     gitAndTools.gh
-    gnugrep-gprefix
+    # gnugrep-gprefix
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
     haskellPackages.retrie
-    helix
+    # helix
     htop
     httpie
     hyperfine
@@ -65,14 +65,14 @@ let
     nix-top
     nix-tree
     nixpkgs-fmt
-    ormoloog
+    # ormoloog
     ormolu
     pandoc
     parinfer-rust
     perlPackages.GitAutofixup
     rlwrap
     stylish-haskell
-    tmux-thumbs
+    # tmux-thumbs
     tokei
     tree
     watchexec

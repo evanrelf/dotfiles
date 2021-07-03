@@ -2,12 +2,6 @@ import ../lib/override-haskell-packages.nix {
   packages = { };
 
   overrides = {
-    ki = oldCabal: {
-      broken = false;
-    };
-    nix-diff = oldCabal: {
-      jailbreak = true;
-    };
   };
 
   hackage = {
