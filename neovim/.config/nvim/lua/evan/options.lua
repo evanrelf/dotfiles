@@ -18,6 +18,7 @@ vim.o.writebackup = false
 vim.o.hidden = true
 vim.o.inccommand = "nosplit"
 vim.o.virtualedit = "block,onemore"
+vim.cmd "set shortmess+=I"
 
 -- Window options
 vim.wo.number = true
