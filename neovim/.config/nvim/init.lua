@@ -1,4 +1,5 @@
-require('evan.plugins')
+-- require('evan.packer')
+require('evan.paq')
 require('evan.options')
 require('evan.mappings')
 

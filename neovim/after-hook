@@ -15,12 +15,20 @@ install_vim_plug() {
   fi
 }
 
-install_packer_nvim() {
+install_packer() {
   if [ ! -d "${HOME}/.local/share/nvim/site/pack/packer/opt/packer.nvim" ]; then
-    echo "[neovim] Installing packer.nvim"
+    echo "[neovim] Installing packer"
     git clone "https://github.com/wbthomason/packer.nvim" \
       "${HOME}/.local/share/nvim/site/pack/packer/opt/packer.nvim"
   fi
 }
 
-install_packer_nvim
+install_paq() {
+  if [ ! -d "${HOME}/.local/share/nvim/site/pack/paqs/start/paq-nvim" ]; then
+    echo "[neovim] Installing paq"
+    git clone --depth=1 "https://github.com/savq/paq-nvim.git" \
+      "${HOME}/.local/share/nvim/site/pack/paqs/start/paq-nvim"
+  fi
+}
+
+install_paq
