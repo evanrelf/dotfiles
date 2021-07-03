@@ -95,21 +95,6 @@ in
 
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
-  helix = pkgsPrev.rustPlatform.buildRustPackage rec {
-    pname = "helix";
-    version = "0.2.1";
-    src = pkgsPrev.fetchFromGitHub {
-      owner = "helix-editor";
-      repo = pname;
-      rev = "v${version}";
-      sha256 = "0finwscsi94wx4xdk4108whabs3l7hjcfygxnmjyzsrf114752v4";
-      fetchSubmodules = true;
-    };
-    cargoSha256 = "018fcv94lwhgpblk8xfamp5bfzy64jk6wsyk5jz91gzwp4pnwzn8";
-    cargoBuildFlags = "--features embed_runtime";
-    doCheck = false;
-  };
-
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
   kakoune-unwrapped =
