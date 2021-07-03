@@ -127,18 +127,6 @@ in
       '';
     });
 
-  neovim-unwrapped =
-    pkgsPrev.neovim-unwrapped.overrideAttrs (old: rec {
-      version = "0.5.0";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "neovim";
-        repo = "neovim";
-        rev = "v${version}";
-        sha256 = "0lgbf90sbachdag1zm9pmnlbn35964l3khs27qy4462qzpqyi9fi";
-      };
-      buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
-    });
-
   nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
 
   ormoloog =
