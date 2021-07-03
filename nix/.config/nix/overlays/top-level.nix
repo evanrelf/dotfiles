@@ -128,15 +128,14 @@ in
     });
 
   neovim-unwrapped =
-    pkgsPrev.neovim-unwrapped.overrideAttrs (old: {
-      version = "0.5.0-dev";
-      src =
-        pkgsPrev.fetchFromGitHub {
-          owner = "neovim";
-          repo = "neovim";
-          rev = "3fe7a04704fdede0cef6b8f6dfaffffee6a287e5";
-          sha256 = "0c4r3vzqm6hla43115v9qrmv30p6izfcjfpvl1cxkkm4w6mfjq3b";
-        };
+    pkgsPrev.neovim-unwrapped.overrideAttrs (old: rec {
+      version = "0.5.0";
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "v${version}";
+        sha256 = "0lgbf90sbachdag1zm9pmnlbn35964l3khs27qy4462qzpqyi9fi";
+      };
       buildInputs = (old.buildInputs or [ ]) ++ [ pkgsFinal.tree-sitter ];
     });
 
@@ -171,7 +170,6 @@ in
         ${ormolu.bin}/share/zsh/vendor-completions/_ormolu \
         $out/share/zsh/vendor-completions/_ormoloog
     '';
-
 
   tmux-thumbs = pkgsPrev.rustPlatform.buildRustPackage rec {
     pname = "tmux-thumbs";
