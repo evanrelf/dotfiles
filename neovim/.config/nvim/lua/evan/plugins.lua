@@ -1,7 +1,6 @@
 require("paq")({
   "savq/paq-nvim";
   "junegunn/seoul256.vim";
-  "pacha/vem-tabline";
   "tpope/vim-sensible";
   "tpope/vim-repeat";
   "wellle/targets.vim";
@@ -28,9 +27,6 @@ vim.api.nvim_exec([[
   highlight! link StatusLine CursorLineNr
   highlight! link StatusLineNC LineNr
 ]], false)
-
--- pacha/vem-tabline
-vim.g.vem_tabline_show_icon = false
 
 -- dense-analysis/ale
 vim.g.ale_linters =
