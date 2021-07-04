@@ -43,38 +43,6 @@ let
       rev = "efe74c6f434d1e30eff70d4b0d737f55bf6c5022";
       sha256 = "09fd7qhlsazf4bcl3z7xh9z0fklw69c5j32hminphihq74qrry6h";
     };
-
-    "parinfer-rust" = {
-      owner = "eraserhd";
-      repo = "parinfer-rust";
-      rev = "afcacc8ef1fbf23d804d2c4eb01a419c50565e44";
-      sha256 = "1xwahgwjv1ylmy0bwbsisycjlz5r9i1gxz20392a8f8019zhjx90";
-    };
-
-    "kakoune-fandt" = {
-      disabled = true;
-      owner = "listentolist";
-      repo = "kakoune-fandt";
-      rev = "6b035782c2437708917ff1e4d3c05e33678e42dc";
-      sha256 = "0vmvlh1cw89dhd1v50bychszyk5ymh2mk891cg10nf47yb0paiv6";
-    };
-
-    "auto-pairs-kak" = {
-      disabled = true;
-      owner = "alexherbo2";
-      repo = "auto-pairs.kak";
-      rev = "fd735ec149ef0d9ca5f628a95b1e52858b5afbdc";
-      sha256 = "07795kv9njlnp6mckwv141ny2ns6wyf5r0dfjaxh9ngd105zgif1";
-    };
-
-    # Dependency of `auto-pairs.kak`
-    "prelude-kak" = {
-      disabled = true;
-      owner = "kakounedotcom";
-      repo = "prelude.kak";
-      rev = "5dbdc020c546032885c1fdb463e366cc89fc15ad";
-      sha256 = "1pncr8azqvl2z9yvzhc68p1s9fld8cvak8yz88zgrp5ypx2cxl8c";
-    };
   };
 
   sourceToPlugin = name: github:
