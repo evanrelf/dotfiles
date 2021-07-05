@@ -1,6 +1,6 @@
 require("paq")({
   "savq/paq-nvim";
-  "junegunn/seoul256.vim";
+  "Mofiqul/vscode.nvim";
   "tpope/vim-sensible";
   "tpope/vim-repeat";
   "wellle/targets.vim";
@@ -19,15 +19,9 @@ require("paq")({
   "critiqjo/husk-x.vim";
 })
 
--- junegunn/seoul256.vim
-vim.g.seoul256_background = 256
-vim.o.termguicolors = true
-vim.o.background = "light"
-vim.api.nvim_exec([[
-  colorscheme seoul256-light
-  highlight! link StatusLine CursorLineNr
-  highlight! link StatusLineNC LineNr
-]], false)
+-- Mofiqul/vscode.nvim
+vim.g.vscode_style = "light"
+vim.cmd "colorscheme vscode"
 
 -- dense-analysis/ale
 vim.g.ale_linters =
