@@ -7,6 +7,7 @@ require("paq")({
   "michaeljsmith/vim-indent-object";
   "sheerun/vim-polyglot";
   "dense-analysis/ale";
+  "nvim-treesitter/nvim-treesitter";
   "sbdchd/neoformat";
   "tmsvg/pear-tree";
   "tomtom/tcomment_vim";
@@ -37,6 +38,26 @@ vim.g.ale_linters =
 vim.cmd "let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')"
 vim.g.ale_lint_on_text_changed = "never"
 vim.g.ale_lint_on_insert_leave = false
+
+-- nvim-treesitter/nvim-treesitter
+require("nvim-treesitter.configs").setup({
+  ensure_installed =
+    { "bash"
+    , "fish"
+    -- , "haskell"
+    , "html"
+    , "javascript"
+    , "json"
+    , "lua"
+    , "nix"
+    , "python"
+    , "rust"
+    , "toml"
+    , "yaml"
+    },
+  highlight = { enable = true },
+  indent = { enable = true },
+})
 
 -- sbdchd/neoformat
 vim.g.neoformat_only_msg_on_error = true
