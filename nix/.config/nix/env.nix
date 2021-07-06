@@ -13,7 +13,7 @@ let
       ln -s ${pkgs.path} $out/channels/nixpkgs
     '';
 
-  essentialPackages = with pkgs; [
+  commonPackages = with pkgs; [
     cabal-install
     declarative-channels
     delta
@@ -107,26 +107,26 @@ pkgs.buildEnv {
   name = "env";
   paths = pkgs.lib.concatLists (builtins.getAttr hostname {
     "auburn" = [
-      essentialPackages
+      commonPackages
       extraPackages
       personalPackages
     ];
 
     "sienna" = [
-      essentialPackages
+      commonPackages
       extraPackages
       personalPackages
       linuxPackages
     ];
 
     "indigo" = [
-      essentialPackages
+      commonPackages
       extraPackages
       [ pkgs.tmux-xpanes ]
     ];
 
     "hydra-dev" = [
-      essentialPackages
+      commonPackages
     ];
   });
 }
