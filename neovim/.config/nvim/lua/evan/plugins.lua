@@ -1,6 +1,6 @@
 require("paq")({
   "savq/paq-nvim";
-  "Mofiqul/vscode.nvim";
+  "ishan9299/modus-theme-vim";
   "lukas-reineke/indent-blankline.nvim";
   "tpope/vim-sensible";
   "tpope/vim-repeat";
@@ -20,9 +20,9 @@ require("paq")({
   "critiqjo/husk-x.vim";
 })
 
--- Mofiqul/vscode.nvim
-vim.g.vscode_style = "light"
-vim.cmd "colorscheme vscode"
+-- ishan9299/modus-theme-vim
+vim.o.termguicolors = true
+vim.cmd "colorscheme modus-operandi"
 
 -- lukas-reineke/indent-blankline.nvim
 vim.g.indent_blankline_char = "┊"
