@@ -23,9 +23,12 @@ let
     fzf
     ghcid
     gitAndTools.gitFull
+    haskellPackages.fourmolu
     jq
     kakoune
+    neovim
     nix-diff
+    nixpkgs-fmt
     ripgrep
     sd
     shellcheck
@@ -48,9 +51,7 @@ let
     gitAndTools.gh
     # gnugrep-gprefix
     haskellPackages.cabal-plan
-    haskellPackages.fourmolu
     haskellPackages.retrie
-    # helix
     htop
     httpie
     hyperfine
@@ -58,13 +59,11 @@ let
     lorri
     magic-wormhole
     moreutils
-    neovim
     nerdfonts
     nix-index
     nix-prefetch-git
     nix-top
     nix-tree
-    nixpkgs-fmt
     # ormoloog
     ormolu
     pandoc
@@ -127,6 +126,11 @@ pkgs.buildEnv {
 
     "hydra-dev" = [
       commonPackages
+      [
+        pkgs.gcc
+        pkgs.gnupg
+        pkgs.pinentry-curses
+      ]
     ];
   });
 }
