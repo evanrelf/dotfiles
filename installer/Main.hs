@@ -1,46 +1,6 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -I nixpkgs=nix/.config/nix/pkgs.nix
-#!nix-shell -p stow "haskellPackages.ghcWithPackages (p: with p; [ ansi-terminal optparse-applicative relude string-interpolate unliftio ])"
-#!nix-shell -i runghc
-
-{-# LANGUAGE ApplicativeDo #-}
-{-# LANGUAGE BlockArguments #-}
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveFunctor #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
-{-# LANGUAGE DerivingVia #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE InstanceSigs #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TupleSections #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-
-{-# OPTIONS_GHC -Wall #-}
-{-# OPTIONS_GHC -Wcompat #-}
-{-# OPTIONS_GHC -Werror=incomplete-record-updates #-}
-{-# OPTIONS_GHC -Werror=incomplete-uni-patterns #-}
-{-# OPTIONS_GHC -Werror=missing-fields #-}
-{-# OPTIONS_GHC -Werror=partial-fields #-}
-{-# OPTIONS_GHC -Widentities #-}
-{-# OPTIONS_GHC -Wmissing-home-modules #-}
-{-# OPTIONS_GHC -Wredundant-constraints #-}
-{-# OPTIONS_GHC -foptimal-applicative-do #-}
-{-# OPTIONS_GHC -fshow-warning-groups #-}
-{-# OPTIONS_GHC -threaded #-}
-{-# OPTIONS_GHC -rtsopts #-}
-{-# OPTIONS_GHC -with-rtsopts=-N #-}
-
 module Main (main) where
 
 import Data.String.Interpolate (i, iii)
-import Relude
 
 import qualified Data.List.NonEmpty as NonEmpty
 import qualified Options.Applicative as Options

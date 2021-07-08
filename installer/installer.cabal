@@ -1,0 +1,48 @@
+cabal-version: 2.2
+
+name:    installer
+version: 0.0.0.0
+
+
+executable installer
+  main-is: Main.hs
+
+  mixins:
+    , base hiding (Prelude)
+    , relude (Relude as Prelude)
+    , relude
+
+  build-depends:
+    , ansi-terminal
+    , base
+    , optparse-applicative
+    , relude
+    , string-interpolate
+    , unliftio
+
+  default-language: Haskell2010
+
+  default-extensions:
+    ApplicativeDo
+    BlockArguments
+    DerivingStrategies
+    FlexibleContexts
+    NamedFieldPuns
+    OverloadedStrings
+    QuasiQuotes
+    TupleSections
+
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Werror=incomplete-record-updates
+    -Werror=incomplete-uni-patterns
+    -Werror=missing-fields
+    -Werror=partial-fields
+    -Widentities
+    -Wmissing-home-modules
+    -Wredundant-constraints
+    -fshow-warning-groups
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
