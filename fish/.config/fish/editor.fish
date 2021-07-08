@@ -29,6 +29,15 @@ function kakc
     end
 end
 
+if _exists nvim
+    function nvim
+        if test -n "$TMUX"
+            env TERM=screen-256color nvim $argv
+        else
+            command nvim $argv
+        end
+    end
+end
 
 # Magit as a standalone command, for use alongside other editors
 if _exists evil
