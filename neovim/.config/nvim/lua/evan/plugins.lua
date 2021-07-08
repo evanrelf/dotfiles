@@ -1,7 +1,6 @@
 require("paq")({
   "savq/paq-nvim";
   "ishan9299/modus-theme-vim";
-  "lukas-reineke/indent-blankline.nvim";
   "tpope/vim-sensible";
   "tpope/vim-repeat";
   "wellle/targets.vim";
@@ -23,11 +22,6 @@ require("paq")({
 -- ishan9299/modus-theme-vim
 vim.o.termguicolors = true
 vim.cmd "colorscheme modus-operandi"
-
--- lukas-reineke/indent-blankline.nvim
-vim.g.indent_blankline_char = "┊"
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_show_first_indent_level = false
 
 -- dense-analysis/ale
 vim.g.ale_linters =
