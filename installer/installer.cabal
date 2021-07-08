@@ -30,6 +30,7 @@ executable installer
     NamedFieldPuns
     OverloadedStrings
     QuasiQuotes
+    ScopedTypeVariables
     TupleSections
 
   ghc-options:
