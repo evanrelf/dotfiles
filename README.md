@@ -13,7 +13,7 @@ My personal dotfiles
 - OS: [macOS][macos], [NixOS][nixos]
 
 Dotfiles are managed using a combination of [GNU Stow][gnustow],
-`{before,after}-hook` shell scripts, and [my install script](./install.hs)
+`{before,after}-hook` shell scripts, and [my install script](./installer)
 written in Haskell.
 
 [kakoune]: https://github.com/mawww/kakoune
