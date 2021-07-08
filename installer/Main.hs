@@ -16,15 +16,17 @@ main = do
 
   let stripSlashes = filter (/= '/')
 
-  existentPackages <- discardNonexistent (fmap stripSlashes rawPackages)
+  let allPackages = fmap stripSlashes rawPackages
+
+  existentPackages <- discardNonexistent allPackages
 
   case nonEmpty existentPackages of
     Nothing -> do
       putStrLnColored Ansi.Red "No packages specified"
       exitFailure
 
-    Just packages ->
-      mapM_ (usingReaderT dryRun . install) packages
+    Just packages -> usingReaderT dryRun do
+      traverse_ install packages
 
 
 data Options = Options
@@ -68,13 +70,13 @@ discardNonexistent packages = do
 
 partitionM :: Monad m => (a -> m Bool) -> NonEmpty a -> m ([a], [a])
 partitionM predicate xs = do
-  xs' <- mapM (\x -> (x, ) <$> predicate x) xs
+  xs' <- traverse (\x -> (x, ) <$> predicate x) xs
   pure $ Bifunctor.bimapBoth (fmap fst) (NonEmpty.partition snd xs')
 
 
 install :: (MonadIO m, MonadReader Bool m) => FilePath -> m ()
 install package =
-  mapM_
+  traverse_
     ($ package)
     [ runHook "before"
     , stow
@@ -82,7 +84,7 @@ install package =
     ]
 
 
-runHook :: (MonadIO m, MonadReader Bool m) => String -> FilePath -> m ()
+runHook :: (MonadIO m, MonadReader Bool m) => Text -> FilePath -> m ()
 runHook hookName package = do
   let script = [i|#{package}/#{hookName}-hook|]
 
@@ -99,13 +101,13 @@ stow package = do
   sh [iii|
     stow
       --stow
-      --target "$HOME"
+      --target "${HOME}"
       --no-folding #{package}
       --ignore "-hook"
   |]
 
 
-sh :: (MonadIO m, MonadReader Bool m) => String -> m ()
+sh :: (MonadIO m, MonadReader Bool m) => Text -> m ()
 sh command = do
   dryRun <- ask
 
@@ -114,15 +116,15 @@ sh command = do
 
   else do
     log [i|+ #{command}|]
-    Process.callCommand command
+    Process.callCommand (toString command)
 
 
-log :: MonadIO m => String -> m ()
+log :: MonadIO m => Text -> m ()
 log = putStrLnColored Ansi.Magenta
 
 
-putStrLnColored :: MonadIO m => Ansi.Color -> String -> m ()
+putStrLnColored :: MonadIO m => Ansi.Color -> Text -> m ()
 putStrLnColored color message = do
   let colored = Ansi.setSGRCode [Ansi.SetColor Ansi.Foreground Ansi.Dull color]
   let reset = Ansi.setSGRCode [Ansi.Reset]
-  putStrLn (colored <> message <> reset)
+  putTextLn (toText colored <> message <> toText reset)
