@@ -38,7 +38,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed =
     { "bash"
     , "fish"
-    -- , "haskell"
+    , "haskell"
     , "html"
     , "javascript"
     , "json"
@@ -49,7 +49,10 @@ require("nvim-treesitter.configs").setup({
     , "toml"
     , "yaml"
     },
-  highlight = { enable = true },
+  highlight =
+    { enable = true
+    , disable = {"haskell"}
+    },
   indent = { enable = true },
 })
 
