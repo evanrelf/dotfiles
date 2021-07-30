@@ -13,8 +13,7 @@
 declare-option str-list haskell2_static_words \
   "anyclass" "as" "case" "class" "data" "deriving" "else" "forall" "import" \
   "in" "instance" "let" "module" "newtype" "pattern" "qualified" "stock" \
-  "then" "type" "where" \
-  "Control.Monad"
+  "then" "type" "where"
 
 declare-option completions haskell2_completions
 
