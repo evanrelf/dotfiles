@@ -144,6 +144,18 @@ in
         $out/share/zsh/vendor-completions/_ormoloog
     '';
 
+  patat =
+    let
+      source = pkgsPrev.fetchFromGitHub {
+        owner = "evanrelf";
+        repo = "patat";
+        rev = "4d976d463aedc1027a31ea70ae2d12d64c915cc6";
+        sha256 = "1760bddpz0p8n88n1m03wz8yzzs7x1sgd2rf26fs4x6way3jym6b";
+      };
+    in
+    pkgsPrev.haskell.lib.doJailbreak
+      (pkgsPrev.haskellPackages.callCabal2nix "patat" source { });
+
   tmux-thumbs = pkgsPrev.rustPlatform.buildRustPackage rec {
     pname = "tmux-thumbs";
     version = "0.5.1";

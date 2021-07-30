@@ -29,6 +29,7 @@ let
     neovim
     nix-diff
     nixpkgs-fmt
+    patat
     ripgrep
     sd
     shellcheck
