@@ -31,4 +31,4 @@ install_paq() {
   fi
 }
 
-install_paq
+install_vim_plug
