@@ -167,4 +167,30 @@ in
     };
     cargoSha256 = "1qyfp7kswd3ppbj4jwrkp2b2lhs5pi8f6mxrjffjxa2bsiz6spzw";
   };
+
+  zig = pkgsPrev.stdenv.mkDerivation rec {
+    pname = "zig";
+    version = "0.9.0-dev.730+011a46838";
+    src =
+      let
+        system =
+          if builtins.currentSystem == "x86_64-darwin" then {
+            name = "macos-x86_64";
+            sha256 = "03bpvy29cy6vyh570khimqbxsjnrybn0y7lgfybh8dhah7w2vn1w";
+          } else {
+            name = "linux-x86_64";
+            sha256 = "09amvngffpz86d368jj8fwcpn6vlzqfln3mpy4xlc8i0qv089avi";
+          };
+      in
+      builtins.fetchTarball {
+        url = "https://ziglang.org/builds/zig-${system.name}-${version}.tar.xz";
+        inherit (system) sha256;
+      };
+    phases = [ "unpackPhase" "installPhase" ];
+    installPhase = ''
+      mkdir -p $out/bin
+      mv zig $out/bin/zig
+      mv lib $out/lib
+    '';
+  };
 }

@@ -86,6 +86,7 @@ let
     mercurialFull
     rclone
     youtube-dl
+    zig
   ];
 
   linuxPackages = with pkgs; [
