@@ -1,9 +1,9 @@
 args:
 
 let
-  # master on 2021-07-05
-  rev = "490a823e78febc182a70c902c028af4a78a37717";
-  sha256 = "1q28snbqq668r9h13hh7csnlrh61y23fyfgmb44ww94i54mk2ifg";
+  # master on 2021-08-12
+  rev = "bbfec00ec916415738ea7b723dd472d7dbafaa18";
+  sha256 = "1v9px4kp9ys3sv5zrdxviw5366rv8fvlkfc7kc72xcdlk1sxjmi0";
 
   nixpkgs = builtins.fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
