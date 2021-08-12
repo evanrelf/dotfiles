@@ -11,9 +11,18 @@
 # TODO: Operators next to `[]` aren't highlighted correctly (e.g. `[+ 1]`)
 
 declare-option str-list haskell2_static_words \
-  "anyclass" "as" "case" "class" "data" "deriving" "else" "forall" "import" \
-  "in" "instance" "let" "module" "newtype" "pattern" "qualified" "stock" \
-  "then" "type" "where"
+  "module" "where" "import" "import qualified" "qualified" "as" "hiding" \
+  \
+  "data" "data instance" "newtype" "newtype instance" "type" "type instance" \
+  "type family" "family" "instance" "class" "where" "pattern" "default" \
+  "foreign" \
+  \
+  "deriving" "deriving stock" "deriving newtype" "deriving anyclass" "stock" \
+  "newtype" "anyclass" "via" \
+  \
+  "let" "in" "where" \
+  \
+  "do" "mdo" "proc" "rec" "if" "then" "else" "case" "of"
 
 declare-option completions haskell2_completions
 
