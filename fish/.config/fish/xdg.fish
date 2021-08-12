@@ -72,3 +72,8 @@ end
 if _exists startx
     set --export XAUTHORITY "$XDG_RUNTIME_DIR/Xauthority"
 end
+
+# zellij
+if _exists zellij
+    set --export ZELLIJ_CONFIG_DIR "$HOME/.config/zellij"
+end
