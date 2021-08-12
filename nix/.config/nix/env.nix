@@ -17,6 +17,7 @@ let
     cabal-install
     declarative-channels
     delta
+    dhall
     exa
     fd
     fish
@@ -45,7 +46,6 @@ let
     as-tree
     bashInteractive
     # coreutils-gprefix
-    dhall
     direnv
     # findutils-gprefix
     gitAndTools.delta
