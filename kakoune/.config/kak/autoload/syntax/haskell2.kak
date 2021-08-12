@@ -7,7 +7,6 @@
 # the same faces
 # TODO: makeLenses is highlighted like a top-level declaration
 # TODO: Labels should be highlighted differently
-# TODO: Top-level operator definitions aren't highlighted correctly (e.g. `f $ x`)
 # TODO: Operators next to `[]` aren't highlighted correctly (e.g. `[+ 1]`)
 
 declare-option str-list haskell2_static_words \
@@ -62,6 +61,7 @@ add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
 add-highlighter shared/haskell2/code/operator regex (?<![\[])('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]]) 1:operator
 add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)#?\s+ 1:function
+add-highlighter shared/haskell2/code/top-level-operator regex ^\((?<![\[])('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]])\)\s+ 1:function
 add-highlighter shared/haskell2/code/keyword group
 add-highlighter shared/haskell2/code/keyword/reserved-words regex (\\case\b|(?<!\.)\b(?:case|class|data|default|deriving|do|else|foreign|if|import|in|instance|let|mdo|module|newtype|of|pattern|proc|rec|then|type|where)\b) 1:keyword
 add-highlighter shared/haskell2/code/keyword/deriving-strategies regex \bderiving\b\s+\b(stock|anyclass|via)\b 1:keyword
