@@ -71,13 +71,12 @@ add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+
 add-highlighter shared/haskell2/code/keyword/symbols regex (!(?=\w)|(?<![\w'])_(?![\w'])|[\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\\@~](?!')|=>|->|<-|-<|-<<|::|\.\.)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 add-highlighter shared/haskell2/code/keyword/promotion regex ('\[|'\(|@') 1:keyword
 add-highlighter shared/haskell2/code/type regex (?<![\w'])('{0,2}(?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)(?![\.\w]) 1:type
-# TODO: Need to disambiguate unit from importing only instances, or not exporting anything
-# add-highlighter shared/haskell2/code/type-unit regex \(\) 0:type
+add-highlighter shared/haskell2/code/type-unit regex \(\) 0:type
 add-highlighter shared/haskell2/code/infix regex `(?:(?:[A-Z][\w']*\.)*)\w[\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
 # TODO: -XPackageImports breaks this for some reason
-add-highlighter shared/haskell2/code/module/import regex (import)(?:\s+(qualified))?(?:\s+("[\w-]*?"))?\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(qualified))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))?(?:\s+(hiding)\s+\(.*?\))? 1:keyword 2:keyword 3:string 4:module 5:keyword 6:keyword 7:module 8:keyword
-add-highlighter shared/haskell2/code/module/declaration regex \bmodule\b\s+\b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)\b 1:module
+add-highlighter shared/haskell2/code/module/import regex (import)(?:\s+(qualified))?(?:\s+("[\w-]*?"))?\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*)(?:\s+(qualified))?(?:\s+(as)\s+([A-Z][\w']*(?:\.[A-Z][\w']*)*))?(?:\s+(hiding))?(?:\s+(\().*?(\)))? 1:keyword 2:keyword 3:string 4:module 5:keyword 6:keyword 7:module 8:keyword 9:keyword 10:keyword
+add-highlighter shared/haskell2/code/module/declaration regex (module)\s+\b((?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)(?:\s+(\().*?(\)))?(?:\s+(where))\b 1:keyword 2:module 3:keyword 4:keyword 5:keyword
 add-highlighter shared/haskell2/code/numbers group
 add-highlighter shared/haskell2/code/numbers/decimal regex ((\b|-)[0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-]?[0-9]+)?)\b 1:value
 add-highlighter shared/haskell2/code/numbers/hexadecimal regex \b(0x[0-9a-f_]*[0-9a-f])\b 1:value
