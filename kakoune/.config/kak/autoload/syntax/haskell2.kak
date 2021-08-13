@@ -7,7 +7,6 @@
 # the same faces
 # TODO: makeLenses is highlighted like a top-level declaration
 # TODO: Labels should be highlighted differently
-# TODO: Operators next to `[]` aren't highlighted correctly (e.g. `[+ 1]`)
 
 declare-option str-list haskell2_static_words \
   "module" "where" "import" "import qualified" "qualified" "as" "hiding" \
@@ -58,7 +57,7 @@ add-highlighter shared/haskell2/quasiquote-texp region \[\|\| \|\|\] regex (\[\|
 add-highlighter shared/haskell2/quasiquote-exp region \[\| \|\] regex (\[\|)(.*?)(\|\]) 1:keyword 2:string 3:keyword
 add-highlighter shared/haskell2/quasiquote-user-defined region \[\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?\| \|\] regex (\[)\b(?:(?:[A-Z][\w']*\.)*)[_a-z][\w']*#?(\|)(.*?)(\|\]) 1:keyword 2:keyword 3:string 4:keyword
 add-highlighter shared/haskell2/cpp-or-shebang region '^#' $ fill meta
-add-highlighter shared/haskell2/code/operator regex (?<![\[])('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]]) 1:operator
+add-highlighter shared/haskell2/code/operator regex ('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?![']) 1:operator
 add-highlighter shared/haskell2/code/top-level-binding regex ^(\w[\w']*)#?\s+ 1:function
 add-highlighter shared/haskell2/code/top-level-operator regex ^\((?<![\[])('?(?:(?:[A-Z][\w']*\.)*)(?:[!#$%&\*\+\./<=>?@\\\^|\-~:]{2,}|[!#$%&\*\+/<>?\^\-:]|(?<![\w'])\.(?!\w)))(?!['\]])\)\s+ 1:function
 add-highlighter shared/haskell2/code/keyword group
@@ -83,7 +82,7 @@ add-highlighter shared/haskell2/code/numbers/binary regex \b(0b[01_+]*[01])\b 1:
 
 # TODO: -XTemplateHaskell splices (e.g. $(makeLenses ''MyType))
 # TODO: -XForeignFunctionInterface keywords (e.g. foreign, ccall, prim, capi, interruptible, etc.)
-# TODO: -XMagicHash / -XOverloadedLabels (#) (needs to highlight when against other stuff, like [#name :- primary])
+# TODO: -XMagicHash / -XOverloadedLabels (#)
 
 # TODO: Write your own indentation logic
 define-command -hidden haskell2-trim-indent %{
