@@ -9,7 +9,7 @@ let
 
 in
 haskellPackage.overrideAttrs (old: {
-  buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.makeWrapper ];
+  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
 
   postInstall = ''
     ${old.postInstall or ""}
