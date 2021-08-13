@@ -3,18 +3,19 @@
 set -euo pipefail
 
 cache="${HOME}/.cache/dotfiles"
+implementation="haskell"
 
 if [ ! -d "${cache}" ]; then
   mkdir -p "${cache}"
 fi
 
-hash=$(nix-hash --type sha256 --base32 ./installer/haskell)
+hash=$(nix-hash --type sha256 --base32 "./installer/${implementation}")
 
 result="${cache}/${hash}"
 
 if [ ! -L "${result}" ]; then
   echo "Building installer..." >&2
-  nix-build ./installer/haskell --out-link "${result}"
+  nix-build "./installer/${implementation}" --out-link "${result}"
 fi
 
 "${result}"/bin/installer "$@"

@@ -8,8 +8,8 @@ let
       { };
 
 in
-pkgs.haskell.lib.overrideCabal haskellPackage (old: {
-  buildDepends = (old.buildDepends or [ ]) ++ [ pkgs.makeWrapper ];
+haskellPackage.overrideAttrs (old: {
+  buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.makeWrapper ];
 
   postInstall = ''
     ${old.postInstall or ""}
