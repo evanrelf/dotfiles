@@ -8,13 +8,13 @@ if [ ! -d "${cache}" ]; then
   mkdir -p "${cache}"
 fi
 
-hash=$(nix-hash --type sha256 --base32 ./installer)
+hash=$(nix-hash --type sha256 --base32 ./installer/haskell)
 
 result="${cache}/${hash}"
 
 if [ ! -L "${result}" ]; then
   echo "Building installer..." >&2
-  nix-build ./installer --out-link "${result}"
+  nix-build ./installer/haskell --out-link "${result}"
 fi
 
 "${result}"/bin/installer "$@"

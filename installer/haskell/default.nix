@@ -1,5 +1,5 @@
 let
-  pkgs = import ../nix/.config/nix/pkgs.nix { };
+  pkgs = import ../../nix/.config/nix/pkgs.nix { };
 
   gitignoreSource =
     let
