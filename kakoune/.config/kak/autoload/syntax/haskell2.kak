@@ -49,9 +49,8 @@ provide-module haskell2 %§
 
 add-highlighter shared/haskell2 regions
 add-highlighter shared/haskell2/code default-region group
-# TODO: This is broken: '"' (this still works: '\"')
-# TODO: This is broken: '\ESC'
 add-highlighter shared/haskell2/string region '(?<![\\])"' (?<!\\)(\\\\)*" fill string
+add-highlighter shared/haskell2/character region (?<![\\\w@])'(?!['\w\[\(]) (?<!\\)(\\\\)*' fill string
 add-highlighter shared/haskell2/comment region -recurse \{-(?!#) \{-(?!#) (?<!#)-\} fill comment
 add-highlighter shared/haskell2/line_comment region -- $ fill comment
 add-highlighter shared/haskell2/pragma region '\{-#' '#-\}' fill meta
@@ -71,7 +70,7 @@ add-highlighter shared/haskell2/code/keyword/forall regex (\bforall\b|∀)(?:\s+
 add-highlighter shared/haskell2/code/keyword/symbols regex (!(?=\w)|(?<![\w'])_(?![\w'])|[\{\}\(\)\[\],\;]|(?<![!#$%&\*\+\./<=>?@\\\^|\-~:'])(?:[=\|\\@~](?!')|=>|->|<-|-<|-<<|::|\.\.)(?![!#$%&\*\+\./<=>?@\^|\-~:])) 1:keyword
 add-highlighter shared/haskell2/code/keyword/promotion regex ('\[|'\(|@') 1:keyword
 add-highlighter shared/haskell2/code/type regex (?<![\w'])('{0,2}(?:[A-Z][\w']*)(?:\.[A-Z][\w']*)*)(?![\.\w]) 1:type
-add-highlighter shared/haskell2/code/type-unit regex \(\) 0:type
+add-highlighter shared/haskell2/code/type-unit regex \'?\(\) 0:type
 add-highlighter shared/haskell2/code/infix regex `(?:(?:[A-Z][\w']*\.)*)\w[\w']*` 0:operator
 add-highlighter shared/haskell2/code/module group
 # TODO: -XPackageImports breaks this for some reason
@@ -81,7 +80,6 @@ add-highlighter shared/haskell2/code/numbers group
 add-highlighter shared/haskell2/code/numbers/decimal regex ((\b|-)[0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-]?[0-9]+)?)\b 1:value
 add-highlighter shared/haskell2/code/numbers/hexadecimal regex \b(0x[0-9a-f_]*[0-9a-f])\b 1:value
 add-highlighter shared/haskell2/code/numbers/binary regex \b(0b[01_+]*[01])\b 1:value
-add-highlighter shared/haskell2/code/character regex (?<!')\B'([^\\']|\\['"\w\d\\])' 0:string
 
 # TODO: -XTemplateHaskell splices (e.g. $(makeLenses ''MyType))
 # TODO: -XForeignFunctionInterface keywords (e.g. foreign, ccall, prim, capi, interruptible, etc.)
