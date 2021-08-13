@@ -1,3 +1,5 @@
+declare-user-mode "dhall"
+
 # Better Dhall syntax
 # Set filetype to `dhall2` only once (allows switching back to `dhall`
 # filetype)
@@ -9,8 +11,7 @@ hook global WinCreate .*\.dhall %{
 
 hook global WinSetOption filetype=(dhall|dhall2) %{
   set-option window formatcmd "dhall format --ascii"
-  map window "user" "," ": enter-user-mode haskell<ret>" -docstring "Haskell..."
-  map window "haskell" "f" "|dhall format --ascii<ret>" -docstring "Format (ASCII)"
-  map window "haskell" "F" "|dhall format<ret>" -docstring "Format (Unicode)"
-  # hook window BufWritePre .* %{ format-buffer }
+  map window "user" "," ": enter-user-mode dhall<ret>" -docstring "Dhall..."
+  map window "dhall" "f" "|dhall format --ascii<ret>" -docstring "Format (ASCII)"
+  map window "dhall" "F" "|dhall format<ret>" -docstring "Format (Unicode)"
 }
