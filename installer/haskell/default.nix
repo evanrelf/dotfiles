@@ -1,14 +1,12 @@
 let
   pkgs = import ../../nix/.config/nix/pkgs.nix { };
 
-  haskellPackage =
-    pkgs.haskellPackages.callCabal2nix
-      "installer"
-      (pkgs.gitignoreSource ./.)
-      { };
-
 in
-haskellPackage.overrideAttrs (old: {
+(pkgs.haskellPackages.callCabal2nix
+  "installer"
+  (pkgs.gitignoreSource ./.)
+  { }
+).overrideAttrs (old: {
   nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
 
   postInstall = ''
