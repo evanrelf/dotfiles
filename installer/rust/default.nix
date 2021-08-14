@@ -7,7 +7,7 @@ pkgs.rustPlatform.buildRustPackage {
 
   src = pkgs.gitignoreSource ./.;
 
-  cargoSha256 = "0j9xpwrjdvb4mhipvf9kxjnan6kmc06rk91qxv6nz9zl4jjkxv8p";
+  cargoSha256 = "1aksax3xz0pqak9gni1xz5rvfcnbg30a66px4vylbqavf57dn2ff";
 
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
