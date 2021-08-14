@@ -1,16 +1,17 @@
-#[derive(argh::FromArgs, Debug)]
-/// installer
+use structopt::StructOpt;
+
+#[derive(StructOpt, Debug)]
+#[structopt(name = "installer")]
 struct Options {
-    /// packages
-    #[argh(positional)]
+    #[structopt(name = "PACKAGE")]
     packages: Vec<String>,
 
-    /// run in dry run mode
-    #[argh(option)]
+    /// Run in dry run mode
+    #[structopt(long)]
     dry_run: bool,
 }
 
 fn main() {
-    let options: Options = argh::from_env();
+    let options = Options::from_args();
     println!("{:#?}", options);
 }
