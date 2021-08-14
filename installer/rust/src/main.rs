@@ -15,3 +15,11 @@ fn main() {
     let options = Options::from_args();
     println!("{:#?}", options);
 }
+
+fn log(message: String) {
+    println_colored(ansi_term::Color::Purple, message);
+}
+
+fn println_colored(color: ansi_term::Color, message: String) {
+    println!("{}", color.paint(message));
+}

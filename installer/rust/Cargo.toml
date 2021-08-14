@@ -4,4 +4,5 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
+ansi_term = "0.12.1"
 structopt = { version = "0.3.22", default-features = false }
