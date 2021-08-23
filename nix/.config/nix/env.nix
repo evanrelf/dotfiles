@@ -38,6 +38,7 @@ let
     starship
     tealdeer
     tmux
+    zig
     zoxide
   ];
 
@@ -86,7 +87,6 @@ let
     mercurialFull
     rclone
     youtube-dl
-    zig
   ];
 
   linuxPackages = with pkgs; [
