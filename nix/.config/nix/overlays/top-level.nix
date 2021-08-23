@@ -21,10 +21,10 @@ in
   emacsCustom =
     let
       emacsGccDarwin = (import (pkgsPrev.fetchFromGitHub {
-        owner = "twlz0ne";
+        owner = "siraben";
         repo = "nix-gccemacs-darwin";
-        rev = "088f97e2939f33d6983fb90649a9c51d572736ec";
-        sha256 = "0mdbgl82r0dpgsz71i2npfy6kyd16637sk7glagwwdz7l0zxxmwn";
+        rev = "c3800c44331dca424fa525d8bb08e49ee37fdfb3";
+        sha256 = "1m8qqhfij37q7sjqa91cmymr6az2vva15jghzywhpq3j73ipmqy1";
       })).emacsGccDarwin;
 
       emacs =
