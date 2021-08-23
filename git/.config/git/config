@@ -48,7 +48,7 @@
   k = lookup
 
   # LOG
-  l = lll --max-count=20
+  l = lll --max-count=20 --first-parent
   lu = lll @{upstream}..
   ll = lll --max-count=50
   lll = log --graph --pretty=normal
