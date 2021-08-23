@@ -14,77 +14,72 @@ let
     '';
 
   commonPackages = with pkgs; [
-    cabal-install
-    declarative-channels
-    delta
-    dhall
-    exa
-    fd
-    fish
-    fzf
-    ghcid
-    gitAndTools.gitFull
-    haskellPackages.fourmolu
-    jq
-    kakoune
-    lorri
-    neovim
-    nix-diff
-    nixpkgs-fmt
-    nix-tree
-    patat
-    ripgrep
-    sd
-    shellcheck
-    starship
-    tealdeer
-    tmux
-    zig
-    zoxide
-  ];
-
-  extraPackages = with pkgs; [
-    # emacsCustom
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
     as-tree
     bashInteractive
+    cabal-install
     # coreutils-gprefix
+    declarative-channels
+    delta
+    dhall
     direnv
+    # emacsCustom
+    exa
+    fd
     # findutils-gprefix
+    fish
+    fzf
+    ghcid
     gitAndTools.delta
     gitAndTools.gh
+    gitAndTools.gitFull
     # gnugrep-gprefix
     haskellPackages.cabal-plan
+    haskellPackages.fourmolu
     haskellPackages.retrie
     htop
     httpie
     hyperfine
     iosevka-bin
+    jq
+    kakoune
+    lorri
     magic-wormhole
     moreutils
+    neovim
     nerdfonts
+    nix-diff
     nix-index
+    nixpkgs-fmt
     nix-prefetch-git
     nix-top
+    nix-tree
     # ormoloog
     ormolu
     pandoc
     parinfer-rust
+    patat
     perlPackages.GitAutofixup
+    ripgrep
     rlwrap
+    sd
+    shellcheck
+    starship
     stylish-haskell
+    tealdeer
+    tmux
     # tmux-thumbs
     tokei
     tree
     watchexec
     yj
+    zig
+    zoxide
   ];
 
   personalPackages = with pkgs; [
     borgbackup
     ffmpeg
-    go
-    mercurialFull
     rclone
     youtube-dl
   ];
@@ -109,20 +104,17 @@ pkgs.buildEnv {
   paths = pkgs.lib.concatLists (builtins.getAttr hostname {
     "auburn" = [
       commonPackages
-      extraPackages
       personalPackages
     ];
 
     "sienna" = [
       commonPackages
-      extraPackages
       personalPackages
       linuxPackages
     ];
 
     "indigo" = [
       commonPackages
-      extraPackages
       [ pkgs.tmux-xpanes ]
     ];
 
