@@ -30,6 +30,7 @@ let
     neovim
     nix-diff
     nixpkgs-fmt
+    nix-tree
     patat
     ripgrep
     sd
@@ -64,7 +65,6 @@ let
     nix-index
     nix-prefetch-git
     nix-top
-    nix-tree
     # ormoloog
     ormolu
     pandoc
