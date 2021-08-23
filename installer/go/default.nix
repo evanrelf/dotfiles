@@ -2,7 +2,7 @@ let
   pkgs = import ../../nix/.config/nix/pkgs.nix { };
 
 in
-pkgs.buildGoModule rec {
+pkgs.buildGoModule {
   name = "installer";
 
   src = pkgs.gitignoreSource ./.;
@@ -12,7 +12,7 @@ pkgs.buildGoModule rec {
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postInstall = ''
-    mv $out/bin/{go,${name}}
+    mv $out/bin/{go,installer}
     wrapProgram $out/bin/installer --prefix PATH : ${pkgs.stow}/bin
   '';
 }
