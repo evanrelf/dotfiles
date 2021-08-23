@@ -27,6 +27,7 @@ let
     haskellPackages.fourmolu
     jq
     kakoune
+    lorri
     neovim
     nix-diff
     nixpkgs-fmt
@@ -59,7 +60,6 @@ let
     httpie
     hyperfine
     iosevka-bin
-    lorri
     magic-wormhole
     moreutils
     nerdfonts
