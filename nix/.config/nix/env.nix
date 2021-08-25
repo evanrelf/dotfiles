@@ -18,12 +18,12 @@ let
     as-tree
     bashInteractive
     cabal-install
-    # coreutils-gprefix
+    coreutils-gprefix
     declarative-channels
     delta
     dhall
     direnv
-    # emacsCustom
+    emacsCustom
     exa
     fd
     # findutils-gprefix

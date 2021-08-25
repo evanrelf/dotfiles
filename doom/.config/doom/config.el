@@ -3,8 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(unless EMACS27+ (error "Please use Emacs 27 or newer"))
-
 (use-package! mood-line
   :config (mood-line-mode +1))
 
@@ -153,9 +151,9 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (if IS-MAC
-    (setq doom-font (font-spec :family "PragmataPro Liga" :size 16)
-          doom-big-font (font-spec :family "PragmataPro Liga" :size 20)
-          doom-variable-pitch-font (font-spec :family "PragmataPro Liga" :size 16))
+    (setq doom-font (font-spec :family "Iosevka Term SS08" :size 16)
+          doom-big-font (font-spec :family "Iosevka Term SS08" :size 20)
+          doom-variable-pitch-font (font-spec :family "Iosevka Term SS08" :size 16))
   (setq doom-font (font-spec :family "Iosevka Term SS08" :size 27)
         doom-big-font (font-spec :family "Iosevka Term SS08" :size 40)
         doom-variable-pitch-font (font-spec :family "Iosevka Term SS08" :size 27)))

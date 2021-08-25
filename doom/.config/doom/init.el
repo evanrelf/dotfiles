@@ -39,7 +39,6 @@
 
   :lang
   data
-  go
   haskell
   json
   javascript

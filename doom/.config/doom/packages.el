@@ -2,16 +2,11 @@
 ;;; $DOOMDIR/packages.el
 
 (package! apheleia
-  :pin "6aff83d"
   :recipe (:host github :repo "raxod502/apheleia"))
-(package! git-gutter
-  :pin "2c3242")
-(package! magit-delta
-  :pin "d988ab")
-(package! modus-operandi-theme
-  :pin "c376b0")
-(package! mood-line
-  :pin "64cbd6")
+(package! git-gutter)
+(package! magit-delta)
+(package! modus-themes)
+(package! mood-line)
 
 (disable-packages!
  ;; core
