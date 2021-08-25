@@ -93,7 +93,9 @@
 
   # SHOW
   sh = "!if [ -z \"$1\" ]; then git lookup | xargs git show; else git show $@; fi #"
+  shf = "!if [ -z \"$1\" ]; then GIT_LOOKUP_SHOW_OPTIONS="--name-status" git lookup | xargs git show --name-status; else git show --name-status $@; fi #"
   shh = sh HEAD
+  shfh = shf HEAD
 
   # SPARSE-CHECKOUT
   sc = sparse-checkout

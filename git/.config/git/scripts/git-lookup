@@ -18,7 +18,7 @@ else
   fi
 
   preview=(\
-    --preview "echo {} | cut -d ' ' -f 1 | xargs git show --color=always | delta" \
+    --preview "echo {} | cut -d ' ' -f 1 | xargs git show --color=always ${GIT_LOOKUP_SHOW_OPTIONS:-} | delta" \
     --preview-window "${position}":"${size}":sharp \
   )
 fi
