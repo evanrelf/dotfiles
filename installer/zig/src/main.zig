@@ -1,5 +1,6 @@
 const std = @import("std");
 
 pub fn main() anyerror!void {
-    std.log.alert("All your codebase are belong to us.", .{});
+    const name = "Evan";
+    std.debug.print("Hello, {s}!\n", .{name});
 }
