@@ -38,6 +38,7 @@
   d = diff
   dd = diff --no-ext-diff
   ds = diff --staged
+  dds = diff --staged --no-ext-diff
   da = diff HEAD
   du = diff @{upstream}..
 
