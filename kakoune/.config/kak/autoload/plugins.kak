@@ -6,11 +6,6 @@ declare-option str column_color "rgb:f6f8fa"
 # evanrelf/byline.kak
 require-module "byline"
 
-# evanrelf/reselect.kak
-require-module "reselect"
-map global "normal" "i" ": reselect<ret>;i"
-map global "normal" "a" ": reselect-a<ret>"
-
 # alexherbo2/replace-mode.kak
 require-module "replace-mode"
 map global "normal" "<a-r>" ": enter-replace-mode<ret>"

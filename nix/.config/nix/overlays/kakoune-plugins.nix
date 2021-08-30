@@ -16,13 +16,6 @@ let
       sha256 = "0yxialy0n35hw2wcnpacax1b19jqwbm7i1kq66x7g4msadlqqigj";
     };
 
-    "reselect-kak" = {
-      owner = "evanrelf";
-      repo = "reselect.kak";
-      rev = "f004700e851c1c25fe950e63c673135ae1396a5f";
-      sha256 = "1gyc7q0scibmgjg2vddwjd1pxpyc1hif459qb0p7g7qdwqdbmbar";
-    };
-
     "replace-mode-kak" = {
       owner = "alexherbo2";
       repo = "replace-mode.kak";
