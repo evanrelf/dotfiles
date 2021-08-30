@@ -68,7 +68,6 @@ let
     stylish-haskell
     tealdeer
     tmux
-    # tmux-thumbs
     tokei
     tree
     watchexec
