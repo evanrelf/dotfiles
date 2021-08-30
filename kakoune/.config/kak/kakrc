@@ -25,6 +25,7 @@ set-option global spell_lang "en-US"
 # Highlight autowrap column (usually 80 characters)
 hook global WinSetOption autowrap_column=.* %{
   add-highlighter -override window/wrap-column column %sh{ echo $((kak_opt_autowrap_column + 1)) } "default,%opt{column_color}"
+  add-highlighter -override window/wrap-regex regex "^[^\n]{%opt{autowrap_column}}([^\n]*)$" "1:default,%opt{column_color}"
 }
 
 # Toggle soft wrapping
