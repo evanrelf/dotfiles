@@ -1,7 +1,3 @@
-# # Swap : and ;
-# map global "normal" ":" ";"
-# map global "normal" ";" ":"
-
 # Use q for backwards word movement
 map global "normal" "q" "b"
 map global "normal" "Q" "B"
@@ -18,10 +14,6 @@ map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstrin
 # Comment out line
 map global "normal" "#" ": comment-line<ret>"
 map global "normal" "<a-#>" ": comment-block<ret>"
-
-# Use <c-n> and <c-p> in command mode
-map global "prompt" "<c-n>" "<down>"
-map global "prompt" "<c-p>" "<up>"
 
 # Format buffer
 map global "user" "=" ": format-buffer<ret>" -docstring "Format buffer"

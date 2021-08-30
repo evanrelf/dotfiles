@@ -1,4 +1,7 @@
+# Default to 2 spaces for indentation
 set-option global indentwidth 2
+
+# Never show changelog on startup
 set-option global startup_info_version 99991231
 
 # Show line numbers
@@ -7,7 +10,7 @@ add-highlighter global/number-lines number-lines -hlcursor
 # Highlight matching delimiters
 add-highlighter global/show-matching show-matching
 
-# Underline search matches
+# Highlight search matches
 add-highlighter global/search-matches dynregex "%%reg{/}" 0:black,bright-white+f
 
 # Highlight TODO/FIXME/NOTE
@@ -42,10 +45,4 @@ evaluate-buffer %{
 define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
 evaluate-selection %{
   execute-keys -itersel -draft ": <c-r>.<ret>"
-}
-
-define-command -docstring "client-quit: delete buffer and quit" \
-client-quit %{
-  delete-buffer
-  quit
 }

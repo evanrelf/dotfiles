@@ -19,24 +19,20 @@ hook -once global NormalIdle .* %{
 define-command yank -docstring 'Yank to clipboard' %{
   execute-keys "<a-|>%opt{clipboard_copy}<ret>"
 }
-alias global y yank
 
 define-command paste-after -docstring 'Paste after from clipboard' %{
   execute-keys "<a-!>%opt{clipboard_paste}<ret>"
 }
 alias global paste paste-after
-alias global p paste-after
 
 define-command paste-before -docstring 'Paste before from clipboard' %{
   execute-keys "!%opt{clipboard_paste}<ret>"
 }
-alias global P paste-before
 
 define-command paste-replace -docstring 'Paste replace from clipboard' %{
   execute-keys "|%opt{clipboard_paste}<ret>"
 }
 alias global replace paste-replace
-alias global R paste-replace
 
 map global "user" "y" ": yank<ret>" -docstring "Yank"
 map global "user" "p" ": paste-after<ret>" -docstring "Paste after"
