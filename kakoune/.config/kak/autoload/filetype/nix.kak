@@ -12,5 +12,6 @@ hook global WinCreate .*\.nix %{
 hook global WinSetOption filetype=(nix|nix2) %{
   set-option window formatcmd "nixpkgs-fmt"
   map window "user" "," ": enter-user-mode nix<ret>" -docstring "Nix..."
+  map window "nix" "f" "|nixpkgs-fmt<ret>" -docstring "Format"
   map window "nix" "h" "i0000000000000000000000000000000000000000000000000000<esc>" -docstring "Insert dummy hash"
 }
