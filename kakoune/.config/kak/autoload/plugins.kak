@@ -3,10 +3,6 @@ hook -once global KakBegin .* %{
 # evanrelf/primer.kak
 declare-option str column_color "rgb:f6f8fa"
 
-# evanrelf/number-toggle.kak
-require-module "number-toggle"
-set-option global number_toggle_params -hlcursor
-
 # evanrelf/byline.kak
 require-module "byline"
 
