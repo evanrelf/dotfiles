@@ -57,7 +57,6 @@ let
     # ormoloog
     ormolu
     pandoc
-    parinfer-rust
     patat
     perlPackages.GitAutofixup
     ripgrep
