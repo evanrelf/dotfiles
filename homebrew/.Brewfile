@@ -18,8 +18,5 @@ cask "the-unarchiver"
 tap "homebrew/cask-fonts"
 cask "font-iosevka-ss08"
 
-# tap "wez/wezterm"
-# brew "wezterm"
-
 brew "mas"
 mas "Affinity Photo", id: 824183456
