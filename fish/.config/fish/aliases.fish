@@ -63,7 +63,13 @@ end
 
 alias less "less -RMK"
 
-alias cargod "watchexec --exts rs --restart --clear -- cargo check --color=always '|&' less -~cRMK"
+function cargod
+    if _exists cargo-clippy
+        watchexec --exts rs --restart --clear -- cargo clippy --color=always '|&' less -~cRMK
+    else
+        watchexec --exts rs --restart --clear -- cargo check --color=always '|&' less -~cRMK
+    end
+end
 
 # Typos
 abbr --add gs "git s"
