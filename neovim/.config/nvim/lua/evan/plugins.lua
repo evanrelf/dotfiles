@@ -37,38 +37,37 @@ require("lspconfig").rust_analyzer.setup({
 })
 
 -- dense-analysis/ale
-vim.g.ale_linters =
-  { nix = {"nix"}
-  , rust = {}
-  , sh = {"shellcheck"}
-  }
+vim.g.ale_linters = {
+  nix = {"nix"},
+  rust = {},
+  sh = {"shellcheck"},
+}
 vim.cmd "let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')"
 vim.g.ale_lint_on_text_changed = "never"
 vim.g.ale_lint_on_insert_leave = false
 
 -- nvim-treesitter/nvim-treesitter
-require("nvim-treesitter.configs").setup(
-  { ensure_installed =
-      { "bash"
-      , "fish"
-      , "haskell"
-      , "html"
-      , "javascript"
-      , "json"
-      , "lua"
-      , "nix"
-      , "python"
-      , "rust"
-      , "toml"
-      , "yaml"
-      }
-  , highlight =
-      { enable = true
-      , disable = {"haskell"}
-      }
-  , indent = { enable = true }
-  }
-)
+require("nvim-treesitter.configs").setup({
+  ensure_installed = {
+    "bash",
+    "fish",
+    "haskell",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "nix",
+    "python",
+    "rust",
+    "toml",
+    "yaml",
+  },
+  highlight = {
+    enable = true,
+    disable = {"haskell"},
+  },
+  indent = { enable = true },
+})
 
 -- sbdchd/neoformat
 vim.g.neoformat_only_msg_on_error = true
