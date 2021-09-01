@@ -7,6 +7,7 @@ vim.api.nvim_exec([[
   Plug 'wellle/targets.vim'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'sheerun/vim-polyglot'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'dense-analysis/ale'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'sbdchd/neoformat'
@@ -26,10 +27,19 @@ vim.api.nvim_exec([[
 vim.o.termguicolors = true
 vim.cmd "colorscheme modus-operandi"
 
+-- neovim/nvim-lspconfig
+require("lspconfig").rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = { command = "clippy" }
+    }
+  }
+})
+
 -- dense-analysis/ale
 vim.g.ale_linters =
   { nix = {"nix"}
-  , rust = {"analyzer", "cargo"}
+  , rust = {}
   , sh = {"shellcheck"}
   }
 vim.cmd "let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')"
