@@ -8,6 +8,9 @@ vim.api.nvim_exec([[
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'sheerun/vim-polyglot'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'sbdchd/neoformat'
   Plug 'tmsvg/pear-tree'
@@ -36,6 +39,20 @@ require("lspconfig").rust_analyzer.setup({
     ["rust-analyzer"] = {
       checkOnSave = { command = "clippy" }
     }
+  }
+})
+
+-- hrsh7th/nvim-cmp
+local cmp = require("cmp")
+cmp.setup({
+  mapping = {
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
+    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), {"i", "s"}),
+    ["<CR>"] = cmp.mapping.confirm(),
+  },
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "buffer" },
   }
 })
 
