@@ -30,6 +30,7 @@ vim.o.termguicolors = true
 vim.cmd "colorscheme modus-operandi"
 
 -- neovim/nvim-lspconfig
+vim.o.signcolumn = "yes"
 require("lspconfig").hls.setup({
   autostart = false,
 })
