@@ -8,7 +8,6 @@ vim.api.nvim_exec([[
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'sheerun/vim-polyglot'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'dense-analysis/ale'
   Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'sbdchd/neoformat'
   Plug 'tmsvg/pear-tree'
@@ -35,16 +34,6 @@ require("lspconfig").rust_analyzer.setup({
     }
   }
 })
-
--- dense-analysis/ale
-vim.g.ale_linters = {
-  nix = {"nix"},
-  rust = {},
-  sh = {"shellcheck"},
-}
-vim.cmd "let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')"
-vim.g.ale_lint_on_text_changed = "never"
-vim.g.ale_lint_on_insert_leave = false
 
 -- nvim-treesitter/nvim-treesitter
 require("nvim-treesitter.configs").setup({
