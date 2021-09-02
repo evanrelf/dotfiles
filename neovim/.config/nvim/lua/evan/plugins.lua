@@ -27,8 +27,11 @@ vim.o.termguicolors = true
 vim.cmd "colorscheme modus-operandi"
 
 -- neovim/nvim-lspconfig
-require("lspconfig").hls.setup({})
+require("lspconfig").hls.setup({
+  autostart = false,
+})
 require("lspconfig").rust_analyzer.setup({
+  autostart = false,
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = { command = "clippy" }
