@@ -27,6 +27,7 @@ vim.o.termguicolors = true
 vim.cmd "colorscheme modus-operandi"
 
 -- neovim/nvim-lspconfig
+require("lspconfig").hls.setup({})
 require("lspconfig").rust_analyzer.setup({
   settings = {
     ["rust-analyzer"] = {
