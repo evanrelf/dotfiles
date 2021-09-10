@@ -65,9 +65,9 @@ alias less "less -RMK"
 
 function cargod
     if _exists cargo-clippy
-        watchexec --exts rs --restart --clear -- cargo clippy --color=always '|&' less -~cRMK
+        watchexec --exts rs --restart --clear -- cargo clippy --all-targets --color=always $argv '|&' less -~cRMK
     else
-        watchexec --exts rs --restart --clear -- cargo check --color=always '|&' less -~cRMK
+        watchexec --exts rs --restart --clear -- cargo check --all-targets --color=always $argv '|&' less -~cRMK
     end
 end
 
