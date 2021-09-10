@@ -1,4 +1,3 @@
-use ifmt::iformat;
 use once_cell::sync::OnceCell;
 use std::{
     path::Path,
@@ -51,7 +50,7 @@ fn discard_nonexistent(packages: Vec<String>) -> Vec<String> {
         } else {
             println_colored(
                 ansi_term::Color::Yellow,
-                &iformat!("[{package}] Configuration doesn't exist"),
+                &format!("[{}] Configuration doesn't exist", package),
             );
         }
     }
@@ -66,31 +65,34 @@ fn install(package: &str) {
 }
 
 fn run_hook(hook_name: &str, package: &str) {
-    let script = iformat!("{package}/{hook_name}-hook");
+    let script = format!("{}/{}-hook", package, hook_name);
 
     if Path::new(&script).exists() {
-        sh(&iformat!("./{script}"));
+        sh(&format!("./{}", script));
     }
 }
 
 fn stow(package: &str) {
-    log(&iformat!("[{package}] Stowing configuration"));
+    log(&format!("[{}] Stowing configuration", package));
 
-    sh(&iformat!(concat![
-        "stow",
-        "--stow",
-        "--stow",
-        "--target \"${HOME}\"",
-        "--no-folding {package}",
-        "--ignore \"-hook\"",
-    ]));
+    sh(&format!(
+        concat![
+            "stow",
+            "--stow",
+            "--stow",
+            "--target \"${{HOME}}\"",
+            "--no-folding {}",
+            "--ignore \"-hook\"",
+        ],
+        package
+    ));
 }
 
 fn sh(command: &str) {
     if *DRY_RUN.get().expect("dry_run not initialized") {
-        log(&iformat!("dry-run> {command}"));
+        log(&format!("dry-run> {}", command));
     } else {
-        log(&iformat!("+ {command}"));
+        log(&format!("+ {}", command));
         Command::new("sh")
             .args(&["-c", command])
             .stdout(Stdio::piped())
