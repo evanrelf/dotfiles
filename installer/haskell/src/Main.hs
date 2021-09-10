@@ -75,13 +75,10 @@ partitionM predicate xs = do
 
 
 install :: (MonadIO m, MonadReader Bool m) => FilePath -> m ()
-install package =
-  traverse_
-    ($ package)
-    [ runHook "before"
-    , stow
-    , runHook "after"
-    ]
+install package = do
+  runHook "before" package
+  stow package
+  runHook "after" package
 
 
 runHook :: (MonadIO m, MonadReader Bool m) => Text -> FilePath -> m ()
