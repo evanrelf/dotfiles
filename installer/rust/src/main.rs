@@ -22,11 +22,11 @@ fn main() {
     let existent_packages = discard_nonexistent(all_packages);
 
     if existent_packages.is_empty() {
-        println_colored(ansi_term::Color::Red, "No packages specified".to_string());
+        println_colored(ansi_term::Color::Red, "No packages specified");
         std::process::exit(1);
     } else {
         for package in existent_packages {
-            install(package);
+            install(&package);
         }
     }
 }
@@ -51,7 +51,7 @@ fn discard_nonexistent(packages: Vec<String>) -> Vec<String> {
         } else {
             println_colored(
                 ansi_term::Color::Yellow,
-                iformat!("[{package}] Configuration doesn't exist"),
+                &iformat!("[{package}] Configuration doesn't exist"),
             );
         }
     }
@@ -59,24 +59,24 @@ fn discard_nonexistent(packages: Vec<String>) -> Vec<String> {
     existent
 }
 
-fn install(package: String) {
-    run_hook("before".to_string(), package.clone());
-    stow(package.clone());
-    run_hook("after".to_string(), package.clone());
+fn install(package: &str) {
+    run_hook("before", package);
+    stow(package);
+    run_hook("after", package);
 }
 
-fn run_hook(hook_name: String, package: String) {
+fn run_hook(hook_name: &str, package: &str) {
     let script = iformat!("{package}/{hook_name}-hook");
 
     if Path::new(&script).exists() {
-        sh(iformat!("./{script}"));
+        sh(&iformat!("./{script}"));
     }
 }
 
-fn stow(package: String) {
-    log(iformat!("[{package}] Stowing configuration"));
+fn stow(package: &str) {
+    log(&iformat!("[{package}] Stowing configuration"));
 
-    sh(iformat!(concat![
+    sh(&iformat!(concat![
         "stow",
         "--stow",
         "--stow",
@@ -86,23 +86,23 @@ fn stow(package: String) {
     ]));
 }
 
-fn sh(command: String) {
+fn sh(command: &str) {
     if *DRY_RUN.get().expect("dry_run not initialized") {
-        log(iformat!("dry-run> {command}"));
+        log(&iformat!("dry-run> {command}"));
     } else {
-        log(iformat!("+ {command}"));
+        log(&iformat!("+ {command}"));
         Command::new("sh")
-            .args(&["-c", command.as_str()])
+            .args(&["-c", command])
             .stdout(Stdio::piped())
             .spawn()
             .expect("Failed to run command");
     }
 }
 
-fn log(message: String) {
+fn log(message: &str) {
     println_colored(ansi_term::Color::Purple, message);
 }
 
-fn println_colored(color: ansi_term::Color, message: String) {
+fn println_colored(color: ansi_term::Color, message: &str) {
     println!("{}", color.paint(message));
 }
