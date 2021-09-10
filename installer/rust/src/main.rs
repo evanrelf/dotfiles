@@ -1,7 +1,9 @@
 use ifmt::iformat;
 use once_cell::sync::OnceCell;
-use std::path::Path;
-use std::process::{Command, Stdio};
+use std::{
+    path::Path,
+    process::{Command, Stdio},
+};
 use structopt::StructOpt;
 
 static DRY_RUN: OnceCell<bool> = OnceCell::new();
