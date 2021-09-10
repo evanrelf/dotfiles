@@ -1,20 +1,36 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016
 
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-current_branch=$(git symbolic-ref HEAD | sed -e "s,.*/\(.*\),\1,")
-blacklist_regex='^(master|main|trunk|development|release-.*)$'
+repo=$(git remote get-url origin | sd '(?:git@github.com:|https://github.com/)([\w-]+)/([\w-]+)(?:\.git)?' '$1/$2')
+
+branch=$(git symbolic-ref HEAD | sd '(?:.+/)*(.+)' '$1')
+
 delay=5
 
-if echo "${current_branch}" | grep --quiet --extended-regexp "${blacklist_regex}"; then
-  read -p "Type the name of the branch to confirm: " -r < /dev/tty
-  if [ "${REPLY}" = "${current_branch}" ]; then
-    echo "Pushing to branch '${current_branch}' in ${delay} seconds... (Ctrl-C to cancel)"
-    sleep "${delay}"
-    exit 0
-  else
+if echo "${branch}" | rg --quiet '^(master|main|trunk|development|release-.+)$'; then
+  if [ -n "${repo}" ]; then
+    read -p "Confirm repository (${repo}): " -r < /dev/tty
+    if [ "${REPLY}" != "${repo}" ]; then
+      echo "Incorrect repo name"
+      exit 1
+    fi
+  fi
+
+  read -p "Confirm branch (${branch}): " -r < /dev/tty
+  if [ "${REPLY}" != "${branch}" ]; then
     echo "Incorrect branch name"
     exit 1
   fi
+
+  if [ -n "${repo}" ]; then
+    echo "Pushing to ${repo}:${branch} in ${delay} seconds... (Ctrl-C to cancel)"
+  else
+    echo "Pushing to ${branch} in ${delay} seconds... (Ctrl-C to cancel)"
+  fi
+
+  sleep "${delay}"
+  exit 0
 fi
