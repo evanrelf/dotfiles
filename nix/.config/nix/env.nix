@@ -37,6 +37,7 @@ let
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
     haskellPackages.retrie
+    helix
     htop
     httpie
     hyperfine
