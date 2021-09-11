@@ -1,25 +1,17 @@
-"escape" = { fg = "black", bg = "white", modifiers = [] }
+"escape" = { fg = "yellow_900" }
 
-"type" = { fg = "black", bg = "white", modifiers = [] }
-# "type.builtin" = { fg = "black", bg = "white", modifiers = [] }
+"type" = { fg = "blue_500" }
 
-"constant" = { fg = "black", bg = "white", modifiers = [] }
+# "constant" = { fg = "black", bg = "white", modifiers = [] }
 # "constant.builtin" = { fg = "black", bg = "white", modifiers = [] }
-# "constant.builtin.boolean" = { fg = "black", bg = "white", modifiers = [] }
-# "constant.character" = { fg = "black", bg = "white", modifiers = [] }
+"constant.builtin.boolean" = { fg = "green_500" }
+"constant.character" = { fg = "yellow_800" }
 
-"number" = { fg = "black", bg = "white", modifiers = [] }
+"number" = { fg = "green_500" }
 
-"string" = { fg = "black", bg = "white", modifiers = [] }
-# "string.regexp" = { fg = "black", bg = "white", modifiers = [] }
-# "string.special" = { fg = "black", bg = "white", modifiers = [] }
-# "string.special.path" = { fg = "black", bg = "white", modifiers = [] }
-# "string.special.url" = { fg = "black", bg = "white", modifiers = [] }
+"string" = { fg = "yellow_800" }
 
-"comment" = { fg = "black", bg = "white", modifiers = [] }
-# "comment.line" = { fg = "black", bg = "white", modifiers = [] }
-# "comment.block" = { fg = "black", bg = "white", modifiers = [] }
-# "comment.block.documentation" = { fg = "black", bg = "white", modifiers = [] }
+"comment" = { fg = "gray_500" }
 
 "variable" = { fg = "black", bg = "white", modifiers = [] }
 # "variable.builtin" = { fg = "black", bg = "white", modifiers = [] }
@@ -33,7 +25,7 @@
 # "punctuation.delimiter" = { fg = "black", bg = "white", modifiers = [] }
 # "punctuation.bracket" = { fg = "black", bg = "white", modifiers = [] }
 
-"keyword" = { fg = "black", bg = "white", modifiers = [] }
+"keyword" = { fg = "red_600" }
 # "keyword.control" = { fg = "black", bg = "white", modifiers = [] }
 # "keyword.control.conditional" = { fg = "black", bg = "white", modifiers = [] }
 # "keyword.control.conditional.repeat" = { fg = "black", bg = "white", modifiers = [] }
@@ -41,33 +33,33 @@
 # "keyword.directive" = { fg = "black", bg = "white", modifiers = [] }
 # "keyword.function" = { fg = "black", bg = "white", modifiers = [] }
 
-"operator" = { fg = "black", bg = "white", modifiers = [] }
+"operator" = { fg = "orange_600" }
 
-"function" = { fg = "black", bg = "white", modifiers = [] }
+"function" = { fg = "purple_500" }
 # "function.builtin" = { fg = "black", bg = "white", modifiers = [] }
 # "function.method" = { fg = "black", bg = "white", modifiers = [] }
-# "function.macro" = { fg = "black", bg = "white", modifiers = [] }
+"function.macro" = { fg = "green_600", bg = "white", modifiers = [] }
 # "function.special" = { fg = "black", bg = "white", modifiers = [] }
 
 "tag" = { fg = "black", bg = "white", modifiers = [] }
 
-"namespace" = { fg = "black", bg = "white", modifiers = [] }
+"namespace" = { fg = "purple_500", bg = "white", modifiers = [] }
 
 "ui.background" = { fg = "black", bg = "white", modifiers = [] }
 
-"ui.cursor" = { fg = "black", bg = "white", modifiers = [] }
-"ui.cursor.insert" = { fg = "black", bg = "white", modifiers = [] }
-"ui.cursor.select" = { fg = "black", bg = "white", modifiers = [] }
-"ui.cursor.match" = { fg = "black", bg = "white", modifiers = [] }
-"ui.cursor.primary" = { fg = "black", bg = "white", modifiers = [] }
+"ui.cursor" = { fg = "red_100", bg = "pink_500" }
+"ui.cursor.insert" = { fg = "black", bg = "yellow_500" }
+"ui.cursor.select" = { fg = "black", bg = "yellow_500" }
+"ui.cursor.match" = { fg = "black", bg = "yellow_500" }
+"ui.cursor.primary" = { fg = "black", bg = "yellow_500" }
 
-"ui.linenr" = { fg = "black", bg = "white", modifiers = [] }
-"ui.linenr.selected" = { fg = "black", bg = "white", modifiers = [] }
+"ui.linenr" = { fg = "gray_500", bg = "gray_100" }
+"ui.linenr.selected" = { fg = "black", bg = "gray_100" }
 
-"ui.statusline" = { fg = "black", bg = "white", modifiers = [] }
-"ui.statusline.inactive" = { fg = "black", bg = "white", modifiers = [] }
+"ui.statusline" = { fg = "black", bg = "gray_100", modifiers = [] }
+"ui.statusline.inactive" = { fg = "black", bg = "gray_100", modifiers = [] }
 
-"ui.popup" = { fg = "black", bg = "white", modifiers = [] }
+"ui.popup" = { fg = "black", bg = "gray_100", modifiers = [] }
 
 "ui.window" = { fg = "black", bg = "white", modifiers = [] }
 
@@ -76,14 +68,14 @@
 "ui.text" = { fg = "black", bg = "white", modifiers = [] }
 "ui.text.focus" = { fg = "black", bg = "white", modifiers = [] }
 
-"ui.info" = { fg = "black", bg = "white", modifiers = [] }
-"ui.info.text" = { fg = "black", bg = "white", modifiers = [] }
+"ui.info" = { fg = "black", bg = "gray_100", modifiers = [] }
+"ui.info.text" = { fg = "black", bg = "gray_100", modifiers = [] }
 
-"ui.menu" = { fg = "black", bg = "white", modifiers = [] }
-"ui.menu.selected" = { fg = "black", bg = "white", modifiers = [] }
+"ui.menu" = { fg = "black", bg = "gray_100", modifiers = [] }
+"ui.menu.selected" = { fg = "white", bg = "blue_500", modifiers = [] }
 
-"ui.selection" = { fg = "black", bg = "white", modifiers = [] }
-"ui.selection.primary" = { fg = "black", bg = "white", modifiers = [] }
+"ui.selection" = { bg = "red_100" }
+"ui.selection.primary" = { bg = "yellow_200" }
 
 "info" = { fg = "black", bg = "white", modifiers = [] }
 "hint" = { fg = "black", bg = "white", modifiers = [] }
