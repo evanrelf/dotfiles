@@ -6,11 +6,11 @@ in
   "installer"
   (pkgs.gitignoreSource ./.)
   { }
-).overrideAttrs (old: {
-  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
+).overrideAttrs (prev: {
+  nativeBuildInputs = (prev.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
 
   postInstall = ''
-    ${old.postInstall or ""}
+    ${prev.postInstall or ""}
     wrapProgram $out/bin/installer --prefix PATH : ${pkgs.stow}/bin
   '';
 })

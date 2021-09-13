@@ -18,11 +18,11 @@ let
 
 
   haskellPackages =
-    pkgsPrev.haskellPackages.override (old: {
+    pkgsPrev.haskellPackages.override (prev: {
       overrides =
         pkgsPrev.lib.fold
           pkgsPrev.lib.composeExtensions
-          (old.overrides or (_: _: { }))
+          (prev.overrides or (_: _: { }))
           [
             packagesExtension
             overridesExtension

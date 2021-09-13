@@ -13,10 +13,12 @@ let
 in
 {
   coreutils-gprefix =
-    pkgsPrev.coreutils.override {
+    (pkgsPrev.coreutils.override {
       singleBinary = false;
       withPrefix = true;
-    };
+    }).overrideAttrs (prev: {
+      doCheck = false;
+    });
 
   emacsCustom =
     let
@@ -88,7 +90,7 @@ in
   };
 
   gitAndTools = pkgsPrev.gitAndTools // {
-    gitFull = pkgsPrev.gitAndTools.gitFull.overrideAttrs (old: {
+    gitFull = pkgsPrev.gitAndTools.gitFull.overrideAttrs (prev: {
       doInstallCheck = false;
     });
   };
@@ -109,7 +111,7 @@ in
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
   kakoune-unwrapped =
-    pkgsPrev.kakoune-unwrapped.overrideAttrs (old: rec {
+    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "2021.08.28";
       src = pkgsPrev.fetchFromGitHub {
         owner = "mawww";
@@ -118,7 +120,7 @@ in
         sha256 = "13kc68vkrzg89khir6ayyxgbnmz16dhippcnw09hhzxivf5ayzpy";
       };
       preConfigure = ''
-        ${old.preConfigure}
+        ${prev.preConfigure}
         export version="${version}"
       '';
     });
@@ -128,7 +130,7 @@ in
   ormoloog =
     let
       ormolu =
-        pkgsPrev.ormolu.overrideAttrs (old: {
+        pkgsPrev.ormolu.overrideAttrs (prev: {
           src = pkgsPrev.fetchFromGitHub {
             owner = "google";
             repo = "ormolu";
