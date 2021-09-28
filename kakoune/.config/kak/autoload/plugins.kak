@@ -1,7 +1,8 @@
 hook -once global KakBegin .* %{
 
 # evanrelf/primer.kak
-declare-option str column_color "rgb:f6f8fa"
+# declare-option str column_color "rgb:f6f8fa"
+declare-option str column_color "rgb:3c3c3c" # lucius
 
 # evanrelf/byline.kak
 require-module "byline"

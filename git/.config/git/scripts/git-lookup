@@ -35,6 +35,6 @@ fi
   --height 100% \
   "${preview[@]}" \
   --ansi \
-  --color light \
+  --color dark \
 | cut -d ' ' -f 1 \
 | xargs git rev-parse --verify --quiet

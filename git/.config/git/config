@@ -151,7 +151,7 @@
   pager = delta
 [delta]
   tabs = 8
-  syntax-theme = GitHub
+  syntax-theme = ansi
 [diff]
   renames = copies
   algorithm = patience
