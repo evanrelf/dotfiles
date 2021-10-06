@@ -3,9 +3,9 @@
 let
   nixos-hardware =
     let
-      # master on 2020-04-16
-      rev = "267d8b2d7f049d2cb9b7f4a7f981c123db19a868";
-      sha256 = "1ks1j9pkpjbz0sbwqrp4l0p9lfc1y17cdxjjk8sa8khf60l2cwzw";
+      # master on 2021-10-06
+      rev = "0a8b8054c9920368a3c15e6d766188fdf04b736f";
+      sha256 = "1vg43gvqav4p31awk82ax5710cvp0lizqbhgmg3j1qvdspxv7nj8";
     in
     builtins.fetchTarball {
       url = "https://github.com/NixOS/nixos-hardware/archive/${rev}.tar.gz";
