@@ -72,7 +72,6 @@ let
     tree
     watchexec
     yj
-    zig
     zoxide
   ];
 
