@@ -32,7 +32,7 @@ do_exists() {
 
 do_copy() {
   if ! diff "${destination_path}" "${source_path}" >/dev/null; then
-    diff -u "${destination_path}" "${source_path}" | eval "$(git config core.pager)"
+    diff -u "${destination_path}" "${source_path}" | eval "$(git config core.pager)" || true
 
     if confirm "Copy new configuration?"; then
       sudo cp -v "${destination_path}" "${destination_path}.old"
