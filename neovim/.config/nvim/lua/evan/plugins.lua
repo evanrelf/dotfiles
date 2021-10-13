@@ -27,7 +27,7 @@ vim.api.nvim_exec([[
 
 -- ishan9299/modus-theme-vim
 vim.o.termguicolors = true
-vim.cmd "colorscheme modus-operandi"
+vim.cmd "colorscheme modus-vivendi"
 
 -- neovim/nvim-lspconfig
 vim.o.signcolumn = "yes"
