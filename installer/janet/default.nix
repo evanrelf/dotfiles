@@ -11,8 +11,11 @@ pkgs.stdenv.mkDerivation {
 
   buildInputs = [ pkgs.janet ];
 
-  buildPhase = ''
-    false # TODO
+  # TODO
+  installPhase = ''
+    mkdir -p $out/bin/
+    echo exec ${pkgs.janet}/bin/janet "$src/src/main.janet" '$@' > $out/bin/installer
+    chmod +x $out/bin/installer
   '';
 
   postInstall = ''
