@@ -42,6 +42,7 @@ let
     httpie
     hyperfine
     iosevka-bin
+    janet
     jq
     kakoune
     lorri
