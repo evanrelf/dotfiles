@@ -73,3 +73,5 @@ end
 
 # Typos
 abbr --add gs "git s"
+
+abbr --add grr "set -l commit (git k) && git rebase \$commit --exec 'env -i PATH=\$(dirname \$(which nix)) XDG_CACHE_HOME=.cache ./update-config --yes && git commit --all --fixup HEAD --allow-empty' && git rbauto \$commit"
