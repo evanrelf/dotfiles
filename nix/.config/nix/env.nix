@@ -28,6 +28,7 @@ let
     fd
     # findutils-gprefix
     fish
+    fx
     fzf
     ghcid
     gitAndTools.delta
