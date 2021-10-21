@@ -79,6 +79,7 @@
   rbc = rebase --continue
   rbs = rebase --skip
   rba = rebase --abort
+  rbmain = "!git fetch && git rb origin/main #"
 
   # RESET
   r = reset --mixed
