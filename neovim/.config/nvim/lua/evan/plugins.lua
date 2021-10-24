@@ -1,6 +1,7 @@
 vim.api.nvim_exec([[
   call plug#begin(stdpath('data') . '/plugged')
 
+  Plug 'bluz71/vim-moonfly-colors'
   Plug 'ishan9299/modus-theme-vim'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-repeat'
@@ -25,9 +26,13 @@ vim.api.nvim_exec([[
   call plug#end()
 ]], false)
 
--- ishan9299/modus-theme-vim
+-- bluz71/vim-moonfly-colors
 vim.o.termguicolors = true
-vim.cmd "colorscheme modus-vivendi"
+vim.cmd "colorscheme moonfly"
+
+-- ishan9299/modus-theme-vim
+-- vim.o.termguicolors = true
+-- vim.cmd "colorscheme modus-vivendi"
 
 -- neovim/nvim-lspconfig
 vim.o.signcolumn = "yes"
