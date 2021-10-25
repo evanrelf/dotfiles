@@ -57,7 +57,6 @@ let
     nix-prefetch-git
     nix-top
     nix-tree
-    # ormoloog
     ormolu
     pandoc
     patat
