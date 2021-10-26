@@ -23,6 +23,7 @@ let
     delta
     dhall
     direnv
+    emacsCustom
     exa
     fd
     # findutils-gprefix
@@ -71,7 +72,6 @@ let
   ];
 
   x86_64Packages = with pkgs; [
-    emacsCustom
     ghcid
     magic-wormhole
     nix-index

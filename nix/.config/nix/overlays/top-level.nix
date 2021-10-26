@@ -33,6 +33,7 @@ in
         builtins.getAttr builtins.currentSystem {
           "x86_64-linux" = pkgsFinal.emacsGcc;
           "x86_64-darwin" = emacsGccDarwin;
+          "aarch64-darwin" = emacsGccDarwin;
         };
     in
     (pkgsPrev.emacsPackagesGen emacs).emacsWithPackages (p: [ p.vterm ]);
