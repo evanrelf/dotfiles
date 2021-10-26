@@ -23,14 +23,12 @@ let
     delta
     dhall
     direnv
-    emacsCustom
     exa
     fd
     # findutils-gprefix
     fish
     fx
     fzf
-    ghcid
     gitAndTools.delta
     gitAndTools.gh
     gitAndTools.gitFull
@@ -47,17 +45,14 @@ let
     jq
     kakoune
     lorri
-    magic-wormhole
     moreutils
     neovim
     nerdfonts
     nix-diff
-    nix-index
     nixpkgs-fmt
     nix-prefetch-git
     nix-top
     nix-tree
-    ormolu
     pandoc
     patat
     perlPackages.GitAutofixup
@@ -71,9 +66,17 @@ let
     tmux
     tokei
     tree
-    watchexec
     yj
     zoxide
+  ];
+
+  x86_64Packages = with pkgs; [
+    emacsCustom
+    ghcid
+    magic-wormhole
+    nix-index
+    ormolu
+    watchexec
   ];
 
   personalPackages = with pkgs; [
@@ -103,6 +106,7 @@ pkgs.buildEnv {
   paths = pkgs.lib.concatLists (builtins.getAttr hostname {
     "auburn" = [
       commonPackages
+      x86_64Packages
       personalPackages
     ];
 
@@ -113,17 +117,20 @@ pkgs.buildEnv {
 
     "sienna" = [
       commonPackages
+      x86_64Packages
       personalPackages
       linuxPackages
     ];
 
     "indigo" = [
       commonPackages
+      x86_64Packages
       [ pkgs.tmux-xpanes ]
     ];
 
     "hydra-dev" = [
       commonPackages
+      x86_64Packages
       [
         pkgs.gcc
         pkgs.gnupg
