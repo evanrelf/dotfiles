@@ -7,6 +7,14 @@
 let
   pkgs = import ./pkgs.nix { };
 
+  pkgs-x86_64 = import ./pkgs.nix { localSystem = "x86_64-darwin"; };
+
+  useRosetta = attr:
+    if builtins.currentSystem == "aarch64-darwin" then
+      pkgs-x86_64."${attr}"
+    else
+      pkgs."${attr}";
+
   declarative-channels =
     pkgs.runCommandLocal "declarative-channels" { } ''
       mkdir -p $out/channels
@@ -15,6 +23,8 @@ let
 
   commonPackages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
+    (useRosetta "nix-index")
+    (useRosetta "watchexec")
     as-tree
     bashInteractive
     cabal-install
@@ -74,9 +84,7 @@ let
   x86_64Packages = with pkgs; [
     ghcid
     magic-wormhole
-    nix-index
     ormolu
-    watchexec
   ];
 
   personalPackages = with pkgs; [
