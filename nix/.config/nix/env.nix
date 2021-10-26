@@ -36,14 +36,12 @@ let
     emacsCustom
     exa
     fd
-    # findutils-gprefix
     fish
     fx
     fzf
     gitAndTools.delta
     gitAndTools.gh
     gitAndTools.gitFull
-    # gnugrep-gprefix
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
     haskellPackages.retrie
