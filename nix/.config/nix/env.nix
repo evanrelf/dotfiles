@@ -106,6 +106,11 @@ pkgs.buildEnv {
       personalPackages
     ];
 
+    "ultraviolet" = [
+      commonPackages
+      personalPackages
+    ];
+
     "sienna" = [
       commonPackages
       personalPackages
