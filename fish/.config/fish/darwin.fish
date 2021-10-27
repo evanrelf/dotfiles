@@ -1,4 +1,8 @@
 if test (uname) = "Darwin"
+    function rosetta2
+        arch -x86_64 /bin/sh -c "$argv"
+    end
+
     function rmds -d "Remove .DS_Store files recursively from current directory"
         if _exists fd
             _log "Searching..."
