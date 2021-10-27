@@ -1,2 +1,5 @@
 set --export HOMEBREW_NO_AUTO_UPDATE "1"
-eval (/opt/homebrew/bin/brew shellenv)
+
+if test -e /opt/homebrew/bin/brew
+    eval (/opt/homebrew/bin/brew shellenv)
+end
