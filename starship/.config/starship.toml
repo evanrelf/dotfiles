@@ -1,4 +1,5 @@
 format = """\
+  ${custom.rosetta2}\
   $username\
   $directory\
   $hg_branch\
@@ -17,6 +18,11 @@ add_newline = false
 # format = '[ $number]($style) '
 # style = 'cyan'
 # threshold = 0
+
+[custom.rosetta2]
+symbol = "Rosetta 2 "
+when = 'test -n "$ROSETTA2"'
+style = 'yellow'
 
 [username]
 disabled = false
