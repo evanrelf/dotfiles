@@ -1,4 +1,8 @@
 if test (uname) = "Darwin"
+    if test (sysctl -in sysctl.proc_translated) = 1
+        set --export ROSETTA2 "true"
+    end
+
     function rosetta2
         arch -x86_64 /bin/sh -c "$argv"
     end
