@@ -81,7 +81,6 @@ let
 
   x86_64Packages = with pkgs; [
     ghcid
-    magic-wormhole
     ormolu
   ];
 
