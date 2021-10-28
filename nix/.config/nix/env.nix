@@ -23,7 +23,9 @@ let
 
   commonPackages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
+    (useRosetta "ghcid")
     (useRosetta "nix-index")
+    (useRosetta "ormolu")
     (useRosetta "watchexec")
     as-tree
     bashInteractive
@@ -79,11 +81,6 @@ let
     zoxide
   ];
 
-  x86_64Packages = with pkgs; [
-    ghcid
-    ormolu
-  ];
-
   personalPackages = with pkgs; [
     borgbackup
     ffmpeg
@@ -111,7 +108,6 @@ pkgs.buildEnv {
   paths = pkgs.lib.concatLists (builtins.getAttr hostname {
     "auburn" = [
       commonPackages
-      x86_64Packages
       personalPackages
     ];
 
@@ -122,20 +118,17 @@ pkgs.buildEnv {
 
     "sienna" = [
       commonPackages
-      x86_64Packages
       personalPackages
       linuxPackages
     ];
 
     "indigo" = [
       commonPackages
-      x86_64Packages
       [ pkgs.tmux-xpanes ]
     ];
 
     "hydra-dev" = [
       commonPackages
-      x86_64Packages
       [
         pkgs.gcc
         pkgs.gnupg
