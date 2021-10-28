@@ -113,12 +113,12 @@ in
 
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
-      version = "2021.08.28";
+      version = "2021.10.28";
       src = pkgsPrev.fetchFromGitHub {
         owner = "mawww";
         repo = "kakoune";
         rev = "v${version}";
-        sha256 = "13kc68vkrzg89khir6ayyxgbnmz16dhippcnw09hhzxivf5ayzpy";
+        sha256 = "17z536iw6xap2lj3c23j53qnqs5lzr80kvxmdaxmdj07f7mk87d6";
       };
       preConfigure = ''
         ${prev.preConfigure}
