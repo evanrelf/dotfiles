@@ -30,6 +30,7 @@ let
     as-tree
     bashInteractive
     cabal-install
+    cargo
     coreutils-gprefix
     declarative-channels
     delta
@@ -69,6 +70,8 @@ let
     perlPackages.GitAutofixup
     ripgrep
     rlwrap
+    rustc
+    rust-script
     sd
     shellcheck
     starship
