@@ -26,6 +26,7 @@ style = 'yellow'
 
 [username]
 disabled = false
+style_user = 'blue'
 
 [directory]
 disabled = false
