@@ -103,13 +103,7 @@
   :config
   (setq org-startup-indented nil)
   (setq org-adapt-indentation nil)
-  (setq org-hide-leading-stars nil)
-  (defun force-org-hide-leading-stars ()
-    "See issue for more info: https://github.com/hlissner/doom-emacs/issues/3076"
-    (setq org-hide-leading-stars nil)
-    (font-lock-mode -1)
-    (font-lock-mode +1))
-  (add-hook 'org-mode-hook #'force-org-hide-leading-stars))
+  (setq org-hide-leading-stars nil))
 
 ;; Make Emacs shut up (https://emacs.stackexchange.com/a/20039)
 (defun quieter-command-error-function (data context caller)
