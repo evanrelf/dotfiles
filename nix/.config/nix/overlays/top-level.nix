@@ -21,22 +21,7 @@ in
     });
 
   emacsCustom =
-    let
-      emacsGccDarwin = (import (pkgsPrev.fetchFromGitHub {
-        owner = "siraben";
-        repo = "nix-gccemacs-darwin";
-        rev = "c3800c44331dca424fa525d8bb08e49ee37fdfb3";
-        sha256 = "1m8qqhfij37q7sjqa91cmymr6az2vva15jghzywhpq3j73ipmqy1";
-      })).packages."x86_64-darwin".emacsGccDarwin;
-
-      emacs =
-        builtins.getAttr builtins.currentSystem {
-          "x86_64-linux" = pkgsFinal.emacsGcc;
-          "x86_64-darwin" = emacsGccDarwin;
-          "aarch64-darwin" = emacsGccDarwin;
-        };
-    in
-    (pkgsPrev.emacsPackagesGen emacs).emacsWithPackages (p: [ p.vterm ]);
+    (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
