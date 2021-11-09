@@ -7,6 +7,7 @@
 (package! magit-delta)
 (package! modus-themes)
 (package! mood-line)
+(package! solaire-mode)
 
 (disable-packages!
  ;; core
@@ -72,9 +73,6 @@
  ;; :tools magit
  github-review
  ;; magit-gitflow ;; TODO: I need this enabled for the ? popup
-
- ;; :ui doom
- solaire-mode
 
  ;; :ui vc-gutter
  git-gutter-fringe)

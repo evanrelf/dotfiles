@@ -135,6 +135,9 @@
              evil-window-vsplit)
     (+ivy/projectile-find-file)))
 
+(use-package! solaire-mode
+  :config (solaire-global-mode +1))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Evan Relf"
