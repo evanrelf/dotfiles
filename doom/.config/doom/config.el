@@ -158,7 +158,7 @@
         doom-big-font (font-spec :family "Iosevka Term SS08" :size 40)
         doom-variable-pitch-font (font-spec :family "Iosevka Term SS08" :size 27)))
 
-(setq modus-operandi-theme-org-blocks 'greyscale)
-(setq doom-theme 'modus-operandi)
+(setq modus-vivendi-theme-org-blocks 'greyscale)
+(setq doom-theme 'modus-vivendi)
 
 (setq display-line-numbers-type t)
