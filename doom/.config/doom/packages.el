@@ -8,6 +8,7 @@
 (package! modus-themes)
 (package! mood-line)
 (package! solaire-mode)
+(package! janet-mode)
 
 (disable-packages!
  ;; core
