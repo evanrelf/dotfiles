@@ -14,6 +14,7 @@
   bd = branch --delete
   bdf = branch --delete --force
   master-to-main = branch --move --force main
+  bm = branch --move
 
   # CHERRY-PICK
   ch = cherry-pick
