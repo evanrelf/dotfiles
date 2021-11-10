@@ -52,6 +52,7 @@
   (sh +fish)
   web
   yaml
+  zig
 
   :config
   (default +bindings +smartparens))
