@@ -4,7 +4,7 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-repo=$(git remote get-url origin | sd '(?:git@github.com:|https://github.com/)([\w\-]+)/([\w\-\.]+)(?:\.git)' '$1/$2')
+repo=$(git remote get-url origin | sd '(?:git@github\.com:|https://github\.com/)([\w\-]+)/([\w\-\.]+)(?:\.git)' '$1/$2')
 
 branch=$(git symbolic-ref HEAD | sd '(?:.+/)*(.+)' '$1')
 
