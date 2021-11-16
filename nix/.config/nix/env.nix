@@ -43,6 +43,7 @@ let
     fish
     fx
     fzf
+    git-branchless
     gitAndTools.delta
     gitAndTools.gh
     gitAndTools.gitFull
