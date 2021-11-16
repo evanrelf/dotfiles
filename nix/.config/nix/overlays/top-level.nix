@@ -118,8 +118,8 @@ in
       source = pkgsPrev.fetchFromGitHub {
         owner = "evanrelf";
         repo = "patat";
-        rev = "4d976d463aedc1027a31ea70ae2d12d64c915cc6";
-        sha256 = "1760bddpz0p8n88n1m03wz8yzzs7x1sgd2rf26fs4x6way3jym6b";
+        rev = "b5f525bd2f3971fba231f378fa1b8f02c63860ba";
+        sha256 = "sha256-4m9iYRlzDzd4d1a+Qo/n64ER0+elAoW838CF/qgDjpE=";
       };
     in
     pkgsPrev.haskell.lib.doJailbreak
