@@ -36,6 +36,7 @@ let
     delta
     dhall
     direnv
+    diskus
     emacsCustom
     exa
     fd
