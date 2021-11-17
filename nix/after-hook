@@ -6,8 +6,15 @@ IFS=$'\n\t'
 command -v nix-env >/dev/null 2>&1 \
   || (echo "Missing executable: nix-env"; exit 1)
 
-echo "[nix] Installing profile"
-nix-env \
-  --install \
+echo "[nix] Building profile"
+temp=$(mktemp -d)
+nix build \
   --file "nix/.config/nix/env.nix" \
-  --argstr hostname "$(hostname -s)"
+  --argstr hostname "$(hostname -s)" \
+  -o "${temp}/result"
+profile=$(readlink "${temp}/result")
+echo "${profile}"
+rm -rf "${temp}"
+
+echo "[nix] Installing profile"
+nix-env --install "${profile}"
