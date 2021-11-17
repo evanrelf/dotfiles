@@ -72,8 +72,6 @@ let
     perlPackages.GitAutofixup
     ripgrep
     rlwrap
-    rustc
-    rust-script
     sd
     shellcheck
     starship
