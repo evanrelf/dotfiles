@@ -1,6 +1,3 @@
-{ hostname ? throw "Please specify your machine's hostname (e.g. `--argstr hostname $(hostname -s)`)"
-}:
-
 # To install fonts on macOS:
 # $ open ~/.nix-profile/share/fonts/truetype/**/*.{ttf,ttc}
 
@@ -105,38 +102,41 @@ let
     xclip
   ];
 
+  buildEnvWith = packageSets:
+    pkgs.buildEnv {
+      name = "env";
+      paths = pkgs.lib.concatLists packageSets;
+    };
+
 in
-pkgs.buildEnv {
-  name = "env";
-  paths = pkgs.lib.concatLists (builtins.getAttr hostname {
-    "auburn" = [
-      commonPackages
-      personalPackages
-    ];
+{
+  "auburn" = buildEnvWith [
+    commonPackages
+    personalPackages
+  ];
 
-    "ultraviolet" = [
-      commonPackages
-      personalPackages
-    ];
+  "ultraviolet" = buildEnvWith [
+    commonPackages
+    personalPackages
+  ];
 
-    "sienna" = [
-      commonPackages
-      personalPackages
-      linuxPackages
-    ];
+  "sienna" = buildEnvWith [
+    commonPackages
+    personalPackages
+    linuxPackages
+  ];
 
-    "indigo" = [
-      commonPackages
-      [ pkgs.tmux-xpanes ]
-    ];
+  "indigo" = buildEnvWith [
+    commonPackages
+    [ pkgs.tmux-xpanes ]
+  ];
 
-    "hydra-dev" = [
-      commonPackages
-      [
-        pkgs.gcc
-        pkgs.gnupg
-        pkgs.pinentry-curses
-      ]
-    ];
-  });
+  "hydra-dev" = buildEnvWith [
+    commonPackages
+    [
+      pkgs.gcc
+      pkgs.gnupg
+      pkgs.pinentry-curses
+    ]
+  ];
 }
