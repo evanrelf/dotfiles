@@ -22,40 +22,36 @@
             ]);
     in
     {
-      # e.g. `nix run . -- switch`
-      defaultApp = eachSystem (system:
+      defaultPackage = eachSystem (system:
+        # TODO:
+        #
+        # Silence this error message when `build`ing or `switch`ing:
+        #
+        #```
+        # No configuration file found. Please create one at /Users/evanrelf/.config/nixpkgs/home.nix
+        #```
+        #
+        # One of these should work:
+        #
+        # ```
+        # export HOME_MANAGER_CONFIG="/dev/null"
+        # export HOME_MANAGER_CONFIG="${pkgs.writeText "home.nix" "{ }"}"
+        # ```
+        #
+        # ...but it produces this error message:
+        #
+        # ```
+        # error: file 'home-manager/home-manager/home-manager.nix' was not found in the Nix search path (add it using $NIX_PATH or -I)
+        # ```
         let
           pkgs = import nixpkgs { inherit system; };
 
         in
-        {
-          type = "app";
-          # TODO:
-          #
-          # Silence this error message when `build`ing or `switch`ing:
-          #
-          #```
-          # No configuration file found. Please create one at /Users/evanrelf/.config/nixpkgs/home.nix
-          #```
-          #
-          # One of these should work:
-          #
-          # ```
-          # export HOME_MANAGER_CONFIG="/dev/null"
-          # export HOME_MANAGER_CONFIG="${pkgs.writeText "home.nix" "{ }"}"
-          # ```
-          #
-          # ...but it produces this error message:
-          #
-          # ```
-          # error: file 'home-manager/home-manager/home-manager.nix' was not found in the Nix search path (add it using $NIX_PATH or -I)
-          # ```
-          program = builtins.toString (pkgs.writeShellScript "home-manager" ''
-            export PATH="${home-manager.defaultPackage."${system}"}/bin:$PATH"
-            hostname=$(hostname -s)
-            { set -x; home-manager --flake .#$hostname $@; }
-          '');
-        }
+        pkgs.writeShellScriptBin "home-manager" ''
+          export PATH="${home-manager.defaultPackage."${system}"}/bin:$PATH"
+          hostname=$(hostname -s)
+          { set -x; home-manager --flake .#$hostname $@; }
+        ''
       );
 
       homeConfigurations = rec {
