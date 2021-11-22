@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -6,4 +6,6 @@
     ./awake.nix
     ./common.nix
   ];
+
+  home.packages = [ pkgs.tmux-xpanes ];
 }

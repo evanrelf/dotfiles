@@ -113,16 +113,10 @@ in
 
     "indigo" = [
       commonPackages
-      [ pkgsFinal.tmux-xpanes ]
     ];
 
     "hydra-dev" = [
       commonPackages
-      [
-        pkgsFinal.gcc
-        pkgsFinal.gnupg
-        pkgsFinal.pinentry-curses
-      ]
     ];
   };
 }
