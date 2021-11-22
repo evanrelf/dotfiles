@@ -29,7 +29,6 @@ let
     jq
     lorri
     moreutils
-    neovim
     nerdfonts
     pandoc
     patat
