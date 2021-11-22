@@ -7,5 +7,6 @@
     ../programs/kakoune.nix
     ../programs/nix.nix
     ../programs/starship.nix
+    ../programs/tmux.nix
   ];
 }

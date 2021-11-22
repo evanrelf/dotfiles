@@ -42,7 +42,6 @@ let
     shellcheck
     stylish-haskell
     tealdeer
-    tmux
     tokei
     tree
     yj
