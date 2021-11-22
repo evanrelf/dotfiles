@@ -18,4 +18,5 @@ if [ ! -L "${result}" ]; then
   nix-build "./installer/${implementation}" --out-link "${result}"
 fi
 
+cd configs
 "${result}"/bin/installer "$@"
