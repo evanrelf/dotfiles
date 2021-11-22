@@ -8,6 +8,18 @@ let
   #     ln -s ${pkgs.path} $out/channels/nixpkgs
   #   '';
 
+  # TODO
+  # rosetta =
+  #   import pkgsFinal.path {
+  #     system =
+  #       if pkgsFinal.system == "aarch64-darwin" then
+  #         "x86_64-darwin"
+  #       else
+  #         pkgsFinal.system;
+
+  #     inherit (pkgsFinal) overlays;
+  #   };
+
 in
 {
   home.packages = with pkgs; [
@@ -33,7 +45,6 @@ in
       # inputs.emacs-overlay.overlay
       (import ../../configs/nix/.config/nix/overlays/kakoune-plugins.nix)
       (import ../../configs/nix/.config/nix/overlays/top-level.nix)
-      (import ../../configs/nix/.config/nix/overlays/envs.nix)
     ];
   };
 }
