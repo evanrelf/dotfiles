@@ -8,7 +8,7 @@ command -v nix-env >/dev/null 2>&1 \
 
 echo "[nix] Building profile"
 temp=$(mktemp -d)
-nix build ./nix/.config/nix/#"$(hostname -s)" -o "${temp}/result"
+nix build ./nix/.config/nix/#envs."$(hostname -s)" -o "${temp}/result"
 profile=$(readlink "${temp}/result")
 echo "${profile}"
 rm -rf "${temp}"
