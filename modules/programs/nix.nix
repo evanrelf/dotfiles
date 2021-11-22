@@ -33,8 +33,8 @@ in
     # rosetta.nix-index
   ];
 
-  xdg.configFile."nix" = {
-    source = ../../configs/nix/.config/nix;
+  xdg.configFile."nixpkgs" = {
+    source = ../../configs/nix/.config/nixpkgs;
     recursive = true;
   };
 
@@ -43,8 +43,8 @@ in
     overlays = [
       # TODO Thread Emacs overlay into this module from `flake.nix`
       # inputs.emacs-overlay.overlay
-      (import ../../configs/nix/.config/nix/overlays/kakoune-plugins.nix)
-      (import ../../configs/nix/.config/nix/overlays/top-level.nix)
+      (import ../../configs/nix/.config/nixpkgs/overlays/kakoune-plugins.nix)
+      (import ../../configs/nix/.config/nixpkgs/overlays/top-level.nix)
     ];
   };
 }
