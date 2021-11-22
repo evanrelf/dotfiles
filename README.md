@@ -12,9 +12,7 @@ My personal dotfiles
 - Package Manager: [Nix][nix], [Homebrew][homebrew] (for GUI apps on macOS)
 - OS: [macOS][macos], [NixOS][nixos]
 
-Dotfiles are managed using a combination of [GNU Stow][gnustow],
-`{before,after}-hook` shell scripts, and [my install script](./installer)
-written in Haskell.
+Dotfiles are managed using [Home Manager][home-manager] (`nix run . -- switch`).
 
 [kakoune]: https://github.com/mawww/kakoune
 [fish]: https://fishshell.com/
@@ -27,3 +25,4 @@ written in Haskell.
 [macos]: https://www.apple.com/macos/
 [nixos]: https://nixos.org/
 [gnustow]: https://www.gnu.org/software/stow/
+[home-manager]: https://github.com/nix-community/home-manager
