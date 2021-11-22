@@ -63,7 +63,6 @@ let
     rosetta.watchexec
     sd
     shellcheck
-    starship
     stylish-haskell
     tealdeer
     tmux

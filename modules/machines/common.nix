@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./common.nix
+    ../programs/starship.nix
   ];
 }
