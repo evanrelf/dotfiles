@@ -9,7 +9,7 @@ command -v nix-env >/dev/null 2>&1 \
 echo "[nix] Building profile"
 temp=$(mktemp -d)
 nix build \
-  --file "nix/.config/nix/env.nix" \
+  --file "nix/.config/nix/default.nix" \
   "$(hostname -s)" \
   -o "${temp}/result"
 profile=$(readlink "${temp}/result")
