@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../programs/hammerspoon.nix
     ../programs/kitty.nix
     ./awake.nix
     ./common.nix
