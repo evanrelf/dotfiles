@@ -51,7 +51,6 @@ let
   ];
 
   personalPackages = with pkgsFinal; [
-    borgbackup
     ffmpeg
     rclone
     youtube-dl
