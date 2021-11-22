@@ -1,9 +1,0 @@
-[package]
-name = "installer"
-version = "0.1.0"
-edition = "2018"
-
-[dependencies]
-ansi_term = "0.12.1"
-once_cell = "1.8.0"
-structopt = { version = "0.3.22", default-features = false }
