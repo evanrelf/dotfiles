@@ -16,7 +16,6 @@ let
     emacsCustom
     exa
     fd
-    fish
     fx
     fzf
     haskellPackages.cabal-plan
