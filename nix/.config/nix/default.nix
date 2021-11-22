@@ -1,4 +1,6 @@
-args@{ ... }:
+{ system
+, inputs
+}:
 
 # To install fonts on macOS:
 # $ open ~/.nix-profile/share/fonts/truetype/**/*.{ttf,ttc}
@@ -11,13 +13,13 @@ let
   ];
 
   pkgs =
-    import ./nixpkgs.nix { inherit system overlays; };
+    import inputs.nixpkgs { inherit system overlays; };
 
   pkgs-x86_64 =
-    import ./nixpkgs { system = "x86_64-darwin"; inherit overlays; };
+    import inputs.nixpkgs { system = "x86_64-darwin"; inherit overlays; };
 
   useRosetta = attr:
-    if (args.system or builtins.currentSystem) == "aarch64-darwin" then
+    if system == "aarch64-darwin" then
       pkgs-x86_64."${attr}"
     else
       pkgs."${attr}";
