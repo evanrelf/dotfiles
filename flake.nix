@@ -51,10 +51,29 @@
           pkgs = import nixpkgs { inherit system; };
 
         in
+        # e.g. `nix run . -- switch` or `eval $(nix-build --no-out-link)/bin/home-manager switch`
         pkgs.writeShellScriptBin "home-manager" ''
           export PATH="${home-manager.defaultPackage."${system}"}/bin:$PATH"
           hostname=$(hostname -s)
-          { set -x; home-manager --flake .#$hostname $@; }
+          trace() { set -x; $@; { set +x; } 2>/dev/null; }
+          if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
+            trace home-manager --flake .#$hostname $@
+          else
+            if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
+              echo "Falling back to non-flake switch"
+              temp=$(mktemp -d)
+              trap "rm -rf $temp" EXIT
+              trace nix build --file . homeConfigurations.$hostname -o $temp/result
+              config=$(readlink "$temp/result")
+              trace $config/activate
+            elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
+              echo "Falling back to non-flake build"
+              trace nix build --file . homeConfigurations.$hostname
+            else
+              echo "Unsupported arguments in fallback mode"
+              trace home-manager $@
+            fi
+          fi
         ''
       );
 
