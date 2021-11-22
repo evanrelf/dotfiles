@@ -4,12 +4,6 @@ pkgsFinal: pkgsPrev:
 # $ open ~/.nix-profile/share/fonts/truetype/**/*.{ttf,ttc}
 
 let
-  declarative-channels =
-    pkgsPrev.runCommandLocal "declarative-channels" { } ''
-      mkdir -p $out/channels
-      ln -s ${pkgsFinal.path} $out/channels/nixpkgs
-    '';
-
   commonPackages = with pkgsFinal; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))
     as-tree
@@ -17,9 +11,7 @@ let
     cabal-install
     cargo
     coreutils-gprefix
-    declarative-channels
     dhall
-    direnv
     diskus
     emacsCustom
     exa
@@ -41,17 +33,11 @@ let
     moreutils
     neovim
     nerdfonts
-    nix-diff
-    nixpkgs-fmt
-    nix-prefetch-git
-    nix-top
-    nix-tree
     pandoc
     patat
     ripgrep
     rlwrap
     rosetta.ghcid
-    rosetta.nix-index
     rosetta.ormolu
     rosetta.watchexec
     sd
