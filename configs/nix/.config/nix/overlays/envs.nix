@@ -37,7 +37,6 @@ let
     iosevka-bin
     janet
     jq
-    kakoune
     lorri
     moreutils
     neovim
