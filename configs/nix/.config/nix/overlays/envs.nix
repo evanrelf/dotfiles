@@ -18,7 +18,6 @@ let
     cargo
     coreutils-gprefix
     declarative-channels
-    delta
     dhall
     direnv
     diskus
@@ -28,10 +27,6 @@ let
     fish
     fx
     fzf
-    git-branchless
-    gitAndTools.delta
-    gitAndTools.gh
-    gitAndTools.gitFull
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
     haskellPackages.retrie
@@ -54,7 +49,6 @@ let
     nix-tree
     pandoc
     patat
-    perlPackages.GitAutofixup
     ripgrep
     rlwrap
     rosetta.ghcid
