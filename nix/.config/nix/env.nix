@@ -4,9 +4,17 @@ args@{ ... }:
 # $ open ~/.nix-profile/share/fonts/truetype/**/*.{ttf,ttc}
 
 let
-  pkgs = import ./pkgs.nix args;
+  overlays = [
+    inputs.emacs-overlay.overlay
+    (import ./overlays/kakoune-plugins.nix)
+    (import ./overlays/top-level.nix)
+  ];
 
-  pkgs-x86_64 = import ./pkgs.nix (args // { system = "x86_64-darwin"; });
+  pkgs =
+    import ./nixpkgs.nix { inherit system overlays; };
+
+  pkgs-x86_64 =
+    import ./nixpkgs { system = "x86_64-darwin"; inherit overlays; };
 
   useRosetta = attr:
     if (args.system or builtins.currentSystem) == "aarch64-darwin" then
