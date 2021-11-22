@@ -6,17 +6,17 @@
 # $ open ~/.nix-profile/share/fonts/truetype/**/*.{ttf,ttc}
 
 let
-  overlays = [
-    inputs.emacs-overlay.overlay
-    (import ./overlays/kakoune-plugins.nix)
-    (import ./overlays/top-level.nix)
-  ];
-
   pkgs =
-    import inputs.nixpkgs { inherit system overlays; };
+    import inputs.nixpkgs {
+      inherit system;
+      inherit (inputs.self) overlays;
+    };
 
   pkgs-x86_64 =
-    import inputs.nixpkgs { system = "x86_64-darwin"; inherit overlays; };
+    import inputs.nixpkgs {
+      system = "x86_64-darwin";
+      inherit (inputs.self) overlays;
+    };
 
   useRosetta = attr:
     if system == "aarch64-darwin" then

@@ -26,5 +26,11 @@
         mapAttrNames
           (system: import ./default.nix { inherit system inputs; })
           systems;
+
+      overlays = [
+        inputs.emacs-overlay.overlay
+        (import ./overlays/kakoune-plugins.nix)
+        (import ./overlays/top-level.nix)
+      ];
     };
 }
