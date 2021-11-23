@@ -83,6 +83,7 @@
           username = "evanrelf";
           homeDirectory = "/Users/${username}";
           configuration.imports = [ ./modules/machines/ultraviolet.nix ];
+          extraSpecialArgs = { inherit inputs; };
         };
 
         "auburn" = home-manager.lib.homeManagerConfiguration rec {
@@ -90,6 +91,7 @@
           username = "evanrelf";
           homeDirectory = "/Users/${username}";
           configuration.imports = [ ./modules/machines/auburn.nix ];
+          extraSpecialArgs = { inherit inputs; };
         };
 
         "sienna" = home-manager.lib.homeManagerConfiguration rec {
@@ -97,6 +99,7 @@
           username = "evanrelf";
           homeDirectory = "/home/${username}";
           configuration.imports = [ ./modules/machines/sienna.nix ];
+          extraSpecialArgs = { inherit inputs; };
         };
 
         "indigo" = home-manager.lib.homeManagerConfiguration rec {
@@ -104,6 +107,7 @@
           username = "evan";
           homeDirectory = "/Users/${username}";
           configuration.imports = [ ./modules/machines/indigo.nix ];
+          extraSpecialArgs = { inherit inputs; };
         };
 
         "hydra-dev" = home-manager.lib.homeManagerConfiguration rec {
@@ -111,6 +115,7 @@
           username = "evan";
           homeDirectory = "/home/${username}";
           configuration.imports = [ ./modules/machines/hydra-dev.nix ];
+          extraSpecialArgs = { inherit inputs; };
         };
       };
     };
