@@ -77,7 +77,7 @@
         ''
       );
 
-      homeConfigurations = rec {
+      homeConfigurations = {
         "ultraviolet" = home-manager.lib.homeManagerConfiguration rec {
           system = "aarch64-darwin";
           username = "evanrelf";
