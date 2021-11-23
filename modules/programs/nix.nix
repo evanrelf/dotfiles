@@ -37,13 +37,4 @@ in
     source = ../../overlays;
     recursive = true;
   };
-
-  nixpkgs = {
-    config = { };
-    overlays = [
-      inputs.emacs-overlay.overlay
-      (import ../../overlays/kakoune-plugins.nix)
-      (import ../../overlays/top-level.nix)
-    ];
-  };
 }

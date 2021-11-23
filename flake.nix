@@ -16,6 +16,14 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
+      config = { };
+
+      overlays = [
+        inputs.emacs-overlay.overlay
+        (import ./overlays/kakoune-plugins.nix)
+        (import ./overlays/top-level.nix)
+      ];
+
       eachSystem = f:
         builtins.listToAttrs
           (builtins.map
@@ -49,7 +57,7 @@
         # error: file 'home-manager/home-manager/home-manager.nix' was not found in the Nix search path (add it using $NIX_PATH or -I)
         # ```
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = import nixpkgs { inherit system config overlays; };
 
         in
         # e.g. `nix run . -- switch` or `eval $(nix-build --no-out-link)/bin/home-manager switch`
@@ -85,6 +93,7 @@
           homeDirectory = "/Users/${username}";
           configuration.imports = [ ./modules/machines/ultraviolet.nix ];
           extraSpecialArgs = { inherit inputs; };
+          pkgs = import nixpkgs { inherit system config overlays; };
         };
 
         "auburn" = home-manager.lib.homeManagerConfiguration rec {
@@ -93,6 +102,7 @@
           homeDirectory = "/Users/${username}";
           configuration.imports = [ ./modules/machines/auburn.nix ];
           extraSpecialArgs = { inherit inputs; };
+          pkgs = import nixpkgs { inherit system config overlays; };
         };
 
         "sienna" = home-manager.lib.homeManagerConfiguration rec {
@@ -101,6 +111,7 @@
           homeDirectory = "/home/${username}";
           configuration.imports = [ ./modules/machines/sienna.nix ];
           extraSpecialArgs = { inherit inputs; };
+          pkgs = import nixpkgs { inherit system config overlays; };
         };
 
         "indigo" = home-manager.lib.homeManagerConfiguration rec {
@@ -109,6 +120,7 @@
           homeDirectory = "/Users/${username}";
           configuration.imports = [ ./modules/machines/indigo.nix ];
           extraSpecialArgs = { inherit inputs; };
+          pkgs = import nixpkgs { inherit system config overlays; };
         };
 
         "hydra-dev" = home-manager.lib.homeManagerConfiguration rec {
@@ -117,6 +129,7 @@
           homeDirectory = "/home/${username}";
           configuration.imports = [ ./modules/machines/hydra-dev.nix ];
           extraSpecialArgs = { inherit inputs; };
+          pkgs = import nixpkgs { inherit system config overlays; };
         };
       };
     };
