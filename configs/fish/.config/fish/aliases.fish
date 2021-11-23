@@ -52,6 +52,13 @@ if _exists git
     end
 end
 
+if _exists tmux
+    if test -n "$TMUX"
+        alias tmux-copy "tmux load-buffer -"
+        alias tmux-paste "tmux save-buffer -"
+    end
+end
+
 alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
 
 alias deathrow "sudo tree -x -C --prune / | grep -vE '(/etc/static|/persist|/nix/store)' | less"
