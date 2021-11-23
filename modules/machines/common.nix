@@ -25,6 +25,7 @@
     fd
     fx
     fzf
+    ghcid
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
     haskellPackages.retrie
@@ -37,20 +38,18 @@
     lorri
     moreutils
     nerdfonts
+    ormolu
     pandoc
     patat
     ripgrep
     rlwrap
-    # TODO
-    # rosetta.ghcid
-    # rosetta.ormolu
-    # rosetta.watchexec
     sd
     shellcheck
     stylish-haskell
     tealdeer
     tokei
     tree
+    watchexec
     yj
     zoxide
   ];

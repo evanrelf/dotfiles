@@ -25,12 +25,11 @@ in
     declarative-channels
     direnv
     nix-diff
+    nix-index
     nix-prefetch-git
     nix-top
     nix-tree
     nixpkgs-fmt
-    # TODO Get Rosetta 2 stuff working
-    # rosetta.nix-index
   ];
 
   xdg.configFile."nixpkgs/overlays" = {
