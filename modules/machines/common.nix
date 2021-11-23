@@ -20,7 +20,7 @@
     coreutils-gprefix
     dhall
     diskus
-    # emacsCustom # TODO Thread flake inputs
+    emacsCustom
     exa
     fd
     fx

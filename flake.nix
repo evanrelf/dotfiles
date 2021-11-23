@@ -2,6 +2,7 @@
   description = "evanrelf's dotfiles";
 
   inputs = {
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;

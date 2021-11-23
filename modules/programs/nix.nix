@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 let
   # TODO Do I still need this?
@@ -41,8 +41,7 @@ in
   nixpkgs = {
     config = { };
     overlays = [
-      # TODO Thread Emacs overlay into this module from `flake.nix`
-      # inputs.emacs-overlay.overlay
+      inputs.emacs-overlay.overlay
       (import ../../overlays/kakoune-plugins.nix)
       (import ../../overlays/top-level.nix)
     ];
