@@ -1,12 +1,11 @@
 { inputs, pkgs, ... }:
 
 let
-  # TODO Do I still need this?
-  # declarative-channels =
-  #   pkgs.runCommandLocal "declarative-channels" { } ''
-  #     mkdir -p $out/channels
-  #     ln -s ${pkgs.path} $out/channels/nixpkgs
-  #   '';
+  declarative-channels =
+    pkgs.runCommandLocal "declarative-channels" { } ''
+      mkdir -p $out/channels
+      ln -s ${inputs.nixpkgs} $out/channels/nixpkgs
+    '';
 
   # TODO
   # rosetta =
@@ -23,6 +22,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    declarative-channels
     direnv
     nix-diff
     nix-prefetch-git
