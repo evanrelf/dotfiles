@@ -12,6 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
+    tpm = {
+      url = "github:tmux-plugins/tpm";
+      flake = false;
+    };
     vim-plug = {
       url = "github:junegunn/vim-plug";
       flake = false;

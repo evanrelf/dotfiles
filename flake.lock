@@ -72,7 +72,24 @@
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "tpm": "tpm",
         "vim-plug": "vim-plug"
+      }
+    },
+    "tpm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628931604,
+        "narHash": "sha256-dw0nPVHXOX4YuFcfDfnolZmg9WzsqBdkvT1jrY9XuP8=",
+        "owner": "tmux-plugins",
+        "repo": "tpm",
+        "rev": "693e5a2a0f6acfd2666882655d5dfd32e8c6c50b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tmux-plugins",
+        "repo": "tpm",
+        "type": "github"
       }
     },
     "vim-plug": {
