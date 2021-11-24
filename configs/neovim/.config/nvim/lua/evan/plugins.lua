@@ -39,7 +39,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "bash",
     "fish",
-    "haskell",
+    -- "haskell",
     "html",
     "javascript",
     "json",
