@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   home.packages = [ pkgs.fish ];
@@ -8,5 +8,17 @@
     recursive = true;
   };
 
-  # TODO Install fisher and update plugins
+  home.activation.installFisher =
+    lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      if [ ! -f "$HOME/.config/fish/functions/fisher.fish" ]; then
+        echo "Downloading Fisher"
+        $DRY_RUN_CMD curl \
+          --location "https://git.io/fisher" \
+          --output "$HOME/.config/fish/functions/fisher.fish" \
+          --create-dirs
+
+        echo "Installing plugins"
+        $DRY_RUN_CMD fish -c "fisher update"
+      fi
+    '';
 }
