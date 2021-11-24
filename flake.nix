@@ -7,10 +7,14 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    nixpkgs.url = "github:NixOS/nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs";
+    vim-plug = {
+      url = "github:junegunn/vim-plug";
+      flake = false;
     };
   };
 

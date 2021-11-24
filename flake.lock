@@ -71,7 +71,24 @@
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "vim-plug": "vim-plug"
+      }
+    },
+    "vim-plug": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1630397677,
+        "narHash": "sha256-UZnVrX6P+RFlFilPJawVlKu8qJoU3GzlQm9wuZ2YWnA=",
+        "owner": "junegunn",
+        "repo": "vim-plug",
+        "rev": "c9971346bb486ccff354aaee8606cc0d2d5a0c97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "junegunn",
+        "repo": "vim-plug",
+        "type": "github"
       }
     }
   },
