@@ -13,7 +13,6 @@
     bemenu
     dmenu # keep for `dmenu_path | bemenu`
     firefox
-    kitty
     noto-fonts
     redshift
     spotify
