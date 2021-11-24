@@ -1,3 +1,4 @@
+require('evan.plug')
 require('evan.plugins')
 require('evan.options')
 require('evan.mappings')
