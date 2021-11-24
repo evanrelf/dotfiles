@@ -19,9 +19,4 @@ in
     nix-tree
     nixpkgs-fmt
   ];
-
-  xdg.configFile."nixpkgs/overlays" = {
-    source = ../../overlays;
-    recursive = true;
-  };
 }
