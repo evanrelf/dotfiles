@@ -7,18 +7,6 @@ let
       ln -s ${inputs.nixpkgs} $out/channels/nixpkgs
     '';
 
-  # TODO
-  # rosetta =
-  #   import pkgsFinal.path {
-  #     system =
-  #       if pkgsFinal.system == "aarch64-darwin" then
-  #         "x86_64-darwin"
-  #       else
-  #         pkgsFinal.system;
-
-  #     inherit (pkgsFinal) overlays;
-  #   };
-
 in
 {
   home.packages = with pkgs; [
