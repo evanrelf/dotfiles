@@ -19,6 +19,9 @@
       config = { };
 
       overlays = [
+        (_: _: eachSystem (system:
+          import nixpkgs { inherit system config overlays; }
+        ))
         inputs.emacs-overlay.overlay
         (import ./overlays/kakoune-plugins.nix)
         (import ./overlays/top-level.nix)
