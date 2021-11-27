@@ -168,6 +168,7 @@
   diffFilter = delta --color-only
 [merge]
   autoStash = true
+  conflictStyle = diff3
 [pull]
   ff = only
 [pretty]
