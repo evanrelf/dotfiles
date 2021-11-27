@@ -73,6 +73,8 @@
         in
         # e.g. `nix run . -- switch` or `eval $(nix-build --no-out-link)/bin/home-manager switch`
         pkgs.writeShellScriptBin "home-manager" ''
+          set -euo pipefail
+          IFS=$'\n\t'
           export PATH="${home-manager.defaultPackage."${system}"}/bin:$PATH"
           hostname=$(hostname -s)
           trace() { set -x; $@; { set +x; } 2>/dev/null; }
