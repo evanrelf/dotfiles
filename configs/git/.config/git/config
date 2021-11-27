@@ -1,7 +1,4 @@
 [alias]
-  # ABSORB
-  ab = aborb
-
   # ADD
   a = add
   aa = add --all
@@ -13,8 +10,11 @@
   b = branch
   bd = branch --delete
   bdf = branch --delete --force
-  master-to-main = branch --move --force main
   bm = branch --move
+  master-to-main = branch --move --force main
+
+  # CHECKOUT
+  co = checkout
 
   # CHERRY-PICK
   ch = cherry-pick
@@ -130,23 +130,15 @@
   wt = worktree
 
   # MISCELLANEOUS
-  # git git
-  git = "!exec git"
-  # git g
-  g = git
   # Print the path for the root of the git repo
   root = rev-parse --show-toplevel
   # Print name of upstream branch
   upstream = rev-parse --abbrev-ref @{upstream}
   # Run a command from the root of the git repo
   exec = "!exec "
+  git = "!exec git"
   # `grep` through previous versions of a repository
   grep-through-time = "!git rev-list --all | xargs git grep \"$@\" #"
-
-  # DEPRECATED
-  co = "!echo \"Prefer using 'switch' and 'restore'\" >&2; exit 1 #"
-  r = "!echo \"Prefer using 'restore' and 'reset'-related aliases\" >&2; exit 1 #"
-  shd = "!echo \"'shd' deprecated\" >&2; exit 1 #"
 
 [color]
   ui = true
@@ -165,7 +157,6 @@
 [diff "nodiff"]
   command = true
 [feature]
-  # TODO: See if this makes `git status` faster in `end-to-end`
   manyFiles = true
 [fetch]
   prune = true
