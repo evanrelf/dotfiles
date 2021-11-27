@@ -200,6 +200,8 @@
   gpgSign = true
 [url "git@github.com:"]
   insteadOf = https://github.com/
+[url "git@git.sr.ht:"]
+  insteadOf = https://git.sr.ht/
 [user]
   name = Evan Relf
   useConfigOnly = true
