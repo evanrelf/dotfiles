@@ -21,7 +21,6 @@ source "$__fish_config_dir/brew.fish"
 source "$__fish_config_dir/gh.fish"
 
 # Functions
-source "$__fish_config_dir/rc.fish"
 source "$__fish_config_dir/update.fish"
 source "$__fish_config_dir/edit-matches.fish"
 source "$__fish_config_dir/darwin.fish"
