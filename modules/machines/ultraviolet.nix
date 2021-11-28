@@ -42,10 +42,12 @@
 
   nixpkgs.overlays = [
     (pkgsFinal: pkgsPrev: {
-      ghcid = pkgsFinal.cross.x86_64-darwin.ghcid;
-      nix-index = pkgsFinal.cross.x86_64-darwin.nix-index;
-      ormolu = pkgsFinal.cross.x86_64-darwin.ormolu;
-      watchexec = pkgsFinal.cross.x86_64-darwin.watchexec;
+      inherit (pkgsFinal.cross.x86_64-darwin)
+        ghcid
+        nix-index
+        ormolu
+        watchexec
+        ;
     })
   ];
 }
