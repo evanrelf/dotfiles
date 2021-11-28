@@ -26,9 +26,9 @@ in
     home.file.".local/bin/evil".source = ../../configs/emacs/.local/bin/evil;
 
     home.activation.emacsTruecolor =
-      lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      lib.hm.dag.entryAfter [ "writeBarrier" "linkGeneration" ] ''
         if [ ! -e "$HOME/.local/share/terminfo" ]; then
-          $DRY_RUN_CMD ${../../configs/emacs/.config/emacs/setup-truecolor}
+          $DRY_RUN_CMD "$HOME/.config/emacs/setup-truecolor"
         fi
       '';
   };
