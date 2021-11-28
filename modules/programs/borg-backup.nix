@@ -1,10 +1,22 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.borg-backup;
+
+in
 {
-  home.packages [ pkgs.borgbackup ];
+  options = {
+    dotfiles.programs.borg-backup = {
+      enable = lib.mkEnableOption "borg-backup";
+    };
+  };
 
-  xdg.configFile."borg" = {
-    source = ../../configs/borg/.config/borg;
-    recursive = true;
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.borgbackup ];
+
+    xdg.configFile."borg" = {
+      source = ../../configs/borg/.config/borg;
+      recursive = true;
+    };
   };
 }

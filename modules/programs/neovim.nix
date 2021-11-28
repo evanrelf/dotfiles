@@ -1,24 +1,36 @@
-{ inputs, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.neovim;
+
+in
 {
-  home.packages = [ pkgs.neovim ];
-
-  xdg.configFile."nvim" = {
-    source = ../../configs/neovim/.config/nvim;
-    recursive = true;
+  options = {
+    dotfiles.programs.neovim = {
+      enable = lib.mkEnableOption "neovim";
+    };
   };
 
-  xdg.dataFile."nvim/site/autoload/plug.vim".source =
-    "${inputs.vim-plug}/plug.vim";
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.neovim ];
 
-  home.activation.neovimInstallPlugins =
-    lib.hm.dag.entryAfter [ "writeBarrier" ] ''
-      if [ ! -d "$HOME/.local/share/nvim/plugged" ]; then
-        echo "Installing plugins"
-        $DRY_RUN_CMD nvim \
-          -u "$HOME/.config/nvim/lua/evan/plug.lua" \
-          -i NONE \
-          -c "PlugUpdate" -c "PlugClean!" -c "qa"
-      fi
-    '';
+    xdg.configFile."nvim" = {
+      source = ../../configs/neovim/.config/nvim;
+      recursive = true;
+    };
+
+    xdg.dataFile."nvim/site/autoload/plug.vim".source =
+      "${inputs.vim-plug}/plug.vim";
+
+    home.activation.neovimInstallPlugins =
+      lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+        if [ ! -d "$HOME/.local/share/nvim/plugged" ]; then
+          echo "Installing plugins"
+          $DRY_RUN_CMD nvim \
+            -u "$HOME/.config/nvim/lua/evan/plug.lua" \
+            -i NONE \
+            -c "PlugUpdate" -c "PlugClean!" -c "qa"
+        fi
+      '';
+  };
 }

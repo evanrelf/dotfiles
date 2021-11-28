@@ -2,12 +2,15 @@
 
 {
   imports = [
-    ../programs/hammerspoon.nix
-    ../programs/karabiner.nix
-    ../programs/kitty.nix
     ./awake.nix
     ./common.nix
   ];
+
+  dotfiles.programs = {
+    hammerspoon.enable = true;
+    karabiner.enable = true;
+    kitty.enable = true;
+  };
 
   home.packages = [ pkgs.tmux-xpanes ];
 }

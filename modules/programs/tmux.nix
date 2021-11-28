@@ -1,10 +1,22 @@
-{ inputs, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.tmux;
+
+in
 {
-  home.packages = [ pkgs.tmux ];
+  options = {
+    dotfiles.programs.tmux = {
+      enable = lib.mkEnableOption "tmux";
+    };
+  };
 
-  xdg.configFile."tmux/tmux.conf".source =
-    ../../configs/tmux/.config/tmux/tmux.conf;
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.tmux ];
 
-  xdg.configFile."tmux/plugins/tpm".source = "${inputs.tpm}";
+    xdg.configFile."tmux/tmux.conf".source =
+      ../../configs/tmux/.config/tmux/tmux.conf;
+
+    xdg.configFile."tmux/plugins/tpm".source = "${inputs.tpm}";
+  };
 }

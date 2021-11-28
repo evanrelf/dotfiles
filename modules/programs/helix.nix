@@ -1,10 +1,22 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.helix;
+
+in
 {
-  home.packages = [ pkgs.helix ];
+  options = {
+    dotfiles.programs.helix = {
+      enable = lib.mkEnableOption "helix";
+    };
+  };
 
-  xdg.configFile."helix" = {
-    source = ../../configs/helix/.config/helix;
-    recursive = true;
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.helix ];
+
+    xdg.configFile."helix" = {
+      source = ../../configs/helix/.config/helix;
+      recursive = true;
+    };
   };
 }

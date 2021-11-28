@@ -2,12 +2,15 @@
 
 {
   imports = [
-    ../programs/hammerspoon.nix
-    ../programs/karabiner.nix
-    ../programs/kitty.nix
     ./common.nix
     ./personal.nix
   ];
+
+  dotfiles.programs = {
+    hammerspoon.enable = true;
+    karabiner.enable = true;
+    kitty.enable = true;
+  };
 
   nixpkgs.overlays = [
     (pkgsFinal: pkgsPrev: {

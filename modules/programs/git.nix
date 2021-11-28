@@ -1,16 +1,28 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.git;
+
+in
 {
-  home.packages = with pkgs; [
-    delta
-    gh
-    git-branchless
-    gitAndTools.gitFull
-    perlPackages.GitAutofixup
-  ];
+  options = {
+    dotfiles.programs.git = {
+      enable = lib.mkEnableOption "git";
+    };
+  };
 
-  xdg.configFile."git" = {
-    source = ../../configs/git/.config/git;
-    recursive = true;
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      delta
+      gh
+      git-branchless
+      gitAndTools.gitFull
+      perlPackages.GitAutofixup
+    ];
+
+    xdg.configFile."git" = {
+      source = ../../configs/git/.config/git;
+      recursive = true;
+    };
   };
 }

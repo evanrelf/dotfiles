@@ -104,45 +104,50 @@
           system = "aarch64-darwin";
           username = "evanrelf";
           homeDirectory = "/Users/${username}";
-          configuration.imports = [ ./modules/machines/ultraviolet.nix ];
-          extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs { inherit system config overlays; };
+          extraSpecialArgs = { inherit inputs; };
+          extraModules = import ./modules;
+          configuration.imports = [ ./modules/machines/ultraviolet.nix ];
         };
 
         "auburn" = home-manager.lib.homeManagerConfiguration rec {
           system = "x86_64-darwin";
           username = "evanrelf";
           homeDirectory = "/Users/${username}";
-          configuration.imports = [ ./modules/machines/auburn.nix ];
-          extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs { inherit system config overlays; };
+          extraSpecialArgs = { inherit inputs; };
+          extraModules = import ./modules;
+          configuration.imports = [ ./modules/machines/auburn.nix ];
         };
 
         "sienna" = home-manager.lib.homeManagerConfiguration rec {
           system = "x86_64-linux";
           username = "evanrelf";
           homeDirectory = "/home/${username}";
-          configuration.imports = [ ./modules/machines/sienna.nix ];
-          extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs { inherit system config overlays; };
+          extraSpecialArgs = { inherit inputs; };
+          extraModules = import ./modules;
+          configuration.imports = [ ./modules/machines/sienna.nix ];
         };
 
         "indigo" = home-manager.lib.homeManagerConfiguration rec {
           system = "x86_64-darwin";
           username = "evan";
           homeDirectory = "/Users/${username}";
-          configuration.imports = [ ./modules/machines/indigo.nix ];
-          extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs { inherit system config overlays; };
+          extraSpecialArgs = { inherit inputs; };
+          extraModules = import ./modules;
+          configuration.imports = [ ./modules/machines/indigo.nix ];
         };
 
         "hydra-dev" = home-manager.lib.homeManagerConfiguration rec {
           system = "x86_64-linux";
           username = "evan";
           homeDirectory = "/home/${username}";
-          configuration.imports = [ ./modules/machines/hydra-dev.nix ];
-          extraSpecialArgs = { inherit inputs; };
           pkgs = import nixpkgs { inherit system config overlays; };
+          extraSpecialArgs = { inherit inputs; };
+          extraModules = import ./modules;
+          configuration.imports = [ ./modules/machines/hydra-dev.nix ];
         };
       };
     };

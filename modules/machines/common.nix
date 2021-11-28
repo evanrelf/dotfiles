@@ -1,15 +1,15 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ../programs/fish.nix
-    ../programs/git.nix
-    ../programs/kakoune.nix
-    ../programs/neovim.nix
-    ../programs/nix.nix
-    ../programs/starship.nix
-    ../programs/tmux.nix
-  ];
+  dotfiles.programs = {
+    fish.enable = true;
+    git.enable = true;
+    kakoune.enable = true;
+    neovim.enable = true;
+    nix.enable = true;
+    starship.enable = true;
+    tmux.enable = true;
+  };
 
   home.packages = with pkgs; [
     (aspellWithDicts (d: with d; [ en en-computers en-science ]))

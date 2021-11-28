@@ -1,8 +1,20 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.vis;
+
+in
 {
-  home.packages = [ pkgs.vis ];
+  options = {
+    dotfiles.programs.vis = {
+      enable = lib.mkEnableOption "vis";
+    };
+  };
 
-  xdg.configFile."vis/visrc.lua".source =
-    ../../configs/wezterm/.config/vis/visrc.lua;
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.vis ];
+
+    xdg.configFile."vis/visrc.lua".source =
+      ../../configs/wezterm/.config/vis/visrc.lua;
+  };
 }

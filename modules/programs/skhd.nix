@@ -1,6 +1,18 @@
-{ ... }:
+{ config, lib, ... }:
 
+let
+  cfg = config.dotfiles.programs.skhd;
+
+in
 {
-  xdg.configFile."skhd/skhdrc".source =
-    ../../configs/skhd/.config/skhd/skhdrc;
+  options = {
+    dotfiles.programs.skhd = {
+      enable = lib.mkEnableOption "skhd";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    xdg.configFile."skhd/skhdrc".source =
+      ../../configs/skhd/.config/skhd/skhdrc;
+  };
 }

@@ -1,8 +1,20 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.dotfiles.programs.starship;
+
+in
 {
-  home.packages = [ pkgs.starship ];
+  options = {
+    dotfiles.programs.starship = {
+      enable = lib.mkEnableOption "starship";
+    };
+  };
 
-  xdg.configFile."starship.toml".source =
-    ../../configs/starship/.config/starship.toml;
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.starship ];
+
+    xdg.configFile."starship.toml".source =
+      ../../configs/starship/.config/starship.toml;
+  };
 }

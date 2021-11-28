@@ -2,10 +2,11 @@
 
 {
   imports = [
-    ../programs/kitty.nix
     ./common.nix
     ./personal.nix
   ];
+
+  dotfiles.programs.kitty.enable = true;
 
   home.packages = with pkgs; [
     acpi
