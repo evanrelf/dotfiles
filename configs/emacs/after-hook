@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -Eeuo pipefail
-IFS=$'\n\t'
-
-echo "[emacs] Setting up truecolor support"
-.config/emacs/setup-truecolor

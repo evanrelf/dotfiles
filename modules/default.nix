@@ -1,6 +1,7 @@
 [
   ./programs/alacritty.nix
   ./programs/borg-backup.nix
+  ./programs/emacs.nix
   ./programs/fish.nix
   ./programs/git.nix
   ./programs/hammerspoon.nix

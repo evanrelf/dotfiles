@@ -20,7 +20,6 @@
     coreutils-gprefix
     dhall
     diskus
-    emacsCustom
     exa
     fd
     fx
