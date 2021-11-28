@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.dotfiles.programs.alacritty;
@@ -12,6 +12,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = lib.mkIf pkgs.stdenv.isLinux [ pkgs.alacritty ];
+
     xdg.configFile."alacritty.yml".source =
       ../../configs/alacritty/.config/alacritty.yml;
   };
