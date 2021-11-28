@@ -130,6 +130,8 @@ in
 
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
+  home-manager = pkgsPrev.inputs.home-manager.defaultPackage."${pkgsFinal.system}";
+
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
   kakoune-unwrapped =

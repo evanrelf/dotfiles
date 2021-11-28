@@ -27,20 +27,17 @@
     };
   };
 
-  outputs = inputs@{ flake-utils, home-manager, nixpkgs, ... }:
+  outputs = inputs@{ flake-utils, nixpkgs, ... }:
     flake-utils.lib.eachDefaultSystem (system: rec {
       defaultPackage = packages.dotfiles;
       packages =
         let
           config = { };
           overlays = [
-            (_: _: {
-              # Make flake inputs available in overlays
-              inherit inputs;
-              # Use newer `home-manager` from flake input
-              inherit (home-manager.packages."${system}") home-manager;
-            } // flake-utils.lib.eachDefaultSystem (system:
-              # Make packages for other systems available for cross compilation
+            # Make flake inputs available in overlays
+            (_: _: { inherit inputs; })
+            # Make packages for other systems available for cross compilation
+            (_: _: flake-utils.lib.eachDefaultSystem (system:
               { cross = import nixpkgs { inherit system config overlays; }; }
             ))
             inputs.emacs-overlay.overlay
