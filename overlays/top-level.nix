@@ -20,6 +20,53 @@ in
       doCheck = false;
     });
 
+  dotfiles =
+    # TODO:
+    #
+    # Silence this error message when `build`ing or `switch`ing:
+    #
+    #```
+    # No configuration file found. Please create one at /Users/evanrelf/.config/nixpkgs/home.nix
+    #```
+    #
+    # One of these should work:
+    #
+    # ```
+    # export HOME_MANAGER_CONFIG="/dev/null"
+    # export HOME_MANAGER_CONFIG="${pkgs.writeText "home.nix" "{ }"}"
+    # ```
+    #
+    # ...but it produces this error message:
+    #
+    # ```
+    # error: file 'home-manager/home-manager/home-manager.nix' was not found in the Nix search path (add it using $NIX_PATH or -I)
+    # ```
+    pkgsPrev.writeShellScriptBin "dotfiles" ''
+      set -euo pipefail
+      IFS=$'\n\t'
+      export PATH="${pkgsFinal.home-manager}/bin:$PATH"
+      hostname=$(hostname -s)
+      trace() { set -x; $@; { set +x; } 2>/dev/null; }
+      if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
+        trace home-manager --flake .#$hostname $@
+      else
+        if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
+          echo "Falling back to non-flake switch"
+          temp=$(mktemp -d)
+          trap "rm -rf $temp" EXIT
+          trace nix build --file . homeConfigurations.$hostname -o $temp/result
+          config=$(readlink "$temp/result")
+          trace $config/activate
+        elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
+          echo "Falling back to non-flake build"
+          trace nix build --file . homeConfigurations.$hostname
+        else
+          echo "Unsupported arguments in fallback mode"
+          trace home-manager $@
+        fi
+      fi
+    '';
+
   emacsCustom =
     (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
 
