@@ -31,7 +31,6 @@
   # COMMIT
   c = commit
   cf = "!if [ -z \"$1\" ]; then git commit --fixup \"$(git lookup)\"; else git commit --fixup $@; fi #"
-  fix = "!if [ -z \"$1\" ]; then rev=$(git lookup); else rev=\"$1\"; fi; git cf \"$rev\" && git rbauto \"$rev\" #"
   reword = with-stash "git commit --amend --quiet"
   amend = commit --amend --no-edit
 
