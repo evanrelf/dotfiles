@@ -41,6 +41,8 @@
       config = { };
 
       overlays = [
+        # Make flake inputs available in overlays
+        (_: _: { inherit inputs; })
         # Make packages for other systems available for cross compilation
         (_: _: eachSystem (system:
           import nixpkgs { inherit system config overlays; }
@@ -52,6 +54,7 @@
         inputs.emacs-overlay.overlay
         (import ./overlays/kakoune-plugins.nix)
         (import ./overlays/top-level.nix)
+        (import ./overlays/home-configurations.nix)
       ];
 
     in
@@ -61,57 +64,5 @@
       packages = eachSystem (system:
         import nixpkgs { inherit system config overlays; }
       );
-
-      homeConfigurations = {
-        "ultraviolet" = home-manager.lib.homeManagerConfiguration rec {
-          system = "aarch64-darwin";
-          username = "evanrelf";
-          homeDirectory = "/Users/${username}";
-          pkgs = import nixpkgs { inherit system config overlays; };
-          extraSpecialArgs = { inherit inputs; };
-          extraModules = import ./modules;
-          configuration.imports = [ ./modules/machines/ultraviolet.nix ];
-        };
-
-        "auburn" = home-manager.lib.homeManagerConfiguration rec {
-          system = "x86_64-darwin";
-          username = "evanrelf";
-          homeDirectory = "/Users/${username}";
-          pkgs = import nixpkgs { inherit system config overlays; };
-          extraSpecialArgs = { inherit inputs; };
-          extraModules = import ./modules;
-          configuration.imports = [ ./modules/machines/auburn.nix ];
-        };
-
-        "sienna" = home-manager.lib.homeManagerConfiguration rec {
-          system = "x86_64-linux";
-          username = "evanrelf";
-          homeDirectory = "/home/${username}";
-          pkgs = import nixpkgs { inherit system config overlays; };
-          extraSpecialArgs = { inherit inputs; };
-          extraModules = import ./modules;
-          configuration.imports = [ ./modules/machines/sienna.nix ];
-        };
-
-        "indigo" = home-manager.lib.homeManagerConfiguration rec {
-          system = "x86_64-darwin";
-          username = "evan";
-          homeDirectory = "/Users/${username}";
-          pkgs = import nixpkgs { inherit system config overlays; };
-          extraSpecialArgs = { inherit inputs; };
-          extraModules = import ./modules;
-          configuration.imports = [ ./modules/machines/indigo.nix ];
-        };
-
-        "hydra-dev" = home-manager.lib.homeManagerConfiguration rec {
-          system = "x86_64-linux";
-          username = "evan";
-          homeDirectory = "/home/${username}";
-          pkgs = import nixpkgs { inherit system config overlays; };
-          extraSpecialArgs = { inherit inputs; };
-          extraModules = import ./modules;
-          configuration.imports = [ ./modules/machines/hydra-dev.nix ];
-        };
-      };
     };
 }
