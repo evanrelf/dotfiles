@@ -26,7 +26,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       config = { };
 
@@ -53,8 +53,10 @@
             ]);
     in
     {
-      defaultPackage = eachSystem (system:
-        (import nixpkgs { inherit system config overlays; }).dotfiles
+      defaultPackage = eachSystem (system: self.packages."${system}".dotfiles);
+
+      packages = eachSystem (system:
+        import nixpkgs { inherit system config overlays; }
       );
 
       homeConfigurations = {
