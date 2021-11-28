@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.dotfiles.programs.hammerspoon;
@@ -12,6 +12,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = pkgs.stdenv.isDarwin;
+        message = "hammerspoon: Only works on macOS";
+      }
+    ];
+
     xdg.configFile."hammerspoon/init.lua".source =
       ../../configs/hammerspoon/.config/hammerspoon/init.lua;
 

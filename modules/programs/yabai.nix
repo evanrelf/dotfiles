@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.dotfiles.programs.yabai;
@@ -12,6 +12,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = pkgs.stdenv.isDarwin;
+        message = "yabai: Only works on macOS";
+      }
+    ];
+
     xdg.configFile."yabai/yabairc".source =
       ../../configs/yabai/.config/yabai/yabairc;
   };

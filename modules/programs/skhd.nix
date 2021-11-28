@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.dotfiles.programs.skhd;
@@ -12,6 +12,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = pkgs.stdenv.isLinux;
+        message = "skhd: Only works on Linux";
+      }
+    ];
+
     xdg.configFile."skhd/skhdrc".source =
       ../../configs/skhd/.config/skhd/skhdrc;
   };
