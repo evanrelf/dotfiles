@@ -11,6 +11,7 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,43 +27,28 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-    let
-      eachSystem = f:
-        builtins.listToAttrs
-          (builtins.map
-            (system: { name = system; value = f system; })
-            [
-              "aarch64-darwin"
-              "x86_64-darwin"
-              "x86_64-linux"
-            ]);
-
-      config = { };
-
-      overlays = [
-        # Make flake inputs available in overlays
-        (_: _: { inherit inputs; })
-        # Make packages for other systems available for cross compilation
-        (_: _: eachSystem (system:
-          import nixpkgs { inherit system config overlays; }
-        ))
-        # Use newer `home-manager` from flake input
-        (_: { system, ... }: {
-          inherit (home-manager.packages."${system}") home-manager;
-        })
-        inputs.emacs-overlay.overlay
-        (import ./overlays/kakoune-plugins.nix)
-        (import ./overlays/top-level.nix)
-        (import ./overlays/home-configurations.nix)
-      ];
-
-    in
-    {
-      defaultPackage = eachSystem (system: self.packages."${system}".dotfiles);
-
-      packages = eachSystem (system:
-        import nixpkgs { inherit system config overlays; }
-      );
-    };
+  outputs = inputs@{ flake-utils, home-manager, nixpkgs, ... }:
+    flake-utils.lib.eachDefaultSystem (system: rec {
+      defaultPackage = packages.dotfiles;
+      packages =
+        let
+          config = { };
+          overlays = [
+            (_: _: {
+              # Make flake inputs available in overlays
+              inherit inputs;
+              # Use newer `home-manager` from flake input
+              inherit (home-manager.packages."${system}") home-manager;
+            } // flake-utils.lib.eachDefaultSystem (system:
+              # Make packages for other systems available for cross compilation
+              { cross = import nixpkgs { inherit system config overlays; }; }
+            ))
+            inputs.emacs-overlay.overlay
+            (import ./overlays/kakoune-plugins.nix)
+            (import ./overlays/top-level.nix)
+            (import ./overlays/home-configurations.nix)
+          ];
+        in
+        import nixpkgs { inherit system config overlays; };
+    });
 }
