@@ -2,6 +2,10 @@
   description = "evanrelf's dotfiles";
 
   inputs = {
+    doom-emacs = {
+      url = "github:hlissner/doom-emacs/develop";
+      flake = false;
+    };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-compat = {
       url = "github:edolstra/flake-compat";

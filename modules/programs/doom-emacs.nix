@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   cfg = config.dotfiles.programs.doom-emacs;
@@ -24,6 +24,10 @@ in
     xdg.configFile."doom" = {
       source = ../../configs/doom-emacs/.config/doom;
       recursive = true;
+      onChange = ''
+        echo "+ doom sync"
+        $DRY_RUN_CMD "$HOME"/.config/emacs/bin/doom sync
+      '';
     };
 
     home.file.".local/bin/evil".source = ../../configs/emacs/.local/bin/evil;
@@ -38,11 +42,8 @@ in
     home.activation.installDoomEmacs =
       lib.hm.dag.entryAfter [ "writeBarrier" ] ''
         if [ ! -e "$HOME/.config/emacs" ]; then
-          $DRY_RUN_CMD git clone \
-            --depth 1 \
-            "https://github.com/hlissner/doom-emacs" \
-            "$HOME/.config/emacs"
-          $DRY_RUN_CMD "$HOME/.config/emacs/bin/doom" install
+          $DRY_RUN_CMD cp -r "${inputs.doom-emacs}" "$HOME/.config/emacs"
+          $DRY_RUN_CMD chmod -R u+w "$HOME/.config/emacs"
         fi
       '';
   };
