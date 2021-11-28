@@ -17,6 +17,7 @@
     bashInteractive
     cabal-install
     cargo
+    comma
     coreutils-gprefix
     dhall
     diskus

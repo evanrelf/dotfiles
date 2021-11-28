@@ -12,6 +12,13 @@ let
 
 in
 {
+  comma =
+    # TODO: This is a hack
+    if pkgsPrev.system == "aarch64-darwin" then
+      pkgsPrev.inputs.comma.defaultPackage."x86_64-darwin"
+    else
+      pkgsPrev.inputs.comma.defaultPackage."${pkgsPrev.system}";
+
   coreutils-gprefix =
     (pkgsPrev.coreutils.override {
       singleBinary = false;

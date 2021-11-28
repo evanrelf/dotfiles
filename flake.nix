@@ -6,6 +6,10 @@
       url = "github:hlissner/doom-emacs/develop";
       flake = false;
     };
+    comma = {
+      url = "github:DavHau/comma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-compat = {
       url = "github:edolstra/flake-compat";

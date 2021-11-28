@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "comma": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1635404919,
+        "narHash": "sha256-F95bKzwc/9hhhvzNW3OX9TBeUnq89ZhebYFS2Q1mrc8=",
+        "owner": "DavHau",
+        "repo": "comma",
+        "rev": "7eca596248e8d808617103d0eb515074b994bff0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DavHau",
+        "repo": "comma",
+        "type": "github"
+      }
+    },
     "doom-emacs": {
       "flake": false,
       "locked": {
@@ -100,6 +120,7 @@
     },
     "root": {
       "inputs": {
+        "comma": "comma",
         "doom-emacs": "doom-emacs",
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
