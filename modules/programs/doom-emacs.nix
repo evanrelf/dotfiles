@@ -1,13 +1,13 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.dotfiles.programs.doom;
+  cfg = config.dotfiles.programs.doom-emacs;
 
 in
 {
   options = {
-    dotfiles.programs.doom = {
-      enable = lib.mkEnableOption "doom";
+    dotfiles.programs.doom-emacs = {
+      enable = lib.mkEnableOption "doom-emacs";
     };
   };
 
@@ -15,14 +15,14 @@ in
     assertions = [
       {
         assertion = !config.dotfiles.programs.emacs.enable;
-        message = "doom: dotfiles.programs.{doom,emacs} cannot be enabled simultaneously";
+        message = "doom-emacs: dotfiles.programs.{doom-emacs,emacs} cannot be enabled simultaneously";
       }
     ];
 
     home.packages = [ pkgs.emacsCustom ];
 
     xdg.configFile."doom" = {
-      source = ../../configs/doom/.config/doom;
+      source = ../../configs/doom-emacs/.config/doom;
       recursive = true;
     };
 

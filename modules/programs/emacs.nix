@@ -14,8 +14,8 @@ in
   config = lib.mkIf cfg.enable {
     assertions = [
       {
-        assertion = !config.dotfiles.programs.doom.enable;
-        message = "emacs: dotfiles.programs.{doom,emacs} cannot be enabled simultaneously";
+        assertion = !config.dotfiles.programs.doom-emacs.enable;
+        message = "emacs: dotfiles.programs.{doom-emacs,emacs} cannot be enabled simultaneously";
       }
     ];
 

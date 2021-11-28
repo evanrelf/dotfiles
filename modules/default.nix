@@ -1,7 +1,7 @@
 [
   ./programs/alacritty.nix
   ./programs/borg-backup.nix
-  ./programs/doom.nix
+  ./programs/doom-emacs.nix
   ./programs/emacs.nix
   ./programs/fish.nix
   ./programs/git.nix
