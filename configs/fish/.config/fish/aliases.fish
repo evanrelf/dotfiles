@@ -62,6 +62,7 @@ end
 alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
 
 if _exists nix
+    abbr --add n "nix"
     alias nix-death-row "sudo tree -x -C --prune / | grep -vE '(/etc/static|/persist|/nix/store)' | less"
 end
 
