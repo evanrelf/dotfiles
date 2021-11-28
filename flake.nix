@@ -28,20 +28,6 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
-      config = { };
-
-      overlays = [
-        (_: _: eachSystem (system:
-          import nixpkgs { inherit system config overlays; }
-        ))
-        (_: { system, ... }: {
-          inherit (home-manager.packages."${system}") home-manager;
-        })
-        inputs.emacs-overlay.overlay
-        (import ./overlays/kakoune-plugins.nix)
-        (import ./overlays/top-level.nix)
-      ];
-
       eachSystem = f:
         builtins.listToAttrs
           (builtins.map
@@ -51,6 +37,23 @@
               "x86_64-darwin"
               "x86_64-linux"
             ]);
+
+      config = { };
+
+      overlays = [
+        # Make packages for other systems available for cross compilation
+        (_: _: eachSystem (system:
+          import nixpkgs { inherit system config overlays; }
+        ))
+        # Use newer `home-manager` from flake input
+        (_: { system, ... }: {
+          inherit (home-manager.packages."${system}") home-manager;
+        })
+        inputs.emacs-overlay.overlay
+        (import ./overlays/kakoune-plugins.nix)
+        (import ./overlays/top-level.nix)
+      ];
+
     in
     {
       defaultPackage = eachSystem (system: self.packages."${system}".dotfiles);
