@@ -7,15 +7,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1635404919,
-        "narHash": "sha256-F95bKzwc/9hhhvzNW3OX9TBeUnq89ZhebYFS2Q1mrc8=",
-        "owner": "DavHau",
+        "lastModified": 1638088347,
+        "narHash": "sha256-0RJpJUMWoQeCVixoh1mLuHpZwmTMZPXZ4RCqm6ys+Uk=",
+        "owner": "evanrelf",
         "repo": "comma",
-        "rev": "7eca596248e8d808617103d0eb515074b994bff0",
+        "rev": "cb8333faef497a687c55f373a12df2eade8cb55a",
         "type": "github"
       },
       "original": {
-        "owner": "DavHau",
+        "owner": "evanrelf",
         "repo": "comma",
         "type": "github"
       }

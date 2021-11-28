@@ -7,7 +7,7 @@
       flake = false;
     };
     comma = {
-      url = "github:DavHau/comma";
+      url = "github:evanrelf/comma";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
