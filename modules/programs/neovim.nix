@@ -23,7 +23,7 @@ in
       "${inputs.vim-plug}/plug.vim";
 
     home.activation.neovimInstallPlugins =
-      lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         if [ ! -d "$HOME/.local/share/nvim/plugged" ]; then
           echo "Installing plugins"
           $DRY_RUN_CMD nvim \

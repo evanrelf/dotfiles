@@ -33,14 +33,14 @@ in
     home.file.".local/bin/evil".source = ../../configs/emacs/.local/bin/evil;
 
     home.activation.emacsTruecolor =
-      lib.hm.dag.entryAfter [ "writeBarrier" "linkGeneration" ] ''
+      lib.hm.dag.entryAfter [ "writeBoundary" "linkGeneration" ] ''
         if [ ! -e "$HOME/.local/share/terminfo" ]; then
           $DRY_RUN_CMD "$HOME/.config/emacs/setup-truecolor"
         fi
       '';
 
     home.activation.installDoomEmacs =
-      lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         if [ ! -e "$HOME/.config/emacs" ]; then
           $DRY_RUN_CMD cp -r "${inputs.doom-emacs}" "$HOME/.config/emacs"
           $DRY_RUN_CMD chmod -R u+w "$HOME/.config/emacs"

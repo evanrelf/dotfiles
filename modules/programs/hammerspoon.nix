@@ -23,7 +23,7 @@ in
       ../../configs/hammerspoon/.config/hammerspoon/init.lua;
 
     home.activation.hammerspoonConfigLocation =
-      lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         $DRY_RUN_CMD defaults write org.hammerspoon.Hammerspoon \
           MJConfigFile "$HOME/.config/hammerspoon/init.lua"
       '';

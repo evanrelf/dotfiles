@@ -20,7 +20,7 @@ in
     };
 
     home.activation.installFisher =
-      lib.hm.dag.entryAfter [ "writeBarrier" ] ''
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         if [ ! -f "$HOME/.config/fish/functions/fisher.fish" ]; then
           echo "Downloading Fisher"
           $DRY_RUN_CMD curl \
