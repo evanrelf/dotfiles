@@ -4,7 +4,13 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-repo=$(git remote get-url origin | sd '(?:git@github\.com:|https://github\.com/|git@git\.sr\.ht:~|https://git\.sr\.ht/~)([\w\-]+)/([\w\-\.]+)' '$1/$2' | sd '\.git$' '')
+test -e ".git/hooks/pre-push" && ".git/hooks/pre-push"
+
+# remote_name=${1:?}
+
+remote_location=${2:?}
+
+repo=$(echo "${remote_location}" | sd '(?:git@github\.com:|https://github\.com/|git@git\.sr\.ht:~|https://git\.sr\.ht/~)([\w\-]+)/([\w\-\.]+)' '$1/$2' | sd '\.git$' '')
 
 branch=$(git symbolic-ref HEAD | sd '(?:.+/)*(.+)' '$1')
 
@@ -14,7 +20,7 @@ if echo "${branch}" | rg --quiet '^(master|main|trunk|development|release-.+)$';
   if [ -n "${repo}" ]; then
     read -p "Confirm repository (${repo}): " -r < /dev/tty
     if [ "${REPLY}" != "${repo}" ]; then
-      echo "Incorrect repo name"
+      echo "Incorrect repository name"
       exit 1
     fi
   fi
