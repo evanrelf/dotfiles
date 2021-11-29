@@ -1,4 +1,26 @@
 [alias]
+  # ADD
+  a = add
+  ap = add --patch
+  ae = add --edit
+
+  # CHECKOUT
+  co = checkout
+
+  # COMMIT
+  c = commit
+
+  # DIFF
+  d = diff
+  ds = diff --staged
+
+  # LOG
+  l = log --graph --pretty=normal --first-parent --max-count=20
+  ll = log --graph --pretty=normal
+
+  # STATUS
+  s = status --short
+
 [color]
   ui = true
 [commit]
