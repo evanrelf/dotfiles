@@ -4,9 +4,6 @@
   ap = add --patch
   ae = add --edit
 
-  # CHECKOUT
-  co = checkout
-
   # COMMIT
   c = commit
 
@@ -18,8 +15,17 @@
   l = log --graph --pretty=normal --first-parent --max-count=20
   ll = log --graph --pretty=normal
 
+  # RESTORE
+  re = restore
+  res = restore --staged
+
   # STATUS
   s = status --short
+
+  # SWITCH
+  sw = switch
+  swd = switch --detach
+  swc = switch --create
 
 [color]
   ui = true
