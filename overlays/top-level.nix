@@ -135,6 +135,20 @@ in
     });
   };
 
+  git-branchless =
+    pkgsPrev.rustPlatform.buildRustPackage {
+      inherit (pkgsPrev.git-branchless) pname nativeBuildInputs buildInputs;
+      version = "HEAD";
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "arxanas";
+        repo = "git-branchless";
+        rev = "9861d7093093ae2a92ff087a44ffd273ae051d37";
+        sha256 = "sha256-aJJE25QyzfwfEWdd8l+y67OWH+HlPyyq0Fz4isPWr40=";
+      };
+      cargoSha256 = "sha256-aCCGIbefWVkfCB292ghBkQ9jdFZlQbRWsQvpkixzqls=";
+      doCheck = false;
+    };
+
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
   home-manager = pkgsPrev.inputs.home-manager.defaultPackage."${pkgsFinal.system}";
