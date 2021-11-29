@@ -18,6 +18,7 @@
   # PUSH
   p = push
   pf = push --force-with-lease
+  pu = push --set-upstream origin HEAD
 
   # RESTORE
   re = restore
