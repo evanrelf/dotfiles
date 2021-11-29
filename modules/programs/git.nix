@@ -16,6 +16,7 @@ in
       delta
       gh
       git-branchless
+      git-revise
       gitAndTools.gitFull
       perlPackages.GitAutofixup
     ];
