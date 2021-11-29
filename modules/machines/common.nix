@@ -16,7 +16,6 @@
     as-tree
     bashInteractive
     cabal-install
-    cargo
     comma
     coreutils-gprefix
     dhall
