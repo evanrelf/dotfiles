@@ -15,9 +15,16 @@
   l = log --graph --pretty=normal --first-parent --max-count=20
   ll = log --graph --pretty=normal
 
+  # PUSH
+  p = push
+  pf = push --force-with-lease
+
   # RESTORE
   re = restore
   res = restore --staged
+
+  # SHOW
+  sh = show
 
   # STATUS
   s = status --short
