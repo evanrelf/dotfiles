@@ -170,8 +170,8 @@
 [pull]
   ff = only
 [pretty]
-  normal = format:%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset
-  signed = format:%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset %C(magenta)%GS%Creset
+  normal = format:%C(red)%h %C(reset)%s %C(green)%ch %C(blue)%an %C(yellow)%D %C(reset)
+  signed = format:%C(red)%h %C(reset)%s %C(green)%ch %C(blue)%an %C(magenta)%G? %C(yellow)%D %C(reset)
 [push]
   followTags = true
   gpgSign = if-asked
