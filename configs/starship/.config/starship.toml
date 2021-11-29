@@ -53,6 +53,7 @@ only_attached = true
 disabled = false
 format = '(at [ $hash]($style)) '
 style = 'blue'
+only_detached = false
 
 [git_status]
 disabled = false
