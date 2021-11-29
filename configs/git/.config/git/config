@@ -33,6 +33,7 @@
   gpgSign = true
   template = ~/.config/git/template
 [core]
+  hooksPath = ~/.config/git/hooks
   excludesfile = ~/.config/git/ignore
   pager = delta
 [delta]
