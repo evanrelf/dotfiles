@@ -57,16 +57,17 @@ in
       if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
         trace home-manager --flake .#$hostname $@
       else
+        system=$(nix-instantiate --eval --expr 'builtins.currentSystem' --json | jq --raw-output .)
         if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
           echo "Falling back to non-flake switch"
           temp=$(mktemp -d)
           trap "rm -rf $temp" EXIT
-          trace nix build --file . homeConfigurations.$hostname -o $temp/result
+          trace nix build --file . packages.$system.homeConfigurations.$hostname -o $temp/result
           config=$(readlink "$temp/result")
           trace $config/activate
         elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
           echo "Falling back to non-flake build"
-          trace nix build --file . homeConfigurations.$hostname
+          trace nix build --file . packages.$system.homeConfigurations.$hostname
         else
           echo "Unsupported arguments in fallback mode"
           trace home-manager $@
