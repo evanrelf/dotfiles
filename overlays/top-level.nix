@@ -156,6 +156,31 @@ in
 
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
+  jujutsu =
+    (pkgsPrev.makeRustPlatform {
+      inherit (pkgsFinal.fenix.minimal) cargo rustc;
+    }).buildRustPackage {
+      name = "jujutsu";
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "martinvonz";
+        repo = "jj";
+        rev = "ba01c512aed9fee71ae1cd83709bcd4181d25876";
+        sha256 = "sha256-OhbKQh8mrEazpml4QCs4H6+5HBVv6dQEACUSybO0J34=";
+      };
+      cargoSha256 = "sha256-EWzAXSAPE+hE7g8aDdUoKEKWZztIz53ajPxi6j49lCQ=";
+      buildInputs = pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+        pkgsFinal.darwin.apple_sdk.frameworks.Security
+        pkgsFinal.darwin.apple_sdk.frameworks.SystemConfiguration
+      ];
+      NIX_LDFLAGS =
+        pkgsPrev.lib.optionalString
+          pkgsPrev.stdenv.isDarwin
+          "-framework Security -framework SystemConfiguration";
+      OPENSSL_NO_VENDOR = true;
+      OPENSSL_LIB_DIR = "${pkgsFinal.openssl.out}/lib";
+      OPENSSL_INCLUDE_DIR = "${pkgsFinal.openssl.dev}/include";
+    };
+
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "2021.11.08";
