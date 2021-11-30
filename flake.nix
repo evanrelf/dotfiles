@@ -11,6 +11,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -45,6 +49,7 @@
               { cross = import nixpkgs { inherit system config overlays; }; }
             ))
             inputs.emacs-overlay.overlay
+            inputs.fenix.overlay
             (import ./overlays/kakoune-plugins.nix)
             (import ./overlays/top-level.nix)
             (import ./overlays/home-configurations.nix)
