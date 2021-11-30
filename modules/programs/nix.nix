@@ -23,7 +23,6 @@ in
       direnv
       nix-diff
       nix-index
-      nix-prefetch-git
       nix-top
       nix-tree
       nixpkgs-fmt

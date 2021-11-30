@@ -24,11 +24,9 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       delta
-      gh
       git-branchless
       git-revise
       gitAndTools.gitFull
-      perlPackages.GitAutofixup
     ];
 
     xdg.configFile."git" = {
