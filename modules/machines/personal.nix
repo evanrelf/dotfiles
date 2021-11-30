@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -18,10 +18,8 @@
     '';
   };
 
-  xdg.configFile."git/local".text =
-    lib.mkIf config.dotfiles.programs.git.enable ''
-      [user]
-        email = "evan@evanrelf.com"
-        signingkey = "D85956120D0F33A6"
-    '';
+  dotfiles.programs.git = {
+    email = "evan@evanrelf.com";
+    signingkey = "D85956120D0F33A6";
+  };
 }
