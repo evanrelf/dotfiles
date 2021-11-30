@@ -7,6 +7,8 @@
     youtube-dl
   ];
 
+  dotfiles.programs.jujutsu.enable = true;
+
   xdg.configFile."git/local".text =
     lib.mkIf config.dotfiles.programs.git.enable ''
       [user]

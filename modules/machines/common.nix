@@ -34,7 +34,6 @@
     iosevka-bin
     janet
     jq
-    jujutsu
     lorri
     moreutils
     nerdfonts
