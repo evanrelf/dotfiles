@@ -20,6 +20,6 @@ in
     home.packages = [ pkgs.jujutsu ];
 
     home.file.".jjconfig".text =
-      lib.mkIf (cfg.enable && cfg.config != null) cfg.extraConfig;
+      lib.mkIf (cfg.enable && cfg.config != null) cfg.config;
   };
 }

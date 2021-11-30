@@ -9,7 +9,7 @@
 
   dotfiles.programs.jujutsu = {
     enable = true;
-    extraConfig = ''
+    config = ''
       [user]
       name = "Evan Relf"
       email = "evan@evanrelf.com"
