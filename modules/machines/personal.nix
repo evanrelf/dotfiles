@@ -7,7 +7,16 @@
     youtube-dl
   ];
 
-  dotfiles.programs.jujutsu.enable = true;
+  dotfiles.programs.jujutsu = {
+    enable = true;
+    extraConfig = ''
+      [user]
+      name = "Evan Relf"
+      email = "evan@evanrelf.com"
+      [diff]
+      format = "git"
+    '';
+  };
 
   xdg.configFile."git/local".text =
     lib.mkIf config.dotfiles.programs.git.enable ''
