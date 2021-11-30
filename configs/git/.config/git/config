@@ -16,9 +16,9 @@
   ll = log --graph --pretty=normal
 
   # PUSH
-  p = push
-  pf = push --force-with-lease
-  pu = push --set-upstream origin HEAD
+  p = "!~/.config/git/hooks/pre-push && git push $@ #"
+  pf = p --force-with-lease
+  pu = p --set-upstream origin HEAD
 
   # RESTORE
   re = restore
@@ -41,7 +41,6 @@
   gpgSign = true
   template = ~/.config/git/template
 [core]
-  hooksPath = ~/.config/git/hooks
   excludesfile = ~/.config/git/ignore
   pager = delta
 [delta]
