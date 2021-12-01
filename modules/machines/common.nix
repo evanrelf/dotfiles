@@ -2,6 +2,7 @@
 
 {
   dotfiles.programs = {
+    emacs.enable = true;
     fish.enable = true;
     git.enable = true;
     kakoune.enable = true;
