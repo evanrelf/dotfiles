@@ -6,6 +6,10 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-echo-state nil)
+  (general-define-key
+   :states '(normal visual motion)
+   "j" 'evil-next-visual-line
+   "k" 'evil-previous-visual-line)
   :config (evil-mode +1))
 
 (leaf general
@@ -18,10 +22,6 @@
   (setq which-key-idle-secondary-delay 0.05)
   :config (which-key-mode +1))
 
-(leaf modus-themes
-  :ensure t
-  :config (load-theme 'modus-vivendi t))
-
 (leaf vertico
   :ensure t
   :config (vertico-mode +1))
@@ -33,6 +33,10 @@
 (leaf savehist
   :ensure nil
   :config (savehist-mode +1))
+
+(leaf modus-themes
+  :ensure t
+  :config (load-theme 'modus-vivendi t))
 
 (leaf mood-line
   :ensure t
@@ -109,3 +113,15 @@
   (xterm-mouse-mode +1)
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
+
+(general-define-key
+ :prefix "SPC"
+ :keymaps 'override
+ :states '(normal visual)
+
+ "" '(nil :which-key "leader")
+ "<escape>" '(keyboard-quit :which-key t)
+
+ "f" '(:ignore t :which-key "file")
+ "f <escape>" '(keyboard-quit :which-key t)
+ "f s" '(save-buffer :which-key "save"))
