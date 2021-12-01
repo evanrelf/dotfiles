@@ -15,4 +15,9 @@ export TERM=xterm-24bit
 emacsclient=$(greadlink -f "$(command -v emacsclient)")
 
 mkdir -p "${HOME}/.local/share/emacs"
+if [ ! -e "${HOME}/.local/share/emacs/tty.sock" ]; then
+  echo -n "Starting Emacs daemon..." >&2
+  "${emacsclient}" --socket-name "${HOME}/.local/share/emacs/tty.sock" --tty --eval "(evil-quit)" >/dev/null 2>&1 || true
+  echo -ne "\r"
+fi
 exec "${emacsclient}" --socket-name "${HOME}/.local/share/emacs/tty.sock" --tty "$@"
