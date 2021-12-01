@@ -20,6 +20,10 @@
   :ensure t
   :config (setq completion-styles '(orderless)))
 
+(leaf savehist
+  :ensure nil
+  :config (savehist-mode +1))
+
 (leaf mood-line
   :ensure t
   :config (mood-line-mode +1))
