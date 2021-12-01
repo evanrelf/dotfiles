@@ -16,6 +16,11 @@
   :ensure t
   :config (mood-line-mode +1))
 
+(leaf git-gutter
+  :ensure t
+  :init (setq git-gutter:modified-sign "~")
+  :config (global-git-gutter-mode +1))
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
