@@ -2,6 +2,7 @@
   :ensure t
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-echo-state nil)
   :config (evil-mode +1))
 
 (leaf modus-themes
@@ -22,6 +23,14 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 (fset 'display-startup-echo-area-message 'ignore)
+
+;; Disable {beginning,end} of buffer messages
+;; (https://emacs.stackexchange.com/a/20039)
+(defun quieter-command-error-function (data context caller)
+  (when (not (memq (car data) '(beginning-of-buffer
+				end-of-buffer)))
+    (command-error-default-function data context caller)))
+(setq command-error-function #'quieter-command-error-function)
 
 ;; Disable audio bell
 (setq ring-bell-function 'ignore)
