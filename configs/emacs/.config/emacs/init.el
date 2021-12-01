@@ -32,6 +32,10 @@
 (leaf haskell-mode
   :ensure t)
 
+(leaf nix-mode
+  :ensure t
+  :mode "\\.nix\\'")
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
