@@ -76,7 +76,11 @@ in
     '';
 
   emacsCustom =
-    (pkgsPrev.emacsPackagesGen pkgsFinal.emacsGcc).emacsWithPackages (p: [ p.vterm ]);
+    pkgsPrev.emacsWithPackagesFromUsePackage {
+      package = pkgsFinal.emacsGcc;
+      config = ../configs/emacs/.config/emacs/init.el;
+      extraEmacsPackages = p: [ p.vterm ];
+    };
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
 
