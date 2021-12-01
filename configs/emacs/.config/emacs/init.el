@@ -2,6 +2,7 @@
   :ensure t
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
   (setq evil-echo-state nil)
   :config (evil-mode +1))
 
@@ -50,3 +51,13 @@
 ;; Indent with 2 spaces
 (setq tab-width 2)
 (setq indent-tabs-mode nil)
+
+;; Make the mouse wheel scroll 3 lines at a time
+(setq scroll-conservatively 10000)
+(when (display-graphic-p)
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
+  (setq mouse-wheel-progressive-speed nil))
+(unless (display-graphic-p)
+  (xterm-mouse-mode +1)
+  (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
+  (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
