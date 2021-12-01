@@ -12,6 +12,14 @@
   :ensure t
   :config (load-theme 'modus-vivendi t))
 
+(leaf vertico
+  :ensure t
+  :config (vertico-mode +1))
+
+(leaf orderless
+  :ensure t
+  :config (setq completion-styles '(orderless)))
+
 (leaf mood-line
   :ensure t
   :config (mood-line-mode +1))
