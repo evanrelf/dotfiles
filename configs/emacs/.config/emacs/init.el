@@ -12,6 +12,10 @@
   :ensure t
   :config (load-theme 'modus-vivendi t))
 
+(leaf mood-line
+  :ensure t
+  :config (mood-line-mode +1))
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
