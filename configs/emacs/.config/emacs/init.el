@@ -114,6 +114,14 @@
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
+;; Focus and resize GUI frames
+(when (display-graphic-p)
+  (x-focus-frame nil)
+  (setq initial-frame-alist '((fullscreen . maximized)))
+  (setq default-frame-alist
+	'((fullscreen . fullheight) (width . 100) (left . 0.5))))
+
+;; Use preferred font in GUI
 (when (display-graphic-p)
   (set-frame-font "Iosevka Term SS08 16" nil t))
 
