@@ -29,6 +29,9 @@
   :init (setq git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
+(leaf haskell-mode
+  :ensure t)
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
