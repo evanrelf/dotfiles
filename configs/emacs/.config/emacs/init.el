@@ -52,6 +52,14 @@
 (setq tab-width 2)
 (setq indent-tabs-mode nil)
 
+;; Enable line numbers
+(global-display-line-numbers-mode +1)
+(setq display-line-numbers-width 3)
+
+;; Show ruler at 80 columns
+(setq-default fill-column 81)
+(global-display-fill-column-indicator-mode +1)
+
 ;; Make the mouse wheel scroll 3 lines at a time
 (setq scroll-conservatively 10000)
 (when (display-graphic-p)
