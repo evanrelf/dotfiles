@@ -54,6 +54,11 @@
   :ensure t
   :mode "\\.nix\\'")
 
+(leaf rust-mode
+  :init
+  (setq rust-format-on-save t)
+  :ensure t)
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
