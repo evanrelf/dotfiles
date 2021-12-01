@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (leaf evil
   :ensure t
   :init
