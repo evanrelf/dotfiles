@@ -8,6 +8,16 @@
   (setq evil-echo-state nil)
   :config (evil-mode +1))
 
+(leaf general
+  :ensure t)
+
+(leaf which-key
+  :ensure t
+  :init
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-idle-secondary-delay 0.05)
+  :config (which-key-mode +1))
+
 (leaf modus-themes
   :ensure t
   :config (load-theme 'modus-vivendi t))
