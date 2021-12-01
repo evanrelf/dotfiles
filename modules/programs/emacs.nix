@@ -21,7 +21,10 @@ in
 
     home.packages = [ pkgs.emacsCustom ];
 
-    xdg.configFile."emacs".source = ../../configs/emacs/.config/emacs;
+    xdg.configFile."emacs" = {
+      source = ../../configs/emacs/.config/emacs;
+      recursive = true;
+    };
 
     home.file.".local/bin" = {
       source = ../../configs/emacs/.local/bin;

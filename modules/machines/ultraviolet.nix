@@ -6,6 +6,8 @@
     ./personal.nix
   ];
 
+  dotfiles.programs.emacs.enable = true;
+
   dotfiles.programs.hammerspoon.enable = true;
 
   dotfiles.programs.karabiner.enable = true;
