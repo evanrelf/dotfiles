@@ -114,6 +114,9 @@
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
+(when (display-graphic-p)
+  (set-frame-font "Iosevka Term SS08 16" nil t))
+
 ;; Make the mouse wheel scroll 3 lines at a time
 (setq scroll-conservatively 10000)
 (when (display-graphic-p)
