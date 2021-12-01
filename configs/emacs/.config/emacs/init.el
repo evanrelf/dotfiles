@@ -59,6 +59,11 @@
   (setq rust-format-on-save t)
   :ensure t)
 
+(leaf exec-path-from-shell
+  :ensure t
+  :when (display-graphic-p)
+  :config (exec-path-from-shell-initialize))
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
