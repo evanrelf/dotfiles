@@ -47,6 +47,13 @@
   :init (setq git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
+(setq show-paren-delay 0)
+(leaf smartparens
+  :ensure t
+  :config
+  :init (setq sp-highlight-pair-overlay nil)
+  :config (smartparens-global-mode +1))
+
 (leaf haskell-mode
   :ensure t)
 
