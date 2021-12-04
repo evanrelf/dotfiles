@@ -31,6 +31,11 @@ in
       recursive = true;
     };
 
+    home.activation.emacsCleanupImperativePackages =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD rm -rf "$HOME"/.config/emacs/{eln-cache,elpa}
+      '';
+
     home.activation.emacsTruecolor =
       lib.hm.dag.entryAfter [ "writeBoundary" "linkGeneration" ] ''
         if [ ! -e "$HOME/.local/share/terminfo" ]; then
