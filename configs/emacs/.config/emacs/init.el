@@ -47,7 +47,6 @@
   :init (setq git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
-(setq show-paren-delay 0)
 (leaf smartparens
   :ensure t
   :config
@@ -120,6 +119,11 @@
 ;; Show ruler at 80 columns
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
+
+;; Remove delay showing matching parenthesis
+(show-paren-mode -1)
+(setq show-paren-delay 0)
+(show-paren-mode +1)
 
 ;; Focus and resize GUI frames
 (when (display-graphic-p)
