@@ -21,6 +21,7 @@
     coreutils-gprefix
     dhall
     diskus
+    dotfiles
     exa
     fd
     fx

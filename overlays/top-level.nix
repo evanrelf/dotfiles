@@ -51,26 +51,27 @@ in
     pkgsPrev.writeShellScriptBin "dotfiles" ''
       set -euo pipefail
       IFS=$'\n\t'
+      if [ -n "$DOTFILES" ]; then
+        cd "$DOTFILES"
+      fi
       export PATH="${pkgsFinal.home-manager}/bin:$PATH"
       hostname=$(hostname -s)
-      trace() { set -x; $@; { set +x; } 2>/dev/null; }
       if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
-        trace home-manager --flake .#$hostname $@
+        home-manager --flake .#$hostname $@
       else
         system=$(nix-instantiate --eval --expr 'builtins.currentSystem' --json | jq --raw-output .)
         if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
           echo "Falling back to non-flake switch"
           temp=$(mktemp -d)
           trap "rm -rf $temp" EXIT
-          trace nix build --file . packages.$system.homeConfigurations.$hostname -o $temp/result
-          config=$(readlink "$temp/result")
-          trace $config/activate
+          nix build --file . packages.$system.homeConfigurations.$hostname -o $temp/result
+          "$(readlink "$temp/result")"/activate
         elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
           echo "Falling back to non-flake build"
-          trace nix build --file . packages.$system.homeConfigurations.$hostname
+          nix build --file . packages.$system.homeConfigurations.$hostname
         else
           echo "Unsupported arguments in fallback mode"
-          trace home-manager $@
+          home-manager $@
         fi
       fi
     '';
