@@ -62,7 +62,8 @@
   :config
   (setq git-commit-summary-max-length 50)
   (setq git-commit-style-convention-checks '(overlong-summary-line
-					     non-empty-second-line)))
+					     non-empty-second-line))
+  (add-hook 'git-commit-mode-hook #'(lambda () (setq fill-column 72))))
 
 (leaf git-gutter
   :ensure t
