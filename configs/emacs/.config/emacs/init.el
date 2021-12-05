@@ -22,6 +22,11 @@
    "k" 'evil-previous-visual-line)
   :config (evil-mode +1))
 
+(leaf evil-collection
+  :ensure t
+  :after evil
+  :config (evil-collection-init))
+
 (leaf general
   :ensure t)
 
@@ -51,6 +56,13 @@
 (leaf mood-line
   :ensure t
   :config (mood-line-mode +1))
+
+(leaf magit
+  :ensure t
+  :config
+  (setq git-commit-summary-max-length 50)
+  (setq git-commit-style-convention-checks '(overlong-summary-line
+					     non-empty-second-line)))
 
 (leaf git-gutter
   :ensure t
@@ -174,4 +186,8 @@
 
  "f" '(:ignore t :which-key "file")
  "f <escape>" '(keyboard-quit :which-key t)
- "f s" '(save-buffer :which-key "save"))
+ "f s" '(save-buffer :which-key "save")
+
+ "g" '(:ignore t :which-key "git")
+ "g <escape>" '(keyboard-quit :which-key t)
+ "g s" '(magit-status :which-key "status"))
