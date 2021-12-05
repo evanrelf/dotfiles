@@ -51,7 +51,17 @@
 
 (leaf modus-themes
   :ensure t
-  :config (load-theme 'modus-vivendi t))
+  :config
+  (cond
+   ((eq system-type 'gnu/linux)
+    (load-theme 'modus-vivendi t))
+   ((eq system-type 'darwin)
+    (let ((style (shell-command-to-string "begin; defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light; end | tr -d '\n'")))
+      (cond
+       ((string= style "Light")
+	(load-theme 'modus-operandi t))
+       ((string= style "Dark")
+	(load-theme 'modus-vivendi t)))))))
 
 (leaf mood-line
   :ensure t
