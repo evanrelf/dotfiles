@@ -21,15 +21,23 @@ in
 
     home.packages = [ pkgs.emacsCustom ];
 
-    xdg.configFile."emacs" = {
-      source = ../../configs/emacs/.config/emacs;
-      recursive = true;
-    };
-
     home.file.".local/bin" = {
       source = ../../configs/emacs/.local/bin;
       recursive = true;
     };
+
+    # xdg.configFile."emacs" = {
+    #   source = ../../configs/emacs/.config/emacs;
+    #   recursive = true;
+    # };
+
+    home.activation.emacsLinkConfig =
+      lib.hm.dag.entryAfter [ "writeBoundary" "linkGeneration" ] ''
+        if [ ! -e "$HOME/.config/emacs/init.el" ]; then
+          $DRY_RUN_CMD mkdir -p "$HOME/.config/emacs"
+          $DRY_RUN_CMD ln -s {$OLDPWD/configs/emacs,$HOME}/.config/emacs/init.el
+        fi
+      '';
 
     home.activation.emacsCleanupImperativePackages =
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
