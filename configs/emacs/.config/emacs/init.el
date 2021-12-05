@@ -173,6 +173,9 @@
 (setq show-paren-delay 0)
 (show-paren-mode +1)
 
+;; Disable documentation on hover
+(global-eldoc-mode -1)
+
 ;; Focus and resize GUI frames
 (when (display-graphic-p)
   (x-focus-frame nil)
