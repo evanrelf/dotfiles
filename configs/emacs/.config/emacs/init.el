@@ -182,12 +182,15 @@
  :states '(normal visual)
 
  "" '(nil :which-key "leader")
+ "C-g" '(keyboard-quit :which-key t)
  "<escape>" '(keyboard-quit :which-key t)
 
  "f" '(:ignore t :which-key "file")
+ "f C-g" '(keyboard-quit :which-key t)
  "f <escape>" '(keyboard-quit :which-key t)
  "f s" '(save-buffer :which-key "save")
 
  "g" '(:ignore t :which-key "git")
+ "g C-g" '(keyboard-quit :which-key t)
  "g <escape>" '(keyboard-quit :which-key t)
  "g s" '(magit-status :which-key "status"))
