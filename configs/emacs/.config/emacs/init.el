@@ -208,4 +208,9 @@
  "g" '(:ignore t :which-key "git")
  "g C-g" '(keyboard-quit :which-key t)
  "g <escape>" '(keyboard-quit :which-key t)
- "g s" '(magit-status :which-key "status"))
+ "g s" '(magit-status :which-key "status")
+
+ "," '((lambda ()
+	 (interactive)
+	 (evil-edit "~/.config/emacs/init.el"))
+       :which-key "edit config"))
