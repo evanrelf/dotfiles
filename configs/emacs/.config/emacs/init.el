@@ -110,6 +110,9 @@
 				 (display-fill-column-indicator-mode -1)
 				 (setq mode-line-format nil))))
 
+(leaf multi-vterm
+  :ensure t)
+
 (leaf exec-path-from-shell
   :ensure t
   :when (display-graphic-p)
@@ -217,6 +220,15 @@
  "g C-g" '(keyboard-quit :which-key t)
  "g <escape>" '(keyboard-quit :which-key t)
  "g s" '(magit-status :which-key "status")
+
+ "t" '(:ignore t :which-key "terminal")
+ "t C-g" '(keyboard-quit :which-key t)
+ "t <escape>" '(keyboard-quit :which-key t)
+ "t c" '(multi-vterm :which-key "create")
+ "t t" '(multi-vterm-dedicated-toggle :which-key "toggle (dedicated)")
+ "t p" '(multi-vterm-project :which-key "toggle (project)")
+ "t n" '(multi-vterm-next :which-key "next")
+ "t p" '(multi-vterm-prev :which-key "prev")
 
  "," '((lambda ()
 	 (interactive)
