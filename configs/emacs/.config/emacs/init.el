@@ -102,6 +102,14 @@
   (setq rust-format-on-save t)
   :ensure t)
 
+(leaf vterm
+  :ensure nil
+  :config
+  (add-hook 'vterm-mode-hook #'(lambda ()
+				 (display-line-numbers-mode -1)
+				 (display-fill-column-indicator-mode -1)
+				 (setq mode-line-format nil))))
+
 (leaf exec-path-from-shell
   :ensure t
   :when (display-graphic-p)
