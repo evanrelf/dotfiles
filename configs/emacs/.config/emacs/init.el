@@ -16,6 +16,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-echo-state nil)
+  (setq evil-undo-system 'undo-fu)
   (general-define-key
    :states '(normal visual motion)
    "j" 'evil-next-visual-line
@@ -26,6 +27,9 @@
   :ensure t
   :after evil
   :config (evil-collection-init))
+
+(leaf undo-fu
+  :ensure t)
 
 (leaf general
   :ensure t)
