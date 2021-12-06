@@ -51,7 +51,7 @@ in
     pkgsPrev.writeShellScriptBin "dotfiles" ''
       set -euo pipefail
       IFS=$'\n\t'
-      if [ -n "$DOTFILES" ]; then
+      if [ -n "''${DOTFILES:-}" ]; then
         cd "$DOTFILES"
       fi
       export PATH="${pkgsFinal.home-manager}/bin:$PATH"
