@@ -53,6 +53,9 @@
   :ensure t
   :config (vertico-mode +1))
 
+(leaf consult
+  :ensure t)
+
 (leaf orderless
   :ensure t
   :config (setq completion-styles '(orderless)))
