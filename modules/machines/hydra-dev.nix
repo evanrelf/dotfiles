@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     gcc
     gnupg
+    nix
     pinentry-curses
   ];
 
@@ -22,5 +23,9 @@
 
   xdg.configFile."fish/local.fish".text = ''
     set --export GPG_TTY (tty)
+  '';
+
+  xdg.configFile."nix/nix.conf".text = ''
+    extra-experimental-features = nix-command flakes
   '';
 }
