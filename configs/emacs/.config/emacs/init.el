@@ -28,6 +28,10 @@
   :after evil
   :config (evil-collection-init))
 
+(leaf evil-commentary
+  :ensure t
+  :config (evil-commentary-mode +1))
+
 (leaf undo-fu
   :ensure t)
 
