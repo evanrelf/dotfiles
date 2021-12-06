@@ -106,8 +106,11 @@
   :config (setq nix-nixfmt-bin "nixpkgs-fmt"))
 
 (leaf rust-mode
+  :ensure t
   :init
-  (setq rust-format-on-save t)
+  (setq rust-format-on-save t))
+
+(leaf zig-mode
   :ensure t)
 
 (leaf vterm
