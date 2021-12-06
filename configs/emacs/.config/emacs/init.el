@@ -56,6 +56,10 @@
 (leaf consult
   :ensure t)
 
+(leaf marginalia
+  :ensure t
+  :config (marginalia-mode +1))
+
 (leaf orderless
   :ensure t
   :config (setq completion-styles '(orderless)))
