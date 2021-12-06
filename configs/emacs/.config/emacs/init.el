@@ -82,6 +82,11 @@
        ((string= style "Dark")
 	(load-theme 'modus-vivendi t)))))))
 
+(leaf ns-auto-titlebar
+  :ensure t
+  :when (eq system-type 'darwin)
+  :config (ns-auto-titlebar-mode +1))
+
 (leaf mood-line
   :ensure t
   :config (mood-line-mode +1))
