@@ -150,7 +150,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "tpm": "tpm",
-        "vim-plug": "vim-plug"
+        "vim-plug": "vim-plug",
+        "zig-overlay": "zig-overlay"
       }
     },
     "rust-analyzer-src": {
@@ -199,6 +200,29 @@
       "original": {
         "owner": "junegunn",
         "repo": "vim-plug",
+        "type": "github"
+      }
+    },
+    "zig-overlay": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1638750426,
+        "narHash": "sha256-+yOaBvHMh6dc3lcpQ622RR7EelNkz6w+phQlCxxeSpg=",
+        "owner": "arqv",
+        "repo": "zig-overlay",
+        "rev": "6b2d2c52f7c569cf01d529458622ff78c91591b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arqv",
+        "repo": "zig-overlay",
         "type": "github"
       }
     }

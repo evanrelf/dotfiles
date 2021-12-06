@@ -33,6 +33,11 @@
       url = "github:junegunn/vim-plug";
       flake = false;
     };
+    zig-overlay = {
+      url = "github:arqv/zig-overlay";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ flake-utils, nixpkgs, ... }:

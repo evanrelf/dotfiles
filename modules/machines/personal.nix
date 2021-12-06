@@ -5,6 +5,7 @@
     ffmpeg
     rclone
     youtube-dl
+    zig
   ];
 
   dotfiles.programs.jujutsu = {

@@ -214,4 +214,10 @@ in
     in
     pkgsPrev.haskell.lib.doJailbreak
       (pkgsPrev.haskellPackages.callCabal2nix "patat" source { });
+
+  zig =
+    pkgsPrev.inputs.zig-overlay.packages."${pkgsPrev.system}"."0.8.1";
+
+  zig-master =
+    pkgsPrev.inputs.zig-overlay.packages."${pkgsPrev.system}".master.latest;
 }
