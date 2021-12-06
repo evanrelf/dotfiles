@@ -94,7 +94,6 @@
 
 (leaf smartparens
   :ensure t
-  :config
   :init (setq sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
 
@@ -103,7 +102,8 @@
 
 (leaf nix-mode
   :ensure t
-  :mode "\\.nix\\'")
+  :mode "\\.nix\\'"
+  :config (setq nix-nixfmt-bin "nixpkgs-fmt"))
 
 (leaf rust-mode
   :init
