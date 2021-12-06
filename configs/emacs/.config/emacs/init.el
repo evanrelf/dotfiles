@@ -32,6 +32,10 @@
   :ensure t
   :config (evil-commentary-mode +1))
 
+(leaf evil-indent-plus
+  :ensure t
+  :config (evil-indent-plus-default-bindings))
+
 (leaf undo-fu
   :ensure t)
 
