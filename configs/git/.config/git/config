@@ -4,21 +4,38 @@
   ap = add --patch
   ae = add --edit
 
+  # BRANCH
+  b = branch
+  bd = branch --delete
+  bdf = branch --delete --force
+
   # COMMIT
   c = commit
+  amend = git commit --amend
 
   # DIFF
   d = diff
   ds = diff --staged
 
+  # FETCH
+  f = fetch
+
   # LOG
   l = log --graph --pretty=normal --first-parent --max-count=20
   ll = log --graph --pretty=normal
+
+  # PULL
+  pullff = pull --ff-only
 
   # PUSH
   p = "!~/.config/git/hooks/pre-push && git push $@ #"
   pf = p --force-with-lease
   pu = p --set-upstream origin HEAD
+
+  # RESET
+  r = reset --mixed
+  rs = reset --soft
+  rh = reset --hard
 
   # RESTORE
   re = restore
@@ -29,6 +46,13 @@
 
   # STATUS
   s = status --short
+
+  # STASH
+  st = stash push
+  stp = stash pop
+  sts = stash show
+  stl = stash list
+  std = stash drop
 
   # SWITCH
   sw = switch
