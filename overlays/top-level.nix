@@ -141,23 +141,10 @@ in
     });
   };
 
-  git-branchless =
-    pkgsPrev.rustPlatform.buildRustPackage {
-      inherit (pkgsPrev.git-branchless) pname nativeBuildInputs buildInputs;
-      version = "HEAD";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "arxanas";
-        repo = "git-branchless";
-        rev = "9861d7093093ae2a92ff087a44ffd273ae051d37";
-        sha256 = "sha256-aJJE25QyzfwfEWdd8l+y67OWH+HlPyyq0Fz4isPWr40=";
-      };
-      cargoSha256 = "sha256-aCCGIbefWVkfCB292ghBkQ9jdFZlQbRWsQvpkixzqls=";
-      doCheck = false;
-    };
-
   gnugrep-gprefix = gprefix pkgsFinal.gnugrep;
 
-  home-manager = pkgsPrev.inputs.home-manager.defaultPackage."${pkgsFinal.system}";
+  home-manager =
+    pkgsPrev.inputs.home-manager.defaultPackage."${pkgsFinal.system}";
 
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
@@ -185,21 +172,6 @@ in
       OPENSSL_LIB_DIR = "${pkgsFinal.openssl.out}/lib";
       OPENSSL_INCLUDE_DIR = "${pkgsFinal.openssl.dev}/include";
     };
-
-  kakoune-unwrapped =
-    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
-      version = "2021.11.08";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "mawww";
-        repo = "kakoune";
-        rev = "v${version}";
-        sha256 = "02ads7d2scvab9pmsj77hc2kh9fpshmmblmwzw6w26zm86vqrhcl";
-      };
-      preConfigure = ''
-        ${prev.preConfigure}
-        export version="${version}"
-      '';
-    });
 
   nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
 
