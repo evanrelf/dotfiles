@@ -25,7 +25,8 @@ in
     home.packages = with pkgs; [
       delta
       git-branchless
-      git-revise
+      # Disabled until GPG signing is supported in the next stable release
+      # git-revise 
       gitAndTools.gitFull
     ];
 
