@@ -150,7 +150,7 @@
   :mode ("\\.md\\'" . gfm-mode))
 
 (leaf vterm
-  :ensure nil
+  :ensure t
   :config
   (defun vterm-hide-ui ()
     (display-line-numbers-mode -1)
