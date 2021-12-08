@@ -148,10 +148,11 @@
 (leaf vterm
   :ensure nil
   :config
-  (add-hook 'vterm-mode-hook #'(lambda ()
-				 (display-line-numbers-mode -1)
-				 (display-fill-column-indicator-mode -1)
-				 (setq mode-line-format nil))))
+  (defun vterm-hide-ui ()
+    (display-line-numbers-mode -1)
+    (display-fill-column-indicator-mode -1)
+    (setq mode-line-format nil))
+  :hook (vterm-mode . vterm-hide-ui))
 
 (leaf multi-vterm
   :ensure t)
