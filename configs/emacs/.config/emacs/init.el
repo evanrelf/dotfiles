@@ -184,6 +184,9 @@
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 
+;; Add newline at the end of files
+(setq require-final-newline t)
+
 ;; Enable line numbers
 (global-display-line-numbers-mode +1)
 (setq display-line-numbers-width 3)
