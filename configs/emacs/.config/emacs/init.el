@@ -262,7 +262,10 @@
 
   ;; Use monospaced font for everything
   (copy-face 'default 'fixed-pitch)
-  (copy-face 'default 'variable-pitch))
+  (copy-face 'default 'variable-pitch)
+
+  ;; Adjust font size in smaller increments
+  (setq text-scale-mode-step 1.1))
 
 ;; Make the mouse wheel scroll 3 lines at a time
 (setq scroll-conservatively 10000)
