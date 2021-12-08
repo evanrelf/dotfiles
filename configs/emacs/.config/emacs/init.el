@@ -147,8 +147,7 @@
 
 (leaf rust-mode
   :ensure t
-  :init
-  (setq rust-format-on-save t))
+  :init (setq rust-format-on-save t))
 
 (leaf zig-mode
   :ensure t)
@@ -159,6 +158,22 @@
 (leaf markdown-mode
   :ensure t
   :mode ("\\.md\\'" . gfm-mode))
+
+(leaf purescript-mode
+  :ensure t
+  :hook (purescript-mode . turn-on-purescript-indentation))
+
+(leaf dhall-mode
+  :ensure t)
+
+(leaf racket-mode
+  :ensure t)
+
+(leaf web-mode
+  :ensure t)
+
+(leaf lua-mode
+  :ensure t)
 
 (leaf vterm
   :ensure t
