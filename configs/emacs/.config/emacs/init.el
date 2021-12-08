@@ -25,11 +25,13 @@
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
+  (setq evil-want-Y-yank-to-eol t)
   (setq evil-echo-state nil)
   (setq evil-undo-system 'undo-fu)
   (setq-default evil-shift-width 2)
   (setq evil-split-window-below t)
   (setq evil-vsplit-window-right t)
+  (setq evil-move-beyond-eol t)
   (general-define-key
    :states '(normal visual motion)
    "j" 'evil-next-visual-line
