@@ -43,10 +43,12 @@
 
 (leaf evil-commentary
   :ensure t
+  :after evil
   :config (evil-commentary-mode +1))
 
 (leaf evil-indent-plus
   :ensure t
+  :after evil
   :config (evil-indent-plus-default-bindings))
 
 (leaf undo-fu
@@ -158,6 +160,7 @@
 
 (leaf vterm
   :ensure t
+  :when (display-graphic-p)
   :config
   (defun vterm-hide-ui ()
     (display-line-numbers-mode -1)
@@ -166,7 +169,9 @@
   :hook (vterm-mode . vterm-hide-ui))
 
 (leaf multi-vterm
-  :ensure t)
+  :ensure t
+  :when (display-graphic-p)
+  :after vterm)
 
 ;; Disable user interface elements
 (menu-bar-mode -1)
