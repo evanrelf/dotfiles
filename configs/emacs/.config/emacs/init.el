@@ -214,6 +214,9 @@
 (setq-default fill-column 81)
 (global-display-fill-column-indicator-mode +1)
 
+;; Stop wrapping lines at window edge
+(setq-default truncate-lines t)
+
 ;; Remove delay showing matching parenthesis
 (show-paren-mode -1)
 (setq show-paren-style 'expression)
