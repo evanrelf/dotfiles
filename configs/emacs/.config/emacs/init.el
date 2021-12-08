@@ -247,6 +247,13 @@
  "g <escape>" '(keyboard-quit :which-key t)
  "g s" '(magit-status :which-key "status")
 
+ "h" '(:ignore t :which-key "help")
+ "h C-g" '(keyboard-quit :which-key t)
+ "h <escape>" '(keyboard-quit :which-key t)
+ "h f" '(describe-function :which-key "function")
+ "h k" '(describe-key :which-key "key")
+ "h v" '(describe-variable :which-key "variable")
+
  "t" '(:ignore t :which-key "terminal")
  "t C-g" '(keyboard-quit :which-key t)
  "t <escape>" '(keyboard-quit :which-key t)
