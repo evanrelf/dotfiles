@@ -76,6 +76,10 @@
 
 (leaf modus-themes
   :ensure t
+  :init
+  (setq modus-theme-syntax '(alt-syntax))
+  (setq modus-themes-mode-line '(accented borderless))
+  (setq modus-themes-region '(bg-only))
   :config
   (cond
    ((eq system-type 'gnu/linux)
