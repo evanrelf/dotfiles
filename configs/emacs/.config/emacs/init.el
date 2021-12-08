@@ -175,21 +175,6 @@
 (leaf lua-mode
   :ensure t)
 
-(leaf vterm
-  :ensure t
-  :when (display-graphic-p)
-  :config
-  (defun vterm-hide-ui ()
-    (display-line-numbers-mode -1)
-    (display-fill-column-indicator-mode -1)
-    (setq mode-line-format nil))
-  :hook (vterm-mode . vterm-hide-ui))
-
-(leaf multi-vterm
-  :ensure t
-  :when (display-graphic-p)
-  :after vterm)
-
 (leaf simpleclip
   :ensure t
   :when (display-graphic-p)
