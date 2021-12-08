@@ -80,7 +80,10 @@ in
     pkgsPrev.emacsWithPackagesFromUsePackage {
       package = pkgsFinal.emacsGcc;
       config = ../configs/emacs/.config/emacs/init.el;
-      extraEmacsPackages = p: [ p.vterm ];
+      extraEmacsPackages = p: with p; [
+        libgit
+        vterm
+      ];
     };
 
   findutils-gprefix = gprefix pkgsFinal.findutils;
