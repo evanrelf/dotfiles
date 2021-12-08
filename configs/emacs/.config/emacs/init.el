@@ -23,6 +23,8 @@
   (setq evil-echo-state nil)
   (setq evil-undo-system 'undo-fu)
   (setq-default evil-shift-width 2)
+  (setq evil-split-window-below t)
+  (setq evil-vsplit-window-right t)
   (general-define-key
    :states '(normal visual motion)
    "j" 'evil-next-visual-line
