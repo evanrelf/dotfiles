@@ -249,15 +249,20 @@
 
 ;; Use preferred font in GUI
 (when (display-graphic-p)
+  ;; Fallback to Iosevka if PragmataPro isn't available
   (cond
    ((find-font (font-spec :name "PragmataPro Liga"))
-    (set-frame-font "PragmataPro Liga 16" nil t))
+    (set-face-font 'default "PragmataPro Liga-16"))
    ((find-font (font-spec :name "PragmataPro"))
-    (set-frame-font "PragmataPro 16" nil t))
+    (set-face-font 'default "PragmataPro-16"))
    ((find-font (font-spec :name "Iosevka Term SS08"))
-    (set-frame-font "Iosevka Term SS08 16" nil t))
+    (set-face-font 'default "Iosevka Term SS08-16"))
    ((find-font (font-spec :name "Iosevka Term"))
-    (set-frame-font "Iosevka Term 16" nil t))))
+    (set-face-font 'default "Iosevka Term-16")))
+
+  ;; Use monospaced font for everything
+  (copy-face 'default 'fixed-pitch)
+  (copy-face 'default 'variable-pitch))
 
 ;; Make the mouse wheel scroll 3 lines at a time
 (setq scroll-conservatively 10000)
