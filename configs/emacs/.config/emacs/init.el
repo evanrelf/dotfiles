@@ -23,15 +23,15 @@
 (leaf evil
   :ensure t
   :init
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-Y-yank-to-eol t)
-  (setq evil-echo-state nil)
-  (setq evil-undo-system 'undo-fu)
+  (setq-default evil-want-keybinding nil)
+  (setq-default evil-want-C-u-scroll t)
+  (setq-default evil-want-Y-yank-to-eol t)
+  (setq-default evil-echo-state nil)
+  (setq-default evil-undo-system 'undo-fu)
   (setq-default evil-shift-width 2)
-  (setq evil-split-window-below t)
-  (setq evil-vsplit-window-right t)
-  (setq evil-move-beyond-eol t)
+  (setq-default evil-split-window-below t)
+  (setq-default evil-vsplit-window-right t)
+  (setq-default evil-move-beyond-eol t)
   (general-define-key
    :states '(normal visual motion)
    "j" 'evil-next-visual-line
@@ -62,8 +62,8 @@
 (leaf which-key
   :ensure t
   :init
-  (setq which-key-idle-delay 0.5)
-  (setq which-key-idle-secondary-delay 0.05)
+  (setq-default which-key-idle-delay 0.5)
+  (setq-default which-key-idle-secondary-delay 0.05)
   :config (which-key-mode +1))
 
 (leaf vertico
@@ -79,7 +79,7 @@
 
 (leaf orderless
   :ensure t
-  :config (setq completion-styles '(orderless)))
+  :config (setq-default completion-styles '(orderless)))
 
 (leaf savehist
   :ensure nil
@@ -88,9 +88,9 @@
 (leaf modus-themes
   :ensure t
   :init
-  (setq modus-theme-syntax '(alt-syntax))
-  (setq modus-themes-mode-line '(accented borderless))
-  (setq modus-themes-region '(bg-only))
+  (setq-default modus-theme-syntax '(alt-syntax))
+  (setq-default modus-themes-mode-line '(accented borderless))
+  (setq-default modus-themes-region '(bg-only))
   :config
   (cond
    ((eq system-type 'gnu/linux)
@@ -115,10 +115,10 @@
 (leaf magit
   :ensure t
   :config
-  (setq git-commit-summary-max-length 50)
-  (setq git-commit-style-convention-checks '(overlong-summary-line
-                                             non-empty-second-line))
-  (add-hook 'git-commit-mode-hook #'(lambda () (setq fill-column 72))))
+  (setq-default git-commit-summary-max-length 50)
+  (setq-default git-commit-style-convention-checks '(overlong-summary-line
+                                                     non-empty-second-line))
+  :hook (git-commit-mode-hook . (lambda () (setq-local fill-column 72))))
 
 (leaf libgit
   :ensure t)
@@ -129,12 +129,12 @@
 
 (leaf git-gutter
   :ensure t
-  :init (setq git-gutter:modified-sign "~")
+  :init (setq-default git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
 (leaf smartparens
   :ensure t
-  :init (setq sp-highlight-pair-overlay nil)
+  :init (setq-default sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
 
 (leaf haskell-mode
@@ -143,11 +143,11 @@
 (leaf nix-mode
   :ensure t
   :mode "\\.nix\\'"
-  :config (setq nix-nixfmt-bin "nixpkgs-fmt"))
+  :config (setq-default nix-nixfmt-bin "nixpkgs-fmt"))
 
 (leaf rust-mode
   :ensure t
-  :init (setq rust-format-on-save t))
+  :init (setq-default rust-format-on-save t))
 
 (leaf zig-mode
   :ensure t)
@@ -195,8 +195,8 @@
   (fringe-mode -1))
 
 ;; Disable startup messages
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message nil)
+(setq-default inhibit-startup-screen t)
+(setq-default initial-scratch-message nil)
 (fset 'display-startup-echo-area-message 'ignore)
 
 ;; Disable {beginning,end} of buffer messages
@@ -205,33 +205,33 @@
   (when (not (memq (car data) '(beginning-of-buffer
                                 end-of-buffer)))
     (command-error-default-function data context caller)))
-(setq command-error-function #'quieter-command-error-function)
+(setq-default command-error-function #'quieter-command-error-function)
 
 ;; Disable audio bell
-(setq ring-bell-function 'ignore)
+(setq-default ring-bell-function 'ignore)
 
 ;; Disable clutter files
-(setq custom-file null-device)
-(setq make-backup-files nil)
-(setq create-lockfiles nil)
-(setq auto-save-default nil)
+(setq-default custom-file null-device)
+(setq-default make-backup-files nil)
+(setq-default create-lockfiles nil)
+(setq-default auto-save-default nil)
 
 ;; Shorten yes/no prompts to y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Follow symlinks when opening files under version control
-(setq vc-follow-symlinks t)
+(setq-default vc-follow-symlinks t)
 
 ;; Indent with 2 spaces
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 
 ;; Add newline at the end of files
-(setq require-final-newline t)
+(setq-default require-final-newline t)
 
 ;; Enable line numbers
 (global-display-line-numbers-mode +1)
-(setq display-line-numbers-width 3)
+(setq-default display-line-numbers-width 3)
 
 ;; Show ruler at 80 columns
 (setq-default fill-column 81)
@@ -242,8 +242,8 @@
 
 ;; Remove delay showing matching parenthesis
 (show-paren-mode -1)
-(setq show-paren-style 'expression)
-(setq show-paren-delay 0)
+(setq-default show-paren-style 'expression)
+(setq-default show-paren-delay 0)
 (show-paren-mode +1)
 
 ;; Disable documentation on hover
@@ -252,9 +252,9 @@
 ;; Focus and resize GUI frames
 (when (display-graphic-p)
   (x-focus-frame nil)
-  (setq initial-frame-alist '((fullscreen . maximized)))
-  (setq default-frame-alist
-        '((fullscreen . fullheight) (width . 100) (left . 0.5))))
+  (setq-default initial-frame-alist '((fullscreen . maximized)))
+  (setq-default default-frame-alist
+                '((fullscreen . fullheight) (width . 100) (left . 0.5))))
 
 ;; Use preferred font in GUI
 (when (display-graphic-p)
@@ -274,13 +274,13 @@
   (copy-face 'default 'variable-pitch)
 
   ;; Adjust font size in smaller increments
-  (setq text-scale-mode-step 1.1))
+  (setq-default text-scale-mode-step 1.1))
 
 ;; Make the mouse wheel scroll 3 lines at a time
-(setq scroll-conservatively 10000)
+(setq-default scroll-conservatively 10000)
 (when (display-graphic-p)
-  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
-  (setq mouse-wheel-progressive-speed nil))
+  (setq-default mouse-wheel-scroll-amount '(3 ((shift) . 1)))
+  (setq-default mouse-wheel-progressive-speed nil))
 (unless (display-graphic-p)
   (xterm-mouse-mode +1)
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
