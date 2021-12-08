@@ -169,7 +169,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; Disable clutter files
-(setq custom-file "/dev/null")
+(setq custom-file null-device)
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 (setq auto-save-default nil)
