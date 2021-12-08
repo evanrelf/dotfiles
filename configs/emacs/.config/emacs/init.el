@@ -190,6 +190,11 @@
   :when (display-graphic-p)
   :after vterm)
 
+(leaf simpleclip
+  :ensure t
+  :when (display-graphic-p)
+  :config (simpleclip-mode +1))
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
