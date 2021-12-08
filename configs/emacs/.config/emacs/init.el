@@ -195,6 +195,10 @@
   :when (display-graphic-p)
   :config (simpleclip-mode +1))
 
+(leaf ws-butler
+  :ensure t
+  :config (ws-butler-global-mode +1))
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
