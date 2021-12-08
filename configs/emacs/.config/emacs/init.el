@@ -6,8 +6,8 @@
   (eval-and-compile
     (customize-set-variable
      'package-archives '(("org" . "https://orgmode.org/elpa/")
-			 ("melpa" . "https://melpa.org/packages/")
-			 ("gnu" . "https://elpa.gnu.org/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)))
 
 (leaf exec-path-from-shell
@@ -22,6 +22,7 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-echo-state nil)
   (setq evil-undo-system 'undo-fu)
+  (setq-default evil-shift-width 2)
   (general-define-key
    :states '(normal visual motion)
    "j" 'evil-next-visual-line
@@ -83,9 +84,9 @@
     (let ((style (shell-command-to-string "begin; defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light; end | tr -d '\n'")))
       (cond
        ((string= style "Light")
-	(load-theme 'modus-operandi t))
+        (load-theme 'modus-operandi t))
        ((string= style "Dark")
-	(load-theme 'modus-vivendi t)))))))
+        (load-theme 'modus-vivendi t)))))))
 
 (leaf ns-auto-titlebar
   :ensure t
@@ -101,7 +102,7 @@
   :config
   (setq git-commit-summary-max-length 50)
   (setq git-commit-style-convention-checks '(overlong-summary-line
-					     non-empty-second-line))
+                                             non-empty-second-line))
   (add-hook 'git-commit-mode-hook #'(lambda () (setq fill-column 72))))
 
 (leaf git-gutter
@@ -160,7 +161,7 @@
 ;; (https://emacs.stackexchange.com/a/20039)
 (defun quieter-command-error-function (data context caller)
   (when (not (memq (car data) '(beginning-of-buffer
-				end-of-buffer)))
+                                end-of-buffer)))
     (command-error-default-function data context caller)))
 (setq command-error-function #'quieter-command-error-function)
 
@@ -180,8 +181,8 @@
 (setq vc-follow-symlinks t)
 
 ;; Indent with 2 spaces
-(setq tab-width 2)
-(setq indent-tabs-mode nil)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
 
 ;; Enable line numbers
 (global-display-line-numbers-mode +1)
@@ -204,7 +205,7 @@
   (x-focus-frame nil)
   (setq initial-frame-alist '((fullscreen . maximized)))
   (setq default-frame-alist
-	'((fullscreen . fullheight) (width . 100) (left . 0.5))))
+        '((fullscreen . fullheight) (width . 100) (left . 0.5))))
 
 ;; Use preferred font in GUI
 (when (display-graphic-p)
@@ -264,6 +265,6 @@
  "t p" '(multi-vterm-prev :which-key "prev")
 
  "," '((lambda ()
-	 (interactive)
-	 (evil-edit "~/.config/emacs/init.el"))
+         (interactive)
+         (evil-edit "~/.config/emacs/init.el"))
        :which-key "edit config"))
