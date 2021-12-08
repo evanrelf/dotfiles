@@ -10,9 +10,14 @@
                          ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)))
 
+(leaf no-littering
+  :ensure t
+  :require t)
+
 (leaf exec-path-from-shell
   :ensure t
   :when (display-graphic-p)
+  :after no-littering
   :config (exec-path-from-shell-initialize))
 
 (leaf evil
