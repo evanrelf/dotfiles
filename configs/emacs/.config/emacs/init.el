@@ -138,6 +138,9 @@
 (leaf zig-mode
   :ensure t)
 
+(leaf fish-mode
+  :ensure t)
+
 (leaf vterm
   :ensure nil
   :config
