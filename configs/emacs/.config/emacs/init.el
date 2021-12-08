@@ -141,6 +141,10 @@
 (leaf fish-mode
   :ensure t)
 
+(leaf markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" . gfm-mode))
+
 (leaf vterm
   :ensure nil
   :config
