@@ -10,6 +10,11 @@
 			 ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)))
 
+(leaf exec-path-from-shell
+  :ensure t
+  :when (display-graphic-p)
+  :config (exec-path-from-shell-initialize))
+
 (leaf evil
   :ensure t
   :init
@@ -135,11 +140,6 @@
 
 (leaf multi-vterm
   :ensure t)
-
-(leaf exec-path-from-shell
-  :ensure t
-  :when (display-graphic-p)
-  :config (exec-path-from-shell-initialize))
 
 ;; Disable user interface elements
 (menu-bar-mode -1)
