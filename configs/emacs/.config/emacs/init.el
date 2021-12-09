@@ -40,6 +40,17 @@
   :after evil
   :config (evil-collection-init))
 
+(use-package evil-terminal-cursor-changer
+  :unless (display-graphic-p)
+  :after evil
+  :init
+  (setq-default evil-motion-state-cursor 'box)
+  (setq-default evil-visual-state-cursor 'box)
+  (setq-default evil-normal-state-cursor 'box)
+  (setq-default evil-insert-state-cursor 'bar)
+  (setq-default evil-emacs-state-cursor 'hbar)
+  :config (evil-terminal-cursor-changer-activate))
+
 (use-package evil-commentary
   :after evil
   :config (evil-commentary-mode +1))
