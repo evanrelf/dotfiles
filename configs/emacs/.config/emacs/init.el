@@ -294,6 +294,7 @@
  "" '(nil :which-key "leader")
  "C-g" '(keyboard-quit :which-key t)
  "<escape>" '(keyboard-quit :which-key t)
+ "SPC" '(execute-extended-command :which-key "command")
  "," '((lambda ()
          (interactive)
          (evil-edit "~/.config/emacs/init.el"))
