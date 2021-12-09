@@ -11,6 +11,9 @@
 
 (use-package no-littering)
 
+(use-package gcmh
+  :config (gcmh-mode +1))
+
 (use-package exec-path-from-shell
   :when (display-graphic-p)
   :after no-littering

@@ -34,10 +34,9 @@ in
 
       home.activation.emacsLinkConfig =
         lib.hm.dag.entryAfter [ "writeBoundary" "linkGeneration" ] ''
-          if [ ! -e "$HOME/.config/emacs/init.el" ]; then
-            $DRY_RUN_CMD mkdir -p "$HOME/.config/emacs"
-            $DRY_RUN_CMD ln -s {$OLDPWD/configs/emacs,$HOME}/.config/emacs/init.el
-          fi
+          $DRY_RUN_CMD mkdir -p "$HOME/.config/emacs"
+          $DRY_RUN_CMD ln -sf {$OLDPWD/configs/emacs,$HOME}/.config/emacs/init.el
+          $DRY_RUN_CMD ln -sf {$OLDPWD/configs/emacs,$HOME}/.config/emacs/early-init.el
         '';
 
       home.activation.emacsCleanupImperativePackages =
