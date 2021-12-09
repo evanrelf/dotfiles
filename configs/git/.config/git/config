@@ -32,6 +32,13 @@
   pf = p --force-with-lease
   pu = p --set-upstream origin HEAD
 
+  # REBASE
+  rb = rebase
+  rbi = rebase --interactive
+  rbc = rebase --continue
+  rbs = rebase --skip
+  rba = rebase --abort
+
   # RESET
   r = reset --mixed
   rs = reset --soft
