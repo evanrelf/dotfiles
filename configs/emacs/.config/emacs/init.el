@@ -294,6 +294,10 @@
  "" '(nil :which-key "leader")
  "C-g" '(keyboard-quit :which-key t)
  "<escape>" '(keyboard-quit :which-key t)
+ "," '((lambda ()
+         (interactive)
+         (evil-edit "~/.config/emacs/init.el"))
+       :which-key "edit config")
 
  "f" '(:ignore t :which-key "file")
  "f C-g" '(keyboard-quit :which-key t)
@@ -311,9 +315,5 @@
  "h a" '(consult-apropos :which-key "apropos")
  "h f" '(describe-function :which-key "function")
  "h k" '(describe-key :which-key "key")
- "h v" '(describe-variable :which-key "variable")
+ "h v" '(describe-variable :which-key "variable"))
 
- "," '((lambda ()
-         (interactive)
-         (evil-edit "~/.config/emacs/init.el"))
-       :which-key "edit config"))
