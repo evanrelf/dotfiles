@@ -84,6 +84,7 @@ in
         libgit
         vterm
       ];
+      alwaysEnsure = true;
     };
 
   findutils-gprefix = gprefix pkgsFinal.findutils;

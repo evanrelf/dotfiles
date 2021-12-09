@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
-(leaf leaf
-  :ensure nil
+(use-package use-package
   :config
+  (setq-default use-package-always-ensure t)
   (eval-and-compile
     (customize-set-variable
      'package-archives '(("org" . "https://orgmode.org/elpa/")
@@ -10,18 +10,14 @@
                          ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)))
 
-(leaf no-littering
-  :ensure t
-  :require t)
+(use-package no-littering)
 
-(leaf exec-path-from-shell
-  :ensure t
+(use-package exec-path-from-shell
   :when (display-graphic-p)
   :after no-littering
   :config (exec-path-from-shell-initialize))
 
-(leaf evil
-  :ensure t
+(use-package evil
   :init
   (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
@@ -38,57 +34,46 @@
    "k" 'evil-previous-visual-line)
   :config (evil-mode +1))
 
-(leaf evil-collection
-  :ensure t
+(use-package evil-collection
   :after evil
   :config (evil-collection-init))
 
-(leaf evil-commentary
-  :ensure t
+(use-package evil-commentary
   :after evil
   :config (evil-commentary-mode +1))
 
-(leaf evil-indent-plus
-  :ensure t
+(use-package evil-indent-plus
   :after evil
   :config (evil-indent-plus-default-bindings))
 
-(leaf undo-fu
-  :ensure t
+(use-package undo-fu
   :after evil)
 
-(leaf general
-  :ensure t
+(use-package general
   :commands general-define-key)
 
-(leaf which-key
-  :ensure t
+(use-package which-key
   :init
   (setq-default which-key-idle-delay 0.5)
   (setq-default which-key-idle-secondary-delay 0.05)
   :config (which-key-mode +1))
 
-(leaf vertico
-  :ensure t
+(use-package vertico
   :config (vertico-mode +1))
 
-(leaf consult
-  :ensure t)
+(use-package consult)
 
-(leaf marginalia
-  :ensure t
+(use-package marginalia
   :config (marginalia-mode +1))
 
-(leaf orderless
-  :ensure t
+(use-package orderless
   :config (setq-default completion-styles '(orderless)))
 
-(leaf savehist
+(use-package savehist
   :ensure nil
   :config (savehist-mode +1))
 
-(leaf modus-themes
-  :ensure t
+(use-package modus-themes
   :init
   (setq-default modus-theme-syntax '(alt-syntax))
   (setq-default modus-themes-mode-line '(accented borderless))
@@ -105,18 +90,15 @@
        ((string= style "Dark")
         (load-theme 'modus-vivendi t)))))))
 
-(leaf ns-auto-titlebar
-  :ensure t
+(use-package ns-auto-titlebar
   :when (eq system-type 'darwin)
   :after modus-themes
   :config (ns-auto-titlebar-mode +1))
 
-(leaf mood-line
-  :ensure t
+(use-package mood-line
   :config (mood-line-mode +1))
 
-(leaf magit
-  :ensure t
+(use-package magit
   :commands magit-status
   :config
   (setq-default git-commit-summary-max-length 50)
@@ -124,78 +106,61 @@
                                                      non-empty-second-line))
   :hook (git-commit-mode-hook . (lambda () (setq-local fill-column 72))))
 
-(leaf libgit
-  :ensure t
+(use-package libgit
   :after magit)
 
-(leaf magit-libgit
-  :ensure t
-  :after magit libgit)
+(use-package magit-libgit
+  :after (magit libgit))
 
-(leaf git-gutter
-  :ensure t
+(use-package git-gutter
   :init (setq-default git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
-(leaf smartparens
-  :ensure t
+(use-package smartparens
   :init (setq-default sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
 
-(leaf haskell-mode
-  :ensure t
+(use-package haskell-mode
   :mode "\\.hs\\'" "\\.hs-boot\\'" "\\.cabal\\'")
 
-(leaf nix-mode
-  :ensure t
+(use-package nix-mode
   :mode "\\.nix\\'"
   :config (setq-default nix-nixfmt-bin "nixpkgs-fmt"))
 
-(leaf rust-mode
-  :ensure t
+(use-package rust-mode
   :mode "\\.rs\\'"
   :init (setq-default rust-format-on-save t))
 
-(leaf zig-mode
-  :ensure t
+(use-package zig-mode
   :mode "\\.zig\\'")
 
-(leaf fish-mode
-  :ensure t
+(use-package fish-mode
   :mode "\\.fish\\'")
 
-(leaf markdown-mode
-  :ensure t
+(use-package markdown-mode
   :mode ("\\.md\\'" . gfm-mode))
 
-(leaf purescript-mode
-  :ensure t
+(use-package purescript-mode
   :mode "\\.purs\\'"
   :hook (purescript-mode . turn-on-purescript-indentation))
 
-(leaf dhall-mode
-  :ensure t
+(use-package dhall-mode
   :mode "\\.dhall\\'")
 
-(leaf racket-mode
-  :ensure t
+(use-package racket-mode
   :mode "\\.rkt\\'")
 
-(leaf web-mode
-  :ensure t
+(use-package web-mode
   :mode "\\.html\\'" "\\.css\\'" "\\.js\\'")
 
-(leaf lua-mode
-  :ensure t
+(use-package lua-mode
   :mode "\\.lua\\'")
 
-(leaf simpleclip
-  :ensure t
+(use-package simpleclip
   :when (display-graphic-p)
   :config (simpleclip-mode +1))
 
-(leaf ws-butler
-  :ensure t
+(use-package ws-butler
   :config (ws-butler-global-mode +1))
 
 ;; Disable user interface elements
