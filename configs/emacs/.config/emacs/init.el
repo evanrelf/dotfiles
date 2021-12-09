@@ -54,10 +54,12 @@
   :config (evil-indent-plus-default-bindings))
 
 (leaf undo-fu
-  :ensure t)
+  :ensure t
+  :after evil)
 
 (leaf general
-  :ensure t)
+  :ensure t
+  :commands general-define-key)
 
 (leaf which-key
   :ensure t
@@ -106,6 +108,7 @@
 (leaf ns-auto-titlebar
   :ensure t
   :when (eq system-type 'darwin)
+  :after modus-themes
   :config (ns-auto-titlebar-mode +1))
 
 (leaf mood-line
@@ -114,6 +117,7 @@
 
 (leaf magit
   :ensure t
+  :commands magit-status
   :config
   (setq-default git-commit-summary-max-length 50)
   (setq-default git-commit-style-convention-checks '(overlong-summary-line
@@ -121,7 +125,8 @@
   :hook (git-commit-mode-hook . (lambda () (setq-local fill-column 72))))
 
 (leaf libgit
-  :ensure t)
+  :ensure t
+  :after magit)
 
 (leaf magit-libgit
   :ensure t
@@ -138,7 +143,8 @@
   :config (smartparens-global-mode +1))
 
 (leaf haskell-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.hs\\'" "\\.hs-boot\\'" "\\.cabal\\'")
 
 (leaf nix-mode
   :ensure t
@@ -147,13 +153,16 @@
 
 (leaf rust-mode
   :ensure t
+  :mode "\\.rs\\'"
   :init (setq-default rust-format-on-save t))
 
 (leaf zig-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.zig\\'")
 
 (leaf fish-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.fish\\'")
 
 (leaf markdown-mode
   :ensure t
@@ -161,19 +170,24 @@
 
 (leaf purescript-mode
   :ensure t
+  :mode "\\.purs\\'"
   :hook (purescript-mode . turn-on-purescript-indentation))
 
 (leaf dhall-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.dhall\\'")
 
 (leaf racket-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.rkt\\'")
 
 (leaf web-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.html\\'" "\\.css\\'" "\\.js\\'")
 
 (leaf lua-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.lua\\'")
 
 (leaf simpleclip
   :ensure t
