@@ -229,7 +229,6 @@
 
 ;; Remove delay showing matching parenthesis
 (show-paren-mode -1)
-(setq-default show-paren-style 'expression)
 (setq-default show-paren-delay 0)
 (show-paren-mode +1)
 
