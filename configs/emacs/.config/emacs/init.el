@@ -313,15 +313,6 @@
  "h k" '(describe-key :which-key "key")
  "h v" '(describe-variable :which-key "variable")
 
- "t" '(:ignore t :which-key "terminal")
- "t C-g" '(keyboard-quit :which-key t)
- "t <escape>" '(keyboard-quit :which-key t)
- "t c" '(multi-vterm :which-key "create")
- "t t" '(multi-vterm-dedicated-toggle :which-key "toggle (dedicated)")
- "t p" '(multi-vterm-project :which-key "toggle (project)")
- "t n" '(multi-vterm-next :which-key "next")
- "t p" '(multi-vterm-prev :which-key "prev")
-
  "," '((lambda ()
          (interactive)
          (evil-edit "~/.config/emacs/init.el"))
