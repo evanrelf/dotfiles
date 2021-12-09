@@ -62,8 +62,7 @@
 (use-package undo-fu
   :after evil)
 
-(use-package general
-  :commands general-define-key)
+(use-package general)
 
 (use-package which-key
   :init
