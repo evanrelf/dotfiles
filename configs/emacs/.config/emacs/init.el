@@ -116,7 +116,7 @@
   (setq-default git-commit-summary-max-length 50)
   (setq-default git-commit-style-convention-checks '(overlong-summary-line
                                                      non-empty-second-line))
-  :hook (git-commit-mode-hook . (lambda () (setq-local fill-column 72))))
+  :hook (git-commit-mode . (lambda () (setq-local fill-column 72))))
 
 (use-package libgit
   :after magit)
