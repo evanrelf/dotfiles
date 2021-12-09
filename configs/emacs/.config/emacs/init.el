@@ -168,10 +168,6 @@
 (use-package lua-mode
   :mode "\\.lua\\'")
 
-(use-package simpleclip
-  :when (display-graphic-p)
-  :config (simpleclip-mode +1))
-
 (use-package ws-butler
   :config (ws-butler-global-mode +1))
 
