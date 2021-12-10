@@ -81,6 +81,7 @@ in
       package = pkgsFinal.emacsGcc;
       config = ../configs/emacs/.config/emacs/init.el;
       extraEmacsPackages = p: with p; [
+        apheleia
         libgit
         vterm
       ];

@@ -179,6 +179,7 @@
   :config (ws-butler-global-mode +1))
 
 (use-package apheleia
+  :ensure nil
   :defer 0
   :init
   (setq-default apheleia-formatters '((fourmolu . ("fourmolu" "-o" "-XBangPatterns" "-o" "-XTypeApplications"))
