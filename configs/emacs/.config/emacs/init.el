@@ -179,6 +179,18 @@
   :defer 0
   :config (ws-butler-global-mode +1))
 
+(use-package apheleia
+  :defer 0
+  :init
+  (setq-default apheleia-formatters '((fourmolu . ("fourmolu" "-o" "-XBangPatterns" "-o" "-XTypeApplications"))
+                                      (nixpkgs-fmt . ("nixpkgs-fmt"))
+                                      (rustfmt . ("rustfmt"))))
+  (setq-default apheleia-mode-alist '((haskell-mode . (fourmolu))
+                                      (nix-mode . (nixpkgs-fmt))
+                                      (rust-mode . (rustfmt))))
+  :commands apheleia-format-buffer
+  :hook (rust-mode . apheleia-mode))
+
 (use-package org
   :mode "\\.org\\'")
 
@@ -197,8 +209,7 @@
   :config (setq-default nix-nixfmt-bin "nixpkgs-fmt"))
 
 (use-package rust-mode
-  :mode "\\.rs\\'"
-  :init (setq-default rust-format-on-save t))
+  :mode "\\.rs\\'")
 
 (use-package zig-mode
   :mode "\\.zig\\'")
@@ -323,6 +334,7 @@
  "C-g" '(keyboard-quit :which-key t)
  "<escape>" '(keyboard-quit :which-key t)
  "SPC" '(execute-extended-command :which-key "command")
+ "=" '(apheleia-format-buffer :which-key "format")
  "," '((lambda ()
          (interactive)
          (evil-edit "~/.config/emacs/init.el"))
