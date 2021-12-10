@@ -6,8 +6,7 @@
   (setq-default use-package-always-ensure t)
   :config
   (eval-and-compile
-    (setq-default package-archives '(("org" . "https://orgmode.org/elpa/")
-                                     ("melpa" . "https://melpa.org/packages/")
+    (setq-default package-archives '(("melpa" . "https://melpa.org/packages/")
                                      ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)))
 
