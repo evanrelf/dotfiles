@@ -180,14 +180,13 @@
 
 (use-package apheleia
   :ensure nil
-  :defer 0
   :init
-  (setq-default apheleia-formatters '((fourmolu . ("fourmolu" "-o" "-XBangPatterns" "-o" "-XTypeApplications"))
-                                      (nixpkgs-fmt . ("nixpkgs-fmt"))
-                                      (rustfmt . ("rustfmt"))))
-  (setq-default apheleia-mode-alist '((haskell-mode . (fourmolu))
-                                      (nix-mode . (nixpkgs-fmt))
-                                      (rust-mode . (rustfmt))))
+  (setq-default apheleia-formatters '((fourmolu "fourmolu" "-o" "-XBangPatterns" "-o" "-XTypeApplications")
+                                      (nixpkgs-fmt "nixpkgs-fmt")
+                                      (rustfmt "rustfmt")))
+  (setq-default apheleia-mode-alist '((haskell-mode . fourmolu)
+                                      (nix-mode . nixpkgs-fmt)
+                                      (rust-mode . rustfmt)))
   :commands apheleia-format-buffer
   :hook (rust-mode . apheleia-mode))
 
