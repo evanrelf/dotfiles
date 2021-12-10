@@ -190,7 +190,7 @@
   :mode ("\\.md\\'" . gfm-mode))
 
 (use-package haskell-mode
-  :mode "\\.hs\\'" "\\.hs-boot\\'" "\\.cabal\\'")
+  :mode "\\.hs\\'" "\\.hs-boot\\'" ("\\.cabal\\'" . haskell-cabal-mode))
 
 (use-package nix-mode
   :mode "\\.nix\\'"
