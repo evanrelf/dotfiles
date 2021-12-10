@@ -10,4 +10,4 @@ let
   flake = import flake-compat { src = ./.; };
 
 in
-flake.defaultNix
+flake.defaultNix.packages."${builtins.currentSystem}"
