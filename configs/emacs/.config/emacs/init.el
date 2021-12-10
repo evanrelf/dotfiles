@@ -121,6 +121,11 @@
   :defer 0
   :config (savehist-mode +1))
 
+(use-package autorevert
+  :ensure nil
+  :defer 0
+  :config (global-auto-revert-mode +1))
+
 (use-package magit
   :commands magit-status
   :config
