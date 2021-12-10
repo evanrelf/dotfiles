@@ -156,6 +156,18 @@
   :init (setq-default sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
 
+(use-package whitespace
+  :ensure nil
+  :defer 0
+  :init
+  (setq-default whitespace-style '(face
+                                   trailing
+                                   tabs
+                                   missing-newline-at-eof
+                                   empty
+                                   tab-mark))
+  :config (whitespace-mode +1))
+
 (use-package ws-butler
   :defer 0
   :config (ws-butler-global-mode +1))
