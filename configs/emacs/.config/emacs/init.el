@@ -145,6 +145,12 @@
   :init (setq-default git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
+(use-package paren
+  :ensure nil
+  :defer 0
+  :init (setq-default show-paren-delay 0)
+  :config (show-paren-mode +1))
+
 (use-package smartparens
   :defer 0
   :init (setq-default sp-highlight-pair-overlay nil)
@@ -241,11 +247,6 @@
 
 ;; Stop wrapping lines at window edge
 (setq-default truncate-lines t)
-
-;; Remove delay showing matching parenthesis
-(show-paren-mode -1)
-(setq-default show-paren-delay 0)
-(show-paren-mode +1)
 
 ;; Disable documentation on hover
 (global-eldoc-mode -1)
