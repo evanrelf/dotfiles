@@ -135,6 +135,11 @@
 (use-package magit-libgit
   :after (magit libgit))
 
+(use-package display-line-numbers
+  :ensure nil
+  :init (setq-default display-line-numbers-width 3)
+  :config (global-display-line-numbers-mode +1))
+
 (use-package git-gutter
   :defer 0
   :init (setq-default git-gutter:modified-sign "~")
@@ -229,10 +234,6 @@
 
 ;; Add newline at the end of files
 (setq-default require-final-newline t)
-
-;; Enable line numbers
-(global-display-line-numbers-mode +1)
-(setq-default display-line-numbers-width 3)
 
 ;; Show ruler at 80 columns
 (setq-default fill-column 81)
