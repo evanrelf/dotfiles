@@ -1,17 +1,44 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package use-package
-  :config
+  :defer 0
+  :init
   (setq-default use-package-always-ensure t)
+  :config
   (eval-and-compile
     (setq-default package-archives '(("org" . "https://orgmode.org/elpa/")
                                      ("melpa" . "https://melpa.org/packages/")
                                      ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)))
 
+(use-package modus-themes
+  :config
+  (setq-default modus-theme-syntax '(alt-syntax))
+  (setq-default modus-themes-mode-line '(accented borderless))
+  (setq-default modus-themes-region '(bg-only))
+  (cond
+   ((eq system-type 'gnu/linux)
+    (load-theme 'modus-vivendi t))
+   ((eq system-type 'darwin)
+    (let ((style (shell-command-to-string "begin; defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light; end | tr -d '\n'")))
+      (cond
+       ((string= style "Light")
+        (load-theme 'modus-operandi t))
+       ((string= style "Dark")
+        (load-theme 'modus-vivendi t)))))))
+
+(use-package ns-auto-titlebar
+  :when (and (display-graphic-p) (eq system-type 'darwin))
+  :after modus-themes
+  :config (ns-auto-titlebar-mode +1))
+
+(use-package mood-line
+  :config (mood-line-mode +1))
+
 (use-package no-littering)
 
 (use-package gcmh
+  :defer 0
   :config (gcmh-mode +1))
 
 (use-package exec-path-from-shell
@@ -20,6 +47,8 @@
   :config (exec-path-from-shell-initialize))
 
 (use-package evil
+  :defer 0
+  :after general
   :init
   (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
@@ -62,53 +91,35 @@
 (use-package undo-fu
   :after evil)
 
-(use-package general)
+(use-package general
+  :defer 0)
 
 (use-package which-key
+  :defer 0
   :init
   (setq-default which-key-idle-delay 0.5)
   (setq-default which-key-idle-secondary-delay 0.05)
   :config (which-key-mode +1))
 
 (use-package vertico
+  :defer 0
   :config (vertico-mode +1))
 
-(use-package consult)
+(use-package consult
+  :defer 0)
 
 (use-package marginalia
+  :defer 0
   :config (marginalia-mode +1))
 
 (use-package orderless
+  :defer 0
   :config (setq-default completion-styles '(orderless)))
 
 (use-package savehist
   :ensure nil
+  :defer 0
   :config (savehist-mode +1))
-
-(use-package modus-themes
-  :init
-  (setq-default modus-theme-syntax '(alt-syntax))
-  (setq-default modus-themes-mode-line '(accented borderless))
-  (setq-default modus-themes-region '(bg-only))
-  :config
-  (cond
-   ((eq system-type 'gnu/linux)
-    (load-theme 'modus-vivendi t))
-   ((eq system-type 'darwin)
-    (let ((style (shell-command-to-string "begin; defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light; end | tr -d '\n'")))
-      (cond
-       ((string= style "Light")
-        (load-theme 'modus-operandi t))
-       ((string= style "Dark")
-        (load-theme 'modus-vivendi t)))))))
-
-(use-package ns-auto-titlebar
-  :when (eq system-type 'darwin)
-  :after modus-themes
-  :config (ns-auto-titlebar-mode +1))
-
-(use-package mood-line
-  :config (mood-line-mode +1))
 
 (use-package magit
   :commands magit-status
@@ -125,10 +136,12 @@
   :after (magit libgit))
 
 (use-package git-gutter
+  :defer 0
   :init (setq-default git-gutter:modified-sign "~")
   :config (global-git-gutter-mode +1))
 
 (use-package smartparens
+  :defer 0
   :init (setq-default sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
 
@@ -169,6 +182,7 @@
   :mode "\\.lua\\'")
 
 (use-package ws-butler
+  :defer 0
   :config (ws-butler-global-mode +1))
 
 ;; Disable user interface elements
