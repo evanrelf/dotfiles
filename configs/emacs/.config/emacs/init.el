@@ -145,6 +145,10 @@
   :init (setq-default sp-highlight-pair-overlay nil)
   :config (smartparens-global-mode +1))
 
+(use-package ws-butler
+  :defer 0
+  :config (ws-butler-global-mode +1))
+
 (use-package haskell-mode
   :mode "\\.hs\\'" "\\.hs-boot\\'" "\\.cabal\\'")
 
@@ -180,10 +184,6 @@
 
 (use-package lua-mode
   :mode "\\.lua\\'")
-
-(use-package ws-butler
-  :defer 0
-  :config (ws-butler-global-mode +1))
 
 ;; Disable user interface elements
 (menu-bar-mode -1)
