@@ -53,6 +53,8 @@
   (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
   (setq-default evil-want-Y-yank-to-eol t)
+  ;; Fix TAB in org-mode when running Emacs in a terminal
+  (setq-default evil-want-C-i-jump nil)
   (setq-default evil-echo-state nil)
   (setq-default evil-undo-system 'undo-fu)
   (setq-default evil-shift-width 2)
@@ -177,6 +179,16 @@
   :defer 0
   :config (ws-butler-global-mode +1))
 
+(use-package org
+  :mode "\\.org\\'")
+
+(use-package evil-org
+  :after (evil org)
+  :hook (org-mode . evil-org-mode))
+
+(use-package markdown-mode
+  :mode ("\\.md\\'" . gfm-mode))
+
 (use-package haskell-mode
   :mode "\\.hs\\'" "\\.hs-boot\\'" "\\.cabal\\'")
 
@@ -193,9 +205,6 @@
 
 (use-package fish-mode
   :mode "\\.fish\\'")
-
-(use-package markdown-mode
-  :mode ("\\.md\\'" . gfm-mode))
 
 (use-package purescript-mode
   :mode "\\.purs\\'"
