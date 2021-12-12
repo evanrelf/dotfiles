@@ -191,7 +191,10 @@
 
 (use-package git-gutter
   :defer 0
-  :init (setq-default git-gutter:modified-sign "~")
+  :init
+  (setq-default git-gutter:added-sign " ")
+  (setq-default git-gutter:modified-sign " ")
+  (setq-default git-gutter:deleted-sign " ")
   :config (global-git-gutter-mode +1))
 
 (use-package paren
