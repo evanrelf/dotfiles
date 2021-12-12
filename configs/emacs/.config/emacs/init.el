@@ -144,6 +144,13 @@
   :defer 0
   :config (global-auto-revert-mode +1))
 
+(use-package winner
+  :defer 0
+  :bind (:map evil-window-map
+              ("u" . winner-undo)
+              ("U" . winner-redo))
+  :config (winner-mode +1))
+
 (use-package projectile
   :defer 0
   :config (projectile-mode +1))
@@ -458,4 +465,7 @@
  "w L" '(evil-window-move-far-right :which-key "move right")
  "w -" '(evil-window-new :which-key "split horizontally")
  "w \\" '(evil-window-vnew :which-key "split vertically")
- "w d" '(evil-window-delete :which-key "delete"))
+ "w d" '(evil-window-delete :which-key "delete")
+ "w u" '(winner-undo :which-key "undo")
+ "w C-r" '(winner-undo :which-key "redo")
+ "w U" '(winner-undo :which-key "redo"))
