@@ -309,8 +309,7 @@
   (scroll-bar-mode -1)
   (horizontal-scroll-bar-mode -1)
   (blink-cursor-mode -1)
-  (tooltip-mode -1)
-  (fringe-mode -1))
+  (tooltip-mode -1))
 
 ;; Disable startup messages
 (setq-default inhibit-startup-screen t)
@@ -359,6 +358,9 @@
 
 ;; Disable documentation on hover
 (global-eldoc-mode -1)
+
+;; Widen fringe in GUI frames
+(setq-default left-fringe-width 10)
 
 ;; Focus and resize GUI frames
 (when (display-graphic-p)
