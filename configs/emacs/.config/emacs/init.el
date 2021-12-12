@@ -199,8 +199,14 @@
   (setq-default flycheck-highlighting-mode 'lines)
   (setq-default flycheck-highlighting-style 'level-face)
   (setq-default flycheck-indication-mode nil)
+  (setq-default flycheck-display-errors-delay 0.2)
   :hook ((nix-mode . flycheck-mode)
          (sh-mode . flycheck-mode)))
+
+(use-package flycheck-popup-tip
+  :after flycheck
+  :init (setq-default flycheck-popup-tip-error-prefix "• ")
+  :hook (flycheck-mode . flycheck-popup-tip-mode))
 
 (use-package consult-flycheck
   :after (consult flycheck)
