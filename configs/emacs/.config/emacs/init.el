@@ -148,6 +148,7 @@
   :config (global-auto-revert-mode +1))
 
 (use-package winner
+  :ensure nil
   :defer 0
   :bind (:map evil-window-map
               ("u" . winner-undo)
