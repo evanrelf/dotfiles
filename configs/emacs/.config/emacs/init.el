@@ -105,7 +105,9 @@
 
 (use-package vertico
   :defer 0
-  :config (vertico-mode +1))
+  :config
+  (vertico-mode +1)
+  (vertico-mouse-mode +1))
 
 (use-package consult
   :defer 0
