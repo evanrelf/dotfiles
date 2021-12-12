@@ -197,6 +197,10 @@
   :hook ((nix-mode . flycheck-mode)
          (sh-mode . flycheck-mode)))
 
+(use-package consult-flycheck
+  :after (consult flycheck)
+  :commands consult-flycheck)
+
 (use-package org
   :mode "\\.org\\'")
 
