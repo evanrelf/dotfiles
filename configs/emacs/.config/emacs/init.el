@@ -49,6 +49,9 @@
   :after no-littering
   :config (exec-path-from-shell-initialize))
 
+(use-package simpleclip
+  :config (simpleclip-mode +1))
+
 (use-package evil
   :defer 0
   :after general
