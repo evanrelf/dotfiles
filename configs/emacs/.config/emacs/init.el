@@ -141,6 +141,14 @@
   :defer 0
   :config (global-auto-revert-mode +1))
 
+(use-package projectile
+  :defer 0
+  :config (projectile-mode +1))
+
+(use-package consult-projectile
+  :after (consult projectile)
+  :commands consult-projectile)
+
 (use-package magit
   :commands magit-status
   :config
@@ -407,9 +415,9 @@
  "p" '(:ignore t :which-key "project")
  "p C-g" '(keyboard-quit :which-key t)
  "p <escape>" '(keyboard-quit :which-key t)
- "p s" '(project-switch-project :which-key "switch")
- "p b" '(project-switch-to-buffer :which-key "switch buffer")
- "p f" '(project-find-file :which-key "find file")
+ "p p" '(consult-projectile :which-key "switch")
+ "p b" '(projectile-switch-to-buffer :which-key "switch buffer")
+ "p f" '(projectile-find-file :which-key "find file")
 
  "w" '(:ignore t :which-key "window")
  "w C-g" '(keyboard-quit :which-key t)
