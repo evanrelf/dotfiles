@@ -422,6 +422,13 @@
  "p b" '(projectile-switch-to-buffer :which-key "switch buffer")
  "p f" '(projectile-find-file :which-key "find file")
 
+ "q" '(:ignore t :which-key "quit")
+ "q C-g" '(keyboard-quit :which-key t)
+ "q <escape>" '(keyboard-quit :which-key t)
+ "q q" '(evil-quit-all :which-key "quit")
+ "q k" '(save-buffers-kill-emacs :which-key "quit daemon")
+ "q K" '(kill-emacs :which-key "kill daemon")
+
  "w" '(:ignore t :which-key "window")
  "w C-g" '(keyboard-quit :which-key t)
  "w <escape>" '(keyboard-quit :which-key t)
