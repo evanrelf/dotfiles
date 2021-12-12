@@ -253,7 +253,7 @@
   :commands consult-flycheck)
 
 (use-package org
-  :mode "\\.org\\'")
+  :mode ("\\.org\\'" . org-mode))
 
 (use-package evil-org
   :after (evil org)
