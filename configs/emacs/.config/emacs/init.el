@@ -169,6 +169,7 @@
     "D" 'bufler-list-buffer-kill))
 
 (use-package magit
+  :defer 2
   :commands magit-status
   :config
   (setq-default magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
