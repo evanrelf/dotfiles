@@ -392,6 +392,10 @@
   (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down 3)))
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 
+;; Confirm when quitting GUI Emacs
+(when (display-graphic-p)
+  (setq-default confirm-kill-emacs 'yes-or-no-p))
+
 (general-define-key
  :keymaps 'override
  :states '(normal visual insert emacs)
