@@ -109,6 +109,14 @@
   (vertico-mode +1)
   (vertico-mouse-mode +1))
 
+(use-package vertico-directory
+  :ensure nil
+  :after vertico
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word)))
+
 (use-package consult
   :defer 0
   :config
