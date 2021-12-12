@@ -418,7 +418,7 @@
  "b C-g" '(keyboard-quit :which-key t)
  "b <escape>" '(keyboard-quit :which-key t)
  "b s" '(consult-buffer :which-key "switch")
- "b l" '(bufler :which "list")
+ "b l" '(bufler :which-key "list")
  "b `" '(evil-buffer :which-key "last")
  "b n" '(evil-next-buffer :which-key "next")
  "b p" '(evil-prev-buffer :which-key "previous")
