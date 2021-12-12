@@ -448,8 +448,7 @@
  "p C-g" '(keyboard-quit :which-key t)
  "p <escape>" '(keyboard-quit :which-key t)
  "p p" '(consult-projectile :which-key "switch")
- "p b" '(projectile-switch-to-buffer :which-key "switch buffer")
- "p f" '(projectile-find-file :which-key "find file")
+ "p s" '(projectile-switch-project :which-key "switch project")
 
  "q" '(:ignore t :which-key "quit")
  "q C-g" '(keyboard-quit :which-key t)
