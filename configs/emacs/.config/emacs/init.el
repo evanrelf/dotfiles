@@ -316,6 +316,9 @@
 ;; Follow symlinks when opening files under version control
 (setq-default vc-follow-symlinks t)
 
+;; Silence native compilation warnings
+(setq-default comp-async-report-warnings-errors nil)
+
 ;; Indent with 2 spaces
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
