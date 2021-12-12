@@ -60,7 +60,7 @@
   (setq-default evil-want-C-i-jump nil)
   (setq-default evil-echo-state nil)
   (setq-default evil-undo-system 'undo-fu)
-  (setq-default evil-shift-width 2)
+  (setq-default evil-shift-width tab-width)
   (setq-default evil-split-window-below t)
   (setq-default evil-vsplit-window-right t)
   (setq-default evil-move-beyond-eol t)
