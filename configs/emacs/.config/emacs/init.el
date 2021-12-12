@@ -190,6 +190,13 @@
   :commands apheleia-format-buffer
   :hook (rust-mode . apheleia-mode))
 
+(use-package flycheck
+  :init
+  (setq-default flycheck-checkers '(nix
+                                    sh-shellcheck))
+  :hook ((nix-mode . flycheck-mode)
+         (sh-mode . flycheck-mode)))
+
 (use-package org
   :mode "\\.org\\'")
 
