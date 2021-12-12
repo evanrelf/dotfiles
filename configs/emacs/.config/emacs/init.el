@@ -152,6 +152,15 @@
   :after (consult projectile)
   :commands consult-projectile)
 
+(use-package bufler
+  :commands bufler
+  :config
+  (evil-collection-define-key 'normal 'bufler-list-mode-map
+    (kbd "RET") 'bufler-list-buffer-switch
+    (kbd "M-RET") 'bufler-list-buffer-peek
+    "S" 'bufler-list-buffer-save
+    "D" 'bufler-list-buffer-kill))
+
 (use-package magit
   :commands magit-status
   :config
@@ -393,7 +402,7 @@
  "b C-g" '(keyboard-quit :which-key t)
  "b <escape>" '(keyboard-quit :which-key t)
  "b s" '(consult-buffer :which-key "switch")
- "b l" '(ibuffer :which "list")
+ "b l" '(bufler :which "list")
  "b `" '(evil-buffer :which-key "last")
  "b n" '(evil-next-buffer :which-key "next")
  "b p" '(evil-prev-buffer :which-key "previous")
