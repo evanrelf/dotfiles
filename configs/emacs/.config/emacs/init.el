@@ -15,6 +15,7 @@
   (setq-default modus-theme-syntax '(alt-syntax))
   (setq-default modus-themes-mode-line '(accented borderless))
   (setq-default modus-themes-region '(bg-only))
+  (setq-default modus-themes-lang-checkers '(background text-also))
   (cond
    ((eq system-type 'gnu/linux)
     (load-theme 'modus-vivendi t))
@@ -194,6 +195,10 @@
   :init
   (setq-default flycheck-checkers '(nix
                                     sh-shellcheck))
+  (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
+  (setq-default flycheck-highlighting-mode 'lines)
+  (setq-default flycheck-highlighting-style 'level-face)
+  (setq-default flycheck-indication-mode nil)
   :hook ((nix-mode . flycheck-mode)
          (sh-mode . flycheck-mode)))
 
