@@ -374,9 +374,10 @@
   (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up 3))))
 
 (general-define-key
- :prefix "SPC"
  :keymaps 'override
- :states '(normal visual)
+ :states '(normal visual insert emacs)
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
 
  "" '(nil :which-key "leader")
  "C-g" '(keyboard-quit :which-key t)
