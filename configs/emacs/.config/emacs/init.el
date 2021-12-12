@@ -358,6 +358,7 @@
  "C-g" '(keyboard-quit :which-key t)
  "<escape>" '(keyboard-quit :which-key t)
  "SPC" '(execute-extended-command :which-key "command")
+ "/" '(consult-ripgrep :which-key "ripgrep")
  "," '((lambda ()
          (interactive)
          (evil-edit "~/.config/emacs/init.el"))
@@ -377,6 +378,7 @@
  "f" '(:ignore t :which-key "file")
  "f C-g" '(keyboard-quit :which-key t)
  "f <escape>" '(keyboard-quit :which-key t)
+ "f f" '(consult-find :which-key "find")
  "f s" '(save-buffer :which-key "save")
 
  "g" '(:ignore t :which-key "git")
