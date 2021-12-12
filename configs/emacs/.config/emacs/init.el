@@ -171,6 +171,7 @@
 (use-package magit
   :commands magit-status
   :config
+  (setq-default magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (setq-default git-commit-summary-max-length 50)
   (setq-default git-commit-style-convention-checks '(overlong-summary-line
                                                      non-empty-second-line))
