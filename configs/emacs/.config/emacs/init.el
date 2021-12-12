@@ -294,6 +294,9 @@
 (use-package lua-mode
   :mode "\\.lua\\'")
 
+(use-package yaml-mode
+  :mode "\\.yaml\\'" "\\.yml\\'")
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
