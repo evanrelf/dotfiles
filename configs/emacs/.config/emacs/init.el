@@ -434,6 +434,13 @@
  "b d" '(evil-delete-buffer :which-key "delete")
  "b =" '(apheleia-format-buffer :which-key "format")
 
+ "c" '(:ignore t :which-key "clipboard")
+ "c C-g" '(keyboard-quit :which-key t)
+ "c <escape>" '(keyboard-quit :which-key t)
+ "c d" '(simpleclip-cut :which-key "cut")
+ "c y" '(simpleclip-copy :which-key "copy")
+ "c p" '(simpleclip-paste :which-key "paste")
+
  "f" '(:ignore t :which-key "file")
  "f C-g" '(keyboard-quit :which-key t)
  "f <escape>" '(keyboard-quit :which-key t)
