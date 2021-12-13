@@ -157,6 +157,9 @@
 
 (use-package projectile
   :defer 0
+  :init
+  (when (file-directory-p "~/Code/evanrelf")
+    (setq projectile-project-search-path '("~/Code/evanrelf")))
   :config (projectile-mode +1))
 
 (use-package consult-projectile
