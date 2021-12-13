@@ -35,9 +35,6 @@
 (use-package mood-line
   :config (mood-line-mode +1))
 
-(use-package paren-face
-  :hook (emacs-lisp-mode . paren-face-mode))
-
 (use-package no-littering)
 
 (use-package gcmh
@@ -263,6 +260,13 @@
 (use-package consult-flycheck
   :after (consult flycheck)
   :commands consult-flycheck)
+
+(use-package hl-todo
+  :defer 0
+  :config (global-hl-todo-mode +1))
+
+(use-package paren-face
+  :hook (emacs-lisp-mode . paren-face-mode))
 
 (use-package org
   :mode ("\\.org\\'" . org-mode))
