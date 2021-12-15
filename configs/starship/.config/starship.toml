@@ -58,16 +58,16 @@ only_detached = false
 
 [git_status]
 disabled = false
-format = '([\($conflicted$staged$modified$renamed$deleted$untracked$ahead_behind$stashed\)]($style) )'
+format = '([$conflicted$staged$modified$renamed$deleted$untracked$ahead_behind$stashed]($style) )'
 style = ''
 conflicted = '[=$count](cyan)'
 ahead = '[⇡$count](green)'
 behind = '[⇣$count](red)'
 diverged = '[⇡$ahead_count](green)[⇣$behind_count](red)'
 untracked = '[?](red)'
-stashed = '[\$](yellow)'
+stashed = '[\$](purple)'
 modified = '[~](red)'
-staged = '[+](green)'
+staged = '[~](yellow)'
 renamed = '[»](red)'
 deleted = '[×](red)'
 
