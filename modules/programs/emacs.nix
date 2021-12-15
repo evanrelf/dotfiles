@@ -47,7 +47,7 @@ in
       home.activation.emacsTruecolor =
         lib.hm.dag.entryAfter [ "writeBoundary" "linkGeneration" ] ''
           if [ ! -e "$HOME/.local/share/terminfo" ]; then
-            $DRY_RUN_CMD emacs-setup-truecolor
+            $DRY_RUN_CMD "$HOME"/.local/bin/emacs-setup-truecolor
           fi
         '';
     })

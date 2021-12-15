@@ -29,7 +29,7 @@ in
             --create-dirs
 
           echo "Installing plugins"
-          $DRY_RUN_CMD fish -c "fisher update"
+          $DRY_RUN_CMD ${pkgs.fish}/bin/fish -c "fisher update"
         fi
       '';
   };

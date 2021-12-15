@@ -55,6 +55,7 @@ in
         cd "$DOTFILES"
       fi
       export PATH="${pkgsFinal.home-manager}/bin:$PATH"
+      export PATH="${pkgsFinal.jq}/bin:$PATH"
       hostname=$(hostname -s)
       if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
         home-manager --flake .#$hostname $@
@@ -64,11 +65,11 @@ in
           echo "Falling back to non-flake switch"
           temp=$(mktemp -d)
           trap "rm -rf $temp" EXIT
-          nix build --file . packages.$system.homeConfigurations.$hostname -o $temp/result
+          nix build --file . homeConfigurations.$hostname -o $temp/result
           "$(readlink "$temp/result")"/activate
         elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
           echo "Falling back to non-flake build"
-          nix build --file . packages.$system.homeConfigurations.$hostname
+          nix build --file . homeConfigurations.$hostname
         else
           echo "Unsupported arguments in fallback mode"
           home-manager $@
