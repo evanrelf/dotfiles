@@ -25,6 +25,15 @@
     set --export GPG_TTY (tty)
   '';
 
+  home.file.".gnupg/gpg-agent.conf" = {
+    text = ''
+      pinentry-program /home/evan/.nix-profile/bin/pinentry-curses
+    '';
+    onChange = ''
+      chmod 700 "$HOME"/.gnupg
+    '';
+  };
+
   xdg.configFile."nix/nix.conf".text = ''
     extra-experimental-features = nix-command flakes
   '';
