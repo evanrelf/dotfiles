@@ -60,7 +60,7 @@
   (setq-default evil-want-C-i-jump nil)
   (setq-default evil-echo-state nil)
   (setq-default evil-undo-system 'undo-fu)
-  (setq-default evil-shift-width tab-width)
+  (setq-default evil-shift-width 2)
   (setq-default evil-split-window-below t)
   (setq-default evil-vsplit-window-right t)
   (setq-default evil-move-beyond-eol t)
@@ -356,6 +356,7 @@
 ;; Indent with 2 spaces
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
+(setq-default sh-basic-offset 2) ;; sh-mode
 
 ;; Add newline at the end of files
 (setq-default require-final-newline t)
