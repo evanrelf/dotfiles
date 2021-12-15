@@ -1,6 +1,6 @@
 format = """\
   ${custom.rosetta2}\
-  $username\
+  $hostname\
   $directory\
   $hg_branch\
   $git_branch\
@@ -24,9 +24,10 @@ symbol = "Rosetta 2 "
 when = 'test -n "$ROSETTA2"'
 style = 'yellow'
 
-[username]
+[hostname]
 disabled = false
-style_user = 'blue'
+format = 'on [$hostname]($style) in '
+style = 'blue'
 
 [directory]
 disabled = false
