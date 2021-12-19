@@ -23,6 +23,7 @@ in
   homeConfigurations = builtins.mapAttrs mkConfiguration {
     # Personal
     "ultraviolet" = { system = "aarch64-darwin"; username = "evanrelf"; };
+    "iris" = { system = "x86_64-linux"; username = "evan"; };
     "auburn" = { system = "x86_64-darwin"; username = "evanrelf"; };
     "sienna" = { system = "x86_64-linux"; username = "evanrelf"; };
     # Work
