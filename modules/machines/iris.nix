@@ -13,6 +13,10 @@
 
   xdg.configFile."fish/local.fish".text = ''
     set --export GPG_TTY (tty)
+
+    if test -z "$SSH_AUTH_SOCK" -a -n "$XDG_RUNTIME_DIR"
+      set --export SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
+    end
   '';
 
   home.file.".gnupg/gpg-agent.conf" = {
