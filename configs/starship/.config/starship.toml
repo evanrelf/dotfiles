@@ -82,7 +82,7 @@ style = 'cyan'
 
 [fill]
 disabled = false
-symbol = '─'
+symbol = '· '
 style = 'black'
 
 [username]
