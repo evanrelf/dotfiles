@@ -32,6 +32,7 @@ read_only_style = 'blue'
 truncation_length = 2
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
+repo_root_style = 'blue underline'
 
 [hg_branch]
 disabled = false
