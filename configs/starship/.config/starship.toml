@@ -8,10 +8,10 @@ format = """\
   $git_status\
   $git_state\
   $nix_shell\
+  $line_break\
   $status\
   $character\
 """
-add_newline = false
 
 [custom.rosetta2]
 symbol = "x86_64 "
