@@ -14,8 +14,8 @@ let
           "/home/${username}";
       pkgs = import nixpkgs { inherit system config overlays; };
       extraSpecialArgs = { inherit inputs; };
-      extraModules = import ../modules;
-      configuration.imports = [ (../modules/machines + "/${hostname}.nix") ];
+      extraModules = import ../home;
+      configuration.imports = [ (../home/machines + "/${hostname}.nix") ];
     };
 
 in
