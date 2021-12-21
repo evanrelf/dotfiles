@@ -14,7 +14,7 @@ format = """\
 add_newline = false
 
 [custom.rosetta2]
-symbol = "Rosetta 2 "
+symbol = "x86_64 "
 when = 'test -n "$ROSETTA2"'
 style = 'yellow'
 
