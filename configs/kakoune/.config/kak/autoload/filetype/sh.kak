@@ -1,5 +1,5 @@
 hook global WinSetOption filetype=sh %{
-  set-option window lintcmd "shellcheck --external-sources --check-sourced --enable all --format gcc"
+  set-option window lintcmd "shellcheck --external-sources --check-sourced --format gcc"
   # set-option window lintcmd "shellcheck --format gcc"
   hook window BufWritePost .* %{ lint-buffer }
 }
