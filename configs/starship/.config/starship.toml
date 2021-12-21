@@ -87,14 +87,14 @@ style = 'black'
 
 [username]
 disabled = false
-style_user = 'black'
+style_user = 'yellow'
 style_root = 'red'
 format = ' [$user]($style)'
 
 [hostname]
 disabled = false
 format = '[@$hostname]($style)'
-style = 'black'
+style = 'yellow'
 
 [character]
 disabled = false
