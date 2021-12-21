@@ -43,7 +43,7 @@ only_attached = true
 
 [git_commit]
 disabled = false
-format = '(at [ $hash]($style)) '
+format = '([ $hash]($style)) '
 style = 'blue'
 only_detached = false
 
