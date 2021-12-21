@@ -8,6 +8,7 @@ format = """\
   $git_status\
   $git_state\
   $nix_shell\
+  $fill\
   $line_break\
   $status\
   $character\
@@ -75,6 +76,11 @@ disabled = false
 format = 'via [${symbol}nix-shell]($style) '
 symbol = ' '
 style = 'cyan'
+
+[fill]
+disabled = false
+symbol = '─'
+style = 'black'
 
 [status]
 disabled = false
