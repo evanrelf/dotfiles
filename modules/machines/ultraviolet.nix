@@ -23,6 +23,7 @@
       "backblaze"
       "bartender"
       "discord"
+      "firefox"
       "gpg-suite-no-mail"
       "hammerspoon"
       "iina"
