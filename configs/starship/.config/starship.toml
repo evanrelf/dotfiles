@@ -33,9 +33,9 @@ format = '[$read_only]($read_only_style)[$path]($style) '
 style = 'blue'
 read_only = ' '
 read_only_style = 'blue'
+truncation_length = 99
+truncate_to_repo = false
 repo_root_style = 'blue underline'
-truncation_length = 4
-fish_style_pwd_dir_length = 2
 
 [hg_branch]
 disabled = false
