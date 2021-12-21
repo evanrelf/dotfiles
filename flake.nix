@@ -24,6 +24,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence.url = "github:nix-community/impermanence";
     nixpkgs.url = "github:NixOS/nixpkgs";
     tpm = {
       url = "github:tmux-plugins/tpm";
@@ -40,7 +41,7 @@
     };
   };
 
-  outputs = inputs@{ flake-utils, nixpkgs, ... }:
+  outputs = inputs@{ self, flake-utils, nixpkgs, ... }:
     flake-utils.lib.eachDefaultSystem (system: rec {
       defaultPackage = packages.dotfiles;
       packages =
@@ -58,6 +59,7 @@
             (import ./overlays/kakoune-plugins.nix)
             (import ./overlays/top-level.nix)
             (import ./overlays/home-configurations.nix)
+            (import ./overlays/nixos-configurations.nix)
           ];
         in
         import nixpkgs { inherit system config overlays; };
