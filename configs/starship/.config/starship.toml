@@ -1,4 +1,5 @@
 format = """\
+  $status\
   ${custom.rosetta2}\
   $directory\
   $hg_branch\
@@ -11,9 +12,15 @@ format = """\
   $username\
   $hostname\
   $line_break\
-  $status\
   $character\
 """
+
+[status]
+disabled = false
+format = """([$status( / SIG$signal_name)( \\($common_meaning\\))]($style)\n)"""
+# TODO: Add `hex_status` once we get `starship` v1.1.0
+# format = """([$status / $hex_status( / SIG$signal_name)( \\($common_meaning\\))]($style)\n)"""
+style = 'red'
 
 [custom.rosetta2]
 symbol = "x86_64 "
@@ -89,13 +96,7 @@ disabled = false
 format = '[@$hostname]($style)'
 style = 'black'
 
-[status]
-disabled = false
-format = '[$status]($style) '
-style = 'red'
-recognize_signal_code = false
-
 [character]
 disabled = false
 success_symbol = 'λ'
-error_symbol = '[λ](red)'
+error_symbol = 'λ'
