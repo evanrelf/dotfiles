@@ -6,6 +6,10 @@ IFS=$'\n\t'
 
 test -e ".git/hooks/pre-push" && ".git/hooks/pre-push"
 
+if [ "$(git config evan.confirm-push || echo true)" = "false" ]; then
+  exit 0
+fi
+
 remote_name=${1:-origin}
 
 remote_location=${2:-"$(git remote get-url "${remote_name}")"}
