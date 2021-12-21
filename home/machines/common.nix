@@ -21,7 +21,6 @@
     coreutils-gprefix
     dhall
     diskus
-    dotfiles
     exa
     fd
     fx
@@ -30,6 +29,7 @@
     haskellPackages.cabal-plan
     haskellPackages.fourmolu
     haskellPackages.retrie
+    home-rebuild
     htop
     httpie
     hyperfine

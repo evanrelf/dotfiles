@@ -27,29 +27,9 @@ in
       doCheck = false;
     });
 
-  dotfiles =
-    # TODO:
-    #
-    # Silence this error message when `build`ing or `switch`ing:
-    #
-    #```
-    # No configuration file found. Please create one at /Users/evanrelf/.config/nixpkgs/home.nix
-    #```
-    #
-    # One of these should work:
-    #
-    # ```
-    # export HOME_MANAGER_CONFIG="/dev/null"
-    # export HOME_MANAGER_CONFIG="${pkgs.writeText "home.nix" "{ }"}"
-    # ```
-    #
-    # ...but it produces this error message:
-    #
-    # ```
-    # error: file 'home-manager/home-manager/home-manager.nix' was not found in the Nix search path (add it using $NIX_PATH or -I)
-    # ```
-    pkgsPrev.writeShellScriptBin "dotfiles" ''
-      set -euo pipefail
+  home-rebuild =
+    pkgsPrev.writeShellScriptBin "home-rebuild" ''
+      set -Eeuo pipefail
       IFS=$'\n\t'
       if [ -n "''${DOTFILES:-}" ]; then
         cd "$DOTFILES"
@@ -58,21 +38,20 @@ in
       export PATH="${pkgsFinal.jq}/bin:$PATH"
       hostname=$(hostname -s)
       if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
-        home-manager --flake .#$hostname $@
+        home-manager --flake .#"$hostname" "$@"
       else
-        system=$(nix-instantiate --eval --expr 'builtins.currentSystem' --json | jq --raw-output .)
         if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
           echo "Falling back to non-flake switch"
           temp=$(mktemp -d)
-          trap "rm -rf $temp" EXIT
-          nix build --file . homeConfigurations.$hostname -o $temp/result
+          trap 'rm -rf $temp' EXIT
+          nix build --file . homeConfigurations."$hostname" -o "$temp/result"
           "$(readlink "$temp/result")"/activate
         elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
           echo "Falling back to non-flake build"
-          nix build --file . homeConfigurations.$hostname
+          nix build --file . homeConfigurations."$hostname"
         else
           echo "Unsupported arguments in fallback mode"
-          home-manager $@
+          home-manager "$@"
         fi
       fi
     '';

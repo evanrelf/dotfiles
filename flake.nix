@@ -43,7 +43,7 @@
 
   outputs = inputs@{ self, flake-utils, nixpkgs, ... }:
     flake-utils.lib.eachDefaultSystem (system: rec {
-      defaultPackage = packages.dotfiles;
+      defaultPackage = packages.home-rebuild;
       packages =
         let
           config = { };
