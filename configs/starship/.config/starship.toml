@@ -1,6 +1,5 @@
 format = """\
   ${custom.rosetta2}\
-  $hostname\
   $directory\
   $hg_branch\
   $git_branch\
@@ -9,6 +8,8 @@ format = """\
   $git_state\
   $nix_shell\
   $fill\
+  $username\
+  $hostname\
   $line_break\
   $status\
   $character\
@@ -18,11 +19,6 @@ format = """\
 symbol = "x86_64 "
 when = 'test -n "$ROSETTA2"'
 style = 'yellow'
-
-[hostname]
-disabled = false
-format = 'on [$hostname]($style) in '
-style = 'blue'
 
 [directory]
 disabled = false
@@ -80,6 +76,17 @@ style = 'cyan'
 [fill]
 disabled = false
 symbol = '─'
+style = 'black'
+
+[username]
+disabled = false
+style_user = 'black'
+style_root = 'red'
+format = ' [$user]($style)'
+
+[hostname]
+disabled = false
+format = '[@$hostname]($style)'
 style = 'black'
 
 [status]
