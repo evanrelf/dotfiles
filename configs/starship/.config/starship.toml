@@ -13,12 +13,6 @@ format = """\
 """
 add_newline = false
 
-# [jobs]
-# disabled = false
-# format = '[ $number]($style) '
-# style = 'cyan'
-# threshold = 0
-
 [custom.rosetta2]
 symbol = "Rosetta 2 "
 when = 'test -n "$ROSETTA2"'
@@ -80,7 +74,7 @@ style = 'cyan'
 disabled = false
 format = 'via [${symbol}nix-shell]($style) '
 symbol = ' '
-style = 'blue'
+style = 'cyan'
 
 [status]
 disabled = false
