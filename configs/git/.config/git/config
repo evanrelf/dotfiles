@@ -28,7 +28,7 @@
   pullff = pull --ff-only
 
   # PUSH
-  p = "!~/.config/git/hooks/pre-push && git push $@ #"
+  p = confirm-push
   pf = p --force-with-lease
   pu = p --set-upstream origin HEAD
 

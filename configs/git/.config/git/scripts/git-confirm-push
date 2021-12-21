@@ -6,12 +6,14 @@ IFS=$'\n\t'
 
 # Skip confirmation when 'evan.confirm-push' is explicitly disabled
 if [ "$(git config evan.confirm-push || echo true)" = "false" ]; then
+  git push "$@"
   exit 0
 fi
 
 # Skip confirmation when pushing to unprotected branch
 branch=$(git symbolic-ref HEAD | sd '(?:.+/)*(.+)' '$1')
 if echo "${branch}" | rg --quiet --invert-match '^(master|main|trunk|development|release-.+)$'; then
+  git push "$@"
   exit 0
 fi
 
@@ -40,3 +42,5 @@ else
   echo "Pushing to ${branch} in ${delay} seconds... (Ctrl-C to cancel)"
 fi
 sleep "${delay}"
+
+git push "$@"
