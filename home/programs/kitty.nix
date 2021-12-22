@@ -14,7 +14,9 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = lib.mkIf pkgs.stdenv.isLinux [ pkgs.kitty ];
 
-    xdg.configFile."kitty/kitty.conf".source =
-      ../../configs/kitty/.config/kitty/kitty.conf;
+    xdg.configFile."kitty" = {
+      source = ../../configs/kitty/.config/kitty;
+      recursive = true;
+    };
   };
 }
