@@ -23,24 +23,6 @@ else
     alias ls "command ls -AFGh"
 end
 
-if _exists kak
-    abbr --add k "kak"
-end
-
-if _exists nvim
-    abbr --add v "nvim"
-end
-
-if _exists evil
-    abbr --add e "evil"
-end
-
-if _exists emacs
-    function emacs
-        TERM=xterm-24bit command emacs --no-window-system $argv
-    end
-end
-
 if _exists git
     abbr --add g "git"
 
