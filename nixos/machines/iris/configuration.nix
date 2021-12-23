@@ -3,6 +3,7 @@
 {
   hardware.enableRedistributableFirmware = true;
 
+  # BOOTLOADER
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -74,7 +75,6 @@
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist" = {
     directories = [
-      "/etc/NetworkManager/system-connections"
       "/etc/nixos"
       "/etc/restic/b2"
     ];
@@ -84,9 +84,6 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/ssh/ssh_host_rsa_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
-      "/var/lib/NetworkManager/secret_key"
-      "/var/lib/NetworkManager/seen-bssids"
-      "/var/lib/NetworkManager/timestamps"
       "/var/lib/tailscale/tailscaled.state"
     ];
   };
@@ -94,7 +91,7 @@
   security.sudo.extraConfig = "Defaults lecture = never";
 
   networking.hostName = "iris";
-  networking.networkmanager.enable = true;
+
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   networking.useDHCP = false;
   networking.interfaces.enp42s0.useDHCP = true;
@@ -110,7 +107,7 @@
 
   users.users.evan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" ];
     shell = pkgs.fish;
     initialPassword = "banana";
   };
@@ -130,7 +127,6 @@
   programs.gnupg.agent.enable = true;
 
   time.timeZone = "America/Los_Angeles";
-
 
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
