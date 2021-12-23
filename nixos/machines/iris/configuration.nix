@@ -108,7 +108,6 @@
 
   services.tailscale.enable = true;
 
-  users.users.root.initialPassword = "alpine";
   users.users.evan = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
