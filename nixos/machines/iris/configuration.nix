@@ -103,6 +103,7 @@
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
+    passwordAuthentication = false;
   };
 
   services.tailscale.enable = true;
