@@ -12,9 +12,11 @@
     devices = {
       "cryptroot" = {
         device = "/dev/disk/by-uuid/242c09c6-51f4-4fae-911e-c0933c6a1f8d";
+        bypassWorkqueues = true;
       };
       "cryptmirror" = {
         device = "/dev/disk/by-uuid/0feb9a46-dbae-4612-96d5-bf9cf8153c47";
+        bypassWorkqueues = true;
       };
     };
     reusePassphrases = true;
