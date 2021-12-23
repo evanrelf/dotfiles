@@ -100,6 +100,13 @@
   networking.interfaces.enp42s0.useDHCP = true;
   networking.interfaces.wlp41s0.useDHCP = true;
 
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "no";
+  };
+
+  services.tailscale.enable = true;
+
   users.users.root.initialPassword = "alpine";
   users.users.evan = {
     isNormalUser = true;
@@ -118,9 +125,6 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-
-  services.openssh.enable = true;
-  services.tailscale.enable = true;
 
   programs.ssh.startAgent = true;
   programs.gnupg.agent.enable = true;
