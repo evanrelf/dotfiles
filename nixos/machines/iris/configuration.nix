@@ -11,24 +11,23 @@
   # LUKS
   boot.initrd.luks = {
     devices = {
-      "cryptroot" = {
-        device = "/dev/disk/by-uuid/242c09c6-51f4-4fae-911e-c0933c6a1f8d";
+      "crypt0" = {
+        device = "/dev/disk/by-uuid/6a553fcf-5a9f-490b-98fe-5c830e5ba862";
         bypassWorkqueues = true;
       };
-      "cryptmirror" = {
-        device = "/dev/disk/by-uuid/0feb9a46-dbae-4612-96d5-bf9cf8153c47";
+      "crypt1" = {
+        device = "/dev/disk/by-uuid/a0d1e98d-6ee7-4d2f-bbb6-8266e6714be6";
         bypassWorkqueues = true;
       };
     };
     reusePassphrases = true;
   };
-  # boot.zfs.enable = true;
-  # boot.zfs.devNodes = "/dev/vg/root";
 
   # ZFS
+  boot.zfs.devNodes = "/dev/mapper";
   services.zfs.trim.enable = true;
   services.zfs.autoScrub.enable = true;
-  networking.hostId = "d9f31fe6";
+  networking.hostId = "89922804";
 
   # Scheduled ZFS snapshots
   services.sanoid.enable = true;
@@ -44,8 +43,8 @@
       };
     in
     {
-      "rpool/safe/home" = common;
-      "rpool/safe/persist" = common;
+      "tank/safe/home" = common;
+      "tank/safe/persist" = common;
     };
 
   # Backups
@@ -68,7 +67,7 @@
 
   # Roll back to blank snapshot on boot
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/local/root@blank
+    zfs rollback -r tank/local/root@blank
   '';
 
   # Persist state
