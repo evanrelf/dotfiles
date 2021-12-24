@@ -22,13 +22,13 @@
     };
     reusePassphrases = true;
   };
+  # boot.zfs.enable = true;
+  # boot.zfs.devNodes = "/dev/vg/root";
 
   # ZFS
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "d9f31fe6";
-  boot.zfs.devNodes = "/dev/vg/root";
   services.zfs.trim.enable = true;
   services.zfs.autoScrub.enable = true;
+  networking.hostId = "d9f31fe6";
 
   # Scheduled ZFS snapshots
   services.sanoid.enable = true;
