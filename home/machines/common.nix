@@ -17,6 +17,7 @@
     as-tree
     bashInteractive
     cabal-install
+    cachix
     comma
     coreutils-gprefix
     dhall
