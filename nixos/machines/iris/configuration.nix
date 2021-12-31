@@ -106,6 +106,7 @@
   };
 
   services.tailscale.enable = true;
+  networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
 
   users.users.evan = {
     isNormalUser = true;
@@ -129,7 +130,6 @@
   programs.gnupg.agent.enable = true;
 
   time.timeZone = "America/Los_Angeles";
-
 
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
