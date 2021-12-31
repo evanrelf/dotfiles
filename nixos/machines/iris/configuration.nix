@@ -129,8 +129,13 @@
     experimental-features = nix-command flakes
   '';
 
+  programs.fish.enable = true;
+  programs.fish.useBabelfish = true;
+
   programs.ssh.startAgent = true;
+
   programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.pinentryFlavor = "tty";
 
   time.timeZone = "America/Los_Angeles";
 
