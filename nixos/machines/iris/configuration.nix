@@ -119,6 +119,7 @@
   };
 
   environment.systemPackages = [
+    pkgs.file
     pkgs.kakoune
     pkgs.restic
   ];
