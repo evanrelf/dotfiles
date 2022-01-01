@@ -58,6 +58,7 @@
             inputs.fenix.overlay
             (import ./overlays/kakoune-plugins.nix)
             (import ./overlays/top-level.nix)
+            (import ./overlays/nixos-isos.nix)
             (import ./overlays/home-configurations.nix)
             (import ./overlays/nixos-configurations.nix)
           ];
