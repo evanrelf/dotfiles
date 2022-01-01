@@ -14,17 +14,14 @@ assert_exists grep
 export ALTERNATE_EDITOR=""
 export TERM=xterm-24bit
 emacsclient=$(greadlink -f "$(command -v emacsclient)")
-stderr_regex="(can't find socket|To start the server in Emacs|Emacs daemon should have started|could not get terminal name|error executing alternate editor)"
 
 mkdir -p "${HOME}/.local/share/emacs"
-if [[ ! -e "${HOME}/.local/share/emacs/tty.sock" ]]; then
+if [ ! -e "${HOME}/.local/share/emacs/tty.sock" ]; then
   echo "Starting Emacs daemon..." >&2
   "${emacsclient}" \
     --tty \
     --socket-name "${HOME}/.local/share/emacs/tty.sock" \
     --eval "(evil-quit)" \
-    >/dev/null \
-    2> >(grep --invert-match --extended-regexp "${stderr_regex}" >&2) \
   || true
 fi
 exec "${emacsclient}" --socket-name "${HOME}/.local/share/emacs/tty.sock" --tty "$@"
