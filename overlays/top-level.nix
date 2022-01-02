@@ -57,8 +57,8 @@ in
     '';
 
   emacsCustom =
-    pkgsPrev.emacsWithPackagesFromUsePackage {
-      package = pkgsFinal.emacsGcc;
+    pkgsPrev.slow.emacsWithPackagesFromUsePackage {
+      package = pkgsFinal.slow.emacsGcc;
       config = ../configs/emacs/.config/emacs/init.el;
       extraEmacsPackages = p: with p; [
         apheleia

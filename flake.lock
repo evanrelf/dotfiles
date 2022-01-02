@@ -139,13 +139,28 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "nixpkgs-slow": {
       "locked": {
         "lastModified": 1638847994,
         "narHash": "sha256-Yr/nG6ZpFWjJ7xWPUtfj6L3dPuaY5D4WGYKuYA8qTTY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "fe3e7ef66c3b774fd194ae275ce1ac9cb71b13e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1641091559,
+        "narHash": "sha256-VcV/5wF2vddIupms2x0FqQSNIjjgYTJSukcYL3gNrUI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "057166b50eb1dc254ff3aaef8273f6d37335c47f",
         "type": "github"
       },
       "original": {
@@ -165,6 +180,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-slow": "nixpkgs-slow",
         "tpm": "tpm",
         "vim-plug": "vim-plug",
         "zig-overlay": "zig-overlay"
