@@ -10,7 +10,7 @@
   ];
 
   dotfiles.programs.jujutsu = {
-    enable = true;
+    enable = false;
     config = ''
       [user]
       name = "Evan Relf"
