@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     ffmpeg
+    podman qemu gvproxy
     rclone
     youtube-dl
     zig
