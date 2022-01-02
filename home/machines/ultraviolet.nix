@@ -14,7 +14,6 @@
 
   dotfiles.programs.homebrew = {
     enable = true;
-    cleanup = true;
     zap = true;
     casks = [
       "1password"
