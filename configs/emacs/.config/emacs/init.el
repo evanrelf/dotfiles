@@ -318,6 +318,9 @@
 (use-package yaml-mode
   :mode "\\.yaml\\'" "\\.yml\\'")
 
+(use-package bpftrace-mode
+  :mode "\\.bt\\'" "\\.bpf\\'")
+
 ;; Disable user interface elements
 (menu-bar-mode -1)
 (when (display-graphic-p)
