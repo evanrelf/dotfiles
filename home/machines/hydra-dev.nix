@@ -11,7 +11,7 @@
     gcc
     gnupg
     nix
-    pinentry-curses
+    pinentry.tty
   ];
 
   home.file.".bash_profile".text = ''
@@ -28,7 +28,7 @@
 
   home.file.".gnupg/gpg-agent.conf" = {
     text = ''
-      pinentry-program /home/evan/.nix-profile/bin/pinentry-curses
+      pinentry-program /home/evan/.nix-profile/bin/pinentry
     '';
     onChange = ''
       chmod 700 "$HOME"/.gnupg
