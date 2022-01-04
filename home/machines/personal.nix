@@ -5,6 +5,7 @@
     ffmpeg
     podman qemu gvproxy
     rclone
+    rustup
     yt-dlp
     zig
   ];
