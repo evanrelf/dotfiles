@@ -32,6 +32,7 @@ in
       declarative-channels
       direnv
       nix-diff
+      nix-direnv
       nix-index
       nix-top
       nix-tree
@@ -42,6 +43,10 @@ in
       extra-substituters = ${extra-substituters}
       extra-trusted-public-keys = ${extra-trusted-public-keys}
       extra-experimental-features = nix-command flakes
+    '';
+
+    xdg.configFile."direnv/direnvrc".text = ''
+      source "${pkgs.nix-direnv}/share/nix-direnv/direnvrc"
     '';
   };
 }

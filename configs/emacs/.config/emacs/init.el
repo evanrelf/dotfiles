@@ -46,6 +46,10 @@
   :after no-littering
   :config (exec-path-from-shell-initialize))
 
+(use-package envrc
+  :defer 1
+  :config (envrc-global-mode +1))
+
 (use-package simpleclip
   :config (simpleclip-mode +1))
 
@@ -230,6 +234,7 @@
 
 (use-package apheleia
   :ensure nil
+  :after envrc
   :init
   (setq-default apheleia-formatters '((fourmolu "fourmolu" "-o" "-XBangPatterns" "-o" "-XTypeApplications")
                                       (nixpkgs-fmt "nixpkgs-fmt")
