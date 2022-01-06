@@ -4,6 +4,7 @@
   # Hardware
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
+    ./time-machine.nix
   ];
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sr_mod" ];
@@ -19,6 +20,9 @@
       { device = "tank/safe/home"; fsType = "zfs"; };
     "/persist" =
       { device = "tank/safe/persist"; fsType = "zfs"; };
+    "/data/time-machine" =
+      { device = "tank/safe/data/time-machine"; fsType = "zfs"; };
+
   };
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
