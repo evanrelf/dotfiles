@@ -10,8 +10,7 @@ let
       modules = [
         impermanence.nixosModules.impermanence
         ../nixos/git-rev.nix
-        (../nixos/machines + "/${hostname}/hardware-configuration.nix")
-        (../nixos/machines + "/${hostname}/configuration.nix")
+        (../nixos/machines + "/${hostname}")
       ];
       specialArgs = { inherit inputs; };
     };

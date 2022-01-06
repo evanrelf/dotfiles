@@ -1,8 +1,29 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, modulesPath, pkgs, ... }:
 
 {
+  # Hardware
+  imports = [
+    "${modulesPath}/installer/scan/not-detected.nix"
+  ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sr_mod" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  fileSystems = {
+    "/boot" =
+      { device = "/dev/disk/by-uuid/66C8-88A2"; fsType = "vfat"; };
+    "/" =
+      { device = "tank/local/root"; fsType = "zfs"; };
+    "/nix" =
+      { device = "tank/local/nix"; fsType = "zfs"; };
+    "/home" =
+      { device = "tank/safe/home"; fsType = "zfs"; };
+    "/persist" =
+      { device = "tank/safe/persist"; fsType = "zfs"; };
+  };
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -89,9 +110,9 @@
       "/var/lib/tailscale/tailscaled.state"
     ];
   };
-
   security.sudo.extraConfig = "Defaults lecture = never";
 
+  # Networking
   networking.hostName = "iris";
   networking.networkmanager.enable = true;
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -111,6 +132,7 @@
     config.services.tailscale.interfaceName
   ];
 
+  # Users
   users.users.evan = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];

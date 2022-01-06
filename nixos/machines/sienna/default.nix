@@ -1,7 +1,33 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, modulesPath, pkgs, ... }:
 
 {
+  imports = [
+    "${modulesPath}/installer/scan/not-detected.nix"
+  ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+  fileSystems = {
+    "/" =
+      { device = "rpool/local/root"; fsType = "zfs"; };
+    "/boot" =
+      { device = "/dev/disk/by-uuid/4B03-3702"; fsType = "vfat"; };
+    "/nix" =
+      { device = "rpool/local/nix"; fsType = "zfs"; };
+    "/home" =
+      { device = "rpool/safe/home"; fsType = "zfs"; };
+    "/persist" =
+      { device = "rpool/safe/persist"; fsType = "zfs"; };
+  };
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/0905e0c9-1508-49c1-94ee-f912247550d7"; }
+  ];
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.enableRedistributableFirmware = true;
+  hardware.cpu.intel.updateMicrocode = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
