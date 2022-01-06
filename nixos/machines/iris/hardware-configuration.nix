@@ -20,28 +20,24 @@
     {
       device = "tank/local/root";
       fsType = "zfs";
-      # options = [ "zfsutil" ];
     };
 
   fileSystems."/nix" =
     {
       device = "tank/local/nix";
       fsType = "zfs";
-      # options = [ "zfsutil" ];
     };
 
   fileSystems."/home" =
     {
       device = "tank/safe/home";
       fsType = "zfs";
-      # options = [ "zfsutil" ];
     };
 
   fileSystems."/persist" =
     {
       device = "tank/safe/persist";
       fsType = "zfs";
-      # options = [ "zfsutil" ];
     };
 
   hardware.cpu.amd.updateMicrocode =
