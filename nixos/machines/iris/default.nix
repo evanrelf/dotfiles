@@ -129,6 +129,12 @@
     passwordAuthentication = false;
   };
 
+  services.fail2ban.enable = true;
+  services.fail2ban.ignoreIP = [
+    # Tailscale
+    "100.64.0.0/10"
+  ];
+
   services.tailscale.enable = true;
   networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
   networking.firewall.trustedInterfaces = [
