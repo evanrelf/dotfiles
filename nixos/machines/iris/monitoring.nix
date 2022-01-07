@@ -61,6 +61,9 @@
           isDefault = true;
         }
       ];
+      dashboards = [
+        { name = "dashboards"; options.path = ./grafana-dashboards; }
+      ];
     };
     analytics.reporting.enable = false;
   };
