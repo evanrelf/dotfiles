@@ -20,7 +20,6 @@ $ sudo pdbedit --list --verbose
   services.samba = {
     enable = true;
     enableNmbd = false;
-    openFirewall = true;
     extraConfig = ''
       winbind use default domain = yes
       vfs objects = acl_xattr fruit streams_xattr
