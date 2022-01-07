@@ -237,9 +237,11 @@
   :after envrc
   :init
   (setq-default apheleia-formatters '((fourmolu "fourmolu" "-o" "-XBangPatterns" "-o" "-XTypeApplications")
+                                      (jq "jq" ".")
                                       (nixpkgs-fmt "nixpkgs-fmt")
                                       (rustfmt "rustfmt")))
   (setq-default apheleia-mode-alist '((haskell-mode . fourmolu)
+                                      (js-mode . jq)
                                       (nix-mode . nixpkgs-fmt)
                                       (rust-mode . rustfmt)))
   :commands apheleia-format-buffer
