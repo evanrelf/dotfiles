@@ -102,6 +102,7 @@
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
       "/etc/restic/b2"
+      "/var/lib/prometheus2/data"
     ];
     files = [
       "/etc/machine-id"
