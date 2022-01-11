@@ -22,7 +22,6 @@
     coreutils-gprefix
     dhall
     diskus
-    exa
     fd
     fx
     fzf
@@ -38,6 +37,7 @@
     janet
     jq
     lorri
+    lsd
     moreutils
     nerdfonts
     ormolu

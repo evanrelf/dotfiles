@@ -13,7 +13,10 @@ if _exists fd && _exists as-tree
     end
 end
 
-if _exists exa
+if _exists lsd
+    alias ls "lsd --group-dirs=first --classify --icon=never"
+    alias ll "ls -l"
+else if _exists exa
     alias ls "exa --group-directories-first"
     alias ll "exa --long --group-directories-first"
     if not _exists tree
