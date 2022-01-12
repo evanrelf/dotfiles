@@ -27,7 +27,6 @@
       "hammerspoon"
       "iina"
       "imageoptim"
-      "istat-menus"
       "karabiner-elements"
       "kitty"
       "minecraft"
@@ -37,6 +36,8 @@
       "the-unarchiver"
       "transmission"
       "transmit"
+      "vmware-fusion-tech-preview"
+      "zoom"
     ];
   };
 
