@@ -24,7 +24,6 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       delta
-      git-branchless
       # Disabled until GPG signing is supported in the next stable release
       # git-revise 
       gitAndTools.gitFull

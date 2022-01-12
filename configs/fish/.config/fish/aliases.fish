@@ -29,10 +29,6 @@ end
 if _exists git
     abbr --add g "git"
 
-    if _exists git-branchless
-        alias git "git-branchless wrap --"
-    end
-
     function root -d "Change directory to Git repository root"
         if set --local root (git rev-parse --show-toplevel 2>/dev/null)
             cd "$root"
