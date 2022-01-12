@@ -14,8 +14,9 @@ let
 
     in
     pkgs.writeText "Brewfile" ''
-      ${prefixLinesWith "brew" cfg.formulae}
+      ${prefixLinesWith "tap" cfg.taps}
       ${lib.optionalString (builtins.length cfg.casks > 0) "tap \"homebrew/cask\""}
+      ${prefixLinesWith "brew" cfg.formulae}
       ${prefixLinesWith "cask" cfg.casks}
     '';
 
@@ -51,6 +52,12 @@ in
 
       casks = lib.mkOption {
         description = "Casks to install";
+        type = lib.types.listOf lib.types.string;
+        default = [ ];
+      };
+
+      taps = lib.mkOption {
+        description = "Taps to install";
         type = lib.types.listOf lib.types.string;
         default = [ ];
       };

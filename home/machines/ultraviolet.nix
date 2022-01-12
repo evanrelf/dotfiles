@@ -15,6 +15,9 @@
   dotfiles.programs.homebrew = {
     enable = true;
     zap = true;
+    taps = [
+      "Homebrew/homebrew-cask-versions"
+    ];
     casks = [
       "1password"
       "alfred"
