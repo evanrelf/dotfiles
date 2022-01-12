@@ -3,11 +3,8 @@ pkgsFinal: pkgsPrev:
 let
   inherit (pkgsPrev.inputs) nixpkgs;
 
-  mkIso = modules:
-    (nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      inherit modules;
-    }).config.system.build.isoImage;
+  mkIso = args@{ system ? "x86_64-linux", modules, ... }:
+    (nixpkgs.lib.nixosSystem args).config.system.build.isoImage;
 
   minimalConfiguration = { ... }: {
     imports = [
@@ -28,11 +25,20 @@ let
 in
 {
   nixosIsos = {
-    minimal = mkIso [ minimalConfiguration ];
+    minimal = mkIso {
+      modules = [ minimalConfiguration ];
+    };
 
-    evan = mkIso [
-      minimalConfiguration
-      evanConfiguration
-    ];
+    minimal-arm = mkIso {
+      system = "aarch64-linux";
+      modules = [ minimalConfiguration ];
+    };
+
+    evan = mkIso {
+      modules = [
+        minimalConfiguration
+        evanConfiguration
+      ];
+    };
   };
 }
