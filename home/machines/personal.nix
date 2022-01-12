@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     ffmpeg
-    podman qemu gvproxy
     rclone
     rustup
     yt-dlp
