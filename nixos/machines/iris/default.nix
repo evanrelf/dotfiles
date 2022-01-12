@@ -27,6 +27,7 @@
   };
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
