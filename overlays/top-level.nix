@@ -160,6 +160,15 @@ in
 
   nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
 
+  nix-direnv = pkgsPrev.nix-direnv.overrideAttrs (prev: {
+    src = pkgsPrev.fetchFromGitHub {
+      owner = "nix-community";
+      repo = "nix-direnv";
+      rev = "f860b9dbb6708686d4ae633926090aacb4d36486";
+      sha256 = "sha256-3yInO0P7IBId/5dDPoKuECYpDbgw54MX9zQprlymywA=";
+    };
+  });
+
   patat =
     let
       source = pkgsPrev.fetchFromGitHub {
