@@ -4,7 +4,6 @@
   # Hardware
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
-    ./time-machine.nix
     ./monitoring.nix
   ];
   boot.initrd.availableKernelModules =
@@ -21,9 +20,6 @@
       { device = "tank/safe/home"; fsType = "zfs"; };
     "/persist" =
       { device = "tank/safe/persist"; fsType = "zfs"; };
-    "/data/time-machine" =
-      { device = "tank/safe/data/time-machine"; fsType = "zfs"; };
-
   };
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
@@ -111,7 +107,6 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/ssh/ssh_host_rsa_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
-      "/var/lib/samba/private/passdb.tdb"
       "/var/lib/tailscale/tailscaled.state"
     ];
   };
