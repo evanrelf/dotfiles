@@ -372,7 +372,7 @@
 (setq-default require-final-newline t)
 
 ;; Show ruler at 80 columns
-(setq-default fill-column 81)
+(setq-default fill-column 80)
 (global-display-fill-column-indicator-mode +1)
 
 ;; Stop wrapping lines at window edge
