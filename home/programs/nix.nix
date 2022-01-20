@@ -43,6 +43,7 @@ in
       extra-substituters = ${extra-substituters}
       extra-trusted-public-keys = ${extra-trusted-public-keys}
       extra-experimental-features = nix-command flakes
+      !include local.conf
     '';
 
     xdg.configFile."direnv/direnvrc".text = ''
