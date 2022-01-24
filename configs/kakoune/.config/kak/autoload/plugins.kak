@@ -12,7 +12,7 @@ require-module "replace-mode"
 map global "normal" "<a-r>" ": enter-replace-mode<ret>"
 
 # h-youhei/kakoune-surround
-map global "user" "s" ": enter-user-mode surround<ret>" -docstring "Surround mode"
+map global "user" "s" ": enter-user-mode surround<ret>" -docstring "Surround..."
 declare-user-mode "surround"
 map global "surround" "s" ": select-surround<ret>" -docstring "Select surround"
 map global "surround" "a" ": surround<ret>" -docstring "Add surround"

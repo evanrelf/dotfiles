@@ -22,6 +22,7 @@ map global "buffer" "d" ": delete-buffer<ret>" -docstring "Delete buffer"
 map global "buffer" "f" ": format-buffer<ret>" -docstring "Format buffer"
 map global "buffer" "r" ": buffer *grep*<ret>" -docstring "Go to grep buffer"
 map global "buffer" "u" ": buffer *debug*<ret>" -docstring "Go to Debug buffer"
+map global "buffer" "=" ": format-buffer<ret>" -docstring "Format buffer"
 try %{
   require-module "fzf"
   map global "buffer" "b" ": fzf-buffer<ret>" -docstring "Switch buffer"

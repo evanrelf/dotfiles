@@ -15,9 +15,6 @@ map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstrin
 map global "normal" "#" ": comment-line<ret>"
 map global "normal" "<a-#>" ": comment-block<ret>"
 
-# Format buffer
-map global "user" "=" ": format-buffer<ret>" -docstring "Format buffer"
-
 # Diet https://github.com/evanrelf/reselect.kak
 map global "normal" "i" ";i"
 map global "normal" "a" ";li"

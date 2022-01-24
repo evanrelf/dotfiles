@@ -14,13 +14,10 @@ add-highlighter global/show-matching show-matching
 add-highlighter global/search-matches dynregex "%%reg{/}" 0:black,bright-white+f
 
 # Highlight TODO/FIXME/NOTE
-add-highlighter global/todo regex "\b(TODO|FIXME|NOTE)\b" 0:+r
+add-highlighter global/todo regex "\b(TODO|FIXME|NOTE|XXX)\b" 0:+r
 
 # Use ripgrep
 set-option global grepcmd "rg --column"
-
-# Use `en-US` for `:spell` command
-set-option global spell_lang "en-US"
 
 # Highlight autowrap column (usually 80 characters)
 hook global WinSetOption autowrap_column=.* %{
