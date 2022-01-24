@@ -1,10 +1,10 @@
 -- bluz71/vim-moonfly-colors
-vim.o.termguicolors = true
-vim.cmd "silent! colorscheme moonfly"
+-- vim.o.termguicolors = true
+-- vim.cmd "silent! colorscheme moonfly"
 
 -- ishan9299/modus-theme-vim
--- vim.o.termguicolors = true
--- vim.cmd "silent! colorscheme modus-vivendi"
+vim.o.termguicolors = true
+vim.cmd "silent! colorscheme modus-operandi"
 
 -- neovim/nvim-lspconfig
 vim.o.signcolumn = "yes"

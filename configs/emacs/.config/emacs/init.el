@@ -18,7 +18,7 @@
   (setq-default modus-themes-lang-checkers '(background text-also))
   (cond
    ((eq system-type 'gnu/linux)
-    (load-theme 'modus-vivendi t))
+    (load-theme 'modus-operandi t))
    ((eq system-type 'darwin)
     (let ((style (shell-command-to-string "begin; defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light; end | tr -d '\n'")))
       (cond

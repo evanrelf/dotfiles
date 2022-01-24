@@ -1,5 +1,3 @@
-colorscheme palenight
-
 # Default to 2 spaces for indentation
 set-option global indentwidth 2
 
