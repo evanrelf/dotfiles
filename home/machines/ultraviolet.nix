@@ -25,6 +25,7 @@
       "backblaze"
       "bartender"
       "discord"
+      "fantastical"
       "firefox"
       "gpg-suite-no-mail"
       "hammerspoon"
