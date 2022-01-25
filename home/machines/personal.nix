@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    deno
     ffmpeg
     rclone
     rustup
