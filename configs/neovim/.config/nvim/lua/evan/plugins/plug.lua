@@ -20,6 +20,7 @@ vim.api.nvim_exec([[
   Plug 'tomtom/tcomment_vim'
   Plug 'machakann/vim-sandwich'
   Plug 'junegunn/vim-easy-align'
+  Plug 'tpope/vim-eunuch'
   Plug 'sickill/vim-pasta'
   Plug 'tpope/vim-sleuth'
   Plug 'bronson/vim-trailing-whitespace'
