@@ -22,7 +22,7 @@ vim.cmd "set shortmess+=I"
 
 -- Window options
 vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.numberwidth = 3
 vim.wo.wrap = false
 
 -- Buffer options
