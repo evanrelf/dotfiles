@@ -21,6 +21,7 @@ vim.api.nvim_exec([[
   Plug 'machakann/vim-sandwich'
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-eunuch'
+  Plug 'romainl/vim-cool'
   Plug 'sickill/vim-pasta'
   Plug 'svban/YankAssassin.vim'
   Plug 'tpope/vim-sleuth'
