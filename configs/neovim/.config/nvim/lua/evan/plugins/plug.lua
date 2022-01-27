@@ -3,6 +3,7 @@ vim.api.nvim_exec([[
 
   Plug 'bluz71/vim-moonfly-colors'
   Plug 'ishan9299/modus-theme-vim'
+  Plug 'projekt0n/github-nvim-theme'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-repeat'
   Plug 'wellle/targets.vim'

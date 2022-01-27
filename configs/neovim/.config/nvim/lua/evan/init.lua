@@ -1,6 +1,7 @@
 require('evan.plugins.plug')
 -- require('evan.plugins.moonfly-theme')
-require('evan.plugins.modus-theme')
+-- require('evan.plugins.modus-theme')
+require('evan.plugins.github-theme')
 require('evan.plugins.lspconfig')
 require('evan.plugins.null-ls')
 require('evan.plugins.treesitter')
