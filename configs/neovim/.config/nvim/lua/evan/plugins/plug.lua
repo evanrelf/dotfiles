@@ -9,6 +9,8 @@ vim.api.nvim_exec([[
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'sheerun/vim-polyglot'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'nvim-lua/plenary.nvim'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
