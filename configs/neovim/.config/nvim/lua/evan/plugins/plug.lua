@@ -22,6 +22,7 @@ vim.api.nvim_exec([[
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-eunuch'
   Plug 'sickill/vim-pasta'
+  Plug 'svban/YankAssassin.vim'
   Plug 'tpope/vim-sleuth'
   Plug 'bronson/vim-trailing-whitespace'
   Plug 'critiqjo/husk-x.vim'
