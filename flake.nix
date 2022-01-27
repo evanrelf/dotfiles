@@ -25,6 +25,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    kakoune = {
+      url = "github:evanrelf/kakoune";
+      flake = false;
+    };
     nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-slow.url = "github:NixOS/nixpkgs";
     tpm = {

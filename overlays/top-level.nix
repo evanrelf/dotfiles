@@ -27,35 +27,6 @@ in
       doCheck = false;
     });
 
-  home-rebuild =
-    pkgsPrev.writeShellScriptBin "home-rebuild" ''
-      set -Eeuo pipefail
-      IFS=$'\n\t'
-      if [ -n "''${DOTFILES:-}" ]; then
-        cd "$DOTFILES"
-      fi
-      export PATH="${pkgsFinal.home-manager}/bin:$PATH"
-      export PATH="${pkgsFinal.jq}/bin:$PATH"
-      hostname=$(hostname -s)
-      if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
-        home-manager --flake .#"$hostname" "$@"
-      else
-        if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
-          echo "Falling back to non-flake switch"
-          temp=$(mktemp -d)
-          trap 'rm -rf $temp' EXIT
-          nix build --file . homeConfigurations."$hostname" -o "$temp/result"
-          "$(readlink "$temp/result")"/activate
-        elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
-          echo "Falling back to non-flake build"
-          nix build --file . homeConfigurations."$hostname"
-        else
-          echo "Unsupported arguments in fallback mode"
-          home-manager "$@"
-        fi
-      fi
-    '';
-
   emacsCustom =
     pkgsPrev.slow.emacsWithPackagesFromUsePackage {
       package = pkgsFinal.slow.emacsGcc;
@@ -131,6 +102,35 @@ in
   home-manager =
     pkgsPrev.inputs.home-manager.defaultPackage."${pkgsFinal.system}";
 
+  home-rebuild =
+    pkgsPrev.writeShellScriptBin "home-rebuild" ''
+      set -Eeuo pipefail
+      IFS=$'\n\t'
+      if [ -n "''${DOTFILES:-}" ]; then
+        cd "$DOTFILES"
+      fi
+      export PATH="${pkgsFinal.home-manager}/bin:$PATH"
+      export PATH="${pkgsFinal.jq}/bin:$PATH"
+      hostname=$(hostname -s)
+      if [ "$(nix-instantiate --eval --expr 'builtins ? getFlake')" = "true" ]; then
+        home-manager --flake .#"$hostname" "$@"
+      else
+        if [ "$#" = "1" ] && [ "$1" = "switch" ]; then
+          echo "Falling back to non-flake switch"
+          temp=$(mktemp -d)
+          trap 'rm -rf $temp' EXIT
+          nix build --file . homeConfigurations."$hostname" -o "$temp/result"
+          "$(readlink "$temp/result")"/activate
+        elif [ "$#" = "1" ] && [ "$1" = "build" ]; then
+          echo "Falling back to non-flake build"
+          nix build --file . homeConfigurations."$hostname"
+        else
+          echo "Unsupported arguments in fallback mode"
+          home-manager "$@"
+        fi
+      fi
+    '';
+
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
   jujutsu =
@@ -157,6 +157,16 @@ in
       OPENSSL_LIB_DIR = "${pkgsFinal.openssl.out}/lib";
       OPENSSL_INCLUDE_DIR = "${pkgsFinal.openssl.dev}/include";
     };
+
+  kakoune-unwrapped =
+    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
+      version = "evanrelf";
+      src = pkgsPrev.inputs.kakoune;
+      preConfigure = ''
+        ${prev.preConfigure}
+        export version="${version}"
+      '';
+    });
 
   nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
 

@@ -139,18 +139,19 @@
         "type": "github"
       }
     },
-    "nixpkgs-slow": {
+    "kakoune": {
+      "flake": false,
       "locked": {
-        "lastModified": 1638847994,
-        "narHash": "sha256-Yr/nG6ZpFWjJ7xWPUtfj6L3dPuaY5D4WGYKuYA8qTTY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "fe3e7ef66c3b774fd194ae275ce1ac9cb71b13e5",
+        "lastModified": 1641765875,
+        "narHash": "sha256-d0s1wA/GRpq3F6JRBWJaZQPY8UqzTzW5/hx0NlkIC6Q=",
+        "owner": "evanrelf",
+        "repo": "kakoune",
+        "rev": "9acd4e62dc485aa7e44a601a0300697f8825a98c",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
+        "owner": "evanrelf",
+        "repo": "kakoune",
         "type": "github"
       }
     },
@@ -169,6 +170,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-slow": {
+      "locked": {
+        "lastModified": 1638847994,
+        "narHash": "sha256-Yr/nG6ZpFWjJ7xWPUtfj6L3dPuaY5D4WGYKuYA8qTTY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fe3e7ef66c3b774fd194ae275ce1ac9cb71b13e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "comma": "comma",
@@ -179,6 +195,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "kakoune": "kakoune",
         "nixpkgs": "nixpkgs",
         "nixpkgs-slow": "nixpkgs-slow",
         "tpm": "tpm",
