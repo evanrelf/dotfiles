@@ -5,6 +5,7 @@
     deno
     ffmpeg
     janet
+    janetfmt
     scmindent
     yt-dlp
     zig

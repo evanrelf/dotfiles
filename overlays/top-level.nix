@@ -133,6 +133,26 @@ in
 
   iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
 
+  janetfmt =
+    let
+      sporkFmt =
+        pkgsPrev.fetchurl {
+          url = "https://raw.githubusercontent.com/janet-lang/spork/c3af52ae85815886e923d5f4465d930a4f0d6480/spork/fmt.janet";
+          sha256 = "sha256-k9wI9zIxY+mP7QzbgIrUcJEKqn7D60lXhO6cOdoJAII=";
+        };
+    in
+    pkgsPrev.writeScriptBin "janetfmt" ''
+      #!/usr/bin/env janet
+
+      (def env (curenv))
+      (def fmtenv (dofile "${sporkFmt}"))
+      (merge-module env fmtenv "fmt/" false)
+
+      (defn main [script &opt input]
+        (default input (file/read stdin :all))
+        (prin (fmt/format input)))
+    '';
+
   jujutsu =
     (pkgsPrev.makeRustPlatform {
       inherit (pkgsFinal.fenix.minimal) cargo rustc;
