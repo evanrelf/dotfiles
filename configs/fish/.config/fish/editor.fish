@@ -1,4 +1,4 @@
-for editor in evil kak nvim vim vi nano
+for editor in kak nvim evil vim vi nano
     if _exists "$editor"
         set --export EDITOR "$editor"
         break
