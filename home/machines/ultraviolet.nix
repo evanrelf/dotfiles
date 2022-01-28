@@ -50,7 +50,6 @@
       inherit (pkgsFinal.cross.x86_64-darwin)
         ghcid
         nix-index
-        ormolu
         watchexec
         ;
     })

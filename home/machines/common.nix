@@ -13,7 +13,6 @@
   };
 
   home.packages = with pkgs; [
-    (aspellWithDicts (d: with d; [ en en-computers en-science ]))
     as-tree
     bashInteractive
     cabal-install
@@ -23,28 +22,21 @@
     dhall
     diskus
     fd
-    fx
     fzf
     ghcid
-    haskellPackages.cabal-plan
     haskellPackages.fourmolu
-    haskellPackages.retrie
     home-rebuild
     htop
     httpie
     hyperfine
     iosevka-bin
-    janet
     jq
     lorri
     lsd
     moreutils
     nerdfonts
-    ormolu
     pandoc
-    patat
     ripgrep
-    rlwrap
     sd
     shellcheck
     stylish-haskell
@@ -52,7 +44,6 @@
     tokei
     tree
     watchexec
-    yj
     zoxide
   ];
 }
