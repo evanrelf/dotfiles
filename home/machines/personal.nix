@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     deno
     ffmpeg
+    scmindent
     yt-dlp
     zig
   ];

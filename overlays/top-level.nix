@@ -182,6 +182,23 @@ in
     pkgsPrev.haskell.lib.doJailbreak
       (pkgsPrev.haskellPackages.callCabal2nix "patat" source { });
 
+  scmindent =
+    pkgsPrev.stdenv.mkDerivation {
+      name = "scmindent";
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "ds26gte";
+        repo = "scmindent";
+        rev = "627a6f97907438fe9f0eeb6b1f7eb875ec4a9bd9";
+        sha256 = "sha256-J1p4YffBWLfzt+BlTVVIIaMeMHPm7+cg8oW+9yI5VlU=";
+      };
+      buildInputs = [ pkgsFinal.nodejs ];
+      dontBuild = true;
+      installPhase = ''
+        mkdir -p $out/bin/
+        mv scmindent.js $out/bin/scmindent
+      '';
+    };
+
   zig =
     pkgsPrev.inputs.zig-overlay.packages."${pkgsPrev.system}"."0.9.0";
 }
