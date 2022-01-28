@@ -15,11 +15,8 @@
   ];
 
   home.file.".bash_profile".text = ''
-    # Forcibly set 'fish' as my shell, even though I can't modify '/etc/shells'
-    if [ "$(basename "$SHELL")" != "fish" ]; then
-      sudo chsh "$(whoami)" --shell "$(command -v fish)"
-      exec fish --login
-    fi
+    # Use `fish` as my shell without needing to modify `/etc/shells`
+    shopt -q login_shell && exec fish --login
   '';
 
   xdg.configFile."fish/local.fish".text = ''
