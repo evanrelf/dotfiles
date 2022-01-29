@@ -9,6 +9,8 @@ plug("michaeljsmith/vim-indent-object")
 plug("sheerun/vim-polyglot")
 plug("nvim-treesitter/nvim-treesitter")
 plug("sbdchd/neoformat", { ["on"] = {"Neoformat"} })
+plug("rlane/pounce.nvim")
+plug("rhysd/clever-f.vim")
 plug("tomtom/tcomment_vim")
 plug("machakann/vim-sandwich")
 plug("junegunn/vim-easy-align", { ["on"] = {"EasyAlign", "<Plug>(EasyAlign)"} })
@@ -46,6 +48,12 @@ vim.api.nvim_exec([[
     autocmd BufWritePre *.dhall,*.fish,*.go,*.janet,*.rs,*.zig undojoin | Neoformat
   augroup END
 ]], false)
+
+-- rlane/pounce.nvim
+vim.api.nvim_set_keymap("n", "gs", "<Cmd>Pounce<CR>", {})
+vim.api.nvim_set_keymap("n", "gS", "<Cmd>PounceRepeat<CR>", {})
+vim.api.nvim_set_keymap("v", "gs", "<Cmd>Pounce<CR>", {})
+vim.api.nvim_set_keymap("o", "gs", "<Cmd>Pounce<CR>", {})
 
 -- junegunn/vim-easy-align
 vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
