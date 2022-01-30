@@ -9,7 +9,7 @@ plug("michaeljsmith/vim-indent-object")
 plug("sheerun/vim-polyglot")
 plug("bakpakin/janet.vim")
 plug("nvim-treesitter/nvim-treesitter")
-plug("sbdchd/neoformat", { ["on"] = {"Neoformat"} })
+plug("itmecho/formatter.nvim", { ["branch"] = "synchronous-format" })
 plug("rlane/pounce.nvim")
 plug("rhysd/clever-f.vim")
 plug("tomtom/tcomment_vim")
@@ -41,12 +41,31 @@ require("nvim-treesitter.configs").setup({
   indent = { enable = true },
 })
 
--- sbdchd/neoformat
-vim.g.neoformat_only_msg_on_error = true
+-- mhartington/formatter.nvim
+function formatter_exe(exe, args)
+  return {
+    function()
+      return { exe = exe, args = args or {}, stdin = true }
+    end
+  }
+end
+require("formatter").setup({
+  filetype = {
+    dhall = formatter_exe("dhall", {"format"}),
+    elixir = formatter_exe("mix", {"format", "-"}),
+    go = formatter_exe("go", {"fmt"}),
+    haskell = formatter_exe("fourmolu"),
+    janet = formatter_exe("janetfmt"),
+    json = formatter_exe("jq", {"."}),
+    nix = formatter_exe("nixpkgs-fmt"),
+    rust = formatter_exe("rustfmt"),
+    zig = formatter_exe("zig", {"fmt", "--stdin"}),
+  }
+})
 vim.api.nvim_exec([[
-  augroup neoformat
+  augroup formatter
     autocmd!
-    autocmd BufWritePre *.dhall,*.fish,*.go,*.janet,*.rs,*.zig undojoin | Neoformat
+    autocmd BufWritePre *.dhall,*.go,*.janet,*.rs,*.zig FormatSync
   augroup END
 ]], false)
 
