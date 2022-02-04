@@ -9,6 +9,8 @@ plug("michaeljsmith/vim-indent-object")
 plug("sheerun/vim-polyglot")
 plug("bakpakin/janet.vim")
 plug("nvim-treesitter/nvim-treesitter")
+plug("nvim-lua/plenary.nvim")
+plug("lewis6991/gitsigns.nvim")
 plug("itmecho/formatter.nvim", { ["branch"] = "synchronous-format" })
 plug("rlane/pounce.nvim")
 plug("rhysd/clever-f.vim")
@@ -39,6 +41,12 @@ require("nvim-treesitter.configs").setup({
     disable = {"haskell", "markdown"},
   },
   indent = { enable = true },
+})
+
+-- lewis6991/gitsigns.nvim
+require("gitsigns").setup({
+  signcolumn = false,
+  numhl = true,
 })
 
 -- mhartington/formatter.nvim
