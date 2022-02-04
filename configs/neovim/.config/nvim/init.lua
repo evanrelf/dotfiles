@@ -1,47 +1,36 @@
 -- PLUGINS
 local plug = vim.fn["plug#"]
 vim.call("plug#begin", vim.call("stdpath", "data") .. "/plugged")
-plug("ishan9299/modus-theme-vim")
-plug("tpope/vim-sensible")
-plug("tpope/vim-repeat")
-plug("wellle/targets.vim")
-plug("michaeljsmith/vim-indent-object")
-plug("sheerun/vim-polyglot")
 plug("bakpakin/janet.vim")
-plug("nvim-treesitter/nvim-treesitter")
-plug("nvim-lua/plenary.nvim")
-plug("lewis6991/gitsigns.nvim")
+plug("critiqjo/husk-x.vim")
+plug("ishan9299/modus-theme-vim")
 plug("itmecho/formatter.nvim", { ["branch"] = "synchronous-format" })
-plug("rlane/pounce.nvim")
-plug("rhysd/clever-f.vim")
-plug("tomtom/tcomment_vim")
-plug("machakann/vim-sandwich")
 plug("junegunn/vim-easy-align", { ["on"] = {"EasyAlign", "<Plug>(EasyAlign)"} })
-plug("tpope/vim-eunuch")
+plug("lewis6991/gitsigns.nvim")
+plug("machakann/vim-sandwich")
+plug("michaeljsmith/vim-indent-object")
+plug("nvim-lua/plenary.nvim")
+plug("nvim-treesitter/nvim-treesitter")
+plug("rhysd/clever-f.vim")
+plug("rlane/pounce.nvim")
 plug("romainl/vim-cool")
+plug("sheerun/vim-polyglot")
 plug("sickill/vim-pasta")
 plug("svban/YankAssassin.vim")
+plug("tomtom/tcomment_vim")
+plug("tpope/vim-eunuch")
+plug("tpope/vim-repeat")
+plug("tpope/vim-sensible")
 plug("tpope/vim-sleuth")
-plug("critiqjo/husk-x.vim")
+plug("wellle/targets.vim")
 vim.call("plug#end")
 
 -- ishan9299/modus-theme-vim
 vim.cmd("silent! colorscheme modus-operandi")
 
--- nvim-treesitter/nvim-treesitter
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish", "go",
-    "haskell", "html", "javascript", "json", "lua", "make", "markdown", "nix",
-    "perl", "python", "ruby", "rust", "toml", "typescript", "vim", "yaml",
-    "zig",
-  },
-  highlight = {
-    enable = true,
-    disable = {"haskell", "markdown"},
-  },
-  indent = { enable = true },
-})
+-- junegunn/vim-easy-align
+vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
+vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
 
 -- lewis6991/gitsigns.nvim
 require("gitsigns").setup({
@@ -77,15 +66,26 @@ vim.api.nvim_exec([[
   augroup END
 ]], false)
 
+-- nvim-treesitter/nvim-treesitter
+require("nvim-treesitter.configs").setup({
+  ensure_installed = {
+    "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish", "go",
+    "haskell", "html", "javascript", "json", "lua", "make", "markdown", "nix",
+    "perl", "python", "ruby", "rust", "toml", "typescript", "vim", "yaml",
+    "zig",
+  },
+  highlight = {
+    enable = true,
+    disable = {"haskell", "markdown"},
+  },
+  indent = { enable = true },
+})
+
 -- rlane/pounce.nvim
 vim.api.nvim_set_keymap("n", "gs", "<Cmd>Pounce<CR>", {})
 vim.api.nvim_set_keymap("n", "gS", "<Cmd>PounceRepeat<CR>", {})
 vim.api.nvim_set_keymap("v", "gs", "<Cmd>Pounce<CR>", {})
 vim.api.nvim_set_keymap("o", "gs", "<Cmd>Pounce<CR>", {})
-
--- junegunn/vim-easy-align
-vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
-vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
 
 
 -- OPTIONS
