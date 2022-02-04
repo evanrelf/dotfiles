@@ -86,7 +86,7 @@ if _exists nix
         eval "nix-shell --packages $with_packages $with_command"
     end
 
-    function with-ghc
+    function withghc
         __with $argv || return 1
         eval "nix-shell --packages 'haskellPackages.ghcWithPackages (p: with p; [ $with_packages ])' $with_command"
     end
