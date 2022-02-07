@@ -93,6 +93,7 @@ vim.api.nvim_set_keymap("o", "gs", "<Cmd>Pounce<CR>", {})
 vim.o.termguicolors = true
 vim.o.background = "light"
 vim.o.colorcolumn = "81"
+vim.o.cursorline = true
 vim.o.showmode = false
 vim.o.splitbelow = true
 vim.o.splitright = true
