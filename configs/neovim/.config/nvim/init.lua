@@ -124,6 +124,10 @@ vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
 vim.api.nvim_set_keymap("x", "<", "<gv", { noremap = true })
 vim.api.nvim_set_keymap("x", ">", ">gv", { noremap = true })
 
+vim.api.nvim_set_keymap("n", "<C-u>", [[<Cmd>execute "normal! " .. (float2nr(winheight(0) / 2) * v:count1) .. "\<C-y>"<CR>]], { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-d>", [[<Cmd>execute "normal! " .. (float2nr(winheight(0) / 2) * v:count1) .. "\<C-e>"<CR>]], { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-b>", [[<Cmd>execute "normal! " .. (float2nr(winheight(0)) * v:count1) .. "\<C-y>"<CR>]], { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-f>", [[<Cmd>execute "normal! " .. (float2nr(winheight(0)) * v:count1) .. "\<C-e>"<CR>]], { noremap = true })
 
 -- AUTOCMDS
 vim.api.nvim_exec([[
