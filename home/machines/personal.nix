@@ -6,7 +6,9 @@
     ffmpeg
     janet
     janetfmt
+    qmk
     scmindent
+    wally-cli
     yt-dlp
     zig
   ];
