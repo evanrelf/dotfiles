@@ -19,7 +19,13 @@ in
       recursive = true;
     };
 
-    xdg.dataFile."nvim/site/autoload/plug.vim".source =
-      "${inputs.vim-plug}/plug.vim";
+    home.activation.neovimInstallPacker =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        if [ ! -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+          $DRY_RUN_CMD git clone --depth 1 \
+            "https://github.com/wbthomason/packer.nvim" \
+            "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+        fi
+      '';
   };
 }

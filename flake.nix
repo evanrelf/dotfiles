@@ -35,10 +35,6 @@
       url = "github:tmux-plugins/tpm";
       flake = false;
     };
-    vim-plug = {
-      url = "github:junegunn/vim-plug";
-      flake = false;
-    };
     zig-overlay = {
       url = "github:arqv/zig-overlay";
       inputs.flake-utils.follows = "flake-utils";

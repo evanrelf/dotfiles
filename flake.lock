@@ -199,7 +199,6 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-slow": "nixpkgs-slow",
         "tpm": "tpm",
-        "vim-plug": "vim-plug",
         "zig-overlay": "zig-overlay"
       }
     },
@@ -233,22 +232,6 @@
       "original": {
         "owner": "tmux-plugins",
         "repo": "tpm",
-        "type": "github"
-      }
-    },
-    "vim-plug": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1641218708,
-        "narHash": "sha256-6HVwA69fXZ7KkZFbSr+hOZ2epkQoT1BBN6HYMGxTzy0=",
-        "owner": "junegunn",
-        "repo": "vim-plug",
-        "rev": "e300178a0e2fb04b56de8957281837f13ecf0b27",
-        "type": "github"
-      },
-      "original": {
-        "owner": "junegunn",
-        "repo": "vim-plug",
         "type": "github"
       }
     },
