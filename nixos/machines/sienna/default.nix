@@ -128,11 +128,9 @@
     # pkgs.restic
   ];
 
-  nix.trustedUsers = [ "root" "@wheel" ];
-  nix.maxJobs = 16;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+  nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.setting.max-jobs = 16;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.openssh.enable = true;
   # services.tailscale.enable = true;

@@ -152,11 +152,9 @@
     pkgs.restic
   ];
 
-  nix.trustedUsers = [ "root" "@wheel" ];
-  nix.maxJobs = 16;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+  nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.settings.max-jobs = 16;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.fish.enable = true;
   programs.fish.useBabelfish = true;
