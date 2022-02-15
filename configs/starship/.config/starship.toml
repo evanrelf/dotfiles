@@ -8,7 +8,6 @@ format = """\
   $git_status\
   $git_state\
   $nix_shell\
-  $fill\
   $username\
   $hostname\
   $line_break\
@@ -79,11 +78,6 @@ disabled = false
 format = 'in [${symbol}nix-shell]($style) '
 symbol = ' '
 style = 'cyan'
-
-[fill]
-disabled = false
-symbol = '· '
-style = 'white'
 
 [username]
 disabled = false
