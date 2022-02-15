@@ -11,7 +11,8 @@
 
   # COMMIT
   c = commit
-  amend = git commit --amend
+  ca = commit --amend
+  can = commit --amend --no-edit
 
   # DIFF
   d = diff
@@ -46,7 +47,9 @@
 
   # RESTORE
   re = restore
+  rep = restore --patch
   res = restore --staged
+  resp = restore --staged --patch
 
   # SHOW
   sh = show
