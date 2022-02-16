@@ -1,7 +1,7 @@
-if test (uname) = "Darwin"
+if test (uname) = Darwin
     set -l x (sysctl -in sysctl.proc_translated)
     if test "$x" = 1
-        set --export ROSETTA2 "true"
+        set --export ROSETTA2 true
     end
 
     function rosetta2

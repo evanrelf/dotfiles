@@ -7,7 +7,7 @@ end
 
 if _exists emacs
     if _exists evil
-        abbr --add e "evil"
+        abbr --add e evil
     end
 
     function emacs
@@ -30,11 +30,11 @@ if _exists emacs
 end
 
 if _exists kak
-    abbr --add k "kak"
+    abbr --add k kak
 end
 
 if _exists nvim
-    abbr --add v "nvim"
+    abbr --add v nvim
 
     function nvim
         if test -n "$TMUX"
@@ -44,4 +44,3 @@ if _exists nvim
         end
     end
 end
-

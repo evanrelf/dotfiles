@@ -1,7 +1,7 @@
 set fish_greeting
 
 if _exists starship
-    if test -n "$TMUX"
+    if _exists tmux && test -n "$TMUX"
         # Fix prompt redraw bug with multi-line `starship` prompt and `tmux`
         tmux set -g focus-events off
     end

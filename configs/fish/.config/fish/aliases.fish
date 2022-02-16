@@ -14,20 +14,27 @@ if _exists fd && _exists as-tree
 end
 
 if _exists lsd
-    alias ls "lsd --group-dirs=first --classify --icon=never"
+    alias ls "lsd --group-dirs=first --icon=never"
     alias ll "ls -l"
+    if not _exists tree
+        alias tree "ls --tree"
+    end
 else if _exists exa
     alias ls "exa --group-directories-first"
-    alias ll "exa --long --group-directories-first"
+    alias ll "ls --long"
     if not _exists tree
-        alias tree "exa --tree --group-directories-first --ignore-glob '.git|dist-newstyle|node_modules'"
+        alias tree "ls --tree --ignore-glob '.git|dist-newstyle|node_modules'"
     end
 else
     alias ls "command ls -AFGh"
 end
 
 if _exists git
-    abbr --add g "git"
+    abbr --add g git
+
+    abbr --add gs "git s"
+
+    abbr --add grr "set -l commit (git k) && git rebase \$commit --exec 'env -i PATH=\$(dirname \$(which nix)) XDG_CACHE_HOME=.cache ./update-config --yes && git commit --all --fixup HEAD --allow-empty' && git rbauto \$commit"
 
     function root -d "Change directory to Git repository root"
         if set --local root (git rev-parse --show-toplevel 2>/dev/null)
@@ -39,18 +46,12 @@ if _exists git
     end
 end
 
-if _exists tmux
-    if test -n "$TMUX"
-        alias tmux-copy "tmux load-buffer -"
-        alias tmux-paste "tmux save-buffer -"
-    end
+if _exists tmux && test -n "$TMUX"
+    alias tmux-copy "tmux load-buffer -"
+    alias tmux-paste "tmux save-buffer -"
 end
 
 alias utcdate "date -u +'%Y-%m-%dT%H:%M:%S%Z'"
-
-if _exists nix
-    abbr --add n "nix"
-end
 
 function rg
     if isatty stdout
@@ -69,8 +70,3 @@ function cargod
         watchexec --exts rs --restart --clear -- cargo check --all-targets --color=always $argv '|&' less -~cRMK
     end
 end
-
-# Typos
-abbr --add gs "git s"
-
-abbr --add grr "set -l commit (git k) && git rebase \$commit --exec 'env -i PATH=\$(dirname \$(which nix)) XDG_CACHE_HOME=.cache ./update-config --yes && git commit --all --fixup HEAD --allow-empty' && git rbauto \$commit"

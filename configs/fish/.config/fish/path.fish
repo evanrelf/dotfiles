@@ -4,7 +4,7 @@ if test -z "$IN_NIX_SHELL"
     end
 
     if _exists brew
-        set --prepend PATH "/usr/local/sbin"
+        set --prepend PATH /usr/local/sbin
     end
 
     if _exists emacs && test -d "$HOME/.emacs.d/bin"

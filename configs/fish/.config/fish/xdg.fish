@@ -42,7 +42,7 @@ set --export KDEHOME "$XDG_CONFIG_HOME/kde"
 
 # less
 if _exists less
-    set --export LESSHISTFILE "-"
+    set --export LESSHISTFILE -
 end
 
 # ncurses

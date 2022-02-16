@@ -10,9 +10,9 @@ function __edit_file_position
     set --local column (echo "$argv" | cut -d ':' -f 3)
 
     switch "$EDITOR"
-        case "kak"
+        case kak
             eval "$EDITOR $file +$line:$column"
-        case "vi" "vim" "nvim"
+        case vi vim nvim
             eval "$EDITOR $file '+normal $line''G$column|zz'"
         case "*"
             eval "$EDITOR $file"

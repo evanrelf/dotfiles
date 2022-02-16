@@ -11,11 +11,12 @@ if _exists fzf
         set --local commandline (__fzf_parse_commandline)
         set --local fzf_query $commandline[2]
 
-        set --query FZF_FIND_REV_COMMAND || set --local FZF_FIND_REV_COMMAND "
-        git log --graph --pretty=normal --first-parent --max-count=100 --color=always"
+        set --query FZF_FIND_REV_COMMAND || set --local FZF_FIND_REV_COMMAND "git log --graph --pretty=normal --first-parent --max-count=100 --color=always"
 
         begin
-            eval "$FZF_FIND_REV_COMMAND | "(__fzfcmd) "-m $FZF_DEFAULT_OPTS $FZF_FIND_REV_OPTS --query \"$fzf_query\"" | while read -l s; set results $results $s; end
+            eval "$FZF_FIND_REV_COMMAND | "(__fzfcmd) "-m $FZF_DEFAULT_OPTS $FZF_FIND_REV_OPTS --query \"$fzf_query\"" | while read -l s
+                set results $results $s
+            end
         end
 
         if test -z "$results"

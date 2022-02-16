@@ -7,25 +7,25 @@ function __nix_source_configs
         set --export NIX_PROFILES "/nix/var/nix/profiles/default /Users/$USER/.nix-profile"
         set --export NIX_SSL_CERT_FILE "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt"
         set --export NIX_USER_PROFILE_DIR "/nix/var/nix/profiles/per-user/$USER"
-        set --export --prepend PATH "/nix/var/nix/profiles/default/bin"
+        set --export --prepend PATH /nix/var/nix/profiles/default/bin
         set --export --prepend PATH "/Users/$USER/.nix-profile/bin"
-        # if _exists bass
-        #     bass source "$multi_user_path"
+        # if _exists replay
+        #     replay source "$multi_user_path"
         # else
-        #     _warn "Nix isn't working because you don't have bass installed"
+        #     _warn "Nix isn't working because you don't have replay installed"
         # end
     else if test -f "$single_user_path"
-        if _exists bass
-            bass source "$single_user_path"
+        if _exists replay
+            replay source "$single_user_path"
         else
-            _warn "Nix isn't working because you don't have bass installed"
+            _warn "Nix isn't working because you don't have replay installed"
         end
     else
         _warn "Unable to find Nix shell config"
     end
 end
 
-if test -d "/nix"
+if test -d /nix
     # This isn't necessary on NixOS
     if not _exists nixos-version
         __nix_source_configs
@@ -42,6 +42,8 @@ if test -d "/nix"
 end
 
 if _exists nix
+    abbr --add n nix
+
     function run
         if test ! -f "shell.nix" && test ! -f "default.nix"
             _error "Couldn't find 'shell.nix' or 'default.nix' in the current directory"
@@ -66,7 +68,7 @@ if _exists nix
         set with_packages ""
         set with_command ""
         for arg in $argv
-            if test "$arg" = "run"
+            if test "$arg" = run
                 set with_command "--run '"
                 continue
             end
@@ -104,7 +106,7 @@ if _exists nix
         for p in "$PATH"
             if test "$p" = "."
                 true
-            else if echo "$p" | grep --quiet "/nix/store"
+            else if echo "$p" | grep --quiet /nix/store
                 set --append nix_paths "$p"
             else
                 set --append non_nix_paths "$p"
