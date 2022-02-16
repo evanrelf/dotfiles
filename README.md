@@ -3,7 +3,7 @@
 My personal dotfiles. Configured as declaratively as possible using Home Manager
 and NixOS.
 
-- Editor: A mix of Emacs and Kakoune
+- Editor: Constantly vacillating between Kakoune, Neovim, and Emacs
 - Shell: fish
 - Terminal: kitty
 - Window manager: tmux in my terminal, Hammerspoon on macOS, xmonad or sway on
