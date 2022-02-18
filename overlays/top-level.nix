@@ -161,10 +161,10 @@ in
       src = pkgsPrev.fetchFromGitHub {
         owner = "martinvonz";
         repo = "jj";
-        rev = "ba01c512aed9fee71ae1cd83709bcd4181d25876";
-        sha256 = "sha256-OhbKQh8mrEazpml4QCs4H6+5HBVv6dQEACUSybO0J34=";
+        rev = "03e6b8c0e6a44d12494a7467f626108ebba2fbec";
+        sha256 = "sha256-mhK2fF54IjQjQpb9fzvjuLK/pzmAxWxOt6cDpjpFeT0=";
       };
-      cargoSha256 = "sha256-EWzAXSAPE+hE7g8aDdUoKEKWZztIz53ajPxi6j49lCQ=";
+      cargoSha256 = "sha256-LKPloAXiWHg437KikHu4YowIb2bz6x/9BKawg48FjH4=";
       buildInputs = pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
         pkgsFinal.darwin.apple_sdk.frameworks.Security
         pkgsFinal.darwin.apple_sdk.frameworks.SystemConfiguration
