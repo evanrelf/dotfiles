@@ -30,12 +30,12 @@ repo_root_style = 'blue underline'
 
 [hg_branch]
 disabled = false
-format = '(on [ $branch]($style)) '
+format = '([ $branch]($style)) '
 style = 'blue'
 
 [git_branch]
 disabled = false
-format = '(on [ $branch]($style)) '
+format = '([ $branch]($style)) '
 style = 'blue'
 only_attached = true
 
@@ -67,7 +67,7 @@ style = 'cyan'
 
 [nix_shell]
 disabled = false
-format = 'in [${symbol}nix-shell]($style) '
+format = '[${symbol}nix-shell]($style) '
 symbol = ' '
 style = 'cyan'
 
