@@ -16,9 +16,7 @@ format = """\
 
 [status]
 disabled = false
-format = """([$status( / SIG$signal_name)( \\($common_meaning\\))]($style)\n)"""
-# TODO: Add `hex_status` once we get `starship` v1.1.0
-# format = """([$status / $hex_status( / SIG$signal_name)( \\($common_meaning\\))]($style)\n)"""
+format = """([$status]($style)\n)"""
 style = 'red'
 
 [custom.rosetta2]
