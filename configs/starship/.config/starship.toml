@@ -81,14 +81,14 @@ style = 'cyan'
 
 [username]
 disabled = false
-style_user = 'yellow'
-style_root = 'red'
-format = ' [$user]($style)'
+style_user = 'white'
+style_root = 'white'
+format = '[$user]($style)'
 
 [hostname]
 disabled = false
 format = '[@$hostname]($style)'
-style = 'yellow'
+style = 'white'
 
 [character]
 disabled = false
