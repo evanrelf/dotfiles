@@ -1,6 +1,5 @@
 format = """\
   $status\
-  ${custom.rosetta2}\
   $directory\
   $hg_branch\
   $git_branch\
@@ -18,11 +17,6 @@ format = """\
 disabled = false
 format = """([$status]($style)\n)"""
 style = 'red'
-
-[custom.rosetta2]
-symbol = "x86_64 "
-when = 'test -n "$ROSETTA2"'
-style = 'yellow'
 
 [directory]
 disabled = false
