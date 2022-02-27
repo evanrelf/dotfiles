@@ -12,7 +12,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.starship ];
+    home.packages = [
+      # TODO: Move off of `nixpkgs-slow`
+      pkgs.slow.starship
+    ];
 
     xdg.configFile."starship.toml".source =
       ../../configs/starship/.config/starship.toml;

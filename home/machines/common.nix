@@ -27,7 +27,8 @@
     haskellPackages.fourmolu
     home-rebuild
     htop
-    httpie
+    # TODO: Move off of `nixpkgs-slow`
+    slow.httpie
     hyperfine
     iosevka-bin
     jq

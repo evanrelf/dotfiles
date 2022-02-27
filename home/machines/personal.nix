@@ -4,7 +4,8 @@
   home.packages = with pkgs; [
     deno
     ffmpeg
-    janet
+    # TODO: Move off of `nixpkgs-slow`
+    slow.janet
     janetfmt
     qmk
     scmindent
