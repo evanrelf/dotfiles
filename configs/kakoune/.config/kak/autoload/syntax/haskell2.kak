@@ -49,7 +49,7 @@ provide-module haskell2 %§
 add-highlighter shared/haskell2 regions
 add-highlighter shared/haskell2/code default-region group
 add-highlighter shared/haskell2/string region '(?<![\\])"' (?<!\\)(\\\\)*" fill string
-# TODO: Doesn't highlight `'_'` correctly
+# TODO: Doesn't highlight `'_'`, `'['`, `'('` correctly
 add-highlighter shared/haskell2/character region (?<![\\\w@])'(?!['\w\[\(]) (?<!\\)(\\\\)*' fill string
 add-highlighter shared/haskell2/comment region -recurse \{-(?!#) \{-(?!#) (?<!#)-\} fill comment
 add-highlighter shared/haskell2/line_comment region -- $ fill comment
