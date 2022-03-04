@@ -1,0 +1,7 @@
+[commit]
+  gpgSign = true
+[user]
+  name = "Evan Relf"
+  useConfigOnly = true
+[include]
+  path = "~/.config/git/local"
