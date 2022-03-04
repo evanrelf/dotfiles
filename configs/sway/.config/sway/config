@@ -1,7 +1,0 @@
-set $font "Iosevka SS08 Extended 20px"
-
-include "inputs"
-include "outputs"
-include "bindings"
-include "appearance"
-include "exec"

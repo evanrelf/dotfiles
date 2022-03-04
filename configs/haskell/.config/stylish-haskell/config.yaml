@@ -1,6 +1,0 @@
-steps:
-  - imports:
-      align: file
-  - language_pragmas:
-      remove_redundant: false
-cabal: false
