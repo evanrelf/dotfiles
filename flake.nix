@@ -3,6 +3,10 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs";
   };
 
@@ -11,7 +15,10 @@
       let
         config = { };
 
-        overlays = [ ];
+        overlays = [
+          (_: _: { inherit inputs; })
+          (import ./overlays/home-configurations.nix)
+        ];
 
         pkgs = import nixpkgs { inherit system config overlays; };
       in
