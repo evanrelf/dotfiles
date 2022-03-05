@@ -12,3 +12,4 @@ begin
     set --universal FZF_OPEN_COMMAND "$fzf_default_command --hidden"
 end
 alias ls "command ls --color=auto"
+set --global fish_greeting ""
