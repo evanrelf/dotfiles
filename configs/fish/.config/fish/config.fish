@@ -11,5 +11,5 @@ begin
     set --universal FZF_FIND_FILE_COMMAND "$fzf_default_command --hidden"
     set --universal FZF_OPEN_COMMAND "$fzf_default_command --hidden"
 end
-alias ls "command ls --color=auto"
+alias ls "ls --color=auto"
 set --global fish_greeting ""
