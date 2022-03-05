@@ -7,6 +7,7 @@
     git
     home-manager
     neovim
+    ripgrep
   ];
 
   xdg.configFile."fish" = {
