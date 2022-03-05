@@ -2,11 +2,16 @@
 
 {
   home.packages = with pkgs; [
+    fish
     git
     home-manager
     neovim
-    zsh
   ];
+
+  xdg.configFile."fish" = {
+    source = ../../configs/fish/.config/fish;
+    recursive = true;
+  };
 
   xdg.configFile."git" = {
     source = ../../configs/git/.config/git;
@@ -17,6 +22,4 @@
     source = ../../configs/kitty/.config/kitty;
     recursive = true;
   };
-
-  home.file.".zshrc".source = ../../configs/zsh/.zshrc;
 }
