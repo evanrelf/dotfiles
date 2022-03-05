@@ -13,5 +13,10 @@
     recursive = true;
   };
 
+  xdg.configFile."kitty" = {
+    source = ../../configs/kitty/.config/kitty;
+    recursive = true;
+  };
+
   home.file.".zshrc".source = ../../configs/zsh/.zshrc;
 }
