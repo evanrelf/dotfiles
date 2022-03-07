@@ -10,7 +10,7 @@
     bpftrace
     gcc
     gnupg
-    nix
+    # nix
     pinentry.tty
   ];
 
@@ -32,7 +32,7 @@
     '';
   };
 
-  xdg.configFile."nix/nix.conf".text = ''
-    extra-experimental-features = nix-command flakes
-  '';
+  # xdg.configFile."nix/nix.conf".text = ''
+  #   extra-experimental-features = nix-command flakes
+  # '';
 }
