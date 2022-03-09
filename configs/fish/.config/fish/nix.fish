@@ -98,7 +98,7 @@ if _exists nix
     end
 
     alias nix-instantiate "nix-instantiate --no-gc-warning"
-    alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof)'"
+    alias nix-stray-roots "nix-store --gc --print-roots | grep --invert-match --extended-regexp '^(/nix/var/|\{censored|\{lsof|/proc|/run)'"
 
     if test -n "$IN_NIX_SHELL"
         set --local nix_paths
