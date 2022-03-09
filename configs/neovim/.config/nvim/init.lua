@@ -26,7 +26,7 @@ require("packer").startup(function(use)
 
   use({
     "itmecho/formatter.nvim",
-    branch = "synchronous-format",
+    branch = "buffer-locking",
     config = function()
       function formatter_exe(exe, args)
         return {
