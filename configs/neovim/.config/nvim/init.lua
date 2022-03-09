@@ -80,6 +80,8 @@ require("packer").startup(function(use)
 
   use({ "michaeljsmith/vim-indent-object" })
 
+  use({ "nathom/filetype.nvim" })
+
   use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
