@@ -1,4 +1,5 @@
 -- PLUGINS
+pcall(require, "impatient")
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
@@ -75,6 +76,8 @@ require("packer").startup(function(use)
       })
     end,
   })
+
+  use({ "lewis6991/impatient.nvim" })
 
   use({ "machakann/vim-sandwich" })
 
