@@ -19,6 +19,8 @@ require("packer").startup(function(use)
     end,
   })
 
+  use({ "rktjmp/lush.nvim" })
+
   use({
     "wbthomason/packer.nvim",
     config = function()
