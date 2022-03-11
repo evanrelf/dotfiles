@@ -11,6 +11,7 @@ in
 {
   home.packages = [
     channel
+    pkgs.comma
     pkgs.fd
     pkgs.fzf
     pkgs.git

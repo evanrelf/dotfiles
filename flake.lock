@@ -1,5 +1,28 @@
 {
   "nodes": {
+    "comma": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1647042371,
+        "narHash": "sha256-+2qDijfLbMLtGl3Yuy1StXjOXG83TTPxy/MgXL1wBCw=",
+        "owner": "evanrelf",
+        "repo": "comma",
+        "rev": "ecb3e0e01b09d1388e3ced3ebfaad2eac94edd55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "comma",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1644229661,
@@ -52,6 +75,7 @@
     },
     "root": {
       "inputs": {
+        "comma": "comma",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"

@@ -2,6 +2,11 @@
   description = "dotfiles";
 
   inputs = {
+    comma = {
+      url = "github:evanrelf/comma";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,6 +22,7 @@
 
         overlays = [
           (_: _: { inherit inputs; })
+          (_: _: { inherit (inputs.comma.packages.${system}) comma; })
           (import ./overlays/home-configurations.nix)
         ];
 
