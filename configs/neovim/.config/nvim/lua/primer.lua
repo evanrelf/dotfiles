@@ -1,6 +1,133 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
+-- All colors
+
+local black = hsl("#1b1f23")
+
+local white = hsl("#ffffff")
+
+local gray_000 = hsl("#fafbfc")
+local gray_100 = hsl("#f6f8fa")
+local gray_200 = hsl("#e1e4e8")
+local gray_300 = hsl("#d1d5da")
+local gray_400 = hsl("#959da5")
+local gray_500 = hsl("#6a737d")
+local gray_600 = hsl("#586069")
+local gray_700 = hsl("#444d56")
+local gray_800 = hsl("#2f363d")
+local gray_900 = hsl("#24292e")
+
+local blue_000 = hsl("#f1f8ff")
+local blue_100 = hsl("#dbedff")
+local blue_200 = hsl("#c8e1ff")
+local blue_300 = hsl("#79b8ff")
+local blue_400 = hsl("#2188ff")
+local blue_500 = hsl("#0366d6")
+local blue_600 = hsl("#005cc5")
+local blue_700 = hsl("#044289")
+local blue_800 = hsl("#032f62")
+local blue_900 = hsl("#05264c")
+
+local green_000 = hsl("#f0fff4")
+local green_100 = hsl("#dcffe4")
+local green_200 = hsl("#bef5cb")
+local green_300 = hsl("#85e89d")
+local green_400 = hsl("#34d058")
+local green_500 = hsl("#28a745")
+local green_600 = hsl("#22863a")
+local green_700 = hsl("#176f2c")
+local green_800 = hsl("#165c26")
+local green_900 = hsl("#144620")
+
+local yellow_000 = hsl("#fffdef")
+local yellow_100 = hsl("#fffbdd")
+local yellow_200 = hsl("#fff5b1")
+local yellow_300 = hsl("#ffea7f")
+local yellow_400 = hsl("#ffdf5d")
+local yellow_500 = hsl("#ffd33d")
+local yellow_600 = hsl("#f9c513")
+local yellow_700 = hsl("#dbab09")
+local yellow_800 = hsl("#b08800")
+local yellow_900 = hsl("#735c0f")
+
+local orange_000 = hsl("#fff8f2")
+local orange_100 = hsl("#ffebda")
+local orange_200 = hsl("#ffd1ac")
+local orange_300 = hsl("#ffab70")
+local orange_400 = hsl("#fb8532")
+local orange_500 = hsl("#f66a0a")
+local orange_600 = hsl("#e36209")
+local orange_700 = hsl("#d15704")
+local orange_800 = hsl("#c24e00")
+local orange_900 = hsl("#a04100")
+
+local red_000 = hsl("#ffeef0")
+local red_100 = hsl("#ffdce0")
+local red_200 = hsl("#fdaeb7")
+local red_300 = hsl("#f97583")
+local red_400 = hsl("#ea4a5a")
+local red_500 = hsl("#d73a49")
+local red_600 = hsl("#cb2431")
+local red_700 = hsl("#b31d28")
+local red_800 = hsl("#9e1c23")
+local red_900 = hsl("#86181d")
+
+local purple_000 = hsl("#f5f0ff")
+local purple_100 = hsl("#e6dcfd")
+local purple_200 = hsl("#d1bcf9")
+local purple_300 = hsl("#b392f0")
+local purple_400 = hsl("#8a63d2")
+local purple_500 = hsl("#6f42c1")
+local purple_600 = hsl("#5a32a3")
+local purple_700 = hsl("#4c2889")
+local purple_800 = hsl("#3a1d6e")
+local purple_900 = hsl("#29134e")
+
+local pink_000 = hsl("#ffeef8")
+local pink_100 = hsl("#fedbf0")
+local pink_200 = hsl("#f9b3dd")
+local pink_300 = hsl("#f692ce")
+local pink_400 = hsl("#ec6cb9")
+local pink_500 = hsl("#ea4aaa")
+local pink_600 = hsl("#d03592")
+local pink_700 = hsl("#b93a86")
+local pink_800 = hsl("#99306f")
+local pink_900 = hsl("#6d224f")
+
+-- Background colors
+
+local bg_gray_light = gray_000
+local bg_gray = gray_100
+local bg_gray_dark = gray_900
+local bg_blue_light = blue_000
+local bg_blue = blue_500
+local bg_green_light = green_100
+local bg_green = green_500
+local bg_purple_light = purple_000
+local bg_purple = purple_500
+local bg_yellow_light = yellow_200
+local bg_yellow = yellow_500
+local bg_yellow_dark = yellow_700
+local bg_orange = orange_700
+local bg_red_light = red_100
+local bg_red = red_500
+local bg_pink = pink_500
+
+-- Text colors
+
+local text_gray_light = gray_500
+local text_gray = gray_600
+local text_gray_dark = gray_900
+local text_blue = blue_500
+local text_green = green_500
+local text_purple = purple_500
+local text_yellow = yellow_800
+local text_orange_light = orange_600
+local text_orange = orange_900
+local text_red = red_600
+local text_pink = pink_500
+
 local theme = lush(function()
   return {
     -- The following are all the Neovim default highlight groups from the docs
