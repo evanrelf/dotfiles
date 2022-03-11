@@ -1,6 +1,25 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish",
+          "go", "haskell", "html", "javascript", "json", "lua", "make",
+          "markdown", "nix", "perl", "python", "ruby", "rust", "toml",
+          "typescript", "vim", "yaml", "zig",
+        },
+        highlight = {
+          enable = true,
+          disable = {"haskell", "markdown"},
+        },
+        indent = { enable = true },
+      })
+    end,
+  })
+
+  use({
     "wbthomason/packer.nvim",
     config = function()
       vim.api.nvim_exec([[
