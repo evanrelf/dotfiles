@@ -10,11 +10,11 @@ require("packer").startup(function(use)
           "markdown", "nix", "perl", "python", "ruby", "rust", "toml",
           "typescript", "vim", "yaml", "zig",
         },
-        highlight = {
+        highlight = { enable = true },
+        indent = {
           enable = true,
           disable = {"haskell", "markdown"},
         },
-        indent = { enable = true },
       })
     end,
   })
