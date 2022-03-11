@@ -12,6 +12,7 @@ in
       username = "evanrelf";
       homeDirectory = "/Users/${username}";
       pkgs = import nixpkgs { inherit system config overlays; };
+      extraSpecialArgs = { inherit inputs; };
       configuration.imports = [ ../home/machines/ultraviolet.nix ];
     };
   };

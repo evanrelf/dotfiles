@@ -1,14 +1,23 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
+let
+  channel =
+    pkgs.runCommandLocal "channel" { } ''
+      mkdir -p $out/channels
+      ln -s ${inputs.nixpkgs} $out/channels/nixpkgs
+    '';
+
+in
 {
-  home.packages = with pkgs; [
-    fd
-    fish
-    fzf
-    git
-    home-manager
-    neovim
-    ripgrep
+  home.packages = [
+    channel
+    pkgs.fd
+    pkgs.fish
+    pkgs.fzf
+    pkgs.git
+    pkgs.home-manager
+    pkgs.neovim
+    pkgs.ripgrep
   ];
 
   xdg.configFile."fish" = {

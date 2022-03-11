@@ -1,5 +1,13 @@
 set --global --export --prepend PATH "/nix/var/nix/profiles/default/bin"
 set --global --export --prepend PATH "$HOME/.nix-profile/bin"
+if test -d "$HOME/.nix-profile/channels/"
+    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels"
+    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/nixpkgs"
+else
+    echo "Using imperative Nix channels"
+    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels"
+    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
+end
 set --global --export COLORTERM "$TERM"
 set --global --export EDITOR "nvim"
 set --universal FZF_LEGACY_KEYBINDINGS 0
