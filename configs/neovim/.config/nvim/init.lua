@@ -42,10 +42,10 @@ require("packer").startup(function(use)
   })
 end)
 
+vim.o.expandtab = true
 vim.o.shiftwidth = 2
+vim.o.number = true
 vim.o.mouse = "a"
-vim.bo.expandtab = true
-vim.wo.number = true
 
 vim.cmd([[
   augroup autocmds
