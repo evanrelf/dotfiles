@@ -7,6 +7,15 @@ let
 in
 {
   homeConfigurations = {
+    indigo = home-manager.lib.homeManagerConfiguration rec {
+      system = "x86_64-darwin";
+      username = "evan";
+      homeDirectory = "/Users/${username}";
+      pkgs = import nixpkgs { inherit system config overlays; };
+      extraSpecialArgs = { inherit inputs; };
+      configuration.imports = [ ../home/machines/indigo.nix ];
+    };
+
     ultraviolet = home-manager.lib.homeManagerConfiguration rec {
       system = "aarch64-darwin";
       username = "evanrelf";
