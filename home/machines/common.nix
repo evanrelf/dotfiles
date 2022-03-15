@@ -52,6 +52,11 @@ in
     recursive = true;
   };
 
+  xdg.configFile."hammerspoon" = {
+    source = ../../configs/hammerspoon/.config/hammerspoon;
+    recursive = true;
+  };
+
   xdg.configFile."karabiner" = {
     source = ../../configs/karabiner/.config/karabiner;
     recursive = true;
