@@ -52,6 +52,11 @@ in
     recursive = true;
   };
 
+  xdg.configFile."karabiner" = {
+    source = ../../configs/karabiner/.config/karabiner;
+    recursive = true;
+  };
+
   xdg.configFile."kitty" = {
     source = ../../configs/kitty/.config/kitty;
     recursive = true;
