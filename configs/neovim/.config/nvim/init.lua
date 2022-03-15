@@ -31,12 +31,12 @@ require("packer").startup(function(use)
   use({
     "wbthomason/packer.nvim",
     config = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         augroup packer
           autocmd!
           autocmd BufWritePost init.lua source <afile> | PackerCompile
         augroup end
-      ]], false)
+      ]])
     end,
   })
 end)
