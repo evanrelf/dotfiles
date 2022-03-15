@@ -1,6 +1,15 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
+    "ishan9299/modus-theme-vim",
+    config = function()
+      vim.o.termguicolors = true
+      vim.o.background = "light"
+      vim.cmd("colorscheme modus-operandi")
+    end,
+  })
+
+  use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
