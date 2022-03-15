@@ -20,16 +20,6 @@ require("packer").startup(function(use)
   })
 
   use({
-    "rktjmp/lush.nvim",
-    config = function()
-      vim.o.termguicolors = true
-      vim.o.background = "light"
-      package.loaded["primer"] = nil
-      require("lush")(require("primer"))
-    end,
-  })
-
-  use({
     "wbthomason/packer.nvim",
     config = function()
       vim.api.nvim_exec([[
