@@ -1,5 +1,7 @@
 [commit]
   gpgSign = true
+[init]
+  defaultBranch = main
 [user]
   name = "Evan Relf"
   useConfigOnly = true
