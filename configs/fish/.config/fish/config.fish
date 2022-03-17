@@ -1,3 +1,6 @@
+if test (uname) = "Darwin"
+    set --global --export --prepend PATH "/opt/homebrew/bin"
+end
 set --global --export --prepend PATH "/nix/var/nix/profiles/default/bin"
 set --global --export --prepend PATH "$HOME/.nix-profile/bin"
 if test -d "$HOME/.nix-profile/channels/"
