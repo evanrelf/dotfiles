@@ -48,6 +48,7 @@ vim.o.mouse = "a"
 
 vim.cmd([[
   augroup autocmds
+    autocmd FileType fish setlocal shiftwidth=4
     autocmd FileType gitcommit setlocal colorcolumn=51,73
   augroup end
 ]])
