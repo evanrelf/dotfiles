@@ -18,6 +18,7 @@ in
     pkgs.home-manager
     pkgs.neovim
     pkgs.ripgrep
+    pkgs.sd
   ];
 
   programs.fish.enable = true;
