@@ -44,6 +44,7 @@ end)
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.number = true
+vim.o.colorcolumn = "81"
 vim.o.mouse = "a"
 
 vim.cmd([[
