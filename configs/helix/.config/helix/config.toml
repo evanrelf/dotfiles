@@ -1,0 +1,4 @@
+theme = "spacebones_light"
+
+[editor]
+true-color = true

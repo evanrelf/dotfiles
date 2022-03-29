@@ -62,6 +62,11 @@ in
     recursive = true;
   };
 
+  xdg.configFile."helix" = {
+    source = ../../configs/helix/.config/helix;
+    recursive = true;
+  };
+
   xdg.configFile."karabiner" = {
     source = ../../configs/karabiner/.config/karabiner;
     recursive = true;
