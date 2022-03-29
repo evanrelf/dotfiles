@@ -15,8 +15,10 @@ in
     pkgs.fd
     pkgs.fzf
     pkgs.git
+    pkgs.haskellPackages.fourmolu
     pkgs.home-manager
     pkgs.neovim
+    pkgs.nixpkgs-fmt
     pkgs.ripgrep
     pkgs.sd
   ];
