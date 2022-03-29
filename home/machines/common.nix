@@ -16,7 +16,9 @@ in
     pkgs.fzf
     pkgs.git
     pkgs.haskellPackages.fourmolu
+    pkgs.helix
     pkgs.home-manager
+    pkgs.kakoune
     pkgs.neovim
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
