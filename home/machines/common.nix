@@ -15,6 +15,7 @@ in
     pkgs.fd
     pkgs.fzf
     pkgs.git
+    pkgs.git-branchless
     pkgs.haskellPackages.fourmolu
     pkgs.helix
     pkgs.home-manager
