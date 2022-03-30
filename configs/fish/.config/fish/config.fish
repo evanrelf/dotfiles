@@ -25,3 +25,5 @@ set --universal FZF_FIND_FILE_COMMAND      "fd --type file      --follow --exclu
 set --universal FZF_OPEN_COMMAND           "fd --type file      --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
 alias ls "ls --color=auto"
 set --global fish_greeting ""
+abbr --add --global g git
+abbr --add --global n nvim
