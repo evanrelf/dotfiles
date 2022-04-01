@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +27,7 @@
         overlays = [
           (_: _: { inherit inputs; })
           (_: _: { inherit (inputs.comma.packages.${system}) comma; })
+          (_: _: { inherit (inputs.helix.packages.${system}) helix; })
           (import ./overlays/home-configurations.nix)
         ];
 
