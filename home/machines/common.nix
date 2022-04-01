@@ -73,6 +73,11 @@ in
     recursive = true;
   };
 
+  xdg.configFile."kak" = {
+    source = ../../configs/kakoune/.config/kak;
+    recursive = true;
+  };
+
   xdg.configFile."kitty" = {
     source = ../../configs/kitty/.config/kitty;
     recursive = true;
