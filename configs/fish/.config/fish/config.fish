@@ -26,4 +26,5 @@ set --universal FZF_OPEN_COMMAND           "fd --type file      --follow --exclu
 alias ls "ls --color=auto"
 set --global fish_greeting ""
 abbr --add --global g git
+abbr --add --global k kak
 abbr --add --global n nvim
