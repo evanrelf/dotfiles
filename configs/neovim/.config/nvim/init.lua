@@ -46,6 +46,8 @@ vim.opt.shiftwidth = 2
 vim.opt.number = true
 vim.opt.colorcolumn = "81"
 vim.opt.mouse = "a"
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.api.nvim_create_augroup("filetype", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
