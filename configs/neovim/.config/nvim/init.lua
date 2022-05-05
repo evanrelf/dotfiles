@@ -31,12 +31,12 @@ require("packer").startup(function(use)
   use({
     "wbthomason/packer.nvim",
     config = function()
-      vim.cmd([[
-        augroup packer
-          autocmd!
-          autocmd BufWritePost init.lua source <afile> | PackerCompile
-        augroup end
-      ]])
+      vim.api.nvim_create_augroup("packer", { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        group = "packer",
+        pattern = "init.lua",
+        command = "source <afile> | PackerCompile",
+      })
     end,
   })
 end)
@@ -47,10 +47,19 @@ vim.o.number = true
 vim.o.colorcolumn = "81"
 vim.o.mouse = "a"
 
-vim.cmd([[
-  augroup autocmds
-    autocmd FileType fish setlocal shiftwidth=4
-    autocmd FileType rust setlocal colorcolumn=81,101
-    autocmd FileType gitcommit setlocal colorcolumn=51,73
-  augroup end
-]])
+vim.api.nvim_create_augroup("filetype", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = "filetype",
+  pattern = "fish",
+  command = "setlocal shiftwidth=4",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  group = "filetype",
+  pattern = "rust",
+  command = "setlocal colorcolumn=81,101",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  group = "filetype",
+  pattern = "gitcommit",
+  command = "setlocal colorcolumn=51,73",
+})
