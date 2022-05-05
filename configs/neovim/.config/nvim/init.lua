@@ -3,8 +3,8 @@ require("packer").startup(function(use)
   use({
     "ishan9299/modus-theme-vim",
     config = function()
-      vim.o.termguicolors = true
-      vim.o.background = "light"
+      vim.opt.termguicolors = true
+      vim.opt.background = "light"
       vim.cmd("colorscheme modus-operandi")
     end,
   })
@@ -41,25 +41,31 @@ require("packer").startup(function(use)
   })
 end)
 
-vim.o.expandtab = true
-vim.o.shiftwidth = 2
-vim.o.number = true
-vim.o.colorcolumn = "81"
-vim.o.mouse = "a"
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.number = true
+vim.opt.colorcolumn = "81"
+vim.opt.mouse = "a"
 
 vim.api.nvim_create_augroup("filetype", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = "filetype",
   pattern = "fish",
-  command = "setlocal shiftwidth=4",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+  end,
 })
 vim.api.nvim_create_autocmd("FileType", {
   group = "filetype",
   pattern = "rust",
-  command = "setlocal colorcolumn=81,101",
+  callback = function()
+    vim.opt_local.colorcolumn = "81,101"
+  end,
 })
 vim.api.nvim_create_autocmd("FileType", {
   group = "filetype",
   pattern = "gitcommit",
-  command = "setlocal colorcolumn=51,73",
+  callback = function()
+    vim.opt_local.colorcolumn = "51,73"
+  end,
 })
