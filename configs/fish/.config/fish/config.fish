@@ -17,6 +17,7 @@ set --global --export EDITOR "nvim"
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
 set --global --export --prepend PATH "$CARGO_HOME/bin"
+set --global --export --prepend PATH (dirname (rustup which rustc))
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
 set --universal FZF_CD_COMMAND             "fd --type directory --follow --exclude '.git'          . \$dir | sed -e 's_^\./__' -e 's_\$_/_'"
