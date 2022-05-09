@@ -10,6 +10,15 @@ require("packer").startup(function(use)
   })
 
   use({
+    "numToStr/Comment.nvim",
+    config = function()
+      require("comment").setup()
+      -- Use `gco` and `gcO` to explicitly continue comment on new lines
+      vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
+    end,
+  })
+
+  use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
