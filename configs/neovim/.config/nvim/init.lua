@@ -16,15 +16,19 @@ require("packer").startup(function(use)
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.diagnostics.trail_space,
+          null_ls.builtins.formatting.fish_indent,
           null_ls.builtins.formatting.rustfmt.with({
             extra_args = { "--edition=2021" },
           }),
+          null_ls.builtins.formatting.zigfmt,
         },
       })
       vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = "evan_null_ls",
-        pattern = "*.rs",
+        pattern = {"*.fish", "*.rs"},
         callback = function()
           vim.lsp.buf.formatting_sync()
         end,

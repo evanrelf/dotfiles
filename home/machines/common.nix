@@ -24,6 +24,7 @@ in
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
     pkgs.sd
+    pkgs.shellcheck
   ];
 
   programs.fish.enable = true;
