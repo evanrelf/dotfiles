@@ -42,6 +42,10 @@ require("packer").startup(function(use)
   })
 
   use({
+    "michaeljsmith/vim-indent-object",
+  })
+
+  use({
     "wbthomason/packer.nvim",
     config = function()
       vim.api.nvim_create_augroup("packer", { clear = true })
