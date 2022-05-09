@@ -141,6 +141,10 @@ require("packer").startup(function(use)
   })
 
   use({
+    "sickill/vim-pasta",
+  })
+
+  use({
     "tpope/vim-repeat",
   })
 
