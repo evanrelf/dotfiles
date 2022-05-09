@@ -7,6 +7,15 @@ let
 in
 {
   homeConfigurations = {
+    hydra-dev = home-manager.lib.homeManagerConfiguration rec {
+      system = "x86_64-linux";
+      username = "evan";
+      homeDirectory = "/home/${username}";
+      pkgs = import nixpkgs { inherit system config overlays; };
+      extraSpecialArgs = { inherit inputs; };
+      configuration.imports = [ ../home/machines/hydra-dev.nix ];
+    };
+
     indigo = home-manager.lib.homeManagerConfiguration rec {
       system = "x86_64-darwin";
       username = "evan";

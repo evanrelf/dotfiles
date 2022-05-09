@@ -164,6 +164,7 @@ vim.opt.colorcolumn = "81"
 vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.wrap = false
 
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
