@@ -1,6 +1,48 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
+    "hrsh7th/nvim-cmp",
+    requires = {"hrsh7th/cmp-buffer", "hrsh7th/cmp-path"},
+    config = function()
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+      local cmp = require("cmp")
+      cmp.setup({
+        sources = {
+          { name = "buffer" },
+          { name = "path" },
+        },
+        mapping = {
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, {"i", "s"}),
+          ["<S-Tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+              cmp.select_prev_item()
+            end
+          end, {"i", "s"}),
+        },
+        window = {
+          -- Hides file preview from `cmp-path`
+          documentation = {
+            max_width = 0,
+            max_height = 0,
+          },
+        },
+      })
+      vim.opt.completeopt = {"menu", "menuone", "noselect"}
+    end,
+  })
+
+  use({
     "ishan9299/modus-theme-vim",
     config = function()
       vim.opt.termguicolors = true
