@@ -10,6 +10,14 @@ require("packer").startup(function(use)
   })
 
   use({
+    "machakann/vim-sandwich",
+  })
+
+  use({
+    "michaeljsmith/vim-indent-object",
+  })
+
+  use({
     "numToStr/Comment.nvim",
     config = function()
       require("comment").setup()
@@ -35,14 +43,6 @@ require("packer").startup(function(use)
         },
       })
     end,
-  })
-
-  use({
-    "machakann/vim-sandwich",
-  })
-
-  use({
-    "michaeljsmith/vim-indent-object",
   })
 
   use({
