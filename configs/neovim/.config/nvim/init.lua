@@ -106,6 +106,9 @@ vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.keymap.set("x", "<", "<gv")
+vim.keymap.set("x", ">", ">gv")
+
 vim.api.nvim_create_augroup("evan_filetype", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = "evan_filetype",
