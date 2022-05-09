@@ -25,6 +25,7 @@ require("packer").startup(function(use)
           null_ls.builtins.formatting.zigfmt,
         },
       })
+      vim.opt.signcolumn = "number"
       vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = "evan_null_ls",
