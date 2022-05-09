@@ -10,6 +10,29 @@ require("packer").startup(function(use)
   })
 
   use({
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = {"nvim-lua/plenary.nvim"},
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.rustfmt.with({
+            extra_args = { "--edition=2021" },
+          }),
+        },
+      })
+      vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = "evan_null_ls",
+        pattern = "*.rs",
+        callback = function()
+          vim.lsp.buf.formatting_sync()
+        end,
+      })
+    end,
+  })
+
+  use({
     "machakann/vim-sandwich",
   })
 
@@ -41,19 +64,6 @@ require("packer").startup(function(use)
           enable = true,
           disable = {"haskell", "markdown"},
         },
-      })
-    end,
-  })
-
-  use({
-    "sbdchd/neoformat",
-    cmd = {"Neoformat"},
-    setup = function()
-      vim.api.nvim_create_augroup("evan_neoformat", { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = "evan_neoformat",
-        pattern = "*.rs",
-        command = "undojoin | Neoformat! rust rustfmt",
       })
     end,
   })
