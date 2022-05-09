@@ -137,6 +137,10 @@ require("packer").startup(function(use)
   })
 
   use({
+    "romainl/vim-cool",
+  })
+
+  use({
     "tpope/vim-repeat",
   })
 
