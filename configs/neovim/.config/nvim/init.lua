@@ -59,6 +59,10 @@ require("packer").startup(function(use)
   })
 
   use({
+    "tpope/vim-repeat",
+  })
+
+  use({
     "wbthomason/packer.nvim",
     config = function()
       vim.api.nvim_create_augroup("evan_packer", { clear = true })
