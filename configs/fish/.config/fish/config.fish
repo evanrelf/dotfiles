@@ -28,6 +28,26 @@ set --universal FZF_FIND_FILE_COMMAND "fd --type file      --follow --exclude '.
 set --universal FZF_OPEN_COMMAND "fd --type file      --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
 alias ls "ls --color=auto"
 set --global fish_greeting ""
-abbr --add --global g git
 abbr --add --global k kak
 abbr --add --global n nvim
+abbr --add --global g git
+abbr --add --global ga "git add"
+abbr --add --global gap "git add --patch"
+abbr --add --global gb "git branch"
+abbr --add --global gbd "git branch --delete --force"
+abbr --add --global gbm "git branch --move"
+abbr --add --global gc "git commit"
+abbr --add --global gca "git commit --amend"
+abbr --add --global gcan "git commit --amend --no-edit"
+abbr --add --global gd "git diff"
+abbr --add --global gds "git diff --staged"
+abbr --add --global gp "git push"
+abbr --add --global gpf "git push --force-with-lease"
+abbr --add --global gpu "git push --set-upstream origin HEAD"
+abbr --add --global grb "git rebase"
+abbr --add --global grbi "git rebase --interactive"
+abbr --add --global gre "git restore"
+abbr --add --global gres "git restore --staged"
+abbr --add --global gs "git status"
+abbr --add --global gsw "git switch"
+abbr --add --global gswc "git switch --create"
