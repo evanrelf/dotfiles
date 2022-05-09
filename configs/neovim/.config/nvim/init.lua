@@ -38,6 +38,10 @@ require("packer").startup(function(use)
   })
 
   use({
+    "machakann/vim-sandwich",
+  })
+
+  use({
     "wbthomason/packer.nvim",
     config = function()
       vim.api.nvim_create_augroup("packer", { clear = true })
