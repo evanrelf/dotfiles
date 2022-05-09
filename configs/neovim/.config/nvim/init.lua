@@ -46,6 +46,19 @@ require("packer").startup(function(use)
   })
 
   use({
+    "sbdchd/neoformat",
+    cmd = {"Neoformat"},
+    setup = function()
+      vim.api.nvim_create_augroup("evan_neoformat", { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = "evan_neoformat",
+        pattern = "*.rs",
+        command = "undojoin | Neoformat! rust rustfmt",
+      })
+    end,
+  })
+
+  use({
     "wbthomason/packer.nvim",
     config = function()
       vim.api.nvim_create_augroup("evan_packer", { clear = true })
