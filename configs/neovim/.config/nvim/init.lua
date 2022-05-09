@@ -84,13 +84,9 @@ require("packer").startup(function(use)
     requires = {"kana/vim-textobj-user"},
   })
 
-  use({
-    "machakann/vim-sandwich",
-  })
+  use({ "machakann/vim-sandwich" })
 
-  use({
-    "michaeljsmith/vim-indent-object",
-  })
+  use({ "michaeljsmith/vim-indent-object" })
 
   use({
     "numToStr/Comment.nvim",
@@ -136,17 +132,11 @@ require("packer").startup(function(use)
     end,
   })
 
-  use({
-    "romainl/vim-cool",
-  })
+  use({ "romainl/vim-cool" })
 
-  use({
-    "sickill/vim-pasta",
-  })
+  use({ "sickill/vim-pasta" })
 
-  use({
-    "tpope/vim-repeat",
-  })
+  use({ "tpope/vim-repeat" })
 
   use({
     "wbthomason/packer.nvim",
