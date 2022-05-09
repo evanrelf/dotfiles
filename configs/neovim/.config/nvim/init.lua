@@ -48,9 +48,9 @@ require("packer").startup(function(use)
   use({
     "wbthomason/packer.nvim",
     config = function()
-      vim.api.nvim_create_augroup("packer", { clear = true })
+      vim.api.nvim_create_augroup("evan_packer", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePost", {
-        group = "packer",
+        group = "evan_packer",
         pattern = "init.lua",
         command = "source <afile> | PackerCompile",
       })
@@ -75,23 +75,23 @@ vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.api.nvim_create_augroup("filetype", { clear = true })
+vim.api.nvim_create_augroup("evan_filetype", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-  group = "filetype",
+  group = "evan_filetype",
   pattern = "fish",
   callback = function()
     vim.opt_local.shiftwidth = 4
   end,
 })
 vim.api.nvim_create_autocmd("FileType", {
-  group = "filetype",
+  group = "evan_filetype",
   pattern = "rust",
   callback = function()
     vim.opt_local.colorcolumn = "81,101"
   end,
 })
 vim.api.nvim_create_autocmd("FileType", {
-  group = "filetype",
+  group = "evan_filetype",
   pattern = "gitcommit",
   callback = function()
     vim.opt_local.colorcolumn = "51,73"
