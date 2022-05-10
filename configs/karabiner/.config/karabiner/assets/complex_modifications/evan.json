@@ -89,6 +89,26 @@
           ]
         }
       ]
+    },
+    {
+      "description": "Elecom Deft Pro Mouse Buttons",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button4" },
+          "to": [ { "key_code": "mission_control" } ]
+        },
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button5" },
+          "to": [ { "key_code": "f11" } ]
+        },
+        {
+          "type": "basic",
+          "from": { "pointing_button": "button7" },
+          "to": [ { "pointing_button": "button3" } ]
+        }
+      ]
     }
   ]
 }
