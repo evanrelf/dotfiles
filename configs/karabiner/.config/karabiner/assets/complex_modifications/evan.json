@@ -10,13 +10,10 @@
       "description": "Fn to Hyper",
       "manipulators": [
         {
+          "type": "basic",
           "from": {
             "key_code": "fn",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
+            "modifiers": { "optional": [ "any" ] }
           },
           "to": [
             {
@@ -27,8 +24,7 @@
                 "right_option"
               ]
             }
-          ],
-          "type": "basic"
+          ]
         }
       ]
     },
@@ -36,13 +32,10 @@
       "description": "Fn to Meh",
       "manipulators": [
         {
+          "type": "basic",
           "from": {
             "key_code": "fn",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
+            "modifiers": { "optional": [ "any" ] }
           },
           "to": [
             {
@@ -52,8 +45,7 @@
                 "right_option"
               ]
             }
-          ],
-          "type": "basic"
+          ]
         }
       ]
     },
@@ -64,22 +56,10 @@
           "type": "basic",
           "from": {
             "key_code": "escape",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
+            "modifiers": { "optional": [ "any" ] }
           },
-          "to": [
-            {
-              "key_code": "left_control"
-            }
-          ],
-          "to_if_alone": [
-            {
-              "key_code": "escape"
-            }
-          ]
+          "to": [ { "key_code": "left_control" } ],
+          "to_if_alone": [ { "key_code": "escape" } ]
         }
       ]
     },
@@ -88,39 +68,23 @@
       "manipulators": [
         {
           "type": "basic",
-          "from": {
-            "key_code": "left_shift"
-          },
-          "to": [
-            {
-              "key_code": "left_shift"
-            }
-          ],
+          "from": { "key_code": "left_shift" },
+          "to": [ { "key_code": "left_shift" } ],
           "to_if_alone": [
             {
               "key_code": "9",
-              "modifiers": [
-                "left_shift"
-              ]
+              "modifiers": [ "left_shift" ]
             }
           ]
         },
         {
           "type": "basic",
-          "from": {
-            "key_code": "right_shift"
-          },
-          "to": [
-            {
-              "key_code": "right_shift"
-            }
-          ],
+          "from": { "key_code": "right_shift" },
+          "to": [ { "key_code": "right_shift" } ],
           "to_if_alone": [
             {
               "key_code": "0",
-              "modifiers": [
-                "right_shift"
-              ]
+              "modifiers": [ "right_shift" ]
             }
           ]
         }
