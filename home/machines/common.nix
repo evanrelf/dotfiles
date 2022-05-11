@@ -25,6 +25,7 @@ in
     pkgs.neovim
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
+    pkgs.rust-script
     pkgs.sd
     pkgs.shellcheck
   ];

@@ -5,6 +5,7 @@
     comma = {
       url = "github:nix-community/comma";
       inputs.flake-compat.follows = "flake-compat";
+      inputs.naersk.follows = "naersk";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
@@ -15,6 +16,10 @@
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    naersk = {
+      url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
@@ -28,6 +33,7 @@
         overlays = [
           (_: _: { inherit inputs; })
           (_: _: { inherit (inputs.comma.packages.${system}) comma; })
+          inputs.naersk.overlay
           (import ./overlays/pkgs.nix)
           (import ./overlays/home-configurations.nix)
         ];
