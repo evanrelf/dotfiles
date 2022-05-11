@@ -29,6 +29,7 @@ in
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
+    pkgs.tealdeer
   ];
 
   programs.fish.enable = true;
