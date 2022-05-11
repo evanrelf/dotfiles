@@ -1,7 +1,7 @@
 #![allow(clippy::collapsible_else_if)]
 
 use anyhow::Context as _;
-use std::process::{Command, Stdio};
+use std::process::{Command, ExitStatus, Stdio};
 
 fn main() -> Result<(), anyhow::Error> {
     let supports_flakes = {
@@ -11,15 +11,13 @@ fn main() -> Result<(), anyhow::Error> {
             .output()
             .context("Failed to execute nix-instantiate")?;
 
-        match output.status.code() {
-            Some(0) => String::from_utf8(output.stdout)
-                .context("Failed to convert output from nix-instantiate into a UTF-8 string")?
-                .trim_end()
-                .parse()
-                .context("Failed to parse output from nix-instantiate into a bool")?,
-            Some(code) => anyhow::bail!("nix-instantiate failed with exit code {code}"),
-            None => anyhow::bail!("nix-instantiate terminated by a signal"),
-        }
+        handle_status("nix-instantiate", output.status)?;
+
+        String::from_utf8(output.stdout)
+            .context("Failed to convert output from nix-instantiate into a UTF-8 string")?
+            .trim_end()
+            .parse()
+            .context("Failed to parse output from nix-instantiate into a bool")?
     };
 
     let hostname = {
@@ -28,12 +26,10 @@ fn main() -> Result<(), anyhow::Error> {
             .output()
             .context("Failed to execute hostname")?;
 
-        match output.status.code() {
-            Some(0) => String::from_utf8(output.stdout)
-                .context("Failed to convert output from hostname into a UTF-8 string")?,
-            Some(code) => anyhow::bail!("hostname failed with exit code {code}"),
-            None => anyhow::bail!("hostname terminated by a signal"),
-        }
+        handle_status("hostname", output.status)?;
+
+        String::from_utf8(output.stdout)
+            .context("Failed to convert output from hostname into a UTF-8 string")?
     };
     let hostname = hostname.trim_end();
 
@@ -46,11 +42,7 @@ fn main() -> Result<(), anyhow::Error> {
             .status()
             .context("Failed to execute home-manager")?;
 
-        match exit_status.code() {
-            Some(0) => {}
-            Some(code) => anyhow::bail!("home-manager failed with exit code {code}"),
-            None => anyhow::bail!("home-manager terminated by a signal"),
-        }
+        handle_status("home-manager", exit_status)?;
     } else {
         let mut args = std::env::args().skip(1);
 
@@ -74,12 +66,10 @@ fn main() -> Result<(), anyhow::Error> {
             .output()
             .context("Failed to execute nix-build")?;
 
-        let store_path = match output.status.code() {
-            Some(0) => String::from_utf8(output.stdout)
-                .context("Failed to convert output from nix-build into a UTF-8 string")?,
-            Some(code) => anyhow::bail!("nix-build failed with exit code {code}"),
-            None => anyhow::bail!("nix-build terminated by a signal"),
-        };
+        handle_status("nix-build", output.status)?;
+
+        let store_path = String::from_utf8(output.stdout)
+            .context("Failed to convert output from nix-build into a UTF-8 string")?;
         let store_path = store_path.trim_end();
 
         match subcommand {
@@ -89,14 +79,18 @@ fn main() -> Result<(), anyhow::Error> {
                     .status()
                     .context("Failed to execute activate")?;
 
-                match exit_status.code() {
-                    Some(0) => {}
-                    Some(code) => anyhow::bail!("activate failed with exit code {code}"),
-                    None => anyhow::bail!("activate terminated by a signal"),
-                };
+                handle_status("activate", exit_status)?;
             }
         }
     }
 
     Ok(())
+}
+
+fn handle_status(program: &str, status: ExitStatus) -> Result<(), anyhow::Error> {
+    match status.code() {
+        Some(0) => Ok(()),
+        Some(code) => anyhow::bail!("{program} failed with exit code {code}"),
+        None => anyhow::bail!("{program} terminated by a signal"),
+    }
 }
