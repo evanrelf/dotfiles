@@ -28,7 +28,7 @@
         overlays = [
           (_: _: { inherit inputs; })
           (_: _: { inherit (inputs.comma.packages.${system}) comma; })
-          (import ./overlays/packages.nix)
+          (import ./overlays/pkgs.nix)
           (import ./overlays/home-configurations.nix)
         ];
 
