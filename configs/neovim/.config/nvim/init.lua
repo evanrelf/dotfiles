@@ -78,6 +78,7 @@ require("packer").startup(function(use)
           vim.lsp.buf.formatting_sync()
         end,
       })
+      vim.cmd("command! Format lua vim.lsp.buf.formatting_sync()")
     end,
   })
 
