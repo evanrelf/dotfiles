@@ -12,6 +12,7 @@ in
   home.packages = [
     channel
     pkgs.comma
+    pkgs.comma-update
     pkgs.fd
     pkgs.fzf
     pkgs.git

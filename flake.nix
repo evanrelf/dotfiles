@@ -3,9 +3,9 @@
 
   inputs = {
     comma = {
-      url = "github:evanrelf/comma";
-      inputs.flake-utils.follows = "flake-utils";
+      url = "github:nix-community/comma";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
@@ -23,6 +23,7 @@
         overlays = [
           (_: _: { inherit inputs; })
           (_: _: { inherit (inputs.comma.packages.${system}) comma; })
+          (import ./overlays/packages.nix)
           (import ./overlays/home-configurations.nix)
         ];
 
