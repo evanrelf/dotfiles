@@ -1,6 +1,7 @@
 #![allow(clippy::collapsible_else_if)]
 
 use anyhow::Context as _;
+use itertools::Itertools as _;
 use std::process::{Command, ExitStatus, Stdio};
 
 fn main() -> Result<(), anyhow::Error> {
@@ -20,25 +21,12 @@ fn main() -> Result<(), anyhow::Error> {
             .context("Failed to parse output from nix-instantiate into a bool")?
     };
 
-    let hostname = {
-        let output = Command::new("hostname")
-            .arg("-s")
-            .output()
-            .context("Failed to execute hostname")?;
-
-        handle_status("hostname", output.status)?;
-
-        String::from_utf8(output.stdout)
-            .context("Failed to convert output from hostname into a UTF-8 string")?
-    };
-    let hostname = hostname.trim_end();
-
     if supports_flakes {
-        let args = std::env::args().skip(1).collect::<Vec<_>>();
+        let args = std::env::args().skip(1).join(" ");
 
-        let exit_status = Command::new("home-manager")
-            .args(["--flake", &format!(".#{hostname}")])
-            .args(args)
+        let exit_status = Command::new("sh")
+            .arg("-c")
+            .arg(format!("home-manager --flake .#$(hostname -s) {args}"))
             .status()
             .context("Failed to execute home-manager")?;
 
@@ -57,11 +45,9 @@ fn main() -> Result<(), anyhow::Error> {
             _ => anyhow::bail!("usage: home-rebuild (build | switch)"),
         };
 
-        let output = Command::new("nix-build")
-            .args([
-                "--attr",
-                &format!("homeConfigurations.{hostname}.activation-script"),
-            ])
+        let output = Command::new("sh")
+            .arg("-c")
+            .arg("nix-build --attr homeConfigurations.$(hostname -s).activation-script")
             .stderr(Stdio::inherit())
             .output()
             .context("Failed to execute nix-build")?;
@@ -75,7 +61,7 @@ fn main() -> Result<(), anyhow::Error> {
         match subcommand {
             Subcommand::Build => println!("{store_path}"),
             Subcommand::Switch => {
-                let exit_status = Command::new(&format!("{store_path}/activate"))
+                let exit_status = Command::new(format!("{store_path}/activate"))
                     .status()
                     .context("Failed to execute activate")?;
 
