@@ -1,3 +1,5 @@
+{ raw ? false }:
+
 let
   lock =
     builtins.fromJSON (builtins.readFile ./flake.lock);
@@ -12,4 +14,7 @@ let
     import flake-compat { src = ./.; };
 
 in
-flake.defaultNix.packages.${builtins.currentSystem}
+if raw then
+  flake.defaultNix
+else
+  flake.defaultNix.packages.${builtins.currentSystem}
