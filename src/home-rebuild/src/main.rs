@@ -7,11 +7,9 @@ fn main() -> Result<(), anyhow::Error> {
     let supports_flakes = {
         let output = Command::new("nix-instantiate")
             .args(["--eval", "--expr", "builtins ? getFlake", "--json"])
-            .stdout(Stdio::piped())
-            .spawn()
-            .context("Failed to execute nix-instantiate")?
-            .wait_with_output()
-            .context("nix-instantiate wasn't running")?;
+            .stderr(Stdio::inherit())
+            .output()
+            .context("Failed to execute nix-instantiate")?;
 
         match output.status.code() {
             Some(0) => String::from_utf8(output.stdout)
@@ -45,10 +43,8 @@ fn main() -> Result<(), anyhow::Error> {
         let exit_status = Command::new("home-manager")
             .args(["--flake", &format!(".#{hostname}")])
             .args(args)
-            .spawn()
-            .context("Failed to execute home-manager")?
-            .wait()
-            .context("home-manager wasn't running")?;
+            .status()
+            .context("Failed to execute home-manager")?;
 
         match exit_status.code() {
             Some(0) => {}
@@ -74,11 +70,9 @@ fn main() -> Result<(), anyhow::Error> {
                 "--attr",
                 &format!("homeConfigurations.{hostname}.activation-script"),
             ])
-            .stdout(Stdio::piped())
-            .spawn()
-            .context("Failed to execute nix-build")?
-            .wait_with_output()
-            .context("nix-build wasn't running")?;
+            .stderr(Stdio::inherit())
+            .output()
+            .context("Failed to execute nix-build")?;
 
         let store_path = match output.status.code() {
             Some(0) => String::from_utf8(output.stdout)
@@ -92,10 +86,8 @@ fn main() -> Result<(), anyhow::Error> {
             Subcommand::Build => println!("{store_path}"),
             Subcommand::Switch => {
                 let exit_status = Command::new(&format!("{store_path}/activate"))
-                    .spawn()
-                    .context("Failed to execute activate")?
-                    .wait()
-                    .context("activate wasn't running")?;
+                    .status()
+                    .context("Failed to execute activate")?;
 
                 match exit_status.code() {
                     Some(0) => {}
