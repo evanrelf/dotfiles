@@ -17,6 +17,9 @@
   d = diff
   ds = diff --staged
 
+  # PULL
+  pullff = pull --ff-only
+
   # PUSH
   p = push
   pf = push --force-with-lease
