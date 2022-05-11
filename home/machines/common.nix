@@ -20,6 +20,7 @@ in
     pkgs.haskellPackages.fourmolu
     pkgs.helix
     pkgs.home-manager
+    pkgs.home-rebuild
     pkgs.kakoune
     pkgs.neovim
     pkgs.nixpkgs-fmt
