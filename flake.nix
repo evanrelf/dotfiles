@@ -4,8 +4,13 @@
   inputs = {
     comma = {
       url = "github:nix-community/comma";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
+    };
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
