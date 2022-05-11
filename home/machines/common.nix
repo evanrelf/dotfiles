@@ -26,6 +26,7 @@ in
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
     pkgs.rust-script
+    pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
   ];
