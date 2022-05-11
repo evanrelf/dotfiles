@@ -5,9 +5,7 @@
         "flake-compat": [
           "flake-compat"
         ],
-        "naersk": [
-          "naersk"
-        ],
+        "naersk": "naersk",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -26,6 +24,33 @@
       "original": {
         "owner": "nix-community",
         "repo": "comma",
+        "type": "github"
+      }
+    },
+    "crane": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nix-std": "nix-std",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1652228911,
+        "narHash": "sha256-O+2OEeBVNmemENwmk4cMzoRjHeAxUHUehRXqHh/5e7U=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "ca0bc628fc37c0ffec5f0bc91429375388562f29",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
         "type": "github"
       }
     },
@@ -83,6 +108,7 @@
     "naersk": {
       "inputs": {
         "nixpkgs": [
+          "comma",
           "nixpkgs"
         ]
       },
@@ -96,7 +122,23 @@
       },
       "original": {
         "owner": "nix-community",
+        "ref": "master",
         "repo": "naersk",
+        "type": "github"
+      }
+    },
+    "nix-std": {
+      "locked": {
+        "lastModified": 1647625366,
+        "narHash": "sha256-jR4tpiQDs4GNJC6MzfrNyOFIhVH3o203qR+YNB++GYo=",
+        "owner": "chessai",
+        "repo": "nix-std",
+        "rev": "8b8d32582e298da2c15b4c13ca48ba7994ef96df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chessai",
+        "repo": "nix-std",
         "type": "github"
       }
     },
@@ -118,10 +160,10 @@
     "root": {
       "inputs": {
         "comma": "comma",
+        "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "naersk": "naersk",
         "nixpkgs": "nixpkgs"
       }
     }
