@@ -102,6 +102,30 @@ require("packer").startup(function(use)
   })
 
   use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    },
+    config = function()
+      local telescope = require("telescope")
+      local telescope_builtin = require("telescope.builtin")
+      telescope.setup({
+        defaults = {
+          preview = false,
+        },
+        pickers = {
+          find_files = {
+            theme = "ivy",
+          },
+        },
+      })
+      telescope.load_extension("fzf")
+      vim.keymap.set("n", "<A-o>", telescope_builtin.find_files)
+    end,
+  })
+
+  use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
