@@ -17,6 +17,9 @@
   d = diff
   ds = diff --staged
 
+  # FETCH
+  f = fetch
+
   # LOG
   l = log --oneline --graph
 
@@ -31,6 +34,9 @@
   # REBASE
   rb = rebase
   rbi = rebase --interactive
+  rbc = rebase --continue
+  rbs = rebase --skip
+  rba = rebase --abort
 
   # RESTORE
   re = restore
