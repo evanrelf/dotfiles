@@ -135,8 +135,6 @@ require("packer").startup(function(use)
     end,
   })
 
-  use({ "romainl/vim-cool" })
-
   use({ "sickill/vim-pasta" })
 
   use({ "tpope/vim-repeat" })
