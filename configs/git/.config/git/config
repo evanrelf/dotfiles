@@ -38,6 +38,11 @@
   rbs = rebase --skip
   rba = rebase --abort
 
+  # RESET
+  r = reset --mixed
+  rs = reset --soft
+  rh = reset --hard
+
   # RESTORE
   re = restore
   res = restore --staged
@@ -48,6 +53,9 @@
   # SWITCH
   sw = switch
   swc = switch --create
+
+  # WORKTREE
+  wt = worktree
 [commit]
   gpgSign = true
 [init]
