@@ -21,7 +21,8 @@
   f = fetch
 
   # LOG
-  l = log --oneline --graph
+  l = log --oneline --graph --max-count 20
+  ll = log --oneline --graph
 
   # PULL
   pullff = pull --ff-only
