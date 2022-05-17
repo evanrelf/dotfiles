@@ -1,7 +1,7 @@
 pkgsFinal: pkgsPrev:
 
 let
-  src = ../src;
+  src = ../src/rust;
 
   cargoArtifacts =
     pkgsFinal.crane.buildDepsOnly { inherit src; };
