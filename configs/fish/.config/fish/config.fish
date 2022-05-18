@@ -22,6 +22,10 @@ else
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
 end
+if command -v direnv >/dev/null
+    set --global --export DIRENV_LOG_FORMAT ""
+    direnv hook fish | source
+end
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
 set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' . \$dir | sed -e 's_^\./__' -e 's_\$_/_'"

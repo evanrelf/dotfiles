@@ -13,6 +13,7 @@ in
     channel
     pkgs.comma
     pkgs.comma-update
+    pkgs.direnv
     pkgs.fd
     pkgs.fzf
     pkgs.git
@@ -23,6 +24,7 @@ in
     pkgs.home-rebuild
     pkgs.kakoune
     pkgs.neovim
+    pkgs.nix-direnv
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
     pkgs.rust-script
