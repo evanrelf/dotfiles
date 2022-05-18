@@ -79,6 +79,18 @@ require("packer").startup(function(use)
           vim.lsp.buf.formatting_sync()
         end,
       })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = "evan_null_ls",
+        pattern = {"*.hs", ".nix"},
+        callback = function(args)
+          local extension = string.sub(args.match, -3, -1)
+          local is_haskell = extension == ".hs" and vim.env.EVAN_FORMAT_HASKELL == "true"
+          local is_nix = extension == ".nix" and vim.env.EVAN_FORMAT_NIX == "true"
+          if is_haskell or is_nix then
+            vim.lsp.buf.formatting_sync()
+          end
+        end,
+      })
       vim.cmd("command! Format lua vim.lsp.buf.formatting_sync()")
     end,
   })
