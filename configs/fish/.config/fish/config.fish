@@ -1,8 +1,19 @@
-if test (uname) = Darwin
-    set --global --export --prepend PATH /opt/homebrew/bin
+set --global --export XDG_CONFIG_HOME "$HOME/.config"
+set --global --export COLORTERM "$TERM"
+set --global --export EDITOR nvim
+set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
+set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
+if test -z "$IN_NIX_SHELL"
+    if test (uname) = Darwin
+        set --global --export --prepend PATH /opt/homebrew/bin
+    end
+    set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
+    set --global --export --prepend PATH "$HOME/.nix-profile/bin"
+    set --global --export --prepend PATH "$CARGO_HOME/bin"
+    if command -v rustup >/dev/null
+        set --global --export --prepend PATH (dirname (rustup which rustc))
+    end
 end
-set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
-set --global --export --prepend PATH "$HOME/.nix-profile/bin"
 if test -d "$HOME/.nix-profile/channels/"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/nixpkgs"
@@ -10,15 +21,6 @@ else
     echo "Using imperative Nix channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
-end
-set --global --export XDG_CONFIG_HOME "$HOME/.config"
-set --global --export COLORTERM "$TERM"
-set --global --export EDITOR nvim
-set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
-set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
-set --global --export --prepend PATH "$CARGO_HOME/bin"
-if command -v rustup >/dev/null
-    set --global --export --prepend PATH (dirname (rustup which rustc))
 end
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
