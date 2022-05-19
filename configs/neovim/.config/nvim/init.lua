@@ -127,13 +127,13 @@ require("packer").startup(function(use)
           preview = false,
         },
         pickers = {
-          find_files = {
-            theme = "ivy",
-          },
+          buffers = { theme = "ivy" },
+          find_files = { theme = "ivy" },
         },
       })
       telescope.load_extension("fzf")
-      vim.keymap.set("n", "<A-o>", telescope_builtin.find_files)
+      vim.keymap.set("n", "<Leader>f", telescope_builtin.find_files)
+      vim.keymap.set("n", "<Leader>b", telescope_builtin.buffers)
     end,
   })
 
@@ -205,6 +205,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wrap = false
 
+vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
 
