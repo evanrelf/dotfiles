@@ -46,7 +46,9 @@
 
   # RESTORE
   re = restore
+  rep = restore --patch
   res = restore --staged
+  resp = restore --staged --patch
 
   # STATUS
   s = status
