@@ -172,18 +172,6 @@ require("packer").startup(function(use)
     end,
   })
 
-  use({
-    "romgrk/barbar.nvim",
-    config = function()
-      vim.g.bufferline = {
-        animation = false,
-        auto_hide = true,
-        closable = false,
-        icons = false,
-      }
-    end,
-  })
-
   use({ "tpope/vim-repeat" })
 
   use({
