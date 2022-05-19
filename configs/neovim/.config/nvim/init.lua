@@ -27,6 +27,8 @@ require("packer").startup(function(use)
           ["<S-Tab>"] = cmp.mapping(function()
             if cmp.visible() then
               cmp.select_prev_item()
+            else
+              fallback()
             end
           end, {"i", "s"}),
         },
@@ -98,6 +100,23 @@ require("packer").startup(function(use)
   use({
     "Julian/vim-textobj-variable-segment",
     requires = {"kana/vim-textobj-user"},
+  })
+
+  use({
+    "L3MON4D3/LuaSnip",
+    config = function()
+      local luasnip = require("luasnip")
+      vim.keymap.set("i", "<C-n>", function()
+        if luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        end
+      end)
+      vim.keymap.set("i", "<C-p>", function()
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        end
+      end)
+    end,
   })
 
   use({ "machakann/vim-sandwich" })
