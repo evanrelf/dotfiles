@@ -301,6 +301,7 @@ vim.opt.colorcolumn = "81"
 vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.gdefault = true
 vim.opt.wrap = false
 vim.opt.wildmode = "longest:full"
 
