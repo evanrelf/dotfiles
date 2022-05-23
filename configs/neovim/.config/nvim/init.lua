@@ -69,6 +69,7 @@ require("packer").startup(function(use)
           null_ls.builtins.formatting.rustfmt.with({
             extra_args = { "--edition=2021" },
           }),
+          null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.zigfmt,
         },
       })
@@ -76,7 +77,7 @@ require("packer").startup(function(use)
       vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = "evan_null_ls",
-        pattern = {"*.fish", "*.rs"},
+        pattern = {"*.fish", "*.lua", "*.rs"},
         callback = function()
           vim.lsp.buf.formatting_sync()
         end,

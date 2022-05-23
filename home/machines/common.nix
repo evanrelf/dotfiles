@@ -31,6 +31,7 @@ in
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
+    pkgs.stylua
     pkgs.tealdeer
   ];
 
