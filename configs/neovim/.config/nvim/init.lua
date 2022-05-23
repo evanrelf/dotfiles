@@ -2,11 +2,15 @@ vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
-    requires = {"hrsh7th/cmp-buffer", "hrsh7th/cmp-path"},
+    requires = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
     config = function()
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        return col ~= 0
+          and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+              :sub(col, col)
+              :match("%s")
+            == nil
       end
       local cmp = require("cmp")
       cmp.setup({
@@ -23,14 +27,14 @@ require("packer").startup(function(use)
             else
               fallback()
             end
-          end, {"i", "s"}),
+          end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function()
             if cmp.visible() then
               cmp.select_prev_item()
             else
               fallback()
             end
-          end, {"i", "s"}),
+          end, { "i", "s" }),
         },
         window = {
           -- Hides file preview from `cmp-path`
@@ -40,7 +44,7 @@ require("packer").startup(function(use)
           },
         },
       })
-      vim.opt.completeopt = {"menu", "menuone", "noselect"}
+      vim.opt.completeopt = { "menu", "menuone", "noselect" }
     end,
   })
 
@@ -56,7 +60,7 @@ require("packer").startup(function(use)
 
   use({
     "jose-elias-alvarez/null-ls.nvim",
-    requires = {"nvim-lua/plenary.nvim"},
+    requires = { "nvim-lua/plenary.nvim" },
     config = function()
       local null_ls = require("null-ls")
       null_ls.setup({
@@ -77,18 +81,20 @@ require("packer").startup(function(use)
       vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = "evan_null_ls",
-        pattern = {"*.fish", "*.lua", "*.rs"},
+        pattern = { "*.fish", "*.lua", "*.rs" },
         callback = function()
           vim.lsp.buf.formatting_sync()
         end,
       })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = "evan_null_ls",
-        pattern = {"*.hs", ".nix"},
+        pattern = { "*.hs", ".nix" },
         callback = function(args)
           local extension = string.sub(args.match, -3, -1)
-          local is_haskell = extension == ".hs" and vim.env.EVAN_FORMAT_HASKELL == "true"
-          local is_nix = extension == ".nix" and vim.env.EVAN_FORMAT_NIX == "true"
+          local is_haskell = extension == ".hs"
+            and vim.env.EVAN_FORMAT_HASKELL == "true"
+          local is_nix = extension == ".nix"
+            and vim.env.EVAN_FORMAT_NIX == "true"
           if is_haskell or is_nix then
             vim.lsp.buf.formatting_sync()
           end
@@ -100,7 +106,7 @@ require("packer").startup(function(use)
 
   use({
     "Julian/vim-textobj-variable-segment",
-    requires = {"kana/vim-textobj-user"},
+    requires = { "kana/vim-textobj-user" },
   })
 
   use({
@@ -131,6 +137,7 @@ require("packer").startup(function(use)
         update_events = "TextChanged,TextChangedI",
         region_check_events = "CursorMoved",
       })
+      -- stylua: ignore
       luasnip.add_snippets("haskell", {
         s(
           { trig = "^lang ", regTrig = true },
@@ -197,7 +204,7 @@ require("packer").startup(function(use)
     config = function()
       require("Comment").setup()
       -- Use `gco` and `gcO` to explicitly continue comment on new lines
-      vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
+      vim.opt.formatoptions = vim.opt.formatoptions - { "o" }
     end,
   })
 
@@ -205,7 +212,7 @@ require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = {
       "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     },
     config = function()
       local telescope = require("telescope")
@@ -228,17 +235,19 @@ require("packer").startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
+        -- stylua: ignore
+      local languages = {
+        "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish", "go",
+        "haskell", "html", "javascript", "json", "lua", "make", "markdown",
+        "nix", "perl", "python", "ruby", "rust", "toml", "typescript", "vim",
+        "yaml", "zig",
+      }
       require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish",
-          "go", "haskell", "html", "javascript", "json", "lua", "make",
-          "markdown", "nix", "perl", "python", "ruby", "rust", "toml",
-          "typescript", "vim", "yaml", "zig",
-        },
+        ensure_installed = languages,
         highlight = { enable = true },
         indent = {
           enable = true,
-          disable = {"haskell", "markdown"},
+          disable = { "haskell", "markdown" },
         },
       })
     end,
