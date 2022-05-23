@@ -106,12 +106,12 @@ require("packer").startup(function(use)
     "L3MON4D3/LuaSnip",
     config = function()
       local luasnip = require("luasnip")
-      vim.keymap.set("i", "<C-n>", function()
+      vim.keymap.set("i", "<A-Tab>", function()
         if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         end
       end)
-      vim.keymap.set("i", "<C-p>", function()
+      vim.keymap.set("i", "<A-S-Tab>", function()
         if luasnip.jumpable(-1) then
           luasnip.jump(-1)
         end
