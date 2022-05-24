@@ -44,19 +44,25 @@ local line_picker = function(title, command)
   end
 end
 
-local ghc_language_extensions = line_picker(
+local language_extensions = line_picker(
   "GHC Language Extensions",
-  "ghc --supported-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'"
+  [[ghc --supported-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)']]
 )
 
-local ghc_options = line_picker(
+local options = line_picker(
   "GHC Options",
-  "ghc --show-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'"
+  [[ghc --show-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)']]
+)
+
+local modules = line_picker(
+  "GHC Package Modules",
+  [[ghc-pkg field '*' exposed-modules | tr -d ',' | tr ' ' '\n' | grep --only-matching --extended-regexp '\b[A-Z]\w+\b(\.\w+)*\b' | sort -u]]
 )
 
 return telescope.register_extension({
   exports = {
-    language_extensions = ghc_language_extensions,
-    options = ghc_options,
+    language_extensions = language_extensions,
+    options = options,
+    modules = modules,
   },
 })
