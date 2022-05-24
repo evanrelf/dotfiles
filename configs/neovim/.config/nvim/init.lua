@@ -113,6 +113,11 @@ require("packer").startup(function(use)
     "L3MON4D3/LuaSnip",
     config = function()
       local luasnip = require("luasnip")
+      luasnip.config.set_config({
+        enable_autosnippets = true,
+        update_events = "TextChanged,TextChangedI",
+        region_check_events = "CursorMoved",
+      })
       vim.keymap.set("i", "<A-Tab>", function()
         if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
@@ -123,58 +128,9 @@ require("packer").startup(function(use)
           luasnip.jump(-1)
         end
       end)
-      local s = luasnip.s
-      local i = luasnip.insert_node
-      local f = luasnip.function_node
-      local fmt = require("luasnip.extras.fmt").fmt
-      local same = function(index)
-        return f(function(args)
-          return args[1]
-        end, { index })
-      end
-      luasnip.config.set_config({
-        enable_autosnippets = true,
-        update_events = "TextChanged,TextChangedI",
-        region_check_events = "CursorMoved",
+      require("luasnip.loaders.from_lua").lazy_load({
+        paths = "./snippets",
       })
-      -- stylua: ignore
-      luasnip.add_snippets("haskell", {
-        s(
-          { trig = "^lang ", regTrig = true },
-          fmt("{{-# LANGUAGE {} #-}}", { i(0) }),
-          { show_condition = function() return false end }
-        ),
-        s(
-          { trig = "^opt ", regTrig = true },
-          fmt("{{-# OPTIONS_GHC {} #-}}", { i(0) }),
-          { show_condition = function() return false end }
-        ),
-        s(
-          { trig = "^module ", regTrig = true },
-          fmt("module {} where", { i(0) }),
-          { show_condition = function() return false end }
-        ),
-        s(
-          { trig = "^i ", regTrig = true },
-          fmt("import {}", { i(0) }),
-          { show_condition = function() return false end }
-        ),
-        s(
-          { trig = "^ii ", regTrig = true },
-          fmt("import qualified {}", { i(0) }),
-          { show_condition = function() return false end }
-        ),
-        s(
-          { trig = "^uio ", regTrig = true },
-          fmt("import qualified UnliftIO.{} as {}", { same(1), i(1) }),
-          { show_condition = function() return false end }
-        ),
-        s(
-          { trig = "^instance ", regTrig = true },
-          fmt("instance {} where", { i(0) }),
-          { show_condition = function() return false end }
-        ),
-      }, { key = "haskell", type = "autosnippets" })
     end,
   })
 
