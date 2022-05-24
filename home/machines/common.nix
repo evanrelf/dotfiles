@@ -17,7 +17,6 @@ in
     pkgs.fd
     pkgs.fzf
     pkgs.git
-    pkgs.git-branchless
     pkgs.haskellPackages.fourmolu
     pkgs.helix
     pkgs.home-manager
@@ -27,7 +26,6 @@ in
     pkgs.nix-direnv
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
-    pkgs.rust-script
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
