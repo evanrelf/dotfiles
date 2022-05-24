@@ -9,16 +9,6 @@ local line_picker = function(title, command)
   return function(options)
     options = options or {}
 
-    if vim.fn.executable("ghc") == "1" then
-      error("telescope-ghc: 'ghc' executable not found! Aborting.")
-      return
-    end
-
-    if vim.fn.executable("grep") == "1" then
-      error("telescope-ghc: 'grep' executable not found! Aborting.")
-      return
-    end
-
     local handle = io.popen(command)
     local result = handle:read("*a")
     handle:close()
@@ -54,6 +44,11 @@ local options = line_picker(
   [[ghc --show-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)']]
 )
 
+local packages = line_picker(
+  "GHC Packages",
+  [[ghc-pkg field '*' name | cut -d ' ' -f 2 | sort -u]]
+)
+
 local modules = line_picker(
   "GHC Package Modules",
   [[ghc-pkg field '*' exposed-modules | tr -d ',' | tr ' ' '\n' | grep --only-matching --extended-regexp '\b[A-Z]\w+\b(\.\w+)*\b' | sort -u]]
@@ -63,6 +58,7 @@ return telescope.register_extension({
   exports = {
     language_extensions = language_extensions,
     options = options,
+    packages = packages,
     modules = modules,
   },
 })
