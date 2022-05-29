@@ -105,11 +105,6 @@ require("packer").startup(function(use)
   })
 
   use({
-    "Julian/vim-textobj-variable-segment",
-    requires = { "kana/vim-textobj-user" },
-  })
-
-  use({
     "L3MON4D3/LuaSnip",
     config = function()
       local luasnip = require("luasnip")
