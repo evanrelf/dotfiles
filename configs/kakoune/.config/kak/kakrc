@@ -1,3 +1,7 @@
+hook -once global KakBegin .* %{
+  # evanrelf/primer.kak
+  declare-option str column_color "rgb:f6f8fa"
+}
 set-option global indentwidth 2
 add-highlighter global/number-lines number-lines
 add-highlighter global/show-matching show-matching
@@ -5,7 +9,6 @@ add-highlighter global/search-matches dynregex "%%reg{/}" 0:black,bright-white+f
 map global normal "i" ";i"
 map global normal "a" ";li"
 map global normal "#" ": comment-line<ret>"
-declare-option str column_color "rgb:eeeeee"
 set-option global autowrap_column 81
 add-highlighter global/trailing-whitespace regex \h+$ 0:red+r
 hook global WinSetOption autowrap_column=.* %{

@@ -36,6 +36,7 @@
           (_: _: { inherit (inputs.comma.packages.${system}) comma; })
           (_: _: { crane = inputs.crane.lib.${system}; })
           (import ./overlays/rust.nix)
+          (import ./overlays/kakoune-plugins.nix)
           (import ./overlays/home-configurations.nix)
         ];
 
