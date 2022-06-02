@@ -21,6 +21,7 @@ in
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
+    pkgs.jq
     pkgs.kakoune
     pkgs.neovim
     pkgs.nix-direnv
