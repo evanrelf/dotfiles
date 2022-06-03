@@ -221,6 +221,8 @@ require("packer").startup(function(use)
     end,
   })
 
+  use({ "tpope/vim-eunuch" })
+
   use({ "tpope/vim-repeat" })
 
   use({
