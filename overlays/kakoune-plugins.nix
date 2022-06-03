@@ -15,6 +15,13 @@ let
       rev = "3636f8f83624cf9d44c0e1242e5af2319abbca5f";
       sha256 = "0yxialy0n35hw2wcnpacax1b19jqwbm7i1kq66x7g4msadlqqigj";
     };
+
+    "better-haskell-kak" = {
+      owner = "evanrelf";
+      repo = "better-haskell.kak";
+      rev = "b9524dd43e13268f7a9517c177b2d6062b1a3708";
+      sha256 = "sha256-xz0UUDSlkx0hq14SnoiajuZJQBsjfV+jE2GEk2oxRDk=";
+    };
   };
 
 in
