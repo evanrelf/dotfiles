@@ -95,4 +95,9 @@ in
     source = ../../configs/neovim/.config/nvim;
     recursive = true;
   };
+
+  xdg.configFile."wezterm" = {
+    source = ../../configs/wezterm/.config/wezterm;
+    recursive = true;
+  };
 }
