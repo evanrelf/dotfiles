@@ -32,7 +32,6 @@ return {
   font_rules = font_rules(),
   color_scheme = "primer",
   freetype_load_flags = "NO_HINTING",
-  -- TODO: Stop dimming inactive panes
   colors = {
     tab_bar = {
       background = "#ffffff",
@@ -54,6 +53,10 @@ return {
         bg_color = "#ffffff",
       },
     },
+  },
+  inactive_pane_hsb = {
+    brightness = 1.0,
+    saturation = 1.0,
   },
   window_frame = {
     font = wezterm.font("PragmataPro Liga"),
