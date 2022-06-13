@@ -46,7 +46,11 @@ return {
       },
       inactive_tab_edge = "#ffffff",
       new_tab = {
-        fg_color = "#959da5",
+        fg_color = "#ffffff",
+        bg_color = "#ffffff",
+      },
+      new_tab_hover = {
+        fg_color = "#ffffff",
         bg_color = "#ffffff",
       },
     },
