@@ -82,10 +82,13 @@ return {
     key("LEADER", "j", { ActivatePaneDirection = "Down" }),
     key("LEADER", "k", { ActivatePaneDirection = "Up" }),
     key("LEADER", "l", { ActivatePaneDirection = "Right" }),
+    key("LEADER", "[", { AdjustPaneSize = { "Left", 5 } }),
+    key("LEADER", "]", { AdjustPaneSize = { "Right", 5 } }),
+    key("LEADER", "{", { AdjustPaneSize = { "Down", 5 } }),
+    key("LEADER", "}", { AdjustPaneSize = { "Up", 5 } }),
     -- TODO: Focusing tabs
     -- TODO: Moving tabs
     -- TODO: Renaming tabs
     -- TODO: Moving panes
-    -- TODO: Resizing panes
   },
 }
