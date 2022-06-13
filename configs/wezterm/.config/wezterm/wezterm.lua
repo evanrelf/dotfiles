@@ -86,8 +86,9 @@ return {
     key("LEADER", "]", { AdjustPaneSize = { "Right", 5 } }),
     key("LEADER", "{", { AdjustPaneSize = { "Down", 5 } }),
     key("LEADER", "}", { AdjustPaneSize = { "Up", 5 } }),
+    key("LEADER", "<", { MoveTabRelative = -1 }),
+    key("LEADER", ">", { MoveTabRelative = 1 }),
     -- TODO: Focusing tabs
-    -- TODO: Moving tabs
     -- TODO: Renaming tabs
     -- TODO: Moving panes
   },
