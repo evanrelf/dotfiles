@@ -1,6 +1,10 @@
 local wezterm = require("wezterm")
 
-local font = wezterm.font("PragmataPro Liga")
+local font = wezterm.font_with_fallback({
+  "PragmataPro Liga",
+  "Iosevka SS08",
+  "Iosevka Nerd Font",
+})
 
 local font_rules = function()
   local rules = {}

@@ -21,9 +21,11 @@ in
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
+    pkgs.iosevka-bin
     pkgs.jq
     pkgs.kakoune
     pkgs.neovim
+    pkgs.nerdfonts
     pkgs.nix-direnv
     pkgs.nixpkgs-fmt
     pkgs.ripgrep

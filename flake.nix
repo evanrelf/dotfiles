@@ -38,6 +38,7 @@
           (import ./overlays/rust.nix)
           (import ./overlays/kakoune-plugins.nix)
           (import ./overlays/home-configurations.nix)
+          (import ./overlays/fonts.nix)
         ];
 
         pkgs = import nixpkgs { inherit system config overlays; };
