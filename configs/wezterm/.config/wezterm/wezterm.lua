@@ -34,7 +34,7 @@ return {
   font = font,
   font_size = 17.0,
   font_rules = font_rules(),
-  color_scheme = "primer",
+  color_scheme = "primer-light",
   freetype_load_flags = "NO_HINTING",
   colors = {
     tab_bar = {
