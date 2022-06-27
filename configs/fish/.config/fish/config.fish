@@ -3,6 +3,7 @@ set --global --export COLORTERM "$TERM"
 set --global --export EDITOR nvim
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
+set --global --export --prepend PATH "$HOME/.config/git/scripts"
 if test -z "$IN_NIX_SHELL"
     if test (uname) = Darwin
         set --global --export --prepend PATH /opt/homebrew/bin

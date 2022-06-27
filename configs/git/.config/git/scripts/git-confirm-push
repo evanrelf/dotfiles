@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2016
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+# Skip confirmation when 'evan.confirm-push' is explicitly disabled
+if [ "$(git config evan.confirm-push || echo true)" = "false" ]; then
+  git push "$@"
+  exit 0
+fi
+
+# Skip confirmation when pushing to unprotected branch
+branch=$(git symbolic-ref HEAD | sd '(?:.+/)*(.+)' '$1')
+if echo "${branch}" | rg --quiet --invert-match '^(master|main|trunk|development|release-.+)$'; then
+  git push "$@"
+  exit 0
+fi
+
+# Confirm repository
+repo=$(git remote get-url origin | sd '(?:git@github\.com:|https://github\.com/|git@git\.sr\.ht:~|https://git\.sr\.ht/~)([\w\-]+)/([\w\-\.]+)' '$1/$2' | sd '\.git$' '')
+if [ -n "${repo}" ]; then
+  read -e -p "Confirm repository (${repo}): " -r < /dev/tty
+  if [ "${REPLY}" != "${repo}" ]; then
+    echo "Incorrect repository name"
+    exit 1
+  fi
+fi
+
+# Confirm branch
+read -e -p "Confirm branch (${branch}): " -r < /dev/tty
+if [ "${REPLY}" != "${branch}" ]; then
+  echo "Incorrect branch name"
+  exit 1
+fi
+
+# Delay push to allow last minute cancellation
+delay=5
+if [ -n "${repo}" ]; then
+  echo "Pushing to ${repo}:${branch} in ${delay} seconds... (Ctrl-C to cancel)"
+else
+  echo "Pushing to ${branch} in ${delay} seconds... (Ctrl-C to cancel)"
+fi
+sleep "${delay}"
+
+git push "$@"

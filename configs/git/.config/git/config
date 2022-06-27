@@ -28,9 +28,9 @@
   pullff = pull --ff-only
 
   # PUSH
-  p = push
-  pf = push --force-with-lease
-  pu = push --set-upstream origin HEAD
+  p = confirm-push
+  pf = confirm-push --force-with-lease
+  pu = confirm-push --set-upstream origin HEAD
 
   # REBASE
   rb = rebase
