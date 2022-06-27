@@ -34,13 +34,4 @@ if [ "${REPLY}" != "${branch}" ]; then
   exit 1
 fi
 
-# Delay push to allow last minute cancellation
-delay=5
-if [ -n "${repo}" ]; then
-  echo "Pushing to ${repo}:${branch} in ${delay} seconds... (Ctrl-C to cancel)"
-else
-  echo "Pushing to ${branch} in ${delay} seconds... (Ctrl-C to cancel)"
-fi
-sleep "${delay}"
-
 git push "$@"
