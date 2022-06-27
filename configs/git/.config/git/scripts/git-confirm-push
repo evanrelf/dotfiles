@@ -11,7 +11,7 @@ if [ "$(git config evan.confirm-push || echo true)" = "false" ]; then
 fi
 
 # Skip confirmation when pushing to unprotected branch
-branch=$(git symbolic-ref HEAD | sd '(?:.+/)*(.+)' '$1')
+branch=$(git branch --show-current)
 if echo "${branch}" | rg --quiet --invert-match '^(master|main|trunk|development|release-.+)$'; then
   git push "$@"
   exit 0
