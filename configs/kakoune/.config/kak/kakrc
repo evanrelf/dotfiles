@@ -1,3 +1,4 @@
+set-option -add global ui_options terminal_enable_mouse=false
 hook -once global KakBegin .* %{
   # evanrelf/primer.kak
   declare-option str column_color "rgb:f6f8fa"
