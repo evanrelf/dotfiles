@@ -81,7 +81,7 @@ require("packer").startup(function(use)
       vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = "evan_null_ls",
-        pattern = { "*.fish", "*.lua", "*.rs" },
+        pattern = { "*.fish", "*.rs" },
         callback = function()
           vim.lsp.buf.formatting_sync()
         end,
