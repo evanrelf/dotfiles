@@ -227,6 +227,8 @@ require("packer").startup(function(use)
 
   use({ "tpope/vim-repeat" })
 
+  use({ "vmchale/dhall-vim" })
+
   use({
     "wbthomason/packer.nvim",
     config = function()
