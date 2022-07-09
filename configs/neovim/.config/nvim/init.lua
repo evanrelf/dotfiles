@@ -205,6 +205,8 @@ require("packer").startup(function(use)
     end,
   })
 
+  use({ "purescript-contrib/purescript-vim" })
+
   use({
     "rlane/pounce.nvim",
     config = function()
