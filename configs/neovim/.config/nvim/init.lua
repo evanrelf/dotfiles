@@ -261,6 +261,7 @@ vim.opt.smartcase = true
 vim.opt.gdefault = true
 vim.opt.wrap = false
 vim.opt.wildmode = "longest:full"
+vim.opt.swapfile = false
 
 vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
