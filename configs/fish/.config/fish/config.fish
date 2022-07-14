@@ -39,8 +39,15 @@ abbr --add --global g git
 abbr --add --global k kak
 abbr --add --global n nvim
 function hstype
-    rg "^ *\b(?:type|type\s+family|newtype|data|class)\b\s+\b(?:$argv[1])\b" $argv[2..-1]
+    rg \
+        --type haskell \
+        "^ *\b(?:type|type\s+family|newtype|data|class)\b\s+\b(?:$argv[1])\b" \
+        $argv[2..-1]
 end
 function hsfunc
-    rg --multiline "^ *\b(?:$argv[1])\b\s+::" $argv[2..-1]
+    rg \
+        --type haskell \
+        --multiline \
+        "^ *\b(?:$argv[1])\b\s+::" \
+        $argv[2..-1]
 end
