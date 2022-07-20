@@ -1,14 +1,16 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   channel =
     pkgs.runCommandLocal "channel" { } ''
       mkdir -p $out/channels
-      ln -s ${inputs.nixpkgs} $out/channels/nixpkgs
+      ln -s ${pkgs.path} $out/channels/nixpkgs
     '';
 
 in
 {
+  home.stateVersion = "22.11";
+
   home.packages = [
     channel
     pkgs.comma

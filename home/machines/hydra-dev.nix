@@ -1,9 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
     ./common.nix
   ];
+
+  home.username = "evan";
+
+  home.homeDirectory = "/home/${config.home.username}";
 
   home.packages = with pkgs; [
     gcc
