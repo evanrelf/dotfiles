@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   channel =
@@ -70,7 +70,7 @@ in
     recursive = true;
   };
 
-  xdg.configFile."hammerspoon" = {
+  xdg.configFile."hammerspoon" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../../configs/hammerspoon/.config/hammerspoon;
     recursive = true;
   };
@@ -80,7 +80,7 @@ in
     recursive = true;
   };
 
-  xdg.configFile."karabiner" = {
+  xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../../configs/karabiner/.config/karabiner;
     recursive = true;
   };
