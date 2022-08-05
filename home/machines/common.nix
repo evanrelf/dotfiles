@@ -90,11 +90,6 @@ in
     recursive = true;
   };
 
-  xdg.configFile."kitty" = {
-    source = ../../configs/kitty/.config/kitty;
-    recursive = true;
-  };
-
   xdg.configFile."nvim" = {
     source = ../../configs/neovim/.config/nvim;
     recursive = true;
