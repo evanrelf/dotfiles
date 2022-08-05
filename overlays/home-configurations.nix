@@ -17,6 +17,11 @@ in
       modules = [ ../home/machines/indigo.nix ];
     };
 
+    porcelain = home-manager.lib.homeManagerConfiguration rec {
+      pkgs = pkgsFinal;
+      modules = [ ../home/machines/porcelain.nix ];
+    };
+
     ultraviolet = home-manager.lib.homeManagerConfiguration rec {
       pkgs = pkgsFinal;
       modules = [ ../home/machines/ultraviolet.nix ];
