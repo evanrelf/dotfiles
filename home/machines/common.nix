@@ -13,6 +13,7 @@ in
 
   home.packages = [
     channel
+    pkgs.cached-nix-shell
     pkgs.comma
     pkgs.comma-update
     pkgs.direnv

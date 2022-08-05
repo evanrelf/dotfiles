@@ -27,6 +27,9 @@ if command -v direnv >/dev/null
     set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
 end
+if command -v cached-nix-shell >/dev/null
+    alias nix-shell cached-nix-shell
+end
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
 set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' . \$dir | sed -e 's_^\./__'"
