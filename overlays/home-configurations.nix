@@ -7,16 +7,6 @@ let
 in
 {
   homeConfigurations = {
-    hydra-dev = home-manager.lib.homeManagerConfiguration rec {
-      pkgs = pkgsFinal;
-      modules = [ ../home/machines/hydra-dev.nix ];
-    };
-
-    indigo = home-manager.lib.homeManagerConfiguration rec {
-      pkgs = pkgsFinal;
-      modules = [ ../home/machines/indigo.nix ];
-    };
-
     porcelain = home-manager.lib.homeManagerConfiguration rec {
       pkgs = pkgsFinal;
       modules = [ ../home/machines/porcelain.nix ];
