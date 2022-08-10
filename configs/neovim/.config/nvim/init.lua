@@ -67,6 +67,7 @@ require("packer").startup(function(use)
         sources = {
           null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.diagnostics.trail_space,
+          null_ls.builtins.formatting.deno_fmt,
           null_ls.builtins.formatting.fish_indent,
           null_ls.builtins.formatting.fourmolu,
           null_ls.builtins.formatting.nixpkgs_fmt,
