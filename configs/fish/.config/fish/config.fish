@@ -1,4 +1,5 @@
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
+set --global --export GHCUP_USE_XDG_DIRS 1
 set --global --export COLORTERM "$TERM"
 set --global --export EDITOR nvim
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
@@ -11,6 +12,7 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
     set --global --export --prepend PATH "$HOME/.nix-profile/bin"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
+    set --global --export --prepend PATH "$HOME/.local/bin"
     if command -v rustup >/dev/null
         set --global --export --prepend PATH (dirname (rustup which rustc))
     end
