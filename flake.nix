@@ -19,6 +19,7 @@
       flake = false;
     };
     flake-utils.url = "github:numtide/flake-utils";
+    haskell-overlay.url = "github:evanrelf/haskell-overlay";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +36,8 @@
           (_: _: { inherit inputs; })
           (_: _: { inherit (inputs.comma.packages.${system}) comma; })
           (_: _: { crane = inputs.crane.lib.${system}; })
+          inputs.haskell-overlay.overlay
+          (import ./overlays/haskell.nix)
           (import ./overlays/rust.nix)
           (import ./overlays/packages.nix)
           (import ./overlays/kakoune-plugins.nix)

@@ -21,6 +21,7 @@ in
     pkgs.fzf
     pkgs.git
     pkgs.haskellPackages.fourmolu
+    pkgs.haskellPackages.ghc-tags
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
