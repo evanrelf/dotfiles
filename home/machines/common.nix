@@ -38,6 +38,7 @@ in
     pkgs.shellcheck
     pkgs.stylua
     pkgs.tealdeer
+    pkgs.zoxide
   ];
 
   programs.fish.enable = true;
@@ -49,15 +50,6 @@ in
         repo = "fzf";
         rev = "479fa67d7439b23095e01b64987ae79a91a4e283";
         hash = "sha256-28QW/WTLckR4lEfHv6dSotwkAKpNJFCShxmKFGQQ1Ew=";
-      };
-    }
-    {
-      name = "z";
-      src = pkgs.fetchFromGitHub {
-        owner = "jethrokuan";
-        repo = "z";
-        rev = "45a9ff6d0932b0e9835cbeb60b9794ba706eef10";
-        hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
       };
     }
   ];

@@ -1,4 +1,5 @@
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
+set --global --export XDG_DATA_HOME "$HOME/.local/share"
 set --global --export GHCUP_USE_XDG_DIRS 1
 set --global --export COLORTERM "$TERM"
 set --global --export EDITOR nvim
@@ -31,6 +32,10 @@ if command -v direnv >/dev/null
 end
 if command -v cached-nix-shell >/dev/null
     alias nix-shell cached-nix-shell
+end
+if command -v zoxide >/dev/null
+    set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
+    zoxide init fish | source
 end
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
