@@ -18,6 +18,11 @@ if test -z "$IN_NIX_SHELL"
         set --global --export --prepend PATH (dirname (rustup which rustc))
     end
 end
+function fish_right_prompt
+    if test -n "$IN_NIX_SHELL"
+        echo nix-shell
+    end
+end
 if test -d "$HOME/.nix-profile/channels/"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/nixpkgs"
