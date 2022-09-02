@@ -14,7 +14,7 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH "$HOME/.nix-profile/bin"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
     set --global --export --prepend PATH "$HOME/.local/bin"
-    if command -v rustup >/dev/null
+    if command -q rustup
         set --global --export --prepend PATH (dirname (rustup which rustc))
     end
 end
@@ -31,14 +31,14 @@ else
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
 end
-if command -v direnv >/dev/null
+if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
 end
-if command -v cached-nix-shell >/dev/null
+if command -q cached-nix-shell
     alias nix-shell cached-nix-shell
 end
-if command -v zoxide >/dev/null
+if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
     zoxide init fish | source
 end
