@@ -183,22 +183,6 @@ require("packer").startup(function(use)
 
   use({ "purescript-contrib/purescript-vim" })
 
-  use({
-    "rlane/pounce.nvim",
-    config = function()
-      require("pounce")
-      vim.cmd([[
-        highlight! link PounceMatch Visual
-        highlight! link PounceGap PounceMatch
-        highlight! link PounceAccept Search
-        highlight! link PounceAcceptBest PounceAccept
-      ]])
-      vim.keymap.set("n", "S", "<Cmd>Pounce<CR>")
-      vim.keymap.set("x", "S", "<Cmd>Pounce<CR>")
-      vim.keymap.set("o", "S", "<Cmd>Pounce<CR>")
-    end,
-  })
-
   use({ "tpope/vim-eunuch" })
 
   use({ "tpope/vim-repeat" })
