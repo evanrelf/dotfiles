@@ -22,7 +22,6 @@ in
     pkgs.git
     pkgs.haskellPackages.fourmolu
     pkgs.haskellPackages.ghc-tags
-    pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
     pkgs.iosevka-bin
@@ -66,11 +65,6 @@ in
 
   xdg.configFile."hammerspoon" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../../configs/hammerspoon/.config/hammerspoon;
-    recursive = true;
-  };
-
-  xdg.configFile."helix" = {
-    source = ../../configs/helix/.config/helix;
     recursive = true;
   };
 
