@@ -97,4 +97,5 @@ return {
     -- TODO: Moving panes
   },
   enable_csi_u_key_encoding = true,
+  check_for_updates = false,
 }
