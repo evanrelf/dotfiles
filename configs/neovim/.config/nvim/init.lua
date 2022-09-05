@@ -183,8 +183,6 @@ require("packer").startup(function(use)
 
   use({ "purescript-contrib/purescript-vim" })
 
-  use({ "tpope/vim-eunuch" })
-
   use({ "tpope/vim-repeat" })
 
   use({ "vmchale/dhall-vim" })
