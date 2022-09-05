@@ -1,3 +1,4 @@
+set-option global startup_info_version 99991231
 set-option -add global ui_options terminal_enable_mouse=false
 hook -once global KakBegin .* %{
   # evanrelf/primer.kak
