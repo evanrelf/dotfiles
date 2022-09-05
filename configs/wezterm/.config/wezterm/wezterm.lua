@@ -97,5 +97,6 @@ return {
     -- TODO: Moving panes
   },
   enable_csi_u_key_encoding = true,
+  max_fps = 120,
   check_for_updates = false,
 }
