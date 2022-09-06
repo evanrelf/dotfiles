@@ -6,6 +6,12 @@ set --global --export EDITOR nvim
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
 set --global --export --prepend PATH "$HOME/.config/git/scripts"
+set --universal FZF_LEGACY_KEYBINDINGS 0
+set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
+set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' . \$dir | sed -e 's_^\./__'"
+set --universal FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
+set --universal FZF_FIND_FILE_COMMAND "fd --type file --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
+set --universal FZF_OPEN_COMMAND "fd --type file --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
 if test -z "$IN_NIX_SHELL"
     if test (uname) = Darwin
         set --global --export --prepend PATH /opt/homebrew/bin
@@ -40,14 +46,9 @@ if command -q cached-nix-shell
 end
 if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
+    set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
     zoxide init fish | source
 end
-set --universal FZF_LEGACY_KEYBINDINGS 0
-set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
-set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' . \$dir | sed -e 's_^\./__'"
-set --universal FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
-set --universal FZF_FIND_FILE_COMMAND "fd --type file --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
-set --universal FZF_OPEN_COMMAND "fd --type file --follow --exclude '.git' --hidden . \$dir | sed -e 's_^\./__'"
 alias ls "ls --color=auto"
 set --global fish_greeting ""
 abbr --add --global g git
