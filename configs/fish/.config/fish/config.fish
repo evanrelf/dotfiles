@@ -67,3 +67,4 @@ function hsterm
         "^ *\b(?:$argv[1])\b\s+::" \
         $argv[2..-1]
 end
+source "$__fish_config_dir/local.fish" 2>/dev/null || true
