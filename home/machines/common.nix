@@ -35,6 +35,7 @@ in
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
+    pkgs.starship
     pkgs.stylua
     pkgs.tealdeer
     pkgs.zoxide
@@ -82,6 +83,9 @@ in
     source = ../../configs/neovim/.config/nvim;
     recursive = true;
   };
+
+  xdg.configFile."starship.toml".source =
+      ../../configs/starship/.config/starship.toml;
 
   xdg.configFile."wezterm" = {
     source = ../../configs/wezterm/.config/wezterm;

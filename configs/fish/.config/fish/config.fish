@@ -24,11 +24,6 @@ if test -z "$IN_NIX_SHELL"
         set --global --export --prepend PATH (dirname (rustup which rustc))
     end
 end
-function fish_right_prompt
-    if test -n "$IN_NIX_SHELL"
-        echo nix-shell
-    end
-end
 if test -d "$HOME/.nix-profile/channels/"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels"
     set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/nixpkgs"
@@ -48,6 +43,9 @@ if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
     set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
     zoxide init fish | source
+end
+if command -q starship
+    starship init fish | source
 end
 alias ls "ls --color=auto"
 set --global fish_greeting ""
