@@ -5,7 +5,6 @@ set --global --export COLORTERM "$TERM"
 set --global --export EDITOR nvim
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
-set --global --export --prepend PATH "$HOME/.config/git/scripts"
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
 set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' . \$dir | sed -e 's_^\./__'"
@@ -19,6 +18,7 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
     set --global --export --prepend PATH "$HOME/.nix-profile/bin"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
+    set --global --export --prepend PATH "$HOME/.config/git/scripts"
     set --global --export --prepend PATH "$HOME/.local/bin"
     if command -q rustup
         set --global --export --prepend PATH (dirname (rustup which rustc))
