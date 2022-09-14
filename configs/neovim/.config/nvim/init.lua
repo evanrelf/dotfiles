@@ -61,6 +61,18 @@ require("packer").startup(function(use)
   })
 
   use({
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup({
+        sources = {
+          ["null-ls"] = { ignore = true },
+        },
+        text = { spinner = "dots" },
+      })
+    end,
+  })
+
+  use({
     "jose-elias-alvarez/null-ls.nvim",
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
