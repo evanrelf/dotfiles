@@ -178,9 +178,21 @@ require("packer").startup(function(use)
       local capabilities = require("cmp_nvim_lsp").update_capabilities(
         vim.lsp.protocol.make_client_capabilities()
       )
+      -- stylua: ignore
+      local on_attach = function(client, buffernr)
+        vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover, { buffer = buffer })
+        vim.keymap.set("n", "<Leader>le", vim.diagnostic.open_float, {})
+        vim.keymap.set("n", "<Leader>ln", vim.diagnostic.goto_next, {})
+        vim.keymap.set("n", "<Leader>lp", vim.diagnostic.goto_prev, {})
+        vim.keymap.set("n", "<Leader>ld", vim.lsp.buf.definition, { buffer = buffer })
+        vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { buffer = buffer })
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buffer })
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = buffer })
+      end
       require("lspconfig").hls.setup({
         autostart = false,
         capabilities = capabilities,
+        on_attach = on_attach,
       })
     end,
   })
