@@ -154,6 +154,14 @@ require("packer").startup(function(use)
   use({ "michaeljsmith/vim-indent-object" })
 
   use({
+    "neovim/nvim-lspconfig",
+    after = { "nvim-cmp" },
+    config = function()
+      require("lspconfig").hls.setup({})
+    end,
+  })
+
+  use({
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
