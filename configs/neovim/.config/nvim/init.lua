@@ -157,7 +157,9 @@ require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     after = { "nvim-cmp" },
     config = function()
-      require("lspconfig").hls.setup({})
+      require("lspconfig").hls.setup({
+        autostart = false,
+      })
     end,
   })
 
