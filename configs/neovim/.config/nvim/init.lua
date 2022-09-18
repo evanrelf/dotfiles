@@ -229,6 +229,15 @@ require("packer").startup(function(use)
 
   use({ "purescript-contrib/purescript-vim" })
 
+  use({
+    "rktjmp/lush.nvim",
+    config = function()
+      -- vim.opt.termguicolors = true
+      -- vim.opt.background = "light"
+      -- require("lush")(require("evan.enough"))
+    end,
+  })
+
   use({ "tpope/vim-repeat" })
 
   use({ "vmchale/dhall-vim" })
