@@ -16,5 +16,10 @@ in
       pkgs = pkgsFinal;
       modules = [ ../home/machines/ultraviolet.nix ];
     };
+
+    ultraviolet-vm = home-manager.lib.homeManagerConfiguration rec {
+      pkgs = pkgsFinal;
+      modules = [ ../home/machines/ultraviolet-vm.nix ];
+    };
   };
 }
