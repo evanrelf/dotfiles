@@ -55,40 +55,40 @@ in
   ];
 
   xdg.configFile."fish" = {
-    source = ../../configs/fish/.config/fish;
+    source = ../configs/fish/.config/fish;
     recursive = true;
   };
 
   xdg.configFile."git" = {
-    source = ../../configs/git/.config/git;
+    source = ../configs/git/.config/git;
     recursive = true;
   };
 
   xdg.configFile."hammerspoon" = lib.mkIf pkgs.stdenv.isDarwin {
-    source = ../../configs/hammerspoon/.config/hammerspoon;
+    source = ../configs/hammerspoon/.config/hammerspoon;
     recursive = true;
   };
 
   xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.isDarwin {
-    source = ../../configs/karabiner/.config/karabiner;
+    source = ../configs/karabiner/.config/karabiner;
     recursive = true;
   };
 
   xdg.configFile."kak" = {
-    source = ../../configs/kakoune/.config/kak;
+    source = ../configs/kakoune/.config/kak;
     recursive = true;
   };
 
   xdg.configFile."nvim" = {
-    source = ../../configs/neovim/.config/nvim;
+    source = ../configs/neovim/.config/nvim;
     recursive = true;
   };
 
   xdg.configFile."starship.toml".source =
-      ../../configs/starship/.config/starship.toml;
+      ../configs/starship/.config/starship.toml;
 
   xdg.configFile."wezterm" = {
-    source = ../../configs/wezterm/.config/wezterm;
+    source = ../configs/wezterm/.config/wezterm;
     recursive = true;
   };
 }

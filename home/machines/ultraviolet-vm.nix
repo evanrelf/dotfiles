@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./common.nix
+    ../common.nix
   ];
 
   home.username = "evanrelf";
