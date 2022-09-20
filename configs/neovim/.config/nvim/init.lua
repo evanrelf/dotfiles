@@ -1,7 +1,5 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
-  use({ "5outh/yesod-routes.vim" })
-
   use({
     "hrsh7th/nvim-cmp",
     requires = {
