@@ -209,19 +209,32 @@ require("packer").startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
-        -- stylua: ignore
+      -- stylua: ignore
       local languages = {
         "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish", "go",
         "haskell", "html", "javascript", "json", "lua", "make", "markdown",
         "nix", "perl", "python", "ruby", "rust", "toml", "typescript", "vim",
         "yaml", "zig",
       }
+      -- stylua: ignore
+      require("vim.treesitter.query").set_query("haskell", "highlights", [[
+        (comment) @comment
+        [ (string) (quasiquote_body) ] @string
+        (char) @character
+        [ (type) (qualified_type) (constructor) (qualified_constructor) ] @type
+        [
+	  "anyclass" "as" "case" "class" (comma) "data" "default" "deriving"
+	  "do" "else" (export_names) "family" "forall" "foreign" "hiding" "if"
+	  "import" (import_con_names) "in" "infix" "infixl" "infixr" "instance"
+	  "let" "mdo" "module" "newtype" "of" (pat_wildcard) "pattern"
+	  "qualified" "rec" "stock" "then" "type" "via" (where) "->" "=>" "::"
+	  "<-" "{" "}" "[" "]" "(" ")" "=" "|"  "\\"
+        ] @keyword ;; missing "proc" "-<" "-<<"
+	[ (operator) (type_operator) ] @operator
+      ]])
       require("nvim-treesitter.configs").setup({
         ensure_installed = languages,
-        highlight = {
-          enable = true,
-          disable = { "haskell" },
-        },
+        highlight = { enable = true },
         indent = {
           enable = true,
           disable = { "haskell", "markdown" },
