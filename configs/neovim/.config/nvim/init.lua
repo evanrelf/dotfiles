@@ -56,15 +56,15 @@ require("packer").startup(function(use)
     end,
   })
 
-  use({
-    "ishan9299/modus-theme-vim",
-    config = function()
-      vim.opt.termguicolors = true
-      vim.opt.background = "light"
-      vim.g.modus_dim_inactive_window = false
-      vim.cmd("colorscheme modus-operandi")
-    end,
-  })
+  -- use({
+  --   "ishan9299/modus-theme-vim",
+  --   config = function()
+  --     vim.opt.termguicolors = true
+  --     vim.opt.background = "light"
+  --     vim.g.modus_dim_inactive_window = false
+  --     vim.cmd("colorscheme modus-operandi")
+  --   end,
+  -- })
 
   use({
     "j-hui/fidget.nvim",
@@ -218,7 +218,10 @@ require("packer").startup(function(use)
       }
       require("nvim-treesitter.configs").setup({
         ensure_installed = languages,
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          disable = { "haskell" },
+        },
         indent = {
           enable = true,
           disable = { "haskell", "markdown" },
@@ -232,9 +235,9 @@ require("packer").startup(function(use)
   use({
     "rktjmp/lush.nvim",
     config = function()
-      -- vim.opt.termguicolors = true
-      -- vim.opt.background = "light"
-      -- require("lush")(require("evan.enough"))
+      vim.opt.termguicolors = true
+      vim.opt.background = "light"
+      require("lush")(require("evan.theme"))
     end,
   })
 
