@@ -1,5 +1,7 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
+  use({ "gpanders/editorconfig.nvim" })
+
   use({
     "hrsh7th/nvim-cmp",
     requires = {
