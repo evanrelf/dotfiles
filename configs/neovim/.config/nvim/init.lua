@@ -223,14 +223,14 @@ require("packer").startup(function(use)
         (char) @character
         [ (type) (qualified_type) (constructor) (qualified_constructor) ] @type
         [
-	  "anyclass" "as" "case" "class" (comma) "data" "default" "deriving"
-	  "do" "else" (export_names) "family" "forall" "foreign" "hiding" "if"
-	  "import" (import_con_names) "in" "infix" "infixl" "infixr" "instance"
-	  "let" "mdo" "module" "newtype" "of" (pat_wildcard) "pattern"
-	  "qualified" "rec" "stock" "then" "type" "via" (where) "->" "=>" "::"
-	  "<-" "{" "}" "[" "]" "(" ")" "=" "|"  "\\"
+          "anyclass" "as" "case" "class" (comma) "data" "default" "deriving"
+          "do" "else" (export_names) "family" "forall" "foreign" "hiding" "if"
+          "import" (import_con_names) "in" "infix" "infixl" "infixr" "instance"
+          "let" "mdo" "module" "newtype" "of" (pat_wildcard) "pattern"
+          "qualified" "rec" "stock" "then" "type" "via" (where) "->" "=>" "::"
+          "<-" "{" "}" "[" "]" "(" ")" "=" "|"  "\\"
         ] @keyword ;; missing "proc" "-<" "-<<"
-	[ (operator) (type_operator) ] @operator
+        [ (operator) (type_operator) ] @operator
       ]])
       require("nvim-treesitter.configs").setup({
         ensure_installed = languages,
