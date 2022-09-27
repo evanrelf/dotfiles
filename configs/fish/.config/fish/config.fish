@@ -48,10 +48,18 @@ if command -q starship
     starship init fish | source
 end
 alias ls "ls --color=auto"
+alias less "less -RMK"
 set --global fish_greeting ""
 abbr --add --global g git
 abbr --add --global k kak
 abbr --add --global n nvim
+function rg
+    if isatty stdout
+        command rg -p $argv | command less -RMFXK
+    else
+        command rg $argv
+    end
+end
 function hstype
     rg \
         --type haskell \
