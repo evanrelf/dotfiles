@@ -123,7 +123,7 @@ require("packer").startup(function(use)
           end
         end,
       })
-      vim.cmd("command! Format lua vim.lsp.buf.format()")
+      vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
     end,
   })
 
