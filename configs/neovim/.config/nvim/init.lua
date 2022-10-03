@@ -89,7 +89,9 @@ require("packer").startup(function(use)
           null_ls.builtins.diagnostics.trail_space,
           null_ls.builtins.formatting.deno_fmt,
           null_ls.builtins.formatting.fish_indent,
-          null_ls.builtins.formatting.fourmolu,
+          null_ls.builtins.formatting.fourmolu.with({
+            extra_args = { "--ghc-opt", "-XImportQualifiedPost" },
+          }),
           null_ls.builtins.formatting.nixpkgs_fmt,
           null_ls.builtins.formatting.rustfmt.with({
             extra_args = { "--edition=2021" },
