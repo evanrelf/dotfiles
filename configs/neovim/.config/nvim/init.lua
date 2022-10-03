@@ -104,7 +104,7 @@ require("packer").startup(function(use)
         group = "evan_null_ls",
         pattern = { "*.fish", "*.rs" },
         callback = function()
-          vim.lsp.buf.formatting_sync()
+          vim.lsp.buf.format()
         end,
       })
       vim.api.nvim_create_autocmd("BufWritePre", {
@@ -117,11 +117,11 @@ require("packer").startup(function(use)
           local is_nix = extension == ".nix"
             and vim.env.EVAN_FORMAT_NIX == "true"
           if is_haskell or is_nix then
-            vim.lsp.buf.formatting_sync()
+            vim.lsp.buf.format()
           end
         end,
       })
-      vim.cmd("command! Format lua vim.lsp.buf.formatting_sync()")
+      vim.cmd("command! Format lua vim.lsp.buf.format()")
     end,
   })
 
