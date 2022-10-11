@@ -20,7 +20,6 @@ in
     pkgs.fd
     pkgs.fzf
     pkgs.git
-    pkgs.haskellPackages.fourmolu
     pkgs.haskellPackages.ghc-tags
     pkgs.home-manager
     pkgs.home-rebuild
