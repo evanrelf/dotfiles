@@ -90,7 +90,9 @@ require("packer").startup(function(use)
           null_ls.builtins.formatting.deno_fmt,
           null_ls.builtins.formatting.fish_indent,
           null_ls.builtins.formatting.fourmolu.with({
-            extra_args = { "--ghc-opt", "-XImportQualifiedPost" },
+            args = function(params)
+              return { "--stdin-input-file", params.bufname }
+            end,
           }),
           null_ls.builtins.formatting.nixpkgs_fmt,
           null_ls.builtins.formatting.rustfmt.with({
@@ -123,7 +125,9 @@ require("packer").startup(function(use)
           end
         end,
       })
-      vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
+      vim.api.nvim_create_user_command("Format", function()
+        vim.lsp.buf.format()
+      end, {})
     end,
   })
 
