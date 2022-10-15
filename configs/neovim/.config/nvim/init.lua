@@ -222,6 +222,14 @@ require("packer").startup(function(use)
         "nix", "perl", "python", "ruby", "rust", "toml", "typescript", "vim",
         "yaml", "zig",
       }
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = languages,
+        highlight = { enable = true },
+        indent = {
+          enable = true,
+          disable = { "haskell", "markdown" },
+        },
+      })
       -- stylua: ignore
       require("vim.treesitter.query").set_query("haskell", "highlights", [[
         (comment) @comment
@@ -238,14 +246,6 @@ require("packer").startup(function(use)
         ] @keyword ;; missing "proc" "-<" "-<<"
         [ (operator) (type_operator) ] @operator
       ]])
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = languages,
-        highlight = { enable = true },
-        indent = {
-          enable = true,
-          disable = { "haskell", "markdown" },
-        },
-      })
     end,
   })
 
