@@ -1,5 +1,16 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
+  use({
+    "ggandor/leap.nvim",
+    config = function()
+      require("leap")
+      vim.keymap.set({ "n", "x", "o" }, "<A-f>", "<Plug>(leap-forward-to)")
+      vim.keymap.set({ "n", "x", "o" }, "<A-S-f>", "<Plug>(leap-backward-to)")
+      vim.keymap.set({ "n", "x", "o" }, "<A-t>", "<Plug>(leap-forward-till)")
+      vim.keymap.set({ "n", "x", "o" }, "<A-S-t>", "<Plug>(leap-backward-till)")
+    end,
+  })
+
   use({ "gpanders/editorconfig.nvim" })
 
   use({
