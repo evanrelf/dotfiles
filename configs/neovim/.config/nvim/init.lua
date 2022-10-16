@@ -1,6 +1,16 @@
 vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
+    "ggandor/flit.nvim",
+    requires = { "ggandor/leap.nvim" },
+    config = function()
+      require("flit").setup({
+        labeled_modes = "nv",
+      })
+    end,
+  })
+
+  use({
     "ggandor/leap.nvim",
     config = function()
       require("leap")
