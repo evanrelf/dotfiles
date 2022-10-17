@@ -112,7 +112,16 @@ require("packer").startup(function(use)
           null_ls.builtins.formatting.fish_indent,
           null_ls.builtins.formatting.fourmolu.with({
             args = function(params)
-              return { "--stdin-input-file", params.bufname }
+              return {
+                "--stdin-input-file",
+                params.bufname,
+                "--ghc-opt",
+                "-XImportQualifiedPost",
+                "--ghc-opt",
+                "-XOverloadedRecordDot",
+                "--ghc-opt",
+                "-XViewPatterns",
+              }
             end,
           }),
           null_ls.builtins.formatting.nixpkgs_fmt,
