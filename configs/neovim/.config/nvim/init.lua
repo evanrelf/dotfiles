@@ -202,9 +202,7 @@ require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     after = { "nvim-cmp" },
     config = function()
-      local capabilities = require("cmp_nvim_lsp").update_capabilities(
-        vim.lsp.protocol.make_client_capabilities()
-      )
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       -- stylua: ignore
       local on_attach = function(client, buffernr)
         vim.keymap.set("n", "<Leader>lh", vim.lsp.buf.hover, { buffer = buffer })
