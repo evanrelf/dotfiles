@@ -253,15 +253,11 @@ require("packer").startup(function(use)
         defaults = {
           preview = false,
         },
-        pickers = {
-          buffers = { theme = "ivy" },
-          find_files = { theme = "ivy" },
-        },
       })
       telescope.load_extension("fzf")
       telescope.load_extension("ghc")
-      vim.keymap.set("n", "<Leader>f", telescope_builtin.find_files)
-      vim.keymap.set("n", "<Leader>b", telescope_builtin.buffers)
+      vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
+      vim.keymap.set("n", "<Leader>b", "<Cmd>Telescope buffers theme=ivy<CR>")
     end,
   })
 
