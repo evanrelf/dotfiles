@@ -257,6 +257,7 @@ require("packer").startup(function(use)
       telescope.load_extension("fzf")
       telescope.load_extension("ghc")
       vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
+      vim.keymap.set("n", "<Leader>/", "<Cmd>Telescope live_grep theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>b", "<Cmd>Telescope buffers theme=ivy<CR>")
     end,
   })
