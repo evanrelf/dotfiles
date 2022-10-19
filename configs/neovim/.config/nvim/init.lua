@@ -256,7 +256,8 @@ require("packer").startup(function(use)
       })
       telescope.load_extension("fzf")
       telescope.load_extension("ghc")
-      vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
+      -- stylua: ignore
+      vim.keymap.set( "n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>/", "<Cmd>Telescope live_grep theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>b", "<Cmd>Telescope buffers theme=ivy<CR>")
     end,
@@ -307,6 +308,14 @@ require("packer").startup(function(use)
       -- vim.opt.termguicolors = true
       -- vim.opt.background = "light"
       -- require("lush")(require("evan.theme"))
+    end,
+  })
+
+  use({
+    "takac/vim-hardtime",
+    config = function()
+      vim.g.hardtime_default_on = true
+      vim.g.hardtime_maxcount = 2
     end,
   })
 
