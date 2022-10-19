@@ -279,13 +279,14 @@ require("packer").startup(function(use)
         extensions = {
           fzf = {
             fuzzy = false,
-          }
+          },
         },
       })
       telescope.load_extension("fzf")
       telescope.load_extension("ghc")
+      vim.keymap.set("n", "<A-o>", "<Cmd>Telescope git_files theme=ivy<CR>")
       -- stylua: ignore
-      vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
+      vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope git_files theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>/", "<Cmd>Telescope live_grep theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>b", "<Cmd>Telescope buffers theme=ivy<CR>")
     end,
