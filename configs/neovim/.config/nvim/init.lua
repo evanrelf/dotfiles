@@ -276,6 +276,11 @@ require("packer").startup(function(use)
             },
           },
         },
+        extensions = {
+          fzf = {
+            fuzzy = false,
+          }
+        },
       })
       telescope.load_extension("fzf")
       telescope.load_extension("ghc")
