@@ -265,15 +265,22 @@ require("packer").startup(function(use)
     config = function()
       local telescope = require("telescope")
       local telescope_builtin = require("telescope.builtin")
+      local telescope_actions = require("telescope.actions")
       telescope.setup({
         defaults = {
           preview = false,
+          mappings = {
+            i = {
+              ["<Esc>"] = telescope_actions.close,
+              ["<C-u>"] = false,
+            },
+          },
         },
       })
       telescope.load_extension("fzf")
       telescope.load_extension("ghc")
       -- stylua: ignore
-      vim.keymap.set( "n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
+      vim.keymap.set("n", "<Leader>f", "<Cmd>Telescope find_files theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>/", "<Cmd>Telescope live_grep theme=ivy<CR>")
       vim.keymap.set("n", "<Leader>b", "<Cmd>Telescope buffers theme=ivy<CR>")
     end,
