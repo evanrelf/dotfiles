@@ -355,6 +355,19 @@ require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "tamton-aquib/duck.nvim",
+    config = function()
+      local duck = require("duck")
+      vim.api.nvim_create_user_command("DuckOn", function()
+        duck.hatch()
+      end, {})
+      vim.api.nvim_create_user_command("DuckOff", function()
+        duck.cook()
+      end, {})
+    end,
+  })
+
   use({ "tpope/vim-repeat" })
 
   use({ "vmchale/dhall-vim" })
