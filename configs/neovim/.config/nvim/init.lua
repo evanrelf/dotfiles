@@ -341,6 +341,13 @@ require("packer").startup(function(use)
   })
 
   use({
+    "sitiom/nvim-numbertoggle",
+    config = function()
+      require("numbertoggle").setup()
+    end,
+  })
+
+  use({
     "takac/vim-hardtime",
     config = function()
       vim.g.hardtime_default_on = true
