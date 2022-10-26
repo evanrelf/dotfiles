@@ -63,7 +63,8 @@ end
 function hstype
     rg \
         --type haskell \
-        "^ *\b(?:type|type\s+family|newtype|data|class)\b\s+\b(?:$argv[1])\b" \
+        --multiline \
+        "^ *\b(?:type|type\s+family|newtype|data|class)\b.*\s+\b(?:$argv[1])\b" \
         $argv[2..-1]
 end
 function hsterm
