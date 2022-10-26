@@ -55,7 +55,7 @@ abbr --add --global k kak
 abbr --add --global n nvim
 function rg
     if isatty stdout
-        command rg -p $argv | command less -RMFXK
+        command rg --pretty $argv | command less -RMFXK
     else
         command rg $argv
     end
