@@ -12,4 +12,18 @@ pkgsFinal: pkgsPrev:
         };
     in
     import src { pkgs = pkgsFinal; };
+
+  kakoune-unwrapped =
+    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
+      version = "2022.10.31";
+      src = pkgsPrev.fetchFromGitHub {
+        repo = "kakoune";
+        owner = "mawww";
+        rev = "v${version}";
+        hash = "sha256-vmzGaGl0KSjseSD/s6DXxvMUTmAle+Iv/ZP9llaFnXk=";
+      };
+      preConfigure = ''
+        export version="v${version}"
+      '';
+    });
 }
