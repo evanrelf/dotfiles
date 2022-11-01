@@ -6,6 +6,7 @@ let
       (pkgsPrev.inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsFinal;
         inherit modules;
+        extraSpecialArgs = { inherit (pkgsPrev) inputs; };
       }) // { default = self.activation-script; }
     );
 
