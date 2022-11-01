@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
   home.stateVersion = "22.11";
@@ -48,7 +48,7 @@
   ];
 
   programs.fish.shellInit = ''
-    set --global --export NIX_PATH "nixpkgs=${pkgs.path}"
+    set --global --export NIX_PATH "nixpkgs=${inputs.nixpkgs}"
   '';
 
   xdg.configFile."fish" = {
