@@ -11,6 +11,7 @@
     pkgs.comma-update
     pkgs.coreutils-gprefix
     pkgs.direnv
+    pkgs.emacs
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fzf
@@ -35,6 +36,16 @@
     pkgs.tealdeer
     pkgs.zoxide
   ];
+
+  xdg.configFile."emacs" = {
+    source = ../configs/emacs/.config/emacs;
+    recursive = true;
+  };
+
+  home.file.".local/bin" = {
+    source = ../configs/emacs/.local/bin;
+    recursive = true;
+  };
 
   programs.fish.enable = true;
 
