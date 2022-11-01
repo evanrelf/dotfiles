@@ -30,6 +30,9 @@ pkgsFinal: pkgsPrev:
       postInstall = "make -f nix/Makefile post-install";
     });
 
+  emacs =
+    pkgsFinal.emacsNativeComp;
+
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "2022.10.31";
