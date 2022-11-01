@@ -1,25 +1,24 @@
 pkgsFinal: pkgsPrev:
 
 let
-  inherit (pkgsPrev) inputs config overlays;
-  inherit (inputs) home-manager nixpkgs;
+  mkHomeConfiguration = modules:
+    pkgsPrev.lib.fix (self:
+      (pkgsPrev.inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgsFinal;
+        inherit modules;
+      }) // { default = self.activation-script; }
+    );
 
 in
 {
   homeConfigurations = {
-    porcelain = home-manager.lib.homeManagerConfiguration rec {
-      pkgs = pkgsFinal;
-      modules = [ ../home/machines/porcelain.nix ];
-    };
+    porcelain =
+      mkHomeConfiguration [ ../home/machines/porcelain.nix ];
 
-    ultraviolet = home-manager.lib.homeManagerConfiguration rec {
-      pkgs = pkgsFinal;
-      modules = [ ../home/machines/ultraviolet.nix ];
-    };
+    ultraviolet =
+      mkHomeConfiguration [ ../home/machines/ultraviolet.nix ];
 
-    ultraviolet-vm = home-manager.lib.homeManagerConfiguration rec {
-      pkgs = pkgsFinal;
-      modules = [ ../home/machines/ultraviolet-vm.nix ];
-    };
+    ultraviolet-vm =
+      mkHomeConfiguration [ ../home/machines/ultraviolet-vm.nix ];
   };
 }
