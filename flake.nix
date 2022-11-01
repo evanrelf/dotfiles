@@ -34,8 +34,8 @@
 
         overlays = [
           (_: _: { inherit inputs; })
-          (_: _: { inherit (inputs.comma.packages.${system}) comma; })
           (_: _: { crane = inputs.crane.lib.${system}; })
+          inputs.comma.overlays.default
           inputs.haskell-overlay.overlay
           (import ./overlays/haskell.nix)
           (import ./overlays/rust.nix)
