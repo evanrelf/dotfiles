@@ -9,10 +9,13 @@
     pkgs.cached-nix-shell
     pkgs.comma
     pkgs.comma-update
+    pkgs.coreutils-gprefix
     pkgs.direnv
     pkgs.fd
+    pkgs.findutils-gprefix
     pkgs.fzf
     pkgs.git
+    pkgs.gnugrep-gprefix
     pkgs.haskellPackages.ghc-tags
     pkgs.home-manager
     pkgs.home-rebuild

@@ -1,5 +1,16 @@
 pkgsFinal: pkgsPrev:
 
+let
+  gprefix = drv:
+    pkgsPrev.runCommandLocal "gprefix-${drv.name}" { } ''
+      mkdir -p "$out/bin"
+      for bin in ${drv}/bin/*; do
+        ln -s "$bin" "$out/bin/g$(basename $bin)"
+      done
+      ln -s ${drv}/share "$out/share"
+    '';
+
+in
 {
   cached-nix-shell =
     let
@@ -30,8 +41,22 @@ pkgsFinal: pkgsPrev:
       postInstall = "make -f nix/Makefile post-install";
     });
 
+  coreutils-gprefix =
+    (pkgsPrev.coreutils.override {
+      singleBinary = false;
+      withPrefix = true;
+    }).overrideAttrs (prev: {
+      doCheck = false;
+    });
+
   emacs =
     pkgsFinal.emacsNativeComp;
+
+  findutils-gprefix =
+    gprefix pkgsFinal.findutils;
+
+  gnugrep-gprefix =
+    gprefix pkgsFinal.gnugrep;
 
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
