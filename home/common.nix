@@ -45,6 +45,15 @@
         hash = "sha256-28QW/WTLckR4lEfHv6dSotwkAKpNJFCShxmKFGQQ1Ew=";
       };
     }
+    {
+      name = "fish-colored-man";
+      src = pkgs.fetchFromGitHub {
+        owner = "decors";
+        repo = "fish-colored-man";
+        rev = "1ad8fff696d48c8bf173aa98f9dff39d7916de0e";
+        hash = "sha256-uoZ4eSFbZlsRfISIkJQp24qPUNqxeD0JbRb/gVdRYlA=";
+      };
+    }
   ];
 
   programs.fish.shellInit = ''
