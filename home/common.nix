@@ -11,6 +11,8 @@ in
 {
   home.stateVersion = "22.11";
 
+  home.enableNixpkgsReleaseCheck = true;
+
   home.packages = [
     channel
     pkgs.cached-nix-shell
@@ -84,7 +86,7 @@ in
   };
 
   xdg.configFile."starship.toml".source =
-      ../configs/starship/.config/starship.toml;
+    ../configs/starship/.config/starship.toml;
 
   xdg.configFile."wezterm" = {
     source = ../configs/wezterm/.config/wezterm;
