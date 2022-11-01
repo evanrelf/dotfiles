@@ -7,6 +7,7 @@ format = """\
   $git_status\
   $git_state\
   $nix_shell\
+  $jobs\
   $username\
   $hostname\
   $line_break\
@@ -70,6 +71,13 @@ disabled = false
 format = '[${symbol}nix-shell]($style) '
 symbol = ' '
 style = 'cyan'
+
+[jobs]
+disabled = false
+format = '[${symbol}jobs:$number]($style) '
+symbol = ' '
+style = 'green'
+number_threshold = 1
 
 [username]
 disabled = false
