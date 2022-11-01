@@ -1,20 +1,11 @@
 { config, lib, pkgs, ... }:
 
-let
-  channel =
-    pkgs.runCommandLocal "channel" { } ''
-      mkdir -p $out/channels
-      ln -s ${pkgs.path} $out/channels/nixpkgs
-    '';
-
-in
 {
   home.stateVersion = "22.11";
 
   home.enableNixpkgsReleaseCheck = true;
 
   home.packages = [
-    channel
     pkgs.cached-nix-shell
     pkgs.comma
     pkgs.comma-update
@@ -43,6 +34,7 @@ in
   ];
 
   programs.fish.enable = true;
+
   programs.fish.plugins = [
     {
       name = "fzf";
@@ -54,6 +46,10 @@ in
       };
     }
   ];
+
+  programs.fish.shellInit = ''
+    set --global --export NIX_PATH "nixpkgs=${pkgs.path}"
+  '';
 
   xdg.configFile."fish" = {
     source = ../configs/fish/.config/fish;

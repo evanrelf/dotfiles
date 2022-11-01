@@ -25,14 +25,6 @@ if test -z "$IN_NIX_SHELL"
         set --global --export --prepend PATH (dirname (rustup which rustc))
     end
 end
-if test -d "$HOME/.nix-profile/channels/"
-    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels"
-    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-profile/channels/nixpkgs"
-else
-    echo "Using imperative Nix channels"
-    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels"
-    set --global --export --prepend NIX_PATH "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
-end
 if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
