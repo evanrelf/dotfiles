@@ -7,7 +7,7 @@ let
         pkgs = pkgsFinal;
         inherit modules;
         extraSpecialArgs = { inherit (pkgsPrev) inputs; };
-      }) // { default = self.activation-script; }
+      }) // { default = self.activationPackage; }
     );
 
 in

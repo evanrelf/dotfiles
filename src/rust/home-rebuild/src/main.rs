@@ -60,7 +60,7 @@ fn without_flakes() -> Result<(), anyhow::Error> {
 
     let output = Command::new("sh")
         .arg("-c")
-        .arg("nix-build --attr homeConfigurations.$(hostname -s).activation-script")
+        .arg("nix-build --attr homeConfigurations.$(hostname -s).activationPackage")
         .stderr(Stdio::inherit())
         .output()
         .context("Failed to execute nix-build")?;
