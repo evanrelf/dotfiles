@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   channel =
@@ -59,6 +59,9 @@ in
     source = ../configs/fish/.config/fish;
     recursive = true;
   };
+
+  xdg.configFile."fish/home-manager.fish".text =
+    config.xdg.configFile."fish/config.fish".text;
 
   xdg.configFile."git" = {
     source = ../configs/git/.config/git;
