@@ -31,6 +31,8 @@ if command -q direnv
 end
 if command -q cached-nix-shell
     alias nix-shell "cached-nix-shell --run fish"
+else
+    alias nix-shell "command nix-shell --run fish"
 end
 if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
