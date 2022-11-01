@@ -48,6 +48,9 @@ if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
     set --global man_standout --background brwhite black
     set --global man_underline --underline brblack
 end
+function fish_user_key_bindings
+    bind \cz 'fg 2>/dev/null; commandline -f repaint'
+end
 alias ls "ls --color=auto"
 alias less "less -RMK"
 set --global fish_greeting ""
