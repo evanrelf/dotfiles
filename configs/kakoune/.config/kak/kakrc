@@ -3,8 +3,6 @@ set-option -add global ui_options terminal_enable_mouse=false
 hook -once global KakBegin .* %{
   # evanrelf/primer.kak
   declare-option str column_color "rgb:f6f8fa"
-  # evanrelf/byline.kak
-  require-module "byline"
 }
 set-option global indentwidth 2
 add-highlighter global/number-lines number-lines

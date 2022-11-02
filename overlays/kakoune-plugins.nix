@@ -9,13 +9,6 @@ let
       sha256 = "sha256-xz0UUDSlkx0hq14SnoiajuZJQBsjfV+jE2GEk2oxRDk=";
     };
 
-    "byline-kak" = {
-      owner = "evanrelf";
-      repo = "byline.kak";
-      rev = "3636f8f83624cf9d44c0e1242e5af2319abbca5f";
-      sha256 = "0yxialy0n35hw2wcnpacax1b19jqwbm7i1kq66x7g4msadlqqigj";
-    };
-
     "primer-kak" = {
       owner = "evanrelf";
       repo = "primer.kak";
