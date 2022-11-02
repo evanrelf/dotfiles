@@ -47,12 +47,7 @@ return {
         fg_color = "#959da5",
         bg_color = "#ffffff",
       },
-      inactive_tab_edge = "#ffffff",
       new_tab = {
-        fg_color = "#ffffff",
-        bg_color = "#ffffff",
-      },
-      new_tab_hover = {
         fg_color = "#ffffff",
         bg_color = "#ffffff",
       },
@@ -61,11 +56,6 @@ return {
   inactive_pane_hsb = {
     brightness = 1.0,
     saturation = 1.0,
-  },
-  window_frame = {
-    font = wezterm.font("PragmataPro Liga"),
-    active_titlebar_bg = "#ffffff",
-    inactive_titlebar_bg = "#ffffff",
   },
   window_padding = {
     left = 4,
