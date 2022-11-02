@@ -347,14 +347,6 @@ require("packer").startup(function(use)
     end,
   })
 
-  use({
-    "takac/vim-hardtime",
-    config = function()
-      vim.g.hardtime_default_on = true
-      vim.g.hardtime_maxcount = 2
-    end,
-  })
-
   use({ "tpope/vim-repeat" })
 
   use({ "vmchale/dhall-vim" })
