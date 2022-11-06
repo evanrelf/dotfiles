@@ -37,8 +37,8 @@
     pkgs.zoxide
   ];
 
-  xdg.configFile."emacs" = {
-    source = ../configs/emacs/.config/emacs;
+  xdg.configFile."doom" = {
+    source = ../configs/emacs/.config/doom;
     recursive = true;
   };
 
