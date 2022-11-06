@@ -369,6 +369,15 @@ require("packer").startup(function(use)
       })
     end,
   })
+
+  use({
+    "windwp/nvim-ts-autotag",
+    requires = { "nvim-treesitter/nvim-treesitter" },
+    after = { "nvim-treesitter" },
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  })
 end)
 
 vim.opt.expandtab = true
