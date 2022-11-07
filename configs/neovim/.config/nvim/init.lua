@@ -297,10 +297,10 @@ require("packer").startup(function(use)
     config = function()
       -- stylua: ignore
       local languages = {
-        "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fish", "go",
-        "haskell", "html", "javascript", "json", "lua", "make", "markdown",
-        "markdown_inline", "nix", "perl", "python", "ruby", "rust", "toml",
-        "typescript", "vim", "yaml", "zig",
+        "bash", "c", "cpp", "css", "dockerfile", "dot", "elixir", "fennel",
+        "fish", "go", "haskell", "html", "javascript", "json", "lua", "make",
+        "markdown", "markdown_inline", "nix", "perl", "python", "ruby", "rust",
+        "toml", "typescript", "vim", "yaml", "zig",
       }
       require("nvim-treesitter.configs").setup({
         ensure_installed = languages,
