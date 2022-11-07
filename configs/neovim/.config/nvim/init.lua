@@ -39,6 +39,8 @@ require("packer").startup(function(use)
 
   use({ "gpanders/editorconfig.nvim" })
 
+  use({ "gpanders/nvim-parinfer" })
+
   use({
     "hrsh7th/nvim-cmp",
     requires = {
