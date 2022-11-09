@@ -20,6 +20,7 @@
     pkgs.haskellPackages.ghc-tags
     pkgs.home-manager
     pkgs.home-rebuild
+    pkgs.ijq
     pkgs.iosevka-bin
     pkgs.jq
     pkgs.kakoune
