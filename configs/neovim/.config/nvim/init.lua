@@ -100,7 +100,7 @@ require("packer").startup(function(use)
       vim.opt.termguicolors = true
       vim.opt.background = "light"
       vim.g.modus_dim_inactive_window = false
-      vim.cmd("colorscheme modus-operandi")
+      vim.cmd.colorscheme("modus-operandi")
     end,
   })
 
