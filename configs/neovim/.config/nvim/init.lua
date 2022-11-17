@@ -293,6 +293,7 @@ require("packer").startup(function(use)
 
   use({
     "nvim-treesitter/nvim-treesitter",
+    branch = "v0.8.0",
     config = function()
       -- stylua: ignore
       local languages = {
