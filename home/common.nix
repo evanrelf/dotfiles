@@ -35,6 +35,7 @@
     pkgs.starship
     pkgs.stylua
     pkgs.tealdeer
+    pkgs.xsv
     pkgs.zoxide
   ];
 
