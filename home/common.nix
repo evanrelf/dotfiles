@@ -10,6 +10,7 @@
     pkgs.comma
     pkgs.comma-update
     pkgs.coreutils-gprefix
+    pkgs.delta
     pkgs.direnv
     pkgs.emacs
     pkgs.fd
