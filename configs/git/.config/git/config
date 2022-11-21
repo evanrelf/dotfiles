@@ -61,10 +61,20 @@
   wt = worktree
 [commit]
   gpgSign = true
+[core]
+  pager = delta
+[delta]
+  light = true
+[diff]
+  colorMoved = default
 [init]
   defaultBranch = main
+[interactive]
+  diffFilter = delta --color-only
+[merge]
+  conflictstyle = diff3
 [user]
-  name = "Evan Relf"
+  name = Evan Relf
   useConfigOnly = true
 [include]
-  path = "~/.config/git/local"
+  path = ~/.config/git/local
