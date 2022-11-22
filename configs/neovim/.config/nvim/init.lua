@@ -357,7 +357,7 @@ require("packer").startup(function(use)
     config = function()
       -- vim.opt.termguicolors = true
       -- vim.opt.background = "light"
-      -- require("lush")(require("evan.theme"))
+      -- require("lush")(require("primer"))
     end,
   })
 
