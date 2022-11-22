@@ -65,12 +65,13 @@
   pager = delta
 [delta]
   light = true
+  color-only = true
 [diff]
   colorMoved = default
 [init]
   defaultBranch = main
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta
 [merge]
   conflictstyle = diff3
 [user]
