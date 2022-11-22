@@ -29,6 +29,7 @@
     pkgs.nerdfonts
     pkgs.nix-direnv
     pkgs.nixpkgs-fmt
+    pkgs.qsv
     pkgs.ripgrep
     pkgs.rustup
     pkgs.sd
@@ -36,7 +37,6 @@
     pkgs.starship
     pkgs.stylua
     pkgs.tealdeer
-    pkgs.xsv
     pkgs.zoxide
   ];
 
