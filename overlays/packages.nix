@@ -59,4 +59,27 @@ in
 
   gnugrep-gprefix =
     gprefix pkgsFinal.gnugrep;
+
+  qsv =
+    let
+      crane =
+        pkgsFinal.crane.overrideToolchain pkgsFinal.fenix.minimal.toolchain;
+    in
+    crane.buildPackage {
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "jqnatividad";
+        repo = "qsv";
+        rev = "0.73.0";
+        hash = "sha256-jOf+kNU9yoDaI6ovcpJGCsb4yTPdLUcij1RExXeRypw=";
+      };
+
+      buildInputs = [
+        pkgsFinal.python3
+      ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+        pkgsFinal.darwin.apple_sdk.frameworks.Security
+        pkgsFinal.libiconv
+      ];
+
+      cargoExtraArgs = "--features all_full";
+    };
 }
