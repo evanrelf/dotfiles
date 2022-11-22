@@ -33,6 +33,8 @@ in
         pkgsFinal.nix
         pkgsFinal.openssl
         pkgsFinal.ronn
+      ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+        pkgsFinal.libiconv
       ];
       CNS_GIT_COMMIT = "next";
       BLAKE3_CSRC = "${blake3}/c";
