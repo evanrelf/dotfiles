@@ -228,6 +228,7 @@ require("packer").startup(function(use)
     "neovim/nvim-lspconfig",
     after = { "nvim-cmp" },
     config = function()
+      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       -- stylua: ignore
       local on_attach = function(client, buffernr)
@@ -240,7 +241,25 @@ require("packer").startup(function(use)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buffer })
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = buffer })
       end
-      require("lspconfig").hls.setup({
+      lspconfig.hls.setup({
+        autostart = false,
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      local configs = require("lspconfig.configs")
+      local util = require("lspconfig.util")
+      if not configs.sidekick then
+        configs.sidekick = {
+          default_config = {
+            cmd = { "sidekick" },
+            filetypes = { "haskell" },
+            root_dir = util.root_pattern("*.cabal", "package.yaml"),
+            single_file_support = true,
+            settings = {},
+          },
+        }
+      end
+      lspconfig.sidekick.setup({
         autostart = false,
         capabilities = capabilities,
         on_attach = on_attach,
