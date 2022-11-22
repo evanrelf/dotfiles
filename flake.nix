@@ -19,6 +19,10 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -40,6 +44,7 @@
         overlays = [
           (_: _: { inherit inputs; })
           (_: _: { crane = inputs.crane.lib.${system}; })
+          inputs.fenix.overlays.default
           inputs.comma.overlays.default
           inputs.emacs-overlay.overlays.default
           inputs.haskell-overlay.overlays.default
