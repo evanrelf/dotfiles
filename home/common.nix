@@ -7,6 +7,10 @@
 
   home.packages = [
     pkgs.cached-nix-shell
+    pkgs.cargo-edit
+    pkgs.cargo-flamegraph
+    pkgs.cargo-limit
+    pkgs.cargo-watch
     pkgs.comma
     pkgs.comma-update
     pkgs.coreutils-gprefix
