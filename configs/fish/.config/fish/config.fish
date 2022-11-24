@@ -53,6 +53,7 @@ function fish_user_key_bindings
 end
 alias ls "ls --color=auto"
 alias less "less -RMK"
+alias cargod "cargo watch --exec 'lclippy --all-targets' --clear --quiet"
 set --global fish_greeting ""
 abbr --add --global g git
 abbr --add --global k kak
