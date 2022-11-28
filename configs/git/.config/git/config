@@ -50,6 +50,10 @@
   res = restore --staged
   resp = restore --staged --patch
 
+  # REVISE
+  rv = revise
+  rvi = revise --interactive
+
   # STATUS
   s = status
 
@@ -72,6 +76,8 @@
   diffFilter = delta
 [merge]
   conflictstyle = diff3
+[revise]
+  gpgSign = true
 [user]
   name = Evan Relf
   useConfigOnly = true
