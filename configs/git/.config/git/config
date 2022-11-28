@@ -76,8 +76,11 @@
   diffFilter = delta
 [merge]
   conflictstyle = diff3
+[rebase]
+  autoSquash = true
 [revise]
   gpgSign = true
+  autoSquash = true
 [user]
   name = Evan Relf
   useConfigOnly = true
