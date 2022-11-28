@@ -21,6 +21,7 @@
     pkgs.findutils-gprefix
     pkgs.fzf
     pkgs.git
+    pkgs.git-revise
     pkgs.gnugrep-gprefix
     pkgs.home-manager
     pkgs.home-rebuild
