@@ -44,6 +44,9 @@
     pkgs.zoxide
   ];
 
+  # Copying font files on Darwin is too slow
+  home.activation.copyFonts = lib.mkForce "true";
+
   xdg.configFile."doom" = {
     source = ../configs/emacs/.config/doom;
     recursive = true;
