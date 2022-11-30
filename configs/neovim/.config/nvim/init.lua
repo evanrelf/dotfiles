@@ -419,15 +419,14 @@ vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
 
-vim.api.nvim_create_augroup("evan_bufenter", { clear = true })
+vim.api.nvim_create_augroup("evan_filetype", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = "evan_bufenter",
+  group = "evan_filetype",
   pattern = { "git-revise-todo" },
   callback = function()
     vim.opt.filetype = "gitrebase"
   end,
 })
-vim.api.nvim_create_augroup("evan_filetype", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = "evan_filetype",
   pattern = "fish",
