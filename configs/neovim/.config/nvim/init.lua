@@ -1,4 +1,5 @@
-require("packer").startup(function(use)
+local packer = require("packer")
+packer.startup(function(use)
   use({
     "akinsho/bufferline.nvim",
     tag = "v3.*",
@@ -388,6 +389,11 @@ require("packer").startup(function(use)
       require("nvim-ts-autotag").setup()
     end,
   })
+
+  local compile_path = vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua"
+  if vim.fn.empty(vim.fn.glob(compile_path)) > 0 then
+    packer.compile()
+  end
 end)
 
 vim.opt.expandtab = true

@@ -115,6 +115,9 @@
   xdg.configFile."nvim" = {
     source = ../configs/neovim/.config/nvim;
     recursive = true;
+    onChange = ''
+      $DRY_RUN_CMD rm -f "$HOME/.config/nvim/plugin/packer_compiled.lua"
+    '';
   };
 
   xdg.dataFile."nvim/site/pack/home-manager/start/packer.nvim".source =
