@@ -69,8 +69,8 @@ in
       src = pkgsPrev.fetchFromGitHub {
         owner = "jqnatividad";
         repo = "qsv";
-        rev = "0.73.0";
-        hash = "sha256-jOf+kNU9yoDaI6ovcpJGCsb4yTPdLUcij1RExXeRypw=";
+        rev = "0.74.0";
+        hash = "sha256-zMxvA/dc1MoLn7z7y/yWKBc+cYCHI0MO0tiLMNcBKeY=";
       };
 
       buildInputs = [
