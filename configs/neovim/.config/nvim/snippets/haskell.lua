@@ -26,12 +26,6 @@ local autosnippets = {
   auto("^lang ", fmt("{{-# LANGUAGE {} #-}}", { i(0) })),
   auto("^opt ", fmt("{{-# OPTIONS_GHC {} #-}}", { i(0) })),
   auto("^module ", fmt("module {} where", { i(0) })),
-  auto("^i ", fmt("import {}", { i(0) })),
-  auto("^ii ", fmt("import qualified {}", { i(0) })),
-  auto("^uio ", fmt("import qualified UnliftIO.{} as {}", { same(1), i(1) })),
-  auto("^class ", fmt("class {} where", { i(0) })),
-  auto("^instance ", fmt("instance {} where", { i(0) })),
-  auto("^type family ", fmt("type family {} where", { i(0) })),
 }
 
 return snippets, autosnippets
