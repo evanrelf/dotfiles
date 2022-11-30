@@ -114,6 +114,9 @@
     recursive = true;
   };
 
+  xdg.dataFile."nvim/site/pack/home-manager/start/packer.nvim".source =
+    inputs.packer;
+
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;
 

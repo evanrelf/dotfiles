@@ -202,6 +202,22 @@
         "type": "github"
       }
     },
+    "packer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669698468,
+        "narHash": "sha256-8cZ801PYmZvmGtIE9IjBckjTfusOK4xZOZ/Tc59VOQc=",
+        "owner": "wbthomason",
+        "repo": "packer.nvim",
+        "rev": "dcd2f380bb49ec2dfe208f186236dd366434a4d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wbthomason",
+        "repo": "packer.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "comma": "comma",
@@ -212,7 +228,8 @@
         "flake-utils": "flake-utils",
         "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "packer": "packer"
       }
     },
     "rust-analyzer-src": {

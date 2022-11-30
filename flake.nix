@@ -34,6 +34,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
+    packer = {
+      url = "github:wbthomason/packer.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ flake-utils, nixpkgs, ... }:
