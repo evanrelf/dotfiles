@@ -1,4 +1,3 @@
-vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use({
     "akinsho/bufferline.nvim",
@@ -373,18 +372,6 @@ require("packer").startup(function(use)
   use({ "vmchale/dhall-vim" })
 
   use({
-    "wbthomason/packer.nvim",
-    config = function()
-      vim.api.nvim_create_augroup("evan_packer", { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePost", {
-        group = "evan_packer",
-        pattern = "init.lua",
-        command = "source <afile> | PackerCompile",
-      })
-    end,
-  })
-
-  use({
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup({
@@ -418,6 +405,13 @@ vim.opt.swapfile = false
 vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
+
+vim.api.nvim_create_augroup("evan_packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = "evan_packer",
+  pattern = "init.lua",
+  command = "source <afile> | PackerCompile",
+})
 
 vim.api.nvim_create_augroup("evan_filetype", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
