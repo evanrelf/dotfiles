@@ -60,6 +60,11 @@ in
   gnugrep-gprefix =
     gprefix pkgsFinal.gnugrep;
 
+  neovim =
+    pkgsPrev.neovim.override {
+      extraLuaPackages = p: [ p.fennel ];
+    };
+
   qsv =
     let
       crane =

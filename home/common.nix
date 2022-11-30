@@ -117,11 +117,20 @@
     recursive = true;
     onChange = ''
       $DRY_RUN_CMD rm -f "$HOME/.config/nvim/plugin/packer_compiled.lua"
+      $DRY_RUN_CMD rm -rf "$HOME/.cache/nvim/moonwalk/"
     '';
   };
 
   xdg.dataFile."nvim/site/pack/home-manager/start/packer.nvim".source =
     inputs.packer;
+
+  xdg.dataFile."nvim/site/pack/home-manager/start/moonwalk".source =
+    pkgs.fetchFromGitHub {
+      owner = "gpanders";
+      repo = "nvim-moonwalk";
+      rev = "86a59f16ae01606824cef3d0f3f87c9886b312d0";
+      hash = "sha256-srCbkSDKZGb04N+1IQDhCq5uIrmpTjASARaTxUvVjjM=";
+    };
 
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;

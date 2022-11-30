@@ -1,3 +1,7 @@
+require("moonwalk").add_loader("fnl", function(contents, path)
+  return require("fennel").compileString(contents, { filename = path })
+end)
+
 local packer = require("packer")
 packer.startup(function(use)
   use({
