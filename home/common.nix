@@ -41,6 +41,7 @@
     pkgs.starship
     pkgs.stylua
     pkgs.tealdeer
+    pkgs.watchexec
     pkgs.zoxide
   ];
 
