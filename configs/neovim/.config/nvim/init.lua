@@ -416,6 +416,7 @@ vim.opt.swapfile = false
 vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   group = "Evan",
@@ -448,5 +449,29 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = "gitcommit",
   callback = function()
     vim.opt_local.colorcolumn = "51,73"
+  end,
+})
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  group = "Evan",
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.cmd("startinsert!")
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, {
+  group = "Evan",
+  callback = function()
+    if vim.bo.buftype == "terminal" then
+      vim.cmd("startinsert!")
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufWinLeave", "WinLeave" }, {
+  group = "Evan",
+  callback = function()
+    if vim.bo.buftype == "terminal" then
+      vim.cmd("stopinsert")
+    end
   end,
 })
