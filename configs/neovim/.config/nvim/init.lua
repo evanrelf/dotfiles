@@ -2,6 +2,8 @@ require("moonwalk").add_loader("fnl", function(contents, path)
   return require("fennel").compileString(contents, { filename = path })
 end)
 
+vim.api.nvim_create_augroup("Evan", { clear = true })
+
 local packer = require("packer")
 packer.startup(function(use)
   use({
@@ -154,16 +156,15 @@ packer.startup(function(use)
         },
       })
       vim.opt.signcolumn = "number"
-      vim.api.nvim_create_augroup("evan_null_ls", { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = "evan_null_ls",
+      vim.api.nvim_create_autocmd({"BufWritePre"}, {
+        group = "Evan",
         pattern = { "*.fish", "*.rs" },
         callback = function()
           vim.lsp.buf.format()
         end,
       })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = "evan_null_ls",
+      vim.api.nvim_create_autocmd({"BufWritePre"}, {
+        group = "Evan",
         pattern = { "*.hs", ".nix" },
         callback = function(args)
           local extension = string.sub(args.match, -3, -1)
@@ -416,37 +417,34 @@ vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
 
-vim.api.nvim_create_augroup("evan_packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = "evan_packer",
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  group = "Evan",
   pattern = "init.lua",
   command = "source <afile> | PackerCompile",
 })
-
-vim.api.nvim_create_augroup("evan_filetype", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = "evan_filetype",
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+  group = "Evan",
   pattern = { "git-revise-todo" },
   callback = function()
     vim.opt.filetype = "gitrebase"
   end,
 })
-vim.api.nvim_create_autocmd("FileType", {
-  group = "evan_filetype",
+vim.api.nvim_create_autocmd({"FileType"}, {
+  group = "Evan",
   pattern = "fish",
   callback = function()
     vim.opt_local.shiftwidth = 4
   end,
 })
-vim.api.nvim_create_autocmd("FileType", {
-  group = "evan_filetype",
+vim.api.nvim_create_autocmd({"FileType"}, {
+  group = "Evan",
   pattern = "rust",
   callback = function()
     vim.opt_local.colorcolumn = "81,101"
   end,
 })
-vim.api.nvim_create_autocmd("FileType", {
-  group = "evan_filetype",
+vim.api.nvim_create_autocmd({"FileType"}, {
+  group = "Evan",
   pattern = "gitcommit",
   callback = function()
     vim.opt_local.colorcolumn = "51,73"
