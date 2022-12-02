@@ -156,14 +156,14 @@ packer.startup(function(use)
         },
       })
       vim.opt.signcolumn = "number"
-      vim.api.nvim_create_autocmd({"BufWritePre"}, {
+      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         group = "Evan",
         pattern = { "*.fish", "*.rs" },
         callback = function()
           vim.lsp.buf.format()
         end,
       })
-      vim.api.nvim_create_autocmd({"BufWritePre"}, {
+      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         group = "Evan",
         pattern = { "*.hs", ".nix" },
         callback = function(args)
@@ -417,33 +417,33 @@ vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
 
-vim.api.nvim_create_autocmd({"BufWritePost"}, {
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   group = "Evan",
   pattern = "init.lua",
   command = "source <afile> | PackerCompile",
 })
-vim.api.nvim_create_autocmd({"BufEnter"}, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
   group = "Evan",
   pattern = { "git-revise-todo" },
   callback = function()
     vim.opt.filetype = "gitrebase"
   end,
 })
-vim.api.nvim_create_autocmd({"FileType"}, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
   group = "Evan",
   pattern = "fish",
   callback = function()
     vim.opt_local.shiftwidth = 4
   end,
 })
-vim.api.nvim_create_autocmd({"FileType"}, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
   group = "Evan",
   pattern = "rust",
   callback = function()
     vim.opt_local.colorcolumn = "81,101"
   end,
 })
-vim.api.nvim_create_autocmd({"FileType"}, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
   group = "Evan",
   pattern = "gitcommit",
   callback = function()
