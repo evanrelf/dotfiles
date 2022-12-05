@@ -257,8 +257,6 @@ packer.startup(function(use)
     end,
   })
 
-  use({ "norcalli/nvim-colorizer.lua" })
-
   use({
     "numToStr/Comment.nvim",
     config = function()
