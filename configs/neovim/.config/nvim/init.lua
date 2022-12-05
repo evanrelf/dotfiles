@@ -18,12 +18,9 @@ packer.startup(function(use)
 
   use({
     "ggandor/leap.nvim",
+    after = "vim-sandwich",
     config = function()
-      require("leap")
-      vim.keymap.set({ "n", "x", "o" }, "<A-f>", "<Plug>(leap-forward-to)")
-      vim.keymap.set({ "n", "x", "o" }, "<A-S-f>", "<Plug>(leap-backward-to)")
-      vim.keymap.set({ "n", "x", "o" }, "<A-t>", "<Plug>(leap-forward-till)")
-      vim.keymap.set({ "n", "x", "o" }, "<A-S-t>", "<Plug>(leap-backward-till)")
+      require("leap").add_default_mappings()
     end,
   })
 
@@ -210,7 +207,22 @@ packer.startup(function(use)
     end,
   })
 
-  use({ "machakann/vim-sandwich" })
+  use({
+    "machakann/vim-sandwich",
+    before = "leap.nvim",
+    config = function()
+      vim.g.sandwich_no_default_key_mappings = 1
+      vim.keymap.set("n", "gsa", "<Plug>(sandwich-add)")
+      vim.keymap.set("x", "gsa", "<Plug>(sandwich-add)")
+      vim.keymap.set("o", "gsa", "<Plug>(sandwich-add)")
+      vim.keymap.set("n", "gsd", "<Plug>(sandwich-delete)")
+      vim.keymap.set("x", "gsd", "<Plug>(sandwich-delete)")
+      vim.keymap.set("n", "gsdb", "<Plug>(sandwich-delete-auto)")
+      vim.keymap.set("n", "gsr", "<Plug>(sandwich-replace)")
+      vim.keymap.set("x", "gsr", "<Plug>(sandwich-replace)")
+      vim.keymap.set("n", "gsrb", "<Plug>(sandwich-replace-auto)")
+    end,
+  })
 
   use({ "michaeljsmith/vim-indent-object" })
 
