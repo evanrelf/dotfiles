@@ -7,21 +7,6 @@ vim.api.nvim_create_augroup("Evan", { clear = true })
 local packer = require("packer")
 packer.startup(function(use)
   use({
-    "akinsho/bufferline.nvim",
-    tag = "v3.*",
-    config = function()
-      require("bufferline").setup({
-        options = {
-          diagnostics = "nvim_lsp",
-          show_buffer_icons = false,
-          show_close_icon = false,
-          always_show_bufferline = false,
-        },
-      })
-    end,
-  })
-
-  use({
     "ggandor/flit.nvim",
     requires = { "ggandor/leap.nvim" },
     config = function()
