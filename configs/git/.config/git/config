@@ -81,8 +81,10 @@
 [interactive]
   diffFilter = delta
 [merge]
+  autoStash = true
   conflictstyle = diff3
 [rebase]
+  autoStash = true
   autoSquash = true
 [revise]
   gpgSign = true
