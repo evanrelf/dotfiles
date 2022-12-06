@@ -42,6 +42,9 @@ end
 if command -q starship
     starship init fish | source
 end
+if command -q jj
+    set --global --export JJ_CONFIG "$XDG_CONFIG_HOME/jj/config.toml"
+end
 if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
     set --global man_blink --reverse blue
     set --global man_bold --dim --bold blue

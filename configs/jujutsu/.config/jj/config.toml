@@ -1,0 +1,10 @@
+user.name = "Evan Relf"
+user.email = "evan@evanrelf.com"
+ui.relative-timestamps = true
+ui.diff-editor = "nvim"
+ui.merge-editor = "nvim"
+merge-tools.nvim.merge-args = [
+  "-d", "$output", "-M", "$left", "$base", "$right", "-c", "wincmd J", "-c",
+  "set modifiable", "-c", "set write"
+]
+merge-tools.nvim.merge-tool-edits-conflict-markers = true

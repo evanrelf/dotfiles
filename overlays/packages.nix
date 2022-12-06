@@ -60,6 +60,30 @@ in
   gnugrep-gprefix =
     gprefix pkgsFinal.gnugrep;
 
+  jujutsu =
+    pkgsPrev.rustPlatform.buildRustPackage rec {
+      pname = "jujutsu";
+      version = "0.6.1";
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "martinvonz";
+        repo = "jj";
+        rev = "v${version}";
+        sha256 = "sha256-ajBL2o5i4UmclL/s9eEVtn/p51/F4gsClmcYBrAZ+1o=";
+      };
+      cargoSha256 = "sha256-RgF2StIMfFzbp0azG4yRPvzrZ4kczWtOWVd+KTTPbRw=";
+      OPENSSL_NO_VENDOR = 1;
+      nativeBuildInputs = [ pkgsFinal.pkg-config ];
+      buildInputs = [
+        pkgsFinal.openssl
+        pkgsFinal.dbus
+        pkgsFinal.sqlite
+      ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+        pkgsFinal.darwin.apple_sdk.frameworks.Security
+        pkgsFinal.darwin.apple_sdk.frameworks.SystemConfiguration
+        pkgsFinal.libiconv
+      ];
+    };
+
   neovim =
     pkgsPrev.neovim.override {
       extraLuaPackages = p: [ p.fennel ];

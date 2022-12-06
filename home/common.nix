@@ -28,6 +28,7 @@
     pkgs.ijq
     pkgs.iosevka-bin
     pkgs.jq
+    pkgs.jujutsu
     pkgs.kakoune
     pkgs.neovim
     pkgs.nerdfonts
@@ -100,6 +101,11 @@
 
   xdg.configFile."hammerspoon" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../configs/hammerspoon/.config/hammerspoon;
+    recursive = true;
+  };
+
+  xdg.configFile."jj" = {
+    source = ../configs/jujutsu/.config/jj;
     recursive = true;
   };
 
