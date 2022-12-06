@@ -406,6 +406,11 @@ vim.opt.wrap = false
 vim.opt.wildmode = "longest:full,full"
 vim.opt.swapfile = false
 
+if vim.o.diff then
+  vim.opt.number = false
+  vim.opt.relativenumber = false
+end
+
 vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")

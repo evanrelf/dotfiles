@@ -70,6 +70,12 @@
 [delta]
   light = true
   color-only = true
+[diff]
+  tool = nvim
+[difftool]
+  prompt = false
+[difftool "nvim"]
+  cmd = nvim -d "$LOCAL" "$REMOTE"
 [init]
   defaultBranch = main
 [interactive]
