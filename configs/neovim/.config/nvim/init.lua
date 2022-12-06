@@ -407,6 +407,8 @@ vim.opt.gdefault = true
 vim.opt.wrap = false
 vim.opt.wildmode = "longest:full,full"
 vim.opt.swapfile = false
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 if vim.o.diff then
   vim.opt.number = false
