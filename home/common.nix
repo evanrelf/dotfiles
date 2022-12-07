@@ -131,6 +131,9 @@
   xdg.dataFile."nvim/site/pack/home-manager/start/packer.nvim".source =
     inputs.packer;
 
+  xdg.dataFile."nvim/site/pack/home-manager/start/paq".source =
+    inputs.paq;
+
   xdg.dataFile."nvim/site/pack/home-manager/start/moonwalk".source =
     pkgs.fetchFromGitHub {
       owner = "gpanders";
