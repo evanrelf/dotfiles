@@ -129,6 +129,7 @@ packer.startup(function(use)
           null_ls.builtins.diagnostics.trail_space,
           null_ls.builtins.formatting.deno_fmt,
           null_ls.builtins.formatting.fish_indent,
+          null_ls.builtins.formatting.fnlfmt,
           null_ls.builtins.formatting.fourmolu.with({
             args = function(params)
               return {
@@ -154,7 +155,7 @@ packer.startup(function(use)
       vim.opt.signcolumn = "number"
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         group = "Evan",
-        pattern = { "*.fish", "*.rs" },
+        pattern = { "*.fish", "*.fnl", "*.rs" },
         callback = function()
           vim.lsp.buf.format()
         end,
