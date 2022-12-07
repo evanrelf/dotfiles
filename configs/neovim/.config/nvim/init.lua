@@ -6,8 +6,6 @@ vim.api.nvim_create_augroup("Evan", { clear = true })
 
 local packer = require("packer")
 packer.startup(function(use)
-  use({ "camspiers/lens.vim" })
-
   use({
     "ggandor/flit.nvim",
     requires = { "ggandor/leap.nvim" },
