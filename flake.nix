@@ -38,6 +38,10 @@
       url = "github:wbthomason/packer.nvim";
       flake = false;
     };
+    paq = {
+      url = "github:savq/paq-nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ flake-utils, nixpkgs, ... }:

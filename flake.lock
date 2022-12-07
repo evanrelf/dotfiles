@@ -218,6 +218,22 @@
         "type": "github"
       }
     },
+    "paq": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670016914,
+        "narHash": "sha256-/uDf8tJTfpYE6oulgEoZFe+Bq4Mq7OuNJBWxtsz4pZ8=",
+        "owner": "savq",
+        "repo": "paq-nvim",
+        "rev": "51f5cb97c5b329b1c94c6aa0e1ac99d499cd6c15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "savq",
+        "repo": "paq-nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "comma": "comma",
@@ -229,7 +245,8 @@
         "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "packer": "packer"
+        "packer": "packer",
+        "paq": "paq"
       }
     },
     "rust-analyzer-src": {
