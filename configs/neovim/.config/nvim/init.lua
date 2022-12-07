@@ -2,6 +2,8 @@ require("moonwalk").add_loader("fnl", function(contents, path)
   return require("fennel").compileString(contents, { filename = path })
 end)
 
+require("next")
+
 vim.api.nvim_create_augroup("Evan", { clear = true })
 
 local packer = require("packer")
@@ -94,15 +96,15 @@ packer.startup(function(use)
     end,
   })
 
-  use({
-    "ishan9299/modus-theme-vim",
-    config = function()
-      vim.opt.termguicolors = true
-      vim.opt.background = "light"
-      vim.g.modus_dim_inactive_window = false
-      vim.cmd.colorscheme("modus-operandi")
-    end,
-  })
+  -- use({
+  --   "ishan9299/modus-theme-vim",
+  --   config = function()
+  --     vim.opt.termguicolors = true
+  --     vim.opt.background = "light"
+  --     vim.g.modus_dim_inactive_window = false
+  --     vim.cmd.colorscheme("modus-operandi")
+  --   end,
+  -- })
 
   use({
     "j-hui/fidget.nvim",
