@@ -7,6 +7,18 @@ vim.api.nvim_create_augroup("Evan", { clear = true })
 local packer = require("packer")
 packer.startup(function(use)
   use({
+    "eightpigs/win_resize.nvim",
+    config = function()
+      vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "VimResized" }, {
+        group = "Evan",
+        callback = function()
+          require("win_resize").resize()
+        end,
+      })
+    end,
+  })
+
+  use({
     "ggandor/flit.nvim",
     requires = { "ggandor/leap.nvim" },
     config = function()
