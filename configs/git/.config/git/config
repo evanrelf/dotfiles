@@ -81,8 +81,14 @@
 [interactive]
   diffFilter = delta
 [merge]
+  tool = nvim
   autoStash = true
   conflictstyle = diff3
+[mergetool]
+  prompt = false
+  keepBackup = false
+[mergetool "nvim"]
+  cmd = nvim -d "$LOCAL" "$MERGED" "$REMOTE"
 [rebase]
   autoStash = true
   autoSquash = true
