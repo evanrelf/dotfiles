@@ -19,7 +19,6 @@
     pkgs.emacs
     pkgs.fd
     pkgs.findutils-gprefix
-    pkgs.fnlfmt
     pkgs.fzf
     pkgs.git
     pkgs.git-revise
