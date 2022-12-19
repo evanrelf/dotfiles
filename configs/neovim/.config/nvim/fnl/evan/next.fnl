@@ -1,4 +1,6 @@
-(import-macros {: set! : setlocal!} :evan.macros)
+(import-macros {: set!
+                : setlocal!
+                : autocmd!} :evan.macros)
 
 (local paq (require :paq))
 
@@ -32,54 +34,30 @@
 (vim.keymap.set "x" ">" ">gv")
 (vim.keymap.set "t" "<Esc>" "<C-\\><C-n>")
 
-(vim.api.nvim_create_autocmd
-  ["BufWritePost"]
-  {:group "Evan"
-   :pattern "init.lua"
-   :command "source <afile> | PackerCompile"})
+(autocmd! ["BufWritePost"] ["init.lua"]
+  (vim.cmd "source <afile> | PackerCompile"))
 
-(vim.api.nvim_create_autocmd
-  ["BufEnter"]
-  {:group "Evan"
-   :pattern ["git-revise-todo"]
-   :callback (lambda [] (setlocal! filetype "gitrebase"))})
+(autocmd! ["BufEnter"] ["git-revise-todo"]
+  (setlocal! filetype "gitrebase"))
 
-(vim.api.nvim_create_autocmd
-  ["FileType"]
-  {:group "Evan"
-   :pattern "fish"
-   :callback (lambda [] (setlocal! shiftwidth 4))})
+(autocmd! ["FileType"] ["fish"]
+  (setlocal! shiftwidth 4))
 
-(vim.api.nvim_create_autocmd
-  ["FileType"]
-  {:group "Evan"
-   :pattern "rust"
-   :callback (lambda [] (setlocal! colorcolumn "81,101"))})
+(autocmd! ["FileType"] ["rust"]
+  (setlocal! colorcolumn "81,101"))
 
-(vim.api.nvim_create_autocmd
-  ["FileType"]
-  {:group "Evan"
-   :pattern "gitcommit"
-   :callback (lambda [] (setlocal! colorcolumn "51,73"))})
+(autocmd! ["FileType"] ["gitcommit"]
+  (setlocal! colorcolumn "51,73"))
 
-(vim.api.nvim_create_autocmd
-  ["TermOpen"]
-  {:group "Evan"
-   :callback (lambda []
-               (setlocal! nonumber)
-               (setlocal! norelativenumber)
-               (vim.cmd "startinsert!"))})
+(autocmd! ["TermOpen"] ["*"]
+  (setlocal! nonumber)
+  (setlocal! norelativenumber)
+  (vim.cmd "startinsert!"))
 
-(vim.api.nvim_create_autocmd
-  ["BufEnter" "BufWinEnter" "WinEnter"]
-  {:group "Evan"
-   :callback (lambda []
-               (when (= vim.bo.buftype "terminal")
-                 (vim.cmd "startinsert!")))})
+(autocmd! ["BufEnter" "BufWinEnter" "WinEnter"] ["*"]
+  (when (= vim.bo.buftype "terminal")
+    (vim.cmd "startinsert!")))
 
-(vim.api.nvim_create_autocmd
-  ["BufLeave" "BufWinLeave" "WinLeave"]
-  {:group "Evan"
-   :callback (lambda []
-               (when (= vim.bo.buftype "terminal")
-                 (vim.cmd "stopinsert")))})
+(autocmd! ["BufLeave" "BufWinLeave" "WinLeave"] ["*"]
+  (when (= vim.bo.buftype "terminal")
+    (vim.cmd "stopinsert")))

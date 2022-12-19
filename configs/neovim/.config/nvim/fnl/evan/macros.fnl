@@ -1,6 +1,9 @@
 (fn nil? [x]
   (= nil x))
 
+(fn string? [x]
+  (= :string (type x)))
+
 (fn begins-with? [prefix str]
   (if (str:match (.. "^" prefix)) true false))
 
@@ -26,5 +29,15 @@
                  name)]
     `(tset vim.opt_local ,name ,value)))
 
+(lambda autocmd! [events pattern ...]
+  (assert-compile (sequence? events) "expected sequence for events" events)
+  (assert-compile (sequence? pattern) "expected sequence for pattern" pattern)
+  `(vim.api.nvim_create_autocmd
+     ,events
+     {:group "Evan"
+      :pattern ,pattern
+      :callback (lambda [] ,...)}))
+
 {: set!
- : setlocal!}
+ : setlocal!
+ : autocmd!}
