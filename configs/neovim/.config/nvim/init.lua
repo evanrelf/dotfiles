@@ -1,7 +1,4 @@
-require("moonwalk").add_loader("fnl", function(contents, path)
-  return require("fennel").compileString(contents, { filename = path })
-end)
-
+require("hotpot")
 require("next")
 
 vim.api.nvim_create_augroup("Evan", { clear = true })

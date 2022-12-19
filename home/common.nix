@@ -124,7 +124,7 @@
     recursive = true;
     onChange = ''
       $DRY_RUN_CMD rm -f "$HOME/.config/nvim/plugin/packer_compiled.lua"
-      $DRY_RUN_CMD rm -rf "$HOME/.cache/nvim/moonwalk/"
+      $DRY_RUN_CMD rm -rf "$HOME/.cache/nvim/hotpot/"
     '';
   };
 
@@ -134,12 +134,12 @@
   xdg.dataFile."nvim/site/pack/home-manager/start/paq".source =
     inputs.paq;
 
-  xdg.dataFile."nvim/site/pack/home-manager/start/moonwalk".source =
+  xdg.dataFile."nvim/site/pack/home-manager/start/hotpot".source =
     pkgs.fetchFromGitHub {
-      owner = "gpanders";
-      repo = "nvim-moonwalk";
-      rev = "86a59f16ae01606824cef3d0f3f87c9886b312d0";
-      hash = "sha256-srCbkSDKZGb04N+1IQDhCq5uIrmpTjASARaTxUvVjjM=";
+      owner = "rktjmp";
+      repo = "hotpot.nvim";
+      rev = "1002bcdea7af06c5a7bfce0536d96bc4b03ab42e";
+      hash = "sha256-UqyL7uJ4uYpsqyQoGcGQF24Qtl2bTEEFD7fOYvgBfDE=";
     };
 
   xdg.configFile."starship.toml".source =
