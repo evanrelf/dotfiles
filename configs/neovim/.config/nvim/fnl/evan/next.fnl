@@ -1,4 +1,4 @@
-(import-macros {: set!} :evan.macros)
+(import-macros {: set! : setlocal!} :evan.macros)
 
 (local paq (require :paq))
 
@@ -42,32 +42,32 @@
   ["BufEnter"]
   {:group "Evan"
    :pattern ["git-revise-todo"]
-   :callback (lambda [] (set vim.opt_local.filetype "gitrebase"))})
+   :callback (lambda [] (setlocal! filetype "gitrebase"))})
 
 (vim.api.nvim_create_autocmd
   ["FileType"]
   {:group "Evan"
    :pattern "fish"
-   :callback (lambda [] (set vim.opt_local.shiftwidth 4))})
+   :callback (lambda [] (setlocal! shiftwidth 4))})
 
 (vim.api.nvim_create_autocmd
   ["FileType"]
   {:group "Evan"
    :pattern "rust"
-   :callback (lambda [] (set vim.opt_local.colorcolumn "81,101"))})
+   :callback (lambda [] (setlocal! colorcolumn "81,101"))})
 
 (vim.api.nvim_create_autocmd
   ["FileType"]
   {:group "Evan"
    :pattern "gitcommit"
-   :callback (lambda [] (set vim.opt_local.colorcolumn "51,73"))})
+   :callback (lambda [] (setlocal! colorcolumn "51,73"))})
 
 (vim.api.nvim_create_autocmd
   ["TermOpen"]
   {:group "Evan"
    :callback (lambda []
-               (set vim.opt_local.number false)
-               (set vim.opt_local.relativenumber false)
+               (setlocal! nonumber)
+               (setlocal! norelativenumber)
                (vim.cmd "startinsert!"))})
 
 (vim.api.nvim_create_autocmd
