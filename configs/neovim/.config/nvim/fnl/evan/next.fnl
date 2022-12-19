@@ -34,30 +34,30 @@
 (vim.keymap.set "x" ">" ">gv")
 (vim.keymap.set "t" "<Esc>" "<C-\\><C-n>")
 
-(autocmd! ["BufWritePost"] ["init.lua"]
+(autocmd! "BufWritePost" "init.lua"
   (vim.cmd "source <afile> | PackerCompile"))
 
-(autocmd! ["BufEnter"] ["git-revise-todo"]
+(autocmd! "BufEnter" "git-revise-todo"
   (setlocal! filetype "gitrebase"))
 
-(autocmd! ["FileType"] ["fish"]
+(autocmd! "FileType" "fish"
   (setlocal! shiftwidth 4))
 
-(autocmd! ["FileType"] ["rust"]
+(autocmd! "FileType" "rust"
   (setlocal! colorcolumn "81,101"))
 
-(autocmd! ["FileType"] ["gitcommit"]
+(autocmd! "FileType" "gitcommit"
   (setlocal! colorcolumn "51,73"))
 
-(autocmd! ["TermOpen"] ["*"]
+(autocmd! "TermOpen" "*"
   (setlocal! nonumber)
   (setlocal! norelativenumber)
   (vim.cmd "startinsert!"))
 
-(autocmd! ["BufEnter" "BufWinEnter" "WinEnter"] ["*"]
+(autocmd! ["BufEnter" "BufWinEnter" "WinEnter"] "*"
   (when (= vim.bo.buftype "terminal")
     (vim.cmd "startinsert!")))
 
-(autocmd! ["BufLeave" "BufWinLeave" "WinLeave"] ["*"]
+(autocmd! ["BufLeave" "BufWinLeave" "WinLeave"] "*"
   (when (= vim.bo.buftype "terminal")
     (vim.cmd "stopinsert")))

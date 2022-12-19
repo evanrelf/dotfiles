@@ -30,8 +30,14 @@
     `(tset vim.opt_local ,name ,value)))
 
 (lambda autocmd! [events pattern ...]
-  (assert-compile (sequence? events) "expected sequence for events" events)
-  (assert-compile (sequence? pattern) "expected sequence for pattern" pattern)
+  (assert-compile
+    (or (string? events) (sequence? events))
+    "expected string or sequence for events"
+    events)
+  (assert-compile
+    (or (string? pattern) (sequence? pattern))
+    "expected string or sequence for pattern"
+    pattern)
   `(vim.api.nvim_create_autocmd
      ,events
      {:group "Evan"
