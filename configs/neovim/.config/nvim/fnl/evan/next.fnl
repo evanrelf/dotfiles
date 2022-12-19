@@ -71,14 +71,14 @@
                (vim.cmd "startinsert!"))})
 
 (vim.api.nvim_create_autocmd
-  ["BufWinEnter" "WinEnter"]
+  ["BufEnter" "BufWinEnter" "WinEnter"]
   {:group "Evan"
    :callback (lambda []
                (when (= vim.bo.buftype "terminal")
                  (vim.cmd "startinsert!")))})
 
 (vim.api.nvim_create_autocmd
-  ["BufWinLeave" "WinLeave"]
+  ["BufLeave" "BufWinLeave" "WinLeave"]
   {:group "Evan"
    :callback (lambda []
                (when (= vim.bo.buftype "terminal")
