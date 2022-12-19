@@ -405,26 +405,6 @@ packer.startup(function(use)
   end
 end)
 
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.colorcolumn = "81"
-vim.opt.showmode = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.gdefault = true
-vim.opt.wrap = false
-vim.opt.wildmode = "longest:full,full"
-vim.opt.swapfile = false
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
-if vim.o.diff then
-  vim.opt.number = false
-  vim.opt.relativenumber = false
-end
-
 vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
