@@ -26,3 +26,8 @@
 (when vim.o.diff
   (set! nonumber)
   (set! norelativenumber))
+
+(vim.keymap.set "n" "<Space>" "<Leader>" {:remap true})
+(vim.keymap.set "x" "<" "<gv")
+(vim.keymap.set "x" ">" ">gv")
+(vim.keymap.set "t" "<Esc>" "<C-\\><C-n>")

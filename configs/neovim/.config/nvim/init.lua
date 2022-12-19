@@ -405,11 +405,6 @@ packer.startup(function(use)
   end
 end)
 
-vim.keymap.set("n", "<Space>", "<Leader>", { remap = true })
-vim.keymap.set("x", "<", "<gv")
-vim.keymap.set("x", ">", ">gv")
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   group = "Evan",
   pattern = "init.lua",
