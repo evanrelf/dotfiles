@@ -1,5 +1,5 @@
 require("hotpot")
-require("next")
+require("evan.next")
 
 vim.api.nvim_create_augroup("Evan", { clear = true })
 
