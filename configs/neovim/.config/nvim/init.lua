@@ -1,7 +1,7 @@
+vim.api.nvim_create_augroup("Evan", { clear = true })
+
 require("hotpot")
 require("evan.next")
-
-vim.api.nvim_create_augroup("Evan", { clear = true })
 
 local packer = require("packer")
 packer.startup(function(use)
@@ -404,61 +404,3 @@ packer.startup(function(use)
     packer.compile()
   end
 end)
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  group = "Evan",
-  pattern = "init.lua",
-  command = "source <afile> | PackerCompile",
-})
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  group = "Evan",
-  pattern = { "git-revise-todo" },
-  callback = function()
-    vim.opt.filetype = "gitrebase"
-  end,
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = "Evan",
-  pattern = "fish",
-  callback = function()
-    vim.opt_local.shiftwidth = 4
-  end,
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = "Evan",
-  pattern = "rust",
-  callback = function()
-    vim.opt_local.colorcolumn = "81,101"
-  end,
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = "Evan",
-  pattern = "gitcommit",
-  callback = function()
-    vim.opt_local.colorcolumn = "51,73"
-  end,
-})
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-  group = "Evan",
-  callback = function()
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-    vim.cmd("startinsert!")
-  end,
-})
-vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, {
-  group = "Evan",
-  callback = function()
-    if vim.bo.buftype == "terminal" then
-      vim.cmd("startinsert!")
-    end
-  end,
-})
-vim.api.nvim_create_autocmd({ "BufWinLeave", "WinLeave" }, {
-  group = "Evan",
-  callback = function()
-    if vim.bo.buftype == "terminal" then
-      vim.cmd("stopinsert")
-    end
-  end,
-})

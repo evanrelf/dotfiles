@@ -31,3 +31,55 @@
 (vim.keymap.set "x" "<" "<gv")
 (vim.keymap.set "x" ">" ">gv")
 (vim.keymap.set "t" "<Esc>" "<C-\\><C-n>")
+
+(vim.api.nvim_create_autocmd
+  ["BufWritePost"]
+  {:group "Evan"
+   :pattern "init.lua"
+   :command "source <afile> | PackerCompile"})
+
+(vim.api.nvim_create_autocmd
+  ["BufEnter"]
+  {:group "Evan"
+   :pattern ["git-revise-todo"]
+   :callback (lambda [] (set vim.opt_local.filetype "gitrebase"))})
+
+(vim.api.nvim_create_autocmd
+  ["FileType"]
+  {:group "Evan"
+   :pattern "fish"
+   :callback (lambda [] (set vim.opt_local.shiftwidth 4))})
+
+(vim.api.nvim_create_autocmd
+  ["FileType"]
+  {:group "Evan"
+   :pattern "rust"
+   :callback (lambda [] (set vim.opt_local.colorcolumn "81,101"))})
+
+(vim.api.nvim_create_autocmd
+  ["FileType"]
+  {:group "Evan"
+   :pattern "gitcommit"
+   :callback (lambda [] (set vim.opt_local.colorcolumn "51,73"))})
+
+(vim.api.nvim_create_autocmd
+  ["TermOpen"]
+  {:group "Evan"
+   :callback (lambda []
+               (set vim.opt_local.number false)
+               (set vim.opt_local.relativenumber false)
+               (vim.cmd "startinsert!"))})
+
+(vim.api.nvim_create_autocmd
+  ["BufWinEnter" "WinEnter"]
+  {:group "Evan"
+   :callback (lambda []
+               (when (= vim.bo.buftype "terminal")
+                 (vim.cmd "startinsert!")))})
+
+(vim.api.nvim_create_autocmd
+  ["BufWinLeave" "WinLeave"]
+  {:group "Evan"
+   :callback (lambda []
+               (when (= vim.bo.buftype "terminal")
+                 (vim.cmd "stopinsert")))})
