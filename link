@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+if [ $# -ne 1 ]; then
+  echo "usage: ./link <program>" >&2
+  exit 1
+fi
+
+program=$1
+git_root=$(git rev-parse --show-toplevel)
+
+case $program in
+  hammerspoon)
+    source="$git_root/configs/hammerspoon/.config/hammerspoon"
+    destination="$HOME/.config/hammerspoon"
+    rm -rf "$destination"
+    ln -fs "$source" "$destination"
+    ;;
+  neovim)
+    source="$git_root/configs/neovim/.config/nvim"
+    destination="$HOME/.config/nvim"
+    rm -rf "$destination"
+    ln -fs "$source" "$destination"
+    ;;
+  wezterm)
+    source="$git_root/configs/wezterm/.config/wezterm"
+    destination="$HOME/.config/wezterm"
+    rm -rf "$destination"
+    ln -fs "$source" "$destination"
+    ;;
+  *)
+    echo "unsupported program: $program" >&2
+    exit 1
+    ;;
+esac
