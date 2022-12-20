@@ -91,8 +91,8 @@
     recursive = true;
   };
 
-  xdg.configFile."fish/home-manager.fish".text =
-    config.xdg.configFile."fish/config.fish".text;
+  xdg.configFile."fish/home-manager.fish".source =
+    config.xdg.configFile."fish/config.fish".source;
 
   xdg.configFile."git" = {
     source = ../configs/git/.config/git;

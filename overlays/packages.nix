@@ -52,7 +52,7 @@ in
     });
 
   emacs =
-    pkgsFinal.emacsNativeComp;
+    pkgsFinal.emacsUnstable;
 
   findutils-gprefix =
     gprefix pkgsFinal.findutils;
