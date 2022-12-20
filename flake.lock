@@ -165,6 +165,22 @@
         "type": "github"
       }
     },
+    "hotpot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669984370,
+        "narHash": "sha256-UqyL7uJ4uYpsqyQoGcGQF24Qtl2bTEEFD7fOYvgBfDE=",
+        "owner": "rktjmp",
+        "repo": "hotpot.nvim",
+        "rev": "1002bcdea7af06c5a7bfce0536d96bc4b03ab42e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rktjmp",
+        "repo": "hotpot.nvim",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -244,6 +260,7 @@
         "flake-utils": "flake-utils",
         "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
+        "hotpot": "hotpot",
         "nixpkgs": "nixpkgs",
         "packer": "packer",
         "paq": "paq"

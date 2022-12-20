@@ -33,6 +33,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hotpot = {
+      url = "github:rktjmp/hotpot.nvim";
+      flake = false;
+    };
     nixpkgs.url = "github:NixOS/nixpkgs";
     packer = {
       url = "github:wbthomason/packer.nvim";

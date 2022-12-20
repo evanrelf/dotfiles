@@ -135,12 +135,7 @@
     inputs.paq;
 
   xdg.dataFile."nvim/site/pack/home-manager/start/hotpot".source =
-    pkgs.fetchFromGitHub {
-      owner = "rktjmp";
-      repo = "hotpot.nvim";
-      rev = "1002bcdea7af06c5a7bfce0536d96bc4b03ab42e";
-      hash = "sha256-UqyL7uJ4uYpsqyQoGcGQF24Qtl2bTEEFD7fOYvgBfDE=";
-    };
+    inputs.hotpot;
 
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;
