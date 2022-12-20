@@ -35,6 +35,7 @@
     pkgs.nix-direnv
     pkgs.nixpkgs-fmt
     pkgs.qsv
+    pkgs.racket
     pkgs.ripgrep
     pkgs.rustup
     pkgs.sd
