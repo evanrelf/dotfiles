@@ -6,9 +6,21 @@
 
 (paq.register "ishan9299/modus-theme-vim")
 (set! termguicolors)
-(set! background "light")
 (set vim.g.modus_dim_inactive_window false)
-(vim.cmd.colorscheme "modus-operandi")
+(fn sync-colorscheme [options]
+  (if (let [style (vim.fn.system "defaults read -g AppleInterfaceStyle")]
+        (style:match "Dark"))
+      (do
+        (set! background "dark")
+        (vim.cmd.colorscheme options.dark))
+      (do
+        (set! background "light")
+        (vim.cmd.colorscheme options.light))))
+(vim.api.nvim_create_user_command
+  "SyncColorscheme"
+  (lambda [] (sync-colorscheme {:dark "modus-vivendi" :light "modus-operandi"}))
+  {})
+(sync-colorscheme {:dark "modus-vivendi" :light "modus-operandi"})
 
 (set! expandtab)
 (set! shiftwidth 2)
