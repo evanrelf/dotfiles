@@ -22,6 +22,54 @@ local font_rules = function()
   return rules
 end
 
+local color_scheme = (function()
+  if wezterm.gui.get_appearance():find("Light") then
+    return "primer-light"
+  else
+    return "primer-dark"
+  end
+end)()
+
+local colors = (function()
+  if wezterm.gui.get_appearance():find("Light") then
+    return {
+      tab_bar = {
+        background = "#ffffff",
+        active_tab = {
+          fg_color = "#000000",
+          bg_color = "#ffffff",
+        },
+        inactive_tab = {
+          fg_color = "#959da5",
+          bg_color = "#ffffff",
+        },
+        new_tab = {
+          fg_color = "#ffffff",
+          bg_color = "#ffffff",
+        },
+      },
+    }
+  else
+    return {
+      tab_bar = {
+        background = "#010409",
+        active_tab = {
+          fg_color = "#ffffff",
+          bg_color = "#010409",
+        },
+        inactive_tab = {
+          fg_color = "#959da5", -- TODO
+          bg_color = "#010409",
+        },
+        new_tab = {
+          fg_color = "#010409",
+          bg_color = "#010409",
+        },
+      },
+    }
+  end
+end)()
+
 local key = function(mods, key, action)
   return {
     mods = mods,
@@ -34,25 +82,9 @@ return {
   font = font,
   font_size = 17.0,
   font_rules = font_rules(),
-  color_scheme = "primer-light",
   freetype_load_flags = "NO_HINTING",
-  colors = {
-    tab_bar = {
-      background = "#ffffff",
-      active_tab = {
-        fg_color = "#000000",
-        bg_color = "#ffffff",
-      },
-      inactive_tab = {
-        fg_color = "#959da5",
-        bg_color = "#ffffff",
-      },
-      new_tab = {
-        fg_color = "#ffffff",
-        bg_color = "#ffffff",
-      },
-    },
-  },
+  color_scheme = color_scheme,
+  colors = colors,
   inactive_pane_hsb = {
     brightness = 1.0,
     saturation = 1.0,
