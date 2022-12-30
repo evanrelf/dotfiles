@@ -247,6 +247,11 @@ packer.startup(function(use)
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      lspconfig.rust_analyzer.setup({
+        autostart = false,
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       local configs = require("lspconfig.configs")
       local util = require("lspconfig.util")
       if not configs.sidekick then
