@@ -371,12 +371,7 @@ packer.startup(function(use)
     end,
   })
 
-  use({
-    "sitiom/nvim-numbertoggle",
-    config = function()
-      require("numbertoggle").setup()
-    end,
-  })
+  use({ "sitiom/nvim-numbertoggle" })
 
   use({ "tpope/vim-repeat" })
 
