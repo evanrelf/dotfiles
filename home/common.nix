@@ -34,6 +34,7 @@
     pkgs.nerdfonts
     pkgs.nix-direnv
     pkgs.nixpkgs-fmt
+    pkgs.pandoc
     pkgs.qsv
     pkgs.racket
     pkgs.ripgrep
