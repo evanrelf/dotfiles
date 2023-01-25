@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+columns=$(tput cols)
+lines=$(tput lines)
+
+if [ "${columns}" -lt 50 ] || [ "${lines}" -lt 30 ]; then
+  preview=()
+else
+  if [ "${columns}" -ge 150 ]; then
+    position="right"
+    size="60%"
+  else
+    position="down"
+    size="70%"
+  fi
+
+  preview=(\
+    --preview "echo {} | cut -d ' ' -f 1 | xargs git show --color=always ${GIT_LOOKUP_SHOW_OPTIONS:-} | delta" \
+    --preview-window "${position}":"${size}":sharp \
+  )
+fi
+
+  git log \
+  --oneline \
+  --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' \
+  --color=always \
+| fzf -1 -0 \
+  --exact \
+  --query="$*" \
+  --no-sort \
+  --reverse \
+  --height=100% \
+  "${preview[@]}" \
+  --ansi \
+  --color=light \
+| cut -d ' ' -f 1 \
+| xargs git rev-parse --verify --quiet
