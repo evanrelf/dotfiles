@@ -42,6 +42,8 @@
   (set! norelativenumber))
 
 (vim.keymap.set "n" "<Space>" "<Leader>" {:remap true})
+(vim.keymap.set "n" "j" "gj")
+(vim.keymap.set "n" "k" "gk")
 (vim.keymap.set "x" "<" "<gv")
 (vim.keymap.set "x" ">" ">gv")
 (vim.keymap.set "t" "<Esc>" "<C-\\><C-n>")
