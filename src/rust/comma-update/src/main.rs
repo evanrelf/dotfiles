@@ -12,10 +12,8 @@ fn main() -> Result<(), anyhow::Error> {
 
     let arch = match env::consts::ARCH {
         "x86_64" => "x86_64",
-        unsupported => {
-            eprintln!("warning: Unsupported arch {unsupported}, falling back to x86_64");
-            "x86_64"
-        }
+        "aarch64" => "aarch64",
+        unsupported => anyhow::bail!("Unsupported arch: {unsupported}"),
     };
 
     let os = match env::consts::OS {
