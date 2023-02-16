@@ -65,14 +65,14 @@ in
   jujutsu =
     pkgsPrev.rustPlatform.buildRustPackage rec {
       pname = "jujutsu";
-      version = "0.6.1";
+      version = "0.7.0";
       src = pkgsPrev.fetchFromGitHub {
         owner = "martinvonz";
         repo = "jj";
         rev = "v${version}";
-        sha256 = "sha256-ajBL2o5i4UmclL/s9eEVtn/p51/F4gsClmcYBrAZ+1o=";
+        sha256 = "sha256-FczlSBlLhLIamLiY4cGVAoHx0/sxx+tykICzedFbbx8=";
       };
-      cargoSha256 = "sha256-RgF2StIMfFzbp0azG4yRPvzrZ4kczWtOWVd+KTTPbRw=";
+      cargoSha256 = "sha256-PydDgXp47KUSLvAQgfO+09lrzTnBjzGd+zA5f/jZfRc=";
       OPENSSL_NO_VENDOR = 1;
       nativeBuildInputs = [ pkgsFinal.pkg-config ];
       buildInputs = [
