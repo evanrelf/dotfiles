@@ -22,6 +22,8 @@ in
       };
     in
     (pkgsFinal.crane.buildPackage {
+      pname = "cached-nix-shell";
+      version = "0.0.0";
       # Add macOS support: https://github.com/xzfc/cached-nix-shell/pull/25
       src = pkgsPrev.fetchFromGitHub {
         owner = "uri-canva";

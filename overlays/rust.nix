@@ -16,18 +16,26 @@ let
     });
 
   cargoArtifacts =
-    crane.buildDepsOnly { inherit src; };
+    crane.buildDepsOnly {
+      pname = "cargoArtifacts";
+      version = "0.0.0";
+      inherit src;
+    };
 
 in
 {
   comma-update =
     crane.buildPackage {
+      pname = "comma-update";
+      version = "0.0.0";
       inherit src cargoArtifacts;
       cargoBuildCommand = "cargo build --release --bin comma-update";
     };
 
   home-rebuild =
     crane.buildPackage {
+      pname = "home-rebuild";
+      version = "0.0.0";
       inherit src cargoArtifacts;
       cargoBuildCommand = "cargo build --release --bin home-rebuild";
     };
