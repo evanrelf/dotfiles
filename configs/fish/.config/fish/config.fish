@@ -59,6 +59,7 @@ alias less "less -RMK"
 alias cargod "cargo watch --exec 'lclippy --all-targets' --clear --quiet"
 set --global fish_greeting ""
 abbr --add --global g git
+abbr --add --global j jj
 abbr --add --global k kak
 abbr --add --global n nvim
 function rg
