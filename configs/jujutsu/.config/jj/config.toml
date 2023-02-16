@@ -3,6 +3,8 @@ name = "Evan Relf"
 email = "evan@evanrelf.com"
 
 [ui]
+diff.format = "git"
+pager = "delta"
 diff-editor = "nvim"
 merge-editor = "nvim"
 
