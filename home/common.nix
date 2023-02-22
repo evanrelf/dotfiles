@@ -32,6 +32,7 @@
     pkgs.kakoune
     pkgs.neovim
     pkgs.nerdfonts
+    pkgs.nil
     pkgs.nix-direnv
     pkgs.nixpkgs-fmt
     pkgs.pandoc

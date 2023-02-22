@@ -254,6 +254,11 @@ packer.startup(function(use)
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      lspconfig.nil_ls.setup({
+        autostart = true,
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       local configs = require("lspconfig.configs")
       local util = require("lspconfig.util")
       if not configs.sidekick then
