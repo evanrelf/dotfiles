@@ -5,6 +5,8 @@ require("evan.next")
 
 local packer = require("packer")
 packer.startup(function(use)
+  use({ "chaoren/vim-wordmotion" })
+
   use({
     "ggandor/flit.nvim",
     requires = { "ggandor/leap.nvim" },
