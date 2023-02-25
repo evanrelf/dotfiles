@@ -29,7 +29,11 @@ if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
 end
-if command -q cached-nix-shell
+# TODO: Combine `nix-your-shell` and `cached-nix-shell`, or drop
+# `cached-nix-shell`
+if command -q nix-your-shell
+    nix-your-shell fish | source
+else if command -q cached-nix-shell
     alias nix-shell "cached-nix-shell --run fish"
 else
     alias nix-shell "command nix-shell --run fish"
