@@ -261,6 +261,22 @@ packer.startup(function(use)
       })
       local configs = require("lspconfig.configs")
       local util = require("lspconfig.util")
+      if not configs.halfsp then
+        configs.halfsp = {
+          default_config = {
+            cmd = { "halfsp" },
+            filetypes = { "haskell" },
+            root_dir = util.root_pattern("*.cabal", "package.yaml"),
+            single_file_support = false,
+            settings = {},
+          },
+        }
+      end
+      lspconfig.halfsp.setup({
+        autostart = false,
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       if not configs.sidekick then
         configs.sidekick = {
           default_config = {
