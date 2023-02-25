@@ -63,6 +63,9 @@
 (autocmd! "FileType" "gitcommit"
   (setlocal! colorcolumn "51,73"))
 
+(autocmd! "BufEnter" "*/.jj/repo/description-*.txt"
+  (setlocal! colorcolumn "51,73"))
+
 (autocmd! "TermOpen" "*"
   (setlocal! nonumber)
   (setlocal! norelativenumber)
