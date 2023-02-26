@@ -12,3 +12,7 @@ hook global InsertCompletionHide .* %{
   unmap window "insert" "<tab>" "<c-n>"
   unmap window "insert" "<s-tab>" "<c-p>"
 }
+
+# Disable legacy mappings
+map global "insert" "<c-n>" "<a-;>: fail 'Use tab'<ret>"
+map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
