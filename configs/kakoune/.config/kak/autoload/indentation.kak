@@ -1,5 +1,9 @@
 set-option global indentwidth 2
 
+hook global WinSetOption filetype=(fish|rust) %{
+  set-option window indentwidth 4
+}
+
 # Use spaces for indentation
 hook global InsertChar \t %{ try %{
   # Assert cursor is at beginning of line
