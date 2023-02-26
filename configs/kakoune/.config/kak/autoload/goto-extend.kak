@@ -9,5 +9,9 @@ map global "goto" "T" "<esc>Gt" -docstring "window top (extend)"
 map global "goto" "C" "<esc>Gc" -docstring "window center (extend)"
 map global "goto" "B" "<esc>Gb" -docstring "window bottom (extend)"
 
-# Disable `G` key
+# Disable legacy mappings
 map global "normal" "G" ": fail 'Use g'<ret>"
+map global "normal" "<a-h>" ": fail 'Use Gh'<ret>"
+map global "normal" "<a-l>" ": fail 'Use Gl'<ret>"
+map global "normal" "<a-H>" ": fail 'Use Gh'<ret>"
+map global "normal" "<a-L>" ": fail 'Use Gl'<ret>"
