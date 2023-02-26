@@ -1,1 +1,41 @@
 set-option global startup_info_version 99991231
+
+add-highlighter global/show-matching show-matching
+
+map global "normal" "i" ";i"
+map global "normal" "a" ";li"
+
+map global "normal" "#" ": comment-line<ret>"
+map global "normal" "<a-#>" ": comment-block<ret>"
+
+# Diet https://github.com/evanrelf/reselect.kak
+map global "normal" "i" ";i"
+map global "normal" "a" ";li"
+
+# Insert with count
+map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' \
+  -docstring "Insert with count"
+
+# Buffer
+declare-user-mode "buffer"
+map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "Buffer..."
+map global "buffer" "n" ": buffer-next<ret>" -docstring "Next buffer"
+map global "buffer" "p" ": buffer-previous<ret>" -docstring "Previous buffer"
+map global "buffer" "d" ": delete-buffer<ret>" -docstring "Delete buffer"
+map global "buffer" "u" ": buffer *debug*<ret>" -docstring "Go to Debug buffer"
+map global "buffer" "=" ": format-buffer<ret>" -docstring "Format buffer"
+
+# Disable legacy mappings
+map global "goto" "g" "<esc>: fail 'Use gk'<ret>"
+map global "view" "v" "<esc>: fail 'Use vc'<ret>"
+
+# Evaluate commands
+define-command -docstring "evaluate-buffer: evaluate buffer commands as if entered by user" \
+evaluate-buffer %{
+  execute-keys -draft "%: <c-r>.<ret>"
+}
+
+define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
+evaluate-selection %{
+  execute-keys -itersel -draft ": <c-r>.<ret>"
+}
