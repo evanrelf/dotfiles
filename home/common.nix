@@ -123,6 +123,9 @@
     recursive = true;
   };
 
+  xdg.configFile."kak/autoload/runtime".source =
+    "${pkgs.kakoune}/share/kak/autoload";
+
   xdg.configFile."nvim" = {
     source = ../configs/neovim/.config/nvim;
     recursive = true;
