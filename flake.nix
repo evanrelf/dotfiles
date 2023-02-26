@@ -37,6 +37,10 @@
       url = "github:rktjmp/hotpot.nvim";
       flake = false;
     };
+    kakoune = {
+      url = "github:mawww/kakoune";
+      flake = false;
+    };
     nixpkgs.url = "github:NixOS/nixpkgs";
     packer = {
       url = "github:wbthomason/packer.nvim";

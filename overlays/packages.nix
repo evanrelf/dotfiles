@@ -86,6 +86,16 @@ in
       ];
     };
 
+  kakoune-unwrapped =
+    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
+      version = "evanrelf";
+      src = pkgsPrev.inputs.kakoune;
+      preConfigure = ''
+        ${prev.preConfigure}
+        export version="${version}"
+      '';
+    });
+
   neovim =
     pkgsPrev.neovim.override {
       extraLuaPackages = p: [ p.fennel ];

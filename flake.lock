@@ -181,6 +181,22 @@
         "type": "github"
       }
     },
+    "kakoune": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676959156,
+        "narHash": "sha256-q0A2ECTivtX2eLZWh05P7G/QQ6rnNAtGxU/e4CBSdBg=",
+        "owner": "mawww",
+        "repo": "kakoune",
+        "rev": "fa060c2a17e0b52dd5fb3fcd73aab3d176536fb8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mawww",
+        "repo": "kakoune",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -261,6 +277,7 @@
         "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
         "hotpot": "hotpot",
+        "kakoune": "kakoune",
         "nixpkgs": "nixpkgs",
         "packer": "packer",
         "paq": "paq"
