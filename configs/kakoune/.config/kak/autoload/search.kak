@@ -1,3 +1,6 @@
+# Highlight matches
+add-highlighter global/search-matches dynregex "%%reg{/}" 0:black,bright-white+f
+
 # Make search case-insensitive by default
 map global "normal" "/" "/(?i)"
 map global "normal" "?" "?(?i)"
