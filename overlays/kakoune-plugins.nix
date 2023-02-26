@@ -9,6 +9,13 @@ let
       sha256 = "sha256-xz0UUDSlkx0hq14SnoiajuZJQBsjfV+jE2GEk2oxRDk=";
     };
 
+    "number-toggle-kak" = {
+      owner = "evanrelf";
+      repo = "number-toggle.kak";
+      rev = "d6b67642d0950c4a8089233f4260b50d80ba0c48";
+      sha256 = "sha256-C5Dg2/kCtNSztwjClnZkJHy89h5WbvlstbU2j//6lYA=";
+    };
+
     "primer-kak" = {
       owner = "evanrelf";
       repo = "primer.kak";
