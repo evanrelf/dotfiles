@@ -1,35 +1,267 @@
-set-option global startup_info_version 99991231
+################################################################################
+# INDENTATION
+################################################################################
 
-add-highlighter global/show-matching show-matching
+# Use spaces for indentation
+hook global InsertChar \t %{ try %{
+  # Assert cursor is at beginning of line
+  execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
+  # Replace tab character with spaces
+  execute-keys -draft "h%opt{indentwidth}@"
+} catch %{
+  # Delete tab character when cursor is not at beginning of line
+  execute-keys -draft "hd"
+}}
 
-map global "normal" "i" ";i"
-map global "normal" "a" ";li"
+# De-indent when deleting a line's leading whitespace
+hook global InsertDelete " " %{ try %{
+  # Assert cursor is at beginning of line
+  execute-keys -draft "hGh<a-k>\A\h+\z<ret>"
+  # De-indent line
+  execute-keys -draft "i<space><esc><lt>"
+}}
 
+# TODO: Implement Vim's `shiftround` behavior
+
+# Indent with 2 spaces by default
+set-option global indentwidth 2
+
+# Indent with 4 spaces in select languages
+hook global WinSetOption filetype=(fish|rust) %{
+  set-option window indentwidth 4
+}
+
+################################################################################
+# COMPLETION
+################################################################################
+
+# Use Tab in autocomplete menu
+hook global InsertCompletionShow .* %{ try %{
+  # Assert previous character is not a space
+  execute-keys -draft "h<a-K>\h<ret>"
+  # Bind tab keys to control completion menu
+  map window "insert" "<tab>" "<c-n>"
+  map window "insert" "<s-tab>" "<c-p>"
+  # Restore tab keys outside of completion menu
+  hook -once window InsertCompletionHide .* %{
+    unmap window "insert" "<tab>" "<c-n>"
+    unmap window "insert" "<s-tab>" "<c-p>"
+  }
+}}
+
+# Disable legacy mappings
+map global "insert" "<c-n>" "<a-;>: fail 'Use tab'<ret>"
+map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
+
+################################################################################
+# CLIPBOARD
+################################################################################
+
+declare-option -hidden str clipboard_copy \
+  "<esc>: fail 'No clipboard_copy set'<ret>"
+
+declare-option -hidden str clipboard_paste \
+  "<esc>: fail 'No clipboard_paste set'<ret>"
+
+hook -once global NormalIdle .* %{
+  evaluate-commands %sh{
+    case "$(uname)" in
+      "Darwin")
+        echo "set-option global clipboard_copy 'pbcopy'"
+        echo "set-option global clipboard_paste 'pbpaste'"
+        ;;
+      "Linux")
+        echo "set-option global clipboard_copy 'wl-copy || xclip || tmux load-buffer -'"
+        echo "set-option global clipboard_paste 'wl-paste || xclip -o || tmux save-buffer -'"
+        ;;
+    esac
+  }
+}
+
+define-command -docstring "clipboard-yank: yank to clipboard" \
+clipboard-yank %{
+  execute-keys "<a-|>%opt{clipboard_copy}<ret>"
+}
+
+define-command -docstring "clipboard-paste-after: paste after from clipboard" \
+clipboard-paste-after %{
+  execute-keys "<a-!>%opt{clipboard_paste}<ret>"
+}
+
+define-command -docstring "clipboard-paste-before: paste before from clipboard" \
+clipboard-paste-before %{
+  execute-keys "!%opt{clipboard_paste}<ret>"
+}
+
+define-command -docstring "clipboard-replace: replace from clipboard" \
+clipboard-replace %{
+  execute-keys "|%opt{clipboard_paste}<ret>"
+}
+
+################################################################################
+# TRAILING WHITESPACE
+################################################################################
+
+# Highlight trailing whitespace
+hook global WinCreate .* %{
+  add-highlighter window/trailing-whitespace regex \h+$ 0:red+r
+}
+
+hook global ModeChange pop:insert:.* %{ try %{
+  add-highlighter window/trailing-whitespace regex \h+$ 0:red+r
+}}
+
+hook global ModeChange push:.*:insert %{
+  remove-highlighter window/trailing-whitespace
+}
+
+define-command -docstring "strip: strip trailing whitespace" \
+strip %{
+  execute-keys -draft "%%s\h+$<ret>d"
+}
+
+################################################################################
+# NUMBERS
+################################################################################
+
+hook -once global KakBegin .* %{
+  # evanrelf/number-toggle.kak
+  require-module "number-toggle"
+  set-option global number_toggle_params -hlcursor
+}
+
+################################################################################
+# GIT DIFF
+################################################################################
+
+hook global WinCreate .* %{
+  hook -once window NormalIdle .* %{ try %{
+    git show-diff
+    hook window BufWritePost .* %{ try %{
+      git update-diff
+    }}
+  }}
+}
+
+################################################################################
+# COLUMN
+################################################################################
+
+hook -once global KakBegin .* %{
+  # evanrelf/primer.kak
+  declare-option str column_color "rgb:f6f8fa"
+}
+
+# By default, the ideal width is 80 columns
+set-option global autowrap_column 80
+
+hook global WinSetOption filetype=rust %{
+  set-option window autowrap_column 100
+}
+
+hook global WinSetOption filetype=git-commit %{
+  add-highlighter window/subject-column column 50 "default,%opt{column_color}"
+  set-option window autowrap_column 72
+  autowrap-enable
+}
+
+hook global WinSetOption autowrap_column=.* %{
+  add-highlighter -override window/autowrap-column column \
+    %sh{ echo $((kak_opt_autowrap_column + 1)) } \
+    "default,%opt{column_color}"
+}
+
+define-command -docstring "softwrap-enable: enable soft wrapping" \
+softwrap-enable %{
+  add-highlighter window/softwrap wrap -indent -width %opt{autowrap_column}
+}
+
+define-command -docstring "softwrap-disable: disable soft wrapping" \
+softwrap-disable %{
+  remove-highlighter window/softwrap
+}
+
+################################################################################
+# MAPPINGS
+################################################################################
+
+# Toggle comments
 map global "normal" "#" ": comment-line<ret>"
 map global "normal" "<a-#>" ": comment-block<ret>"
 
-# Diet https://github.com/evanrelf/reselect.kak
+# Discard selection upon entering insert mode (diet evanrelf/reselect.kak)
 map global "normal" "i" ";i"
 map global "normal" "a" ";li"
 
-# Insert with count
+# Make search case-insensitive by default
+map global "normal" "/" "/(?i)"
+map global "normal" "?" "?(?i)"
+map global "normal" "<a-/>" "<a-/>(?i)"
+map global "normal" "<a-?>" "<a-?>(?i)"
+
+# Center viewport after jumping
+map global "normal" "n" "nvc"
+map global "normal" "N" "Nvc"
+map global "normal" "<a-n>" "<a-n>vc"
+map global "normal" "<a-N>" "<a-N>vc"
+map global "normal" "<c-i>" "<c-i>vc"
+map global "normal" "<c-o>" "<c-o>vc"
+map global "view" "v" "<esc>: fail 'Use vc'<ret>" -docstring "-"
+
+# Don't use `/` register for split and keep
+map global "normal" "s" '"ss'
+map global "normal" "S" '"sS'
+map global "normal" "<a-k>" '"k<a-k>'
+map global "normal" "<a-K>" '"k<a-K>'
+
+# Use `q` for backwards word movement
+map global "normal" "q" "b"
+map global "normal" "Q" "B"
+map global "normal" "<a-q>" "<a-b>"
+map global "normal" "<a-Q>" "<a-B>"
+map global "normal" "b" "q"
+map global "normal" "B" "Q"
+map global "normal" "<a-b>" ": fail 'Use a-q'<ret>"
+map global "normal" "<a-B>" ": fail 'Use a-Q'<ret>"
+
+# Goto mode
+map global "goto" "H" "<esc>Gh" -docstring "line begin (extend)"
+map global "goto" "L" "<esc>Gl" -docstring "line end (extend)"
+map global "goto" "K" "<esc>Gk" -docstring "buffer top (extend)"
+map global "goto" "J" "<esc>Gj" -docstring "buffer bottom (extend)"
+map global "goto" "I" "<esc>Gi" -docstring "line non blank start (extend)"
+map global "goto" "E" "<esc>Ge" -docstring "buffer end (extend)"
+map global "goto" "T" "<esc>Gt" -docstring "window top (extend)"
+map global "goto" "C" "<esc>Gc" -docstring "window center (extend)"
+map global "goto" "B" "<esc>Gb" -docstring "window bottom (extend)"
+map global "normal" "G" ": fail 'Use g'<ret>"
+map global "normal" "<a-h>" ": fail 'Use gH'<ret>"
+map global "normal" "<a-l>" ": fail 'Use gL'<ret>"
+map global "normal" "<a-H>" ": fail 'Use gH'<ret>"
+map global "normal" "<a-L>" ": fail 'Use gL'<ret>"
+map global "goto" "g" "<esc>: fail 'Use gk'<ret>" -docstring "-"
+
+# User mode
+map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
+map global "user" "p" ": clipboard-paste-after<ret>" -docstring "paste after"
+map global "user" "P" ": clipboard-paste-before<ret>" -docstring "paste before"
+map global "user" "R" ": clipboard-replace<ret>" -docstring "replace"
 map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' \
-  -docstring "Insert with count"
+  -docstring "insert with count"
 
-# Buffer
+# Buffer mode
 declare-user-mode "buffer"
-map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "Buffer..."
-map global "buffer" "n" ": buffer-next<ret>" -docstring "Next buffer"
-map global "buffer" "p" ": buffer-previous<ret>" -docstring "Previous buffer"
-map global "buffer" "d" ": delete-buffer<ret>" -docstring "Delete buffer"
-map global "buffer" "u" ": buffer *debug*<ret>" -docstring "Go to Debug buffer"
-map global "buffer" "=" ": format-buffer<ret>" -docstring "Format buffer"
+map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "buffer..."
+map global "buffer" "n" ": buffer-next<ret>" -docstring "next buffer"
+map global "buffer" "p" ": buffer-previous<ret>" -docstring "previous buffer"
+map global "buffer" "d" ": delete-buffer<ret>" -docstring "delete buffer"
+map global "buffer" "u" ": buffer *debug*<ret>" -docstring "go to debug buffer"
+map global "buffer" "=" ": format-buffer<ret>" -docstring "format buffer"
 
-# Disable legacy mappings
-map global "goto" "g" "<esc>: fail 'Use gk'<ret>"
-map global "view" "v" "<esc>: fail 'Use vc'<ret>"
+################################################################################
+# EVALUATE
+################################################################################
 
-# Evaluate commands
 define-command -docstring "evaluate-buffer: evaluate buffer commands as if entered by user" \
 evaluate-buffer %{
   execute-keys -draft "%: <c-r>.<ret>"
@@ -39,3 +271,16 @@ define-command -docstring "evaluate-selection: evaluate selection commands as if
 evaluate-selection %{
   execute-keys -itersel -draft ": <c-r>.<ret>"
 }
+
+################################################################################
+# MISCELLANEOUS
+################################################################################
+
+# Don't show changelog on startup
+set-option global startup_info_version 99991231
+
+# Highlight search matches
+add-highlighter global/search-matches dynregex '%reg{/}' 0:black,bright-white+f
+
+# Highlight matching pairs
+add-highlighter global/show-matching show-matching
