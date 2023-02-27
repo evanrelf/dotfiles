@@ -88,11 +88,9 @@ map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
 # CLIPBOARD
 ################################################################################
 
-declare-option -hidden str clipboard_copy \
-  "<esc>: fail 'No clipboard_copy set'<ret>"
+declare-option -hidden str clipboard_copy "<esc>: fail 'No clipboard_copy set'<ret>"
 
-declare-option -hidden str clipboard_paste \
-  "<esc>: fail 'No clipboard_paste set'<ret>"
+declare-option -hidden str clipboard_paste "<esc>: fail 'No clipboard_paste set'<ret>"
 
 hook -once global NormalIdle .* %{
   evaluate-commands %sh{
@@ -193,9 +191,7 @@ hook global WinSetOption filetype=git-commit %{
 }
 
 hook global WinSetOption autowrap_column=.* %{
-  add-highlighter -override window/autowrap-column column \
-    %sh{ echo $((kak_opt_autowrap_column + 1)) } \
-    "default,%opt{column_color}"
+  add-highlighter -override window/autowrap-column column %sh{ echo $((kak_opt_autowrap_column + 1)) } "default,%opt{column_color}"
 }
 
 define-command -docstring "softwrap-enable: enable soft wrapping" \
@@ -335,8 +331,7 @@ map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
 map global "user" "p" ": clipboard-paste-after<ret>" -docstring "paste after"
 map global "user" "P" ": clipboard-paste-before<ret>" -docstring "paste before"
 map global "user" "R" ": clipboard-replace<ret>" -docstring "replace"
-map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' \
-  -docstring "insert with count"
+map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstring "insert with count"
 
 # Buffer mode
 declare-user-mode "buffer"
@@ -349,12 +344,9 @@ map global "buffer" "=" ": format-buffer<ret>" -docstring "format buffer"
 
 # Haskell mode
 declare-user-mode "haskell"
-map global "user" "h" ": enter-user-mode haskell<ret>" \
-  -docstring "haskell..."
-map global "haskell" "l" ": haskell-insert-language-extension<ret>" \
-  -docstring "insert language extension"
-map global "haskell" "o" ": haskell-insert-option<ret>" \
-  -docstring "insert option"
+map global "user" "h" ": enter-user-mode haskell<ret>" -docstring "haskell..."
+map global "haskell" "l" ": haskell-insert-language-extension<ret>" -docstring "insert language extension"
+map global "haskell" "o" ": haskell-insert-option<ret>" -docstring "insert option"
 
 ################################################################################
 # EVALUATE
