@@ -228,18 +228,35 @@ define-command -hidden haskell-cache-options %{ nop %sh{
   fi
 }}
 
-define-command -hidden haskell-insert-language-pragma %{
+define-command -hidden haskell-insert-language-extension %{
   haskell-cache-language-extensions
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'" "extension: " %{
-    execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"
+    evaluate-commands %sh{
+      case "$kak_opt_filetype" in
+        "haskell" | "haskell2")
+          echo 'execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"'
+          ;;
+        *)
+          echo 'execute-keys -draft "i%val{text}<esc>"'
+          ;;
+      esac
+    }
     execute-keys "<esc>"
   }
 }
 
-define-command -hidden haskell-insert-options-pragma %{
+define-command -hidden haskell-insert-option %{
   haskell-cache-options
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
-    execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"
+    evaluate-commands %sh{
+      case "$kak_opt_filetype" in
+        "haskell" | "haskell2")
+          echo 'execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"'
+          ;;
+        *)
+          echo 'execute-keys -draft "i%val{text}<esc>"'
+          ;;
+    }
     execute-keys "<esc>"
   }
 }
@@ -322,15 +339,13 @@ map global "buffer" "u" ": buffer *debug*<ret>" -docstring "go to debug buffer"
 map global "buffer" "=" ": format-buffer<ret>" -docstring "format buffer"
 
 # Haskell mode
-hook global WinSetOption filetype=(haskell|haskell2) %{
-  declare-user-mode "haskell"
-  map window "user" "<space>" ": enter-user-mode haskell<ret>" \
-    -docstring "haskell..."
-  map window "haskell" "l" ": haskell-insert-language-pragma<ret>" \
-    -docstring "insert language pragma"
-  map window "haskell" "o" ": haskell-insert-options-pragma<ret>" \
-    -docstring "insert options pragma"
-}
+declare-user-mode "haskell"
+map global "user" "h" ": enter-user-mode haskell<ret>" \
+  -docstring "haskell..."
+map global "haskell" "l" ": haskell-insert-language-extension<ret>" \
+  -docstring "insert language extension"
+map global "haskell" "o" ": haskell-insert-option<ret>" \
+  -docstring "insert option"
 
 ################################################################################
 # EVALUATE
