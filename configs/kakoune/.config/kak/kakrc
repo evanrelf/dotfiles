@@ -288,6 +288,15 @@ map global "normal" "<c-i>" "<c-i>vc"
 map global "normal" "<c-o>" "<c-o>vc"
 map global "view" "v" "<esc>: fail 'Use vc'<ret>" -docstring "-"
 
+# Make `*` search for word under cursor when selection is reduced (like Vim)
+define-command -hidden star-word %{ evaluate-commands %sh{
+  if [ "$kak_selections_length" = "1" ]; then
+    echo 'try %{ execute-keys "<a-i>w" }'
+  fi
+  echo 'execute-keys -save-regs "" "*"'
+}}
+map global "normal" "*" ": star-word<ret>"
+
 # Don't use `/` register for split and keep
 map global "normal" "s" '"ss'
 map global "normal" "S" '"sS'
