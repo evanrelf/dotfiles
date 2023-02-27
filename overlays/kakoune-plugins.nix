@@ -9,6 +9,13 @@ let
       sha256 = "sha256-umLWqBLA6a57feFGDODtgZAPGJftk3J9opFP6xTzfLo=";
     };
 
+    "byline-kak" = {
+      owner = "evanrelf";
+      repo = "byline.kak";
+      rev = "a27d109b776c60e11752eeb3207c989a5e157fc0";
+      sha256 = "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=";
+    };
+
     "number-toggle-kak" = {
       owner = "evanrelf";
       repo = "number-toggle.kak";

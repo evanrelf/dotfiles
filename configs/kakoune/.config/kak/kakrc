@@ -365,6 +365,9 @@ evaluate-selection %{
 # MISCELLANEOUS
 ################################################################################
 
+# evanrelf/byline.kak
+require-module "byline"
+
 # Don't show changelog on startup
 set-option global startup_info_version 99991231
 
