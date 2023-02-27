@@ -54,6 +54,15 @@ hook global WinSetOption filetype=rust %{
 }
 
 ################################################################################
+# LINTING
+################################################################################
+
+hook global WinSetOption filetype=sh %{
+  set-option window lintcmd "shellcheck --external-sources --check-sourced --format gcc"
+  hook window BufWritePost .* %{ lint-buffer }
+}
+
+################################################################################
 # COMPLETION
 ################################################################################
 
