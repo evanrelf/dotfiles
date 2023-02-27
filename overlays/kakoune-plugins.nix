@@ -5,8 +5,8 @@ let
     "better-haskell-kak" = {
       owner = "evanrelf";
       repo = "better-haskell.kak";
-      rev = "b9524dd43e13268f7a9517c177b2d6062b1a3708";
-      sha256 = "sha256-xz0UUDSlkx0hq14SnoiajuZJQBsjfV+jE2GEk2oxRDk=";
+      rev = "767af679bd2c029c739659ab8fa34849e6c5d049";
+      sha256 = "sha256-umLWqBLA6a57feFGDODtgZAPGJftk3J9opFP6xTzfLo=";
     };
 
     "number-toggle-kak" = {
