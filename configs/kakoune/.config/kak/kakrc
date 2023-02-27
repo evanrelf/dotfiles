@@ -32,6 +32,28 @@ hook global WinSetOption filetype=(fish|rust) %{
 }
 
 ################################################################################
+# FORMATTING
+################################################################################
+
+hook global WinSetOption filetype=dhall %{
+  set-option window formatcmd "dhall format"
+}
+
+hook global WinSetOption filetype=fish %{
+  set-option window formatcmd "fish_indent"
+  hook window BufWritePre .* %{ format-buffer }
+}
+
+hook global WinSetOption filetype=nix %{
+  set-option window formatcmd "nixpkgs-fmt"
+}
+
+hook global WinSetOption filetype=rust %{
+  set-option window formatcmd "rustfmt --edition 2021 --emit stdout"
+  hook window BufWritePre .* %{ format-buffer }
+}
+
+################################################################################
 # COMPLETION
 ################################################################################
 
