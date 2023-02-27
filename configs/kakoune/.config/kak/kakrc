@@ -326,6 +326,47 @@ map global "normal" "<a-H>" ": fail 'Use gH'<ret>"
 map global "normal" "<a-L>" ": fail 'Use gL'<ret>"
 map global "goto" "g" "<esc>: fail 'Use gk'<ret>" -docstring "-"
 
+# Surround mode
+declare-user-mode "surround"
+map global "normal" "'" ": enter-user-mode surround<ret>" -docstring "surround..."
+define-command -hidden surround-delete %{
+  on-key -mode-name "surround-delete" %{ evaluate-commands %sh{
+    case "$kak_key" in
+      "(" | ")" | "[" | "]" | "{" | "}" | "<" | ">" | "<gt>" | "<lt>" | '"' | "'" | '`' )
+        echo "execute-keys 'Z<a-a>${kak_key}<a-S><a-d>z'"
+        ;;
+      "<esc>")
+        exit
+        ;;
+      *)
+        echo "fail 'surround-delete: invalid key'"
+        ;;
+    esac
+  }}
+}
+map global "surround" "d" ": surround-delete<ret>" -docstring "delete"
+map global "surround" "D" "Z<a-S><a-d>z<a-:>H" -docstring "delete (dumb)"
+define-command -hidden surround-map -params 2..5 %{ evaluate-commands %sh{
+  name=$1
+  key=$2
+  open=${3:-key}
+  close=${4:-$open}
+  count=${5:-}
+  echo "map 'global' 'surround' %!${key}! %!a${close}<esc>i${open}<esc>${count}H<a-;>! -docstring '${name}'"
+}}
+#             name           key    open    close   count
+surround-map  " (surround) " "("    "("     ")"
+surround-map  " [surround] " "["    "["     "]"
+surround-map  " {surround} " "{"    "{"     "}"
+surround-map  " <surround> " "<lt>" "<lt>"  "<gt>"
+surround-map  "( surround )" ")"    "( "    " )"    2
+surround-map  "[ surround ]" "]"    "[ "    " ]"    2
+surround-map  "{ surround }" "}"    "{ "    " }"    2
+surround-map  "< surround >" "<gt>" "<lt> " " <gt>" 2
+# surround-map %{ 'surround' } "'"
+# surround-map %{ "surround" } '"'
+# surround-map  " `surround` " "`"
+
 # User mode
 map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
 map global "user" "p" ": clipboard-paste-after<ret>" -docstring "paste after"
