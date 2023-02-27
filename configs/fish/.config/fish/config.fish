@@ -3,7 +3,7 @@ set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
 set --global --export GHCUP_USE_XDG_DIRS 1
 set --global --export COLORTERM "$TERM"
-set --global --export EDITOR nvim
+set --global --export EDITOR kak
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
 set --universal FZF_LEGACY_KEYBINDINGS 0
