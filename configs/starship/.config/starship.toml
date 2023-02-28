@@ -68,7 +68,7 @@ style = 'cyan'
 
 [nix_shell]
 disabled = false
-format = '[${symbol}nix-shell]($style) '
+format = '[${symbol}]($style) '
 symbol = ' '
 style = 'cyan'
 
