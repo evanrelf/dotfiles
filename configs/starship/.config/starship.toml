@@ -74,10 +74,9 @@ style = 'cyan'
 
 [jobs]
 disabled = false
-format = '[${symbol}jobs:$number]($style) '
+format = '[${symbol}$number]($style) '
 symbol = ' '
 style = 'green'
-number_threshold = 1
 
 [username]
 disabled = false
