@@ -418,3 +418,9 @@ add-highlighter global/search-matches dynregex '%reg{/}' 0:black,bright-white+f
 
 # Highlight matching pairs
 add-highlighter global/show-matching show-matching
+
+# Rename `delete-buffer` to `buffer-delete`
+alias global "buffer-delete" "delete-buffer"
+alias global "buffer-delete!" "delete-buffer!"
+alias global "bd" "delete-buffer"
+alias global "bd!" "delete-buffer!"
