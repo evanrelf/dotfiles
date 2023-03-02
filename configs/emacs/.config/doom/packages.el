@@ -5,6 +5,8 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
+(package! hl-line :disable t)
+
 (package! modus-themes)
 
 (package! mood-line)
