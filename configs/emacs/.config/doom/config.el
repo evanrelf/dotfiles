@@ -4,6 +4,10 @@
 ;; sync' after modifying this file!
 
 
+(after! which-key
+  (setq which-key-idle-delay 0.3)
+  (setq which-key-idle-secondary-delay 0.05))
+
 (use-package! modus-themes
   :config
   ;; Borderless modeline
