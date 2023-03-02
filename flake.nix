@@ -14,11 +14,6 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,7 +57,6 @@
           (_: _: { crane = inputs.crane.lib.${system}; })
           inputs.fenix.overlays.default
           inputs.comma.overlays.default
-          inputs.emacs-overlay.overlays.default
           inputs.haskell-overlay.overlays.default
           (import ./overlays/rust.nix)
           (import ./overlays/packages.nix)
