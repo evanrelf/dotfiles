@@ -3,9 +3,8 @@
 {
   # Hardware
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
-  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -13,8 +12,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ZFS
-  boot.zfs.devNodes = "/dev/disk/by-uuid/11341917885459316852";
-  networking.hostId = "d684c2fe";
+  boot.zfs.devNodes = "/dev/disk/by-uuid/10237604199205279791";
+  networking.hostId = "1e0dfc20";
 
   # Networking
   networking.hostName = "ultraviolet-vm";
@@ -31,6 +30,7 @@
 
   environment.systemPackages = [
     pkgs.file
+    pkgs.kakoune
     pkgs.neovim
   ];
 
@@ -48,7 +48,13 @@
 
   time.timeZone = "America/Los_Angeles";
 
+  system.copySystemConfiguration = true;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 }
