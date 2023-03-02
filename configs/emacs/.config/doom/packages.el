@@ -6,6 +6,7 @@
 ;; use 'M-x doom/reload'.
 
 (package! hl-line :disable t)
+(package! rainbow-delimiters :disable t)
 
 (package! modus-themes)
 
