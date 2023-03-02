@@ -24,6 +24,9 @@ if test -z "$IN_NIX_SHELL"
     if command -q rustup
         set --global --export --prepend PATH (dirname (rustup which rustc))
     end
+    if test -d "$HOME/.config/emacs/bin"
+        set --global --export --prepend PATH "$HOME/.config/emacs/bin"
+    end
 end
 if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
@@ -37,9 +40,6 @@ else if command -q cached-nix-shell
     alias nix-shell "cached-nix-shell --run fish"
 else
     alias nix-shell "command nix-shell --run fish"
-end
-if test -d "$HOME/.config/emacs/bin"
-    set --global --export --prepend PATH "$HOME/.config/emacs/bin"
 end
 if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
