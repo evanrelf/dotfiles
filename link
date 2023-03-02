@@ -12,6 +12,12 @@ program=$1
 git_root=$(git rev-parse --show-toplevel)
 
 case $program in
+  emacs)
+    source="$git_root/configs/emacs/.config/doom"
+    destination="$HOME/.config/doom"
+    rm -rf "$destination"
+    ln -fs "$source" "$destination"
+    ;;
   hammerspoon)
     source="$git_root/configs/hammerspoon/.config/hammerspoon"
     destination="$HOME/.config/hammerspoon"
