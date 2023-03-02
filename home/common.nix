@@ -16,7 +16,7 @@
     pkgs.coreutils-gprefix
     pkgs.delta
     pkgs.direnv
-    # pkgs.emacs
+    pkgs.emacs
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fzf

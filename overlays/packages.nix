@@ -53,9 +53,6 @@ in
       doCheck = false;
     });
 
-  emacs =
-    pkgsFinal.emacsUnstable;
-
   findutils-gprefix =
     gprefix pkgsFinal.findutils;
 
