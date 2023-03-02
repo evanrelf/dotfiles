@@ -8,6 +8,9 @@
   (setq which-key-idle-delay 0.3)
   (setq which-key-idle-secondary-delay 0.05))
 
+(after! paren
+  (setq show-paren-delay 0))
+
 (use-package! modus-themes
   :config
   ;; Borderless modeline
