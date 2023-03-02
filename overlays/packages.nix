@@ -53,6 +53,9 @@ in
       doCheck = false;
     });
 
+  emacs =
+    pkgsPrev.emacs.pkgs.withPackages (p: [ p.vterm ]);
+
   findutils-gprefix =
     gprefix pkgsFinal.findutils;
 
