@@ -4,6 +4,13 @@
 ;; sync' after modifying this file!
 
 
+(use-package! modus-themes
+  :config
+  ;; Borderless modeline
+  (setq modus-themes-common-palette-overrides
+      '((border-mode-line-active bg-mode-line-active)
+        (border-mode-line-inactive bg-mode-line-inactive))))
+
 (setq user-full-name "Evan Relf"
       user-mail-address "evan@evanrelf.com")
 
