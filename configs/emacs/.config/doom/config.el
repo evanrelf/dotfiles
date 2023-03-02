@@ -11,6 +11,9 @@
       '((border-mode-line-active bg-mode-line-active)
         (border-mode-line-inactive bg-mode-line-inactive))))
 
+(use-package! mood-line
+  :config (mood-line-mode +1))
+
 (setq user-full-name "Evan Relf"
       user-mail-address "evan@evanrelf.com")
 

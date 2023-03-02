@@ -7,6 +7,8 @@
 
 (package! modus-themes)
 
+(package! mood-line)
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
