@@ -38,6 +38,9 @@ else if command -q cached-nix-shell
 else
     alias nix-shell "command nix-shell --run fish"
 end
+if test -d "$HOME/.config/emacs/bin"
+    set --global --export --prepend PATH "$HOME/.config/emacs/bin"
+end
 if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
     set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
