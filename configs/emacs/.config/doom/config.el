@@ -4,12 +4,6 @@
 ;; sync' after modifying this file!
 
 
-(after! which-key
-  (setq which-key-idle-delay 0.3)
-  (setq which-key-idle-secondary-delay 0.05))
-
-(after! paren
-  (setq show-paren-delay 0))
 
 (use-package! modus-themes
   :config
@@ -20,6 +14,13 @@
 
 (use-package! mood-line
   :config (mood-line-mode +1))
+
+(after! paren
+  (setq show-paren-delay 0))
+
+(after! which-key
+  (setq which-key-idle-delay 0.3)
+  (setq which-key-idle-secondary-delay 0.05))
 
 (setq user-full-name "Evan Relf"
       user-mail-address "evan@evanrelf.com")
