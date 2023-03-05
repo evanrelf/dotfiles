@@ -4,6 +4,8 @@
 ;; sync' after modifying this file!
 
 
+(after! eldoc
+  (global-eldoc-mode -1))
 
 (use-package! modus-themes
   :config
