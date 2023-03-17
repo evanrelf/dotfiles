@@ -20,6 +20,7 @@
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fzf
+    pkgs.gawkInteractive-gprefix
     pkgs.git
     pkgs.git-revise
     pkgs.gnugrep-gprefix

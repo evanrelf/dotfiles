@@ -59,6 +59,9 @@ in
   findutils-gprefix =
     gprefix pkgsFinal.findutils;
 
+  gawkInteractive-gprefix =
+    gprefix pkgsFinal.gawkInteractive;
+
   gnugrep-gprefix =
     gprefix pkgsFinal.gnugrep;
 
