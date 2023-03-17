@@ -19,6 +19,7 @@
     pkgs.emacs
     pkgs.fd
     pkgs.findutils-gprefix
+    pkgs.frawk
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
     pkgs.git
