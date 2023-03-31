@@ -67,7 +67,6 @@ in
 
   jujutsu =
     pkgsPrev.rustPlatform.buildRustPackage rec {
-      pname = "jujutsu";
       version = "0.7.0";
       src = pkgsPrev.fetchFromGitHub {
         owner = "martinvonz";
@@ -76,17 +75,13 @@ in
         sha256 = "sha256-FczlSBlLhLIamLiY4cGVAoHx0/sxx+tykICzedFbbx8=";
       };
       cargoSha256 = "sha256-PydDgXp47KUSLvAQgfO+09lrzTnBjzGd+zA5f/jZfRc=";
-      OPENSSL_NO_VENDOR = 1;
-      nativeBuildInputs = [ pkgsFinal.pkg-config ];
-      buildInputs = [
-        pkgsFinal.openssl
-        pkgsFinal.dbus
-        pkgsFinal.sqlite
-      ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
-        pkgsFinal.darwin.apple_sdk.frameworks.Security
-        pkgsFinal.darwin.apple_sdk.frameworks.SystemConfiguration
-        pkgsFinal.libiconv
-      ];
+      inherit (pkgsPrev.jujutsu)
+        pname
+        OPENSSL_NO_VENDOR
+        nativeBuildInputs
+        buildInputs
+        meta
+        ;
     };
 
   kakoune-unwrapped =
