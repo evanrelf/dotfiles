@@ -25,6 +25,7 @@
     pkgs.git
     pkgs.git-revise
     pkgs.gnugrep-gprefix
+    pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
     pkgs.ijq
@@ -107,6 +108,11 @@
 
   xdg.configFile."hammerspoon" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../configs/hammerspoon/.config/hammerspoon;
+    recursive = true;
+  };
+
+  xdg.configFile."helix" = {
+    source = ../configs/helix/.config/helix;
     recursive = true;
   };
 

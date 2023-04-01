@@ -1,0 +1,143 @@
+# Author: Evan Relf <evan@evanrelf.com>
+
+"attributes" = "green_500"
+"comment" = "gray_500"
+"constant" = "blue_500"
+"constant.character.escape" = "yellow_900"
+"constant.numeric" = "blue_500"
+"constructor" = "green_600"
+# "debug" = ""
+# "diagnostic" = ""
+# "diff.delta" = ""
+# "diff.minus" = ""
+# "diff.plus" = ""
+"error" = { bg = "red_100" }
+"function" = "purple_500"
+# "hint" = ""
+# "info" = ""
+"keyword" = "red_600"
+# "label" = ""
+"markup.bold" = { modifiers = ["bold"] }
+# "markup.heading" = ""
+"markup.italic" = { modifiers = ["italic"] }
+# "markup.link.text" = ""
+"markup.link.url" = { modifiers = ["underlined"] }
+# "markup.list" = ""
+# "markup.quote" = ""
+# "markup.raw" = ""
+"namespace" = "purple_500"
+"operator" = "orange_600"
+# "special" = ""
+"string"  = "yellow_800"
+"type" = "blue_500"
+"ui.background" = { bg = "white" }
+"ui.cursor" = { bg = "red_100" }
+"ui.cursor.match" = { bg = "green_100" }
+"ui.cursor.primary" = { bg = "yellow_500" }
+# "ui.gutter" = ""
+"ui.help" = { bg = "blue_000" }
+"ui.linenr" = { fg = "gray_500", bg = "gray_100" }
+"ui.linenr.selected" = { fg = "gray_800", bg = "gray_100" }
+"ui.menu" = { bg = "gray_100" }
+"ui.menu.selected" = { fg = "white", bg = "blue_500" }
+"ui.popup" = { bg = "blue_000" }
+"ui.selection" = { bg = "yellow_200" }
+"ui.statusline" = { bg = "gray_100" }
+"ui.text" = "black"
+# "ui.text.focus" = ""
+# "ui.window" = ""
+# "variable" = ""
+# "variable.other.member" = ""
+"warning" = { bg = "yellow_100" }
+
+[palette]
+"black" = "#1b1f23"
+"white" = "#ffffff"
+
+"gray_000" = "#fafbfc"
+"gray_100" = "#f6f8fa"
+"gray_200" = "#e1e4e8"
+"gray_300" = "#d1d5da"
+"gray_400" = "#959da5"
+"gray_500" = "#6a737d"
+"gray_600" = "#586069"
+"gray_700" = "#444d56"
+"gray_800" = "#2f363d"
+"gray_900" = "#24292e"
+
+"blue_000" = "#f1f8ff"
+"blue_100" = "#dbedff"
+"blue_200" = "#c8e1ff"
+"blue_300" = "#79b8ff"
+"blue_400" = "#2188ff"
+"blue_500" = "#0366d6"
+"blue_600" = "#005cc5"
+"blue_700" = "#044289"
+"blue_800" = "#032f62"
+"blue_900" = "#05264c"
+
+"green_000" = "#f0fff4"
+"green_100" = "#dcffe4"
+"green_200" = "#bef5cb"
+"green_300" = "#85e89d"
+"green_400" = "#34d058"
+"green_500" = "#28a745"
+"green_600" = "#22863a"
+"green_700" = "#176f2c"
+"green_800" = "#165c26"
+"green_900" = "#144620"
+
+"yellow_000" = "#fffdef"
+"yellow_100" = "#fffbdd"
+"yellow_200" = "#fff5b1"
+"yellow_300" = "#ffea7f"
+"yellow_400" = "#ffdf5d"
+"yellow_500" = "#ffd33d"
+"yellow_600" = "#f9c513"
+"yellow_700" = "#dbab09"
+"yellow_800" = "#b08800"
+"yellow_900" = "#735c0f"
+
+"orange_000" = "#fff8f2"
+"orange_100" = "#ffebda"
+"orange_200" = "#ffd1ac"
+"orange_300" = "#ffab70"
+"orange_400" = "#fb8532"
+"orange_500" = "#f66a0a"
+"orange_600" = "#e36209"
+"orange_700" = "#d15704"
+"orange_800" = "#c24e00"
+"orange_900" = "#a04100"
+
+"red_000" = "#ffeef0"
+"red_100" = "#ffdce0"
+"red_200" = "#fdaeb7"
+"red_300" = "#f97583"
+"red_400" = "#ea4a5a"
+"red_500" = "#d73a49"
+"red_600" = "#cb2431"
+"red_700" = "#b31d28"
+"red_800" = "#9e1c23"
+"red_900" = "#86181d"
+
+"purple_000" = "#f5f0ff"
+"purple_100" = "#e6dcfd"
+"purple_200" = "#d1bcf9"
+"purple_300" = "#b392f0"
+"purple_400" = "#8a63d2"
+"purple_500" = "#6f42c1"
+"purple_600" = "#5a32a3"
+"purple_700" = "#4c2889"
+"purple_800" = "#3a1d6e"
+"purple_900" = "#29134e"
+
+"pink_000" = "#ffeef8"
+"pink_100" = "#fedbf0"
+"pink_200" = "#f9b3dd"
+"pink_300" = "#f692ce"
+"pink_400" = "#ec6cb9"
+"pink_500" = "#ea4aaa"
+"pink_600" = "#d03592"
+"pink_700" = "#b93a86"
+"pink_800" = "#99306f"
+"pink_900" = "#6d224f"
