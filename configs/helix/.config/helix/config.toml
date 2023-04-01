@@ -1,4 +1,23 @@
 theme = "primer"
 
 [editor]
+scrolloff = 0
+line-number = "relative"
+gutters = ["line-numbers", "spacer"]
+auto-format = false
+# completion-replace = true
 true-color = true
+# rulers = [81]
+
+[editor.lsp]
+enable = false
+
+[editor.file-picker]
+hidden = false
+
+[editor.search]
+wrap-around = false
+
+[editor.whitespace.render]
+nbsp = "all"
+tab = "all"
