@@ -140,9 +140,10 @@ hook global ModeChange push:.*:insert %{
   remove-highlighter window/trailing-whitespace
 }
 
+# Strip trailing whitespace
 define-command -docstring "strip: strip trailing whitespace" \
 strip %{
-  execute-keys -draft "%%s\h+$<ret>d"
+  execute-keys -draft '%s\h+$<ret>d'
 }
 
 ################################################################################

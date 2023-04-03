@@ -5,8 +5,8 @@ let
     "better-haskell-kak" = {
       owner = "evanrelf";
       repo = "better-haskell.kak";
-      rev = "767af679bd2c029c739659ab8fa34849e6c5d049";
-      sha256 = "sha256-umLWqBLA6a57feFGDODtgZAPGJftk3J9opFP6xTzfLo=";
+      rev = "399c844b6627f61a1c884825c8b616493a80766a";
+      sha256 = "sha256-OmuaW2L34sDE5C2mXUH5JEtt3qh85PCk8hZqoIzvwZc=";
     };
 
     "byline-kak" = {
