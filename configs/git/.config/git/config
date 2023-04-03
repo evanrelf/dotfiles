@@ -8,6 +8,12 @@
   bd = branch --delete --force
   bm = branch --move
 
+  # CHERRY-PICK
+  ch = cherry-pick
+  chc = cherry-pick --continue
+  chs = cherry-pick --skip
+  cha = cherry-pick --abort
+
   # COMMIT
   c = commit
   ca = commit --amend
