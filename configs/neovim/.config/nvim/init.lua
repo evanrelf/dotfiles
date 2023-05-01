@@ -273,7 +273,7 @@ packer.startup(function(use)
         }
       end
       lspconfig.static_ls.setup({
-        autostart = false,
+        autostart = vim.env.EVAN_STATIC_LS_AUTOSTART == "true",
         capabilities = capabilities,
         on_attach = on_attach,
       })
