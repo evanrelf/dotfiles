@@ -25,6 +25,7 @@
     pkgs.git
     pkgs.git-revise
     pkgs.gnugrep-gprefix
+    pkgs.gnused-gprefix
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild

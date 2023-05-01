@@ -65,6 +65,9 @@ in
   gnugrep-gprefix =
     gprefix pkgsFinal.gnugrep;
 
+  gnused-gprefix =
+    gprefix pkgsFinal.gnused;
+
   helix =
     pkgsPrev.rustPlatform.buildRustPackage rec {
       version = "23.03";
