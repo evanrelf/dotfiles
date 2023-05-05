@@ -41,7 +41,7 @@
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
     pkgs.pandoc
-    pkgs.qsv
+    # pkgs.qsv
     pkgs.racket
     pkgs.ripgrep
     pkgs.rustup

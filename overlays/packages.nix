@@ -68,24 +68,6 @@ in
   gnused-gprefix =
     gprefix pkgsFinal.gnused;
 
-  helix =
-    pkgsPrev.rustPlatform.buildRustPackage rec {
-      version = "23.03";
-      src = pkgsPrev.fetchzip {
-        url = "https://github.com/helix-editor/helix/releases/download/${version}/helix-${version}-source.tar.xz";
-        sha256 = "sha256-FtY2V7za3WGeUaC2t2f63CcDUEg9zAS2cGUWI0YeGwk=";
-        stripRoot = false;
-      };
-      cargoSha256 = "sha256-+KnBQA7gYLu2O/5vbY5cdEj9hni0Cn3cWPYswBi4934=";
-      inherit (pkgsPrev.helix)
-        pname
-        nativeBuildInputs
-        postInstall
-        postFixup
-        meta
-        ;
-    };
-
   jujutsu =
     pkgsPrev.rustPlatform.buildRustPackage rec {
       version = "0.7.0";
