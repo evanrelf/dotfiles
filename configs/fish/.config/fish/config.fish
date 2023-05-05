@@ -14,6 +14,7 @@ set --universal FZF_FIND_FILE_COMMAND "fd --type file --follow --exclude '.git' 
 set --universal FZF_OPEN_COMMAND "fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
 if test -z "$IN_NIX_SHELL"
     set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
+    set --global --export NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
     if test (uname) = Darwin
         set --global --export --prepend PATH /opt/homebrew/bin
     end
