@@ -48,12 +48,20 @@ packer.startup(function(use)
       end
       local cmp = require("cmp")
       cmp.setup({
-        sources = {
-          { name = "nvim_lsp", max_item_count = 10 },
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
+        }),
+        performance = {
+          max_view_entries = 15,
         },
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -70,7 +78,7 @@ packer.startup(function(use)
               fallback()
             end
           end, { "i", "s" }),
-        },
+        }),
         window = {
           -- Hides file preview from `cmp-path`
           documentation = {
