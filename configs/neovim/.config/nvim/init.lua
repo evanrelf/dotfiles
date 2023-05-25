@@ -358,7 +358,7 @@ packer.startup(function(use)
         },
       })
       -- stylua: ignore
-      require("vim.treesitter.query").set_query("haskell", "highlights", [[
+      require("vim.treesitter.query").set("haskell", "highlights", [[
         (comment) @comment
         [ (string) (quasiquote_body) ] @string
         (char) @character
