@@ -68,25 +68,6 @@ in
   gnused-gprefix =
     gprefix pkgsFinal.gnused;
 
-  jujutsu =
-    pkgsPrev.rustPlatform.buildRustPackage rec {
-      version = "0.7.0";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "martinvonz";
-        repo = "jj";
-        rev = "v${version}";
-        sha256 = "sha256-FczlSBlLhLIamLiY4cGVAoHx0/sxx+tykICzedFbbx8=";
-      };
-      cargoSha256 = "sha256-PydDgXp47KUSLvAQgfO+09lrzTnBjzGd+zA5f/jZfRc=";
-      inherit (pkgsPrev.jujutsu)
-        pname
-        OPENSSL_NO_VENDOR
-        nativeBuildInputs
-        buildInputs
-        meta
-        ;
-    };
-
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "evanrelf";

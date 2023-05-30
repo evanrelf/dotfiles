@@ -3,7 +3,8 @@
 {
   home.stateVersion = "22.11";
 
-  home.enableNixpkgsReleaseCheck = true;
+  # TODO: Re-enable this as soon as possible
+  home.enableNixpkgsReleaseCheck = false;
 
   home.packages = [
     pkgs.cached-nix-shell
