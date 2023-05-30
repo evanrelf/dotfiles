@@ -50,6 +50,7 @@
     pkgs.starship
     pkgs.stylua
     pkgs.tealdeer
+    pkgs.tectonic
     pkgs.watchexec
     pkgs.zoxide
   ];
