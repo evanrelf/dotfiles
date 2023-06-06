@@ -52,6 +52,7 @@
     pkgs.stylua
     pkgs.tealdeer
     pkgs.tectonic
+    pkgs.universal-ctags
     pkgs.watchexec
     pkgs.zoxide
   ];
