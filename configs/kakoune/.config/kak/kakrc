@@ -353,14 +353,14 @@ define-command -hidden surround-map -params 2..5 %{ evaluate-commands %sh{
   key=$2
   open=${3:-key}
   close=${4:-$open}
-  count=${5:-}
-  echo "map 'global' 'surround' %!${key}! %!a${close}<esc>i${open}<esc>${count}H<a-;>! -docstring '${name}'"
+  width=${5:-}
+  echo "map 'global' 'surround' %!${key}! %!a${close}<esc>i${open}<esc>${width}H<a-;>! -docstring '${name}'"
 }}
-#             name           key    open    close   count
-surround-map  " (surround) " "("    "("     ")"
-surround-map  " [surround] " "["    "["     "]"
-surround-map  " {surround} " "{"    "{"     "}"
-surround-map  " <surround> " "<lt>" "<lt>"  "<gt>"
+#             name           key    open    close   width
+surround-map  " (surround) " "("    "("     ")"     1
+surround-map  " [surround] " "["    "["     "]"     1
+surround-map  " {surround} " "{"    "{"     "}"     1
+surround-map  " <surround> " "<lt>" "<lt>"  "<gt>"  1
 surround-map  "( surround )" ")"    "( "    " )"    2
 surround-map  "[ surround ]" "]"    "[ "    " ]"    2
 surround-map  "{ surround }" "}"    "{ "    " }"    2
