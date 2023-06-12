@@ -348,17 +348,17 @@ define-command -hidden surround-delete %{
 }
 map global "surround" "d" ": surround-delete<ret>" -docstring "delete"
 map global "surround" "D" "Z<a-S><a-d>z<a-:>H" -docstring "delete (dumb)"
-map global "surround" "("    %{| sd --flags s '(.*)' '($1)'        <ret>} -docstring " (surround) "
-map global "surround" "["    %{| sd --flags s '(.*)' '[$1]'        <ret>} -docstring " [surround] "
-map global "surround" "{"    %{| sd --flags s '(.*)' '{$1}'        <ret>} -docstring " {surround} "
-map global "surround" "<lt>" %{| sd --flags s '(.*)' '<lt>$1<gt>'  <ret>} -docstring " <surround> "
-map global "surround" ")"    %{| sd --flags s '(.*)' '( $1 )'      <ret>} -docstring "( surround )"
-map global "surround" "]"    %{| sd --flags s '(.*)' '[ $1 ]'      <ret>} -docstring "[ surround ]"
-map global "surround" "}"    %{| sd --flags s '(.*)' '{ $1 }'      <ret>} -docstring "{ surround }"
-map global "surround" "<gt>" %{| sd --flags s '(.*)' '<lt> $1 <gt>'<ret>} -docstring "< surround >"
-map global "surround" "'"    %{| sd --flags s '(.*)' "'\$1'"       <ret>} -docstring " 'surround' "
-map global "surround" '"'    %{| sd --flags s '(.*)' '"$1"'        <ret>} -docstring ' "surround" '
-map global "surround" "`"    %{| sd --flags s '(.*)' '`$1`'        <ret>} -docstring " `surround` "
+map global "surround" "("    %{_| sd --flags s '(.*)' '($1)'        <ret>} -docstring " (surround) "
+map global "surround" "["    %{_| sd --flags s '(.*)' '[$1]'        <ret>} -docstring " [surround] "
+map global "surround" "{"    %{_| sd --flags s '(.*)' '{$1}'        <ret>} -docstring " {surround} "
+map global "surround" "<lt>" %{_| sd --flags s '(.*)' '<lt>$1<gt>'  <ret>} -docstring " <surround> "
+map global "surround" ")"    %{_| sd --flags s '(.*)' '( $1 )'      <ret>} -docstring "( surround )"
+map global "surround" "]"    %{_| sd --flags s '(.*)' '[ $1 ]'      <ret>} -docstring "[ surround ]"
+map global "surround" "}"    %{_| sd --flags s '(.*)' '{ $1 }'      <ret>} -docstring "{ surround }"
+map global "surround" "<gt>" %{_| sd --flags s '(.*)' '<lt> $1 <gt>'<ret>} -docstring "< surround >"
+map global "surround" "'"    %{_| sd --flags s '(.*)' "'\$1'"       <ret>} -docstring " 'surround' "
+map global "surround" '"'    %{_| sd --flags s '(.*)' '"$1"'        <ret>} -docstring ' "surround" '
+map global "surround" "`"    %{_| sd --flags s '(.*)' '`$1`'        <ret>} -docstring " `surround` "
 
 # User mode
 map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
