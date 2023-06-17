@@ -1,5 +1,6 @@
 format = """\
   $status\
+  [┏╸](fg:bright-white)\
   $directory\
   $hg_branch\
   $git_branch\
@@ -11,7 +12,7 @@ format = """\
   $username\
   $hostname\
   $line_break\
-  $character\
+  [┗╸](fg:bright-white)\
 """
 
 [status]
@@ -88,8 +89,3 @@ format = '[$user]($style)'
 disabled = false
 format = '[@$hostname]($style)'
 style = 'white'
-
-[character]
-disabled = false
-success_symbol = 'λ'
-error_symbol = 'λ'
