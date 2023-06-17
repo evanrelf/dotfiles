@@ -99,4 +99,18 @@ function hsimport
         "^import +(?:\"[\w-]+\" +)?(?:qualified +)?\b$argv[1]\b(?: .*)?\$" \
         $argv[2..-1]
 end
+set --global fish_color_command black
+set --global fish_color_keyword $fish_color_command
+set --global fish_color_param $fish_color_command
+set --global fish_color_option $fish_color_param
+set --global fish_color_valid_path $fish_color_param --underline
+set --global fish_color_quote yellow
+set --global fish_color_escape $fish_color_quote
+set --global fish_color_operator cyan
+set --global fish_color_end $fish_color_operator
+set --global fish_color_redirection $fish_color_operator
+set --global fish_color_error red
+set --global fish_color_cancel white
+set --global fish_color_comment white
+set --global fish_color_autosuggestion white
 source "$__fish_config_dir/local.fish" 2>/dev/null || true
