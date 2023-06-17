@@ -60,13 +60,19 @@
   # Copying font files on Darwin is too slow
   home.activation.copyFonts = lib.mkForce "true";
 
-  xdg.configFile."doom" = {
-    source = ../configs/emacs/.config/doom;
+  home.file.".local/bin" = {
+    source = pkgs.symlinkJoin {
+      name = "local-bin";
+      paths = [
+        ../configs/emacs/.local/bin
+        ../configs/starship/.local/bin
+      ];
+    };
     recursive = true;
   };
 
-  home.file.".local/bin" = {
-    source = ../configs/emacs/.local/bin;
+  xdg.configFile."doom" = {
+    source = ../configs/emacs/.config/doom;
     recursive = true;
   };
 
