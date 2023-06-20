@@ -76,6 +76,10 @@ function multicd
     echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 end
 abbr --add dotdot --regex '^\.{2,}$' --function multicd
+function last_history_item
+    echo $history[1]
+end
+abbr --add !! --position anywhere --function last_history_item
 function rg
     if isatty stdout
         command rg --pretty $argv | command less -RMFXK
