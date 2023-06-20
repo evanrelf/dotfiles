@@ -72,6 +72,10 @@ abbr --add --global g git
 abbr --add --global j jj
 abbr --add --global k kak
 abbr --add --global n nvim
+function multicd
+    echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+end
+abbr --add dotdot --regex '^\.{2,}$' --function multicd
 function rg
     if isatty stdout
         command rg --pretty $argv | command less -RMFXK
