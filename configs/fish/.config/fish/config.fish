@@ -111,7 +111,7 @@ set --global fish_color_command black
 set --global fish_color_keyword $fish_color_command
 set --global fish_color_param $fish_color_command
 set --global fish_color_option $fish_color_param
-set --global fish_color_valid_path $fish_color_param --underline
+set --global fish_color_valid_path --underline
 set --global fish_color_quote yellow
 set --global fish_color_escape $fish_color_quote
 set --global fish_color_operator cyan
