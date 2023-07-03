@@ -104,6 +104,7 @@ return {
     { mods = "LEADER", key = "]", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
     { mods = "LEADER", key = "{", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
     { mods = "LEADER", key = "}", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
+    { mods = "LEADER", key = "z", action = wezterm.action.TogglePaneZoomState },
     { mods = "LEADER", key = "<", action = wezterm.action.MoveTabRelative(-1) },
     { mods = "LEADER", key = ">", action = wezterm.action.MoveTabRelative(1) },
     -- TODO: Focusing tabs
