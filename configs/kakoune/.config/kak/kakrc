@@ -58,6 +58,13 @@ hook global WinSetOption filetype=rust %{
   hook window BufWritePre .* %{ format-buffer }
 }
 
+hook global WinSetOption filetype=clojure %sh{
+  echo 'set-option window formatcmd %{zprint "{:search-config? true}"}'
+  if [ "$(uname)" != "Darwin"] || [ "$(command -v zprint)" != "/usr/bin/zprint" ]; then
+    echo 'hook window BufWritePre .* %{ format-buffer }'
+  fi
+}
+
 ################################################################################
 # LINTING
 ################################################################################
