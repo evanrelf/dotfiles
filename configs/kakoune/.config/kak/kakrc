@@ -40,6 +40,13 @@ hook global WinSetOption filetype=(clojure) %{
 # FORMATTING
 ################################################################################
 
+hook global WinSetOption filetype=clojure %sh{
+  echo 'set-option window formatcmd %{zprint "{:search-config? true}"}'
+  if [ "$(uname)" != "Darwin"] || [ "$(command -v zprint)" != "/usr/bin/zprint" ]; then
+    echo 'hook window BufWritePre .* %{ format-buffer }'
+  fi
+}
+
 hook global WinSetOption filetype=dhall %{
   set-option window formatcmd "dhall format"
 }
@@ -56,13 +63,6 @@ hook global WinSetOption filetype=nix %{
 hook global WinSetOption filetype=rust %{
   set-option window formatcmd "rustfmt --edition 2021 --emit stdout"
   hook window BufWritePre .* %{ format-buffer }
-}
-
-hook global WinSetOption filetype=clojure %sh{
-  echo 'set-option window formatcmd %{zprint "{:search-config? true}"}'
-  if [ "$(uname)" != "Darwin"] || [ "$(command -v zprint)" != "/usr/bin/zprint" ]; then
-    echo 'hook window BufWritePre .* %{ format-buffer }'
-  fi
 }
 
 ################################################################################
