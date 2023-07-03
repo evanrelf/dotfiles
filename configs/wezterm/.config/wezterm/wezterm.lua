@@ -70,14 +70,6 @@ local colors = (function()
   end
 end)()
 
-local key = function(mods, key, action)
-  return {
-    mods = mods,
-    key = key,
-    action = wezterm.action(action),
-  }
-end
-
 return {
   font = font,
   font_size = 17.0,
@@ -102,18 +94,18 @@ return {
   audible_bell = "Disabled",
   leader = { mods = "SUPER", key = "s" },
   keys = {
-    key("LEADER", "-", { SplitVertical = {} }),
-    key("LEADER", "\\", { SplitHorizontal = {} }),
-    key("LEADER", "h", { ActivatePaneDirection = "Left" }),
-    key("LEADER", "j", { ActivatePaneDirection = "Down" }),
-    key("LEADER", "k", { ActivatePaneDirection = "Up" }),
-    key("LEADER", "l", { ActivatePaneDirection = "Right" }),
-    key("LEADER", "[", { AdjustPaneSize = { "Left", 5 } }),
-    key("LEADER", "]", { AdjustPaneSize = { "Right", 5 } }),
-    key("LEADER", "{", { AdjustPaneSize = { "Down", 5 } }),
-    key("LEADER", "}", { AdjustPaneSize = { "Up", 5 } }),
-    key("LEADER", "<", { MoveTabRelative = -1 }),
-    key("LEADER", ">", { MoveTabRelative = 1 }),
+    { mods = "LEADER", key = "-", action = wezterm.action.SplitPane { direction = "Down" } },
+    { mods = "LEADER", key = "\\", action = wezterm.action.SplitPane { direction = "Right" } },
+    { mods = "LEADER", key = "h", action = wezterm.action.ActivatePaneDirection "Left" },
+    { mods = "LEADER", key = "j", action = wezterm.action.ActivatePaneDirection "Down" },
+    { mods = "LEADER", key = "k", action = wezterm.action.ActivatePaneDirection "Up" },
+    { mods = "LEADER", key = "l", action = wezterm.action.ActivatePaneDirection "Right" },
+    { mods = "LEADER", key = "[", action = wezterm.action.AdjustPaneSize { "Left", 5 } },
+    { mods = "LEADER", key = "]", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
+    { mods = "LEADER", key = "{", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
+    { mods = "LEADER", key = "}", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
+    { mods = "LEADER", key = "<", action = wezterm.action.MoveTabRelative(-1) },
+    { mods = "LEADER", key = ">", action = wezterm.action.MoveTabRelative(1) },
     -- TODO: Focusing tabs
     -- TODO: Renaming tabs
     -- TODO: Moving panes
