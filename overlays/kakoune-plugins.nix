@@ -23,6 +23,13 @@ let
       sha256 = "sha256-C5Dg2/kCtNSztwjClnZkJHy89h5WbvlstbU2j//6lYA=";
     };
 
+    "parinfer-rust" = {
+      owner = "eraserhd";
+      repo = "parinfer-rust";
+      rev = "3c769707ad3b18d530f696fe42a9d495139149ab";
+      sha256 = "sha256-EVFuCZo6lYXEOWQzTW7BEfB5PIbO4YA4dCMo7N4oWrM=";
+    };
+
     "primer-kak" = {
       owner = "evanrelf";
       repo = "primer.kak";

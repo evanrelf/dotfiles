@@ -42,6 +42,7 @@
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
     pkgs.pandoc
+    pkgs.parinfer-rust
     # pkgs.qsv
     pkgs.racket
     pkgs.ripgrep
