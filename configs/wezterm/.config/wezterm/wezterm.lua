@@ -107,8 +107,16 @@ return {
     { mods = "LEADER", key = "z", action = wezterm.action.TogglePaneZoomState },
     { mods = "LEADER", key = "<", action = wezterm.action.MoveTabRelative(-1) },
     { mods = "LEADER", key = ">", action = wezterm.action.MoveTabRelative(1) },
+    { mods = "LEADER", key = ",", action = wezterm.action.PromptInputLine {
+        description = "Rename tab",
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      },
+    },
     -- TODO: Focusing tabs
-    -- TODO: Renaming tabs
     -- TODO: Moving panes
   },
   enable_csi_u_key_encoding = true,
