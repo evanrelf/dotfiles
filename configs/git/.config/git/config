@@ -85,6 +85,9 @@
   prompt = false
 [difftool "nvim"]
   cmd = nvim -d "$LOCAL" "$REMOTE"
+[fetch]
+  prune = true
+  pruneTags = true
 [init]
   defaultBranch = main
 [interactive]
