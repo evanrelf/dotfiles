@@ -44,6 +44,7 @@
   # REBASE
   rb = rebase
   rbi = rebase --interactive
+  rbib = "!git rebase --interactive \"$(git merge-base \"$(git rev-parse --abbrev-ref refs/remotes/origin/HEAD)\" HEAD)\" #"
   rbc = rebase --continue
   rbs = rebase --skip
   rba = rebase --abort
@@ -62,6 +63,7 @@
   # REVISE
   rv = revise
   rvi = revise --interactive
+  rvib = "!git revise --interactive \"$(git merge-base \"$(git rev-parse --abbrev-ref refs/remotes/origin/HEAD)\" HEAD)\" #"
 
   # STATUS
   s = status
