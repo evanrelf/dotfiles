@@ -94,6 +94,7 @@ return {
   audible_bell = "Disabled",
   leader = { mods = "SUPER", key = "s" },
   keys = {
+    { mods = "CMD", key = "w", action = wezterm.action.CloseCurrentPane { confirm = true } },
     { mods = "LEADER", key = "-", action = wezterm.action.SplitPane { direction = "Down" } },
     { mods = "LEADER", key = "\\", action = wezterm.action.SplitPane { direction = "Right" } },
     { mods = "LEADER", key = "h", action = wezterm.action.ActivatePaneDirection "Left" },
