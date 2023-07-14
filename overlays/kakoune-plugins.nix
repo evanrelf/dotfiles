@@ -16,6 +16,13 @@ let
       sha256 = "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=";
     };
 
+    "git-revise-kak" = {
+      owner = "evanrelf";
+      repo = "git-revise.kak";
+      rev = "ec9a7995a9eefc44f682e4c198a27dbc0921b283";
+      sha256 = "sha256-6GoiJsNqxe0dzxzpnjw50dSE94o2AyCX59XAiWfSSGA=";
+    };
+
     "number-toggle-kak" = {
       owner = "evanrelf";
       repo = "number-toggle.kak";
