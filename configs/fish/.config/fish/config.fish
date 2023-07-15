@@ -1,11 +1,8 @@
 source "$__fish_config_dir/home-manager.fish" 2>/dev/null || true
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
-set --global --export GHCUP_USE_XDG_DIRS 1
 set --global --export COLORTERM "$TERM"
 set --global --export EDITOR kak
-set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
-set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
 set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' . \$dir | sed -e 's_^\./__'"
@@ -29,6 +26,15 @@ if test -z "$IN_NIX_SHELL"
     if test -d "$HOME/.config/emacs/bin"
         set --global --export --prepend PATH "$HOME/.config/emacs/bin"
     end
+end
+if command -q ghcup
+    set --global --export GHCUP_USE_XDG_DIRS 1
+end
+if command -q rustup
+    set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
+end
+if command -q cargo
+    set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
 end
 if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
