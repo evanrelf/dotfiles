@@ -34,6 +34,10 @@ if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
 end
+if command -q limactl
+    set --global --export LIMA_HOME "$XDG_DATA_HOME/lima"
+    limactl completion fish | source
+end
 # TODO: Combine `nix-your-shell` and `cached-nix-shell`, or drop
 # `cached-nix-shell`
 if command -q nix-your-shell
