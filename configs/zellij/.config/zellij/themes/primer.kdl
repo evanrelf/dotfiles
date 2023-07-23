@@ -1,0 +1,15 @@
+themes {
+  primer {
+    fg "#000000"
+    bg "#ffffff"
+    white "#000000"
+    black "#ffffff"
+    red "#cb2431"
+    green "#0366d6"
+    yellow "#b08800"
+    blue "#28a745"
+    magenta "#6f42c1"
+    cyan "#ea4aaa"
+    orange "#d15704"
+  }
+}
