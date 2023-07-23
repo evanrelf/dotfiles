@@ -57,6 +57,7 @@
     pkgs.tree
     pkgs.universal-ctags
     pkgs.watchexec
+    pkgs.zellij
     pkgs.zoxide
   ];
 
@@ -170,6 +171,11 @@
 
   xdg.configFile."wezterm" = {
     source = ../configs/wezterm/.config/wezterm;
+    recursive = true;
+  };
+
+  xdg.configFile."zellij" = {
+    source = ../configs/zellij/.config/zellij;
     recursive = true;
   };
 }
