@@ -44,6 +44,7 @@
     pkgs.nixpkgs-fmt
     pkgs.pandoc
     pkgs.parinfer-rust
+    pkgs.pstree
     # pkgs.qsv
     pkgs.racket
     pkgs.ripgrep
