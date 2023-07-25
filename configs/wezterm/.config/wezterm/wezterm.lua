@@ -87,6 +87,7 @@ return {
     top = 4,
     bottom = 4,
   },
+  window_decorations = "RESIZE",
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
   hide_tab_bar_if_only_one_tab = true,
