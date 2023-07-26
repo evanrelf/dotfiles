@@ -83,6 +83,24 @@ in
       extraLuaPackages = p: [ p.fennel ];
     };
 
+  prqlc =
+    pkgsFinal.crane.buildPackage rec {
+      pname = "prqlc";
+      version = "0.9.2";
+      src = pkgsPrev.fetchFromGitHub {
+        owner = "PRQL";
+        repo = "prql";
+        rev = "c0d769a32e887973437a509129f6fae68c5d4740";
+        sha256 = "sha256-5w+EODFeI5h4geGPSAZyssZgDrsFJyqzGoQRr8mHazA=";
+      };
+      buildInputs =
+        pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+          pkgsFinal.darwin.apple_sdk.frameworks.CoreServices
+          pkgsFinal.libiconv
+        ];
+      cargoExtraArgs = "--package prqlc";
+    };
+
   qsv =
     let
       crane =
@@ -95,14 +113,12 @@ in
         rev = "0.74.0";
         hash = "sha256-zMxvA/dc1MoLn7z7y/yWKBc+cYCHI0MO0tiLMNcBKeY=";
       };
-
       buildInputs = [
         pkgsFinal.python3
       ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
         pkgsFinal.darwin.apple_sdk.frameworks.Security
         pkgsFinal.libiconv
       ];
-
       cargoExtraArgs = "--features all_full";
     };
 }
