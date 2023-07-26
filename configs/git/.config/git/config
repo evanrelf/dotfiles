@@ -94,6 +94,7 @@
   defaultBranch = main
 [interactive]
   diffFilter = delta
+  singleKey = true
 [merge]
   tool = nvim
   autoStash = true
