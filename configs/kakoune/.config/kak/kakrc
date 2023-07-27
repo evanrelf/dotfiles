@@ -429,3 +429,36 @@ alias global "buffer-delete" "delete-buffer"
 alias global "buffer-delete!" "delete-buffer!"
 alias global "bd" "delete-buffer"
 alias global "bd!" "delete-buffer!"
+
+################################################################################
+# PRQL.KAK
+################################################################################
+
+hook global BufCreate .*/?(?i)prql %{
+  set-option buffer filetype prql
+}
+
+hook global WinSetOption filetype=prql %{
+  require-module prql
+  set-option window static_words %opt{prql_static_words}
+}
+
+hook -group prql-highlight global WinSetOption filetype=prql %{
+  add-highlighter window/prql ref prql
+  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/prql }
+}
+
+provide-module prql %{
+
+add-highlighter shared/prql regions
+add-highlighter shared/prql/code default-region group
+add-highlighter shared/prql/comment region '#' '$' fill comment
+add-highlighter shared/prql/double-string region '"' (?<!\\)(\\\\)*" fill string
+add-highlighter shared/prql/single_string region "'" (?<!\\)(\\\\)*' fill string
+add-highlighter shared/prql/code/ regex (?<!\.)\b(?:prql|let|type|func|from|derive|select|filter|sort|join|take|group|aggregate|window)\b(?!\.) 0:keyword
+add-highlighter shared/prql/code/ regex (?:[\{\}\(\)\[\],\|=]|->) 0:keyword
+add-highlighter shared/prql/code/ regex (?<!\.)\b(?:true|false|null)\b(?!\.) 0:value
+add-highlighter shared/prql/code/ regex (?:-?\b[0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-]?[0-9]+)?)\b 0:value
+add-highlighter shared/prql/code/ regex \b\d+(?:\.\d+)?\b 0:value
+
+}
