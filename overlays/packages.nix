@@ -90,7 +90,7 @@ in
       src = pkgsPrev.fetchFromGitHub {
         owner = "PRQL";
         repo = "prql";
-        rev = "c0d769a32e887973437a509129f6fae68c5d4740";
+        rev = version;
         sha256 = "sha256-5w+EODFeI5h4geGPSAZyssZgDrsFJyqzGoQRr8mHazA=";
       };
       buildInputs =
@@ -106,11 +106,13 @@ in
       crane =
         pkgsFinal.crane.overrideToolchain pkgsFinal.fenix.minimal.toolchain;
     in
-    crane.buildPackage {
+    crane.buildPackage rec {
+      pname = "qsv";
+      version = "0.74.0";
       src = pkgsPrev.fetchFromGitHub {
         owner = "jqnatividad";
         repo = "qsv";
-        rev = "0.74.0";
+        rev = version;
         hash = "sha256-zMxvA/dc1MoLn7z7y/yWKBc+cYCHI0MO0tiLMNcBKeY=";
       };
       buildInputs = [
