@@ -32,6 +32,7 @@
     pkgs.home-rebuild
     pkgs.ijq
     pkgs.iosevka-bin
+    pkgs.jless
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune
