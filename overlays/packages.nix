@@ -69,7 +69,10 @@ in
     gprefix pkgsFinal.gnused;
 
   kakoune-unwrapped =
-    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
+    (pkgsPrev.kakoune-unwrapped.override (prev: {
+      # https://github.com/mawww/kakoune/issues/4944
+      stdenv = pkgsFinal.overrideCC prev.stdenv pkgsFinal.gcc;
+    })).overrideAttrs (prev: rec {
       version = "evanrelf";
       src = pkgsPrev.inputs.kakoune;
       preConfigure = ''
