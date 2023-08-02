@@ -17,5 +17,8 @@ pkgsFinal: pkgsPrev:
   memorize =
     pkgsFinal.crane.buildPackage {
       src = ../src/rust/memorize;
+      nativeBuildInputs = [
+        pkgsFinal.libiconv
+      ];
     };
 }
