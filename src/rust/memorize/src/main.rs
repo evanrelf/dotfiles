@@ -1,4 +1,5 @@
 use clap::Parser as _;
+use rand::{distributions::Standard, prelude::*};
 use std::{io, io::Write as _};
 
 #[derive(clap::Parser)]
@@ -44,4 +45,58 @@ fn erase_line() {
         ansi_escapes::CursorPrevLine,
         ansi_escapes::EraseLine
     );
+}
+
+enum MeridiemIndicator {
+    Am,
+    Pm,
+}
+
+impl Distribution<MeridiemIndicator> for Standard {
+    fn sample<R>(&self, rng: &mut R) -> MeridiemIndicator
+    where
+        R: Rng + ?Sized,
+    {
+        if rng.gen() {
+            MeridiemIndicator::Am
+        } else {
+            MeridiemIndicator::Pm
+        }
+    }
+}
+
+fn convert_km_to_mi(x: f32) -> f32 {
+    todo!()
+}
+
+fn convert_c_to_f(x: f32) -> f32 {
+    todo!()
+}
+
+fn convert_24h_to_12h(x: u8) -> (u8, MeridiemIndicator) {
+    todo!()
+}
+
+fn gen_km() -> f32 {
+    thread_rng().gen_range::<u16, _>(1..=800).into()
+}
+
+fn gen_mi() -> f32 {
+    convert_km_to_mi(gen_km())
+}
+
+fn gen_c() -> f32 {
+    thread_rng().gen_range::<i8, _>(-20..=50).into()
+}
+
+fn gen_f() -> f32 {
+    convert_c_to_f(gen_c())
+}
+
+fn gen_24h() -> u8 {
+    thread_rng().gen_range(0..=23)
+}
+
+fn gen_12h() -> (u8, MeridiemIndicator) {
+    convert_24h_to_12h(gen_24h())
 }
