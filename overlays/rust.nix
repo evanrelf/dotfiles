@@ -13,4 +13,9 @@ pkgsFinal: pkgsPrev:
     pkgsFinal.crane.buildPackage {
       src = ../src/rust/home-rebuild;
     };
+
+  memorize =
+    pkgsFinal.crane.buildPackage {
+      src = ../src/rust/memorize;
+    };
 }

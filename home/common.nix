@@ -37,6 +37,7 @@
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.lima
+    pkgs.memorize
     pkgs.neovim
     pkgs.nerdfonts
     pkgs.nil
