@@ -1,6 +1,9 @@
 use clap::Parser as _;
 use rand::{distributions::Standard, prelude::*};
-use std::{io, io::Write as _};
+use std::{
+    fmt::{self, Display},
+    io::{self, Write as _},
+};
 
 #[derive(clap::Parser)]
 struct Args {
@@ -52,6 +55,19 @@ enum MeridiemIndicator {
     Pm,
 }
 
+impl Display for MeridiemIndicator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}",
+            match self {
+                MeridiemIndicator::Am => "AM",
+                MeridiemIndicator::Pm => "PM",
+            }
+        )
+    }
+}
+
 impl Distribution<MeridiemIndicator> for Standard {
     fn sample<R>(&self, rng: &mut R) -> MeridiemIndicator
     where
@@ -66,15 +82,41 @@ impl Distribution<MeridiemIndicator> for Standard {
 }
 
 fn convert_km_to_mi(x: f32) -> f32 {
-    todo!()
+    (x * 0.6213712).round()
+}
+
+fn convert_mi_to_km(x: f32) -> f32 {
+    (x / 0.6213712).round()
 }
 
 fn convert_c_to_f(x: f32) -> f32 {
-    todo!()
+    ((x * (9.0 / 5.0)) + 32.0).round()
+}
+
+fn convert_f_to_c(x: f32) -> f32 {
+    ((x - 32.0) * (5.0 / 9.0)).round()
 }
 
 fn convert_24h_to_12h(x: u8) -> (u8, MeridiemIndicator) {
-    todo!()
+    use MeridiemIndicator::*;
+    match x {
+        0 => (12, Am),
+        1..=11 => (x, Am),
+        12 => (12, Pm),
+        13..=23 => (x - 12, Pm),
+        _ => panic!("Invalid 24h time: {}", x),
+    }
+}
+
+fn convert_12h_to_24h(x: (u8, MeridiemIndicator)) -> u8 {
+    use MeridiemIndicator::*;
+    match x {
+        (12, Am) => 0,
+        (1..=11, Am) => x.0,
+        (12, Pm) => 12,
+        (1..=11, Pm) => x.0 + 12,
+        _ => panic!("Invalid 12h time: {} {}", x.0, x.1),
+    }
 }
 
 fn gen_km() -> f32 {
