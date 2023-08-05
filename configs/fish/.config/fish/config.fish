@@ -57,7 +57,7 @@ if command -q starship
 end
 if command -q jj
     set --global --export JJ_CONFIG "$XDG_CONFIG_HOME/jj/config.toml"
-    jj debug completion --fish | source
+    jj util completion --fish | source
 end
 if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
     set --global man_blink --reverse blue
