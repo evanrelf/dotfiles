@@ -37,7 +37,7 @@ in
 
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
-      version = "evanrelf";
+      version = "HEAD";
       src = pkgsPrev.inputs.kakoune;
       preConfigure = ''
         ${prev.preConfigure}
