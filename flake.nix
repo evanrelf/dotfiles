@@ -58,6 +58,7 @@
           inputs.fenix.overlays.default
           inputs.comma.overlays.default
           inputs.haskell-overlay.overlays.default
+          (import ./overlays/haskell.nix)
           (import ./overlays/rust.nix)
           (import ./overlays/packages.nix)
           (import ./overlays/kakoune-plugins.nix)
