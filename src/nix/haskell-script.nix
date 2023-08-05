@@ -1,4 +1,4 @@
-{ darwin, ghc, ghcid, lib, makeWrapper, mkShell, runCommand, stdenv }:
+{ darwin, ghc, ghcid, lib, lndir, makeWrapper, mkShell, runCommand, stdenv }:
 
 let
   defaultGhcOptions =
@@ -34,6 +34,20 @@ in
 }:
 
 let
+  ghcWithPackages = ghc.withPackages packages;
+
+  customGhc =
+    runCommand
+      "custom-ghc"
+      { buildInputs = [ ghcWithPackages makeWrapper ]; }
+      ''
+        mkdir $out
+        ${lndir}/bin/lndir -silent ${ghcWithPackages} $out
+        rm $out/bin/ghc $out/bin/ghci
+        makeWrapper ${ghcWithPackages}/bin/ghc $out/bin/ghc --add-flags "${ghcOptions}"
+        makeWrapper ${ghcWithPackages}/bin/ghci $out/bin/ghci --add-flags "${ghcOptions}"
+      '';
+
   substituteCommand =
     if builtins.attrNames substitutions == [ ] then
       "ln --symbolic ${script} Main.hs"
@@ -44,10 +58,10 @@ let
             shellName = lib.escapeShellArg name;
             shellValue = lib.escapeShellArg (toString value);
           in
-          " --subst-var-by ${shellName} ${shellValue}";
+          "--subst-var-by ${shellName} ${shellValue}";
 
         options =
-          lib.concatStrings
+          lib.concatStringsSep " "
             (lib.mapAttrsToList toOption substitutions);
       in
       "substitute ${script} Main.hs ${options}";
@@ -56,18 +70,19 @@ let
     if path == [ ]
     then ""
     else "wrapProgram $out/bin/${name} --prefix PATH : ${lib.makeBinPath path}";
+
 in
 runCommand
   name
 {
-  nativeBuildInputs = [ (ghc.withPackages packages) ]
+  nativeBuildInputs = [ customGhc ]
     ++ lib.optional stdenv.isDarwin darwin.cctools
     ++ lib.optional (path != [ ]) makeWrapper;
 
   passthru.env =
     mkShell {
       packages = [
-        (ghc.withPackages packages)
+        customGhc
         ghcid
       ];
     };
@@ -75,6 +90,6 @@ runCommand
   ''
     ${substituteCommand}
     mkdir --parents $out/bin
-    ghc ${ghcOptions} -package ghc Main.hs -o $out/bin/${name}
+    ghc -Werror -package ghc Main.hs -o $out/bin/${name}
     ${wrapCommand}
   ''
