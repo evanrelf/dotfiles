@@ -242,7 +242,7 @@ define-command -hidden haskell-insert-language-extension %{
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'" "extension: " %{
     evaluate-commands %sh{
       case "$kak_opt_filetype" in
-        "haskell" | "haskell2")
+        "haskell")
           echo 'execute-keys -draft "i{-# LANGUAGE %val{text} #-}<esc>"'
           ;;
         *)
@@ -259,12 +259,13 @@ define-command -hidden haskell-insert-option %{
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
     evaluate-commands %sh{
       case "$kak_opt_filetype" in
-        "haskell" | "haskell2")
+        "haskell")
           echo 'execute-keys -draft "i{-# OPTIONS_GHC %val{text} #-}<esc>"'
           ;;
         *)
           echo 'execute-keys -draft "i%val{text}<esc>"'
           ;;
+      esac
     }
     execute-keys "<esc>"
   }
