@@ -2,8 +2,9 @@ use clap::Parser as _;
 use rand::{distributions::Standard, prelude::*};
 use std::{
     fmt::{self, Display},
-    io::{self, Write as _},
+    io::Write as _,
 };
+use tokio::io::{self, AsyncBufReadExt as _, AsyncWriteExt as _};
 
 #[derive(clap::Parser)]
 struct Args {
@@ -21,23 +22,25 @@ enum Mode {
     Time,
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _args = Args::parse();
 
-    let _ = prompt("2 + 2 =")?;
+    let _ = prompt("2 + 2 =").await?;
     erase_line();
-    let _ = prompt("4 + 4 =")?;
+    let _ = prompt("4 + 4 =").await?;
     erase_line();
 
     Ok(())
 }
 
-fn prompt(prompt: &str) -> Result<String, io::Error> {
+async fn prompt(prompt: &str) -> Result<String, io::Error> {
     print!("{} ", prompt);
-    io::stdout().flush()?;
+    tokio::io::stdout().flush().await?;
 
     let mut input = String::new();
-    io::stdin().read_line(&mut input)?;
+    let mut stdin = io::BufReader::new(io::stdin());
+    stdin.read_line(&mut input).await?;
 
     Ok(input)
 }
