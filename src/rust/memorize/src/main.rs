@@ -1,10 +1,10 @@
 use clap::Parser as _;
 use rand::{distributions::Standard, prelude::*};
-use std::{
-    fmt::{self, Display},
-    io::Write as _,
+use std::fmt::{self, Display};
+use tokio::{
+    io::{self, AsyncBufReadExt as _, AsyncWriteExt as _},
+    time,
 };
-use tokio::io::{self, AsyncBufReadExt as _, AsyncWriteExt as _};
 
 #[derive(clap::Parser)]
 struct Args {
@@ -26,10 +26,15 @@ enum Mode {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _args = Args::parse();
 
-    let _ = prompt("2 + 2 =").await?;
-    erase_line();
-    let _ = prompt("4 + 4 =").await?;
-    erase_line();
+    match time::timeout(time::Duration::from_secs(2), prompt("2 + 2 =")).await {
+        Err(_) => {
+            println!("Ran out of time!");
+        }
+        Ok(input) => {
+            let input = input?;
+            println!("You answered: {input}");
+        }
+    }
 
     Ok(())
 }
