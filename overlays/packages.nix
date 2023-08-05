@@ -12,39 +12,6 @@ let
 
 in
 {
-  cached-nix-shell =
-    let
-      blake3 = pkgsPrev.fetchFromGitHub {
-        owner = "BLAKE3-team";
-        repo = "BLAKE3";
-        rev = "0db6fddc86c2d35a125ec8fff22bcc09f61d3c84";
-        hash = "sha256-/cRXeGzoAv0Sdq+mtIXJJ1NsU/mXUvaAecPhBxoNZCs=";
-      };
-    in
-    (pkgsFinal.crane.buildPackage {
-      pname = "cached-nix-shell";
-      version = "0.0.0";
-      # Add macOS support: https://github.com/xzfc/cached-nix-shell/pull/25
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "uri-canva";
-        repo = "cached-nix-shell";
-        rev = "cb1c60a6d8e8eefb20097c6c5937523d0a2dabb9";
-        sha256 = "sha256-Un/vvQSk8c1qY7NGynvMCHgEikRhqeRQxVFPlV8Zabs=";
-      };
-      buildInputs = [
-        pkgsFinal.nix
-        pkgsFinal.openssl
-        pkgsFinal.ronn
-      ] ++ pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
-        pkgsFinal.libiconv
-      ];
-      CNS_GIT_COMMIT = "next";
-      BLAKE3_CSRC = "${blake3}/c";
-    }).overrideAttrs (prev: {
-      postBuild = "make -f nix/Makefile post-build";
-      postInstall = "make -f nix/Makefile post-install";
-    });
-
   coreutils-gprefix =
     (pkgsPrev.coreutils.override {
       singleBinary = false;

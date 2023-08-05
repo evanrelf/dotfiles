@@ -7,7 +7,6 @@
   home.enableNixpkgsReleaseCheck = false;
 
   home.packages = [
-    pkgs.cached-nix-shell
     pkgs.cargo-edit
     pkgs.cargo-flamegraph
     pkgs.cargo-limit
