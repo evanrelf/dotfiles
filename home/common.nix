@@ -154,20 +154,7 @@
   xdg.configFile."nvim" = {
     source = ../configs/neovim/.config/nvim;
     recursive = true;
-    onChange = ''
-      $DRY_RUN_CMD rm -f "$HOME/.config/nvim/plugin/packer_compiled.lua"
-      $DRY_RUN_CMD rm -rf "$HOME/.cache/nvim/hotpot/"
-    '';
   };
-
-  xdg.dataFile."nvim/site/pack/home-manager/start/packer.nvim".source =
-    inputs.packer;
-
-  xdg.dataFile."nvim/site/pack/home-manager/start/paq".source =
-    inputs.paq;
-
-  xdg.dataFile."nvim/site/pack/home-manager/start/hotpot".source =
-    inputs.hotpot;
 
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;

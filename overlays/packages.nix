@@ -78,11 +78,6 @@ in
       '';
     });
 
-  neovim =
-    pkgsPrev.neovim.override {
-      extraLuaPackages = p: [ p.fennel ];
-    };
-
   prqlc =
     pkgsFinal.crane.buildPackage rec {
       pname = "prqlc";

@@ -28,23 +28,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hotpot = {
-      url = "github:rktjmp/hotpot.nvim";
-      flake = false;
-    };
     kakoune = {
       url = "github:mawww/kakoune";
       flake = false;
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
-    packer = {
-      url = "github:wbthomason/packer.nvim";
-      flake = false;
-    };
-    paq = {
-      url = "github:savq/paq-nvim";
-      flake = false;
-    };
   };
 
   outputs = inputs@{ flake-utils, nixpkgs, ... }:
