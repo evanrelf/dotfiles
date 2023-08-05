@@ -1,11 +1,35 @@
 { darwin, ghc, ghcid, lib, makeWrapper, mkShell, runCommand, stdenv }:
 
+let
+  defaultGhcOptions =
+    lib.concatStringsSep " " [
+      "-Wall"
+      "-Wcompat"
+      "-Werror=incomplete-patterns"
+      "-Werror=incomplete-record-updates"
+      "-Werror=incomplete-uni-patterns"
+      "-Werror=missing-fields"
+      "-Werror=missing-methods"
+      "-Werror=partial-fields"
+      "-Widentities"
+      "-Wmissing-export-lists"
+      "-Wmissing-home-modules"
+      "-Wno-unticked-promoted-constructors"
+      "-Wredundant-constraints"
+      "-O2"
+      "-threaded"
+      "-rtsopts"
+      "-with-rtsopts=-N"
+    ];
+
+in
+
 { name
 , packages ? _: [ ]
 , substitutions ? { }
 , path ? [ ]
 , script
-, ghcOptions ? "-Wall -Werror -O2 -threaded -rtsopts -with-rtsopts=-N ${extraGhcOptions}"
+, ghcOptions ? "${defaultGhcOptions} ${extraGhcOptions}"
 , extraGhcOptions ? ""
 }:
 
