@@ -7,10 +7,9 @@
   home.enableNixpkgsReleaseCheck = false;
 
   home.packages = [
+    pkgs.bacon
     pkgs.cargo-edit
     pkgs.cargo-flamegraph
-    pkgs.cargo-limit
-    pkgs.cargo-watch
     pkgs.comma
     pkgs.comma-update
     pkgs.coreutils-gprefix
