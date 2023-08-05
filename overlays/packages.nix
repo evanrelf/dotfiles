@@ -35,7 +35,7 @@ in
         pkgsFinal.nix
         pkgsFinal.openssl
         pkgsFinal.ronn
-      ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+      ] ++ pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
         pkgsFinal.libiconv
       ];
       CNS_GIT_COMMIT = "next";
@@ -94,7 +94,7 @@ in
         sha256 = "sha256-5w+EODFeI5h4geGPSAZyssZgDrsFJyqzGoQRr8mHazA=";
       };
       buildInputs =
-        pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+        pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
           pkgsFinal.darwin.apple_sdk.frameworks.CoreServices
           pkgsFinal.libiconv
         ];
@@ -117,7 +117,7 @@ in
       };
       buildInputs = [
         pkgsFinal.python3
-      ] ++ pkgsPrev.lib.optionals pkgsPrev.stdenv.isDarwin [
+      ] ++ pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
         pkgsFinal.darwin.apple_sdk.frameworks.Security
         pkgsFinal.libiconv
       ];

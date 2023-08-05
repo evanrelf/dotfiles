@@ -2,8 +2,8 @@ pkgsFinal: pkgsPrev:
 
 let
   mkHomeConfiguration = modules:
-    pkgsPrev.lib.fix (self:
-      (pkgsPrev.inputs.home-manager.lib.homeManagerConfiguration {
+    pkgsFinal.lib.fix (self:
+      (pkgsFinal.inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsFinal;
         inherit modules;
         extraSpecialArgs = { inherit (pkgsPrev) inputs; };
