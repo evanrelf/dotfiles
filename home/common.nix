@@ -21,6 +21,7 @@
     pkgs.frawk
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
+    pkgs.ghcid-ng
     pkgs.git
     pkgs.git-revise
     pkgs.gnugrep-gprefix
