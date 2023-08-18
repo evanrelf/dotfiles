@@ -59,6 +59,7 @@
     pkgs.tree
     pkgs.universal-ctags
     pkgs.watchexec
+    pkgs.yt-dlp
     pkgs.zellij
     pkgs.zoxide
   ];
