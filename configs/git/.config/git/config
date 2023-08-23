@@ -69,6 +69,13 @@
   sh = show
   shn = git show --name-status
 
+  # STASH
+  st = stash push --staged
+  sts = stash show --patch
+  stl = stash list
+  stp = stash pop
+  std = stash drop
+
   # STATUS
   s = status
 
