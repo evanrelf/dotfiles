@@ -372,6 +372,8 @@ map global "surround" "<gt>" %{_| sd --flags s '(.*)' '<lt> $1 <gt>'<ret>} -docs
 map global "surround" "'"    %{_| sd --flags s '(.*)' "'\$1'"       <ret>} -docstring " 'surround' "
 map global "surround" '"'    %{_| sd --flags s '(.*)' '"$1"'        <ret>} -docstring ' "surround" '
 map global "surround" "`"    %{_| sd --flags s '(.*)' '`$1`'        <ret>} -docstring " `surround` "
+map global "surround" "_"    %{_| sd --flags s '(.*)' '_$1_'        <ret>} -docstring " _surround_ "
+map global "surround" "*"    %{_| sd --flags s '(.*)' '*$1*'        <ret>} -docstring " *surround* "
 
 # User mode
 map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
