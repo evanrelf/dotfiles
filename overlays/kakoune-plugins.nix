@@ -23,6 +23,13 @@ let
       sha256 = "sha256-6GoiJsNqxe0dzxzpnjw50dSE94o2AyCX59XAiWfSSGA=";
     };
 
+    "kak-fetch" = {
+      owner = "mmlb";
+      repo = "kak-fetch";
+      rev = "bf4a28bb9bb68fd2b568996dc5cb939bcabfe36a";
+      sha256 = "sha256-/rKtuDn3s+rjX+G5osZXjCgJMhdfI5DvtW/SBRkBeVY=";
+    };
+
     "number-toggle-kak" = {
       owner = "evanrelf";
       repo = "number-toggle.kak";
