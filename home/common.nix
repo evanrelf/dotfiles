@@ -29,6 +29,7 @@
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
+    pkgs.httpie
     pkgs.ijq
     pkgs.iosevka-bin
     pkgs.jless
