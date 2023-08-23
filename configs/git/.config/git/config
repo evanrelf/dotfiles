@@ -65,6 +65,10 @@
   rvi = revise --interactive
   rvib = "!git revise --interactive \"$(git merge-base \"$(git rev-parse --abbrev-ref refs/remotes/origin/HEAD)\" HEAD)\" #"
 
+  # SHOW
+  sh = show
+  shn = git show --name-status
+
   # STATUS
   s = status
 
