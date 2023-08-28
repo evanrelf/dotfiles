@@ -157,6 +157,11 @@
     recursive = true;
   };
 
+  xdg.configFile."ripgrep" = {
+    source = ../configs/ripgrep/.config/ripgrep;
+    recursive = true;
+  };
+
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;
 
