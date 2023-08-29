@@ -67,7 +67,7 @@
 
   # SHOW
   sh = show
-  shn = git show --name-status
+  shn = show --name-status
 
   # STASH
   st = stash push --staged
