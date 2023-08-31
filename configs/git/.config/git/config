@@ -109,7 +109,7 @@
 [merge]
   tool = nvim
   autoStash = true
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [mergetool]
   prompt = false
   keepBackup = false
