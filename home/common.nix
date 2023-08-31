@@ -5,60 +5,87 @@
 
   home.enableNixpkgsReleaseCheck = true;
 
-  home.packages = [
-    pkgs.cargo-edit
-    pkgs.cargo-flamegraph
-    pkgs.comma
-    pkgs.comma-update
-    pkgs.coreutils-gprefix
-    pkgs.delta
-    pkgs.direnv
-    pkgs.emacs
-    pkgs.fd
-    pkgs.findutils-gprefix
-    pkgs.frawk
-    pkgs.fzf
-    pkgs.gawkInteractive-gprefix
-    pkgs.ghcid-ng
-    pkgs.git
-    pkgs.git-revise
-    pkgs.gnugrep-gprefix
-    pkgs.gnused-gprefix
-    pkgs.helix
-    pkgs.home-manager
-    pkgs.home-rebuild
-    pkgs.httpie
-    pkgs.ijq
-    pkgs.iosevka-bin
-    pkgs.jless
-    pkgs.jq
-    pkgs.jujutsu
-    pkgs.kakoune
-    pkgs.lima
-    pkgs.neovim
-    pkgs.nerdfonts
-    pkgs.nix-direnv
-    pkgs.nix-your-shell
-    pkgs.nixpkgs-fmt
-    pkgs.pandoc
-    pkgs.parinfer-rust
-    pkgs.prqlc
-    pkgs.pstree
-    # pkgs.qsv
-    pkgs.ripgrep
-    pkgs.rustup
-    pkgs.sd
-    pkgs.shellcheck
-    pkgs.starship
-    pkgs.tealdeer
-    pkgs.tectonic
-    pkgs.tree
-    pkgs.universal-ctags
-    pkgs.watchexec
-    pkgs.yt-dlp
-    pkgs.zellij
-    pkgs.zoxide
-  ];
+  home.packages = lib.foldlAttrs (xs: _: ys: xs ++ ys) [ ] {
+    disabled = lib.const [ ] [
+      pkgs.qsv
+    ];
+
+    editors = [
+      pkgs.emacs
+      pkgs.helix
+      pkgs.kakoune
+      pkgs.neovim
+      pkgs.parinfer-rust
+    ];
+
+    fonts = [
+      pkgs.iosevka-bin
+      pkgs.nerdfonts
+    ];
+
+    git = [
+      pkgs.delta
+      pkgs.git
+      pkgs.git-revise
+      pkgs.jujutsu
+    ];
+
+    gnu = [
+      pkgs.coreutils-gprefix
+      pkgs.findutils-gprefix
+      pkgs.gawkInteractive-gprefix
+      pkgs.gnugrep-gprefix
+      pkgs.gnused-gprefix
+    ];
+
+    nix = [
+      pkgs.comma
+      pkgs.comma-update
+      pkgs.direnv
+      pkgs.home-manager
+      pkgs.home-rebuild
+      pkgs.nix-direnv
+      pkgs.nix-your-shell
+      pkgs.nixpkgs-fmt
+    ];
+
+    rust = [
+      pkgs.cargo-edit
+      pkgs.cargo-flamegraph
+      pkgs.rustup
+    ];
+
+    shell = [
+      pkgs.fish
+      pkgs.shellcheck
+      pkgs.starship
+      pkgs.tealdeer
+      pkgs.zoxide
+    ];
+
+    uncategorized = [
+      pkgs.fd
+      pkgs.frawk
+      pkgs.fzf
+      pkgs.ghcid-ng
+      pkgs.httpie
+      pkgs.ijq
+      pkgs.jless
+      pkgs.jq
+      pkgs.lima
+      pkgs.pandoc
+      pkgs.prqlc
+      pkgs.pstree
+      pkgs.ripgrep
+      pkgs.sd
+      pkgs.tectonic
+      pkgs.tree
+      pkgs.universal-ctags
+      pkgs.watchexec
+      pkgs.yt-dlp
+      pkgs.zellij
+    ];
+  };
 
   # Copying font files on Darwin is too slow
   home.activation.copyFonts = lib.mkForce "true";
