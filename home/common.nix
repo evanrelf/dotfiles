@@ -6,7 +6,6 @@
   home.enableNixpkgsReleaseCheck = true;
 
   home.packages = [
-    pkgs.bacon
     pkgs.cargo-edit
     pkgs.cargo-flamegraph
     pkgs.comma
@@ -38,7 +37,6 @@
     pkgs.lima
     pkgs.neovim
     pkgs.nerdfonts
-    pkgs.nil
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
@@ -47,13 +45,11 @@
     pkgs.prqlc
     pkgs.pstree
     # pkgs.qsv
-    pkgs.racket
     pkgs.ripgrep
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
     pkgs.starship
-    pkgs.stylua
     pkgs.tealdeer
     pkgs.tectonic
     pkgs.tree
