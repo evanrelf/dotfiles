@@ -108,6 +108,11 @@
     recursive = true;
   };
 
+  home.file."Library/Application Support/espanso" = lib.mkIf pkgs.stdenv.isDarwin {
+    source = ../. + "/configs/espanso/.config/espanso";
+    recursive = true;
+  };
+
   programs.fish.enable = true;
 
   programs.fish.plugins = [
