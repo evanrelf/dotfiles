@@ -52,6 +52,8 @@
     rust = [
       pkgs.cargo-edit
       pkgs.cargo-flamegraph
+      pkgs.cargo-limit
+      pkgs.cargo-watch
       pkgs.rustup
     ];
 
