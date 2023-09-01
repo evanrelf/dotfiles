@@ -16,7 +16,6 @@
 
   # COMMIT
   c = commit
-  cn = commit --no-verify
   ca = commit --amend
   can = commit --amend --no-edit
 
