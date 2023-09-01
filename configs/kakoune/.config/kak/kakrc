@@ -31,6 +31,11 @@ hook global WinSetOption filetype=(fish|rust) %{
   set-option window indentwidth 4
 }
 
+# Indent with tabs in select languages
+hook global WinSetOption filetype=(go|makefile) %{
+  set-option window indentwidth 0
+}
+
 # eraserhd/parinfer-rust
 hook global WinSetOption filetype=(clojure) %{
   parinfer-enable-window -smart
@@ -53,6 +58,11 @@ hook global WinSetOption filetype=dhall %{
 
 hook global WinSetOption filetype=fish %{
   set-option window formatcmd "fish_indent"
+  hook window BufWritePre .* %{ format-buffer }
+}
+
+hook global WinSetOption filetype=go %{
+  set-option window formatcmd "gofmt"
   hook window BufWritePre .* %{ format-buffer }
 }
 
