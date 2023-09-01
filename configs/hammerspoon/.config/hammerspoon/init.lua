@@ -47,41 +47,90 @@ end)
 
 -- Maximize
 hs.hotkey.bind(fn, "f", function()
-  recordFrame()
   local window = hs.window.focusedWindow()
-  if window:isMaximizable() then
-    window:maximize()
+  local windowFrame = window:frame()
+  local screenFrame = window:screen():frame()
+
+  -- I hate imperative programming
+  local copyFrame = function(frame)
+    local x = frame.x
+    local y = frame.y
+    local w = frame.w
+    local h = frame.h
+    return hs.geometry.rect(x, y, w, h)
+  end
+
+  local pragmatic = copyFrame(screenFrame)
+  local aesthetic = copyFrame(pragmatic):scale(0.9, 0.9)
+
+  if windowFrame:equals(pragmatic) then
+    window:setFrame(aesthetic)
+  elseif windowFrame:equals(aesthetic) then
+    window:setFrame(pragmatic)
   else
-    hs.alert.show("Window cannot be maximized")
+    recordFrame()
+    window:setFrame(pragmatic)
   end
 end)
 
--- Left 1/2
+-- Left
 hs.hotkey.bind(fn, "[", function()
-  recordFrame()
   local window = hs.window.focusedWindow()
-  window:moveToUnit(hs.geometry.rect(0, 0, 1 / 2, 1))
+  local windowFrame = window:frame()
+  local screenFrame = window:screen():frame()
+
+  local buildFrame = function(scaleW, scaleH)
+    local x = screenFrame.x
+    local y = screenFrame.y
+    local w = screenFrame.w * scaleW
+    local h = screenFrame.h * scaleH
+    return hs.geometry.rect(x, y, w, h)
+  end
+
+  local third = buildFrame(1 / 3, 1)
+  local half = buildFrame(1 / 2, 1)
+  local twoThirds = buildFrame(2 / 3, 1)
+
+  if windowFrame:equals(half) then
+    window:setFrame(twoThirds)
+  elseif windowFrame:equals(twoThirds) then
+    window:setFrame(third)
+  elseif windowFrame:equals(third) then
+    window:setFrame(half)
+  else
+    recordFrame()
+    window:setFrame(half)
+  end
 end)
 
--- Right 1/2
+-- Right
 hs.hotkey.bind(fn, "]", function()
-  recordFrame()
   local window = hs.window.focusedWindow()
-  window:moveToUnit(hs.geometry.rect(0.5, 0, 1 / 2, 1))
-end)
+  local windowFrame = window:frame()
+  local screenFrame = window:screen():frame()
 
--- Left 2/3
-hs.hotkey.bind(sfn, "[", function()
-  recordFrame()
-  local window = hs.window.focusedWindow()
-  window:moveToUnit(hs.geometry.rect(0, 0, 2 / 3, 1))
-end)
+  local buildFrame = function(scaleW, scaleH)
+    local x = screenFrame.x + (screenFrame.w - (screenFrame.w * scaleW))
+    local y = screenFrame.y + (screenFrame.h - (screenFrame.h * scaleH))
+    local w = screenFrame.w * scaleW
+    local h = screenFrame.h * scaleH
+    return hs.geometry.rect(x, y, w, h)
+  end
 
--- Right 2/3
-hs.hotkey.bind(sfn, "]", function()
-  recordFrame()
-  local window = hs.window.focusedWindow()
-  window:moveToUnit(hs.geometry.rect(1 / 3, 0, 2 / 3, 1))
+  local third = buildFrame(1 / 3, 1)
+  local half = buildFrame(1 / 2, 1)
+  local twoThirds = buildFrame(2 / 3, 1)
+
+  if windowFrame == half then
+    window:setFrame(twoThirds)
+  elseif windowFrame == twoThirds then
+    window:setFrame(third)
+  elseif windowFrame == third then
+    window:setFrame(half)
+  else
+    recordFrame()
+    window:setFrame(half)
+  end
 end)
 
 --------------------------------------------------------------------------------
