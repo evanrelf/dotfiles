@@ -70,6 +70,7 @@
       pkgs.frawk
       pkgs.fzf
       pkgs.ghcid-ng
+      pkgs.go
       pkgs.httpie
       pkgs.ijq
       pkgs.jless
