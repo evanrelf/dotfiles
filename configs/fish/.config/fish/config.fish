@@ -73,6 +73,16 @@ alias ls "ls --color=auto"
 alias less "less -RMK"
 alias cargod "cargo watch --exec 'lclippy --all-targets' --clear --quiet"
 alias prqlcd "watchexec --exts prql --clear -- prqlc compile --hide-signature-comment"
+function cored
+    set --local file $argv[1]
+    set --local ghc_args -O -fforce-recomp -ddump-simpl -dsuppress-coercions -dsuppress-type-applications -dsuppress-module-prefixes -dno-typeable-binds -dsuppress-idinfo -no-keep-hi-files -no-keep-o-files
+    watchexec --watch $file --restart -- ghc $ghc_args $file \| less
+end
+function stgd
+    set --local file $argv[1]
+    set --local ghc_args -O -fforce-recomp -ddump-stg-final -dsuppress-coercions -dsuppress-type-applications -dsuppress-module-prefixes -dno-typeable-binds -dsuppress-idinfo -no-keep-hi-files -no-keep-o-files
+    watchexec --watch $file --restart -- ghc $ghc_args $file \| less
+end
 set --global fish_greeting ""
 abbr --add --global g git
 abbr --add --global j jj
