@@ -43,7 +43,15 @@ local colors = (function()
           fg_color = "#959da5",
           bg_color = "#ffffff",
         },
+        inactive_tab_hover = {
+          fg_color = "#959da5",
+          bg_color = "#ffffff",
+        },
         new_tab = {
+          fg_color = "#ffffff",
+          bg_color = "#ffffff",
+        },
+        new_tab_hover = {
           fg_color = "#ffffff",
           bg_color = "#ffffff",
         },
@@ -61,7 +69,15 @@ local colors = (function()
           fg_color = "#959da5", -- TODO
           bg_color = "#010409",
         },
+        inactive_tab_hover = {
+          fg_color = "#959da5", -- TODO
+          bg_color = "#010409",
+        },
         new_tab = {
+          fg_color = "#010409",
+          bg_color = "#010409",
+        },
+        new_tab_hover = {
           fg_color = "#010409",
           bg_color = "#010409",
         },
