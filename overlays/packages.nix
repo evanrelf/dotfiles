@@ -2,7 +2,7 @@ pkgsFinal: pkgsPrev:
 
 let
   gprefix = drv:
-    pkgsPrev.runCommandLocal "gprefix-${drv.name}" { } ''
+    pkgsFinal.runCommandLocal "gprefix-${drv.name}" { } ''
       mkdir -p "$out/bin"
       for bin in ${drv}/bin/*; do
         ln -s "$bin" "$out/bin/g$(basename $bin)"
@@ -40,7 +40,7 @@ in
         sha256 = "sha256-nRRX2qRXCxhIkbCrxvI/K5VGdWp3a7Ca5Lkt4TmE5u8=";
       };
       buildInputs =
-        pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
+        pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
           pkgsFinal.darwin.apple_sdk.frameworks.CoreServices
           pkgsFinal.libiconv
         ];
@@ -56,7 +56,7 @@ in
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "HEAD";
-      src = pkgsPrev.inputs.kakoune;
+      src = pkgsFinal.inputs.kakoune;
       preConfigure = ''
         ${prev.preConfigure}
         export version="${version}"
@@ -71,7 +71,7 @@ in
     crane.buildPackage rec {
       pname = "qsv";
       version = "0.74.0";
-      src = pkgsPrev.fetchFromGitHub {
+      src = pkgsFinal.fetchFromGitHub {
         owner = "jqnatividad";
         repo = "qsv";
         rev = version;
@@ -79,7 +79,7 @@ in
       };
       buildInputs = [
         pkgsFinal.python3
-      ] ++ pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
+      ] ++ pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
         pkgsFinal.darwin.apple_sdk.frameworks.Security
         pkgsFinal.libiconv
       ];
@@ -96,7 +96,7 @@ in
         rev = "8520d4e1b00055e8f927129e2a4cafda35aedf32";
         hash = "sha256-j3mBZ2adbNMhUn39hD50YFsAKAFh889FGv0BstQ0x4k=";
       };
-      buildInputs = pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
+      buildInputs = pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
         pkgsFinal.libiconv
       ];
       cargoExtraArgs = "--package scm-record --features scm-diff-editor";
