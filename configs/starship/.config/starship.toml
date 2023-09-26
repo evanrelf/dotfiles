@@ -1,6 +1,5 @@
 format = """\
   $status\
-  [┏╸](fg:bright-white) \
   $directory\
   $hg_branch\
   $git_branch\
@@ -12,7 +11,7 @@ format = """\
   $username\
   $hostname\
   $line_break\
-  [┗╸](fg:bright-white) \
+  [\\$](fg:white) \
 """
 
 [status]
