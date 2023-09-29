@@ -1,5 +1,6 @@
 user.name = "Evan Relf"
 user.email = "evan@evanrelf.com"
+ui.graph.style = "ascii"
 ui.diff.format = "git"
 ui.diff-editor = ["scm-diff-editor", "--dir-diff", "$left", "$right"]
 ui.pager = "delta"
