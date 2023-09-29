@@ -5,6 +5,8 @@
 
   home.enableNixpkgsReleaseCheck = true;
 
+  news.display = "silent";
+
   home.packages = lib.foldlAttrs (xs: _: ys: xs ++ ys) [ ] {
     disabled = lib.const [ ] [
       pkgs.qsv
@@ -16,6 +18,7 @@
       pkgs.kakoune
       pkgs.neovim
       pkgs.parinfer-rust
+      pkgs.vis
     ];
 
     fonts = [
@@ -83,6 +86,7 @@
       pkgs.sd
       pkgs.tectonic
       pkgs.tree
+      pkgs.ugrep
       pkgs.universal-ctags
       pkgs.watchexec
       pkgs.yt-dlp
