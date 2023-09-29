@@ -213,6 +213,12 @@ hook global WinSetOption filetype=git-commit %{
   autowrap-enable
 }
 
+hook global WinCreate .*\.jjdescription %{
+  add-highlighter window/subject-column column 50 "default,%opt{column_color}"
+  set-option window autowrap_column 72
+  autowrap-enable
+}
+
 hook global WinSetOption autowrap_column=.* %{
   add-highlighter -override window/autowrap-column column %sh{ echo $((kak_opt_autowrap_column + 1)) } "default,%opt{column_color}"
 }
