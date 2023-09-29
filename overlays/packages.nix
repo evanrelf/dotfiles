@@ -62,24 +62,6 @@ in
       '';
     });
 
-  prqlc =
-    pkgsFinal.crane.buildPackage rec {
-      pname = "prqlc";
-      version = "0.9.2";
-      src = pkgsPrev.fetchFromGitHub {
-        owner = "PRQL";
-        repo = "prql";
-        rev = version;
-        sha256 = "sha256-5w+EODFeI5h4geGPSAZyssZgDrsFJyqzGoQRr8mHazA=";
-      };
-      buildInputs =
-        pkgsFinal.lib.optionals pkgsPrev.stdenv.isDarwin [
-          pkgsFinal.darwin.apple_sdk.frameworks.CoreServices
-          pkgsFinal.libiconv
-        ];
-      cargoExtraArgs = "--package prqlc";
-    };
-
   qsv =
     let
       crane =
