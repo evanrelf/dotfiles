@@ -1,19 +1,12 @@
-[user]
-name = "Evan Relf"
-email = "evan@evanrelf.com"
-
-[ui]
-diff.format = "git"
-pager = "delta"
-diff-editor = "nvim"
-merge-editor = "nvim"
-
-[template-aliases]
-'format_timestamp(timestamp)' = 'timestamp.ago()'
-
-[merge-tools.nvim]
-merge-args = [
+user.name = "Evan Relf"
+user.email = "evan@evanrelf.com"
+ui.diff.format = "git"
+ui.pager = "delta"
+ui.diff-editor = "nvim"
+ui.merge-editor = "nvim"
+template-aliases.'format_timestamp(timestamp)' = 'timestamp.ago()'
+merge-tools.nvim.merge-args = [
   "-d", "$output", "-M", "$left", "$base", "$right", "-c", "wincmd J", "-c",
   "set modifiable", "-c", "set write"
 ]
-merge-tool-edits-conflict-markers = true
+merge-tools.nvim.merge-tool-edits-conflict-markers = true
