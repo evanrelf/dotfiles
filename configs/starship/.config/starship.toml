@@ -17,7 +17,11 @@ format = """\
 [status]
 disabled = false
 format = """([$status]($style)\n)"""
+pipestatus_format = """([$pipestatus]($style)\n)"""
+pipestatus_separator = """[ | ]($style)"""
+pipestatus_segment_format = """([$status]($style))"""
 style = 'red'
+pipestatus = true
 
 [directory]
 disabled = false
