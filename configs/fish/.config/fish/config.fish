@@ -1,4 +1,5 @@
 source "$__fish_config_dir/home-manager.fish" 2>/dev/null || true
+set --universal fish_features qmark-noglob
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
 set --global --export GHCUP_USE_XDG_DIRS 1
