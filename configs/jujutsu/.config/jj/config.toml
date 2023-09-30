@@ -1,11 +1,11 @@
-user.name = "Evan Relf"
-user.email = "evan@evanrelf.com"
-ui.graph.style = "ascii"
-ui.diff.format = "git"
-ui.diff-editor = ["scm-diff-editor", "--dir-diff", "$left", "$right"]
-ui.pager = "delta"
 aliases.l = ['log', '--revisions=alias_l()']
 aliases.ll = ['log', '--revisions=alias_ll()']
+user.name = 'Evan Relf'
+user.email = 'evan@evanrelf.com'
+ui.graph.style = 'ascii'
+ui.diff.format = 'git'
+ui.diff-editor = ['scm-diff-editor', '--dir-diff', '$left', '$right']
+ui.pager = 'delta'
 # Default revset in v0.9.0, made available as an alias
 revset-aliases.'default()' = '@ | (remote_branches() | tags()).. | ((remote_branches() | tags())..)-'
 revset-aliases.'alias_l()' = 'latest(::@, 10) | (branches() & evan()) | git_head() | default()'
