@@ -42,6 +42,10 @@
       pkgs.gnused-gprefix
     ];
 
+    haskell = [
+      pkgs.calligraphy
+    ];
+
     nix = [
       pkgs.comma
       pkgs.comma-update
@@ -75,6 +79,7 @@
       pkgs.fzf
       pkgs.ghcid-ng
       pkgs.go
+      pkgs.graphviz
       pkgs.httpie
       pkgs.ijq
       pkgs.jless

@@ -12,6 +12,17 @@ let
 
 in
 {
+  calligraphy =
+    let
+      src = pkgsFinal.fetchFromGitHub {
+        owner = "jonascarpay";
+        repo = "calligraphy";
+        rev = "309a24bc78836de32a86e1c185b7a1c5698ef368";
+        sha256 = "sha256-8B/e3QggX5xtGkVHGq3gYncL+VvpbZpcRb/OBVbznyE=";
+      };
+    in
+    pkgsFinal.haskellPackages.callCabal2nix "calligraphy" src { };
+
   coreutils-gprefix =
     (pkgsPrev.coreutils.override {
       singleBinary = false;
