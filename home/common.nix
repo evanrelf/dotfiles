@@ -98,6 +98,7 @@
       pkgs.watchexec
       pkgs.yt-dlp
       pkgs.zellij
+      pkgs.zf
     ];
   };
 

@@ -123,4 +123,21 @@ in
       ];
       cargoExtraArgs = "--package scm-record --features scm-diff-editor";
     };
+
+  zf =
+    assert builtins.compareVersions pkgsPrev.zf.version "0.9.0" < 0;
+    pkgsPrev.zf.overrideAttrs (prev: rec {
+      version = "0.9.0";
+      src = pkgsFinal.fetchFromGitHub {
+        owner = "natecraddock";
+        repo = "zf";
+        rev = "refs/tags/${version}";
+        fetchSubmodules = true;
+        hash = "sha256-qzGr72EnWlGZgd7/r+8Iv+1i/Q9qvWpf/cgkr+TrgkE=";
+      };
+      nativeBuildInputs = [
+        pkgsFinal.installShellFiles
+        pkgsFinal.zig.hook
+      ];
+    });
 }
