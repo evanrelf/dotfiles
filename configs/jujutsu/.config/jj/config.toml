@@ -5,3 +5,4 @@ ui.diff.format = "git"
 ui.diff-editor = ["scm-diff-editor", "--dir-diff", "$left", "$right"]
 ui.pager = "delta"
 template-aliases.'format_timestamp(timestamp)' = 'timestamp.ago()'
+template-aliases.'format_short_signature(signature)' = ''
