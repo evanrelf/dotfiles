@@ -64,6 +64,17 @@ in
   gnused-gprefix =
     gprefix pkgsFinal.gnused;
 
+  graphex =
+    let
+      src = pkgsFinal.fetchFromGitHub {
+        owner = "dustin";
+        repo = "graphex";
+        rev = "d330549e36c833b1bab4fce5f77838196682a925";
+        sha256 = "sha256-apgpqPnKXX6giPEqucJMpVXLzSDKYVB4PfNp2Kw1Y/0=";
+      };
+    in
+    pkgsFinal.haskellPackages.callCabal2nix "graphex" src { };
+
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "HEAD";
