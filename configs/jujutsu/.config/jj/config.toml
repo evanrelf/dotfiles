@@ -4,5 +4,69 @@ ui.graph.style = "ascii"
 ui.diff.format = "git"
 ui.diff-editor = ["scm-diff-editor", "--dir-diff", "$left", "$right"]
 ui.pager = "delta"
-template-aliases.'format_timestamp(timestamp)' = 'timestamp.ago()'
-template-aliases.'format_short_signature(signature)' = ''
+templates.log = 'evan_log_oneline'
+template-aliases.'format_short_id(id)' = 'id.shortest(6)'
+template-aliases.evan_log_oneline = '''
+label(
+  if(current_working_copy, "working_copy"),
+  separate(
+    " ",
+    label(
+      separate(
+        " ",
+        if(divergent, "divergent"),
+        if(hidden, "hidden"),
+      ),
+      separate(
+        " ",
+        format_short_change_id(change_id) ++ if(divergent, "?"),
+        format_short_commit_id(commit_id),
+        if(hidden, "hidden"),
+      ),
+    ),
+    if(
+      root,
+      separate(
+        " ",
+        branches,
+        tags,
+        working_copies,
+        git_head,
+      ),
+      separate(
+        " ",
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("second"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" second") ++ label("timestamp", "s"),
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("minute"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" minute") ++ label("timestamp", "m"),
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("hour"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" hour") ++ label("timestamp", "h"),
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("day"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" day") ++ label("timestamp", "d"),
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("week"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" week") ++ label("timestamp", "wk"),
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("month"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" month") ++ label("timestamp", "mo"),
+        if(
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("year"),
+          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" year") ++ label("timestamp", "yr"),
+        committer.timestamp().ago().remove_suffix(" ago"),
+        ))))))),
+        if(empty, label("empty", "(empty)")),
+        if(description, description.first_line(), description_placeholder),
+        if(conflict, label("conflict", "conflict")),
+        branches,
+        tags,
+        working_copies,
+        git_head,
+      ),
+    ),
+  ),
+)
+'''
