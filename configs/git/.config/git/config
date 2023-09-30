@@ -27,7 +27,7 @@
   f = fetch
 
   # LOG
-  l = log --oneline --graph --first-parent --max-count 20
+  l = log --oneline --graph --first-parent --max-count 10
   ll = log --oneline --graph --first-parent
 
   # LOOKUP
