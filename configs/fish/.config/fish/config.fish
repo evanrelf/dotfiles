@@ -72,18 +72,6 @@ function fish_user_key_bindings
 end
 alias ls "ls --color=auto"
 alias less "less -RMK"
-alias cargod "cargo watch --exec 'lclippy --all-targets' --clear --quiet"
-alias prqlcd "watchexec --exts prql --clear -- prqlc compile --hide-signature-comment"
-function cored
-    set --local file $argv[1]
-    set --local ghc_args -O -fforce-recomp -ddump-simpl -dsuppress-coercions -dsuppress-type-applications -dsuppress-module-prefixes -dno-typeable-binds -dsuppress-idinfo -no-keep-hi-files -no-keep-o-files
-    watchexec --watch $file --restart -- ghc $ghc_args $file \| less
-end
-function stgd
-    set --local file $argv[1]
-    set --local ghc_args -O -fforce-recomp -ddump-stg-final -dsuppress-coercions -dsuppress-type-applications -dsuppress-module-prefixes -dno-typeable-binds -dsuppress-idinfo -no-keep-hi-files -no-keep-o-files
-    watchexec --watch $file --restart -- ghc $ghc_args $file \| less
-end
 set --global fish_greeting ""
 abbr --add --global g git
 abbr --add --global j jj
@@ -97,34 +85,6 @@ function last_history_item
     echo $history[1]
 end
 abbr --add !! --position anywhere --function last_history_item
-function rg
-    if isatty stdout
-        command rg --pretty $argv | command less -RMFXK
-        return $pipestatus[1]
-    else
-        command rg $argv
-    end
-end
-function hstype
-    rg \
-        --type haskell \
-        --multiline \
-        "^ *\b(?:type|type\s+family|newtype|data|class)\b.*\s+\b(?:$argv[1])\b" \
-        $argv[2..-1]
-end
-function hsterm
-    rg \
-        --type haskell \
-        --multiline \
-        "^ *\b(?:$argv[1])\b\s+::" \
-        $argv[2..-1]
-end
-function hsimport
-    rg \
-        --type haskell \
-        "^import +(?:\"[\w-]+\" +)?(?:qualified +)?\b$argv[1]\b(?: .*)?\$" \
-        $argv[2..-1]
-end
 set --global fish_color_command black
 set --global fish_color_keyword $fish_color_command
 set --global fish_color_param $fish_color_command
