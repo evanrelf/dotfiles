@@ -39,14 +39,8 @@ if command -q limactl
     set --global --export LIMA_HOME "$XDG_DATA_HOME/lima"
     limactl completion fish | source
 end
-# TODO: Combine `nix-your-shell` and `cached-nix-shell`, or drop
-# `cached-nix-shell`
 if command -q nix-your-shell
     nix-your-shell fish | source
-else if command -q cached-nix-shell
-    alias nix-shell "cached-nix-shell --run fish"
-else
-    alias nix-shell "command nix-shell --run fish"
 end
 if command -q zoxide
     set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
