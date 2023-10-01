@@ -3,7 +3,6 @@ set --universal fish_features qmark-noglob
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
 set --global --export GHCUP_USE_XDG_DIRS 1
-set --global --export COLORTERM "$TERM"
 set --global --export EDITOR kak
 set --global --export RUSTUP_HOME "$XDG_CONFIG_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_CONFIG_HOME/cargo"
@@ -61,12 +60,6 @@ if command -q jj
     set --global --export JJ_CONFIG "$XDG_CONFIG_HOME/jj/config.toml"
     jj util completion --fish | source
 end
-if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
-    set --global man_blink --reverse blue
-    set --global man_bold --dim --bold blue
-    set --global man_standout --background brwhite black
-    set --global man_underline --underline brblack
-end
 function fish_user_key_bindings
     bind \cz 'fg 2>/dev/null; commandline -f repaint'
 end
@@ -85,18 +78,4 @@ function last_history_item
     echo $history[1]
 end
 abbr --add !! --position anywhere --function last_history_item
-set --global fish_color_command black
-set --global fish_color_keyword $fish_color_command
-set --global fish_color_param $fish_color_command
-set --global fish_color_option $fish_color_param
-set --global fish_color_valid_path --underline
-set --global fish_color_quote yellow
-set --global fish_color_escape $fish_color_quote
-set --global fish_color_operator cyan
-set --global fish_color_end $fish_color_operator
-set --global fish_color_redirection $fish_color_operator
-set --global fish_color_error red
-set --global fish_color_cancel white
-set --global fish_color_comment white
-set --global fish_color_autosuggestion white
 source "$__fish_config_dir/local.fish" 2>/dev/null || true
