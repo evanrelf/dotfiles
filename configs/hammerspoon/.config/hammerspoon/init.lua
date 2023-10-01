@@ -51,25 +51,9 @@ hs.hotkey.bind(fn, "f", function()
   local windowFrame = window:frame()
   local screenFrame = window:screen():frame()
 
-  -- I hate imperative programming
-  local copyFrame = function(frame)
-    local x = frame.x
-    local y = frame.y
-    local w = frame.w
-    local h = frame.h
-    return hs.geometry.rect(x, y, w, h)
-  end
-
-  local pragmatic = copyFrame(screenFrame)
-  local aesthetic = copyFrame(pragmatic):scale(0.9, 0.9)
-
-  if windowFrame:equals(pragmatic) then
-    window:setFrame(aesthetic)
-  elseif windowFrame:equals(aesthetic) then
-    window:setFrame(pragmatic)
-  else
+  if not windowFrame:equals(screenFrame) then
     recordFrame()
-    window:setFrame(pragmatic)
+    window:setFrame(screenFrame)
   end
 end)
 
