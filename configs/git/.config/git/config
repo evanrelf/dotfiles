@@ -93,6 +93,7 @@
   light = true
   color-only = true
 [diff]
+  colorMoved = default
 [difftool]
   prompt = false
 [fetch]
@@ -101,7 +102,7 @@
 [init]
   defaultBranch = main
 [interactive]
-  diffFilter = delta
+  diffFilter = delta --color-only
   singleKey = true
 [merge]
   autoStash = true
