@@ -1,3 +1,4 @@
+# TODO: https://github.com/martinvonz/jj/releases/tag/v0.10.0
 aliases.l = ['log', '--revisions=alias_l()']
 aliases.ll = ['log', '--revisions=alias_ll()']
 user.name = 'Evan Relf'
