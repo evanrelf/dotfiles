@@ -116,6 +116,11 @@
     recursive = true;
   };
 
+  xdg.configFile."direnv" = {
+    source = ../configs/direnv/.config/direnv;
+    recursive = true;
+  };
+
   xdg.configFile."doom" = {
     source = ../configs/emacs/.config/doom;
     recursive = true;
