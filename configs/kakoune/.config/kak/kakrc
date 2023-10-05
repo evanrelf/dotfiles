@@ -459,7 +459,9 @@ hook global BufCreate .*/?(?i)prql %{
 
 hook global WinSetOption filetype=prql %{
   require-module prql
-  set-option window static_words %opt{prql_static_words}
+  set-option window formatcmd "prqlc fmt"
+  # At the time of writing, `prqlc fmt` strips comments
+  # hook window BufWritePre .* %{ format-buffer }
 }
 
 hook -group prql-highlight global WinSetOption filetype=prql %{
