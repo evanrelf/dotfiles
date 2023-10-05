@@ -93,11 +93,8 @@
   light = true
   color-only = true
 [diff]
-  tool = nvim
 [difftool]
   prompt = false
-[difftool "nvim"]
-  cmd = nvim -d "$LOCAL" "$REMOTE"
 [fetch]
   prune = true
   pruneTags = true
@@ -107,14 +104,11 @@
   diffFilter = delta
   singleKey = true
 [merge]
-  tool = nvim
   autoStash = true
   conflictstyle = zdiff3
 [mergetool]
   prompt = false
   keepBackup = false
-[mergetool "nvim"]
-  cmd = nvim -d "$LOCAL" "$MERGED" "$REMOTE"
 [rebase]
   autoStash = true
   autoSquash = true
