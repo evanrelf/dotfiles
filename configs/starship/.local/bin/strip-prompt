@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set -Eeuo pipefail
-IFS=$'\n\t'
-
-  rg -v '^(┏╸|┗╸\s*$)' /dev/stdin \
-| sd '┗╸' '$ ' \
-| sd -f m '\s{2,}$' '\n'

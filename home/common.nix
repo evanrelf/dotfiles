@@ -110,7 +110,6 @@
       name = "local-bin";
       paths = [
         ../configs/emacs/.local/bin
-        ../configs/starship/.local/bin
       ];
     };
     recursive = true;
