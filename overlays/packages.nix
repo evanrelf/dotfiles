@@ -107,37 +107,4 @@ in
       ];
       cargoExtraArgs = "--features all_full";
     };
-
-  scm-diff-editor =
-    pkgsFinal.crane.buildPackage {
-      pname = "scm-diff-editor";
-      version = "0.0.0";
-      src = pkgsFinal.fetchFromGitHub {
-        owner = "arxanas";
-        repo = "git-branchless";
-        rev = "8520d4e1b00055e8f927129e2a4cafda35aedf32";
-        hash = "sha256-j3mBZ2adbNMhUn39hD50YFsAKAFh889FGv0BstQ0x4k=";
-      };
-      buildInputs = pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
-        pkgsFinal.libiconv
-      ];
-      cargoExtraArgs = "--package scm-record --features scm-diff-editor";
-    };
-
-  zf =
-    assert builtins.compareVersions pkgsPrev.zf.version "0.9.0" < 0;
-    pkgsPrev.zf.overrideAttrs (prev: rec {
-      version = "0.9.0";
-      src = pkgsFinal.fetchFromGitHub {
-        owner = "natecraddock";
-        repo = "zf";
-        rev = "refs/tags/${version}";
-        fetchSubmodules = true;
-        hash = "sha256-qzGr72EnWlGZgd7/r+8Iv+1i/Q9qvWpf/cgkr+TrgkE=";
-      };
-      nativeBuildInputs = [
-        pkgsFinal.installShellFiles
-        pkgsFinal.zig.hook
-      ];
-    });
 }

@@ -31,7 +31,6 @@
       pkgs.git
       pkgs.git-revise
       pkgs.jujutsu
-      pkgs.scm-diff-editor
     ];
 
     gnu = [

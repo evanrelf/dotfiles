@@ -1,4 +1,3 @@
-# TODO: https://github.com/martinvonz/jj/releases/tag/v0.10.0
 aliases.l = ['log', '--revisions=alias_l()']
 aliases.ll = ['log', '--revisions=alias_ll()']
 user.name = 'Evan Relf'
@@ -8,8 +7,8 @@ ui.diff.format = 'git'
 ui.diff-editor = ['scm-diff-editor', '--dir-diff', '$left', '$right']
 ui.pager = 'delta'
 # Default revset in v0.9.0, made available as an alias
-revset-aliases.'default()' = '@ | (remote_branches() | tags()).. | ((remote_branches() | tags())..)-'
-revset-aliases.'alias_l()' = 'latest(::@, 10) | git_head() | default()'
+revset-aliases.'default()' = '@ | ancestors(immutable_heads().., 2) | heads(immutable_heads())'
+revset-aliases.'alias_l()' = 'ancestors(@, 10) | git_head() | default()'
 revset-aliases.'alias_ll()' = '::@ | git_head() | default()'
 revset-aliases.'wip()' = 'description("wip") | description("whip") | (description(exact:"") ~ root())' # case-insensitive
 revset-aliases.'evan()' = 'evan_personal() | evan_work()'
