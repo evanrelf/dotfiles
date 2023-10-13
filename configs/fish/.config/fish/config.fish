@@ -57,9 +57,7 @@ end
 function fish_user_key_bindings
     bind \cz 'fg 2>/dev/null; commandline -f repaint'
 end
-alias ls "eza --group-directories-first --classify"
-alias ll "eza --group-directories-first --classify --long"
-alias tree "eza --group-directories-first --classify --tree"
+alias ls "ls --color=auto"
 alias less "less -RMK"
 set --global fish_greeting ""
 abbr --add --global g git

@@ -75,7 +75,6 @@
     ];
 
     uncategorized = [
-      pkgs.eza
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
@@ -93,6 +92,7 @@
       pkgs.ripgrep
       pkgs.sd
       pkgs.tectonic
+      pkgs.tree
       pkgs.ugrep
       pkgs.universal-ctags
       pkgs.watchexec
