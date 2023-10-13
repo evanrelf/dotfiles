@@ -40,15 +40,15 @@ in
   gawkInteractive-gprefix =
     gprefix pkgsFinal.gawkInteractive;
 
-  ghcid-ng =
+  ghciwatch =
     pkgsFinal.crane.buildPackage rec {
-      pname = "ghcid-ng";
-      version = "0.3.4";
+      pname = "ghciwatch";
+      version = "0.3.8";
       src = pkgsFinal.fetchFromGitHub {
         owner = "MercuryTechnologies";
-        repo = "ghcid-ng";
+        repo = pname;
         rev = "v${version}";
-        sha256 = "sha256-nRRX2qRXCxhIkbCrxvI/K5VGdWp3a7Ca5Lkt4TmE5u8=";
+        sha256 = "sha256-e2GV26yiOHChv9linNnv4MeJxFhv6eljNllQ9TpwLh0=";
       };
       buildInputs =
         pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [

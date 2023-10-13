@@ -77,7 +77,7 @@
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
-      pkgs.ghcid-ng
+      pkgs.ghciwatch
       pkgs.go
       pkgs.graphviz
       pkgs.httpie
