@@ -287,6 +287,33 @@ define-command -hidden haskell-insert-option %{
   }
 }
 
+# TODO: Infer actual SQLite DB path
+
+define-command -hidden haskell-goto-definition %{ evaluate-commands %sh{
+  db="hiedb.sqlite"
+  input_module=$(rg --only-matching '\bmodule\b\s+([A-Za-z0-9_\.]+)' --replace '$1' --max-count 1 "$kak_buffile")
+  input_position=$(echo "$kak_selection_desc" | tr '.,' ' ')
+  output=$(hiedb -D "$db" point-defs "$input_module" $input_position 2>/dev/null)
+  output_module=$(echo "$output" | cut -d ':' -f 1)
+  output_position=$(echo "$output" | cut -d ':' -f 2- | cut -d '-' -f 1 | tr ':' ' ')
+  output_hie=$(hiedb -D "$db" lookup-hie "$output_module")
+  output_file=$(hiedb dump "$output_hie" | rg --only-matching 'Node@(.+\.hs):' --replace '$1' --max-count 1)
+  if [ -n "$output_file" ]; then
+    echo "edit -existing %{$output_file} $output_position"
+  else
+    echo "fail 'haskell-goto-definition: failed'"
+  fi
+}}
+
+define-command -hidden haskell-type-at-point %{ evaluate-commands %sh{
+  db="hiedb.sqlite"
+  module=$(rg --only-matching '\bmodule\b\s+([A-Za-z0-9_\.]+)' --replace '$1' --max-count 1 "$kak_buffile")
+  hiedb_position=$(echo "$kak_selection_desc" | tr '.,' ' ')
+  output=$(hiedb -D "$db" point-types "$module" $hiedb_position 2>/dev/null | sd '\n(.)' ' $1' | sd 'forall' '\n\nforall' | fmt -w80)
+  info_position=$(echo "$kak_selection_desc" | cut -d ',' -f 1)
+  echo "info -anchor $info_position %{$output}"
+}}
+
 ################################################################################
 # MAPPINGS
 ################################################################################
@@ -412,6 +439,8 @@ declare-user-mode "haskell"
 map global "user" "h" ": enter-user-mode haskell<ret>" -docstring "haskell..."
 map global "haskell" "l" ": haskell-insert-language-extension<ret>" -docstring "insert language extension"
 map global "haskell" "o" ": haskell-insert-option<ret>" -docstring "insert option"
+map global "haskell" "d" "<esc>: haskell-goto-definition<ret>" -docstring "goto definition"
+map global "haskell" "t" "<esc>: haskell-type-at-point<ret>" -docstring "type at point"
 
 ################################################################################
 # EVALUATE

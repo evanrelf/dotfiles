@@ -44,6 +44,7 @@
     haskell = [
       pkgs.calligraphy
       pkgs.graphex
+      pkgs.haskellPackages.hiedb
     ];
 
     nix = [
