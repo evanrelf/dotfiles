@@ -3,8 +3,6 @@ format = """\
   $directory\
   $nix_shell\
   $jobs\
-  $username\
-  $hostname\
   $line_break\
   [\\$](fg:white) \
 """
@@ -99,12 +97,12 @@ symbol = ' '
 style = 'green'
 
 [username]
-disabled = false
+disabled = true
 style_user = 'white'
 style_root = 'white'
 format = '[$user]($style)'
 
 [hostname]
-disabled = false
+disabled = true
 format = '[@$hostname]($style)'
 style = 'white'
