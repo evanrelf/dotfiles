@@ -1,12 +1,6 @@
 format = """\
   $status\
   $directory\
-  $hg_branch\
-  $git_branch\
-  ${custom.jj_change_id}\
-  $git_commit\
-  $git_status\
-  $git_state\
   $nix_shell\
   $jobs\
   $username\
@@ -38,24 +32,24 @@ repo_root_style = 'blue underline'
 '~/Code/MercuryTechnologies/mercury-web-backend' = 'mwb'
 
 [hg_branch]
-disabled = false
+disabled = true
 format = '([hg:$branch]($style)) '
 style = 'blue'
 
 [git_branch]
-disabled = false
+disabled = true
 format = '([git:$branch]($style)) '
 style = 'blue'
 only_attached = true
 
-[custom.jj_change_id]
-disabled = false
-command = """
-jj log --revisions '@' --template 'change_id.shortest(6)' | head -n1 | awk '{print $2}'
-"""
-detect_folders = ['.jj']
-format = '[jj:$output]($style) '
-style = 'blue'
+# [custom.jj_change_id]
+# disabled = false
+# command = """
+# jj log --revisions '@' --template 'change_id.shortest(6)' | head -n1 | awk '{print $2}'
+# """
+# detect_folders = ['.jj']
+# format = '[jj:$output]($style) '
+# style = 'blue'
 
 # [custom.jj_status]
 # disabled = false
@@ -67,13 +61,13 @@ style = 'blue'
 # style = 'red'
 
 [git_commit]
-disabled = false
+disabled = true
 format = '([git:$hash]($style)) '
 style = 'blue'
 only_detached = true
 
 [git_status]
-disabled = false
+disabled = true
 format = '([$conflicted$staged$modified$renamed$deleted$untracked$ahead_behind$stashed]($style) )'
 style = ''
 conflicted = '[=$count](cyan)'
@@ -88,7 +82,7 @@ renamed = '[»](red)'
 deleted = '[×](red)'
 
 [git_state]
-disabled = false
+disabled = true
 format = '[\($state( $progress_current/$progress_total)\)]($style) '
 style = 'cyan'
 
