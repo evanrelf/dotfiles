@@ -96,6 +96,7 @@
       pkgs.ugrep
       pkgs.universal-ctags
       pkgs.watchexec
+      pkgs.watchman
       pkgs.yt-dlp
       pkgs.zellij
       pkgs.zf
