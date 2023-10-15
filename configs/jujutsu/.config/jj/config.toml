@@ -1,5 +1,8 @@
+aliases.clone = ['git', 'clone', '--colocate']
+aliases.fetch = ['git', 'fetch']
 aliases.l = ['log', '--revisions=alias_l()']
 aliases.ll = ['log', '--revisions=alias_ll()']
+aliases.push = ['git', 'push']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 ui.graph.style = 'ascii'
