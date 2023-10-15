@@ -18,7 +18,7 @@ in
         owner = "jonascarpay";
         repo = "calligraphy";
         rev = "309a24bc78836de32a86e1c185b7a1c5698ef368";
-        sha256 = "sha256-8B/e3QggX5xtGkVHGq3gYncL+VvpbZpcRb/OBVbznyE=";
+        hash = "sha256-8B/e3QggX5xtGkVHGq3gYncL+VvpbZpcRb/OBVbznyE=";
       };
     in
     pkgsFinal.haskellPackages.callCabal2nix "calligraphy" src { };
@@ -48,7 +48,7 @@ in
         owner = "MercuryTechnologies";
         repo = pname;
         rev = "v${version}";
-        sha256 = "sha256-e2GV26yiOHChv9linNnv4MeJxFhv6eljNllQ9TpwLh0=";
+        hash = "sha256-e2GV26yiOHChv9linNnv4MeJxFhv6eljNllQ9TpwLh0=";
       };
       buildInputs =
         pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
@@ -70,7 +70,7 @@ in
         owner = "dustin";
         repo = "graphex";
         rev = "d330549e36c833b1bab4fce5f77838196682a925";
-        sha256 = "sha256-apgpqPnKXX6giPEqucJMpVXLzSDKYVB4PfNp2Kw1Y/0=";
+        hash = "sha256-apgpqPnKXX6giPEqucJMpVXLzSDKYVB4PfNp2Kw1Y/0=";
       };
     in
     pkgsFinal.haskellPackages.callCabal2nix "graphex" src { };
