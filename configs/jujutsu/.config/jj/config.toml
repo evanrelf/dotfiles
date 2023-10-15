@@ -6,6 +6,7 @@ aliases.push = ['git', 'push', '--branch']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 ui.graph.style = 'ascii'
+ui.diff-editor = ':builtin'
 ui.diff.format = 'git'
 ui.pager = 'delta'
 ui.default-description = "\n"
