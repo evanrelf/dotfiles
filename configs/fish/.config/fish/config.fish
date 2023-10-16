@@ -24,9 +24,6 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
     set --global --export --prepend PATH "$HOME/.config/git/scripts"
     set --global --export --prepend PATH "$HOME/.local/bin"
-    if command -q rustup
-        set --global --export --prepend PATH (dirname (rustup which rustc))
-    end
     if test -d "$HOME/.config/emacs/bin"
         set --global --export --prepend PATH "$HOME/.config/emacs/bin"
     end
