@@ -85,7 +85,6 @@
       pkgs.ijq
       pkgs.jless
       pkgs.jq
-      pkgs.lima
       pkgs.pandoc
       pkgs.prqlc
       pkgs.pstree

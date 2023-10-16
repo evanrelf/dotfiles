@@ -32,10 +32,6 @@ if command -q direnv
     set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
 end
-if command -q limactl
-    set --global --export LIMA_HOME "$XDG_DATA_HOME/lima"
-    limactl completion fish | source
-end
 if command -q nix-your-shell
     nix-your-shell fish | source
 end
