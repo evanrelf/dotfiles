@@ -4,7 +4,7 @@ format = """\
   $nix_shell\
   $jobs\
   $line_break\
-  [\\$](fg:white) \
+  $character\
 """
 
 [status]
@@ -106,3 +106,7 @@ format = '[$user]($style)'
 disabled = true
 format = '[@$hostname]($style)'
 style = 'white'
+
+[character]
+disabled = false
+format = "[\\$](fg:white) "
