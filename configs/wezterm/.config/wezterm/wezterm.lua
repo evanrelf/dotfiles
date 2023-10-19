@@ -139,5 +139,6 @@ return {
   },
   enable_csi_u_key_encoding = true,
   max_fps = 120,
+  scrollback_lines = 10000,
   check_for_updates = false,
 }
