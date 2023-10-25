@@ -1,8 +1,8 @@
 local wezterm = require("wezterm")
 
 local font = wezterm.font_with_fallback({
-  { family = "PragmataPro" },
-  { family = "Iosevka SS08", harfbuzz_features = { "calt=0" } },
+  { family = "PragmataPro Mono Liga" },
+  { family = "Iosevka SS08" },
   "Iosevka Nerd Font",
 })
 
