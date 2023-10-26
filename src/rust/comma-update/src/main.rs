@@ -1,7 +1,7 @@
-use anyhow::{anyhow, Context};
-use std::{env, fs, io::Read, path::Path};
+use anyhow::Context as _;
+use std::{env, fs, io::Read as _};
 
-fn main() -> Result<(), anyhow::Error> {
+fn main() -> anyhow::Result<()> {
     let home = env::var("HOME").context("Failed to get $HOME")?;
 
     let cache_dir = format!("{home}/.cache/nix-index");
@@ -24,16 +24,15 @@ fn main() -> Result<(), anyhow::Error> {
 
     let filename = format!("index-{arch}-{os}");
 
-    println!("Downloading index");
     let response = ureq::get(&format!(
         "https://github.com/Mic92/nix-index-database/releases/latest/download/{filename}"
     ))
     .call()
-    .context("Failed to send download request to GitHub")?;
+    .context("Failed to download from GitHub")?;
 
     let response_length = response
         .header("Content-Length")
-        .ok_or_else(|| anyhow!("Failed to get 'Content-Length' of response"))?
+        .context("Response lacks a 'Content-Length' header")?
         .parse()
         .context("Failed to parse 'Content-Length' into a number")?;
 
@@ -45,15 +44,9 @@ fn main() -> Result<(), anyhow::Error> {
 
     fs::write(&filename, response_bytes).context("Failed to write index to disk")?;
 
-    println!("Download complete");
+    fs::remove_file("files").context("Failed to remove old index link")?;
 
-    let _ = fs::remove_file("files");
-
-    if Path::new("files").exists() {
-        anyhow::bail!("Failed to remove old index link");
-    }
-
-    fs::hard_link(&filename, "files").context("Faild to create hard link")?;
+    fs::hard_link(&filename, "files").context("Failed to create hard link")?;
 
     Ok(())
 }
