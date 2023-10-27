@@ -2,93 +2,91 @@
 
 use anyhow::Context as _;
 use itertools::Itertools as _;
-use std::process::{Command, ExitStatus, Stdio};
+use xshell::{cmd, Shell};
 
-fn main() -> Result<(), anyhow::Error> {
-    if supports_flakes()? {
-        with_flakes()?;
+fn main() -> anyhow::Result<()> {
+    let sh = Shell::new()?;
+
+    if supports_flakes(&sh)? {
+        with_flakes(&sh)?;
     } else {
-        without_flakes()?;
+        without_flakes(&sh)?;
     }
 
     Ok(())
 }
 
-fn supports_flakes() -> Result<bool, anyhow::Error> {
-    let output = Command::new("nix-instantiate")
-        .args(["--eval", "--expr", "builtins ? getFlake", "--json"])
-        .stderr(Stdio::inherit())
-        .output()
-        .context("Failed to execute nix-instantiate")?;
-
-    handle_status("nix-instantiate", output.status)?;
-
-    String::from_utf8(output.stdout)
-        .context("Failed to convert output from nix-instantiate into a UTF-8 string")?
-        .trim_end()
-        .parse()
-        .context("Failed to parse output from nix-instantiate into a bool")
+fn supports_flakes(sh: &Shell) -> anyhow::Result<bool> {
+    cmd!(
+        sh,
+        "nix-instantiate --eval --expr 'builtins ? getFlake' --json"
+    )
+    .quiet()
+    .read()
+    .context("Failed to run nix-instantiate")?
+    .trim_end()
+    .parse()
+    .context("Failed to parse output from nix-instantiate into a bool")
 }
 
-fn with_flakes() -> Result<(), anyhow::Error> {
+fn with_flakes(sh: &Shell) -> anyhow::Result<()> {
+    let hostname = cmd!(sh, "hostname -s")
+        .quiet()
+        .read()
+        .context("Failed to get hostname")?;
+
     let args = std::env::args().skip(1).join(" ");
 
-    let exit_status = Command::new("sh")
-        .arg("-c")
-        .arg(format!("home-manager --flake .#$(hostname -s) {args}"))
-        .status()
+    cmd!(sh, "home-manager --flake .#{hostname} {args}")
+        .quiet()
+        .run()
         .context("Failed to execute home-manager")?;
-
-    handle_status("home-manager", exit_status)?;
 
     Ok(())
 }
 
-fn without_flakes() -> Result<(), anyhow::Error> {
-    let mut args = std::env::args().skip(1);
+fn without_flakes(sh: &Shell) -> anyhow::Result<()> {
+    let args = std::env::args().skip(1).collect::<Vec<_>>();
 
     enum Subcommand {
         Build,
         Switch,
     }
 
-    let subcommand = match (args.next().as_deref(), args.next()) {
+    let subcommand = match (args.get(0).map(String::as_str), args.get(1..)) {
         (Some("build"), None) => Subcommand::Build,
         (Some("switch"), None) => Subcommand::Switch,
         _ => anyhow::bail!("usage: home-rebuild (build | switch)"),
     };
 
-    let output = Command::new("sh")
-        .arg("-c")
-        .arg("nix-build --attr homeConfigurations.$(hostname -s).activationPackage")
-        .stderr(Stdio::inherit())
-        .output()
-        .context("Failed to execute nix-build")?;
+    let hostname = cmd!(sh, "hostname -s")
+        .quiet()
+        .read()
+        .context("Failed to get hostname")?;
 
-    handle_status("nix-build", output.status)?;
+    let no_out_link = match subcommand {
+        Subcommand::Build => "",
+        Subcommand::Switch => "--no-out-link",
+    };
 
-    let store_path = String::from_utf8(output.stdout)
-        .context("Failed to convert output from nix-build into a UTF-8 string")?;
+    let store_path = cmd!(
+        sh,
+        "nix-build --attr homeConfigurations.{hostname}.activationPackage {no_out_link}"
+    )
+    .quiet()
+    .read()
+    .context("Failed to run nix-build")?;
     let store_path = store_path.trim_end();
 
     match subcommand {
         Subcommand::Build => println!("{store_path}"),
         Subcommand::Switch => {
-            let exit_status = Command::new(format!("{store_path}/activate"))
-                .status()
-                .context("Failed to execute activate")?;
-
-            handle_status("activate", exit_status)?;
+            cmd!(sh, "{store_path}/activate")
+                .quiet()
+                .run()
+                .context("Failed to run activate")?;
         }
     }
 
     Ok(())
-}
-
-fn handle_status(program: &str, status: ExitStatus) -> Result<(), anyhow::Error> {
-    match status.code() {
-        Some(0) => Ok(()),
-        Some(code) => anyhow::bail!("{program} failed with exit code {code}"),
-        None => anyhow::bail!("{program} terminated by a signal"),
-    }
 }
