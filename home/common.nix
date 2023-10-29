@@ -74,6 +74,10 @@
       pkgs.zoxide
     ];
 
+    virtualization = [
+      pkgs.lima
+    ];
+
     uncategorized = [
       pkgs.fd
       pkgs.frawk
