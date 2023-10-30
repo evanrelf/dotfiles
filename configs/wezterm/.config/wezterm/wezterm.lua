@@ -137,7 +137,6 @@ return {
     -- TODO: Focusing tabs
     -- TODO: Moving panes
   },
-  pane_focus_follows_mouse = true,
   enable_csi_u_key_encoding = true,
   max_fps = 120,
   scrollback_lines = 10000,
