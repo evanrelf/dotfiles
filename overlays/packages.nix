@@ -75,6 +75,22 @@ in
     in
     pkgsFinal.haskellPackages.callCabal2nix "graphex" src { };
 
+  jujutsu =
+    pkgsPrev.jujutsu.overrideAttrs (attrs: rec {
+      version = "0.11.0";
+      src = pkgsFinal.fetchFromGitHub {
+        owner = "martinvonz";
+        repo = "jj";
+        rev = "v${version}";
+        hash = "sha256-yEW7+0MnJlW0WeZ6UItaCDrihPLA52mLcu15tJwZx9w=";
+      };
+      cargoDeps = attrs.cargoDeps.overrideAttrs (pkgsFinal.lib.const {
+        name = "${attrs.pname}-${version}-vendor.tar.gz";
+        inherit src;
+        outputHash = "sha256-xA9SDq1Kc0u8qFEPFFCic9uwE2Y/BXJzUHBCs1Czxtw=";
+      });
+    });
+
   kakoune-unwrapped =
     pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
       version = "HEAD";
