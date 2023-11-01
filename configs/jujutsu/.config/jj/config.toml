@@ -1,7 +1,8 @@
+aliases.l = ['log', '-r', 'alias_l()']
+aliases.ll = ['log', '-r', 'alias_ll()']
+# Git compatibility
 aliases.clone = ['git', 'clone', '--colocate']
 aliases.fetch = ['git', 'fetch']
-aliases.l = ['log', '--revisions=alias_l()']
-aliases.ll = ['log', '--revisions=alias_ll()']
 aliases.push = ['git', 'push', '--branch']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
