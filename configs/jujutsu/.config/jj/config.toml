@@ -3,7 +3,8 @@ aliases.ll = ['log', '-r', 'alias_ll()']
 # Git compatibility
 aliases.clone = ['git', 'clone', '--colocate']
 aliases.fetch = ['git', 'fetch']
-aliases.push = ['git', 'push', '--branch']
+aliases.push = ['git', 'push', '--dry-run']
+aliases.'push!' = ['git', 'push']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 core.fsmonitor = 'watchman'
