@@ -14,12 +14,12 @@ in
 {
   aichat =
     pkgsPrev.aichat.overrideAttrs (attrs: rec {
-      version = "0.9.0";
+      version = "0.9.0-d40f104";
       src = pkgsFinal.fetchFromGitHub {
         owner = "sigoden";
         repo = "aichat";
-        rev = "v${version}";
-        hash = "sha256-KY8GUUPZyb89b9mGd+EuYP8M7bKxt7oKQfaaX1R4BTE=";
+        rev = "d40f104f667073f320a01d9c1a91aa88225ccaeb";
+        hash = "sha256-tSMZqm0QfeBJ9S9u9eBCso5Zj/8hf7+VwHMb2gstTOc=";
       };
       buildInputs =
         pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
@@ -29,7 +29,7 @@ in
       cargoDeps = attrs.cargoDeps.overrideAttrs (pkgsFinal.lib.const {
         name = "${attrs.pname}-${version}-vendor.tar.gz";
         inherit src;
-        outputHash = "sha256-YTLiJ8/aTN3d2xkEqtiyP47KeDK88I2Raix8kmddDNE=";
+        outputHash = "sha256-KWAhzmUQJ6vq0atjySOPD9im7cmQdO6rOZ5ItCLljlI=";
       });
     });
 
