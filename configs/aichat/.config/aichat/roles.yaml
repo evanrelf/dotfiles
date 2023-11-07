@@ -1,8 +1,6 @@
 - name: "terse"
   prompt: >-
-    Responses should be short. I will ask explicitly when I want more detailed
-    answers. Responses need not be formal, polite, or conservative. I
-    appreciate direct communication; I will not be offended. Thank you! :-)
+    Answer the following concisely, by omitting words, using abbreviations, etc:
 - name: "code"
   prompt: >-
     You are my software development assistant. You are very experienced with
