@@ -79,6 +79,7 @@
     ];
 
     uncategorized = [
+      pkgs.aichat
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
@@ -116,6 +117,11 @@
         ../configs/emacs/.local/bin
       ];
     };
+    recursive = true;
+  };
+
+  xdg.configFile."aichat" = {
+    source = ../configs/aichat/.config/aichat;
     recursive = true;
   };
 

@@ -12,6 +12,27 @@ let
 
 in
 {
+  aichat =
+    pkgsPrev.aichat.overrideAttrs (attrs: rec {
+      version = "0.9.0";
+      src = pkgsFinal.fetchFromGitHub {
+        owner = "sigoden";
+        repo = "aichat";
+        rev = "v${version}";
+        hash = "sha256-KY8GUUPZyb89b9mGd+EuYP8M7bKxt7oKQfaaX1R4BTE=";
+      };
+      buildInputs =
+        pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
+          pkgsFinal.darwin.apple_sdk.frameworks.AppKit
+          pkgsFinal.libiconv
+        ];
+      cargoDeps = attrs.cargoDeps.overrideAttrs (pkgsFinal.lib.const {
+        name = "${attrs.pname}-${version}-vendor.tar.gz";
+        inherit src;
+        outputHash = "sha256-YTLiJ8/aTN3d2xkEqtiyP47KeDK88I2Raix8kmddDNE=";
+      });
+    });
+
   calligraphy =
     let
       src = pkgsFinal.fetchFromGitHub {
