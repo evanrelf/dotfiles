@@ -12,6 +12,7 @@ ui.diff-editor = ':builtin'
 ui.diff.format = 'git'
 ui.pager = 'delta'
 ui.default-description = "\n"
+git.auto-local-branch = false
 # Default revset in v0.10.0, made available as an alias
 revset-aliases.'default()' = '@ | ancestors(immutable_heads().., 2) | heads(immutable_heads())'
 revset-aliases.'alias_l()' = 'latest(::@, 10) | git_head() | remote_branches(remote=origin).. | conflict()'
