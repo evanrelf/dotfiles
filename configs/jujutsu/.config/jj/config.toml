@@ -1,6 +1,6 @@
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
-# Git compatibility
+aliases.here = ['branch', 'set', '-r', 'HEAD@git']
 aliases.clone = ['git', 'clone', '--colocate']
 aliases.fetch = ['git', 'fetch']
 aliases.push = ['git', 'push', '--dry-run']
