@@ -124,24 +124,35 @@ in
 
   qsv =
     let
+      pname = "qsv";
+      version = "0.118.0";
+      src = pkgsFinal.fetchFromGitHub {
+        owner = "jqnatividad";
+        repo = pname;
+        rev = version;
+        hash = "sha256-EVNqWETlKO7bpnh3rn6wjntgk5Xqa3/mnsu+hxu2UKk=";
+      };
+      # `all_features` minus `to_parquet`, to avoid the `duckdb` dependency
+      # (it's failing to compile and I can't figure out how to fix it)
+      features =
+        pkgsFinal.lib.pipe src [
+          (src: pkgsFinal.lib.importTOML "${src}/Cargo.toml")
+          (toml: toml.features.all_features)
+          (fs: pkgsFinal.lib.filter (f: f != "to_parquet") fs)
+          (fs: pkgsFinal.lib.concatStringsSep "," fs)
+        ];
       crane =
         pkgsFinal.crane.overrideToolchain pkgsFinal.fenix.minimal.toolchain;
     in
     crane.buildPackage rec {
-      pname = "qsv";
-      version = "0.74.0";
-      src = pkgsFinal.fetchFromGitHub {
-        owner = "jqnatividad";
-        repo = "qsv";
-        rev = version;
-        hash = "sha256-zMxvA/dc1MoLn7z7y/yWKBc+cYCHI0MO0tiLMNcBKeY=";
-      };
+      inherit pname version src;
       buildInputs = [
         pkgsFinal.python3
       ] ++ pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
         pkgsFinal.darwin.apple_sdk.frameworks.Security
+        pkgsFinal.darwin.apple_sdk.frameworks.SystemConfiguration
         pkgsFinal.libiconv
       ];
-      cargoExtraArgs = "--features all_full";
+      cargoExtraArgs = "--bin ${pname} --features ${features}";
     };
 }

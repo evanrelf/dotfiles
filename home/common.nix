@@ -93,6 +93,7 @@
       pkgs.pandoc
       pkgs.prqlc
       pkgs.pstree
+      pkgs.qsv
       pkgs.ripgrep
       pkgs.sd
       pkgs.tectonic
