@@ -5,6 +5,7 @@ aliases.clone = ['git', 'clone', '--colocate']
 aliases.fetch = ['git', 'fetch']
 aliases.push = ['git', 'push', '--dry-run']
 aliases.PUSH = ['git', 'push']
+aliases.mutably = ['--config-toml', 'revset-aliases."immutable_heads()" = "none()"']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 core.fsmonitor = 'watchman'
