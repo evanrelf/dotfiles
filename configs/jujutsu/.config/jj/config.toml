@@ -17,8 +17,8 @@ git.auto-local-branch = false
 # Default revset in v0.10.0, made available as an alias
 revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | heads(immutable_heads())'
 revset-aliases.'default_push()' = 'remote_branches(remote=origin)..@'
-revset-aliases.'alias_l()' = 'latest(::@, 10) | git_head() | remote_branches(remote=origin).. | conflict()'
-revset-aliases.'alias_ll()' = '::@ | git_head() | remote_branches(remote=origin).. | conflict()'
+revset-aliases.'alias_l()' = 'latest(::@, 10) | git_head() | branches()'
+revset-aliases.'alias_ll()' = '::@ | git_head() | branches()'
 revset-aliases.'wip()' = 'description("wip") | description("whip") | (description(exact:"") ~ root())' # case-insensitive
 revset-aliases.'evan()' = 'evan_personal() | evan_work()'
 revset-aliases.'evan_personal()' = 'user("evan@evanrelf.com")'
