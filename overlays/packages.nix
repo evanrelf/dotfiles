@@ -1,6 +1,8 @@
 pkgsFinal: pkgsPrev:
 
 let
+  inherit (pkgsFinal.evan) checkVersion;
+
   gprefix = drv:
     pkgsFinal.runCommandLocal "gprefix-${drv.name}" { } ''
       mkdir -p "$out/bin"
@@ -13,8 +15,9 @@ let
 in
 {
   aichat =
-    pkgsPrev.aichat.overrideAttrs (attrs: rec {
-      version = "0.9.0-d40f104";
+    let version = "0.9.0-d40f104"; in
+    (checkVersion version pkgsPrev.aichat).overrideAttrs (attrs: rec {
+      inherit version;
       src = pkgsFinal.fetchFromGitHub {
         owner = "sigoden";
         repo = "aichat";
@@ -34,6 +37,7 @@ in
     });
 
   calligraphy =
+    assert !(pkgsPrev ? calligraphy);
     let
       src = pkgsFinal.fetchFromGitHub {
         owner = "jonascarpay";
@@ -62,6 +66,7 @@ in
     gprefix pkgsFinal.gawkInteractive;
 
   ghciwatch =
+    assert !(pkgsPrev ? ghciwatch);
     pkgsFinal.crane.buildPackage rec {
       pname = "ghciwatch";
       version = "0.3.8";
@@ -86,6 +91,7 @@ in
     gprefix pkgsFinal.gnused;
 
   graphex =
+    assert !(pkgsPrev ? graphex);
     let
       src = pkgsFinal.fetchFromGitHub {
         owner = "dustin";
@@ -97,8 +103,9 @@ in
     pkgsFinal.haskellPackages.callCabal2nix "graphex" src { };
 
   jujutsu =
-    pkgsPrev.jujutsu.overrideAttrs (attrs: rec {
-      version = "0.11.0";
+    let version = "0.11.0"; in
+    (checkVersion version pkgsPrev.jujutsu).overrideAttrs (attrs: rec {
+      inherit version;
       src = pkgsFinal.fetchFromGitHub {
         owner = "martinvonz";
         repo = "jj";
@@ -123,6 +130,7 @@ in
     });
 
   qsv =
+    assert !(pkgsPrev ? qsv);
     let
       pname = "qsv";
       version = "0.118.0";

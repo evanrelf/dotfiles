@@ -46,6 +46,7 @@
           inputs.fenix.overlays.default
           inputs.comma.overlays.default
           inputs.haskell-overlay.overlays.default
+          (import ./overlays/evan.nix)
           (import ./overlays/haskell.nix)
           (import ./overlays/rust.nix)
           (import ./overlays/packages.nix)
