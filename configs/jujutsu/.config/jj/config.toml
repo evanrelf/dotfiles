@@ -20,11 +20,6 @@ revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | heads(
 revset-aliases.'default_push()' = 'remote_branches(remote=origin)..@'
 revset-aliases.'alias_l()' = '(default_log() & remote_branches()..) | latest(::@, 10) | branches()'
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
-revset-aliases.'wip()' = 'description("wip") | description("whip") | (description(exact:"") ~ root())' # case-insensitive
-revset-aliases.'evan()' = 'evan_personal() | evan_work()'
-revset-aliases.'evan_personal()' = 'user("evan@evanrelf.com")'
-revset-aliases.'evan_work()' = 'user("evanr@mercury.com")'
-revset-aliases.'user(pattern)' = 'author(pattern) | committer(pattern)'
 revset-aliases.'common_ancestor(x, y)' = 'latest(::x & ::y)'
 revset-aliases.'first(x, y)' = 'latest(::x & ::y)+ & ::x'
 templates.log = 'evan_log_oneline'
