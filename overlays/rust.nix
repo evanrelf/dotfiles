@@ -13,12 +13,4 @@ pkgsFinal: pkgsPrev:
     pkgsFinal.crane.buildPackage {
       src = ../src/rust/home-rebuild;
     };
-
-  memorize-rust =
-    pkgsFinal.crane.buildPackage {
-      src = ../src/rust/memorize;
-      nativeBuildInputs = [
-        pkgsFinal.libiconv
-      ];
-    };
 }
