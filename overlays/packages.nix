@@ -1,10 +1,10 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 let
-  inherit (pkgsFinal.evan) checkVersion;
+  inherit (final.evan) checkVersion;
 
   gprefix = drv:
-    pkgsFinal.runCommandLocal "gprefix-${drv.name}" { } ''
+    final.runCommandLocal "gprefix-${drv.name}" { } ''
       mkdir -p "$out/bin"
       for bin in ${drv}/bin/*; do
         ln -s "$bin" "$out/bin/g$(basename $bin)"
@@ -15,82 +15,82 @@ let
 in
 {
   calligraphy =
-    assert !(pkgsPrev ? calligraphy);
+    assert !(prev ? calligraphy);
     let
-      src = pkgsFinal.fetchFromGitHub {
+      src = final.fetchFromGitHub {
         owner = "jonascarpay";
         repo = "calligraphy";
         rev = "309a24bc78836de32a86e1c185b7a1c5698ef368";
         hash = "sha256-8B/e3QggX5xtGkVHGq3gYncL+VvpbZpcRb/OBVbznyE=";
       };
     in
-    pkgsFinal.haskellPackages.callCabal2nix "calligraphy" src { };
+    final.haskellPackages.callCabal2nix "calligraphy" src { };
 
   coreutils-gprefix =
-    (pkgsPrev.coreutils.override {
+    (prev.coreutils.override {
       singleBinary = false;
       withPrefix = true;
-    }).overrideAttrs (prev: {
+    }).overrideAttrs (attrs: {
       doCheck = false;
     });
 
   emacs =
-    pkgsPrev.emacs.pkgs.withPackages (p: [ p.vterm ]);
+    prev.emacs.pkgs.withPackages (p: [ p.vterm ]);
 
   findutils-gprefix =
-    gprefix pkgsFinal.findutils;
+    gprefix final.findutils;
 
   gawkInteractive-gprefix =
-    gprefix pkgsFinal.gawkInteractive;
+    gprefix final.gawkInteractive;
 
   ghciwatch =
-    assert !(pkgsPrev ? ghciwatch);
-    pkgsFinal.crane.buildPackage rec {
+    assert !(prev ? ghciwatch);
+    final.crane.buildPackage rec {
       pname = "ghciwatch";
       version = "0.3.8";
-      src = pkgsFinal.fetchFromGitHub {
+      src = final.fetchFromGitHub {
         owner = "MercuryTechnologies";
         repo = pname;
         rev = "v${version}";
         hash = "sha256-e2GV26yiOHChv9linNnv4MeJxFhv6eljNllQ9TpwLh0=";
       };
       buildInputs =
-        pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
-          pkgsFinal.darwin.apple_sdk.frameworks.CoreServices
-          pkgsFinal.libiconv
+        final.lib.optionals final.stdenv.isDarwin [
+          final.darwin.apple_sdk.frameworks.CoreServices
+          final.libiconv
         ];
       doCheck = false; # Workaround for missing `GHC_VERSIONS`
     };
 
   gnugrep-gprefix =
-    gprefix pkgsFinal.gnugrep;
+    gprefix final.gnugrep;
 
   gnused-gprefix =
-    gprefix pkgsFinal.gnused;
+    gprefix final.gnused;
 
   graphex =
-    assert !(pkgsPrev ? graphex);
+    assert !(prev ? graphex);
     let
-      src = pkgsFinal.fetchFromGitHub {
+      src = final.fetchFromGitHub {
         owner = "dustin";
         repo = "graphex";
         rev = "d330549e36c833b1bab4fce5f77838196682a925";
         hash = "sha256-apgpqPnKXX6giPEqucJMpVXLzSDKYVB4PfNp2Kw1Y/0=";
       };
     in
-    pkgsFinal.haskellPackages.callCabal2nix "graphex" src { };
+    final.haskellPackages.callCabal2nix "graphex" src { };
 
   jujutsu =
     let version = "0.11.0"; in
-    (checkVersion version pkgsPrev.jujutsu).overrideAttrs (attrs: rec {
+    (checkVersion version prev.jujutsu).overrideAttrs (attrs: rec {
       inherit version;
-      src = pkgsFinal.fetchFromGitHub {
+      src = final.fetchFromGitHub {
         owner = "martinvonz";
         repo = "jj";
         rev = "v${version}";
         hash = "sha256-yEW7+0MnJlW0WeZ6UItaCDrihPLA52mLcu15tJwZx9w=";
       };
-      cargoDeps = attrs.cargoDeps.overrideAttrs (pkgsFinal.lib.const {
+      cargoDeps = attrs.cargoDeps.overrideAttrs (final.lib.const {
         name = "${attrs.pname}-${version}-vendor.tar.gz";
         inherit src;
         outputHash = "sha256-xA9SDq1Kc0u8qFEPFFCic9uwE2Y/BXJzUHBCs1Czxtw=";
@@ -98,21 +98,21 @@ in
     });
 
   kakoune-unwrapped =
-    pkgsPrev.kakoune-unwrapped.overrideAttrs (prev: rec {
+    prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
       version = "HEAD";
-      src = pkgsFinal.inputs.kakoune;
+      src = final.inputs.kakoune;
       preConfigure = ''
-        ${prev.preConfigure}
+        ${attrs.preConfigure}
         export version="${version}"
       '';
     });
 
   qsv =
-    assert !(pkgsPrev ? qsv);
+    assert !(prev ? qsv);
     let
       pname = "qsv";
       version = "0.118.0";
-      src = pkgsFinal.fetchFromGitHub {
+      src = final.fetchFromGitHub {
         owner = "jqnatividad";
         repo = pname;
         rev = version;
@@ -121,23 +121,23 @@ in
       # `all_features` minus `to_parquet`, to avoid the `duckdb` dependency
       # (it's failing to compile and I can't figure out how to fix it)
       features =
-        pkgsFinal.lib.pipe src [
-          (src: pkgsFinal.lib.importTOML "${src}/Cargo.toml")
+        final.lib.pipe src [
+          (src: final.lib.importTOML "${src}/Cargo.toml")
           (toml: toml.features.all_features)
-          (fs: pkgsFinal.lib.filter (f: f != "to_parquet") fs)
-          (fs: pkgsFinal.lib.concatStringsSep "," fs)
+          (fs: final.lib.filter (f: f != "to_parquet") fs)
+          (fs: final.lib.concatStringsSep "," fs)
         ];
       crane =
-        pkgsFinal.crane.overrideToolchain pkgsFinal.fenix.minimal.toolchain;
+        final.crane.overrideToolchain final.fenix.minimal.toolchain;
     in
     crane.buildPackage rec {
       inherit pname version src;
       buildInputs = [
-        pkgsFinal.python3
-      ] ++ pkgsFinal.lib.optionals pkgsFinal.stdenv.isDarwin [
-        pkgsFinal.darwin.apple_sdk.frameworks.Security
-        pkgsFinal.darwin.apple_sdk.frameworks.SystemConfiguration
-        pkgsFinal.libiconv
+        final.python3
+      ] ++ final.lib.optionals final.stdenv.isDarwin [
+        final.darwin.apple_sdk.frameworks.Security
+        final.darwin.apple_sdk.frameworks.SystemConfiguration
+        final.libiconv
       ];
       cargoExtraArgs = "--bin ${pname} --features ${features}";
     };

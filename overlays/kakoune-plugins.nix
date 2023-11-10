@@ -1,4 +1,4 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 let
   sources = {
@@ -54,13 +54,13 @@ let
 
 in
 {
-  kakoune = pkgsPrev.wrapKakoune pkgsFinal.kakoune-unwrapped {
+  kakoune = prev.wrapKakoune final.kakoune-unwrapped {
     plugins =
       builtins.attrValues
         (builtins.mapAttrs
-          (name: github: pkgsPrev.kakouneUtils.buildKakounePluginFrom2Nix {
+          (name: github: prev.kakouneUtils.buildKakounePluginFrom2Nix {
             inherit name;
-            src = pkgsPrev.fetchFromGitHub github;
+            src = prev.fetchFromGitHub github;
           })
           sources);
   };

@@ -50,6 +50,7 @@
       pkgs.home-manager
       pkgs.home-rebuild
       pkgs.nix-direnv
+      pkgs.nix-tree
       pkgs.nix-your-shell
       pkgs.nixpkgs-fmt
     ];

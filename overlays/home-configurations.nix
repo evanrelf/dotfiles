@@ -1,12 +1,12 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 let
   mkHomeConfiguration = modules:
-    pkgsFinal.lib.fix (self:
-      (pkgsFinal.inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFinal;
+    final.lib.fix (self:
+      (final.inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = final;
         inherit modules;
-        extraSpecialArgs = { inherit (pkgsPrev) inputs; };
+        extraSpecialArgs = { inherit (prev) inputs; };
       }) // { default = self.activationPackage; }
     );
 
@@ -15,9 +15,9 @@ in
   commonPackages =
     (import ../home/common.nix {
       config = { };
-      inputs = pkgsPrev.inputs;
-      lib = pkgsFinal.lib;
-      pkgs = pkgsFinal;
+      inputs = final.inputs;
+      lib = final.lib;
+      pkgs = final;
     }).home.packages;
 
   homeConfigurations = {

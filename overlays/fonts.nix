@@ -1,7 +1,7 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 {
-  iosevka-bin = pkgsPrev.iosevka-bin.override { variant = "ss08"; };
+  iosevka-bin = prev.iosevka-bin.override { variant = "ss08"; };
 
-  nerdfonts = pkgsPrev.nerdfonts.override { fonts = [ "Iosevka" ]; };
+  nerdfonts = prev.nerdfonts.override { fonts = [ "Iosevka" ]; };
 }

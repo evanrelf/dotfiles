@@ -1,11 +1,11 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 {
   haskellScript =
-    pkgsFinal.callPackage ../src/nix/haskell-script.nix { };
+    final.callPackage ../src/nix/haskell-script.nix { };
 
   hello-haskell =
-    pkgsFinal.haskellScript {
+    final.haskellScript {
       name = "hello-haskell";
       packages = p: [ p.relude ];
       script = ../src/haskell/hello.hs;

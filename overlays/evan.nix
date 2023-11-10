@@ -1,7 +1,7 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 {
-  evan = assert !(pkgsPrev ? evan); {
+  evan = assert !(prev ? evan); {
     checkVersion = version: drv:
       let
         older = builtins.compareVersions (drv.version or "0") version < 0;

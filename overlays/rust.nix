@@ -1,16 +1,16 @@
-pkgsFinal: pkgsPrev:
+final: prev:
 
 {
   comma-update =
-    pkgsFinal.crane.buildPackage {
+    final.crane.buildPackage {
       src = ../src/rust/comma-update;
       nativeBuildInputs = [
-        pkgsFinal.darwin.apple_sdk.frameworks.Security
+        final.darwin.apple_sdk.frameworks.Security
       ];
     };
 
   home-rebuild =
-    pkgsFinal.crane.buildPackage {
+    final.crane.buildPackage {
       src = ../src/rust/home-rebuild;
     };
 }
