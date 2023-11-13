@@ -1,7 +1,0 @@
-model: openai:gpt-3.5-turbo
-temperature: null
-messages:
-- role: user
-  content: My name is Evan
-- role: assistant
-  content: Nice to meet you, Evan! How can I assist you today?
