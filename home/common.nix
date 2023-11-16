@@ -8,10 +8,6 @@
   news.display = "silent";
 
   home.packages = lib.foldlAttrs (xs: _: ys: xs ++ ys) [ ] {
-    disabled = lib.const [ ] [
-      pkgs.qsv
-    ];
-
     editors = [
       pkgs.emacs
       pkgs.helix
