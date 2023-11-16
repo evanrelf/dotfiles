@@ -59,6 +59,10 @@
       in
       {
         packages = pkgs;
+
+        devShells.default = pkgs.mkShell {
+          packages = [ pkgs.commonPackages ];
+        };
       }
     );
 

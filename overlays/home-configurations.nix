@@ -12,6 +12,14 @@ let
 
 in
 {
+  commonPackages =
+    (import ../home/common.nix {
+      config = { };
+      inputs = pkgsPrev.inputs;
+      lib = pkgsFinal.lib;
+      pkgs = pkgsFinal;
+    }).home.packages;
+
   homeConfigurations = {
     porcelain =
       mkHomeConfiguration [ ../home/machines/porcelain.nix ];
