@@ -24,7 +24,6 @@
       pkgs.kakoune
       pkgs.neovim
       pkgs.parinfer-rust
-      pkgs.vis
     ];
 
     fonts = [
@@ -90,7 +89,6 @@
       pkgs.frawk
       pkgs.fzf
       pkgs.ghciwatch
-      pkgs.go
       pkgs.graphviz
       pkgs.httpie
       pkgs.pandoc
