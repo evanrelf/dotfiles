@@ -91,6 +91,7 @@
       pkgs.ghciwatch
       pkgs.graphviz
       pkgs.httpie
+      pkgs.hyperfine
       pkgs.pandoc
       pkgs.pstree
       pkgs.ripgrep
