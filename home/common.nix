@@ -9,6 +9,7 @@
 
   home.packages = lib.foldlAttrs (xs: _: ys: xs ++ ys) [ ] {
     data = [
+      pkgs.duckdb
       pkgs.ijq
       pkgs.jless
       pkgs.jq
