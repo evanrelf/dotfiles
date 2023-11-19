@@ -8,6 +8,14 @@
   news.display = "silent";
 
   home.packages = lib.foldlAttrs (xs: _: ys: xs ++ ys) [ ] {
+    data = [
+      pkgs.ijq
+      pkgs.jless
+      pkgs.jq
+      pkgs.prqlc
+      pkgs.qsv
+    ];
+
     editors = [
       pkgs.emacs
       pkgs.helix
@@ -83,13 +91,8 @@
       pkgs.go
       pkgs.graphviz
       pkgs.httpie
-      pkgs.ijq
-      pkgs.jless
-      pkgs.jq
       pkgs.pandoc
-      pkgs.prqlc
       pkgs.pstree
-      pkgs.qsv
       pkgs.ripgrep
       pkgs.sd
       pkgs.tectonic
