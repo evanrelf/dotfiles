@@ -68,6 +68,8 @@
               packages = [ pkgs.commonPackages ];
             };
         };
+
+        formatter = pkgs.nixpkgs-fmt;
       };
     };
 
