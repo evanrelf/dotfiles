@@ -198,6 +198,9 @@ hook global WinCreate .* %{
 hook -once global KakBegin .* %{
   # evanrelf/primer.kak
   declare-option str column_color "rgb:f6f8fa"
+
+  # evanrelf/coconut.kak
+  # declare-option str column_color "rgb:F7F5F2"
 }
 
 # By default, the ideal width is 80 columns
