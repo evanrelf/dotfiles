@@ -36,6 +36,8 @@
   outputs = inputs@{ flake-utils, nixpkgs, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
+        localSystem = system;
+
         config = { };
 
         overlays = [
@@ -53,7 +55,7 @@
           (import ./overlays/fonts.nix)
         ];
 
-        pkgs = import nixpkgs { inherit system config overlays; };
+        pkgs = import nixpkgs { inherit localSystem config overlays; };
       in
       rec {
         packages = pkgs;
