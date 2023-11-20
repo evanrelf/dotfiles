@@ -2,11 +2,6 @@
   description = "dotfiles";
 
   inputs = {
-    comma = {
-      url = "github:nix-community/comma";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     crane = {
       url = "github:ipetkov/crane";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +41,6 @@
               (_: _: { inherit inputs; })
               (_: _: { crane = inputs.crane.lib.${system}; })
               inputs.fenix.overlays.default
-              inputs.comma.overlays.default
               inputs.haskell-overlay.overlays.default
               (import ./overlays/evan.nix)
               (import ./overlays/haskell.nix)
