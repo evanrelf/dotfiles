@@ -65,6 +65,7 @@
 
           everything =
             pkgs.mkShell {
+              name = "everything";
               packages = [ pkgs.commonPackages ];
             };
         };
