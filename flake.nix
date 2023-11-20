@@ -55,11 +55,15 @@
 
         pkgs = import nixpkgs { inherit system config overlays; };
       in
-      {
+      rec {
         packages = pkgs;
 
-        devShells.default = pkgs.mkShell {
-          packages = [ pkgs.commonPackages ];
+        devShells = {
+          default = devShells.everything;
+
+          everything = pkgs.mkShell {
+            packages = [ pkgs.commonPackages ];
+          };
         };
       }
     );
