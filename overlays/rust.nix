@@ -4,7 +4,7 @@ final: prev:
   comma-update =
     final.crane.buildPackage {
       src = ../src/rust/comma-update;
-      nativeBuildInputs = [
+      nativeBuildInputs = final.lib.optionals final.stdenv.isDarwin [
         final.darwin.apple_sdk.frameworks.Security
       ];
     };
