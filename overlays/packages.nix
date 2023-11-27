@@ -47,12 +47,12 @@ in
     assert !(prev ? ghciwatch);
     final.crane.buildPackage rec {
       pname = "ghciwatch";
-      version = "0.3.8";
+      version = "0.5.3";
       src = final.fetchFromGitHub {
         owner = "MercuryTechnologies";
         repo = pname;
         rev = "v${version}";
-        hash = "sha256-e2GV26yiOHChv9linNnv4MeJxFhv6eljNllQ9TpwLh0=";
+        hash = "sha256-tPSrNFo0B/LPsaeOqT/jVu6HOOzoGxx+D0USnaJ5wxI=";
       };
       buildInputs =
         final.lib.optionals final.stdenv.isDarwin [
