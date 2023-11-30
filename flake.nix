@@ -25,6 +25,11 @@
       flake = false;
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
+    roc = {
+      url = "github:roc-lang/roc";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     systems.url = "github:nix-systems/default";
   };
 
@@ -32,13 +37,13 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
-      perSystem = { config, pkgs, system, ... }: {
+      perSystem = { config, inputs', pkgs, system, ... }: {
         _module.args.pkgs =
           import inputs.nixpkgs {
             localSystem = system;
             config = { };
             overlays = [
-              (_: _: { inherit inputs; })
+              (_: _: { inherit inputs inputs'; })
               (_: _: { crane = inputs.crane.lib.${system}; })
               inputs.fenix.overlays.default
               inputs.haskell-overlay.overlays.default
