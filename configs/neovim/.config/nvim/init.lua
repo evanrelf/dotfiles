@@ -37,6 +37,10 @@ require("lazy").setup({
       vim.cmd("highlight! link StatusLine CursorLineNr")
     end,
   },
+}, {
+  install = {
+    colorscheme = { "github_light", "zellner" },
+  },
 })
 
 vim.opt.number = true
