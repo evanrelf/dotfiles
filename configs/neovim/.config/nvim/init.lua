@@ -29,6 +29,7 @@ require("lazy").setup({
       })
     end,
   },
+  { "michaeljsmith/vim-indent-object" },
   {
     "projekt0n/github-nvim-theme",
     priority = 1000,
