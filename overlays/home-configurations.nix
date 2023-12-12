@@ -21,6 +21,9 @@ in
     }).home.packages;
 
   homeConfigurations = {
+    pearl =
+      mkHomeConfiguration [ ../home/machines/pearl.nix ];
+
     porcelain =
       mkHomeConfiguration [ ../home/machines/porcelain.nix ];
 
