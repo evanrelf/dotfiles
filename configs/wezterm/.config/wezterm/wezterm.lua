@@ -96,6 +96,7 @@ local colors = (function()
   end
 end)()
 
+-- TODO: Use `wezterm.config_builder`
 return {
   font = font,
   font_size = font_size(),
@@ -107,6 +108,12 @@ return {
     brightness = 1.0,
     saturation = 1.0,
   },
+  window_frame = {
+    font = font,
+    font_size = font_size(),
+    active_titlebar_bg = "#ffffff",
+    inactive_titlebar_bg = "#ffffff",
+  },
   window_padding = {
     left = 4,
     right = 4,
@@ -114,7 +121,6 @@ return {
     bottom = 4,
   },
   window_decorations = "RESIZE",
-  use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
   hide_tab_bar_if_only_one_tab = true,
   show_tab_index_in_tab_bar = false,
