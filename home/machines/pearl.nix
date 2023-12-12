@@ -12,5 +12,6 @@
   home.packages = [
     pkgs.aws-sso-creds
     pkgs.awscli2
+    pkgs.pgcli
   ];
 }
