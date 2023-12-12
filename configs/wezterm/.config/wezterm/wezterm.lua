@@ -1,10 +1,20 @@
 local wezterm = require("wezterm")
 
+local hostname = wezterm.hostname()
+
 local font = wezterm.font_with_fallback({
   { family = "PragmataPro" },
   { family = "Iosevka SS08", harfbuzz_features = { "calt=0" } },
   "Iosevka Nerd Font",
 })
+
+local font_size = function()
+  if hostname == "pearl" or hostname == "pearl.local" then
+    return 16.0
+  end
+
+  return 17.0
+end
 
 local font_rules = function()
   local rules = {}
@@ -88,7 +98,7 @@ end)()
 
 return {
   font = font,
-  font_size = 17.0,
+  font_size = font_size(),
   font_rules = font_rules(),
   freetype_load_flags = "NO_HINTING",
   color_scheme = color_scheme,
