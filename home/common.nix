@@ -85,6 +85,7 @@
     ];
 
     uncategorized = [
+      pkgs.babelfish
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
