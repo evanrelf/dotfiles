@@ -26,9 +26,6 @@ truncation_length = 99
 truncate_to_repo = false
 repo_root_style = 'blue underline'
 
-[directory.substitutions]
-'~/Code/MercuryTechnologies/mercury-web-backend' = 'mwb'
-
 [hg_branch]
 disabled = true
 format = '([hg:$branch]($style)) '
