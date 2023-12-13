@@ -36,6 +36,7 @@
       pkgs.git
       pkgs.git-revise
       pkgs.jujutsu
+      pkgs.prr
     ];
 
     gnu = [
