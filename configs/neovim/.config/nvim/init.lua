@@ -38,6 +38,8 @@ require("lazy").setup({
       vim.cmd("highlight! link StatusLine CursorLineNr")
     end,
   },
+
+  { "wsdjeg/vim-fetch" },
 }, {
   install = {
     colorscheme = { "github_light", "zellner" },
