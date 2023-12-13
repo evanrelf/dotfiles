@@ -74,6 +74,7 @@
     ];
 
     shell = [
+      pkgs.babelfish
       pkgs.fish
       pkgs.shellcheck
       pkgs.starship
@@ -86,7 +87,6 @@
     ];
 
     uncategorized = [
-      pkgs.babelfish
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
