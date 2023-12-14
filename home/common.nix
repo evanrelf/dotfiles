@@ -88,6 +88,7 @@
     ];
 
     uncategorized = [
+      pkgs.deno
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
