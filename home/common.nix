@@ -93,6 +93,7 @@
       pkgs.fzf
       pkgs.ghciwatch
       pkgs.graphviz
+      pkgs.htop
       pkgs.httpie
       pkgs.hyperfine
       pkgs.pandoc
