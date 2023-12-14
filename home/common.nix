@@ -67,6 +67,7 @@
 
     rust = [
       pkgs.cargo-edit
+      pkgs.cargo-expand
       pkgs.cargo-flamegraph
       pkgs.cargo-limit
       pkgs.cargo-watch
