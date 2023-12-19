@@ -97,6 +97,7 @@
       pkgs.htop
       pkgs.httpie
       pkgs.hyperfine
+      pkgs.ollama
       pkgs.pandoc
       pkgs.pstree
       pkgs.ripgrep
