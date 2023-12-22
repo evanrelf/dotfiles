@@ -85,8 +85,6 @@
 
   # WORKTREE
   wt = worktree
-[commit]
-  gpgSign = true
 [core]
   pager = delta
 [delta]
@@ -114,7 +112,6 @@
   autoStash = true
   autoSquash = true
 [revise]
-  gpgSign = true
   autoSquash = true
 [user]
   name = Evan Relf
