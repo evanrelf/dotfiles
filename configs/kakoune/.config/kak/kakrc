@@ -27,7 +27,7 @@ hook global InsertDelete " " %{ try %{
 set-option global indentwidth 2
 
 # Indent with 4 spaces in select languages
-hook global WinSetOption filetype=(fish|rust) %{
+hook global WinSetOption filetype=(fish|python|rust) %{
   set-option window indentwidth 4
 }
 
@@ -68,6 +68,11 @@ hook global WinSetOption filetype=go %{
 
 hook global WinSetOption filetype=nix %{
   set-option window formatcmd "nixpkgs-fmt"
+}
+
+hook global WinSetOption filetype=python %{
+  set-option window formatcmd "ruff format --stdin-filename %val{buffile}"
+  hook window BufWritePre .* %{ format-buffer }
 }
 
 hook global WinSetOption filetype=rust %{
