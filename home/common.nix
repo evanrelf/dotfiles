@@ -84,6 +84,9 @@
     ];
 
     virtualization = [
+      pkgs.colima
+      # TODO: Update Nixpkgs pin to fix on macOS
+      # pkgs.docker-client
       pkgs.lima
     ];
 
