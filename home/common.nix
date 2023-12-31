@@ -14,7 +14,7 @@
       pkgs.jless
       pkgs.jq
       pkgs.prqlc
-      pkgs.qsv
+      # pkgs.qsv
       pkgs.sqlite
     ];
 
@@ -85,8 +85,7 @@
 
     virtualization = [
       pkgs.colima
-      # TODO: Update Nixpkgs pin to fix on macOS
-      # pkgs.docker-client
+      pkgs.docker-client
       pkgs.lima
     ];
 

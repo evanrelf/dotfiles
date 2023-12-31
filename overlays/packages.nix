@@ -97,36 +97,15 @@ in
   #     });
   #   });
 
-  kakoune-unwrapped =
-    prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
-      version = "HEAD";
-      src = final.inputs.kakoune;
-      preConfigure = ''
-        ${attrs.preConfigure}
-        export version="${version}"
-      '';
-    });
-
-  prr =
-    assert !(prev ? prr);
-    final.crane.buildPackage rec {
-      pname = "prr";
-      version = "0.11.0";
-      src = final.fetchFromGitHub {
-        owner = "danobi";
-        repo = pname;
-        rev = "v${version}";
-        hash = "sha256-mPFnMoYlOU0oJcasrCEHO+Ze1YuwJ0ap7+p2Fs75pcY=";
-      };
-      buildInputs = [
-        final.openssl.dev
-        final.pkg-config
-      ] ++ final.lib.optionals final.stdenv.isDarwin [
-        final.darwin.apple_sdk.frameworks.Security
-        final.darwin.apple_sdk.frameworks.SystemConfiguration
-        final.libiconv
-      ];
-    };
+  # kakoune-unwrapped =
+  #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
+  #     version = "HEAD";
+  #     src = final.inputs.kakoune;
+  #     preConfigure = ''
+  #       ${attrs.preConfigure}
+  #       export version="${version}"
+  #     '';
+  #   });
 
   qsv =
     assert !(prev ? qsv);
