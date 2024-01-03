@@ -59,6 +59,7 @@
       pkgs.direnv
       pkgs.home-manager
       pkgs.home-rebuild
+      pkgs.nix-diff
       pkgs.nix-direnv
       pkgs.nix-tree
       pkgs.nix-your-shell
