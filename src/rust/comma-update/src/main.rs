@@ -1,5 +1,5 @@
 use anyhow::Context as _;
-use std::{env, fs, io::Read as _};
+use std::{env, fs, io::Read as _, path::Path};
 
 fn main() -> anyhow::Result<()> {
     let home = env::var("HOME").context("Failed to get $HOME")?;
@@ -44,7 +44,12 @@ fn main() -> anyhow::Result<()> {
 
     fs::write(&filename, response_bytes).context("Failed to write index to disk")?;
 
-    fs::remove_file("files").context("Failed to remove old index link")?;
+    if Path::new("files")
+        .try_exists()
+        .context("Failed to confirm existence of index link")?
+    {
+        fs::remove_file("files").context("Failed to remove old index link")?;
+    }
 
     fs::hard_link(&filename, "files").context("Failed to create hard link")?;
 
