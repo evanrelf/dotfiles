@@ -1,0 +1,8 @@
+theme = Pro Light
+font-family = PragmataPro Liga
+font-size = 16
+font-style-bold = false
+unfocused-split-opacity = 1
+cursor-style-blink = false
+shell-integration-features = no-cursor
+macos-option-as-alt = true

@@ -176,6 +176,11 @@
   xdg.configFile."fish/home-manager.fish".source =
     config.xdg.configFile."fish/config.fish".source;
 
+  xdg.configFile."ghostty" = {
+    source = ../configs/ghostty/.config/ghostty;
+    recursive = true;
+  };
+
   xdg.configFile."git" = {
     source = ../configs/git/.config/git;
     recursive = true;
