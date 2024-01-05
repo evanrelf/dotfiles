@@ -34,7 +34,8 @@ end
 
 local color_scheme = (function()
   if wezterm.gui.get_appearance():find("Light") then
-    return "primer-light"
+    -- return "primer-light"
+    return "oksolar-light"
   else
     return "primer-dark"
   end

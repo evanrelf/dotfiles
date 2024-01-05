@@ -65,7 +65,7 @@ only_detached = true
 disabled = true
 format = '([$conflicted$staged$modified$renamed$deleted$untracked$ahead_behind$stashed]($style) )'
 style = ''
-conflicted = '[=$count](cyan)'
+conflicted = '[=$count](magenta)'
 ahead = '[⇡$count](green)'
 behind = '[⇣$count](red)'
 diverged = '[⇡$ahead_count](green)[⇣$behind_count](red)'
@@ -79,7 +79,7 @@ deleted = '[×](red)'
 [git_state]
 disabled = true
 format = '[\($state( $progress_current/$progress_total)\)]($style) '
-style = 'cyan'
+style = 'magenta'
 
 [nix_shell]
 disabled = false
@@ -95,15 +95,15 @@ style = 'green'
 
 [username]
 disabled = true
-style_user = 'white'
-style_root = 'white'
+style_user = 'bright-blue'
+style_root = 'bright-blue'
 format = '[$user]($style)'
 
 [hostname]
 disabled = true
 format = '[@$hostname]($style)'
-style = 'white'
+style = 'bright-blue'
 
 [character]
 disabled = false
-format = "[\\$](fg:white) "
+format = "[\\$](fg:bright-blue) "

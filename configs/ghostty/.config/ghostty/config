@@ -1,4 +1,3 @@
-theme = Pro Light
 font-family = PragmataPro Liga
 font-size = 17
 font-style-bold = false
@@ -6,3 +5,26 @@ unfocused-split-opacity = 1
 cursor-style-blink = false
 shell-integration-features = no-cursor
 macos-option-as-alt = true
+
+# ./oksolar-light.sh
+palette = 0=#093946
+palette = 1=#f23749
+palette = 2=#819500
+palette = 3=#ac8300
+palette = 4=#2b90d8
+palette = 5=#dd459d
+palette = 6=#259d94
+palette = 7=#f1e9d2
+palette = 8=#002d38
+palette = 9=#d56500
+palette = 10=#5b7279
+palette = 11=#657377
+palette = 12=#98a8a8
+palette = 13=#7d80d1
+palette = 14=#8faaab
+palette = 15=#fbf7ef
+background = ffffff
+foreground = 002d38
+cursor-color = 8faaab
+selection-background = f1e9d2
+selection-foreground = 002d38
