@@ -27,9 +27,6 @@ in
     pearl =
       mkHomeConfiguration [ ../home/machines/pearl.nix ];
 
-    porcelain =
-      mkHomeConfiguration [ ../home/machines/porcelain.nix ];
-
     ultraviolet =
       mkHomeConfiguration [ ../home/machines/ultraviolet.nix ];
   };
