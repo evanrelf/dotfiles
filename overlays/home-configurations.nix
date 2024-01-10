@@ -21,6 +21,9 @@ in
     }).home.packages;
 
   homeConfigurations = {
+    lima-default =
+      mkHomeConfiguration [ ../home/machines/lima-default.nix ];
+
     pearl =
       mkHomeConfiguration [ ../home/machines/pearl.nix ];
 
