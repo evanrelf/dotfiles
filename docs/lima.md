@@ -2,9 +2,9 @@
 
 ## Create VM
 
-The Fedora image Lima uses feels more minimal than Ubuntu. I would use Alpine,
-but it uses OpenRC instead of systemd. I would use Arch, but it doesn't work
-with the `vz` VM type, at the time of writing.
+The Fedora Cloud image Lima uses is more minimal than the default Ubuntu image.
+I would use Alpine, but it uses OpenRC instead of systemd. I would use Arch, but
+it doesn't work with the `vz` VM type, at the time of writing.
 
 ```
 limactl create \
@@ -28,3 +28,5 @@ Fix `TERM` issues by copying Ghostty's terminfo entry to the VM:
 ```
 infocmp -x | limactl shell default -- tic -x -
 ```
+
+You can tell things have improved if Ctrl-L / `clear` starts working.
