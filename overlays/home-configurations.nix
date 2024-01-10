@@ -32,8 +32,5 @@ in
 
     ultraviolet =
       mkHomeConfiguration [ ../home/machines/ultraviolet.nix ];
-
-    ultraviolet-vm =
-      mkHomeConfiguration [ ../home/machines/ultraviolet-vm.nix ];
   };
 }
