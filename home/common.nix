@@ -87,7 +87,7 @@
     virtualization = [
       pkgs.colima
       pkgs.docker-client
-      pkgs.lima
+      pkgs.lima-bin
     ];
 
     uncategorized = [
