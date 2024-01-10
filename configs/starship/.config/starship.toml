@@ -1,5 +1,6 @@
 format = """\
   $status\
+  $hostname\
   $directory\
   $nix_shell\
   $jobs\
@@ -100,9 +101,9 @@ style_root = 'bright-blue'
 format = '[$user]($style)'
 
 [hostname]
-disabled = true
-format = '[@$hostname]($style)'
-style = 'bright-blue'
+disabled = false
+format = '[$hostname]($style) '
+style = 'green'
 
 [character]
 disabled = false
