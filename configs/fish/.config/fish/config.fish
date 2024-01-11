@@ -6,6 +6,7 @@ set --global --export GHCUP_USE_XDG_DIRS 1
 set --global --export EDITOR kak
 set --global --export RUSTUP_HOME "$XDG_DATA_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_DATA_HOME/cargo"
+set --global --export LIMA_HOME "$XDG_DATA_HOME/lima"
 set --global --export RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/ripgrep/config"
 set --global --export NIXPKGS_ALLOW_UNFREE 1
 set --universal FZF_LEGACY_KEYBINDINGS 0
