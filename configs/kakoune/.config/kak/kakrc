@@ -526,6 +526,64 @@ add-highlighter shared/prql/code/ regex \b\d+(?:\.\d+)?\b 0:value
 }
 
 ################################################################################
+# KDL.KAK
+################################################################################
+
+hook global BufCreate .*/?(?i)kdl %{
+  set-option buffer filetype kdl
+}
+
+hook global WinSetOption filetype=kdl %{
+  require-module kdl
+}
+
+hook -group kdl-init global WinSetOption filetype=kdl %{
+  add-highlighter window/kdl ref kdl
+  hook window ModeChange pop:insert:.* -group kdl-trim-indent kdl-trim-indent
+  hook window InsertChar .* -group kdl-indent kdl-indent-on-char
+  hook window InsertChar \n -group kdl-indent kdl-indent-on-new-line
+  hook -once -always window WinSetOption filetype=.* %{ remove-hooks window kdl-.+ }
+  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/kdl }
+}
+
+provide-module kdl %§
+
+add-highlighter shared/kdl regions
+add-highlighter shared/kdl/code default-region group
+add-highlighter shared/kdl/single-line-comment region '//' '$' fill comment
+add-highlighter shared/kdl/multi-line-comment region '/\*' '\*/' fill comment
+add-highlighter shared/kdl/string region '"' (?<!\\)(\\\\)*" fill string
+add-highlighter shared/kdl/raw-string-0 region r" (?<!\\)(\\\\)*" fill string
+add-highlighter shared/kdl/raw-string-1 region r#" (?<!\\)(\\\\)*"# fill string
+add-highlighter shared/kdl/raw-string-2 region r##" (?<!\\)(\\\\)*"## fill string
+add-highlighter shared/kdl/code/ regex (?:-?\b[0-9](?:[0-9_]*[0-9])?(?:\.[0-9](?:[0-9_]*[0-9])?)?(?:[0-9_]*e[+-]?[0-9]+)?)\b 0:value
+add-highlighter shared/kdl/code/ regex \b\d+(?:\.\d+)?\b 0:value
+add-highlighter shared/kdl/code/ regex \b(?:true|false|null)\b 0:value
+
+# Indentation stolen from https://github.com/mawww/kakoune/blob/master/rc/filetype/json.kak
+
+define-command -hidden kdl-trim-indent %{
+    try %{ execute-keys -draft -itersel x s \h+$ <ret> d }
+}
+
+define-command -hidden kdl-indent-on-char %<
+  evaluate-commands -draft -itersel %<
+    try %< execute-keys -draft <a-h> <a-k> ^\h+[\]}]$ <ret> m <a-S> 1<a-&> >
+  >
+>
+
+define-command -hidden kdl-indent-on-new-line %<
+  evaluate-commands -draft -itersel %<
+    try %{ execute-keys -draft <semicolon> K <a-&> }
+    try %{ execute-keys -draft k : kdl-trim-indent <ret> }
+    try %< execute-keys -draft k x <a-k> [[{]\h*$ <ret> j <a-gt> >
+    try %< execute-keys -draft x <a-k> ^\h*[}\]] <ret> gh / [}\]] <ret> m <a-S> 1<a-&> >
+  >
+>
+
+§
+
+################################################################################
 # JJ
 ################################################################################
 
