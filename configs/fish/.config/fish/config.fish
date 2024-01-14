@@ -7,7 +7,11 @@ set --global --export EDITOR kak
 set --global --export RUSTUP_HOME "$XDG_DATA_HOME/rustup"
 set --global --export CARGO_HOME "$XDG_DATA_HOME/cargo"
 set --global --export LIMA_HOME "$XDG_DATA_HOME/lima"
+set --global --export JJ_CONFIG "$XDG_CONFIG_HOME/jj/config.toml"
 set --global --export RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/ripgrep/config"
+set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
+set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
+set --global --export DIRENV_LOG_FORMAT ""
 set --global --export NIXPKGS_ALLOW_UNFREE 1
 set --universal FZF_LEGACY_KEYBINDINGS 0
 set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
@@ -30,24 +34,17 @@ if test -z "$IN_NIX_SHELL"
         set --global --export --prepend PATH "$HOME/.config/emacs/bin"
     end
 end
+if command -q starship
+    starship init fish | source
+end
 if command -q direnv
-    set --global --export DIRENV_LOG_FORMAT ""
     direnv hook fish | source
 end
 if command -q nix-your-shell
     nix-your-shell fish | source
 end
 if command -q zoxide
-    set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
-    set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
     zoxide init fish | source
-end
-if command -q starship
-    starship init fish | source
-end
-if command -q jj
-    set --global --export JJ_CONFIG "$XDG_CONFIG_HOME/jj/config.toml"
-    jj util completion --fish | source
 end
 function fish_user_key_bindings
     bind \cz 'fg 2>/dev/null; commandline -f repaint'
