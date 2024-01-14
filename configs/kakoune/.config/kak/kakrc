@@ -36,11 +36,6 @@ hook global WinSetOption filetype=(go|makefile) %{
   set-option window indentwidth 0
 }
 
-# eraserhd/parinfer-rust
-hook global WinSetOption filetype=(clojure) %{
-  parinfer-enable-window -smart
-}
-
 ################################################################################
 # FORMATTING
 ################################################################################

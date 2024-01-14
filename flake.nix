@@ -48,7 +48,6 @@
               (import ./overlays/packages.nix)
               (import ./overlays/kakoune-plugins.nix)
               (import ./overlays/home-configurations.nix)
-              (import ./overlays/fonts.nix)
             ];
           };
 

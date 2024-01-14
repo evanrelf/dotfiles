@@ -7,107 +7,45 @@
 
   news.display = "silent";
 
-  home.packages = lib.foldlAttrs (xs: _: ys: xs ++ ys) [ ] {
-    data = [
-      pkgs.duckdb
-      pkgs.ijq
-      pkgs.jless
-      pkgs.jq
-      pkgs.prqlc
-      pkgs.sqlite
-    ];
-
-    editors = [
-      pkgs.kakoune
-      pkgs.parinfer-rust
-    ];
-
-    fonts = [
-      pkgs.iosevka-bin
-      pkgs.nerdfonts
-    ];
-
-    git = [
-      pkgs.delta
-      pkgs.git
-      pkgs.git-revise
-      pkgs.jujutsu
-      pkgs.prr
-    ];
-
-    gnu = [
-      pkgs.coreutils-gprefix
-      pkgs.findutils-gprefix
-      pkgs.gawkInteractive-gprefix
-      pkgs.gnugrep-gprefix
-      pkgs.gnused-gprefix
-    ];
-
-    haskell = [
-      pkgs.haskellPackages.hiedb
-    ];
-
-    nix = [
-      pkgs.comma
-      pkgs.comma-update
-      pkgs.direnv
-      pkgs.home-manager
-      pkgs.home-rebuild
-      pkgs.nix-diff
-      pkgs.nix-direnv
-      pkgs.nix-tree
-      pkgs.nix-your-shell
-      pkgs.nixpkgs-fmt
-    ];
-
-    rust = [
-      pkgs.cargo-edit
-      pkgs.cargo-expand
-      pkgs.cargo-flamegraph
-      pkgs.cargo-limit
-      pkgs.cargo-watch
-      pkgs.rustup
-    ];
-
-    shell = [
-      pkgs.babelfish
-      pkgs.fish
-      pkgs.shellcheck
-      pkgs.starship
-      pkgs.tealdeer
-      pkgs.zoxide
-    ];
-
-    virtualization = [
-      pkgs.colima
-      pkgs.docker-client
-      pkgs.lima-bin
-    ];
-
-    uncategorized = [
-      pkgs.deno
-      pkgs.fd
-      pkgs.frawk
-      pkgs.fzf
-      pkgs.graphviz
-      pkgs.htop
-      pkgs.httpie
-      pkgs.hyperfine
-      pkgs.ollama
-      pkgs.pandoc
-      pkgs.pstree
-      pkgs.ripgrep
-      pkgs.sd
-      pkgs.tectonic
-      pkgs.tree
-      pkgs.ugrep
-      pkgs.universal-ctags
-      pkgs.watchexec
-      pkgs.watchman
-      pkgs.yt-dlp
-      pkgs.zf
-    ];
-  };
+  home.packages = [
+    pkgs.cargo-limit
+    pkgs.cargo-watch
+    pkgs.colima
+    pkgs.comma
+    pkgs.comma-update
+    pkgs.coreutils-gprefix
+    pkgs.delta
+    pkgs.direnv
+    pkgs.docker-client
+    pkgs.fd
+    pkgs.findutils-gprefix
+    pkgs.fish
+    pkgs.fzf
+    pkgs.gawkInteractive-gprefix
+    pkgs.git
+    pkgs.gnugrep-gprefix
+    pkgs.gnused-gprefix
+    pkgs.home-manager
+    pkgs.home-rebuild
+    pkgs.jq
+    pkgs.jujutsu
+    pkgs.kakoune
+    pkgs.lima-bin
+    pkgs.nix-direnv
+    pkgs.nix-your-shell
+    pkgs.nixpkgs-fmt
+    pkgs.ripgrep
+    pkgs.rustup
+    pkgs.sd
+    pkgs.shellcheck
+    pkgs.starship
+    pkgs.tealdeer
+    pkgs.tree
+    pkgs.universal-ctags
+    pkgs.watchexec
+    pkgs.watchman
+    pkgs.zoxide
+  ];
 
   # Copying font files on Darwin is too slow
   home.activation.copyFonts = lib.mkForce "true";
