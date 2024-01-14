@@ -14,18 +14,6 @@ let
 
 in
 {
-  calligraphy =
-    assert !(prev ? calligraphy);
-    let
-      src = final.fetchFromGitHub {
-        owner = "jonascarpay";
-        repo = "calligraphy";
-        rev = "309a24bc78836de32a86e1c185b7a1c5698ef368";
-        hash = "sha256-8B/e3QggX5xtGkVHGq3gYncL+VvpbZpcRb/OBVbznyE=";
-      };
-    in
-    final.haskellPackages.callCabal2nix "calligraphy" src { };
-
   coreutils-gprefix =
     (prev.coreutils.override {
       singleBinary = false;
