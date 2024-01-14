@@ -60,39 +60,4 @@ in
   #       export version="${version}"
   #     '';
   #   });
-
-  qsv =
-    assert !(prev ? qsv);
-    let
-      pname = "qsv";
-      version = "0.118.0";
-      src = final.fetchFromGitHub {
-        owner = "jqnatividad";
-        repo = pname;
-        rev = version;
-        hash = "sha256-EVNqWETlKO7bpnh3rn6wjntgk5Xqa3/mnsu+hxu2UKk=";
-      };
-      # `all_features` minus `to_parquet`, to avoid the `duckdb` dependency
-      # (it's failing to compile and I can't figure out how to fix it)
-      features =
-        final.lib.pipe src [
-          (src: final.lib.importTOML "${src}/Cargo.toml")
-          (toml: toml.features.all_features)
-          (fs: final.lib.filter (f: f != "to_parquet") fs)
-          (fs: final.lib.concatStringsSep "," fs)
-        ];
-      crane =
-        final.crane.overrideToolchain final.fenix.minimal.toolchain;
-    in
-    crane.buildPackage rec {
-      inherit pname version src;
-      buildInputs = [
-        final.python3
-      ] ++ final.lib.optionals final.stdenv.isDarwin [
-        final.darwin.apple_sdk.frameworks.Security
-        final.darwin.apple_sdk.frameworks.SystemConfiguration
-        final.libiconv
-      ];
-      cargoExtraArgs = "--bin ${pname} --features ${features}";
-    };
 }

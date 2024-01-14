@@ -14,7 +14,6 @@
       pkgs.jless
       pkgs.jq
       pkgs.prqlc
-      # pkgs.qsv
       pkgs.sqlite
     ];
 
