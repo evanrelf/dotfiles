@@ -47,7 +47,6 @@
     ];
 
     haskell = [
-      pkgs.graphex
       pkgs.haskellPackages.hiedb
     ];
 

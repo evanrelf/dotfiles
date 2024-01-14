@@ -53,18 +53,6 @@ in
   gnused-gprefix =
     gprefix final.gnused;
 
-  graphex =
-    assert !(prev ? graphex);
-    let
-      src = final.fetchFromGitHub {
-        owner = "dustin";
-        repo = "graphex";
-        rev = "d330549e36c833b1bab4fce5f77838196682a925";
-        hash = "sha256-apgpqPnKXX6giPEqucJMpVXLzSDKYVB4PfNp2Kw1Y/0=";
-      };
-    in
-    final.haskellPackages.callCabal2nix "graphex" src { };
-
   # jujutsu =
   #   let version = "0.11.0"; in
   #   (checkVersion version prev.jujutsu).overrideAttrs (attrs: rec {
