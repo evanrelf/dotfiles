@@ -104,7 +104,6 @@
       pkgs.pandoc
       pkgs.pstree
       pkgs.ripgrep
-      pkgs.roc
       pkgs.sd
       pkgs.tectonic
       pkgs.tree

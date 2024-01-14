@@ -141,7 +141,4 @@ in
       ];
       cargoExtraArgs = "--bin ${pname} --features ${features}";
     };
-
-  roc =
-    final.inputs'.roc.packages.cli;
 }
