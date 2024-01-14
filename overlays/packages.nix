@@ -28,25 +28,6 @@ in
   gawkInteractive-gprefix =
     gprefix final.gawkInteractive;
 
-  ghciwatch =
-    assert !(prev ? ghciwatch);
-    final.crane.buildPackage rec {
-      pname = "ghciwatch";
-      version = "0.5.3";
-      src = final.fetchFromGitHub {
-        owner = "MercuryTechnologies";
-        repo = pname;
-        rev = "v${version}";
-        hash = "sha256-tPSrNFo0B/LPsaeOqT/jVu6HOOzoGxx+D0USnaJ5wxI=";
-      };
-      buildInputs =
-        final.lib.optionals final.stdenv.isDarwin [
-          final.darwin.apple_sdk.frameworks.CoreServices
-          final.libiconv
-        ];
-      doCheck = false; # Workaround for missing `GHC_VERSIONS`
-    };
-
   gnugrep-gprefix =
     gprefix final.gnugrep;
 

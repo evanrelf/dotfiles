@@ -92,7 +92,6 @@
       pkgs.fd
       pkgs.frawk
       pkgs.fzf
-      pkgs.ghciwatch
       pkgs.graphviz
       pkgs.htop
       pkgs.httpie
