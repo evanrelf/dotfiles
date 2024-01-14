@@ -204,9 +204,4 @@
 
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;
-
-  xdg.configFile."wezterm" = {
-    source = ../configs/wezterm/.config/wezterm;
-    recursive = true;
-  };
 }
