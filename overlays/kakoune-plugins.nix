@@ -40,7 +40,7 @@ let
 
 in
 {
-  kakoune = prev.wrapKakoune final.kakoune-unwrapped {
+  kakoune = final.wrapKakoune final.kakoune-unwrapped {
     plugins =
       builtins.attrValues
         (builtins.mapAttrs
