@@ -107,7 +107,6 @@
       pkgs.watchexec
       pkgs.watchman
       pkgs.yt-dlp
-      pkgs.zellij
       pkgs.zf
     ];
   };
@@ -208,11 +207,6 @@
 
   xdg.configFile."wezterm" = {
     source = ../configs/wezterm/.config/wezterm;
-    recursive = true;
-  };
-
-  xdg.configFile."zellij" = {
-    source = ../configs/zellij/.config/zellij;
     recursive = true;
   };
 }
