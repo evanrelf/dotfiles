@@ -19,7 +19,6 @@
     ];
 
     editors = [
-      pkgs.emacs
       pkgs.helix
       pkgs.kakoune
       pkgs.neovim
@@ -120,23 +119,8 @@
   # Copying font files on Darwin is too slow
   home.activation.copyFonts = lib.mkForce "true";
 
-  home.file.".local/bin" = {
-    source = pkgs.symlinkJoin {
-      name = "local-bin";
-      paths = [
-        ../configs/emacs/.local/bin
-      ];
-    };
-    recursive = true;
-  };
-
   xdg.configFile."direnv" = {
     source = ../configs/direnv/.config/direnv;
-    recursive = true;
-  };
-
-  xdg.configFile."doom" = {
-    source = ../configs/emacs/.config/doom;
     recursive = true;
   };
 
