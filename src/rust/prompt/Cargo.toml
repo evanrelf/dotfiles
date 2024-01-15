@@ -1,0 +1,9 @@
+[package]
+name = "prompt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.79"
+camino = "1.1.6"
+clap = { version = "4.4.16", features = ["derive"] }
