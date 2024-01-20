@@ -17,4 +17,4 @@ in
 if raw then
   flake.defaultNix
 else
-  flake.defaultNix.packages.${builtins.currentSystem}
+  flake.defaultNix.legacyPackages.${builtins.currentSystem}
