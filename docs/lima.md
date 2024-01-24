@@ -7,7 +7,7 @@ I would use Alpine, but it uses OpenRC instead of systemd. I would use Arch, but
 it doesn't work with the `vz` VM type, at the time of writing.
 
 ```
-limactl create \
+[host]$ limactl create \
   --name=default \
   template://fedora \
   --vm-type=vz \
@@ -21,26 +21,11 @@ Copy install command from Determinate Systems' [nix-installer] repo.
 
 [nix-installer]: https://github.com/DeterminateSystems/nix-installer#readme
 
-You can tell things have improved if Ctrl-L / `clear` starts working.
-
-## Install dotfiles
-
-TODO: Come up with a more concise way of doing this bootstrapping.
+Then, add yourself as a trusted user:
 
 ```
-lima nix-shell -p git --run 'nix shell .#{home-manager,home-rebuild} -c home-rebuild switch'
-```
-
-or
-
-```
-lima nix-shell -p git --run 'nix build .#homeConfigurations.$(hostname -s).activationPackage' && ./result/activate
-```
-
-## Change shell to Fish
-
-```
-sudo chsh -s $(type -p fish) $(whoami)
+[guest]$ sudo bash -c "echo 'extra-trusted-users = $(whoami)' >> /etc/nix/nix.conf"
+[guest]$ sudo systemctl restart nix-daemon.service
 ```
 
 ## Fix Ghostty issues
@@ -48,7 +33,21 @@ sudo chsh -s $(type -p fish) $(whoami)
 Fix `TERM` issues by copying Ghostty's terminfo entry to the VM:
 
 ```
-infocmp -x | limactl shell default -- nix-shell -p ncurses --run 'tic -x -'
+[host]$ infocmp -x | lima nix-shell -p ncurses --run 'tic -x -'
 ```
 
 You can tell things have improved if Ctrl-L / `clear` starts working.
+
+## Install dotfiles
+
+TODO: Come up with a more concise way of doing this bootstrapping.
+
+```
+[guest]$ nix-shell -p git --run 'nix shell .#{home-manager,home-rebuild} -c home-rebuild switch'
+```
+
+or
+
+```
+[guest]$ nix-shell -p git --run 'nix build .#homeConfigurations.$(hostname -s).activationPackage' && ./result/activate && rm result
+```
