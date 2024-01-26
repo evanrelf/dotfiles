@@ -5,8 +5,7 @@ aliases.here = ['branch', 'set', '-r', 'HEAD@git']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
 aliases.mutably = ['--config-toml', 'revset-aliases."immutable_heads()" = "none()"']
-aliases.push = ['git', 'push', '--dry-run']
-aliases.PUSH = ['git', 'push']
+aliases.push = ['git', 'push']
 aliases.s = ['status']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
