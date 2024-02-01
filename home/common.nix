@@ -8,6 +8,7 @@
   news.display = "silent";
 
   home.packages = [
+    pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
     pkgs.colima
