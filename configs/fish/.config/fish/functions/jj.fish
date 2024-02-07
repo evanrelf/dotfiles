@@ -1,1 +1,1 @@
-jj util completion --fish | source
+jj util completion fish | source
