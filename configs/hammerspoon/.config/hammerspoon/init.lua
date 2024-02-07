@@ -66,7 +66,7 @@ hs.hotkey.bind(fn, "f", function()
     local h = (screenFrame.h - (screenFrame.w * (1 - ratio))) / screenFrame.h
     return hs.geometry.size(w, h)
   end
-  local aesthetic = copyFrame(pragmatic):scale(aestheticSize(0.9))
+  local aesthetic = copyFrame(pragmatic):scale(aestheticSize(0.95))
 
   if windowFrame:equals(pragmatic) then
     window:setFrame(aesthetic)
