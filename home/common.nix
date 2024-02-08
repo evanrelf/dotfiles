@@ -32,6 +32,7 @@
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.lima-bin
+    pkgs.neovim
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
@@ -124,6 +125,11 @@
 
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
+
+  xdg.configFile."nvim" = {
+    source = ../configs/neovim/.config/nvim;
+    recursive = true;
+  };
 
   xdg.configFile."ripgrep" = {
     source = ../configs/ripgrep/.config/ripgrep;
