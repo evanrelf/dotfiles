@@ -34,22 +34,22 @@ in
   gnused-gprefix =
     gprefix final.gnused;
 
-  jujutsu =
-    let version = "0.14.0"; in
-    (checkVersion version prev.jujutsu).overrideAttrs (attrs: rec {
-      inherit version;
-      src = final.fetchFromGitHub {
-        owner = "martinvonz";
-        repo = "jj";
-        rev = "v${version}";
-        hash = "sha256-xnGnervyXPfZyQTYsPu09fj+QvbEZ6rDJ4fYHBeF/RY=";
-      };
-      cargoDeps = attrs.cargoDeps.overrideAttrs (final.lib.const {
-        name = "${attrs.pname}-${version}-vendor.tar.gz";
-        inherit src;
-        outputHash = "sha256-wuZ0zthaemzyDn5J2au2L2k0QJnzbrCRjSBIPivEbnQ=";
-      });
-    });
+  # jujutsu =
+  #   let version = "0.14.0"; in
+  #   (checkVersion version prev.jujutsu).overrideAttrs (attrs: rec {
+  #     inherit version;
+  #     src = final.fetchFromGitHub {
+  #       owner = "martinvonz";
+  #       repo = "jj";
+  #       rev = "v${version}";
+  #       hash = "sha256-xnGnervyXPfZyQTYsPu09fj+QvbEZ6rDJ4fYHBeF/RY=";
+  #     };
+  #     cargoDeps = attrs.cargoDeps.overrideAttrs (final.lib.const {
+  #       name = "${attrs.pname}-${version}-vendor.tar.gz";
+  #       inherit src;
+  #       outputHash = "sha256-wuZ0zthaemzyDn5J2au2L2k0QJnzbrCRjSBIPivEbnQ=";
+  #     });
+  #   });
 
   # kakoune-unwrapped =
   #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
