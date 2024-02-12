@@ -10,6 +10,7 @@ aliases.s = ['status']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 core.fsmonitor = 'watchman'
+ui.default-command = 'status'
 ui.graph.style = 'ascii'
 ui.diff-editor = ':builtin'
 ui.diff.format = 'git'
