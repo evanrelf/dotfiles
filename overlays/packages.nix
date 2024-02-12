@@ -51,13 +51,14 @@ in
   #     });
   #   });
 
-  # kakoune-unwrapped =
-  #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
-  #     version = "HEAD";
-  #     src = final.inputs.kakoune;
-  #     preConfigure = ''
-  #       ${attrs.preConfigure}
-  #       export version="${version}"
-  #     '';
-  #   });
+  kakoune-unwrapped =
+    prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
+      version = final.inputs.kakoune.shortRev;
+      src = final.inputs.kakoune;
+      patches = [ ];
+      preConfigure = ''
+        ${attrs.preConfigure}
+        export version="${version}"
+      '';
+    });
 }
