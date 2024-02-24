@@ -28,6 +28,7 @@
     pkgs.gnused-gprefix
     pkgs.home-manager
     pkgs.home-rebuild
+    pkgs.httpie
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune

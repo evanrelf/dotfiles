@@ -16,6 +16,13 @@ let
       hash = "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=";
     };
 
+    "grep-write-kak" = final.fetchFromGitHub {
+      owner = "jtrv";
+      repo = "grep-write.kak";
+      rev = "183afe2ece341f6366ffdb9039dbd061e305ceb8";
+      hash = "sha256-qPetxg69AYHSeINW2tKQ+BL4ShA+s/mWOmhCgVgoWSU=";
+    };
+
     "kak-fetch" = final.fetchFromGitHub {
       owner = "mmlb";
       repo = "kak-fetch";
