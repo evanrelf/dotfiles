@@ -7,6 +7,7 @@ unfocused-split-opacity = 1
 cursor-style-blink = false
 shell-integration-features = no-cursor
 macos-option-as-alt = true
+window-save-state = never
 
 # ./oksolar-light.sh
 palette = 0=#093946
