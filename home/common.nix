@@ -18,6 +18,7 @@
     pkgs.delta
     pkgs.direnv
     pkgs.docker-client
+    pkgs.duckdb
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fish
