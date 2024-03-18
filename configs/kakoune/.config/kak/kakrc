@@ -317,7 +317,8 @@ define-command -hidden haskell-goto-definition %{ evaluate-commands %sh{
     # echo "echo -debug 'haskell-goto-definition: output_module=\"$output_module\"'"
     # echo "echo -debug 'haskell-goto-definition: output_position=\"$output_position\"'"
     # echo "echo -debug 'haskell-goto-definition: output_file=\"$output_file\"'"
-    echo "fail 'haskell-goto-definition: failed'"
+    echo "select-word-if-reduced"
+    echo "ctags-search"
   fi
 }}
 
@@ -455,8 +456,10 @@ declare-user-mode "haskell"
 map global "user" "h" ": enter-user-mode haskell<ret>" -docstring "haskell..."
 map global "haskell" "l" ": haskell-insert-language-extension<ret>" -docstring "insert language extension"
 map global "haskell" "o" ": haskell-insert-option<ret>" -docstring "insert option"
-map global "haskell" "d" "<esc>: haskell-goto-definition<ret>" -docstring "goto definition"
 map global "haskell" "t" "<esc>: haskell-type-at-point<ret>" -docstring "type at point"
+hook global WinSetOption filetype=haskell %{
+  map global "goto" "d" "<esc>: haskell-goto-definition<ret>" -docstring "definition"
+}
 
 ################################################################################
 # EVALUATE
