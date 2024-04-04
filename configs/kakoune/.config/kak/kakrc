@@ -176,10 +176,8 @@ strip %{
 # NUMBERS
 ################################################################################
 
-hook -once global KakBegin .* %{
-  # evanrelf/number-toggle.kak
-  require-module "number-toggle"
-  set-option global number_toggle_params -hlcursor
+hook -always global WinCreate .* %{
+  add-highlighter window/number-lines number-lines -hlcursor
 }
 
 ################################################################################
