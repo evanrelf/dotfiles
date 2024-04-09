@@ -1,5 +1,3 @@
-# TODO: Incorporate changes from v0.15.0
-# https://github.com/martinvonz/jj/releases/tag/v0.15.0
 aliases.clone = ['git', 'clone', '--colocate']
 aliases.d = ['diff']
 aliases.fetch = ['git', 'fetch']
@@ -19,9 +17,8 @@ ui.diff.format = 'git'
 ui.pager = 'delta'
 ui.default-description = "\n"
 git.auto-local-branch = false
-# Default revset in v0.10.0, made available as an alias
-# TODO: Update to new default revset in v0.15.0
-revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | heads(immutable_heads())' # TODO: This was changed in v0.15.0
+# Default revset in v0.15.0, made available as an alias
+revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | trunk()'
 revset-aliases.'default_push()' = 'remote_branches(remote=origin)..@'
 revset-aliases.'alias_l()' = 'latest(::@, 5) | (ancestors(immutable_heads().., 2) & remote_branches().. & mine()) | heads(trunk()) | branches()'
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
