@@ -35,7 +35,7 @@ in
     gprefix final.gnused;
 
   # jujutsu =
-  #   let version = "0.16.0"; in
+  #   let version = "0.17.0"; in
   #   (checkVersion version prev.jujutsu).overrideAttrs (attrs: rec {
   #     inherit version;
   #     src = final.fetchFromGitHub {

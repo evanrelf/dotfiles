@@ -4,7 +4,6 @@ aliases.fetch = ['git', 'fetch']
 aliases.here = ['branch', 'set', '-r', 'HEAD@git']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
-aliases.mutably = ['--config-toml', 'revset-aliases."immutable_heads()" = "none()"']
 aliases.push = ['git', 'push']
 aliases.s = ['status']
 user.name = 'Evan Relf'
@@ -16,6 +15,7 @@ ui.diff-editor = ':builtin'
 ui.diff.format = 'git'
 ui.pager = 'delta'
 ui.default-description = "\n"
+ui.allow-filesets = true
 git.auto-local-branch = false
 # Default revset in v0.15.0, made available as an alias
 revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | trunk()'
@@ -27,34 +27,13 @@ revset-aliases.'first(x, y)' = 'latest(::x & ::y)+ & ::x'
 templates.log = 'evan_log_oneline'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
 template-aliases.evan_log_oneline = '''
-label(
-  if(current_working_copy, "working_copy"),
-  separate(
-    " ",
-    label(
-      separate(
-        " ",
-        if(divergent, "divergent"),
-        if(hidden, "hidden"),
-      ),
-      separate(
-        " ",
-        format_short_change_id(change_id) ++ if(divergent, "?"),
+if(root,
+  format_root_commit(self),
+  label(if(current_working_copy, "working_copy"),
+    concat(
+      separate(" ",
+        format_short_change_id_with_hidden_and_divergent_info(self),
         format_short_commit_id(commit_id),
-        if(hidden, "hidden"),
-      ),
-    ),
-    if(
-      root,
-      separate(
-        " ",
-        branches,
-        tags,
-        working_copies,
-        git_head,
-      ),
-      separate(
-        " ",
         if(
           committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("second"),
           committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" second") ++ label("timestamp", "s"),
@@ -78,15 +57,18 @@ label(
           committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" year") ++ label("timestamp", "yr"),
         committer.timestamp().ago().remove_suffix(" ago"),
         ))))))),
-        if(conflict, label("conflict", "(conflict)")),
-        if(description, description.first_line(), description_placeholder),
+        if(conflict, label("conflict", "conflict")),
+        if(description,
+          description.first_line(),
+          label(if(empty, "empty"), description_placeholder),
+        ),
         if(empty, label("empty", "(empty)")),
         branches,
         tags,
         working_copies,
         git_head,
-      ),
+      ) ++ "\n",
     ),
-  ),
+  )
 )
 '''
