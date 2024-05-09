@@ -30,6 +30,11 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    roc2nix = {
+      url = "github:JRMurr/roc2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.roc.follows = "roc";
+    };
     systems.url = "github:nix-systems/default";
   };
 
