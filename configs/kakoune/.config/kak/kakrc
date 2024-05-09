@@ -74,6 +74,11 @@ hook global WinSetOption filetype=python %{
   hook window BufWritePre .* %{ format-buffer }
 }
 
+hook global WinSetOption filetype=roc %{
+  set-option window formatcmd "roc format --stdin --stdout"
+  hook window BufWritePre .* %{ format-buffer }
+}
+
 hook global WinSetOption filetype=rust %{
   set-option window formatcmd "rustfmt --edition 2021 --emit stdout"
   hook window BufWritePre .* %{ format-buffer }
