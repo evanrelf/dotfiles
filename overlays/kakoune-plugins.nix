@@ -37,10 +37,11 @@ let
       hash = "sha256-eGxzfbcg31bwoDq+EdAp5peoXTz8e1j+j4neCfuyxxw=";
     };
 
-    # TODO: Use `fetchFromGitHub` once I make the repo public.
-    "roc-kak" = builtins.fetchGit {
-      url = "git@github.com:evanrelf/roc.kak.git";
+    "roc-kak" = final.fetchFromGitHub {
+      owner = "evanrelf";
+      repo = "roc.kak";
       rev = "8569101b0c6b1865ea5827c62ced97e452475409";
+      hash = "sha256-/5qE6uIvqeMcBx2M+Vo9eQLDUBWng2fO4gxPTMM4LM8=";
     };
   };
 
