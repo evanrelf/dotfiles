@@ -36,6 +36,12 @@ let
       rev = "4c0c1c48de189e1f1a8582c57d89f8008b358430";
       hash = "sha256-eGxzfbcg31bwoDq+EdAp5peoXTz8e1j+j4neCfuyxxw=";
     };
+
+    # TODO: Use `fetchFromGitHub` once I make the repo public.
+    "roc-kak" = builtins.fetchGit {
+      url = "git@github.com:evanrelf/roc.kak.git";
+      rev = "214d767df306a980bffa8e4630bc2ce730e174e7";
+    };
   };
 
 in
