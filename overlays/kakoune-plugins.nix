@@ -40,7 +40,7 @@ let
     # TODO: Use `fetchFromGitHub` once I make the repo public.
     "roc-kak" = builtins.fetchGit {
       url = "git@github.com:evanrelf/roc.kak.git";
-      rev = "214d767df306a980bffa8e4630bc2ce730e174e7";
+      rev = "8569101b0c6b1865ea5827c62ced97e452475409";
     };
   };
 

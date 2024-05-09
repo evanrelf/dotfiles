@@ -31,7 +31,7 @@ hook global InsertDelete " " %{ try %{
 set-option global indentwidth 2
 
 # Indent with 4 spaces in select languages
-hook global WinSetOption filetype=(fish|python|rust|zig) %{
+hook global WinSetOption filetype=(fish|python|roc|rust|zig) %{
   set-option window indentwidth 4
 }
 
