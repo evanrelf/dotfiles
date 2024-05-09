@@ -39,6 +39,7 @@
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
+    pkgs.roc
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck

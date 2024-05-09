@@ -25,6 +25,11 @@
       flake = false;
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
+    roc = {
+      url = "github:roc-lang/roc";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     systems.url = "github:nix-systems/default";
   };
 

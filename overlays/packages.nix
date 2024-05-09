@@ -61,4 +61,7 @@ in
         export version="${version}"
       '';
     });
+
+  roc =
+    final.inputs'.roc.packages.cli;
 }
