@@ -1,0 +1,7 @@
+theme = "modus_operandi"
+editor.scrolloff = 0
+editor.auto-format = false
+editor.rulers = [81]
+editor.lsp.enable = false
+editor.gutters.layout = ["diff", "diagnostics", "line-numbers"]
+editor.gutters.line-numbers.min-width = 2
