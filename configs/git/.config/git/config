@@ -39,7 +39,6 @@
   # PUSH
   p = confirm-push
   pf = confirm-push --force-with-lease
-  pu = confirm-push --set-upstream origin HEAD
 
   # REBASE
   rb = rebase
@@ -108,6 +107,8 @@
 [mergetool]
   prompt = false
   keepBackup = false
+[push]
+  autoSetupRemote = true
 [rebase]
   autoStash = true
   autoSquash = true
