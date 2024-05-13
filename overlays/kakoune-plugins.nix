@@ -5,8 +5,8 @@ let
     "better-haskell-kak" = final.fetchFromGitHub {
       owner = "evanrelf";
       repo = "better-haskell.kak";
-      rev = "6fa476c0d7acdeb03beb142b57778f1e864af5bc";
-      hash = "sha256-0f9wzNPuYdHdQ1ZbVvZSC54WfQZdY+Tyrf5pn22jxtI=";
+      rev = "069690575aa92e34338d8102594f797c1e1fa41a";
+      hash = "sha256-X3v/8zNM8zauWSryGs4xh7nI2wBNaVqSkLCVItRDnPA=";
     };
 
     "byline-kak" = final.fetchFromGitHub {
