@@ -25,6 +25,8 @@
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
     pkgs.git
+    pkgs.git-confirm-push
+    pkgs.git-lookup
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
     pkgs.graphviz

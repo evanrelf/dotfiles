@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2016
 
 set -Eeuo pipefail
 IFS=$'\n\t'
@@ -18,6 +17,7 @@ if echo "${branch}" | rg --quiet --invert-match '^(master|main|trunk|development
 fi
 
 # Confirm repository
+# shellcheck disable=SC2016
 repo=$(git remote get-url origin | sd '(?:git@github\.com:|https://github\.com/|git@git\.sr\.ht:~|https://git\.sr\.ht/~)([\w\-]+)/([\w\-\.]+)' '$1/$2' | sd '\.git$' '')
 if [ -n "${repo}" ]; then
   read -e -p "Confirm repository (${repo}): " -r < /dev/tty
