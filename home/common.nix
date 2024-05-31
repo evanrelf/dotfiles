@@ -27,6 +27,7 @@
     pkgs.git
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
+    pkgs.graphviz
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
@@ -34,6 +35,7 @@
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune
+    pkgs.kitty
     pkgs.lima-bin
     pkgs.neovim
     pkgs.nix-direnv
