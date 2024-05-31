@@ -1,4 +1,14 @@
-{ darwin, ghc, ghcid, lib, lndir, makeWrapper, mkShell, runCommand, stdenv }:
+{ darwin
+, ghc
+, ghcid
+, ghciwatch
+, lib
+, lndir
+, makeWrapper
+, mkShell
+, runCommand
+, stdenv
+}:
 
 let
   defaultGhcOptions =
@@ -84,6 +94,7 @@ runCommand
       packages = [
         customGhc
         ghcid
+        ghciwatch
       ];
     };
 }
