@@ -17,7 +17,15 @@ in
       };
     };
 
-  # Broken
+  # Broken because `link_macos` seemingly hardcodes stuff assuming absolute
+  # paths outside of the sandbox.
+  #
+  # ```
+  # thread 'main' panicked at crates/compiler/build/src/program.rs:1032:30:
+  # not yet implemented: gracefully handle `ld` failing to spawn.
+  # ```
+  #
+  # https://github.com/roc-lang/roc/blob/674b9348215118a7c977d0685979d850d3a5f649/crates/compiler/build/src/link.rs#L1056
   hello-roc-manual =
     let
       dependencies =
@@ -44,15 +52,19 @@ in
         final.roc
       ] ++ final.lib.optional final.stdenv.isDarwin [
         final.darwin.DarwinTools
-        # final.darwin.binutils
-        # final.darwin.apple_sdk.frameworks.AudioUnit
-        # final.darwin.apple_sdk.frameworks.Cocoa
-        # final.darwin.apple_sdk.frameworks.CoreAudio
-        # final.darwin.apple_sdk.frameworks.CoreVideo
-        # final.darwin.apple_sdk.frameworks.IOKit
-        # final.darwin.apple_sdk.frameworks.Metal
-        # final.darwin.apple_sdk.frameworks.QuartzCore
-        # final.darwin.apple_sdk.frameworks.Security
+        final.darwin.Libsystem
+        final.darwin.apple_sdk.frameworks.AudioUnit
+        final.darwin.apple_sdk.frameworks.Cocoa
+        final.darwin.apple_sdk.frameworks.CoreAudio
+        final.darwin.apple_sdk.frameworks.CoreFoundation
+        final.darwin.apple_sdk.frameworks.CoreVideo
+        final.darwin.apple_sdk.frameworks.IOKit
+        final.darwin.apple_sdk.frameworks.Metal
+        final.darwin.apple_sdk.frameworks.QuartzCore
+        final.darwin.apple_sdk.frameworks.Security
+        final.darwin.binutils
+        final.darwin.libpthread
+        final.darwin.libresolv
       ];
       buildPhase = ''
         export HOME=$(mktemp -d)
@@ -61,5 +73,7 @@ in
         mkdir -p $out/bin/
         roc build --optimize --output $out/bin/hello
       '';
+      # __noChroot = true; # Requires `sandbox = relaxed`
+      RUST_BACKTRACE = "1";
     };
 }
