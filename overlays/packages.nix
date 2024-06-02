@@ -74,11 +74,17 @@ in
       src = final.inputs.kakoune;
       patches = [ ];
       preConfigure = ''
-        ${attrs.preConfigure}
+        ${attrs.preConfigure or ""}
         export version="${version}"
       '';
     });
 
   roc =
-    final.inputs'.roc.packages.cli;
+    final.inputs'.roc.packages.cli.override (inputs: {
+      compile-deps = (inputs.compile-deps or { }) // {
+        zigPkg =
+          assert inputs.compile-deps.zigPkg.version == "0.11.0";
+          final.zigpkgs."0.11.0";
+      };
+    });
 }

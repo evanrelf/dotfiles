@@ -55,7 +55,7 @@
     pkgs.universal-ctags
     pkgs.watchexec
     pkgs.watchman
-    pkgs.zig
+    pkgs.zigpkgs."0.12.0"
     pkgs.zoxide
   ];
 

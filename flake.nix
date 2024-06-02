@@ -36,6 +36,11 @@
       inputs.roc.follows = "roc";
     };
     systems.url = "github:nix-systems/default";
+    zig-overlay = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -49,9 +54,10 @@
             config = { };
             overlays = [
               (_: _: { inherit inputs inputs'; })
-              (_: _: { crane = inputs.crane.lib.${system}; })
+              (_: _: { crane = inputs.crane.mkLib pkgs; })
               inputs.fenix.overlays.default
               inputs.haskell-overlay.overlays.default
+              inputs.zig-overlay.overlays.default
               (import ./overlays/evan.nix)
               (import ./overlays/haskell.nix)
               (import ./overlays/roc.nix)
@@ -79,9 +85,4 @@
         formatter = pkgs.nixpkgs-fmt;
       };
     };
-
-  nixConfig = {
-    extra-substituters = "https://nix-community.cachix.org https://evanrelf.cachix.org";
-    extra-trusted-public-keys = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= evanrelf.cachix.org-1:n9mrgldEeLIlie/UEGulvshb2Yf5bxz1ZYUIvV5kdO4=";
-  };
 }
