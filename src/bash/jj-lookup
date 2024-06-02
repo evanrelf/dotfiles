@@ -20,14 +20,13 @@ else
   fi
 
   preview=(\
-    --preview "echo {} | awk '{print \$1}' | xargs git show --color=always | delta" \
+    --preview "echo {} | awk '{print \$2}' | xargs jj show --color=always | delta" \
     --preview-window "${position},${size},border-${border}" \
   )
 fi
 
-  git log \
-  --oneline \
-  --pretty=format:'%Cred%h%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)%Creset %Cblue<%an>%Creset' \
+  jj ll \
+  --no-graph \
   --color=always \
 | fzf -1 -0 \
   --exact \
@@ -39,5 +38,5 @@ fi
   "${preview[@]}" \
   --ansi \
   --color=light \
-| awk '{print $1}' \
+| awk '{print $2}' \
 | xargs git rev-parse --verify --quiet

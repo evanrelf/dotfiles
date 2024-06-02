@@ -21,7 +21,24 @@ final: prev:
         final.delta
         final.findutils
         final.fzf
+        final.gawk
         final.git
+        final.ncurses
+      ];
+    };
+
+  jj-lookup =
+    final.writeShellApplication {
+      name = "jj-lookup";
+      text = builtins.readFile ../src/bash/jj-lookup;
+      runtimeInputs = [
+        final.coreutils
+        final.delta
+        final.findutils
+        final.fzf
+        final.gawk
+        final.git
+        final.jujutsu
         final.ncurses
       ];
     };

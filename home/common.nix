@@ -34,6 +34,7 @@
     pkgs.home-manager
     pkgs.home-rebuild
     pkgs.httpie
+    pkgs.jj-lookup
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune
