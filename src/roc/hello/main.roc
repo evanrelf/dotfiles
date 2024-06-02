@@ -1,26 +1,32 @@
 # !/usr/bin/env roc
 app [main] {
+    ascii: "https://github.com/Hasnep/roc-ascii/releases/download/v0.2.0/F8xZFTEm1fA7RF6OA1jl6V_ef_roDHfwGsBva29RxEg.tar.br",
     pf: platform "https://github.com/roc-lang/basic-cli/releases/download/0.10.0/vNe6s9hWzoTZtFmNkvEICPErI9ptji_ySjicO6CkucY.tar.br",
     weaver: "https://github.com/smores56/weaver/releases/download/0.2.0/BBDPvzgGrYp-AhIDw0qmwxT0pWZIQP_7KOrUrZfp_xw.tar.br",
 }
 
-import pf.Stdout
+import ascii.Ascii
 import pf.Arg
+import pf.Stdout
 import pf.Task exposing [Task]
-import weaver.Opt
 import weaver.Cli
+import weaver.Opt
 import weaver.Param
 
 main : Task {} _
 main =
     when Cli.parseOrDisplayMessage cliParser Arg.list! is
         Ok options ->
-            # TODO: How to convert `Str` to all uppercase?
+            name = Result.withDefault options.name "world"
+
             if options.yell then
-                name = Result.withDefault options.name "WORLD"
+                name =
+                    Ascii.fromStr name
+                    |> Result.map Ascii.toUppercase
+                    |> Result.map Ascii.toString
+                    |> Result.withDefault name
                 Stdout.line! "HELLO, $(name)!!!!"
             else
-                name = Result.withDefault options.name "world"
                 Stdout.line! "Hello, $(name)!"
 
         Err error ->
