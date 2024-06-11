@@ -13,6 +13,13 @@ import weaver.Cli
 import weaver.Opt
 import weaver.Param
 
+# Not compiling at time of writing (2024-06-10) due to this compiler bug:
+# https://github.com/roc-lang/roc/issues/6800
+#
+# Also the shebang formatting with the space might be illegal. Relevant issue
+# for whatever it's worth:
+# https://github.com/roc-lang/roc/issues/1135
+
 main : Task {} _
 main =
     when Cli.parseOrDisplayMessage cliParser Arg.list! is
