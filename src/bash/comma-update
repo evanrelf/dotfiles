@@ -5,8 +5,9 @@ IFS=$'\n\t'
 
 cache_dir="$HOME/.cache/nix-index"
 system=$(nix eval --expr 'builtins.currentSystem' --impure --raw)
+release=${1:-latest}
 filename="index-$system"
-url="https://github.com/Mic92/nix-index-database/releases/latest/download/$filename"
+url="https://github.com/nix-community/nix-index-database/releases/download/${release:-latest}/${filename}"
 
 mkdir -p "$cache_dir"
 curl --fail -L "$url" -o "$cache_dir/$filename"
