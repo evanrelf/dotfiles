@@ -119,15 +119,19 @@ map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
 # LSP
 ################################################################################
 
-eval %sh{kak-lsp --kakoune -s $kak_session}
+provide-module lsp-init %{
+  evaluate-commands %sh{ kak-lsp --kakoune -s "$kak_session" }
+  set-option global lsp_completion_trigger "fail"
+}
+
+hook global WinSetOption filetype=(haskell|rust) %{
+  require-module lsp-init
+  lsp-enable-window
+}
 
 map global "user" "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
 map global "object" "d" "<a-;> lsp-diagnostic-object --include-warnings<ret>" -docstring "LSP errors and warnings"
 map global "object" "D" "<a-;> lsp-diagnostic-object<ret>" -docstring "LSP errors"
-
-hook global WinSetOption filetype=rust %{
-  lsp-enable-window
-}
 
 ################################################################################
 # CLIPBOARD
@@ -410,13 +414,18 @@ map global "goto" "E" "<esc>Ge" -docstring "buffer end (extend)"
 map global "goto" "T" "<esc>Gt" -docstring "window top (extend)"
 map global "goto" "C" "<esc>Gc" -docstring "window center (extend)"
 map global "goto" "B" "<esc>Gb" -docstring "window bottom (extend)"
-map global "goto" "d" "<esc>: select-word-if-reduced<ret>: ctags-search<ret>" -docstring "definition"
 map global "normal" "G" ": fail 'Use g'<ret>"
 map global "normal" "<a-h>" ": fail 'Use gH'<ret>"
 map global "normal" "<a-l>" ": fail 'Use gL'<ret>"
 map global "normal" "<a-H>" ": fail 'Use gH'<ret>"
 map global "normal" "<a-L>" ": fail 'Use gL'<ret>"
 map global "goto" "g" "<esc>: fail 'Use gk'<ret>" -docstring "-"
+
+evaluate-commands %sh{
+  if [ -z "$kak_opt_lsp_cmd" ]; then
+    echo "map global 'goto' 'd' '<esc>: select-word-if-reduced<ret>: ctags-search<ret>' -docstring 'definition'"
+  fi
+}
 
 # Surround mode
 declare-user-mode "surround"
