@@ -54,11 +54,11 @@
             config = { };
             overlays = [
               (_: _: { inherit inputs inputs'; })
+              (import ./overlays/evan.nix)
               (_: _: { crane = inputs.crane.mkLib pkgs; })
               inputs.fenix.overlays.default
               inputs.haskell-overlay.overlays.default
               inputs.zig-overlay.overlays.default
-              (import ./overlays/evan.nix)
               (import ./overlays/haskell.nix)
               (import ./overlays/roc.nix)
               (import ./overlays/bash.nix)

@@ -1,7 +1,7 @@
 final: prev:
 
 let
-  inherit (final.evan) checkVersion;
+  inherit (final.evan.lib) checkVersion;
 
   gprefix = drv:
     final.runCommandLocal "gprefix-${drv.name}" { } ''
