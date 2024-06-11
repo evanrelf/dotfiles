@@ -35,6 +35,15 @@ final: prev:
       ];
     };
 
+  home-rebuild =
+    final.writeShellApplication {
+      name = "home-rebuild";
+      text = builtins.readFile ../src/bash/home-rebuild;
+      runtimeInputs = [
+        final.home-manager
+      ];
+    };
+
   jj-lookup =
     final.writeShellApplication {
       name = "jj-lookup";
