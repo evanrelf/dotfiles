@@ -1,4 +1,4 @@
-function cargod
+function wcargo
     cargo watch \
         --exec "lclippy --all-targets $argv" \
         --clear \
