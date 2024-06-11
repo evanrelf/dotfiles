@@ -1,8 +1,0 @@
-[package]
-name = "comma-update"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-anyhow = "1.0.66"
-ureq = { version = "2.5.0", features = ["tls"], default-features = false }

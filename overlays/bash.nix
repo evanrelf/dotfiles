@@ -1,6 +1,15 @@
 final: prev:
 
 {
+  comma-update =
+    final.writeShellApplication {
+      name = "comma-update";
+      text = builtins.readFile ../src/bash/comma-update;
+      runtimeInputs = [
+        final.curl
+      ];
+    };
+
   git-confirm-push =
     final.writeShellApplication {
       name = "git-confirm-push";
@@ -17,7 +26,6 @@ final: prev:
       name = "git-lookup";
       text = builtins.readFile ../src/bash/git-lookup;
       runtimeInputs = [
-        final.coreutils
         final.delta
         final.findutils
         final.fzf
@@ -32,7 +40,6 @@ final: prev:
       name = "jj-lookup";
       text = builtins.readFile ../src/bash/jj-lookup;
       runtimeInputs = [
-        final.coreutils
         final.delta
         final.findutils
         final.fzf

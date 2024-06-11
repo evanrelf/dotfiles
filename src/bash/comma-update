@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+cache_dir="$HOME/.cache/nix-index"
+system=$(nix eval --expr 'builtins.currentSystem' --impure --raw)
+filename="index-$system"
+url="https://github.com/Mic92/nix-index-database/releases/latest/download/$filename"
+
+mkdir -p "$cache_dir"
+curl -L "$url" -o "$cache_dir/$filename"
+ln -sf "$filename" "$cache_dir/files"
