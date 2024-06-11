@@ -40,8 +40,8 @@ let
     "roc-kak" = final.fetchFromGitHub {
       owner = "evanrelf";
       repo = "roc.kak";
-      rev = "dfa8c34a30de7861249bc19dddcfcff195c9ded5";
-      hash = "sha256-AAoy60PWKB4NKIc6S4YQYOD7InL942pS5/EzLylS/3w=";
+      rev = "22a5215652993e3eba1cecddd0b1d458b6d5b19e";
+      hash = "sha256-FBv0ZNR3F3qKJvi9Azfp2FFvRJvp7ixFFDLk1zYE3M0=";
     };
   };
 
