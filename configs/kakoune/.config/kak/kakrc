@@ -122,6 +122,7 @@ map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
 provide-module lsp-init %{
   evaluate-commands %sh{ kak-lsp --kakoune -s "$kak_session" }
   set-option global lsp_completion_trigger "fail"
+  map global "normal" "=" ": lsp-hover<ret>"
   # Dim non-code text
   set-face global InfoDefault comment
   set-face global InfoBlock Information
