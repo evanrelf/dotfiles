@@ -38,6 +38,7 @@
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune
+    pkgs.kakoune-lsp
     pkgs.kitty
     pkgs.lima-bin
     pkgs.neovim

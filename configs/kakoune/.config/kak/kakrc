@@ -116,6 +116,20 @@ map global "insert" "<c-n>" "<a-;>: fail 'Use tab'<ret>"
 map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
 
 ################################################################################
+# LSP
+################################################################################
+
+eval %sh{kak-lsp --kakoune -s $kak_session}
+
+map global "user" "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+map global "object" "d" "<a-;> lsp-diagnostic-object --include-warnings<ret>" -docstring "LSP errors and warnings"
+map global "object" "D" "<a-;> lsp-diagnostic-object<ret>" -docstring "LSP errors"
+
+hook global WinSetOption filetype=rust %{
+  lsp-enable-window
+}
+
+################################################################################
 # CLIPBOARD
 ################################################################################
 
