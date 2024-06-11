@@ -138,6 +138,11 @@
     recursive = true;
   };
 
+  xdg.configFile."kak-lsp" = {
+    source = ../configs/kakoune/.config/kak-lsp;
+    recursive = true;
+  };
+
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
 

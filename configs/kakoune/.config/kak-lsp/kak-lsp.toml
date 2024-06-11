@@ -14,6 +14,6 @@ command = "static-ls"
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
 command = "sh"
-args = ["-c", 'if path=$(rustup which rust-analyzer 2>/dev/null); then exec "$path"; else exec rust-analyzer; fi'
+args = ["-c", 'if path=$(rustup which rust-analyzer 2>/dev/null); then exec "$path"; else exec rust-analyzer; fi']
 [language_server.rust-analyzer.settings.rust-analyzer]
 check.command = "clippy"
