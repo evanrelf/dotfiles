@@ -28,22 +28,22 @@ in
   gawkInteractive-gprefix =
     gprefix final.gawkInteractive;
 
-  ghciwatch =
-    let version = "0.5.13"; in
-    (checkVersion version prev.ghciwatch).overrideAttrs (attrs: rec {
-      inherit version;
-      src = final.fetchFromGitHub {
-        owner = "MercuryTechnologies";
-        repo = "ghciwatch";
-        rev = "release/${version}";
-        hash = "sha256-579dUVfbakhXH/m+wiZRmmYzUHa/mB4pJ49rUA9iAGw=";
-      };
-      cargoDeps = attrs.cargoDeps.overrideAttrs (final.lib.const {
-        name = "${attrs.pname}-${version}-vendor.tar.gz";
-        inherit src;
-        outputHash = "sha256-/wjTZB0JKaAVwjdAl7JbiYSvR/fkvG7Todqxj9YAmAs=";
-      });
-    });
+  # ghciwatch =
+  #   let version = "0.5.16"; in
+  #   (checkVersion version prev.ghciwatch).overrideAttrs (attrs: rec {
+  #     inherit version;
+  #     src = final.fetchFromGitHub {
+  #       owner = "MercuryTechnologies";
+  #       repo = "ghciwatch";
+  #       rev = "release/${version}";
+  #       hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  #     };
+  #     cargoDeps = attrs.cargoDeps.overrideAttrs (final.lib.const {
+  #       name = "${attrs.pname}-${version}-vendor.tar.gz";
+  #       inherit src;
+  #       outputHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  #     });
+  #   });
 
   gnugrep-gprefix =
     gprefix final.gnugrep;
