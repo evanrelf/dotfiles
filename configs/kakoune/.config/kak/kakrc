@@ -122,6 +122,20 @@ map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
 provide-module lsp-init %{
   evaluate-commands %sh{ kak-lsp --kakoune -s "$kak_session" }
   set-option global lsp_completion_trigger "fail"
+  # Dim non-code text
+  set-face global InfoDefault comment
+  set-face global InfoBlock Information
+  set-face global InfoBlockQuote comment
+  set-face global InfoBullet comment
+  set-face global InfoHeader comment
+  set-face global InfoLink comment
+  set-face global InfoLinkMono comment
+  set-face global InfoMono Information
+  set-face global InfoRule comment
+  set-face global InfoDiagnosticError comment
+  set-face global InfoDiagnosticHint comment
+  set-face global InfoDiagnosticInformation comment
+  set-face global InfoDiagnosticWarning comment
 }
 
 hook global WinSetOption filetype=(haskell|rust) %{
