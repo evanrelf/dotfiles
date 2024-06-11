@@ -62,7 +62,7 @@
               (import ./overlays/haskell.nix)
               (import ./overlays/roc.nix)
               (import ./overlays/rust.nix)
-              (import ./overlays/shell.nix)
+              (import ./overlays/bash.nix)
               (import ./overlays/packages.nix)
               (import ./overlays/kakoune-plugins.nix)
               (import ./overlays/home-configurations.nix)
