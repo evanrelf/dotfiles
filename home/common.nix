@@ -1,5 +1,11 @@
 { config, inputs, lib, pkgs, ... }:
 
+let
+  mutable = path:
+    config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/Code/evanrelf/dotfiles/${path}";
+
+in
 {
   home.stateVersion = "22.11";
 
@@ -158,4 +164,7 @@
 
   xdg.configFile."starship.toml".source =
     ../configs/starship/.config/starship.toml;
+
+  home.file.".config/zed/settings.json".source =
+    mutable "configs/zed/.config/zed/settings.json";
 }
