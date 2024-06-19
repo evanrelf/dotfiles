@@ -139,9 +139,13 @@ provide-module lsp-init %{
   set-face global InfoDiagnosticWarning comment
 }
 
-hook global WinSetOption filetype=(haskell|rust) %{
+hook global WinSetOption filetype=haskell %{
   require-module lsp-init
   lsp-enable-window
+}
+
+hook global WinSetOption filetype=rust %{
+  require-module lsp-init
 }
 
 map global "user" "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
