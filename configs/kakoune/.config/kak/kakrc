@@ -144,7 +144,7 @@ hook global WinSetOption filetype=haskell %{
   lsp-enable-window
 }
 
-hook global WinSetOption filetype=rust %{
+hook global WinSetOption filetype=(roc|rust) %{
   require-module lsp-init
 }
 

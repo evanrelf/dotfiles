@@ -10,6 +10,11 @@ filetypes = ["haskell"]
 roots = ["*.cabal", "cabal.project", "package.yaml"]
 command = "static-ls"
 
+[language_server.roc_language_server]
+filetypes = ["roc"]
+roots = ["main.roc"]
+command = "roc_language_server"
+
 [language_server.rust-analyzer]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
