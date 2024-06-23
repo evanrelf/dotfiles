@@ -1,7 +1,6 @@
 { darwin
 , ghc
-, ghcid
-, ghciwatch
+, ghciwatch-compat-ghcid
 , lib
 , lndir
 , makeWrapper
@@ -93,8 +92,7 @@ runCommand
     mkShell {
       packages = [
         customGhc
-        ghcid
-        ghciwatch
+        ghciwatch-compat-ghcid
       ];
     };
 }

@@ -15,6 +15,10 @@
       flake = false;
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    ghciwatch-compat = {
+      url = "github:evanrelf/ghciwatch-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     haskell-overlay.url = "github:evanrelf/haskell-overlay";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -57,6 +61,7 @@
               (import ./overlays/evan.nix)
               (_: _: { crane = inputs.crane.mkLib pkgs; })
               inputs.fenix.overlays.default
+              inputs.ghciwatch-compat.overlays.default
               inputs.haskell-overlay.overlays.default
               inputs.zig-overlay.overlays.default
               (import ./overlays/haskell.nix)

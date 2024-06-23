@@ -129,6 +129,26 @@
         "type": "github"
       }
     },
+    "ghciwatch-compat": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718475151,
+        "narHash": "sha256-m1LnenTDktcuzcbIGQ6p12jzzcHbQhU9ig1oTLLUyOw=",
+        "owner": "evanrelf",
+        "repo": "ghciwatch-compat",
+        "rev": "43ef4e80c469a1869094e5c128f8944142e9c7f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "ghciwatch-compat",
+        "type": "github"
+      }
+    },
     "haskell-overlay": {
       "locked": {
         "lastModified": 1667282725,
@@ -288,6 +308,7 @@
         "fenix": "fenix",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
+        "ghciwatch-compat": "ghciwatch-compat",
         "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
         "kakoune": "kakoune",
