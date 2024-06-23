@@ -1,4 +1,4 @@
-# !/usr/bin/env roc
+#!/usr/bin/env roc
 app [main] {
     ascii: "https://github.com/Hasnep/roc-ascii/releases/download/v0.2.0/F8xZFTEm1fA7RF6OA1jl6V_ef_roDHfwGsBva29RxEg.tar.br",
     pf: platform "https://github.com/roc-lang/basic-cli/releases/download/0.10.0/vNe6s9hWzoTZtFmNkvEICPErI9ptji_ySjicO6CkucY.tar.br",
@@ -15,10 +15,6 @@ import weaver.Param
 
 # Not compiling at time of writing (2024-06-10) due to this compiler bug:
 # https://github.com/roc-lang/roc/issues/6800
-#
-# Also the shebang formatting with the space might be illegal. Relevant issue
-# for whatever it's worth:
-# https://github.com/roc-lang/roc/issues/1135
 
 main : Task {} _
 main =
