@@ -80,7 +80,7 @@ in
     });
 
   roc =
-    final.inputs'.roc.packages.cli.override (inputs: {
+    final.inputs'.roc.packages.full.override (inputs: {
       compile-deps = (inputs.compile-deps or { }) // {
         zigPkg =
           assert inputs.compile-deps.zigPkg.version == "0.11.0";
