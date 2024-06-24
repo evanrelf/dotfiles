@@ -15,6 +15,10 @@
   "buffer_font_size": 16,
   "buffer_line_height": "standard",
   "wrap_guides": [80],
+  "terminal": {
+    // https://github.com/zed-industries/zed/issues/7728
+    "option_as_meta": true
+  },
   "git": {
     "inline_blame": { "enabled": false }
   },
