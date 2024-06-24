@@ -41,7 +41,7 @@ require("lazy").setup({
   { "wsdjeg/vim-fetch" },
 }, {
   install = {
-    colorscheme = { "github_light", "zellner" },
+    colorscheme = { "github_light" },
   },
 })
 
