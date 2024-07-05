@@ -1,6 +1,8 @@
 aliases.clone = ['git', 'clone', '--colocate']
 aliases.d = ['diff']
 aliases.fetch = ['git', 'fetch']
+# TODO: Change `set` to `move` in the next version, to avoid `jj here foo`
+# accidentally creating the `foo` branch.
 aliases.here = ['branch', 'set', '-r', 'HEAD@git']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
