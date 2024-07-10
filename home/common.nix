@@ -25,6 +25,7 @@ in
     pkgs.direnv
     pkgs.docker-client
     pkgs.duckdb
+    pkgs.erlang
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fish
@@ -33,6 +34,7 @@ in
     pkgs.git
     pkgs.git-confirm-push
     pkgs.git-lookup
+    pkgs.gleam
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
     pkgs.graphviz
@@ -51,6 +53,7 @@ in
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
+    pkgs.rebar3
     pkgs.ripgrep
     pkgs.roc
     pkgs.rustup
