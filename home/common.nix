@@ -31,6 +31,7 @@ in
     pkgs.fish
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
+    pkgs.gh
     pkgs.git
     pkgs.git-confirm-push
     pkgs.git-lookup
