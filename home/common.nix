@@ -51,6 +51,7 @@ in
     pkgs.kakoune-lsp
     pkgs.kitty
     pkgs.lima-bin
+    pkgs.llm
     pkgs.neovim
     pkgs.nix-direnv
     pkgs.nix-your-shell
