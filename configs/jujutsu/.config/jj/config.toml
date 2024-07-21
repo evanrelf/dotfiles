@@ -1,11 +1,29 @@
-aliases.clone = ['git', 'clone', '--colocate']
+aliases.ab = ['abandon']
+aliases.b = ['branch']
+aliases.c = ['commit']
 aliases.d = ['diff']
-aliases.fetch = ['git', 'fetch']
-aliases.here = ['branch', 'move', '--to', 'HEAD@git']
+aliases.de = ['diffedit']
+aliases.ds = ['describe']
+aliases.dup = ['duplicate']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
-aliases.push = ['git', 'push']
+aliases.par = ['parallelize']
+aliases.res = ['restore']
 aliases.s = ['status']
+aliases.sh = ['show']
+aliases.sp = ['split']
+aliases.sq = ['split']
+
+aliases.clone = ['git', 'clone', '--colocate']
+aliases.fetch = ['git', 'fetch']
+aliases.push = ['git', 'push']
+
+aliases.mut = ['--ignore-immutable']
+aliases.here = ['branch', 'move', '--to', 'HEAD@git']
+aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
+aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
+aliases.invert = ['backout', '-d', '@-', '-r']
+
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 core.fsmonitor = 'watchman'
