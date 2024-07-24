@@ -56,7 +56,6 @@ in
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
-    pkgs.racket
     pkgs.rebar3
     pkgs.ripgrep
     pkgs.roc
