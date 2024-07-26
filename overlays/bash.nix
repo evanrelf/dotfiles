@@ -1,15 +1,6 @@
 final: prev:
 
 {
-  comma-update =
-    final.writeShellApplication {
-      name = "comma-update";
-      text = builtins.readFile ../src/bash/comma-update;
-      runtimeInputs = [
-        final.curl
-      ];
-    };
-
   git-confirm-push =
     final.writeShellApplication {
       name = "git-confirm-push";

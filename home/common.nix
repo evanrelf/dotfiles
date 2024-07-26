@@ -19,8 +19,6 @@ in
     pkgs.cargo-limit
     pkgs.cargo-watch
     pkgs.colima
-    pkgs.comma
-    pkgs.comma-update
     pkgs.coreutils-gprefix
     pkgs.delta
     pkgs.direnv
