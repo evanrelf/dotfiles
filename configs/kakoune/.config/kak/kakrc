@@ -160,45 +160,6 @@ map global "object" "d" "<a-;> lsp-diagnostic-object --include-warnings<ret>" -d
 map global "object" "D" "<a-;> lsp-diagnostic-object<ret>" -docstring "LSP errors"
 
 ################################################################################
-# CLIPBOARD
-################################################################################
-
-declare-option -hidden str clipboard_copy "<esc>: fail 'No clipboard_copy set'<ret>"
-
-declare-option -hidden str clipboard_paste "<esc>: fail 'No clipboard_paste set'<ret>"
-
-hook -once global NormalIdle .* %{
-  evaluate-commands %sh{
-    case "$(uname)" in
-      "Darwin")
-        echo "set-option global clipboard_copy 'pbcopy'"
-        echo "set-option global clipboard_paste 'pbpaste'"
-        ;;
-      "Linux")
-        echo "set-option global clipboard_copy 'wl-copy || xclip || tmux load-buffer -'"
-        echo "set-option global clipboard_paste 'wl-paste || xclip -o || tmux save-buffer -'"
-        ;;
-    esac
-  }
-}
-
-define-command -hidden clipboard-yank %{
-  execute-keys "<a-|>%opt{clipboard_copy}<ret>"
-}
-
-define-command -hidden clipboard-paste-after %{
-  execute-keys "<a-!>%opt{clipboard_paste}<ret>"
-}
-
-define-command -hidden clipboard-paste-before %{
-  execute-keys "!%opt{clipboard_paste}<ret>"
-}
-
-define-command -hidden clipboard-replace %{
-  execute-keys "|%opt{clipboard_paste}<ret>"
-}
-
-################################################################################
 # TRAILING WHITESPACE
 ################################################################################
 
@@ -254,9 +215,6 @@ hook global WinCreate .* %{
 hook -once global KakBegin .* %{
   # evanrelf/primer.kak
   declare-option str column_color "rgb:f6f8fa"
-
-  # evanrelf/coconut.kak
-  # declare-option str column_color "rgb:F7F5F2"
 }
 
 # By default, the ideal width is 80 columns
@@ -296,24 +254,15 @@ softwrap-disable %{
 # HASKELL
 ################################################################################
 
-define-command -hidden haskell-cache-language-extensions %{ nop %sh{
-  file="${HOME}/.cache/kak/ghc-language-extensions"
-  mkdir -p "${HOME}/.cache/kak"
-  if command -v ghc >/dev/null 2>&1 && [ ! -f "${file}" ]; then
-    ghc --supported-extensions > "${file}"
-  fi
-}}
-
-define-command -hidden haskell-cache-options %{ nop %sh{
-  file="${HOME}/.cache/kak/ghc-options"
-  mkdir -p "${HOME}/.cache/kak"
-  if command -v ghc >/dev/null 2>&1 && [ ! -f "${file}" ]; then
-    ghc --show-options > "${file}"
-  fi
-}}
-
 define-command -hidden haskell-insert-language-extension %{
-  haskell-cache-language-extensions
+  # Cache language extensions
+  nop %sh{
+    file="${HOME}/.cache/kak/ghc-language-extensions"
+    mkdir -p "${HOME}/.cache/kak"
+    if command -v ghc >/dev/null 2>&1 && [ ! -f "${file}" ]; then
+      ghc --supported-extensions > "${file}"
+    fi
+  }
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-language-extensions | grep --invert-match --extended-regexp '(GeneralisedNewtypeDeriving|Rank2Types|AutoDeriveTypeable|TypeInType|NullaryTypeClasses)'" "extension: " %{
     evaluate-commands %sh{
       case "$kak_opt_filetype" in
@@ -330,7 +279,14 @@ define-command -hidden haskell-insert-language-extension %{
 }
 
 define-command -hidden haskell-insert-option %{
-  haskell-cache-options
+  # Cache options
+  nop %sh{
+    file="${HOME}/.cache/kak/ghc-options"
+    mkdir -p "${HOME}/.cache/kak"
+    if command -v ghc >/dev/null 2>&1 && [ ! -f "${file}" ]; then
+      ghc --show-options > "${file}"
+    fi
+  }
   prompt -shell-script-candidates "cat $HOME/.cache/kak/ghc-options | grep --invert-match --extended-regexp '(^-X|-Wwarn=|-Werror=|-Wno-error=)'" "option: " %{
     evaluate-commands %sh{
       case "$kak_opt_filetype" in
@@ -362,27 +318,9 @@ define-command -hidden haskell-goto-definition %{
     if [ -n "$output_file" ]; then
       echo "edit -existing %{$output_file} $output_position"
     else
-      # echo "echo -debug 'haskell-goto-definition: input_module=\"$input_module\"'"
-      # echo "echo -debug 'haskell-goto-definition: input_position=\"$input_position\"'"
-      # echo "echo -debug 'haskell-goto-definition: output_module=\"$output_module\"'"
-      # echo "echo -debug 'haskell-goto-definition: output_position=\"$output_position\"'"
-      # echo "echo -debug 'haskell-goto-definition: output_file=\"$output_file\"'"
       echo "select-word-if-reduced"
       echo "ctags-search"
     fi
-  }}
-}
-
-define-command -hidden haskell-type-at-point %{
-  try %{
-    lsp-hover
-  } catch %{ evaluate-commands %sh{
-    db=".hiedb"
-    module=$(rg --only-matching '\bmodule\b\s+([A-Za-z0-9_\.]+)' --replace '$1' --max-count 1 "$kak_buffile")
-    hiedb_position=$(echo "$kak_selection_desc" | tr '.,' ' ')
-    output=$(hiedb -D "$db" point-types "$module" $hiedb_position 2>/dev/null | sd '\n(.)' ' $1' | sd 'forall' '\n\nforall' | fmt -w80)
-    info_position=$(echo "$kak_selection_desc" | cut -d ',' -f 1)
-    echo "info -anchor $info_position %{$output}"
   }}
 }
 
@@ -496,6 +434,10 @@ map global "surround" "_"    %{_| sd --flags s '(.*)' '_${1}_'      <ret>} -docs
 map global "surround" "*"    %{_| sd --flags s '(.*)' '*$1*'        <ret>} -docstring " *surround* "
 
 # User mode
+define-command -hidden clipboard-yank %{ execute-keys "<a-|>pbcopy<ret>" }
+define-command -hidden clipboard-paste-after %{ execute-keys "<a-!>pbpaste<ret>" }
+define-command -hidden clipboard-paste-before %{ execute-keys "!pbpaste<ret>" }
+define-command -hidden clipboard-replace %{ execute-keys "|pbpaste<ret>" }
 map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
 map global "user" "p" ": clipboard-paste-after<ret>" -docstring "paste after"
 map global "user" "P" ": clipboard-paste-before<ret>" -docstring "paste before"
@@ -516,23 +458,8 @@ declare-user-mode "haskell"
 map global "user" "h" ": enter-user-mode haskell<ret>" -docstring "haskell..."
 map global "haskell" "l" ": haskell-insert-language-extension<ret>" -docstring "insert language extension"
 map global "haskell" "o" ": haskell-insert-option<ret>" -docstring "insert option"
-map global "haskell" "t" "<esc>: haskell-type-at-point<ret>" -docstring "type at point"
 hook global WinSetOption filetype=haskell %{
   map global "goto" "d" "<esc>: haskell-goto-definition<ret>" -docstring "definition"
-}
-
-################################################################################
-# EVALUATE
-################################################################################
-
-define-command -docstring "evaluate-buffer: evaluate buffer commands as if entered by user" \
-evaluate-buffer %{
-  execute-keys -draft "%: <c-r>.<ret>"
-}
-
-define-command -docstring "evaluate-selection: evaluate selection commands as if entered by user" \
-evaluate-selection %{
-  execute-keys -itersel -draft ": <c-r>.<ret>"
 }
 
 ################################################################################
