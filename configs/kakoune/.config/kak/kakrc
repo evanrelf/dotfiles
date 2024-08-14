@@ -1,7 +1,3 @@
-# TODO: Alias `grep-write` to `gw`, `grep-write-quit` to `gwq`.
-# TODO: Make `write` and `write-quit` behave like `grep-write` and
-# `grep-write-quit` when in a `*grep*` buffer.
-
 ################################################################################
 # INDENTATION
 ################################################################################
