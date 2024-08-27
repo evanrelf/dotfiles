@@ -47,7 +47,7 @@ in
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.kakoune-lsp
-    pkgs.kitty
+    # pkgs.kitty
     pkgs.lima-bin
     pkgs.llm
     pkgs.neovim
@@ -56,7 +56,7 @@ in
     pkgs.nixpkgs-fmt
     pkgs.rebar3
     pkgs.ripgrep
-    pkgs.roc
+    # pkgs.roc
     pkgs.rust-script
     pkgs.rustup
     pkgs.sd
