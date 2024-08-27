@@ -65,6 +65,7 @@ in
     pkgs.tealdeer
     pkgs.tree
     pkgs.universal-ctags
+    pkgs.uv
     pkgs.watchexec
     pkgs.watchman
     pkgs.zigpkgs."0.13.0"
