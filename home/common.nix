@@ -57,6 +57,7 @@ in
     pkgs.rebar3
     pkgs.ripgrep
     # pkgs.roc
+    pkgs.ruff
     pkgs.rust-script
     pkgs.rustup
     pkgs.sd
