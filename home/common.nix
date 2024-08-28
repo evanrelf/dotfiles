@@ -54,6 +54,7 @@ in
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
+    pkgs.python3
     pkgs.rebar3
     pkgs.ripgrep
     # pkgs.roc
