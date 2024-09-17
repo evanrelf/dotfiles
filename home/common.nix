@@ -50,6 +50,7 @@ in
     # pkgs.kitty
     pkgs.lima-bin
     pkgs.llm
+    pkgs.marimo
     pkgs.neovim
     pkgs.nix-direnv
     pkgs.nix-your-shell
