@@ -38,6 +38,7 @@ in
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
     pkgs.graphviz
+    pkgs.gum
     pkgs.helix
     pkgs.home-manager
     pkgs.home-rebuild
