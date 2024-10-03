@@ -1,5 +1,5 @@
 aliases.ab = ['abandon']
-aliases.b = ['branch']
+aliases.b = ['bookmark']
 aliases.c = ['commit']
 aliases.d = ['diff']
 aliases.de = ['diffedit']
@@ -19,7 +19,7 @@ aliases.fetch = ['git', 'fetch']
 aliases.push = ['git', 'push']
 
 aliases.mut = ['--ignore-immutable']
-aliases.here = ['branch', 'move', '--to', 'HEAD@git']
+aliases.here = ['bookmark', 'move', '--to', 'HEAD@git']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 aliases.invert = ['backout', '-d', '@-', '-r']
@@ -37,8 +37,8 @@ ui.allow-filesets = true
 git.auto-local-branch = false
 # Default revset in v0.15.0, made available as an alias
 revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | trunk()'
-revset-aliases.'default_push()' = 'remote_branches(remote=origin)..@'
-revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 2) & remote_branches().. & mine()) | heads(trunk()) | branches()'
+revset-aliases.'default_push()' = 'remote_bookmarks(remote=origin)..@'
+revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 2) & remote_bookmarks().. & mine()) | heads(trunk()) | bookmarks()'
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
 revset-aliases.'common_ancestor(x, y)' = 'latest(::x & ::y)'
 revset-aliases.'first(x, y)' = 'latest(::x & ::y)+ & ::x'
@@ -81,7 +81,7 @@ if(root,
           label(if(empty, "empty"), description_placeholder),
         ),
         if(empty, label("empty", "(empty)")),
-        branches,
+        bookmarks,
         tags,
         working_copies,
         git_head,
