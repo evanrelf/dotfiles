@@ -65,6 +65,7 @@ in
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
+    pkgs.sqlite
     pkgs.starship
     pkgs.tealdeer
     pkgs.tree
