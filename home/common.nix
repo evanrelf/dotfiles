@@ -59,6 +59,7 @@ in
     pkgs.python3
     pkgs.rebar3
     pkgs.ripgrep
+    pkgs.rlwrap
     # pkgs.roc
     pkgs.ruff
     pkgs.rust-script
