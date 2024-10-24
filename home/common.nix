@@ -59,14 +59,13 @@ in
     pkgs.python3
     pkgs.rebar3
     pkgs.ripgrep
-    pkgs.rlwrap
     # pkgs.roc
     pkgs.ruff
     pkgs.rust-script
     pkgs.rustup
     pkgs.sd
     pkgs.shellcheck
-    pkgs.sqlite
+    pkgs.sqlite-interactive
     pkgs.starship
     pkgs.tealdeer
     pkgs.tree
