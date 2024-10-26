@@ -37,6 +37,7 @@ in
     pkgs.gleam
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
+    pkgs.go
     pkgs.graphviz
     pkgs.gum
     pkgs.helix
