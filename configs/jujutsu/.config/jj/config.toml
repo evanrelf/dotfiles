@@ -19,7 +19,7 @@ aliases.fetch = ['git', 'fetch']
 aliases.push = ['git', 'push']
 
 aliases.mut = ['--ignore-immutable']
-aliases.here = ['bookmark', 'move', '--to', 'HEAD@git']
+aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 aliases.invert = ['backout', '-d', '@-', '-r']
@@ -84,7 +84,6 @@ if(root,
         bookmarks,
         tags,
         working_copies,
-        git_head,
       ) ++ "\n",
     ),
   )
