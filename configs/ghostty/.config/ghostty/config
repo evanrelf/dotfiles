@@ -1,13 +1,8 @@
 theme = oksolar-light
 font-family = PragmataPro Mono
-# font-family = Iosevka Term SS08
-# adjust-cell-height = -12%
 font-size = 17
 font-style-bold = false
 font-style-italic = false
 unfocused-split-opacity = 1
 cursor-style-blink = false
 shell-integration-features = no-cursor
-macos-option-as-alt = true
-window-save-state = never
-keybind = global:ctrl+alt+super+enter=toggle_quick_terminal
