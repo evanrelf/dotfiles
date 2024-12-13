@@ -23,6 +23,7 @@ aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 aliases.invert = ['backout', '-d', '@-', '-r']
+aliases.mydiff = ['diff', '--from', 'common_ancestor(@, master@origin)', '--to', '@']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
