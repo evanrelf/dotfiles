@@ -324,6 +324,10 @@ define-command -hidden haskell-goto-definition %{
   }}
 }
 
+hook global BufCreate .*\.persistentmodels %{
+  set-option buffer filetype haskell
+}
+
 ################################################################################
 # MAPPINGS
 ################################################################################
