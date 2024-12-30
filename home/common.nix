@@ -24,7 +24,6 @@ in
     pkgs.direnv
     pkgs.docker-client
     pkgs.duckdb
-    pkgs.erlang
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fish
@@ -34,10 +33,8 @@ in
     pkgs.git
     pkgs.git-confirm-push
     pkgs.git-lookup
-    pkgs.gleam
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
-    pkgs.go
     pkgs.graphviz
     pkgs.gum
     pkgs.helix
@@ -49,19 +46,13 @@ in
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.kakoune-lsp
-    # pkgs.kitty
     pkgs.lima-bin
     pkgs.llm
-    pkgs.marimo
     pkgs.neovim
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
-    pkgs.python3
-    pkgs.rebar3
     pkgs.ripgrep
-    # pkgs.roc
-    pkgs.ruff
     pkgs.rust-script
     pkgs.rustup
     pkgs.sd
@@ -71,10 +62,8 @@ in
     pkgs.tealdeer
     pkgs.tree
     pkgs.universal-ctags
-    pkgs.uv
     pkgs.watchexec
     pkgs.watchman
-    pkgs.zigpkgs."0.13.0"
     pkgs.zoxide
   ];
 
