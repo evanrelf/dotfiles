@@ -26,5 +26,5 @@ Run NixOS in a virtual machine on a Mac. Inspired by
 TODO:
 
 ```
-$ /Applications/VMware\ Fusion.app/Contents/Library/vmrun getGuestIPAddress ~/Virtual\ Machines.localized/NixOS.vmwarevm/NixOS.vmx
+$ /Applications/VMware\ Fusion.app/Contents/Library/vmrun getGuestIPAddress ~/Virtual\ Machines.localized/NixOS.vmwarevm/NixOS.vmx -wait
 ```
