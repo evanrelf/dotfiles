@@ -19,9 +19,9 @@ let
           "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
         ];
 
-        # Bake dependencies into ISO
-        isoImage.storeContents = [ system.config.system.build.toplevel ];
-        isoImage.includeSystemBuildDependencies = true;
+        # Bake dependencies into ISO (makes it HUGE)
+        # isoImage.storeContents = [ system.config.system.build.toplevel ];
+        # isoImage.includeSystemBuildDependencies = true;
         boot.supportedFilesystems = [ "zfs" ];
         system.nixos-generate-config.configuration =
           builtins.replaceStrings [ "@" ] [ "\\@" ] (builtins.readFile config);
