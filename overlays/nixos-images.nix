@@ -19,6 +19,8 @@ let
           "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
         ];
 
+        nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
+
         # Bake dependencies into ISO (makes it HUGE)
         # isoImage.storeContents = [ system.config.system.build.toplevel ];
         # isoImage.includeSystemBuildDependencies = true;

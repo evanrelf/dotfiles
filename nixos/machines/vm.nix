@@ -63,5 +63,7 @@
     ];
   };
 
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
+
   system.stateVersion = "24.11";
 }
