@@ -22,3 +22,9 @@ Run NixOS in a virtual machine on a Mac. Inspired by
         - "Sound Card" > Optionally disable "Connect Sound Card" or click "Remove
           Sound Card"
         - "Camera" > Click "Remove Camera"
+
+TODO:
+
+```
+$ /Applications/VMware\ Fusion.app/Contents/Library/vmrun getGuestIPAddress ~/Virtual\ Machines.localized/NixOS.vmwarevm/NixOS.vmx
+```
