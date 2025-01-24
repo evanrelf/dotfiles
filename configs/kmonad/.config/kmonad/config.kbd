@@ -1,0 +1,10 @@
+(defcfg
+  input (iokit-name)
+  output (kext)
+  fallthrough true)
+
+(defsrc
+  caps)
+
+(deflayer base
+  esc)

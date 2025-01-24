@@ -195,6 +195,30 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1736192527,
+        "narHash": "sha256-s0nfy/exouiq6JdBiOhEvcfK1Nh8d/cVzYB67b36WPI=",
+        "ref": "refs/heads/master",
+        "rev": "25de8837fdd89b5c70bb313188f7430fe29e0c42",
+        "revCount": 900,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad"
+      },
+      "original": {
+        "dir": "nix",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad"
+      }
+    },
     "nixgl": {
       "inputs": {
         "flake-utils": [
@@ -307,6 +331,7 @@
         "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
         "kakoune": "kakoune",
+        "kmonad": "kmonad",
         "nixpkgs": "nixpkgs",
         "roc": "roc",
         "roc2nix": "roc2nix",

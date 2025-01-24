@@ -46,6 +46,7 @@ in
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.kakoune-lsp
+    pkgs.kmonad
     pkgs.lima-bin
     pkgs.llm
     pkgs.neovim
@@ -67,6 +68,41 @@ in
     pkgs.zigpkgs."0.13.0"
     pkgs.zoxide
   ];
+
+  launchd.agents.kmonad = {
+    enable = true;
+    config = {
+      Label = "kmonad";
+      ProgramArguments = [
+        "${pkgs.kmonad}/bin/kmonad"
+        ../configs/kmonad/.config/kmonad/config.kbd
+      ];
+        lib.splitString " " "${pkgs.kmonad}/bin/kmonad --fallthrough";
+      ProcessType = "Interactive";
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardOutPath = "/tmp/kmonad.stdout";
+      StandardErrorPath = "/tmp/kmonad.stderr";
+    };
+  };
+
+  # TODO: Test this on a Linux machine
+  systemd.user.services.kmonad = {
+    Unit = {
+      Description = "KMonad";
+    };
+    Service = {
+      Restart = "always";
+      ExecStart = lib.concatStringsSep " " [
+        "${pkgs.kmonad}/bin/kmonad"
+        ../configs/kmonad/.config/kmonad/config.kbd
+      ];
+      Nice = "-20";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
 
   # Copying font files on Darwin is too slow
   home.activation.copyFonts = lib.mkForce "true";

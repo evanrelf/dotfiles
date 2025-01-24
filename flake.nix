@@ -25,6 +25,10 @@
       url = "github:mawww/kakoune";
       flake = false;
     };
+    kmonad = {
+      url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs";
     roc = {
       url = "github:roc-lang/roc";
@@ -60,6 +64,7 @@
               inputs.fenix.overlays.default
               inputs.ghciwatch-compat.overlays.default
               inputs.haskell-overlay.overlays.default
+              inputs.kmonad.overlays.default
               inputs.zig-overlay.overlays.default
               (import ./overlays/haskell.nix)
               (import ./overlays/roc.nix)
