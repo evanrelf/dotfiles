@@ -1,4 +1,4 @@
-# ./oksolar-light.sh
+# ./oksolar-dark.sh
 palette = 0=#093946
 palette = 1=#f23749
 palette = 2=#819500
@@ -15,8 +15,8 @@ palette = 12=#98a8a8
 palette = 13=#7d80d1
 palette = 14=#8faaab
 palette = 15=#fbf7ef
-background = ffffff
-foreground = 002d38
+background = 002d38
+foreground = f1e9d2
 cursor-color = 8faaab
-selection-background = f1e9d2
-selection-foreground = 002d38
+selection-background = 093946
+selection-foreground = fbf7ef
