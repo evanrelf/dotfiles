@@ -14,11 +14,9 @@ in
   news.display = "silent";
 
   home.packages = [
-    pkgs.babelfish
     pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
-    pkgs.colima
     pkgs.coreutils-gprefix
     pkgs.delta
     pkgs.direnv
@@ -29,7 +27,6 @@ in
     pkgs.fish
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
-    pkgs.gh
     pkgs.git
     pkgs.git-confirm-push
     pkgs.git-lookup
