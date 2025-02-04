@@ -56,6 +56,7 @@ abbr --add --global g git
 abbr --add --global j jj
 abbr --add --global k kak
 abbr --add --global i indigo
+abbr --add --global d docker
 function multicd
     echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 end
