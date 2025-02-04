@@ -11,6 +11,7 @@ let
 in
 pkgs.mkShell {
     packages = [
+        pkgs.cabal-install
         (pkgs.ghc.withPackages (p: with p; [ $argv ]))
         ghciwatch-compat
     ];
