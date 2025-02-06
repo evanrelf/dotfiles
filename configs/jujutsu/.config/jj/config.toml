@@ -28,7 +28,6 @@ aliases.mydiff = ['diff', '--from', 'common_ancestor(@, master@origin)', '--to',
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
-core.fsmonitor = 'watchman'
 ui.default-command = 'status'
 ui.graph.style = 'ascii'
 ui.diff-editor = ':builtin'
