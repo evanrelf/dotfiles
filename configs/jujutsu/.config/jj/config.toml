@@ -24,10 +24,10 @@ aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 aliases.invert = ['backout', '-d', '@-', '-r']
-aliases.mydiff = ['diff', '--from', 'common_ancestor(@, master@origin)', '--to', '@']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
+core.watchman.register_snapshot_trigger = true
 ui.default-command = 'status'
 ui.graph.style = 'ascii'
 ui.diff-editor = ':builtin'
@@ -42,8 +42,8 @@ revset-aliases.'default_log()' = '@ | ancestors(immutable_heads().., 2) | trunk(
 revset-aliases.'default_push()' = 'remote_bookmarks(remote=origin)..@'
 revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 2) & remote_bookmarks().. & mine()) | heads(trunk()) | bookmarks()'
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
-revset-aliases.'common_ancestor(x, y)' = 'latest(::x & ::y)'
-revset-aliases.'first(x, y)' = 'latest(::x & ::y)+ & ::x'
+revset-aliases.'pr(x)' = '::x ~ ::trunk()' # TODO: Choose a better name
+
 templates.log = 'evan_log_oneline'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
 template-aliases.evan_log_oneline = '''
