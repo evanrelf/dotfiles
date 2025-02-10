@@ -14,6 +14,7 @@ in
   news.display = "silent";
 
   home.packages = [
+    pkgs.as-tree
     pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
