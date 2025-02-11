@@ -24,6 +24,7 @@ core.watchman.register_snapshot_trigger = true
 ui.default-command = 'status'
 ui.graph.style = 'ascii'
 ui.diff.format = 'git'
+ui.diff-editor = ':builtin'
 ui.pager = 'delta'
 merge-tools.delta.diff-expected-exit-codes = [0, 1]
 merge-tools.difft.diff-args = ['--color=always', '$left', '$right']
