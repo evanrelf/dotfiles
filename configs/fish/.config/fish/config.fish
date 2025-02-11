@@ -11,6 +11,10 @@ set --global --export JJ_CONFIG "$XDG_CONFIG_HOME/jj/config.toml"
 set --global --export RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/ripgrep/config"
 set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
 set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
+set --global --export DFT_BACKGROUND light
+set --global --export DFT_DISPLAY inline
+set --global --export DFT_SYNTAX_HIGHLIGHT off
+set --global --export DFT_TAB_WIDTH 8
 set --global --export DIRENV_LOG_FORMAT ""
 set --global --export NIXPKGS_ALLOW_UNFREE 1
 set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt

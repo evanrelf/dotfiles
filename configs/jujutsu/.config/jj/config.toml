@@ -2,6 +2,7 @@ aliases.ab = ['abandon']
 aliases.b = ['bookmark']
 aliases.c = ['commit']
 aliases.d = ['diff']
+aliases.dt = ['diff', '--tool', 'difft']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
 aliases.s = ['status']
@@ -24,6 +25,8 @@ ui.default-command = 'status'
 ui.graph.style = 'ascii'
 ui.diff.format = 'git'
 ui.pager = 'delta'
+merge-tools.delta.diff-expected-exit-codes = [0, 1]
+merge-tools.difft.diff-args = ['--color=always', '$left', '$right']
 ui.default-description = "\n"
 ui.allow-filesets = true
 git.auto-local-bookmark = false
