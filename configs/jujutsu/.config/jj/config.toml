@@ -22,12 +22,13 @@ user.email = 'evan@evanrelf.com'
 core.watchman.register_snapshot_trigger = true
 ui.default-command = 'status'
 ui.graph.style = 'ascii'
-ui.diff-editor = ':builtin'
 ui.diff.format = 'git'
 ui.pager = 'delta'
 ui.default-description = "\n"
 ui.allow-filesets = true
 git.auto-local-bookmark = false
+git.push-new-bookmarks = true
+git.subprocess = true
 
 revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 2) & remote_bookmarks().. & mine()) | heads(trunk()) | bookmarks()'
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
