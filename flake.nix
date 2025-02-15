@@ -2,7 +2,6 @@
   description = "dotfiles";
 
   inputs = {
-    crane.url = "github:ipetkov/crane";
     flake-parts.url = "github:hercules-ci/flake-parts";
     ghciwatch-compat = {
       url = "github:evanrelf/ghciwatch-compat";
@@ -32,7 +31,6 @@
             overlays = [
               (_: _: { inherit inputs inputs'; })
               (import ./overlays/evan.nix)
-              (_: _: { crane = inputs.crane.mkLib pkgs; })
               inputs.ghciwatch-compat.overlays.default
               (import ./overlays/haskell.nix)
               (import ./overlays/bash.nix)
