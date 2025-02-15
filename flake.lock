@@ -53,21 +53,6 @@
         "type": "github"
       }
     },
-    "haskell-overlay": {
-      "locked": {
-        "lastModified": 1667282725,
-        "narHash": "sha256-16pHe95ok9q1t9wDDAFGy+1hwIyb3D26a8Fn4DLN0j8=",
-        "owner": "evanrelf",
-        "repo": "haskell-overlay",
-        "rev": "b65c9b30f6db4537264854ab645f4557fa14645b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "evanrelf",
-        "repo": "haskell-overlay",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -136,7 +121,6 @@
         "crane": "crane",
         "flake-parts": "flake-parts",
         "ghciwatch-compat": "ghciwatch-compat",
-        "haskell-overlay": "haskell-overlay",
         "home-manager": "home-manager",
         "kakoune": "kakoune",
         "nixpkgs": "nixpkgs",

@@ -8,7 +8,6 @@
       url = "github:evanrelf/ghciwatch-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    haskell-overlay.url = "github:evanrelf/haskell-overlay";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +34,6 @@
               (import ./overlays/evan.nix)
               (_: _: { crane = inputs.crane.mkLib pkgs; })
               inputs.ghciwatch-compat.overlays.default
-              inputs.haskell-overlay.overlays.default
               (import ./overlays/haskell.nix)
               (import ./overlays/bash.nix)
               (import ./overlays/packages.nix)
