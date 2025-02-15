@@ -28,7 +28,7 @@ hook global InsertDelete " " %{ try %{
 set-option global indentwidth 2
 
 # Indent with 4 spaces in select languages
-hook global WinSetOption filetype=(fish|python|roc|rust|zig) %{
+hook global WinSetOption filetype=(fish|python|rust) %{
   set-option window indentwidth 4
 }
 
@@ -68,11 +68,6 @@ hook global WinSetOption filetype=nix %{
 
 hook global WinSetOption filetype=python %{
   set-option window formatcmd "ruff format --stdin-filename %val{buffile}"
-  hook window BufWritePre .* %{ format-buffer }
-}
-
-hook global WinSetOption filetype=roc %{
-  set-option window formatcmd "roc format --stdin --stdout"
   hook window BufWritePre .* %{ format-buffer }
 }
 
@@ -151,7 +146,7 @@ hook global WinSetOption filetype=haskell %{
   lsp-enable-window
 }
 
-hook global WinSetOption filetype=(roc|rust) %{
+hook global WinSetOption filetype=rust %{
   require-module lsp-init
 }
 

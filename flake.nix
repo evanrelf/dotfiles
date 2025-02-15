@@ -26,22 +26,7 @@
       flake = false;
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
-    roc = {
-      url = "github:roc-lang/roc";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    roc2nix = {
-      url = "github:JRMurr/roc2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.roc.follows = "roc";
-    };
     systems.url = "github:nix-systems/default";
-    zig-overlay = {
-      url = "github:mitchellh/zig-overlay";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -60,9 +45,7 @@
               inputs.fenix.overlays.default
               inputs.ghciwatch-compat.overlays.default
               inputs.haskell-overlay.overlays.default
-              inputs.zig-overlay.overlays.default
               (import ./overlays/haskell.nix)
-              (import ./overlays/roc.nix)
               (import ./overlays/bash.nix)
               (import ./overlays/packages.nix)
               (import ./overlays/kakoune-plugins.nix)
