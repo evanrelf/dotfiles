@@ -3,10 +3,6 @@
 
   inputs = {
     crane.url = "github:ipetkov/crane";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     ghciwatch-compat = {
       url = "github:evanrelf/ghciwatch-compat";
@@ -38,7 +34,6 @@
               (_: _: { inherit inputs inputs'; })
               (import ./overlays/evan.nix)
               (_: _: { crane = inputs.crane.mkLib pkgs; })
-              inputs.fenix.overlays.default
               inputs.ghciwatch-compat.overlays.default
               inputs.haskell-overlay.overlays.default
               (import ./overlays/haskell.nix)
