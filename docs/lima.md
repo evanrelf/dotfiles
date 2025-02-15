@@ -43,7 +43,7 @@ You can tell things have improved if Ctrl-L / `clear` starts working.
 TODO: Come up with a more concise way of doing this bootstrapping.
 
 ```
-[guest]$ nix-shell -p git --run 'nix shell .#{home-manager,home-rebuild} -c home-rebuild switch'
+[guest]$ nix-shell -p git --run 'nix shell .#home-manager -c home-manager --flake .#$(hostname -s) switch'
 ```
 
 or
