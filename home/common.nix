@@ -52,6 +52,7 @@ in
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
     pkgs.ripgrep
+    pkgs.ruff
     pkgs.rust-script
     pkgs.rustup
     pkgs.sd
