@@ -61,6 +61,7 @@ in
     pkgs.tealdeer
     pkgs.tree
     pkgs.universal-ctags
+    pkgs.uv
     pkgs.watchexec
     pkgs.watchman
     pkgs.zoxide
