@@ -55,6 +55,7 @@ in
     pkgs.ruff
     pkgs.rust-script
     pkgs.rustup
+    pkgs.samply
     pkgs.sd
     pkgs.shellcheck
     pkgs.sqlite-interactive
