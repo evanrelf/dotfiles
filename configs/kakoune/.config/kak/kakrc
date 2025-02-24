@@ -405,6 +405,7 @@ map global "surround" "("    %{_| sd --flags s '(.*)' '($1)'        <ret>} -docs
 map global "surround" "["    %{_| sd --flags s '(.*)' '[$1]'        <ret>} -docstring " [surround] "
 map global "surround" "{"    %{_| sd --flags s '(.*)' '{$1}'        <ret>} -docstring " {surround} "
 map global "surround" "<lt>" %{_| sd --flags s '(.*)' '<lt>$1<gt>'  <ret>} -docstring " <surround> "
+map global "surround" "|"    %{_| sd --flags s '(.*)' '|$1|'      <ret>} -docstring "| surround |"
 map global "surround" ")"    %{_| sd --flags s '(.*)' '( $1 )'      <ret>} -docstring "( surround )"
 map global "surround" "]"    %{_| sd --flags s '(.*)' '[ $1 ]'      <ret>} -docstring "[ surround ]"
 map global "surround" "}"    %{_| sd --flags s '(.*)' '{ $1 }'      <ret>} -docstring "{ surround }"
