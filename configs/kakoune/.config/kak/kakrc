@@ -401,23 +401,6 @@ evaluate-commands %sh{
 # Surround mode
 declare-user-mode "surround"
 map global "normal" "'" ": enter-user-mode surround<ret>" -docstring "surround..."
-define-command -hidden surround-delete %{
-  on-key -mode-name "surround-delete" %{ evaluate-commands %sh{
-    case "$kak_key" in
-      "(" | ")" | "[" | "]" | "{" | "}" | "<" | ">" | "<gt>" | "<lt>" | '"' | "'" | '`' )
-        echo "execute-keys 'Z<a-a>${kak_key}<a-S><a-d>z'"
-        ;;
-      "<esc>")
-        exit
-        ;;
-      *)
-        echo "fail 'surround-delete: invalid key'"
-        ;;
-    esac
-  }}
-}
-map global "surround" "d" ": surround-delete<ret>" -docstring "delete"
-map global "surround" "D" "Z<a-S><a-d>z<a-:>H" -docstring "delete (dumb)"
 map global "surround" "("    %{_| sd --flags s '(.*)' '($1)'        <ret>} -docstring " (surround) "
 map global "surround" "["    %{_| sd --flags s '(.*)' '[$1]'        <ret>} -docstring " [surround] "
 map global "surround" "{"    %{_| sd --flags s '(.*)' '{$1}'        <ret>} -docstring " {surround} "
