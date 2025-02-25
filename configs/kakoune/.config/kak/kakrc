@@ -73,7 +73,7 @@ hook global WinSetOption filetype=python %{
 
 hook global WinSetOption filetype=rust %{
   add-highlighter shared/rust/shebang region '^#!' $ fill meta
-  set-option window formatcmd "rustfmt --edition 2021 --emit stdout"
+  set-option window formatcmd "rustfmt --edition 2024 --emit stdout"
   hook window BufWritePre .* %{ format-buffer }
 }
 
