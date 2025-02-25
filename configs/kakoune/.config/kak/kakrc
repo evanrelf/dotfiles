@@ -456,7 +456,7 @@ require-module "byline"
 set-option global startup_info_version 99991231
 
 # Highlight search matches
-add-highlighter global/search-matches dynregex '%reg{/}' 0:black,bright-white+f
+add-highlighter global/search-matches dynregex '%reg{/}' 0:black,white+f
 
 # Highlight matching pairs
 add-highlighter global/show-matching show-matching
