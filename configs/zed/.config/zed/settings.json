@@ -7,6 +7,10 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
   "theme": "macOS Classic Light",
   "vim_mode": true,
   "cursor_blink": false,
