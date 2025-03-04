@@ -61,6 +61,7 @@ in
     pkgs.sqlite-interactive
     pkgs.starship
     pkgs.tealdeer
+    pkgs.tracy
     pkgs.tree
     pkgs.universal-ctags
     pkgs.uv
