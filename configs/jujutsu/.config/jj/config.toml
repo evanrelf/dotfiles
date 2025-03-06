@@ -8,15 +8,15 @@ aliases.ll = ['log', '-r', 'alias_ll()']
 aliases.s = ['status']
 
 aliases.blame = ['file', 'annotate']
-aliases.clone = ['git', 'clone', '--colocate']
 aliases.fetch = ['git', 'fetch']
+aliases.init = ['git', 'init', '--colocate']
 aliases.push = ['git', 'push']
 
 aliases.mut = ['--ignore-immutable']
 aliases.here = ['bookmark', 'set', '-r', '@-']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
-aliases.invert = ['backout', '-d', '@-', '-r']
+aliases.revert = ['backout', '-d', '@-', '-r']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
@@ -29,15 +29,20 @@ ui.pager = 'delta'
 merge-tools.delta.diff-expected-exit-codes = [0, 1]
 merge-tools.difft.diff-args = ['--color=always', '$left', '$right']
 ui.default-description = "\n"
-ui.allow-filesets = true
 git.auto-local-bookmark = false
 git.push-new-bookmarks = true
-git.subprocess = true
 
 revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 2) & remote_bookmarks().. & mine()) | heads(trunk()) | bookmarks()'
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
 revset-aliases.'pr(x)' = '::x ~ ::trunk()' # TODO: Choose a better name
 
+templates.backout_description = '''
+concat(
+  'Revert "' ++ description.first_line() ++ '"' ++ "\n",
+  "\n",
+  "This reverts commit " ++ commit_id ++ ".\n",
+)
+'''
 templates.log = 'evan_log_oneline'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
 template-aliases.evan_log_oneline = '''
