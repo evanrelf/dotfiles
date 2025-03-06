@@ -1,5 +1,4 @@
 source "$__fish_config_dir/home-manager.fish" 2>/dev/null || true
-set --universal fish_features qmark-noglob
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
 set --global --export GHCUP_USE_XDG_DIRS 1
@@ -50,7 +49,7 @@ if command -q zoxide
     zoxide init fish | source
 end
 function fish_user_key_bindings
-    bind \cz 'fg 2>/dev/null; commandline -f repaint'
+    bind ctrl-z 'fg 2>/dev/null; commandline -f repaint'
 end
 alias ls "ls --color=auto"
 alias less "less -RMK"
