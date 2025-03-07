@@ -1,27 +1,10 @@
-# Only lists top-level items (i.e. not indented). That excludes declarations in
-# `impl` blocks, `trait` blocks, `mod` blocks, declarative macros, etc.
 function rstoc
-    if test -n "$argv[1]"
-        # If ripgrep is only given a single file to search as an argument, it
-        # elides its path. I couldn't find an option to always print paths, so
-        # giving it a second file that's always empty works as a hacky
-        # alternative.
-        set --append argv /dev/null
-    end
     set --local match (\
-        rg \
-            --type rust \
-            '^(?:pub(?:\((?:self|super|crate)\))?\s+)?\b(fn|type|enum|union|struct|trait|const|static)\s+\b(\w+)\b' \
-            --replace '$1 $2' \
-            --only-matching \
-            --line-number \
-            --color always \
-            --colors 'path:none' \
-            --colors 'line:none' \
-            --colors 'column:none' \
-            --colors 'match:fg:red' \
-            --line-buffered \
-            $argv \
+        if test -z "$argv"; \
+            command rstoc (fd -e rs); \
+        else; \
+            command rstoc $argv; \
+        end \
         | fzf \
             (string split " " -- $FZF_DEFAULT_OPTS) \
             --ansi \
