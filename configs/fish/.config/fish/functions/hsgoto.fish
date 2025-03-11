@@ -32,5 +32,8 @@ function hsgoto
             ' \
         | cut -d ':' -f 1-3
     )
-    test -n "$match" && "$EDITOR" "$match"
+    if test -n "$match"
+        echo "$match"
+        "$EDITOR" "$match"
+    end
 end
