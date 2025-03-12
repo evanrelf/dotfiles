@@ -16,6 +16,8 @@ let
       hash = "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=";
     };
 
+    # TODO: Audit this, maybe make my own simpler version that also handles 2D
+    # parenthesized coordinates.
     "kak-fetch" = final.fetchFromGitHub {
       owner = "mmlb";
       repo = "kak-fetch";
