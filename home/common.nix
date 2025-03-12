@@ -145,10 +145,13 @@ in
     recursive = true;
   };
 
-  xdg.configFile."kak" = {
-    source = ../configs/kakoune/.config/kak;
-    recursive = true;
-  };
+  home.file.".config/kak/kakrc".source =
+    mutable "configs/kakoune/.config/kak/kakrc";
+
+  # xdg.configFile."kak" = {
+  #   source = ../configs/kakoune/.config/kak;
+  #   recursive = true;
+  # };
 
   xdg.configFile."kak-lsp" = {
     source = ../configs/kakoune/.config/kak-lsp;
