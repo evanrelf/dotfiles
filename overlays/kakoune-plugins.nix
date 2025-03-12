@@ -35,9 +35,7 @@ let
           hash = "sha256-eGxzfbcg31bwoDq+EdAp5peoXTz8e1j+j4neCfuyxxw=";
         })
         (final.writeTextDir "primer-kak-column-color.kak" ''
-          hook -once global KakBegin .* %{
-            declare-option str column_color "rgb:f6f8fa"
-          }
+          declare-option str column_color "rgb:f6f8fa"
         '')
       ];
     };

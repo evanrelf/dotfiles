@@ -41,17 +41,6 @@ hook global WinSetOption filetype=(go|makefile) %{
 # FORMATTING
 ################################################################################
 
-hook global WinSetOption filetype=clojure %sh{
-  echo 'set-option window formatcmd %{zprint "{:search-config? true}"}'
-  if [ "$(uname)" != "Darwin"] || [ "$(command -v zprint)" != "/usr/bin/zprint" ]; then
-    echo 'hook window BufWritePre .* %{ format-buffer }'
-  fi
-}
-
-hook global WinSetOption filetype=dhall %{
-  set-option window formatcmd "dhall format"
-}
-
 hook global WinSetOption filetype=fish %{
   set-option window formatcmd "fish_indent"
   hook window BufWritePre .* %{ format-buffer }
@@ -73,7 +62,7 @@ hook global WinSetOption filetype=python %{
 
 hook global WinSetOption filetype=rust %{
   add-highlighter shared/rust/shebang region '^#!' $ fill meta
-  set-option window formatcmd "rustfmt --edition 2024 --emit stdout"
+  set-option window formatcmd "rustfmt --edition 2024"
   hook window BufWritePre .* %{ format-buffer }
 }
 
@@ -87,7 +76,7 @@ hook global WinSetOption filetype=python %{
 }
 
 hook global WinSetOption filetype=sh %{
-  set-option window lintcmd "shellcheck --external-sources --check-sourced --format gcc"
+  set-option window lintcmd "shellcheck --format gcc"
   hook window BufWritePost .* %{ lint-buffer }
 }
 
@@ -182,7 +171,7 @@ strip %{
 ################################################################################
 
 hook -always global WinCreate .* %{
-  add-highlighter window/number-lines number-lines -hlcursor
+  add-highlighter window/number-lines number-lines
 }
 
 ################################################################################
@@ -220,7 +209,7 @@ hook global WinSetOption filetype=git-commit %{
   autowrap-enable
 }
 
-hook global WinSetOption filetype=jjdescription %{
+hook global WinSetOption filetype=jj-description %{
   add-highlighter window/subject-column column 50 "default,%opt{column_color}"
   set-option window autowrap_column 72
   autowrap-enable
@@ -422,15 +411,6 @@ map global "user" "P" ": clipboard-paste-before<ret>" -docstring "paste before"
 map global "user" "R" ": clipboard-replace<ret>" -docstring "replace"
 map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstring "insert with count"
 
-# Buffer mode
-declare-user-mode "buffer"
-map global "user" "b" ": enter-user-mode buffer<ret>" -docstring "buffer..."
-map global "buffer" "n" ": buffer-next<ret>" -docstring "next buffer"
-map global "buffer" "p" ": buffer-previous<ret>" -docstring "previous buffer"
-map global "buffer" "d" ": delete-buffer<ret>" -docstring "delete buffer"
-map global "buffer" "u" ": buffer *debug*<ret>" -docstring "go to debug buffer"
-map global "buffer" "=" ": format-buffer<ret>" -docstring "format buffer"
-
 # Haskell mode
 declare-user-mode "haskell"
 map global "user" "h" ": enter-user-mode haskell<ret>" -docstring "haskell..."
@@ -467,22 +447,22 @@ alias global "bd!" "delete-buffer!"
 ################################################################################
 
 hook global BufCreate .*\.jjdescription %{
-  set-option buffer filetype jjdescription
+  set-option buffer filetype jj-description
 }
 
-hook global WinSetOption filetype=jjdescription %{
-  require-module jjdescription
+hook global WinSetOption filetype=jj-description %{
+  require-module jj-description
 }
 
-hook -group jjdescription-highlight global WinSetOption filetype=jjdescription %{
-  add-highlighter window/jjdescription ref jjdescription
-  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/jjdescription }
+hook -group jj-description-highlight global WinSetOption filetype=jj-description %{
+  add-highlighter window/jj-description ref jj-description
+  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/jj-description }
 }
 
-provide-module jjdescription %{
+provide-module jj-description %{
 
-add-highlighter shared/jjdescription regions
-add-highlighter shared/jjdescription/code default-region group
-add-highlighter shared/jjdescription/comment region '^JJ:' '$' fill comment
+add-highlighter shared/jj-description regions
+add-highlighter shared/jj-description/code default-region group
+add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 
 }
