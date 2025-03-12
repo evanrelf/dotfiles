@@ -207,11 +207,6 @@ hook global WinCreate .* %{
 # COLUMN
 ################################################################################
 
-hook -once global KakBegin .* %{
-  # evanrelf/primer.kak
-  declare-option str column_color "rgb:f6f8fa"
-}
-
 # By default, the ideal width is 80 columns
 set-option global autowrap_column 80
 

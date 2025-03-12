@@ -23,11 +23,21 @@ let
       hash = "sha256-/rKtuDn3s+rjX+G5osZXjCgJMhdfI5DvtW/SBRkBeVY=";
     };
 
-    "primer-kak" = final.fetchFromGitHub {
-      owner = "evanrelf";
-      repo = "primer.kak";
-      rev = "4c0c1c48de189e1f1a8582c57d89f8008b358430";
-      hash = "sha256-eGxzfbcg31bwoDq+EdAp5peoXTz8e1j+j4neCfuyxxw=";
+    "primer-kak" = final.symlinkJoin {
+      name = "primer-kak";
+      paths = [
+        (final.fetchFromGitHub {
+          owner = "evanrelf";
+          repo = "primer.kak";
+          rev = "4c0c1c48de189e1f1a8582c57d89f8008b358430";
+          hash = "sha256-eGxzfbcg31bwoDq+EdAp5peoXTz8e1j+j4neCfuyxxw=";
+        })
+        (final.writeTextDir "primer-kak-column-color.kak" ''
+          hook -once global KakBegin .* %{
+            declare-option str column_color "rgb:f6f8fa"
+          }
+        '')
+      ];
     };
   };
 
