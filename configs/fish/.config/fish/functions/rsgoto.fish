@@ -15,6 +15,7 @@ function rsgoto
         $argv[2..-1] \
         | fzf \
         (string split " " -- $FZF_DEFAULT_OPTS) \
+        --scheme path \
         --ansi \
         --exit-0 \
         --delimiter ':' \
