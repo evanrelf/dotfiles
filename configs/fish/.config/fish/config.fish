@@ -18,12 +18,12 @@ set --global --export DIRENV_LOG_FORMAT ""
 set --global --export NIXPKGS_ALLOW_UNFREE 1
 set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
 set --global --export NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
-set --universal FZF_LEGACY_KEYBINDINGS 0
-set --universal FZF_DEFAULT_OPTS "--color=light --height=40% --layout=reverse --exact"
-set --universal FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' . \$dir | sed -e 's_^\./__'"
-set --universal FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
-set --universal FZF_FIND_FILE_COMMAND "fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
-set --universal FZF_OPEN_COMMAND "fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
+set --global --export FZF_LEGACY_KEYBINDINGS 0
+set --global --export FZF_DEFAULT_OPTS "--style minimal --color=light --height=40% --layout=reverse --exact"
+set --global --export FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' . \$dir | sed -e 's_^\./__'"
+set --global --export FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
+set --global --export FZF_FIND_FILE_COMMAND "fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
+set --global --export FZF_OPEN_COMMAND "fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
 if test -z "$IN_NIX_SHELL"
     if test (uname) = Darwin
         set --global --export --prepend PATH /opt/homebrew/bin

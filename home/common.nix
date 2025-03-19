@@ -15,6 +15,7 @@ in
 
   home.packages = [
     pkgs.as-tree
+    pkgs.bat
     pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
