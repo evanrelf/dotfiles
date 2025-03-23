@@ -7,20 +7,30 @@ function rstoc
         end \
         | fzf \
             (string split " " -- $FZF_DEFAULT_OPTS) \
+            --scheme 'path' \
             --ansi \
             --exit-0 \
+            --delimiter ':' \
+            --with-nth '1,2,4' \
+            --nth '1,3' \
             --preview '
-                set -l file (echo {} | cut -d ":" -f 1)
-                set -l line (echo {} | cut -d ":" -f 2)
-                awk "
-                    NR >= $line {
-                        print;
-                        count++;
-                        if (count == $FZF_PREVIEW_LINES) exit;
-                    }
-                " $file
+                set -l file {1}
+                set -l line {2}
+                set -l start_line $(math "max(0, $line - 5)")
+                bat \
+                    --number \
+                    --line-range "$start_line:+$FZF_PREVIEW_LINES" \
+                    --highlight-line "$line" \
+                    --theme GitHub \
+                    --color always \
+                    "$file"
             ' \
-        | cut -d ':' -f 1-2
+            --preview-window 'down,75%' \
+            --height '80%' \
+        | cut -d ':' -f 1-3
     )
-    test -n "$match" && "$EDITOR" "$match"
+    if test -n "$match"
+        echo "$match"
+        "$EDITOR" "$match"
+    end
 end
