@@ -116,8 +116,11 @@ in
   xdg.configFile."fish/home-manager.fish".source =
     config.xdg.configFile."fish/config.fish".source;
 
-  xdg.configFile."ghostty" = {
-    source = ../configs/ghostty/.config/ghostty;
+  home.file.".config/ghostty/config".source =
+    mutable "configs/ghostty/.config/ghostty/config";
+
+  xdg.configFile."ghostty/themes" = {
+    source = ../configs/ghostty/.config/ghostty/themes;
     recursive = true;
   };
 
