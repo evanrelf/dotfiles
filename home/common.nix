@@ -140,10 +140,8 @@ in
     recursive = true;
   };
 
-  xdg.configFile."jj" = {
-    source = ../configs/jujutsu/.config/jj;
-    recursive = true;
-  };
+  home.file.".config/jj/config.toml".source =
+    mutable "configs/jujutsu/.config/jj/config.toml";
 
   xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../configs/karabiner/.config/karabiner;
