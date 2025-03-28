@@ -40,6 +40,7 @@ in
     pkgs.helix
     pkgs.home-manager
     pkgs.httpie
+    pkgs.hyperfine
     pkgs.jj-lookup
     pkgs.jq
     pkgs.jujutsu
