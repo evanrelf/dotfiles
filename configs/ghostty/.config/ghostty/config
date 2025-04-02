@@ -6,14 +6,6 @@ font-style-italic = false
 unfocused-split-opacity = 1
 cursor-style-blink = false
 shell-integration-features = no-cursor
-keybind = cmd+h=goto_split:left
-keybind = cmd+j=goto_split:down
-keybind = cmd+k=goto_split:up
-keybind = cmd+l=goto_split:right
-keybind = cmd+shift+h=resize_split:left,100
-keybind = cmd+shift+j=resize_split:down,100
-keybind = cmd+shift+k=resize_split:up,100
-keybind = cmd+shift+l=resize_split:right,100
 keybind = ctrl+s>escape=ignore
 keybind = ctrl+s>c=new_tab
 keybind = ctrl+s>n=next_tab
