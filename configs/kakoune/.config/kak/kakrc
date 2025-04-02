@@ -51,8 +51,22 @@ hook global WinSetOption filetype=go %{
   hook window BufWritePre .* %{ format-buffer }
 }
 
+hook global WinSetOption filetype=haskell %{
+  try %{
+    evaluate-commands %sh{ test -n "$be" || echo "fail" }
+    set-option window formatcmd "be format-haskell --stdin"
+    hook window BufWritePre .* %{ format-buffer }
+  }
+}
+
 hook global WinSetOption filetype=nix %{
-  set-option window formatcmd "nixpkgs-fmt"
+  try %{
+    evaluate-commands %sh{ test -n "$be" || echo "fail" }
+    set-option window formatcmd "be format-nix --stdin"
+    hook window BufWritePre .* %{ format-buffer }
+  } catch %{
+    set-option window formatcmd "nixpkgs-fmt"
+  }
 }
 
 hook global WinSetOption filetype=python %{
