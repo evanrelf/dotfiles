@@ -16,11 +16,10 @@ aliases.mut = ['--ignore-immutable']
 aliases.here = ['bookmark', 'set', '-r', '@-']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
-aliases.revert = ['backout', '-d', '@-', '-r']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
-core.watchman.register_snapshot_trigger = true
+core.watchman.register-snapshot-trigger = true
 ui.default-command = 'status'
 ui.graph.style = 'ascii'
 ui.diff.format = 'git'
