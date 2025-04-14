@@ -16,13 +16,11 @@ let
       hash = "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=";
     };
 
-    # TODO: Audit this, maybe make my own simpler version that also handles 2D
-    # parenthesized coordinates.
-    "kak-fetch" = final.fetchFromGitHub {
-      owner = "mmlb";
-      repo = "kak-fetch";
-      rev = "bf4a28bb9bb68fd2b568996dc5cb939bcabfe36a";
-      hash = "sha256-/rKtuDn3s+rjX+G5osZXjCgJMhdfI5DvtW/SBRkBeVY=";
+    "locus-kak" = final.fetchFromGitHub {
+      owner = "evanrelf";
+      repo = "locus.kak";
+      rev = "e5053300401325ed2cc5c8421fe57e3519d2762b";
+      hash = "sha256-wqlAPhwp7SxOIIv57dYP7ZhOCpPg5CL9yx9gaeHE71g=";
     };
 
     "primer-kak" = final.symlinkJoin {
