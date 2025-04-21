@@ -6,6 +6,21 @@ local fn = { "ctrl", "alt", "cmd" }
 local sfn = { "shift", "ctrl", "alt", "cmd" }
 
 --------------------------------------------------------------------------------
+-- APP SWITCHING
+--------------------------------------------------------------------------------
+
+function focusApp(name)
+  return function()
+    hs.application.launchOrFocus(name)
+  end
+end
+
+hs.hotkey.bind(fn, "1", focusApp("Obsidian"))
+hs.hotkey.bind(fn, "2", focusApp("Firefox"))
+hs.hotkey.bind(fn, "3", focusApp("Ghostty"))
+hs.hotkey.bind(fn, "9", focusApp("Spotify"))
+
+--------------------------------------------------------------------------------
 -- FRAME HISTORY
 --------------------------------------------------------------------------------
 
