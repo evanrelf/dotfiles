@@ -131,10 +131,8 @@ in
     recursive = true;
   };
 
-  xdg.configFile."hammerspoon" = lib.mkIf pkgs.stdenv.isDarwin {
-    source = ../configs/hammerspoon/.config/hammerspoon;
-    recursive = true;
-  };
+  home.file.".config/hammerspoon/init.lua".source =
+    mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
 
   xdg.configFile."helix" = {
     source = ../configs/helix/.config/helix;
