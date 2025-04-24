@@ -17,70 +17,18 @@ pipestatus_segment_format = """([$status]($style))"""
 style = 'red'
 pipestatus = true
 
-[directory]
+[hostname]
 disabled = false
+format = '[$hostname]($style) '
+style = 'green'
+
+[directory]
 format = '[$read_only]($read_only_style)[$path]($style) '
 style = 'blue'
-read_only = ' '
 read_only_style = 'blue'
 truncation_length = 99
 truncate_to_repo = false
 repo_root_style = 'blue underline'
-
-[hg_branch]
-disabled = true
-format = '([hg:$branch]($style)) '
-style = 'blue'
-
-[git_branch]
-disabled = true
-format = '([git:$branch]($style)) '
-style = 'blue'
-only_attached = true
-
-# [custom.jj_change_id]
-# disabled = false
-# command = """
-# jj log --revisions '@' --template 'change_id.shortest(6)' | head -n1 | awk '{print $2}'
-# """
-# detect_folders = ['.jj']
-# format = '[jj:$output]($style) '
-# style = 'blue'
-
-# [custom.jj_status]
-# disabled = false
-# command = """
-# jj log --revisions '@' --template 'if(empty, "", "±")' | head -n1 | awk '{print $2}'
-# """
-# detect_folders = ['.jj']
-# format = '[$output]($style) '
-# style = 'red'
-
-[git_commit]
-disabled = true
-format = '([git:$hash]($style)) '
-style = 'blue'
-only_detached = true
-
-[git_status]
-disabled = true
-format = '([$conflicted$staged$modified$renamed$deleted$untracked$ahead_behind$stashed]($style) )'
-style = ''
-conflicted = '[=$count](magenta)'
-ahead = '[⇡$count](green)'
-behind = '[⇣$count](red)'
-diverged = '[⇡$ahead_count](green)[⇣$behind_count](red)'
-untracked = '[?](red)'
-stashed = '[\$](purple)'
-modified = '[±](red)'
-staged = '[±](yellow)'
-renamed = '[»](red)'
-deleted = '[×](red)'
-
-[git_state]
-disabled = true
-format = '[\($state( $progress_current/$progress_total)\)]($style) '
-style = 'magenta'
 
 [nix_shell]
 disabled = false
@@ -94,17 +42,21 @@ format = '[${symbol}$number]($style) '
 symbol = ' '
 style = 'green'
 
-[username]
-disabled = true
-style_user = 'bright-blue'
-style_root = 'bright-blue'
-format = '[$user]($style)'
-
-[hostname]
-disabled = false
-format = '[$hostname]($style) '
-style = 'green'
-
 [character]
 disabled = false
 format = "[\\$](fg:bright-blue) "
+
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_status]
+disabled = true
+
+[git_state]
+disabled = true
+
+[username]
+disabled = true
