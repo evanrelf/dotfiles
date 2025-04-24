@@ -11,7 +11,7 @@ set --global fish_color_end $fish_color_operator
 set --global fish_color_redirection $fish_color_operator
 set --global fish_color_error red
 set --global fish_color_cancel brblue
-set --global fish_color_comment brblue
+set --global fish_color_comment brblue --italics
 set --global fish_color_autosuggestion brblue
 if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
     set --global man_blink --reverse blue
