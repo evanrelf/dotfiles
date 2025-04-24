@@ -185,7 +185,7 @@ strip %{
 ################################################################################
 
 hook -always global WinCreate .* %{
-  add-highlighter window/number-lines number-lines
+  add-highlighter window/number-lines number-lines -hlcursor
 }
 
 ################################################################################
