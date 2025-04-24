@@ -29,8 +29,8 @@ let
         (final.fetchFromGitHub {
           owner = "evanrelf";
           repo = "primer.kak";
-          rev = "4c0c1c48de189e1f1a8582c57d89f8008b358430";
-          hash = "sha256-eGxzfbcg31bwoDq+EdAp5peoXTz8e1j+j4neCfuyxxw=";
+          rev = "4c64b21fb12d14a0c5d687717f5e767a80cdf7c0";
+          hash = "sha256-nUg/0MBfbcJy6nlSx5gswtsq5F5a9BYOYmprI4SEDYw=";
         })
         (final.writeTextDir "primer-kak-column-color.kak" ''
           declare-option str column_color "rgb:f6f8fa"
