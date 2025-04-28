@@ -23,6 +23,13 @@ let
       hash = "sha256-X8yO8NvKJcnZtd2H5Ws79BkkOBsm3A6jq/VTLSumAEU=";
     };
 
+    "open-github-kak" = final.fetchFromGitHub {
+      owner = "evanrelf";
+      repo = "open-github.kak";
+      rev = "dfdd947f5aaa9dc2794011d712cce54d4d9b9213";
+      hash = "sha256-0FkFT+akDNovFcY8LTC8ANWZjzJjk2q90MXWUjPiWV4=";
+    };
+
     "primer-kak" = final.symlinkJoin {
       name = "primer-kak";
       paths = [
