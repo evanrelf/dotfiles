@@ -456,6 +456,23 @@ alias global "buffer-delete!" "delete-buffer!"
 alias global "bd" "delete-buffer"
 alias global "bd!" "delete-buffer!"
 
+define-command -docstring "github: Open primary selection on GitHub" \
+github %{ evaluate-commands %sh{
+  root=$(git rev-parse --show-toplevel)
+  repo=$(git remote get-url origin | sd '(?:https://|git@)github.com[/:](?<repo>[^/]+/[^.]+)(?:\.git)?' '$repo')
+  rev=$(git rev-parse HEAD)
+  path=$(echo "$kak_buffile" | sd "^$root/" '')
+  anchor_line=$(echo "$kak_selection_desc" | sd '^(?<anchor_line>\d+)\.\d+,\d+\.\d+$' '$anchor_line')
+  cursor_line=$(echo "$kak_selection_desc" | sd '^\d+\.\d+,(?<cursor_line>\d+)\.\d+$' '$cursor_line')
+  if [ "$anchor_line" = "$cursor_line" ]; then
+    line_range="L$anchor_line"
+  else
+    line_range="L$anchor_line-L$cursor_line"
+  fi
+  url="https://github.com/$repo/blob/$rev/$path#$line_range"
+  open "$url"
+}}
+
 ################################################################################
 # JJ
 ################################################################################
