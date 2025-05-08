@@ -27,7 +27,6 @@ ui.diff-editor = ':builtin'
 ui.pager = 'delta'
 merge-tools.delta.diff-expected-exit-codes = [0, 1]
 merge-tools.difft.diff-args = ['--color=always', '$left', '$right']
-ui.default-description = "\n"
 git.auto-local-bookmark = false
 git.push-new-bookmarks = true
 
