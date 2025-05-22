@@ -34,13 +34,6 @@ revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
 revset-aliases.'pr(x)' = '::x ~ ::trunk()' # TODO: Choose a better name
 
-templates.backout_description = '''
-concat(
-  'Revert "' ++ description.first_line() ++ '"' ++ "\n",
-  "\n",
-  "This reverts commit " ++ commit_id ++ ".\n",
-)
-'''
 templates.log = 'evan_log_oneline'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
 template-aliases.evan_log_oneline = '''
