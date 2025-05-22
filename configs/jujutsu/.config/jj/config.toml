@@ -51,29 +51,7 @@ if(root,
       separate(" ",
         format_short_change_id_with_hidden_and_divergent_info(self),
         format_short_commit_id(commit_id),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("second"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" second") ++ label("timestamp", "s"),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("minute"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" minute") ++ label("timestamp", "m"),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("hour"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" hour") ++ label("timestamp", "h"),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("day"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" day") ++ label("timestamp", "d"),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("week"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" week") ++ label("timestamp", "wk"),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("month"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" month") ++ label("timestamp", "mo"),
-        if(
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").ends_with("year"),
-          committer.timestamp().ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" year") ++ label("timestamp", "yr"),
-        committer.timestamp().ago().remove_suffix(" ago"),
-        ))))))),
+        format_log_timestamp(committer.timestamp()),
         if(conflict, label("conflict", "conflict")),
         if(description,
           description.first_line(),
@@ -87,6 +65,31 @@ if(root,
     ),
   )
 )
+'''
+template-aliases.'format_log_timestamp(timestamp)' = '''
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("second"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" second") ++ label("timestamp", "s"),
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("minute"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" minute") ++ label("timestamp", "m"),
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("hour"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" hour") ++ label("timestamp", "h"),
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("day"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" day") ++ label("timestamp", "d"),
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("week"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" week") ++ label("timestamp", "wk"),
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("month"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" month") ++ label("timestamp", "mo"),
+if(
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("year"),
+  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" year") ++ label("timestamp", "yr"),
+timestamp.ago().remove_suffix(" ago"),
+)))))))
 '''
 
 [[--scope]]
