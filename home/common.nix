@@ -36,6 +36,7 @@ in
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
     pkgs.graphviz
+    pkgs.gron
     pkgs.gum
     pkgs.helix
     pkgs.home-manager
