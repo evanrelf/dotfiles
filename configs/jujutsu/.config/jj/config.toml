@@ -29,6 +29,7 @@ merge-tools.delta.diff-expected-exit-codes = [0, 1]
 merge-tools.difft.diff-args = ['--color=always', '$left', '$right']
 git.auto-local-bookmark = false
 git.push-new-bookmarks = true
+git.private-commits = 'subject(glob:"private:*") & mine()'
 signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
