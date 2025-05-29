@@ -47,7 +47,7 @@ in
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.kakoune-lsp
-    pkgs.lima-bin
+    pkgs.lima
     pkgs.llm
     pkgs.moreutils
     pkgs.neovim

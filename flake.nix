@@ -2,7 +2,10 @@
   description = "dotfiles";
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     ghciwatch-compat = {
       url = "github:evanrelf/ghciwatch-compat";
       inputs.nixpkgs.follows = "nixpkgs";
