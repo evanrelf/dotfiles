@@ -96,9 +96,3 @@ timestamp.ago().remove_suffix(" ago"),
 --when.repositories = ["~/Code/MercuryTechnologies"]
 [--scope.core]
 fsmonitor = "watchman"
-[--scope.fix.tools.be-format-haskell]
-command = ["be", "format", "haskell"]
-patterns = ["glob:'**/*.hs'"]
-[--scope.fix.tools.be-format-nix]
-command = ["be", "format", "nix"]
-patterns = ["glob:'**/*.nix'"]
