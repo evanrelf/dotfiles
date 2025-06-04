@@ -73,10 +73,6 @@ in
       };
       useFetchCargoVendor = true;
       cargoHash = "sha256-k0IiMh75TzSq4GkOrfqU7b81s+JqHHQt1gVbAruc4vk=";
-      # TODO: Remove this patch once Nixpkgs is using a newer Rust toolchain.
-      preBuild = ''
-        sed -i 's/edition = "2024"/edition = "2021"/' Cargo.toml
-      '';
     };
 
   rstoc =
@@ -90,9 +86,5 @@ in
       };
       useFetchCargoVendor = true;
       cargoHash = "sha256-nouZia7k8Q1zWBaN+55LE2YsWs96jo727rsCEUQdBok=";
-      # TODO: Remove this patch once Nixpkgs is using a newer Rust toolchain.
-      preBuild = ''
-        sed -i 's/edition = "2024"/edition = "2021"/' Cargo.toml
-      '';
     };
 }
