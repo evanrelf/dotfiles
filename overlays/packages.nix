@@ -62,6 +62,23 @@ in
       '';
     });
 
+  pancase =
+    final.rustPlatform.buildRustPackage rec {
+      name = "pancase";
+      src = final.fetchFromGitHub {
+        owner = "evanrelf";
+        repo = name;
+        rev = "4ea8768fcb1ce335652a49bcb66cd137b410d200";
+        hash = "sha256-TBpTpTcEYIavI2QQXWUAPKRXfv8fXZkeWVeKOFVEpdM=";
+      };
+      useFetchCargoVendor = true;
+      cargoHash = "sha256-k0IiMh75TzSq4GkOrfqU7b81s+JqHHQt1gVbAruc4vk=";
+      # TODO: Remove this patch once Nixpkgs is using a newer Rust toolchain.
+      preBuild = ''
+        sed -i 's/edition = "2024"/edition = "2021"/' Cargo.toml
+      '';
+    };
+
   rstoc =
     final.rustPlatform.buildRustPackage rec {
       name = "rstoc";

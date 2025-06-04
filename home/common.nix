@@ -54,6 +54,7 @@ in
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
+    pkgs.pancase
     pkgs.pandoc
     pkgs.ripgrep
     pkgs.rstoc
