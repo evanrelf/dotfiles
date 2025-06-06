@@ -424,6 +424,10 @@ map global "user" "p" ": clipboard-paste-after<ret>" -docstring "paste after"
 map global "user" "P" ": clipboard-paste-before<ret>" -docstring "paste before"
 map global "user" "R" ": clipboard-replace<ret>" -docstring "replace"
 map global "user" "i" ': execute-keys %val{count}o<lt>backspace><ret>' -docstring "insert with count"
+map global "user" "_" "| pancase snake<ret>" -docstring "snake_case"
+map global "user" "<minus>" "| pancase kebab<ret>" -docstring "kebab-case"
+map global "user" "`" "| pancase camel<ret>" -docstring "camelCase"
+map global "user" "~" "| pancase pascal<ret>" -docstring "PascalCase"
 
 # Haskell mode
 declare-user-mode "haskell"
