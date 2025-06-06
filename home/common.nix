@@ -19,6 +19,7 @@ in
     pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
+    pkgs.claude-code
     pkgs.coreutils-gprefix
     pkgs.delta
     pkgs.difftastic

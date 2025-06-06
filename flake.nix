@@ -30,7 +30,7 @@
         _module.args.pkgs =
           import inputs.nixpkgs {
             localSystem = system;
-            config = { };
+            config = { allowUnfree = true; };
             overlays = [
               (_: _: { inherit inputs inputs'; })
               (import ./overlays/evan.nix)
