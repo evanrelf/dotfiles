@@ -317,7 +317,7 @@ define-command -hidden haskell-goto-definition %{
   }}
 }
 
-hook global BufCreate .*\.persistentmodels %{
+hook global BufCreate .*\.(persistentmodels|yesodroutes) %{
   set-option buffer filetype haskell
 }
 
