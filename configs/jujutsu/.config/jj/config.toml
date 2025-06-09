@@ -31,6 +31,7 @@ git.auto-local-bookmark = false
 git.push-new-bookmarks = true
 git.private-commits = 'subject(glob:"private:*") & mine()'
 git.write-change-id-header = true
+git.push-bookmark-prefix = 'evanrelf/push-'
 signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
