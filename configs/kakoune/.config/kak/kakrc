@@ -321,6 +321,13 @@ hook global BufCreate .*\.(persistentmodels|yesodroutes) %{
   set-option buffer filetype haskell
 }
 
+hook global WinDisplay .*/MercuryTechnologies/\w+/(?<module>[A-Z]\w+(?:\.[A-Z]\w+)*) %{
+  evaluate-commands %sh{
+    file=$(echo "$kak_hook_param_capture_module" | tr '.' '/')
+    echo "try %{ edit -existing src/$file.hs } catch %{ edit -existing test/$file.hs } catch %{}"
+  }
+}
+
 ################################################################################
 # MAPPINGS
 ################################################################################
