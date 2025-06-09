@@ -19,8 +19,8 @@ let
     "locus-kak" = final.fetchFromGitHub {
       owner = "evanrelf";
       repo = "locus.kak";
-      rev = "a5e6228f945df7e398ac0338d5a89d5a24b9221f";
-      hash = "sha256-JDpgmFLuL+JTAOoR9QA8TGJHr/YOxkRU3DJrDZNpkVM=";
+      rev = "afd0679ec1e57d73d59740adadfda7a27ccec1f2";
+      hash = "sha256-/KkkJR6lY9xK6UpKY2P7I3u28A4z0H+QiWbVIIoueVs=";
     };
 
     "open-github-kak" = final.fetchFromGitHub {
