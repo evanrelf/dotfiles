@@ -3,7 +3,7 @@ function hsgoto
         rg \
             --type 'haskell' \
             --multiline \
-            "^ *\b(?<term>$argv[1])\b\s+::|^ *\b(?:type [^=]*|type\s+family [^=]*?|newtype [^=]*?|data [^=]*?|class .*? =>) *\b(?<type>$argv[1])\b" \
+            "^ *\b(?<term>$argv[1])\b\s+::|^ *\b(?:type [^=]*|type\s+family [^=]*?|newtype [^=]*?|data [^=]*?|class (?:.*? =>)?) *\b(?<type>$argv[1])\b" \
             --replace '$term$type' \
             --only-matching \
             --column \
