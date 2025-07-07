@@ -31,7 +31,6 @@ git.auto-local-bookmark = false
 git.push-new-bookmarks = true
 git.private-commits = 'subject(glob:"private:*") & mine()'
 git.write-change-id-header = true
-git.push-bookmark-prefix = 'evanrelf/push-'
 signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
@@ -40,6 +39,7 @@ revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 
 revset-aliases.'alias_ll()' = 'alias_l() | ::@'
 revset-aliases.'pr(x)' = '::x ~ ::trunk()' # TODO: Choose a better name
 
+templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log_oneline'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
 template-aliases.evan_log_oneline = '''
