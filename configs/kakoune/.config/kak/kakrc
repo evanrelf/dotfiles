@@ -84,6 +84,14 @@ hook global WinSetOption filetype=rust %{
 # LINTING
 ################################################################################
 
+hook global WinSetOption filetype=haskell %{
+  try %{
+    evaluate-commands %sh{ test -n "$be" || echo "fail" }
+    set-option window lintcmd "be lint haskell 2>/dev/null"
+    hook window BufWritePost .* %{ lint-buffer }
+  }
+}
+
 hook global WinSetOption filetype=python %{
   set-option window lintcmd "ruff check --preview --output-format concise"
   hook window BufWritePost .* %{ lint-buffer }
