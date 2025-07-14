@@ -15,3 +15,4 @@ unfocused-split-opacity = 1
 maximize = true
 cursor-style-blink = false
 shell-integration-features = no-cursor
+scrollback-limit = 256_000_000
