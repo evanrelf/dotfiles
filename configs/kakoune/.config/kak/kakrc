@@ -53,7 +53,10 @@ hook global WinSetOption filetype=go %{
 
 hook global WinSetOption filetype=haskell %{
   try %{
-    evaluate-commands %sh{ test -n "$be" || echo "fail" }
+    evaluate-commands %sh{
+      test -n "$be" || echo "fail"
+      echo "$kak_buffile" | rg --quiet '.*?\.(?:persistentmodels|yesodroutes)$' && echo "fail"
+    }
     set-option window formatcmd "be format haskell --stdin"
     hook window BufWritePre .* %{ format-buffer }
   }
@@ -86,7 +89,10 @@ hook global WinSetOption filetype=rust %{
 
 hook global WinSetOption filetype=haskell %{
   try %{
-    evaluate-commands %sh{ test -n "$be" || echo "fail" }
+    evaluate-commands %sh{
+      test -n "$be" || echo "fail"
+      echo "$kak_buffile" | rg --quiet '.*?\.(?:persistentmodels|yesodroutes)$' && echo "fail"
+    }
     set-option window lintcmd "be lint haskell 2>/dev/null"
     hook window BufWritePost .* %{ lint-buffer }
   }
