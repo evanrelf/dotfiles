@@ -22,7 +22,6 @@ in
     pkgs.claude-code
     pkgs.coreutils-gprefix
     pkgs.delta
-    pkgs.difftastic
     pkgs.direnv
     pkgs.docker-client
     pkgs.duckdb
