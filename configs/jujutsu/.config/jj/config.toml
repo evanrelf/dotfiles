@@ -1,6 +1,3 @@
-aliases.ab = ['abandon']
-aliases.b = ['bookmark']
-aliases.c = ['commit']
 aliases.d = ['diff']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
