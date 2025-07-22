@@ -1,6 +1,7 @@
 aliases.d = ['diff']
 aliases.l = ['log', '-r', 'alias_l()']
 aliases.ll = ['log', '-r', 'alias_ll()']
+aliases.par = ['parallelize']
 aliases.s = ['status']
 
 aliases.blame = ['file', 'annotate']
