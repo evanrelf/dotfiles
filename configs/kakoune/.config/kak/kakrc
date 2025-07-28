@@ -335,10 +335,19 @@ hook global BufCreate .*\.(persistentmodels|yesodroutes) %{
   set-option buffer filetype haskell
 }
 
-hook global WinDisplay .*/MercuryTechnologies/\w+/(?<module>[A-Z]\w+(?:\.[A-Z]\w+)*) %{
+# TODO: this is broken
+hook global BufNewFile .*/MercuryTechnologies/\w+/(?<module>[A-Z]\w+(?:\.[A-Z]\w+)*) %{
   evaluate-commands %sh{
     file=$(echo "$kak_hook_param_capture_module" | tr '.' '/')
-    echo "try %{ edit -existing src/$file.hs } catch %{ edit -existing test/$file.hs } catch %{}"
+    echo "
+      hook -once buffer NormalIdle .* %{
+        try %{
+          edit -existing src/$file.hs
+        } catch %{
+          edit -existing test/$file.hs
+        } catch %{}
+      }
+    "
   }
 }
 
@@ -504,4 +513,21 @@ add-highlighter shared/jj-description regions
 add-highlighter shared/jj-description/code default-region group
 add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 
+}
+
+# Line and optional column: path/to/file:line[:column][:]
+hook global WinDisplay (?<file>[^:]*?):(?<line>\d+)(?::(?<column>\d+))?:?$ %{
+  evaluate-commands %sh{
+    file=$kak_hook_param_capture_file
+    anchor_line=$kak_hook_param_capture_line
+    anchor_column=$kak_hook_param_capture_column
+    cursor_line=$anchor_line
+    cursor_column=$anchor_column
+    echo "
+      hook -once window NormalIdle .* %{
+        edit -existing $file $anchor_line $anchor_column
+        try %{ select -display-column $anchor_line.$anchor_column,$cursor_line.$cursor_column }
+      }
+    "
+  }
 }

@@ -16,12 +16,12 @@ let
       hash = "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=";
     };
 
-    "locus-kak" = final.fetchFromGitHub {
-      owner = "evanrelf";
-      repo = "locus.kak";
-      rev = "580a5975d2eea779c0c300d0cb42e697ea7edc91";
-      hash = "sha256-nf9iiq2J5vsHm+fwf7RgLLZQJNSMYOpiADePas76ftk=";
-    };
+    # "locus-kak" = final.fetchFromGitHub {
+    #   owner = "evanrelf";
+    #   repo = "locus.kak";
+    #   rev = "580a5975d2eea779c0c300d0cb42e697ea7edc91";
+    #   hash = "sha256-nf9iiq2J5vsHm+fwf7RgLLZQJNSMYOpiADePas76ftk=";
+    # };
 
     "open-github-kak" = final.fetchFromGitHub {
       owner = "evanrelf";
