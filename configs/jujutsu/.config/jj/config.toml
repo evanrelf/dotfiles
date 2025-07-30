@@ -17,7 +17,7 @@ aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 core.watchman.register-snapshot-trigger = true
-ui.default-command = 'status'
+ui.default-command = 'l'
 ui.graph.style = 'ascii'
 ui.diff-formatter = ':git'
 ui.diff-editor = ':builtin'
@@ -60,7 +60,10 @@ if(root,
         working_copies,
       ) ++ "\n",
     ),
-  )
+  ),
+) ++
+if(!description && !empty,
+  diff.summary(),
 )
 '''
 template-aliases.'format_log_timestamp(timestamp)' = '''
