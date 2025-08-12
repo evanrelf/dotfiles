@@ -5,6 +5,7 @@ aliases.par = ['parallelize']
 aliases.s = ['status']
 
 aliases.blame = ['file', 'annotate']
+aliases.clone = ['git', 'clone', '--colocate']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init', '--colocate']
 aliases.push = ['git', 'push']
