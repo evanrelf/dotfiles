@@ -68,7 +68,6 @@ in
     pkgs.starship
     pkgs.tealdeer
     pkgs.tokei
-    pkgs.tracy
     pkgs.tree
     pkgs.universal-ctags
     pkgs.uv
