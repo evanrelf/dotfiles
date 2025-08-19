@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751413152,
-        "narHash": "sha256-Tyw1RjYEsp5scoigs1384gIg6e0GoBVjms4aXFfRssQ=",
+        "lastModified": 1754487366,
+        "narHash": "sha256-pHYj8gUBapuUzKV/kN/tR3Zvqc7o6gdFB9XKXIp1SQ8=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "77826244401ea9de6e3bac47c2db46005e1f30b5",
+        "rev": "af66ad14b28a127c5c0f3bbb298218fc63528a18",
         "type": "github"
       },
       "original": {
@@ -47,11 +47,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752254257,
-        "narHash": "sha256-KZLT0Wmn+XeqbWa1R+jX6FExSKlvxAku6Jm1mdrAnj0=",
+        "lastModified": 1755625756,
+        "narHash": "sha256-t57ayMEdV9g1aCfHzoQjHj1Fh3LDeyblceADm2hsLHM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9d343f08806148605e61af532e36d80ed47cef3e",
+        "rev": "dd026d86420781e84d0732f2fa28e1c051117b59",
         "type": "github"
       },
       "original": {
@@ -63,11 +63,11 @@
     "kakoune": {
       "flake": false,
       "locked": {
-        "lastModified": 1752185065,
-        "narHash": "sha256-V4AJC6GFTaysto821O6AsZXcG/jJeHyCHD6z0OIaFRA=",
+        "lastModified": 1755216338,
+        "narHash": "sha256-PtWinIQzSUCpUG8xOj9gJu0ucS9L7Vd7zMI8LLglzp0=",
         "owner": "mawww",
         "repo": "kakoune",
-        "rev": "2dfa7fda650c978083c6f6432c923e0895dd7cf8",
+        "rev": "2643a7aaa66e7a8506adb9fd137843627a608d4d",
         "type": "github"
       },
       "original": {
@@ -78,11 +78,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1752255416,
-        "narHash": "sha256-QRVx7mT6nmJvgWMdkNm9dG2u7H9Xb+Vckr2lNrt/5uQ=",
+        "lastModified": 1755627574,
+        "narHash": "sha256-CIZElQ8hn8c3ZYn+MUsr767Xrq9mkOtGuzEKZAMRHEs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dbd8150065fefcc92cb9f3fb782f1e9ddfa16fa7",
+        "rev": "bdf155c1ab65087b821207fa1a39fb61420768ee",
         "type": "github"
       },
       "original": {
