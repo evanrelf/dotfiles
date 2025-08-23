@@ -46,7 +46,6 @@ require("lazy").setup({
 })
 
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.colorcolumn = "81"
 vim.opt.showmode = false
 vim.opt.laststatus = 3
