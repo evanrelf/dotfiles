@@ -515,6 +515,39 @@ add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 
 }
 
+################################################################################
+# BUCK2
+################################################################################
+
+hook global BufCreate (:?.*/)?BUCK %{
+  set-option buffer filetype buck2
+}
+
+hook global BufCreate (:?.*/)?\.buckconfig %{
+  set-option buffer filetype ini
+}
+
+hook global WinSetOption filetype=buck2 %{
+  require-module buck2
+}
+
+hook -group buck2-highlight global WinSetOption filetype=buck2 %{
+  add-highlighter window/buck2 ref buck2
+  hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/buck2 }
+}
+
+provide-module buck2 %{
+
+add-highlighter shared/buck2 regions
+add-highlighter shared/buck2/code default-region group
+add-highlighter shared/buck2/comment region '#' '$' fill comment
+
+}
+
+################################################################################
+# TODO
+################################################################################
+
 # Line and optional column: path/to/file:line[:column][:]
 hook global WinDisplay (?<file>[^:]*?):(?<line>\d+)(?::(?<column>\d+))?:?$ %{
   evaluate-commands %sh{
