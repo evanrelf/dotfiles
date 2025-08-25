@@ -159,10 +159,8 @@ in
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
 
-  xdg.configFile."nvim" = {
-    source = ../configs/neovim/.config/nvim;
-    recursive = true;
-  };
+  home.file.".config/nvim/init.lua".source =
+    mutable "configs/neovim/.config/nvim/init.lua";
 
   xdg.configFile."ripgrep" = {
     source = ../configs/ripgrep/.config/ripgrep;
