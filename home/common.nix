@@ -1,9 +1,11 @@
 { config, inputs, lib, pkgs, ... }:
 
 let
+  dotfiles =
+    "${config.home.homeDirectory}/Code/evanrelf/dotfiles";
+
   mutable = path:
-    config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/Code/evanrelf/dotfiles/${path}";
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 
 in
 {
@@ -108,6 +110,7 @@ in
   ];
 
   programs.fish.shellInit = ''
+    set --global --export --prepend PATH "${dotfiles}/bin"
     set --global --export NIX_PATH "nixpkgs=${inputs.nixpkgs}"
   '';
 
