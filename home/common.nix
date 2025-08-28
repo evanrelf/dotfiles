@@ -33,8 +33,6 @@ in
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
     pkgs.git
-    pkgs.git-confirm-push
-    pkgs.git-lookup
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
     pkgs.graphviz
@@ -44,7 +42,6 @@ in
     pkgs.home-manager
     pkgs.httpie
     pkgs.hyperfine
-    pkgs.jj-lookup
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune

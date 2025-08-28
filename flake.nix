@@ -35,7 +35,6 @@
               (_: _: { inherit inputs inputs'; })
               (import ./overlays/evan.nix)
               inputs.ghciwatch-compat.overlays.default
-              (import ./overlays/bash.nix)
               (import ./overlays/packages.nix)
               (import ./overlays/kakoune-plugins.nix)
               (import ./overlays/home-configurations.nix)
