@@ -67,29 +67,30 @@ if(!description && !empty,
   diff.summary(),
 )
 '''
-template-aliases.'format_log_timestamp(timestamp)' = '''
+template-aliases.'ts(timestamp)' = 'timestamp.ago().remove_suffix(" ago").remove_suffix("s")'
+template-aliases.'format_log_timestamp(t)' = '''
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("second"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" second") ++ label("timestamp", "s"),
+  ts(t).ends_with("second"),
+  ts(t).remove_suffix(" second") ++ label("timestamp", "s"),
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("minute"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" minute") ++ label("timestamp", "m"),
+  ts(t).ends_with("minute"),
+  ts(t).remove_suffix(" minute") ++ label("timestamp", "m"),
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("hour"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" hour") ++ label("timestamp", "h"),
+  ts(t).ends_with("hour"),
+  ts(t).remove_suffix(" hour") ++ label("timestamp", "h"),
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("day"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" day") ++ label("timestamp", "d"),
+  ts(t).ends_with("day"),
+  ts(t).remove_suffix(" day") ++ label("timestamp", "d"),
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("week"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" week") ++ label("timestamp", "wk"),
+  ts(t).ends_with("week"),
+  ts(t).remove_suffix(" week") ++ label("timestamp", "wk"),
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("month"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" month") ++ label("timestamp", "mo"),
+  ts(t).ends_with("month"),
+  ts(t).remove_suffix(" month") ++ label("timestamp", "mo"),
 if(
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").ends_with("year"),
-  timestamp.ago().remove_suffix(" ago").remove_suffix("s").remove_suffix(" year") ++ label("timestamp", "yr"),
-timestamp.ago().remove_suffix(" ago"),
+  ts(t).ends_with("year"),
+  ts(t).remove_suffix(" year") ++ label("timestamp", "yr"),
+ts(t),
 )))))))
 '''
 
