@@ -26,8 +26,8 @@ let
     "open-github-kak" = final.fetchFromGitHub {
       owner = "evanrelf";
       repo = "open-github.kak";
-      rev = "dfdd947f5aaa9dc2794011d712cce54d4d9b9213";
-      hash = "sha256-0FkFT+akDNovFcY8LTC8ANWZjzJjk2q90MXWUjPiWV4=";
+      rev = "68d8b185f1d203ed667789389717f14015ddd354";
+      hash = "sha256-jO8eXXG/otxTx9uPms5HmP6WCzaOaqjH62pRsdXM9js=";
     };
 
     "primer-kak" = final.symlinkJoin {
