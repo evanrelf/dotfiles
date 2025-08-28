@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tput bel; afplay /System/Library/Sounds/Sosumi.aiff"
+            "command": "tput bel >/dev/tty; afplay /System/Library/Sounds/Sosumi.aiff"
           }
         ]
       }
