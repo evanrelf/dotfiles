@@ -5,9 +5,9 @@ aliases.par = ['parallelize']
 aliases.s = ['status']
 
 aliases.blame = ['file', 'annotate']
-aliases.clone = ['git', 'clone', '--colocate']
+aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
-aliases.init = ['git', 'init', '--colocate']
+aliases.init = ['git', 'init']
 aliases.push = ['git', 'push']
 
 aliases.mut = ['--ignore-immutable']
@@ -24,6 +24,7 @@ ui.diff-formatter = ':git'
 ui.diff-editor = ':builtin'
 ui.pager = 'delta'
 merge-tools.delta.diff-expected-exit-codes = [0, 1]
+git.colocate = true
 git.auto-local-bookmark = false
 git.push-new-bookmarks = true
 git.private-commits = 'subject(glob:"private:*") & mine()'
