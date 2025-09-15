@@ -27,12 +27,14 @@ in
     pkgs.direnv
     pkgs.docker-client
     pkgs.duckdb
+    pkgs.erlang
     pkgs.fd
     pkgs.findutils-gprefix
     pkgs.fish
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
     pkgs.git
+    pkgs.gleam
     pkgs.gnugrep-gprefix
     pkgs.gnused-gprefix
     pkgs.graphviz
@@ -55,6 +57,7 @@ in
     pkgs.nixpkgs-fmt
     pkgs.pancase
     pkgs.pandoc
+    pkgs.rebar3
     pkgs.ripgrep
     pkgs.rstoc
     pkgs.ruff
