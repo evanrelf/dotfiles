@@ -46,6 +46,11 @@ hook global WinSetOption filetype=fish %{
   hook window BufWritePre .* %{ format-buffer }
 }
 
+hook global WinSetOption filetype=gleam %{
+  set-option window formatcmd "gleam format --stdin"
+  hook window BufWritePre .* %{ format-buffer }
+}
+
 hook global WinSetOption filetype=go %{
   set-option window formatcmd "gofmt"
   hook window BufWritePre .* %{ format-buffer }
