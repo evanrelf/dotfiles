@@ -51,16 +51,16 @@ in
   gnused-gprefix =
     gprefix final.gnused;
 
-  kakoune-unwrapped =
-    prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
-      version = final.inputs.kakoune.shortRev;
-      src = final.inputs.kakoune;
-      patches = [ ];
-      preConfigure = ''
-        ${attrs.preConfigure or ""}
-        export version="${version}"
-      '';
-    });
+  # kakoune-unwrapped =
+  #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
+  #     version = final.inputs.kakoune.shortRev;
+  #     src = final.inputs.kakoune;
+  #     patches = [ ];
+  #     preConfigure = ''
+  #       ${attrs.preConfigure or ""}
+  #       export version="${version}"
+  #     '';
+  #   });
 
   pancase =
     final.rustPlatform.buildRustPackage rec {

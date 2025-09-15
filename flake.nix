@@ -14,10 +14,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kakoune = {
-      url = "github:mawww/kakoune";
-      flake = false;
-    };
+    # kakoune = {
+    #   url = "github:mawww/kakoune";
+    #   flake = false;
+    # };
     nixpkgs.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
   };
