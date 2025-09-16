@@ -510,6 +510,8 @@ alias global "buffer-delete!" "delete-buffer!"
 alias global "bd" "delete-buffer"
 alias global "bd!" "delete-buffer!"
 
+hook global BufOpenFile .* %{ nop %sh{ empath record "$kak_buffile" }}
+
 ################################################################################
 # JJ
 ################################################################################
