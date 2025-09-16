@@ -40,6 +40,8 @@ revset-aliases.'pr(x)' = '::x ~ ::trunk()' # TODO: Choose a better name
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log_oneline'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
+# TODO: `s/conflict/conflicted` label? From v0.33.0
+# https://github.com/jj-vcs/jj/releases/tag/v0.33.0
 template-aliases.evan_log_oneline = '''
 if(root,
   format_root_commit(self),
