@@ -1,4 +1,4 @@
-function rstoc
+function rstoc --wraps rstoc
     set --local match (\
         if test -z "$argv"; \
             command rstoc (fd -e rs); \
