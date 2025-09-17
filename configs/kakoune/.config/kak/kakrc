@@ -510,7 +510,23 @@ alias global "buffer-delete!" "delete-buffer!"
 alias global "bd" "delete-buffer"
 alias global "bd!" "delete-buffer!"
 
+################################################################################
+# EMPATH
+################################################################################
+
 hook global BufOpenFile .* %{ nop %sh{ empath record "$kak_buffile" }}
+
+define-command edit-recent -params 1.. %{ edit %arg{@} }
+
+complete-command edit-recent shell-script-candidates "empath mru"
+
+alias global "er" "edit-recent"
+
+define-command edit-frequent -params 1.. %{ edit %arg{@} }
+
+complete-command edit-frequent shell-script-candidates "empath mfu"
+
+alias global "ef" "edit-frequent"
 
 ################################################################################
 # JJ
