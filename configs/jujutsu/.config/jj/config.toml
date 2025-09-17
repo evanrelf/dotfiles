@@ -17,7 +17,6 @@ aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
-fsmonitor.watchman.register-snapshot-trigger = true
 ui.default-command = 'l'
 ui.graph.style = 'ascii'
 ui.diff-formatter = ':git'
@@ -96,8 +95,3 @@ if(
 ts(t),
 )))))))
 '''
-
-[[--scope]]
---when.repositories = ["~/Code/MercuryTechnologies"]
-[--scope.fsmonitor]
-backend = "watchman"
