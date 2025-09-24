@@ -21,7 +21,6 @@ in
     pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
-    pkgs.claude-code
     pkgs.coreutils-gprefix
     pkgs.delta
     pkgs.direnv
@@ -49,7 +48,6 @@ in
     pkgs.kakoune
     pkgs.kakoune-lsp
     pkgs.lima
-    pkgs.llm
     pkgs.moreutils
     pkgs.neovim
     pkgs.nix-direnv
@@ -80,9 +78,6 @@ in
 
   # Copying font files on Darwin is too slow
   home.activation.copyFonts = lib.mkForce "true";
-
-  home.file.".claude/settings.json".source =
-    mutable "configs/claude/.claude/settings.json";
 
   xdg.configFile."direnv" = {
     source = ../configs/direnv/.config/direnv;
