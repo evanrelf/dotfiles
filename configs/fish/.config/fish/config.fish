@@ -54,6 +54,7 @@ end
 alias ls "ls --color=auto"
 alias less "less -RMK"
 alias :q exit
+alias beep "tput bel >/dev/tty; afplay --time 0.2 /System/Library/Sounds/Sosumi.aiff"
 set --global fish_greeting ""
 abbr --add --global g git
 abbr --add --global j jj
