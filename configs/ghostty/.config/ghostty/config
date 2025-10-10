@@ -1,5 +1,4 @@
 theme = light:oksolar-light,dark:oksolar-dark
-
 font-family = PragmataPro VF Liga
 font-style = Regular
 font-size = 17
@@ -10,8 +9,8 @@ font-variation-italic = wght=400
 font-variation-bold-italic = wght=600
 # https://fsd.it/pragmatapro/Handbook.png
 font-feature = +ss13
-
 unfocused-split-opacity = 1
+bell-features = border
 maximize = true
 cursor-style-blink = false
 shell-integration-features = no-cursor
