@@ -13,6 +13,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "nvim-mini/mini.nvim",
+    version = false,
+    config = function()
+      require("mini.comment").setup()
+      require("mini.pairs").setup()
+      require('mini.trailspace').setup()
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
