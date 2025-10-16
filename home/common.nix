@@ -50,7 +50,6 @@ in
     pkgs.lima
     pkgs.mergiraf
     pkgs.moreutils
-    pkgs.neovim
     pkgs.nix-direnv
     pkgs.nix-your-shell
     pkgs.nixpkgs-fmt
@@ -160,9 +159,6 @@ in
 
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
-
-  home.file.".config/nvim/init.lua".source =
-    mutable "configs/neovim/.config/nvim/init.lua";
 
   xdg.configFile."ripgrep" = {
     source = ../configs/ripgrep/.config/ripgrep;
