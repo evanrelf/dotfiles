@@ -22,6 +22,7 @@ ui.default-command = 'l'
 ui.graph.style = 'ascii'
 ui.diff-formatter = ':git'
 ui.diff-editor = ':builtin'
+ui.merge-editor = 'mergiraf'
 ui.pager = 'delta'
 merge-tools.delta.diff-expected-exit-codes = [0, 1]
 git.colocate = true
