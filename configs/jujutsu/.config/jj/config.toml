@@ -9,6 +9,7 @@ aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init']
 aliases.push = ['git', 'push']
+aliases.remote = ['git', 'remote']
 
 aliases.mut = ['--ignore-immutable']
 aliases.here = ['bookmark', 'set', '-r', '@-']
