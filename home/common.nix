@@ -48,6 +48,7 @@ in
     pkgs.kakoune
     pkgs.kakoune-lsp
     pkgs.lima
+    pkgs.mergiraf
     pkgs.moreutils
     pkgs.neovim
     pkgs.nix-direnv
