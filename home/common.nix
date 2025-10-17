@@ -39,7 +39,6 @@ in
     pkgs.graphviz
     pkgs.gron
     pkgs.gum
-    pkgs.helix
     pkgs.home-manager
     pkgs.httpie
     pkgs.hyperfine
@@ -135,11 +134,6 @@ in
 
   home.file.".config/hammerspoon/init.lua".source =
     mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
-
-  xdg.configFile."helix" = {
-    source = ../configs/helix/.config/helix;
-    recursive = true;
-  };
 
   home.file.".config/jj/config.toml".source =
     mutable "configs/jujutsu/.config/jj/config.toml";
