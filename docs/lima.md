@@ -17,9 +17,7 @@ it doesn't work with the `vz` VM type, at the time of writing.
 
 ## Install Nix
 
-Copy install command from Determinate Systems' [nix-installer] repo.
-
-[nix-installer]: https://github.com/DeterminateSystems/nix-installer#readme
+Copy install command from the [Lix website](https://lix.systems/install/).
 
 Then, add yourself as a trusted user:
 
