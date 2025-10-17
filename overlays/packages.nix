@@ -1,8 +1,6 @@
 final: prev:
 
 let
-  inherit (final.evan.lib) checkVersion;
-
   gprefix = drv:
     final.runCommandLocal "gprefix-${drv.name}" { } ''
       mkdir -p "$out/bin"
@@ -27,23 +25,6 @@ in
 
   gawkInteractive-gprefix =
     gprefix final.gawkInteractive;
-
-  # ghciwatch =
-  #   let version = "0.5.16"; in
-  #   (checkVersion version prev.ghciwatch).overrideAttrs (attrs: rec {
-  #     inherit version;
-  #     src = final.fetchFromGitHub {
-  #       owner = "MercuryTechnologies";
-  #       repo = "ghciwatch";
-  #       rev = "release/${version}";
-  #       hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-  #     };
-  #     cargoDeps = attrs.cargoDeps.overrideAttrs (final.lib.const {
-  #       name = "${attrs.pname}-${version}-vendor.tar.gz";
-  #       inherit src;
-  #       outputHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-  #     });
-  #   });
 
   gnugrep-gprefix =
     gprefix final.gnugrep;
