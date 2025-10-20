@@ -10,7 +10,6 @@ font-variation-bold-italic = wght=600
 # https://fsd.it/pragmatapro/Handbook.png
 font-feature = +ss13
 unfocused-split-opacity = 1
-bell-features = border
 maximize = true
 cursor-style-blink = false
 shell-integration-features = no-cursor
