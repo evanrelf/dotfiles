@@ -21,6 +21,7 @@ in
     pkgs.cargo-edit
     pkgs.cargo-limit
     pkgs.cargo-watch
+    pkgs.codex
     pkgs.coreutils-gprefix
     pkgs.delta
     pkgs.direnv

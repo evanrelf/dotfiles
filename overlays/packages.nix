@@ -24,6 +24,18 @@ let
 
 in
 {
+  codex =
+    prev.codex.overrideAttrs (attrs: {
+      patches = (attrs.patches or [ ]) ++ [
+        # Add Ctrl-N and Ctrl-P as aliases for Up and Down
+        (final.fetchpatch {
+          url = "https://github.com/openai/codex/pull/1994.diff";
+          hash = "sha256-D4RszYfXaVslZm3UeymPr+DKI8leEmnfW8lxf7XNmPY=";
+          relative = "codex-rs";
+        })
+      ];
+    });
+
   coreutils-gprefix =
     (prev.coreutils.override {
       singleBinary = false;
