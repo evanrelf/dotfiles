@@ -28,6 +28,7 @@ in
     pkgs.direnv
     pkgs.docker-client
     pkgs.duckdb
+    pkgs.empath
     pkgs.erlang
     pkgs.fd
     pkgs.findutils-gprefix
