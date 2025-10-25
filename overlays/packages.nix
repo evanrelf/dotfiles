@@ -50,8 +50,8 @@ in
       src = final.fetchFromGitHub {
         owner = "evanrelf";
         repo = name;
-        rev = "ac5d0ef1de447c55a038254c55cb6fd76504263b";
-        hash = "sha256-/kfjpnbf3SJAzA/ZPIjmSeYbpPnpBOzGS4eq0J4fSGE=";
+        rev = "4b8557fd20ced7cd379b6c43a1cfe91c99486880";
+        hash = "sha256-IKYQtDwt6f7Y76xxgLVkqU/mAW+mHMjxtI+EPfnVRsY=";
       };
       cargoHash = "sha256-nUUs+51ugEtT3bZZQ7Xy/g4dxAJQeNiKtHy7JMrHAr4=";
     };
