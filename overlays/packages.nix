@@ -22,6 +22,13 @@ let
       ln -s ${drv}/share "$out/share"
     '';
 
+  rust = name:
+    final.rustPlatform.buildRustPackage (attrs: {
+      inherit name;
+      src = final.inputs.${name}.outPath;
+      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
+    });
+
 in
 {
   codex =
@@ -45,16 +52,7 @@ in
     });
 
   empath =
-    final.rustPlatform.buildRustPackage (attrs: {
-      name = "empath";
-      src = final.fetchFromGitHub {
-        owner = "evanrelf";
-        repo = attrs.name;
-        rev = final.inputs.empath.rev;
-        hash = final.inputs.empath.narHash;
-      };
-      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
-    });
+    rust "empath";
 
   findutils-gprefix =
     gprefix final.findutils;
@@ -80,26 +78,8 @@ in
   #   });
 
   pancase =
-    final.rustPlatform.buildRustPackage (attrs: {
-      name = "pancase";
-      src = final.fetchFromGitHub {
-        owner = "evanrelf";
-        repo = attrs.name;
-        rev = final.inputs.pancase.rev;
-        hash = final.inputs.pancase.narHash;
-      };
-      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
-    });
+    rust "pancase";
 
   rstoc =
-    final.rustPlatform.buildRustPackage (attrs: {
-      name = "rstoc";
-      src = final.fetchFromGitHub {
-        owner = "evanrelf";
-        repo = attrs.name;
-        rev = final.inputs.rstoc.rev;
-        hash = final.inputs.rstoc.narHash;
-      };
-      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
-    });
+    rust "rstoc";
 }
