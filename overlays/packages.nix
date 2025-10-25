@@ -45,16 +45,16 @@ in
     });
 
   empath =
-    final.rustPlatform.buildRustPackage rec {
+    final.rustPlatform.buildRustPackage (attrs: {
       name = "empath";
       src = final.fetchFromGitHub {
         owner = "evanrelf";
-        repo = name;
+        repo = attrs.name;
         rev = "4b8557fd20ced7cd379b6c43a1cfe91c99486880";
         hash = "sha256-IKYQtDwt6f7Y76xxgLVkqU/mAW+mHMjxtI+EPfnVRsY=";
       };
-      cargoHash = "sha256-nUUs+51ugEtT3bZZQ7Xy/g4dxAJQeNiKtHy7JMrHAr4=";
-    };
+      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
+    });
 
   findutils-gprefix =
     gprefix final.findutils;
@@ -80,26 +80,26 @@ in
   #   });
 
   pancase =
-    final.rustPlatform.buildRustPackage rec {
+    final.rustPlatform.buildRustPackage (attrs: {
       name = "pancase";
       src = final.fetchFromGitHub {
         owner = "evanrelf";
-        repo = name;
+        repo = attrs.name;
         rev = "4ea8768fcb1ce335652a49bcb66cd137b410d200";
         hash = "sha256-TBpTpTcEYIavI2QQXWUAPKRXfv8fXZkeWVeKOFVEpdM=";
       };
-      cargoHash = "sha256-k0IiMh75TzSq4GkOrfqU7b81s+JqHHQt1gVbAruc4vk=";
-    };
+      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
+    });
 
   rstoc =
-    final.rustPlatform.buildRustPackage rec {
+    final.rustPlatform.buildRustPackage (attrs: {
       name = "rstoc";
       src = final.fetchFromGitHub {
         owner = "evanrelf";
-        repo = name;
+        repo = attrs.name;
         rev = "c21dbb053977aaa0efbaf657be2638a47ff49331";
         hash = "sha256-3VTklzizavdg6ZOkTxjaMFP2lHLfZLncz7Oh1Y6T3xY=";
       };
-      cargoHash = "sha256-nouZia7k8Q1zWBaN+55LE2YsWs96jo727rsCEUQdBok=";
-    };
+      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
+    });
 }
