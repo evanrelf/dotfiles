@@ -16,6 +16,10 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
+
+    empath = { url = "github:evanrelf/empath"; flake = false; };
+    pancase = { url = "github:evanrelf/pancase"; flake = false; };
+    rstoc = { url = "github:evanrelf/rstoc"; flake = false; };
   };
 
   outputs = inputs@{ flake-parts, ... }:

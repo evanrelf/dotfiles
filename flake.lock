@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "empath": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761353516,
+        "narHash": "sha256-IKYQtDwt6f7Y76xxgLVkqU/mAW+mHMjxtI+EPfnVRsY=",
+        "owner": "evanrelf",
+        "repo": "empath",
+        "rev": "4b8557fd20ced7cd379b6c43a1cfe91c99486880",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "empath",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -75,13 +91,48 @@
         "type": "github"
       }
     },
+    "pancase": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1749074711,
+        "narHash": "sha256-TBpTpTcEYIavI2QQXWUAPKRXfv8fXZkeWVeKOFVEpdM=",
+        "owner": "evanrelf",
+        "repo": "pancase",
+        "rev": "4ea8768fcb1ce335652a49bcb66cd137b410d200",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "pancase",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "empath": "empath",
         "flake-parts": "flake-parts",
         "ghciwatch-compat": "ghciwatch-compat",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "pancase": "pancase",
+        "rstoc": "rstoc",
         "systems": "systems"
+      }
+    },
+    "rstoc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741388610,
+        "narHash": "sha256-3VTklzizavdg6ZOkTxjaMFP2lHLfZLncz7Oh1Y6T3xY=",
+        "owner": "evanrelf",
+        "repo": "rstoc",
+        "rev": "c21dbb053977aaa0efbaf657be2638a47ff49331",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "rstoc",
+        "type": "github"
       }
     },
     "systems": {
