@@ -77,6 +77,9 @@ in
   #     '';
   #   });
 
+  lch =
+    rust "lch";
+
   pancase =
     rust "pancase";
 

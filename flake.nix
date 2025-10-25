@@ -19,6 +19,7 @@
 
     # Rust programs
     empath = { url = "github:evanrelf/empath"; flake = false; };
+    lch = { url = "github:evanrelf/lch"; flake = false; };
     pancase = { url = "github:evanrelf/pancase"; flake = false; };
     rstoc = { url = "github:evanrelf/rstoc"; flake = false; };
 

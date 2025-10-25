@@ -50,6 +50,7 @@ in
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.kakoune-lsp
+    pkgs.lch
     pkgs.lima
     pkgs.mergiraf
     pkgs.moreutils
@@ -62,7 +63,6 @@ in
     pkgs.ripgrep
     pkgs.rstoc
     pkgs.ruff
-    pkgs.rust-script
     pkgs.rustup
     pkgs.samply
     pkgs.sd

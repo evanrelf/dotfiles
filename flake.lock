@@ -108,6 +108,22 @@
         "type": "github"
       }
     },
+    "lch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761439794,
+        "narHash": "sha256-IEe2z/1+19+lT3cKcV4vnBHX29QObYiIHcA89I1Vdc4=",
+        "owner": "evanrelf",
+        "repo": "lch",
+        "rev": "0dbc059825f9ff4d8ec205778c4815da33da4f9e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "lch",
+        "type": "github"
+      }
+    },
     "locus-kak": {
       "flake": false,
       "locked": {
@@ -195,6 +211,7 @@
         "flake-parts": "flake-parts",
         "ghciwatch-compat": "ghciwatch-compat",
         "home-manager": "home-manager",
+        "lch": "lch",
         "locus-kak": "locus-kak",
         "nixpkgs": "nixpkgs",
         "open-github-kak": "open-github-kak",
