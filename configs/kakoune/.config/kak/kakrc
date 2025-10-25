@@ -495,6 +495,10 @@ hook global WinSetOption filetype=haskell %{
 # evanrelf/byline.kak
 require-module "byline"
 
+set-option -add global ui_options terminal_status_on_top=true
+set-option -add global ui_options terminal_assistant=cat
+set-option -add global ui_options terminal_padding_char=
+
 # Don't show changelog on startup
 set-option global startup_info_version 99991231
 
