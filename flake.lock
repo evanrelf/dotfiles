@@ -1,5 +1,37 @@
 {
   "nodes": {
+    "better-haskell-kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1715643558,
+        "narHash": "sha256-X3v/8zNM8zauWSryGs4xh7nI2wBNaVqSkLCVItRDnPA=",
+        "owner": "evanrelf",
+        "repo": "better-haskell.kak",
+        "rev": "069690575aa92e34338d8102594f797c1e1fa41a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "better-haskell.kak",
+        "type": "github"
+      }
+    },
+    "byline-kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677472609,
+        "narHash": "sha256-Aa0UnioD20HfGiTtC7Tmbs+xYgaytz3pUsXQWkzrLYg=",
+        "owner": "evanrelf",
+        "repo": "byline.kak",
+        "rev": "a27d109b776c60e11752eeb3207c989a5e157fc0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "byline.kak",
+        "type": "github"
+      }
+    },
     "empath": {
       "flake": false,
       "locked": {
@@ -76,6 +108,22 @@
         "type": "github"
       }
     },
+    "locus-kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750097292,
+        "narHash": "sha256-nf9iiq2J5vsHm+fwf7RgLLZQJNSMYOpiADePas76ftk=",
+        "owner": "evanrelf",
+        "repo": "locus.kak",
+        "rev": "580a5975d2eea779c0c300d0cb42e697ea7edc91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "locus.kak",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1760979402,
@@ -88,6 +136,22 @@
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "open-github-kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756399094,
+        "narHash": "sha256-jO8eXXG/otxTx9uPms5HmP6WCzaOaqjH62pRsdXM9js=",
+        "owner": "evanrelf",
+        "repo": "open-github.kak",
+        "rev": "68d8b185f1d203ed667789389717f14015ddd354",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "open-github.kak",
         "type": "github"
       }
     },
@@ -107,14 +171,35 @@
         "type": "github"
       }
     },
+    "primer-kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745472901,
+        "narHash": "sha256-nUg/0MBfbcJy6nlSx5gswtsq5F5a9BYOYmprI4SEDYw=",
+        "owner": "evanrelf",
+        "repo": "primer.kak",
+        "rev": "4c64b21fb12d14a0c5d687717f5e767a80cdf7c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "primer.kak",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "better-haskell-kak": "better-haskell-kak",
+        "byline-kak": "byline-kak",
         "empath": "empath",
         "flake-parts": "flake-parts",
         "ghciwatch-compat": "ghciwatch-compat",
         "home-manager": "home-manager",
+        "locus-kak": "locus-kak",
         "nixpkgs": "nixpkgs",
+        "open-github-kak": "open-github-kak",
         "pancase": "pancase",
+        "primer-kak": "primer-kak",
         "rstoc": "rstoc",
         "systems": "systems"
       }

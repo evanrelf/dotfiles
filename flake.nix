@@ -17,9 +17,17 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
 
+    # Rust programs
     empath = { url = "github:evanrelf/empath"; flake = false; };
     pancase = { url = "github:evanrelf/pancase"; flake = false; };
     rstoc = { url = "github:evanrelf/rstoc"; flake = false; };
+
+    # Kakoune plugins
+    better-haskell-kak = { url = "github:evanrelf/better-haskell.kak"; flake = false; };
+    byline-kak = { url = "github:evanrelf/byline.kak"; flake = false; };
+    locus-kak = { url = "github:evanrelf/locus.kak"; flake = false; };
+    open-github-kak = { url = "github:evanrelf/open-github.kak"; flake = false; };
+    primer-kak = { url = "github:evanrelf/primer.kak"; flake = false; };
   };
 
   outputs = inputs@{ flake-parts, ... }:
