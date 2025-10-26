@@ -25,9 +25,9 @@ green="rgb:819500"
 black="$base03"
 white="rgb:ffffff"
 
-lighten() { echo "$1" | hsl l % 160 | hsl s % 75; }
+darken() { echo "$1" | hsl l % 80 | hsl s % 150; }
 
-light_base2=$(lighten $base2)
+lighten() { echo "$1" | hsl l % 160 | hsl s % 75; }
 
 # light_yellow=$(lighten $yellow)
 # light_orange=$(lighten $orange)
@@ -65,22 +65,37 @@ set-face global bold               $(c default default b)
 set-face global italic             $(c default default i)
 set-face global mono               $(c default default)
 set-face global block              $(c default default)
-set-face global link               $(c default default u)
+set-face global link               $(c $blue default u)
 set-face global bullet             $(c default default)
 set-face global list               $(c default default)
 
-# Markup
+# # Markup (colorful)
+# set-face global value              $(c $blue default)
+# set-face global type               $(c $blue default)
+# set-face global variable           $(c $blue default)
+# set-face global module             $(c $purple default)
+# set-face global function           $(c $purple default)
+# set-face global string             $(c $yellow default)
+# set-face global keyword            $(c $red default b)
+# set-face global operator           $(c $orange default)
+# set-face global attribute          $(c $green default)
+# set-face global comment            $(c $base0 default i)
+# set-face global documentation      $(c $base0 default i)
+# set-face global meta               $(c $orange default)
+# set-face global builtin            $(c $red default)
+
+# Markup (minimal)
 set-face global value              $(c $blue default)
 set-face global type               $(c default default)
 set-face global variable           $(c default default)
 set-face global module             $(c default default)
 set-face global function           $(c default default)
 set-face global string             $(c $yellow default)
-set-face global keyword            $(c default default)
+set-face global keyword            $(c default default b)
 set-face global operator           $(c default default)
 set-face global attribute          $(c default default)
 set-face global comment            $(c $base0 default i)
-set-face global documentation      $(c default default)
+set-face global documentation      $(c $base0 default i)
 set-face global meta               $(c default default)
 set-face global builtin            $(c default default)
 
