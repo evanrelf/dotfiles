@@ -515,7 +515,7 @@ hook global WinSetOption filetype=haskell %{
 require-module "byline"
 
 set-option -add global ui_options terminal_status_on_top=true
-set-option -add global ui_options terminal_assistant=cat
+set-option -add global ui_options terminal_assistant=none
 set-option -add global ui_options terminal_padding_char=
 
 # Don't show changelog on startup
@@ -537,9 +537,7 @@ alias global "bd!" "delete-buffer!"
 # EMPATH
 ################################################################################
 
-hook global BufOpenFile .* %{ nop %sh{
-  empath record "$kak_buffile" >/dev/null 2>&1 || true
-}}
+hook global BufOpenFile .* %{ try %sh{ empath record "$kak_buffile" }}
 
 ################################################################################
 # JJ
