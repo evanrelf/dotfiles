@@ -187,22 +187,6 @@
         "type": "github"
       }
     },
-    "primer-kak": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1745472901,
-        "narHash": "sha256-nUg/0MBfbcJy6nlSx5gswtsq5F5a9BYOYmprI4SEDYw=",
-        "owner": "evanrelf",
-        "repo": "primer.kak",
-        "rev": "4c64b21fb12d14a0c5d687717f5e767a80cdf7c0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "evanrelf",
-        "repo": "primer.kak",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "better-haskell-kak": "better-haskell-kak",
@@ -216,7 +200,6 @@
         "nixpkgs": "nixpkgs",
         "open-github-kak": "open-github-kak",
         "pancase": "pancase",
-        "primer-kak": "primer-kak",
         "rstoc": "rstoc",
         "systems": "systems"
       }

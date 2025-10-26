@@ -13,17 +13,6 @@ let
 
     open-github-kak =
       final.inputs.open-github-kak.outPath;
-
-    primer-kak =
-      final.symlinkJoin {
-        name = "primer-kak";
-        paths = [
-          final.inputs.primer-kak.outPath
-          (final.writeTextDir "primer-kak-column-color.kak" ''
-            declare-option str column_color "rgb:f6f8fa"
-          '')
-        ];
-      };
   };
 
 in

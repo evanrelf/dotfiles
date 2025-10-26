@@ -150,6 +150,9 @@ in
   home.file.".config/kak/kakrc".source =
     mutable "configs/kakoune/.config/kak/kakrc";
 
+  home.file.".config/kak/colors".source =
+    mutable "configs/kakoune/.config/kak/colors";
+
   xdg.configFile."kak-lsp" = {
     source = ../configs/kakoune/.config/kak-lsp;
     recursive = true;

@@ -28,7 +28,6 @@
     byline-kak = { url = "github:evanrelf/byline.kak"; flake = false; };
     locus-kak = { url = "github:evanrelf/locus.kak"; flake = false; };
     open-github-kak = { url = "github:evanrelf/open-github.kak"; flake = false; };
-    primer-kak = { url = "github:evanrelf/primer.kak"; flake = false; };
   };
 
   outputs = inputs@{ flake-parts, ... }:
