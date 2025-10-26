@@ -2,7 +2,7 @@
 # COLORSCHEME
 ################################################################################
 
-declare-option str colorscheme "primer"
+declare-option str colorscheme "oksolar-light"
 
 colorscheme "%opt{colorscheme}"
 
