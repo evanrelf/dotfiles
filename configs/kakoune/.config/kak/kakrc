@@ -6,10 +6,13 @@ declare-option str colorscheme "primer"
 
 colorscheme "%opt{colorscheme}"
 
-hook global BufWritePost .*/colors/[\w\-]+\.kak$ %{ evaluate-commands %sh{
+hook global BufCreate .*/colors/[\w\-]+\.kak$ %{ evaluate-commands %sh{
   colorscheme=$(realpath "$kak_config/colors/$kak_opt_colorscheme.kak")
   if [ "$kak_buffile" = "$colorscheme" ]; then
-    echo "colorscheme $kak_opt_colorscheme"
+    echo "
+      hook buffer BufWritePost .* %{ colorscheme $kak_opt_colorscheme }
+      hook buffer BufReload .* %{ colorscheme $kak_opt_colorscheme }
+    "
   fi
 }}
 
