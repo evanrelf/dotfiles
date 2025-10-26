@@ -44,13 +44,13 @@ in
     pkgs.gron
     pkgs.gum
     pkgs.home-manager
+    pkgs.hsl
     pkgs.httpie
     pkgs.hyperfine
     pkgs.jq
     pkgs.jujutsu
     pkgs.kakoune
     pkgs.kakoune-lsp
-    pkgs.lch
     pkgs.lima
     pkgs.mergiraf
     pkgs.moreutils

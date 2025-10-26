@@ -66,6 +66,9 @@ in
   gnused-gprefix =
     gprefix final.gnused;
 
+  hsl =
+    rust "hsl";
+
   # kakoune-unwrapped =
   #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
   #     version = final.inputs.kakoune.shortRev;
@@ -76,9 +79,6 @@ in
   #       export version="${version}"
   #     '';
   #   });
-
-  lch =
-    rust "lch";
 
   pancase =
     rust "pancase";
