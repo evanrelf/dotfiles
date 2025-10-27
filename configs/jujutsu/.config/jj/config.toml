@@ -1,6 +1,6 @@
 aliases.d = ['diff']
-aliases.l = ['log', '-r', 'alias_l()']
-aliases.ll = ['log', '-r', 'alias_ll()']
+aliases.l = ['log', '-r', 'ancestors(present(@), 10) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()']
+aliases.ll = ['log', '-r', 'ancestors(present(@)) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()']
 aliases.par = ['parallelize']
 aliases.s = ['status']
 
@@ -34,9 +34,7 @@ signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
 
-revset-aliases.'alias_l()' = 'latest(::@, 10) | (ancestors(immutable_heads().., 2) & remote_bookmarks().. & mine()) | heads(trunk()) | bookmarks()'
-revset-aliases.'alias_ll()' = 'alias_l() | ::@'
-revset-aliases.'pr(x)' = '::x ~ ::trunk()' # TODO: Choose a better name
+revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())' # TODO: Choose a better name
 
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log_oneline'
