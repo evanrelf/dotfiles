@@ -23,7 +23,7 @@ set --global --export FZF_OPEN_COMMAND "__fzf_empath \$dir"
 function __fzf_empath
     set --local dir $argv[1]
     begin
-        empath frecent 2>/dev/null || true
+        { empath frecent 2>/dev/null || true } | grep -v '^\.\./'
         fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . $dir | sed -e 's_^\./__'
     end | awk '{ if (!seen[$0]++) print }'
 end
