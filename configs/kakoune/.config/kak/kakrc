@@ -200,11 +200,11 @@ map global "object" "D" "<a-;> lsp-diagnostic-object<ret>" -docstring "LSP error
 
 # Highlight trailing whitespace
 hook global WinCreate .* %{
-  add-highlighter window/trailing-whitespace regex \h+$ 0:red+r
+  add-highlighter window/trailing-whitespace regex \h+$ 0:Error
 }
 
 hook global ModeChange pop:insert:.* %{ try %{
-  add-highlighter window/trailing-whitespace regex \h+$ 0:red+r
+  add-highlighter window/trailing-whitespace regex \h+$ 0:Error
 }}
 
 hook global ModeChange push:.*:insert %{
