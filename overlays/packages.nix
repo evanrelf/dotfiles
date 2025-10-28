@@ -69,13 +69,6 @@ in
   hsl =
     rust "hsl";
 
-  # https://github.com/NixOS/nixpkgs/issues/456113
-  jujutsu =
-    if final.stdenv.hostPlatform.isDarwin then
-      prev.jujutsu.override { rustPlatform = prev.rustPlatform // { buildRustPackage = prev.rustPlatform.buildRustPackage.override { cargoNextestHook = null; }; }; }
-    else
-      prev.jujutsu;
-
   # kakoune-unwrapped =
   #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
   #     version = final.inputs.kakoune.shortRev;
