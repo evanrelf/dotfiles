@@ -1,6 +1,6 @@
 evaluate-commands %sh{
 
-# Based on OKSolar Light (https://meat.io/oksolar)
+# Based on OKSolar (https://meat.io/oksolar)
 
 hsl() { sed 's/^rgb:/#/' | command hsl "$@" | sed 's/^#/rgb:/'; }
 
@@ -86,6 +86,9 @@ set-face global list               $(c default default)
 
 # Markup (minimal)
 set-face global value              $(c $blue default)
+hook global BufSetOption filetype=rust %{
+  set-face buffer value $(c default default)
+}
 set-face global type               $(c default default)
 set-face global variable           $(c default default)
 set-face global module             $(c default default)
