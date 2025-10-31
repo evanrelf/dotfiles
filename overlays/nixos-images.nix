@@ -10,7 +10,7 @@ let
           modules = [ config ];
         };
 
-      config = ../nixos/machines/vm.nix;
+      config = ../modules/nixos/machines/vm.nix;
 
       system = nixosSystem config;
 

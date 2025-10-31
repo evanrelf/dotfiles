@@ -13,7 +13,7 @@ let
 in
 {
   commonPackages =
-    (import ../home/common.nix {
+    (import ../modules/home/common.nix {
       config = { };
       inputs = final.inputs;
       lib = final.lib;
@@ -22,12 +22,12 @@ in
 
   homeConfigurations = {
     lima-default =
-      mkHomeConfiguration [ ../home/machines/lima-default.nix ];
+      mkHomeConfiguration [ ../modules/home/machines/lima-default.nix ];
 
     pearl =
-      mkHomeConfiguration [ ../home/machines/pearl.nix ];
+      mkHomeConfiguration [ ../modules/home/machines/pearl.nix ];
 
     ultraviolet =
-      mkHomeConfiguration [ ../home/machines/ultraviolet.nix ];
+      mkHomeConfiguration [ ../modules/home/machines/ultraviolet.nix ];
   };
 }

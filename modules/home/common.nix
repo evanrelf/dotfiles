@@ -83,7 +83,7 @@ in
   home.activation.copyFonts = lib.mkForce "true";
 
   xdg.configFile."direnv" = {
-    source = ../configs/direnv/.config/direnv;
+    source = ../../configs/direnv/.config/direnv;
     recursive = true;
   };
 
@@ -116,7 +116,7 @@ in
   '';
 
   xdg.configFile."fish" = {
-    source = ../configs/fish/.config/fish;
+    source = ../../configs/fish/.config/fish;
     recursive = true;
   };
 
@@ -127,12 +127,12 @@ in
     mutable "configs/ghostty/.config/ghostty/config";
 
   xdg.configFile."ghostty/themes" = {
-    source = ../configs/ghostty/.config/ghostty/themes;
+    source = ../../configs/ghostty/.config/ghostty/themes;
     recursive = true;
   };
 
   xdg.configFile."git" = {
-    source = ../configs/git/.config/git;
+    source = ../../configs/git/.config/git;
     recursive = true;
   };
 
@@ -143,7 +143,7 @@ in
     mutable "configs/jujutsu/.config/jj/config.toml";
 
   xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.isDarwin {
-    source = ../configs/karabiner/.config/karabiner;
+    source = ../../configs/karabiner/.config/karabiner;
     recursive = true;
   };
 
@@ -154,7 +154,7 @@ in
     mutable "configs/kakoune/.config/kak/colors";
 
   xdg.configFile."kak-lsp" = {
-    source = ../configs/kakoune/.config/kak-lsp;
+    source = ../../configs/kakoune/.config/kak-lsp;
     recursive = true;
   };
 
@@ -162,12 +162,12 @@ in
     "${pkgs.kakoune}/share/kak/autoload";
 
   xdg.configFile."ripgrep" = {
-    source = ../configs/ripgrep/.config/ripgrep;
+    source = ../../configs/ripgrep/.config/ripgrep;
     recursive = true;
   };
 
   xdg.configFile."starship.toml".source =
-    ../configs/starship/.config/starship.toml;
+    ../../configs/starship/.config/starship.toml;
 
   home.file.".config/zed/settings.json".source =
     mutable "configs/zed/.config/zed/settings.json";
