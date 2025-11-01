@@ -14,8 +14,8 @@ set --global fish_color_cancel brblue
 set --global fish_color_comment brblue --italics
 set --global fish_color_autosuggestion brblue
 if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
-    set --global man_blink --reverse blue
-    set --global man_bold --dim --bold blue
-    set --global man_standout --background bryellow black
-    set --global man_underline --underline bryellow
+    set --global man_blink --reverse black
+    set --global man_bold --bold black
+    set --global man_standout black
+    set --global man_underline --underline black
 end
