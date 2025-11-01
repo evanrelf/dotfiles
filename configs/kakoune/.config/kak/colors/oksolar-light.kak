@@ -60,7 +60,7 @@ set-face global Default            $(c $black $white)
 
 # Code
 set-face global title              $(c default default)
-set-face global header             $(c default default)
+set-face global header             $(c default default b)
 set-face global bold               $(c default default b)
 set-face global italic             $(c default default i)
 set-face global mono               $(c default default)
