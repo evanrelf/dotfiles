@@ -167,7 +167,7 @@ in
   };
 
   xdg.configFile."starship.toml".source =
-    ../../configs/starship/.config/starship.toml;
+    mutable "configs/starship/.config/starship.toml";
 
   home.file.".config/zed/settings.json".source =
     mutable "configs/zed/.config/zed/settings.json";
