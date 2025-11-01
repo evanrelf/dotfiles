@@ -20,27 +20,27 @@ pipestatus = true
 [hostname]
 disabled = false
 format = '[$hostname]($style) '
-style = 'green'
+style = 'bright-blue'
 
 [directory]
 format = '[$read_only]($read_only_style)[$path]($style) '
-style = 'blue'
-read_only_style = 'blue'
+style = 'bright-blue'
+read_only_style = 'bright-blue'
 truncation_length = 99
 truncate_to_repo = false
-repo_root_style = 'blue underline'
+repo_root_style = 'bright-blue underline'
 
 [nix_shell]
 disabled = false
 format = '[${symbol}]($style) '
 symbol = ' '
-style = 'cyan'
+style = 'bright-blue'
 
 [jobs]
 disabled = false
 format = '[${symbol}$number]($style) '
 symbol = ' '
-style = 'green'
+style = 'bright-blue'
 
 [character]
 disabled = false
