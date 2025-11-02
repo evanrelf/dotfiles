@@ -35,7 +35,6 @@ in
     pkgs.fish
     pkgs.fzf
     pkgs.gawkInteractive-gprefix
-    pkgs.gemini-cli
     pkgs.git
     pkgs.gleam
     pkgs.gnugrep-gprefix
