@@ -142,7 +142,7 @@ in
     mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
 
   home.file.".config/jj/config.toml".source =
-    mutable "configs/jujutsu/.config/jj/config.toml";
+    mutable "configs/jj/.config/jj/config.toml";
 
   xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.isDarwin {
     source = ../../configs/karabiner/.config/karabiner;
