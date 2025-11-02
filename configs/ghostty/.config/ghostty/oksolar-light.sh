@@ -22,6 +22,19 @@ blue=2b90d8
 cyan=259d94
 green=819500
 
+darken() { echo "$1" | hsl l % 80 | hsl s % 150; }
+
+lighten() { echo "$1" | hsl l % 160 | hsl s % 75; }
+
+# light_yellow=$(lighten $yellow)
+# light_orange=$(lighten $orange)
+# light_red=$(lighten $red)
+# light_magenta=$(lighten $magenta)
+# light_violet=$(lighten $violet)
+light_blue=$(lighten $blue)
+# light_cyan=$(lighten $cyan)
+# light_green=$(lighten $green)
+
 cat <<EOF
 # ./oksolar-light.sh
 palette = 0=#$base02
@@ -43,6 +56,6 @@ palette = 15=#$base3
 background = ffffff
 foreground = $base03
 cursor-color = $base1
-selection-background = $base2
+selection-background = $light_blue
 selection-foreground = $base03
 EOF
