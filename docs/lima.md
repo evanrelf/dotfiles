@@ -26,3 +26,10 @@ You can tell things have improved if Ctrl-L / `clear` starts working.
 ```
 [guest]$ nix run .#home-manager -- --flake .#$(hostname -s) switch
 ```
+
+## Change shell to Fish
+
+```
+[guest]$ sudo bash -c "echo $(which fish) >> /etc/shells"
+[guest]$ sudo bash -c "chsh $(whoami) -s $(which fish)"
+```
