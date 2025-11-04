@@ -1,20 +1,5 @@
 # Lima
 
-## Create VM
-
-The Fedora Cloud image Lima uses is more minimal than the default Ubuntu image.
-I would use Alpine, but it uses OpenRC instead of systemd. I would use Arch, but
-it doesn't work with the `vz` VM type, at the time of writing.
-
-```
-[host]$ limactl create \
-  --name=default \
-  template://fedora \
-  --vm-type=vz \
-  --mount-type=virtiofs \
-  --mount-writable
-```
-
 ## Install Nix
 
 Copy install command from the [Lix website](https://lix.systems/install/).
