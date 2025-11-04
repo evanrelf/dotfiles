@@ -20,7 +20,8 @@ pipestatus = true
 [hostname]
 disabled = false
 format = '[$hostname]($style) '
-style = 'bright-blue'
+style = 'green'
+aliases = { lima-default = '●' }
 
 [directory]
 format = '[$read_only]($read_only_style)[$path]($style) '
