@@ -23,14 +23,6 @@ You can tell things have improved if Ctrl-L / `clear` starts working.
 
 ## Install dotfiles
 
-TODO: Come up with a more concise way of doing this bootstrapping.
-
 ```
-[guest]$ nix-shell -p git --run 'nix shell .#home-manager -c home-manager --flake .#$(hostname -s) switch'
-```
-
-or
-
-```
-[guest]$ nix-shell -p git --run 'nix build .#homeConfigurations.$(hostname -s).activationPackage' && ./result/activate && rm result
+[guest]$ nix run .#home-manager -- --flake .#$(hostname -s) switch
 ```
