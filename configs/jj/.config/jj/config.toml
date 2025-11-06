@@ -1,6 +1,6 @@
 aliases.d = ['diff']
-aliases.l = ['log', '-r', 'ancestors(present(@), 10) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()']
-aliases.ll = ['log', '-r', 'ancestors(present(@)) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()']
+aliases.l = ['log', '-r', 'ancestors(present(@), 10) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()']
+aliases.ll = ['log', '-r', 'ancestors(present(@)) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()']
 aliases.par = ['parallelize']
 aliases.s = ['status']
 
