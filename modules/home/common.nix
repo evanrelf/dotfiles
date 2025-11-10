@@ -67,6 +67,9 @@ in
   home.file.".claude/settings.json".source =
     mutable "configs/claude/.claude/settings.json";
 
+  home.file.".claude/CLAUDE.md".source =
+    mutable "configs/claude/.claude/CLAUDE.md";
+
   xdg.configFile."direnv" = {
     source = ../../configs/direnv/.config/direnv;
     recursive = true;
