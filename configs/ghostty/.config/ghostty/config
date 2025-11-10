@@ -8,7 +8,7 @@ font-variation-bold = wght=600
 font-variation-italic = wght=400
 font-variation-bold-italic = wght=600
 # https://fsd.it/pragmatapro/Handbook.png
-font-feature = +ss13
+font-feature = +ss13 # Nicer Git graphs
 unfocused-split-opacity = 1
 maximize = true
 cursor-style-blink = false
