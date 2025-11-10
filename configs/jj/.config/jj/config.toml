@@ -12,7 +12,7 @@ aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
 
 aliases.mut = ['--ignore-immutable']
-aliases.here = ['bookmark', 'set', '-r', '@-']
+aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
 aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
 
