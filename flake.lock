@@ -200,24 +200,7 @@
         "nixpkgs": "nixpkgs",
         "open-github-kak": "open-github-kak",
         "pancase": "pancase",
-        "rstoc": "rstoc",
         "systems": "systems"
-      }
-    },
-    "rstoc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741388610,
-        "narHash": "sha256-3VTklzizavdg6ZOkTxjaMFP2lHLfZLncz7Oh1Y6T3xY=",
-        "owner": "evanrelf",
-        "repo": "rstoc",
-        "rev": "c21dbb053977aaa0efbaf657be2638a47ff49331",
-        "type": "github"
-      },
-      "original": {
-        "owner": "evanrelf",
-        "repo": "rstoc",
-        "type": "github"
       }
     },
     "systems": {

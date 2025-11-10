@@ -70,7 +70,4 @@ in
 
   pancase =
     rust "pancase";
-
-  rstoc =
-    rust "rstoc";
 }

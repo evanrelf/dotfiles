@@ -21,7 +21,6 @@
     empath = { url = "github:evanrelf/empath"; flake = false; };
     hsl = { url = "github:evanrelf/hsl"; flake = false; };
     pancase = { url = "github:evanrelf/pancase"; flake = false; };
-    rstoc = { url = "github:evanrelf/rstoc"; flake = false; };
 
     # Kakoune plugins
     better-haskell-kak = { url = "github:evanrelf/better-haskell.kak"; flake = false; };

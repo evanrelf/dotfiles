@@ -60,7 +60,6 @@ in
     pkgs.pandoc
     pkgs.rebar3
     pkgs.ripgrep
-    pkgs.rstoc
     pkgs.ruff
     pkgs.rustup
     pkgs.samply
