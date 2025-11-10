@@ -13,8 +13,8 @@ aliases.remote = ['git', 'remote']
 
 aliases.mut = ['--ignore-immutable']
 aliases.here = ['bookmark', 'move', '--to', '@-']
-aliases.give = ['squash', '--use-destination-message', '--from', '@', '--into']
-aliases.take = ['squash', '--use-destination-message', '--into', '@', '--from']
+aliases.give = ['squash', '--use-destination-message', '--into']
+aliases.take = ['squash', '--use-destination-message', '--from']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
