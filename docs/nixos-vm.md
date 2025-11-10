@@ -11,16 +11,17 @@ Run NixOS in a virtual machine on a Mac. Inspired by
         - "Sharing" > Enable "Enable Shared Folders"
         - "Sharing" > Add host's home folder as shared folder
         - "Default Applications" > Disable opening across operating systems
-        - "Keyboard & Mouse" > Duplicate default "Profile" profile, then disable all
-          mappings under "Key Mappings" and "Fusion Shortcuts"
+        - "Keyboard & Mouse" > Duplicate default "Profile" profile, then disable
+          all mappings under "Key Mappings" and "Fusion Shortcuts"
         - "Processors & Memory" > Allocate as many cores and as much memory as
           possible
         - "Display" > Enable "Accelerate 3D Graphics"
-        - "Display" > "Accelerate 3D Graphics" > Max out "Shared graphics memory"
+        - "Display" > "Accelerate 3D Graphics" > Max out "Shared graphics
+          memory"
         - "Display" > Enable "Use full resolution for Retina display"
         - "Hard Disk (NVMe)" > Choose a higher max disk size (e.g. 100+ GB)
-        - "Sound Card" > Optionally disable "Connect Sound Card" or click "Remove
-          Sound Card"
+        - "Sound Card" > Optionally disable "Connect Sound Card" or click
+          "Remove Sound Card"
         - "Camera" > Click "Remove Camera"
 
 TODO:
