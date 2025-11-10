@@ -26,8 +26,6 @@ in
     coreutils-gprefix
     delta
     direnv
-    docker-client
-    duckdb
     empath
     fd
     findutils-gprefix
@@ -37,12 +35,8 @@ in
     git
     gnugrep-gprefix
     gnused-gprefix
-    graphviz
-    gron
-    gum
     home-manager
     hsl
-    httpie
     hyperfine
     jq
     jujutsu
@@ -50,27 +44,20 @@ in
     kakoune-lsp
     lima
     mergiraf
-    moreutils
     nix-direnv
     nix-your-shell
     nixpkgs-fmt
     pancase
-    pandoc
     ripgrep
-    ruff
     rustup
     samply
     sd
     shellcheck
-    sqlite-interactive
     starship
     tealdeer
     tokei
-    tree
     universal-ctags
-    uv
     watchexec
-    watchman
     zoxide
   ];
 
