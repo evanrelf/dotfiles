@@ -1,4 +1,5 @@
 aliases.d = ['diff']
+aliases.dup = ['duplicate']
 aliases.l = ['log', '-r', 'ancestors(present(@), 10) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()']
 aliases.ll = ['log', '-r', 'ancestors(present(@)) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()']
 aliases.par = ['parallelize']
