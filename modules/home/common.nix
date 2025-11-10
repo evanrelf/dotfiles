@@ -96,7 +96,7 @@ in
   ];
 
   programs.fish.shellInit = ''
-    set --global --export --prepend PATH "${dotfiles}/bin"
+    set --global --export DOTFILES "${dotfiles}"
     set --global --export NIX_PATH "nixpkgs=${inputs.nixpkgs}"
   '';
 

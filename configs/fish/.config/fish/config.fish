@@ -34,10 +34,8 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
     set --global --export --prepend PATH "$HOME/.nix-profile/bin"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
+    set --global --export --prepend PATH "$DOTFILES/bin"
     set --global --export --prepend PATH "$HOME/.local/bin"
-    if test -d "$HOME/.config/emacs/bin"
-        set --global --export --prepend PATH "$HOME/.config/emacs/bin"
-    end
 end
 if command -q starship
     starship init fish | source
