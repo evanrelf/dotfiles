@@ -4,9 +4,9 @@ font-style = Regular
 font-size = 17
 # echo -e "hello \e[3mhello\e[0m\n\e[1mhello\e[0m \e[3m\e[1mhello\e[0m"
 font-variation = wght=400
-font-variation-bold = wght=600
+font-variation-bold = wght=650
 font-variation-italic = wght=400
-font-variation-bold-italic = wght=600
+font-variation-bold-italic = wght=650
 # https://fsd.it/pragmatapro/Handbook.png
 font-feature = +ss13 # Nicer Git graphs
 unfocused-split-opacity = 1
