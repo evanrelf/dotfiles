@@ -229,10 +229,10 @@ hook -always global WinCreate .* %{
 # GIT DIFF
 ################################################################################
 
-set-option global git_diff_add_char "▍"
-set-option global git_diff_mod_char "▍"
-set-option global git_diff_del_char "▁"
-set-option global git_diff_top_char "▔"
+set-option global git_diff_add_char "▌"
+set-option global git_diff_mod_char "▌"
+set-option global git_diff_del_char "▄"
+set-option global git_diff_top_char "▀"
 
 hook global WinCreate .* %{
   hook -once window NormalIdle .* %{ try %{
