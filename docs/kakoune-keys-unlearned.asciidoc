@@ -1,0 +1,453 @@
+= Kakoune Keys
+
+Subset of Kakoune's `:doc keys` that I haven't learned yet. From `a6531a9097fe7031608daba3a2897a2b24ddea1c`.
+
+== Insert mode
+
+*<c-r>*::
+    insert contents of the register given by next key
+
+*<c-v>*::
+    insert next keystroke directly into the buffer, without interpreting it
+
+*<c-u>*::
+    commit changes up to now as a single undo group
+
+*<a-;>*, *<a-semicolon>*::
+    escape to normal mode for a single command
+
+== Insert mode completion
+
+The `completers` option controls automatic completion, which kicks in when
+the value specified in the `idle_timeout` option is reached.
+
+*<c-o>*::
+    toggle automatic completion
+
+*<c-n>*::
+    select next completion candidate
+
+*<c-p>*::
+    select previous completion candidate
+
+*<c-x>*::
+    explicit insert completion query, followed by:
+
+    *f*:::
+        explicit file completion
+
+    *w*:::
+        explicit word completion (current buffer)
+
+    *W*:::
+        explicit word completion (all buffers)
+
+    *l*:::
+        explicit line completion (current buffer)
+
+    *L*:::
+        explicit line completion (all buffers)
+
+== Movement
+
+'word' is a sequence of alphanumeric characters, or those in the `extra_word_chars`
+option (see <<options#builtin-options,`:doc options builtin-options`>>).
+'WORD' is a sequence of non whitespace characters. Generally, a movement on its own
+will move each selection to cover the text moved over, while holding down
+the Shift modifier and moving will extend each selection instead.
+
+*<a-.>*::
+    repeat last object or *f*/*t* selection command
+
+*M*::
+    extend the current selection to the next sequence enclosed by matching
+    character, see the `matching_pairs` option in <<options#,`:doc options`>>
+
+*<a-m>*::
+    select to the previous sequence enclosed by matching characters, see the
+    `matching_pairs` option in <<options#,`:doc options`>>
+
+*<a-M>*::
+    extend the current selection to the previous sequence enclosed by matching
+    characters, see the `matching_pairs` option in <<options#,`:doc options`>>
+
+*<a-x>*::
+    trim selections to only contain full lines (not including last
+    end-of-line)
+
+== Changes
+
+Yanking (copying) and pasting use the *"* register by default (See <<registers#,`:doc registers`>>)
+
+*<a-d>*::
+    delete selections (not yanking)
+
+*<a-c>*::
+    delete selections and enter insert mode (not yanking)
+
+*<a-p>*::
+    paste all after the end of each selection, and select each pasted string
+
+*<a-P>*::
+    paste all before the start of each selection, and select each pasted string
+
+*<a-R>*::
+    replace selections with every yanked text
+
+*<a-J>*::
+    join selected lines and select spaces inserted in place of line breaks
+
+*<a-_>*::
+    merge contiguous selections together (works across lines as well)
+
+*<+>*, *<plus>*::
+    duplicate each selection (generating overlapping selections)
+
+*<a-+>*, *<a-plus>*::
+    merge overlapping selections
+
+*<a-\>>*, *<a-gt>*::
+    indent selected lines, including empty lines
+
+*<a-<>*, *<a-lt>*::
+    unindent selected lines, do not remove incomplete indent (3 leading
+    spaces when indent is 4)
+
+*<c-j>*::
+    move forward in changes history
+
+*<c-k>*::
+    move backward in changes history
+
+*<a-&>*::
+    copy indent, copy the indentation of the main selection (or the
+    `count` one if a `count` is given) to all other ones
+
+*<a-`>*::
+    swap case
+
+*@*::
+    convert tabs to spaces in each selection, uses the buffer tabstop
+    option or the `count` parameter for tabstop
+
+*<a-@>*::
+    convert spaces to tabs in each selection, uses the buffer tabstop
+    option or the `count` parameter for tabstop
+
+*_*::
+    unselect whitespace surrounding each selection, drop those that only
+    contain whitespace
+
+== Changes through external programs
+
+Shell expansions are available, (See <<expansions#shell-expansions,`:doc expansions shell-expansions`>>)
+The default command comes from the *|* register (See <<registers#,`:doc registers`>>)
+
+*<a-|>*::
+    pipe each selection through the given external filter program and
+    ignore its output.
+
+*!*::
+    insert and select command output before each selection.
+
+*<a-!>*::
+    append and select command output after each selection.
+
+== Searching
+
+Searches use the */* register by default (See <<registers#,`:doc registers`>>)
+
+*<a-/>*::
+    select previous match before each selection
+
+*?*::
+    extend to next match after each selection
+
+*<a-?>*::
+    extend to previous match before each selection
+
+***::
+    set the search pattern to the main selection (automatically
+    detects word boundaries)
+
+*<a-***>*::
+    set the search pattern to the main selection (verbatim, no smart
+    detection)
+
+== Goto commands
+
+*g*, *G*::
+    When a `count` is specified, *G* only extends the selection to the given line,
+    *g* sends the anchor to the given line and a menu is then displayed which waits
+    for one of the following additional keys:
+
+    *e*:::
+        go to last char of last line
+
+    *t*:::
+        go to the first displayed line
+
+    *c*:::
+        go to the middle displayed line
+
+    *b*:::
+        go to the last displayed line
+
+    *a*:::
+        go to the previous (alternate) buffer
+
+    *f*:::
+        open the file whose name is selected
+
+    *.*:::
+        go to last buffer modification position
+
+== View commands
+
+*v*, *V*::
+    *V* enters lock view mode (which will be left when the <esc> is hit),
+    and *v* modifies the current view; a menu is then displayed which waits
+    for one of the following additional keys:
+
+    *m*:::
+        center the main selection in the window (horizontally)
+
+    *t*:::
+        scroll to put the main selection on the top line of the window
+
+    *b*:::
+        scroll to put the main selection on the bottom line of the window
+
+    *<*:::
+        scroll to put the main cursor on the leftmost column of the window
+
+    *>*:::
+        scroll to put the main cursor on the rightmost column of the window
+
+== Marks
+
+Current selections position can be saved in a register and restored later on.
+Marks use the *^* register by default (See <<registers#,`:doc registers`>>)
+
+*Z*::
+    save selections to the register
+
+*z*::
+    restore selections from the register
+
+*<a-z>*, *<a-Z>*::
+    *<a-z>* combines selections from the register with the current ones, whereas
+    *<a-Z>* combines current selections with the ones in the register; a menu
+    is then displayed which waits for one of the following additional keys:
+
+    *a*:::
+        append selections
+
+    *u*:::
+        keep a union of selections
+
+    *i*:::
+        keep an intersection of selections
+
+    *<*:::
+        select the selection with the leftmost cursor for each pair
+
+    *>*:::
+        select the selection with the rightmost cursor for each pair
+
+    *+*:::
+        select the longest selection
+
+    *-*:::
+        select the shortest selection
+
+== Macros
+
+Macros use the *@* register by default (See <<registers#,`:doc registers`>>)
+
+*Q*::
+    start or end macro recording
+
+*q*::
+    play a recorded macro
+
+== Jump list
+
+Some commands, like the goto commands, buffer switch or search commands,
+push the previous selections to the client's jump list. It is possible
+to skim through the jump list using:
+
+*<c-s>*::
+    create a jump step, but also save the current selection to have it be
+    restored when the step is subsequently cycled through
+
+== Multiple selections
+
+*s*, *S*, *<a-k>* and *<a-K>* use the */* register by default (See <<registers#,`:doc registers`>>)
+
+*<a-S>*::
+    select first and last characters of each selection
+
+*<a-,>*::
+    clear the main selection
+
+*$*::
+    pipe each selection to the given shell command and keep the ones
+    for which the shell returned 0. Shell expansions are available,
+    (See <<expansions#shell-expansions,`:doc expansions shell-expansions`>>)
+
+== Object Selection
+
+For nestable objects, a `count` can be used in order to specify which surrounding
+level to select. Object selections are repeatable using *<a-.>*.
+
+=== Whole object
+
+A 'whole object' is an object *including* its surrounding characters.
+For example, for a quoted string this will select the quotes, and
+for a word this will select trailing spaces.
+
+*[*::
+    select to the whole object start
+
+*]*::
+    select to the whole object end
+
+*{*::
+    extend selections to the whole object start
+
+*}*::
+    extend selections to the whole object end
+
+=== Inner object
+
+An 'inner object' is an object *excluding* its surrounding characters.
+For example, for a quoted string this will *not* select the quotes, and
+for a word this will *not* select trailing spaces.
+
+*<a-[>*::
+    select to the inner object start
+
+*<a-]>*::
+    select to the inner object end
+
+*<a-{>*::
+    extend selections to the inner object start
+
+*<a-}>*::
+    extend selections to the inner object end
+
+=== Objects types
+
+After the keys described above, a second key needs to be entered
+in order to specify the wanted object:
+
+*s*::
+    select the sentence
+
+*␣*::
+    select the whitespaces
+
+*n*::
+    select the number
+
+*u*::
+    select the argument
+
+*c*::
+    select user defined object, will prompt for open and close text
+
+*<a-;>*, *<a-semicolon>*::
+    run a command with additional expansions describing the selection
+    context (See <<expansions#,`:doc expansions`>>)
+
+If a punctuation character is entered, it will act as the delimiter.
+For instance, if the cursor is on the `o` of `/home/bar`, typing
+`<a-a>/` will select `/home/`.
+
+== Prompt commands
+
+When pressing `:` in normal mode, Kakoune will open a prompt to enter
+a command.  The executed command line is stored in the *:* register
+(See <<registers#,`:doc registers`>>).
+
+During editing, a transient *clipboard* is available, its content is
+empty at the start of prompt edition, and is not preserved afterwards.
+
+The following keys are recognized by this mode to help with editing
+(See <<commands#,`:doc commands`>>).
+
+*<a-F>*::
+    advance to next WORD begin
+
+*<a-B>*::
+    go back to previous WORD begin
+
+*<a-E>*::
+    advance to next WORD end
+
+*<c-w>*::
+    erase to previous word begin, save erased content to *clipboard*
+
+*<c-W>*::
+    erase to previous WORD begin, save erased content to *clipboard*
+
+*<a-d>*::
+    erase to next word begin, save erased content to *clipboard*
+
+*<a-D>*::
+    erase to next WORD begin, save erased content to *clipboard*
+
+*<c-k>*::
+    erase to end of line, save erased content to *clipboard*
+
+*<c-y>*::
+    insert *clipboard* content before cursor
+
+*<c-r>*::
+    insert the content of the register given by next key, if next key has
+    the Alt modifier, it will insert all values in the register joined with
+    spaces, else it will insert the main one. if it has the Control modifier,
+    it will quote the inserted value(s).
+
+*<c-v>*::
+    insert next keystroke without interpreting it
+
+*<c-x>*::
+    explicit completion query, followed by:
+
+    *f*:::
+        explicit file completion
+
+    *w*:::
+        explicit word completion (from current buffer)
+
+*<c-o>*::
+    toggle automatic completion
+
+*<a-!>*::
+    expand the typed expansions in currently entered text
+    (See <<expansions#,`:doc expansions`>>)
+
+*<a-;>*, *<a-semicolon>*::
+    escape to normal mode for a single command
+
+== Cancelling operations
+
+These keys are used to cancel long-running operations, either inside
+Kakoune or outside it. Because they are intended as a safety mechanism
+when something goes wrong, these keys are handled very early on in
+Kakoune's input processing, and therefore cannot be remapped in any mode.
+
+*<c-c>*::
+    Stop any external processes. If you ever see Kakoune display a message
+    like "waiting for shell command to finish", this key will stop
+    that command so you can regain control of Kakoune.
+    Technically, this key causes Kakoune to send the SIGINT signal
+    to its entire process group.
+
+*<c-g>*::
+    Cancel a long-running Kakoune operation, such as a regex search on a
+    very large file. This also clears Kakoune's input buffer, so any
+    commands that were waiting for the long-running operation to complete
+    will also be cancelled.
