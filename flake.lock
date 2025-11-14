@@ -35,11 +35,11 @@
     "empath": {
       "flake": false,
       "locked": {
-        "lastModified": 1762926853,
-        "narHash": "sha256-PSc5kqVI5Kq+TQkE5d1YPWTPOtHwuEpiMcrJ5SByX/A=",
+        "lastModified": 1763104996,
+        "narHash": "sha256-bUgbGs7eLyQAkoadUM5y1ViQKXP1WzdXSoxINFJxUwM=",
         "owner": "evanrelf",
         "repo": "empath",
-        "rev": "5082928292b2cc15ff06d8b6075bd6a2752dcb1f",
+        "rev": "816cb615bc5041c2201c5018a9f4430e9000c51f",
         "type": "github"
       },
       "original": {
