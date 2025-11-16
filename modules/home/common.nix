@@ -57,6 +57,7 @@ in
     tealdeer
     tokei
     universal-ctags
+    up
     watchexec
     zoxide
   ];

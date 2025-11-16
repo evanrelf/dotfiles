@@ -1,6 +1,6 @@
 function tree --wraps fd
     if isatty stdout
-        fd $argv | as-tree --color always | command less -RMFXK
+        fd $argv | as-tree --color always | command less -RMFXK --mouse
         return $pipestatus[1]
     else
         fd $argv | as-tree

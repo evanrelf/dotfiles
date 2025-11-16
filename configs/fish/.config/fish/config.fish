@@ -56,7 +56,7 @@ function fish_user_key_bindings
     bind ctrl-z 'fg 2>/dev/null; commandline -f repaint'
 end
 alias ls "ls --color=auto"
-alias less "less -RMK"
+alias less "less -RMK --mouse"
 alias :q exit
 alias beep "tput bel >/dev/tty; afplay --time 0.2 /System/Library/Sounds/Sosumi.aiff"
 set --global fish_greeting ""
