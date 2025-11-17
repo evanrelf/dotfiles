@@ -73,6 +73,11 @@ in
     recursive = true;
   };
 
+  xdg.configFile."fd" = {
+    source = ../../configs/fd/.config/fd;
+    recursive = true;
+  };
+
   programs.fish.enable = true;
 
   programs.fish.plugins = [
