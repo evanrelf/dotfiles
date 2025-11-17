@@ -9,6 +9,8 @@ let
 
 in
 {
+  # Home Manager
+
   home.stateVersion = "22.11";
 
   home.enableNixpkgsReleaseCheck = true;
@@ -21,6 +23,8 @@ in
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin "/Users/${config.home.username}")
     (lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "/home/${config.home.username}")
   ];
+
+  # Packages
 
   home.packages = with pkgs; [
     as-tree
@@ -69,6 +73,8 @@ in
     watchexec
     zoxide
   ];
+
+  # Config files
 
   home.file.".claude/settings.json".source =
     mutable "configs/claude/.claude/settings.json";
@@ -170,4 +176,8 @@ in
 
   home.file.".config/zed/settings.json".source =
     mutable "configs/zed/.config/zed/settings.json";
+
+  # Services
+
+  services.pueue.enable = true;
 }
