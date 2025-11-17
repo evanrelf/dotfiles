@@ -1,14 +1,12 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   imports = [
     ../common.nix
   ];
 
-  home.username = "evanrelf";
+  home.homeDirectory = lib.mkForce "/home/${config.home.username}.linux";
 
-  home.homeDirectory = "/home/${config.home.username}.linux";
-
-  home.file."Code/evanrelf/dotfiles".source =
-    config.lib.file.mkOutOfStoreSymlink "/Users/evanrelf/Code/evanrelf/dotfiles";
+  home.file."Code/${config.home.username}/dotfiles".source =
+    config.lib.file.mkOutOfStoreSymlink "/Users/${config.home.username}/Code/${config.home.username}/dotfiles";
 }

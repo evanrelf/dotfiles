@@ -15,6 +15,13 @@ in
 
   news.display = "silent";
 
+  home.username = "evanrelf";
+
+  home.homeDirectory = lib.mkMerge [
+    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin "/Users/${config.home.username}")
+    (lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "/home/${config.home.username}")
+  ];
+
   home.packages = with pkgs; [
     as-tree
     bat
