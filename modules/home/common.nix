@@ -48,6 +48,7 @@ in
     nix-your-shell
     nixpkgs-fmt
     pancase
+    pueue
     ripgrep
     rustup
     samply
