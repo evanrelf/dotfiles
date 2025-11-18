@@ -52,6 +52,9 @@ end
 if command -q jj
     jj util completion fish | source
 end
+if command -q pueue
+    pueue completions fish | source
+end
 function fish_user_key_bindings
     bind ctrl-z 'fg 2>/dev/null; commandline -f repaint'
 end
