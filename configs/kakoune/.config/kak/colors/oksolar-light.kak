@@ -27,25 +27,25 @@ white="rgb:ffffff"
 
 darken() { echo "$1" | hsl l % 80 | hsl s % 150; }
 
+dark_yellow=$(darken $yellow)
+dark_orange=$(darken $orange)
+dark_red=$(darken $red)
+dark_magenta=$(darken $magenta)
+dark_violet=$(darken $violet)
+dark_blue=$(darken $blue)
+dark_cyan=$(darken $cyan)
+dark_green=$(darken $green)
+
 lighten() { echo "$1" | hsl l % 160 | hsl s % 75; }
 
-# light_yellow=$(lighten $yellow)
-# light_orange=$(lighten $orange)
-# light_red=$(lighten $red)
-# light_magenta=$(lighten $magenta)
-# light_violet=$(lighten $violet)
-# light_blue=$(lighten $blue)
-# light_cyan=$(lighten $cyan)
-# light_green=$(lighten $green)
-
-light_yellow="rgb:fae6b9"
-light_orange="rgb:fce1d3"
-light_red="rgb:fae0df"
-light_magenta="rgb:f7dfea"
-light_violet="rgb:e5e6f5"
-light_blue="rgb:d7e9fa"
-light_cyan="rgb:bef3ed"
-light_green="rgb:e0f2a3"
+light_yellow=$(lighten $yellow)
+light_orange=$(lighten $orange)
+light_red=$(lighten $red)
+light_magenta=$(lighten $magenta)
+light_violet=$(lighten $violet)
+light_blue=$(lighten $blue)
+light_cyan=$(lighten $cyan)
+light_green=$(lighten $green)
 
 c() {
   local fg="$1"; [ -n "$fg" ] && printf "%s" "$fg"
@@ -63,7 +63,7 @@ set-face global title              $(c default default)
 set-face global header             $(c default default b)
 set-face global bold               $(c default default b)
 set-face global italic             $(c default default i)
-set-face global mono               $(c $yellow default)
+set-face global mono               $(c $dark_yellow default)
 set-face global block              $(c default default)
 set-face global link               $(c $blue default u)
 set-face global bullet             $(c default default)
@@ -75,7 +75,7 @@ set-face global list               $(c default default)
 # set-face global variable           $(c $blue default)
 # set-face global module             $(c $purple default)
 # set-face global function           $(c $purple default)
-# set-face global string             $(c $yellow default)
+# set-face global string             $(c $dark_yellow default)
 # set-face global keyword            $(c $red default b)
 # set-face global operator           $(c $orange default)
 # set-face global attribute          $(c $green default)
@@ -93,7 +93,7 @@ set-face global type               $(c default default)
 set-face global variable           $(c default default)
 set-face global module             $(c default default)
 set-face global function           $(c default default)
-set-face global string             $(c $yellow default)
+set-face global string             $(c $dark_yellow default)
 set-face global keyword            $(c default default)
 set-face global operator           $(c default default)
 set-face global attribute          $(c default default)
