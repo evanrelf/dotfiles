@@ -1,8 +1,4 @@
 {
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": false
-  },
   "permissions": {
     "allow": [
       "Bash(git log:*)",
@@ -35,6 +31,10 @@
         ]
       }
     ]
+  },
+  "sandbox": {
+    "autoAllowBashIfSandboxed": false,
+    "enabled": true
   },
   "alwaysThinkingEnabled": true
 }
