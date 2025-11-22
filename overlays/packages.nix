@@ -31,23 +31,6 @@ let
 
 in
 {
-  codex =
-    prev.codex.overrideAttrs (rec {
-      version = "0.0.0";
-      src = final.fetchFromGitHub {
-        owner = "openai";
-        repo = "codex";
-        rev = "eb1c651c00955d31e4aafcda73a89c78c4c9e871";
-        hash = "sha256-iedF58t94fE1TU1sauctNNsku5EYROdFdeKkNf8OIRc=";
-      };
-      cargoDeps = final.rustPlatform.fetchCargoVendor {
-        src = "${src}/codex-rs";
-        hash = "sha256-rru7cWIjt7WAUwiCxln42C4OVo8WVjp4SWZM1TaSxjI=";
-      };
-      # Don't look for version number in `codex --help`.
-      doInstallCheck = false;
-    });
-
   coreutils-gprefix =
     (prev.coreutils.override {
       singleBinary = false;
