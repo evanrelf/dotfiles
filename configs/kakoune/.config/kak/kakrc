@@ -218,10 +218,12 @@ strip %{
 }
 
 ################################################################################
-# NUMBERS
+# NORMAL
 ################################################################################
 
-hook -always global WinCreate .* %{
+define-command -docstring "normal: make interface look less spartan" \
+normal %{
+  colorscheme primer
   add-highlighter window/number-lines number-lines -hlcursor -separator ' '
 }
 
