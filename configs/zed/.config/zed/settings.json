@@ -15,7 +15,7 @@
   "vim_mode": true,
   "cursor_blink": false,
   "ui_font_size": 16,
-  "buffer_font_family": "PragmataPro Liga",
+  "buffer_font_family": "PragmataPro VF",
   "buffer_font_size": 16,
   "buffer_line_height": "standard",
   "wrap_guides": [80],
