@@ -89,6 +89,7 @@
 [delta]
   light = true
   color-only = true
+  syntax-theme = none
 [diff]
   colorMoved = default
 [difftool]
@@ -99,7 +100,7 @@
 [init]
   defaultBranch = main
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta
   singleKey = true
 [merge]
   autoStash = true
