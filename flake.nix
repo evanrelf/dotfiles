@@ -43,6 +43,7 @@
               inputs.ghciwatch-compat.overlays.default
               (import ./overlays/packages.nix)
               (import ./overlays/kakoune-plugins.nix)
+              (import ./overlays/fish-plugins.nix)
               (import ./overlays/home-configurations.nix)
               (import ./overlays/nixos-images.nix)
             ];

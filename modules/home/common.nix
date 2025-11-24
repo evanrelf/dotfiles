@@ -38,9 +38,9 @@ in
     delta
     direnv
     empath
+    evanrelf-fish
     fd
     findutils-gprefix
-    fish
     fzf
     gawkInteractive-gprefix
     git
@@ -92,41 +92,15 @@ in
     recursive = true;
   };
 
-  programs.fish.enable = true;
-
-  programs.fish.plugins = [
-    {
-      name = "fzf";
-      src = pkgs.fetchFromGitHub {
-        owner = "jethrokuan";
-        repo = "fzf";
-        rev = "479fa67d7439b23095e01b64987ae79a91a4e283";
-        hash = "sha256-28QW/WTLckR4lEfHv6dSotwkAKpNJFCShxmKFGQQ1Ew=";
-      };
-    }
-    {
-      name = "fish-colored-man";
-      src = pkgs.fetchFromGitHub {
-        owner = "decors";
-        repo = "fish-colored-man";
-        rev = "1ad8fff696d48c8bf173aa98f9dff39d7916de0e";
-        hash = "sha256-uoZ4eSFbZlsRfISIkJQp24qPUNqxeD0JbRb/gVdRYlA=";
-      };
-    }
-  ];
-
-  programs.fish.shellInit = ''
-    set --global --export DOTFILES "${dotfiles}"
-    set --global --export NIX_PATH "nixpkgs=${inputs.nixpkgs}"
-  '';
-
   xdg.configFile."fish" = {
     source = ../../configs/fish/.config/fish;
     recursive = true;
   };
 
-  xdg.configFile."fish/home-manager.fish".source =
-    config.xdg.configFile."fish/config.fish".source;
+  xdg.configFile."fish/home-manager.fish".text = ''
+    set --global --export DOTFILES "${dotfiles}"
+    set --global --export NIX_PATH "nixpkgs=${inputs.nixpkgs}"
+  '';
 
   home.file.".config/ghostty/config".source =
     mutable "configs/ghostty/.config/ghostty/config";
