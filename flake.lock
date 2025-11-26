@@ -111,11 +111,11 @@
     "hsl": {
       "flake": false,
       "locked": {
-        "lastModified": 1761453105,
-        "narHash": "sha256-Rmc81dWDuf86o4fU/ZjkwefY+KRrdoytJPeTMpcbP4o=",
+        "lastModified": 1764185573,
+        "narHash": "sha256-6gra1tv4iR/VTNtA0wd3ZSUV00lCdrDnp2XP/zWQdWk=",
         "owner": "evanrelf",
         "repo": "hsl",
-        "rev": "0d09cc078d4c64955232875965bcbd3c4713cd54",
+        "rev": "a134ffbf83bde60a05d7a8b9947f31f111c76c7d",
         "type": "github"
       },
       "original": {
