@@ -20,7 +20,7 @@
     # Rust programs
     empath = { url = "github:evanrelf/empath"; flake = false; };
     hsl = { url = "github:evanrelf/hsl"; flake = false; };
-    least = { url = "git+ssh://git@github.com/evanrelf/least.git"; flake = false; };
+    least = { url = "github:evanrelf/least"; flake = false; };
     pancase = { url = "github:evanrelf/pancase"; flake = false; };
 
     # Kakoune plugins
