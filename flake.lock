@@ -124,6 +124,22 @@
         "type": "github"
       }
     },
+    "least": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764139058,
+        "narHash": "sha256-ztu9jmxIsS1DPdHn7+JEHQ4sBVlwpPPKFhV3M3u9/Yg=",
+        "ref": "refs/heads/main",
+        "rev": "37afe5c7207864bbae1f35971bcf11700c1703cc",
+        "revCount": 19,
+        "type": "git",
+        "url": "ssh://git@github.com/evanrelf/least.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/evanrelf/least.git"
+      }
+    },
     "locus-kak": {
       "flake": false,
       "locked": {
@@ -196,6 +212,7 @@
         "ghciwatch-compat": "ghciwatch-compat",
         "home-manager": "home-manager",
         "hsl": "hsl",
+        "least": "least",
         "locus-kak": "locus-kak",
         "nixpkgs": "nixpkgs",
         "open-github-kak": "open-github-kak",

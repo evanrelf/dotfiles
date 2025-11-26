@@ -68,6 +68,9 @@ in
   #     '';
   #   });
 
+  least =
+    rust "least";
+
   pancase =
     rust "pancase";
 }

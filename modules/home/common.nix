@@ -53,6 +53,7 @@ in
     jujutsu
     kakoune
     kakoune-lsp
+    least
     lima
     mergiraf
     nix-direnv
