@@ -60,7 +60,7 @@ hook global WinSetOption filetype=(go|makefile) %{
 ################################################################################
 
 hook global WinSetOption filetype=fish %{
-  set-option window formatcmd "fish_indent"
+  set-option window formatcmd "fish -c fish_indent"
   hook window BufWritePre .* %{ format-buffer }
 }
 
