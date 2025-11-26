@@ -127,11 +127,11 @@
     "least": {
       "flake": false,
       "locked": {
-        "lastModified": 1764139058,
-        "narHash": "sha256-ztu9jmxIsS1DPdHn7+JEHQ4sBVlwpPPKFhV3M3u9/Yg=",
+        "lastModified": 1764186945,
+        "narHash": "sha256-PxU0y4z3kQlVPk6HefJ9N1FreEebdH/0Ow4ggwnGEeQ=",
         "ref": "refs/heads/main",
-        "rev": "37afe5c7207864bbae1f35971bcf11700c1703cc",
-        "revCount": 19,
+        "rev": "5d69e61ce21c8955d0911a11559f489463e2b469",
+        "revCount": 20,
         "type": "git",
         "url": "ssh://git@github.com/evanrelf/least.git"
       },
