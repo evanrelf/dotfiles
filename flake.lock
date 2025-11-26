@@ -174,11 +174,11 @@
     "pancase": {
       "flake": false,
       "locked": {
-        "lastModified": 1749074711,
-        "narHash": "sha256-TBpTpTcEYIavI2QQXWUAPKRXfv8fXZkeWVeKOFVEpdM=",
+        "lastModified": 1764183865,
+        "narHash": "sha256-aC6czvRsHPbmMANpgdTCX2/Z77fj30iLzSJHpcD65+4=",
         "owner": "evanrelf",
         "repo": "pancase",
-        "rev": "4ea8768fcb1ce335652a49bcb66cd137b410d200",
+        "rev": "8c438a105f1357ccc81117431033f6c8c83b193e",
         "type": "github"
       },
       "original": {
