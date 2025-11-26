@@ -22,11 +22,13 @@ let
       ln -s ${drv}/share "$out/share"
     '';
 
-  rust = name:
+  rust = { name, cargoLock ? { } }:
     final.rustPlatform.buildRustPackage (attrs: {
       inherit name;
       src = final.inputs.${name}.outPath;
-      cargoLock.lockFile = "${attrs.src}/Cargo.lock";
+      cargoLock = (attrs.cargoLock or { }) // {
+        lockFile = "${attrs.src}/Cargo.lock";
+      } // cargoLock;
     });
 
 in
@@ -40,7 +42,7 @@ in
     });
 
   empath =
-    rust "empath";
+    rust { name = "empath"; };
 
   findutils-gprefix =
     gprefix final.findutils;
@@ -55,7 +57,7 @@ in
     gprefix final.gnused;
 
   hsl =
-    rust "hsl";
+    rust { name = "hsl"; };
 
   # kakoune-unwrapped =
   #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
@@ -69,8 +71,15 @@ in
   #   });
 
   least =
-    rust "least";
+    rust {
+      name = "least";
+      cargoLock = {
+        outputHashes = {
+          "ansi-to-tui-8.0.0-beta.0" = "sha256-kXossFEdBv35p1ZPMcBTXC+pNA70jbmHVeaJuKFiUTI=";
+        };
+      };
+    };
 
   pancase =
-    rust "pancase";
+    rust { name = "pancase"; };
 }

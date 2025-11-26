@@ -127,11 +127,11 @@
     "least": {
       "flake": false,
       "locked": {
-        "lastModified": 1764186945,
-        "narHash": "sha256-PxU0y4z3kQlVPk6HefJ9N1FreEebdH/0Ow4ggwnGEeQ=",
+        "lastModified": 1764194152,
+        "narHash": "sha256-HwvMDQcPqiuvix1qckltTa/l98tqJq6+X4F+o8tXeOU=",
         "owner": "evanrelf",
         "repo": "least",
-        "rev": "5d69e61ce21c8955d0911a11559f489463e2b469",
+        "rev": "e2adb232e19e39c889e8de5c064f9e456887bb54",
         "type": "github"
       },
       "original": {
