@@ -73,6 +73,7 @@ in
     up
     watchexec
     watchman
+    zig
     zoxide
   ];
 
