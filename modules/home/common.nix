@@ -72,6 +72,7 @@ in
     universal-ctags
     up
     watchexec
+    watchman
     zoxide
   ];
 

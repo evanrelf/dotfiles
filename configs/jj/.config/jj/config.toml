@@ -91,3 +91,8 @@ if(
 ts(t),
 )))))))
 '''
+
+[[--scope]]
+--when.repositories = ['~/Code/MercuryTechnologies/']
+[--scope.fsmonitor]
+backend = 'watchman'
