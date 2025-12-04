@@ -184,10 +184,8 @@ provide-module lsp-init %{
 hook global WinSetOption filetype=haskell %{
   require-module lsp-init
   lsp-enable-window
-}
-
-hook global WinSetOption filetype=rust %{
-  require-module lsp-init
+  lsp-diagnostic-lines-disable window
+  lsp-inlay-diagnostics-enable window
 }
 
 map global "user" "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
