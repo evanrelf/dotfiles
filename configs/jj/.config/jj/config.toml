@@ -94,5 +94,7 @@ ts(t),
 
 [[--scope]]
 --when.repositories = ['~/Code/MercuryTechnologies/']
+[--scope.user]
+email = 'evanr@mercury.com'
 [--scope.fsmonitor]
 backend = 'watchman'
