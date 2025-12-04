@@ -1,3 +1,5 @@
+"$schema" = 'https://docs.jj-vcs.dev/latest/config-schema.json'
+
 aliases.d = ['diff']
 aliases.dup = ['duplicate']
 aliases.l = ['log', '-r', 'ancestors(present(@), 10) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()']

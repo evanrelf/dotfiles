@@ -69,6 +69,7 @@ in
     starship
     tealdeer
     tokei
+    tombi
     universal-ctags
     up
     watchexec
