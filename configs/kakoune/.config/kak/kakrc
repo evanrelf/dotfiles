@@ -161,46 +161,94 @@ hook global WinSetOption filetype=python %{
 # LSP
 ################################################################################
 
-provide-module lsp-init %{
-  evaluate-commands %sh{ kak-lsp --kakoune -s "$kak_session" }
-  # Disable completions
-  set-option global lsp_completion_trigger "fail"
-  # Only send `textDocument/didChange` on save
-  define-command -override -hidden lsp-did-change nop
-  define-command -hidden lsp-did-change-on-save-enable %{
-    hook window BufWritePre .* %{
-      lsp-unless-blocked lsp-send-buffer textDocument/didChange
-    }
+evaluate-commands %sh{ kak-lsp }
+
+# Remove default language servers
+remove-hooks global lsp-filetype-.*
+
+# Disable completions
+set-option global lsp_completion_trigger "fail"
+
+# Disable code actions lightbulb
+set-option global lsp_auto_show_code_actions false
+
+# Only send `textDocument/didChange` on save
+define-command -override -hidden lsp-did-change nop
+define-command -hidden lsp-did-change-on-save-enable %{
+  hook window BufWritePre .* %{
+    lsp-unless-blocked lsp-send-buffer textDocument/didChange
   }
-  map global "normal" "=" ": lsp-hover<ret>"
-  # Dim non-code text
-  set-face global InfoDefault comment
-  set-face global InfoBlock Information
-  set-face global InfoBlockQuote comment
-  set-face global InfoBullet comment
-  set-face global InfoHeader comment
-  set-face global InfoLink comment
-  set-face global InfoLinkMono comment
-  set-face global InfoMono Information
-  set-face global InfoRule comment
-  set-face global InfoDiagnosticError comment
-  set-face global InfoDiagnosticHint comment
-  set-face global InfoDiagnosticInformation comment
-  set-face global InfoDiagnosticWarning comment
 }
 
-hook global WinSetOption filetype=haskell %{
-  require-module lsp-init
+map global "normal" "=" ": lsp-hover<ret>"
+
+set-face global DiagnosticError default,default,red+c
+set-face global DiagnosticWarning default,default,yellow+c
+set-face global DiagnosticHint default
+set-face global DiagnosticInfo default
+set-face global DiagnosticTagDeprecated default
+set-face global DiagnosticTagUnnecessary default
+set-face global InlayDiagnosticError red+a@DiagnosticError
+set-face global InlayDiagnosticWarning yellow+a@DiagnosticWarning
+set-face global InlayDiagnosticHint DiagnosticHint
+set-face global InlayDiagnosticInfo DiagnosticInfo
+set-face global LineFlagError DiagnosticError
+set-face global LineFlagWarning DiagnosticWarning
+set-face global LineFlagHint DiagnosticHint
+set-face global LineFlagInfo DiagnosticInfo
+set-face global Reference default
+set-face global ReferenceBind default
+set-face global InlayHint default+d
+set-face global InlayCodeLens default+d
+
+hook -group lsp-filetype-static-ls global BufSetOption filetype=haskell %{
+  set-option buffer lsp_servers %{
+    [static-ls]
+    root_globs = ["*.cabal", "cabal.project", "package.yaml"]
+    command = "static-ls"
+  }
+}
+
+hook -group lsp-filetype-rust-analyzer global BufSetOption filetype=rust %{
+  set-option buffer lsp_servers %{
+    [rust-analyzer]
+    root_globs = ["Cargo.toml"]
+    command = "sh"
+    args = ["-c", 'if path=$(rustup which rust-analyzer 2>/dev/null); then exec "$path"; else exec rust-analyzer; fi']
+    single_instance = true
+    [rust-analyzer.settings.rust-analyzer]
+    check.command = "clippy"
+  }
+}
+
+hook -group lsp-filetype-tombi global BufSetOption filetype=toml %{
+  set-option buffer lsp_servers %{
+    [tombi]
+    root_globs = [".git", ".jj"]
+    command = "tombi"
+    args = ["lsp"]
+  }
+}
+
+hook -group lsp-filetype-tsgo global BufSetOption filetype=typescript %{
+  set-option buffer lsp_servers %{
+    [tsgo]
+    root_globs = ["package.json", "tsconfig.json"]
+    command = "sh"
+    args = ["-c", "npx tsgo --lsp --stdio"]
+  }
+}
+
+hook global WinSetOption filetype=(toml) %{
   lsp-enable-window
   lsp-diagnostic-lines-disable window
   lsp-inlay-diagnostics-enable window
+  lsp-did-change-on-save-enable
 }
 
-hook global WinSetOption filetype=toml %{
-  require-module lsp-init
+hook global WinSetOption filetype=(haskell|rust|typescript) %{
   lsp-enable-window
   lsp-diagnostic-lines-disable window
-  lsp-inlay-diagnostics-enable window
   lsp-did-change-on-save-enable
 }
 

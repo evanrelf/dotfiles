@@ -135,11 +135,6 @@ in
   home.file.".config/kak/colors".source =
     mutable "configs/kakoune/.config/kak/colors";
 
-  xdg.configFile."kak-lsp" = {
-    source = ../../configs/kakoune/.config/kak-lsp;
-    recursive = true;
-  };
-
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
 
