@@ -163,7 +163,15 @@ hook global WinSetOption filetype=python %{
 
 provide-module lsp-init %{
   evaluate-commands %sh{ kak-lsp --kakoune -s "$kak_session" }
+  # Disable completions
   set-option global lsp_completion_trigger "fail"
+  # Only send `textDocument/didChange` on save
+  define-command -override -hidden lsp-did-change nop
+  define-command -hidden lsp-did-change-on-save-enable %{
+    hook window BufWritePre .* %{
+      lsp-unless-blocked lsp-send-buffer textDocument/didChange
+    }
+  }
   map global "normal" "=" ": lsp-hover<ret>"
   # Dim non-code text
   set-face global InfoDefault comment
