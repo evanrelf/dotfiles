@@ -37,9 +37,6 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH "$DOTFILES/bin"
     set --global --export --prepend PATH "$HOME/.local/bin"
 end
-if command -q least
-    set --global --export PAGER (command -v least)
-end
 if command -q starship
     starship init fish | source
 end

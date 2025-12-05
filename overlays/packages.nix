@@ -70,16 +70,6 @@ in
   #     '';
   #   });
 
-  least =
-    rust {
-      name = "least";
-      cargoLock = {
-        outputHashes = {
-          "ansi-to-tui-8.0.0-beta.0" = "sha256-kXossFEdBv35p1ZPMcBTXC+pNA70jbmHVeaJuKFiUTI=";
-        };
-      };
-    };
-
   pancase =
     rust { name = "pancase"; };
 }
