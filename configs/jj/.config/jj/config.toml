@@ -27,6 +27,18 @@ fi
 revset=${1:-"trunk()"}
 jj new @- "exactly($revset, 1)" --message "Merge \`$revset\`" && jj new
 ''', '']
+aliases.watch = ['util', 'exec', '--', 'bash', '-c', '''
+# https://docs.jj-vcs.dev/latest/FAQ/#can-i-monitor-how-jj-log-evolves
+watchexec \
+  --quiet \
+  --clear \
+  --restart \
+  --watch "$(jj root)/.jj/repo/op_heads/heads" \
+  --ignore-nothing \
+  --shell none \
+  --wrap-process none \
+  -- jj --ignore-working-copy "$@"
+''', '']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
