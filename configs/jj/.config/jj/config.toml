@@ -22,7 +22,6 @@ aliases.take = ['squash', '--use-destination-message', '--from']
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
 ui.default-command = 'l'
-ui.graph.style = 'ascii'
 ui.diff-formatter = ':git'
 ui.diff-editor = ':builtin'
 ui.merge-editor = 'mergiraf'
@@ -38,7 +37,26 @@ revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())' # TODO: Choose a be
 
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log_oneline'
+templates.log_node = 'evan_log_node'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
+template-aliases.evan_log_node = '''
+coalesce(
+  if(!self, label("elided", "~")),
+  label(
+    separate(" ",
+      if(current_working_copy, "working_copy"),
+      "mutable",
+      if(conflict, "conflicted"),
+    ),
+    coalesce(
+      if(current_working_copy, "@"),
+      if(immutable, "├"),
+      if(conflict, "×"),
+      "○",
+    )
+  )
+)
+'''
 template-aliases.evan_log_oneline = '''
 if(root,
   format_root_commit(self),
