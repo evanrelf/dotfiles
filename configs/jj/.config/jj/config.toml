@@ -33,6 +33,7 @@ signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
 
+revset-aliases.'mega' = 'exactly(coalesce(@ & merges(), heads(reachable(@, mutable()) & merges())), 1)'
 revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())' # TODO: Choose a better name
 
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
