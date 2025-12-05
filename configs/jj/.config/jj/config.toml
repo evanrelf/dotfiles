@@ -18,6 +18,7 @@ aliases.mut = ['--ignore-immutable']
 aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--into']
 aliases.take = ['squash', '--use-destination-message', '--from']
+aliases.tug = ['bookmark', 'move', '--from', 'heads(ancestors(@) & bookmarks())', '--to', '@-']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
