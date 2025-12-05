@@ -19,6 +19,14 @@ aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--into']
 aliases.take = ['squash', '--use-destination-message', '--from']
 aliases.tug = ['bookmark', 'move', '--from', 'heads(ancestors(@) & bookmarks())', '--to', '@-']
+aliases.merge = ['util', 'exec', '--', 'bash', '-c', '''
+if [ "$#" -gt 1 ]; then
+  echo "usage: jj merge [REVSET]" >&2
+  exit 1
+fi
+revset=${1:-"trunk()"}
+jj new @- "exactly($revset, 1)" --message "Merge \`$revset\`" && jj new
+''', '']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
