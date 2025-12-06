@@ -2,8 +2,8 @@
 
 aliases.d = ['diff']
 aliases.dup = ['duplicate']
-aliases.l = ['log', '-r', 'alias_l()']
-aliases.ll = ['log', '-r', 'alias_ll()']
+aliases.l = ['log', '-r', 'evan_log() | ancestors(present(@), 10)']
+aliases.ll = ['log', '-r', 'evan_log() | ancestors(present(@))']
 aliases.pr = ['log', '-r', 'pr()']
 aliases.par = ['parallelize']
 aliases.s = ['status']
@@ -41,7 +41,7 @@ watchexec \
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
-ui.default-command = 'l'
+ui.default-command = ['log', '-r', 'evan_log()']
 ui.diff-formatter = ':git'
 ui.diff-editor = ':builtin'
 ui.merge-editor = 'mergiraf'
@@ -53,9 +53,10 @@ signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
 
+revsets.log = 'evan_log()'
 revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
-revset-aliases.'alias_l()' = 'ancestors(present(@), 10) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()'
-revset-aliases.'alias_ll()' = 'alias_l() | ancestors(present(@))'
+revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
+revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'megamerge()' = '(exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()) & mine()'
 revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge())'
 # Nearest bookmark.
