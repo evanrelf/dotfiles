@@ -251,7 +251,7 @@ hook global WinSetOption filetype=(toml) %{
   lsp-did-change-on-save-enable
 }
 
-hook global WinSetOption filetype=(haskell|rust|typescript) %{
+hook global WinSetOption filetype=(haskell|typescript) %{
   lsp-enable-window
   lsp-diagnostic-lines-disable window
   lsp-did-change-on-save-enable
