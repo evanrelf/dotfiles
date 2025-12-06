@@ -1,6 +1,6 @@
 # dotfiles
 
-My personal dotfiles.
+My personal development environment.
 
 - **Editor:** [Kakoune](https://github.com/mawww/kakoune)
 - **VCS:** [Jujutsu](https://github.com/jj-vcs/jj)
