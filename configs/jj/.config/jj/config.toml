@@ -54,18 +54,15 @@ signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
 
 revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
-revset-aliases.'alias_l()' = '(ancestors(present(@), 10) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()) ~ merge_spam()'
+revset-aliases.'alias_l()' = 'ancestors(present(@), 10) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'alias_ll()' = 'alias_l() | ancestors(present(@))'
 revset-aliases.'megamerge()' = '(exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()) & mine()'
 revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge())'
-# Merge ancestors from other branches. Exclude this to remove merge commit spam.
-# TODO: Choose a better name
-revset-aliases.'merge_spam()' = 'ancestors(merges()) ~ first_ancestors(merges())'
 # Nearest bookmark.
 revset-aliases.'bookmark()' = 'heads(ancestors(@) & bookmarks())'
 # Commits you'd see on GitHub pull requests.
-revset-aliases.'pr()' = '(ancestors(bookmark()) ~ ancestors(trunk())) ~ merge_spam()'
-revset-aliases.'pr(x)' = '(ancestors(x) ~ ancestors(trunk())) ~ merge_spam()'
+revset-aliases.'pr()' = 'ancestors(bookmark()) ~ ancestors(trunk())'
+revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())'
 revset-aliases.'prs()' = 'pr(bookmarks())'
 
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
