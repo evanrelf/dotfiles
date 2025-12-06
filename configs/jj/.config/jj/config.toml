@@ -6,18 +6,15 @@ aliases.l = ['log', '-r', 'ancestors(present(@), 10) | (ancestors((immutable_hea
 aliases.ll = ['log', '-r', 'ancestors(present(@)) | (ancestors((immutable_heads() | bookmarks()).., 2) & mine()) | present(trunk()) | bookmarks()']
 aliases.par = ['parallelize']
 aliases.s = ['status']
-
 aliases.blame = ['file', 'annotate']
 aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init']
 aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
-
-aliases.mut = ['--ignore-immutable']
-aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.give = ['squash', '--use-destination-message', '--into']
 aliases.take = ['squash', '--use-destination-message', '--from']
+aliases.here = ['bookmark', 'move', '--to', '@-']
 aliases.tug = ['bookmark', 'move', '--from', 'heads(ancestors(@) & bookmarks())', '--to', '@-']
 aliases.merge = ['util', 'exec', '--', 'bash', '-c', '''
 if [ "$#" -gt 1 ]; then
@@ -27,6 +24,7 @@ fi
 revset=${1:-"trunk()"}
 jj new @- "exactly($revset, 1)" --message "Merge \`$revset\`" && jj new
 ''', '']
+aliases.mut = ['--ignore-immutable']
 aliases.watch = ['util', 'exec', '--', 'bash', '-c', '''
 # https://docs.jj-vcs.dev/latest/FAQ/#can-i-monitor-how-jj-log-evolves
 watchexec \
