@@ -15,7 +15,7 @@ aliases.remote = ['git', 'remote']
 aliases.give = ['squash', '--use-destination-message', '--into']
 aliases.take = ['squash', '--use-destination-message', '--from']
 aliases.here = ['bookmark', 'move', '--to', '@-']
-aliases.tug = ['bookmark', 'move', '--from', 'heads(ancestors(@) & bookmarks())', '--to', '@-']
+aliases.tug = ['bookmark', 'move', '--from', 'bookmark()', '--to', '@-']
 aliases.merge = ['util', 'exec', '--', 'bash', '-c', '''
 if [ "$#" -gt 1 ]; then
   echo "usage: jj merge [REVSET]" >&2
@@ -60,10 +60,12 @@ revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants
 # Merge ancestors from other branches. Exclude this to remove merge commit spam.
 # TODO: Choose a better name
 revset-aliases.'merge_spam()' = 'ancestors(merges()) ~ first_ancestors(merges())'
-# Commits you'd see for a PR on GitHub.
-# TODO: Choose a better name
-revset-aliases.'pr()' = '(ancestors(present(@)) ~ ancestors(trunk())) ~ merge_spam()'
+# Nearest bookmark.
+revset-aliases.'bookmark()' = 'heads(ancestors(@) & bookmarks())'
+# Commits you'd see on GitHub pull requests.
+revset-aliases.'pr()' = '(ancestors(bookmark()) ~ ancestors(trunk())) ~ merge_spam()'
 revset-aliases.'pr(x)' = '(ancestors(x) ~ ancestors(trunk())) ~ merge_spam()'
+revset-aliases.'prs()' = 'pr(bookmarks())'
 
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log_oneline'
