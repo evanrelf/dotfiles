@@ -52,9 +52,9 @@ signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
 
-revsets.log-graph-prioritize = 'coalesce(megamerges(), present(@))'
-revset-aliases.'megamerges()' = 'coalesce(subject(exact:"megamerge") | subject(glob:"megamerge:*")) & mine()'
-revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerges())'
+revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
+revset-aliases.'megamerge()' = 'coalesce(subject(exact:"megamerge") | subject(glob:"megamerge:*")) & mine()'
+revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge())'
 revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())' # TODO: Choose a better name
 
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
