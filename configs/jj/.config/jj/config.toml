@@ -1,22 +1,28 @@
 "$schema" = 'https://docs.jj-vcs.dev/latest/config-schema.json'
 
-aliases.d = ['diff']
+# Shorter
 aliases.dup = ['duplicate']
+aliases.mut = ['--ignore-immutable']
+aliases.par = ['parallelize']
+
+# Log
 aliases.l = ['log', '-r', 'evan_log() | ancestors(present(@), 10)']
 aliases.ll = ['log', '-r', 'evan_log() | ancestors(present(@))']
 aliases.pr = ['log', '-r', 'pr()']
-aliases.par = ['parallelize']
-aliases.s = ['status']
+
+# Squash
+aliases.give = ['squash', '--use-destination-message', '--into']
+aliases.take = ['squash', '--use-destination-message', '--from']
+
+# Bookmark
+aliases.here = ['bookmark', 'move', '--to', '@-']
+aliases.tug = ['bookmark', 'move', '--from', 'bookmark()', '--to', '@-']
+
+# Git
 aliases.blame = ['file', 'annotate']
 aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init']
-aliases.push = ['git', 'push']
-aliases.remote = ['git', 'remote']
-aliases.give = ['squash', '--use-destination-message', '--into']
-aliases.take = ['squash', '--use-destination-message', '--from']
-aliases.here = ['bookmark', 'move', '--to', '@-']
-aliases.tug = ['bookmark', 'move', '--from', 'bookmark()', '--to', '@-']
 aliases.merge = ['util', 'exec', '--', 'bash', '-c', '''
 if [ "$#" -gt 1 ]; then
   echo "usage: jj merge [REVSET]" >&2
@@ -25,7 +31,9 @@ fi
 revset=${1:-"trunk()"}
 jj new @- "exactly($revset, 1)" --message "Merge \`$revset\`" && jj new
 ''', '']
-aliases.mut = ['--ignore-immutable']
+aliases.push = ['git', 'push']
+aliases.remote = ['git', 'remote']
+
 aliases.watch = ['util', 'exec', '--', 'bash', '-c', '''
 # https://docs.jj-vcs.dev/latest/FAQ/#can-i-monitor-how-jj-log-evolves
 watchexec \
