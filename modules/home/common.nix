@@ -95,6 +95,15 @@ in
     recursive = true;
   };
 
+  home.file.".config/fish/config.fish".source =
+    mutable "configs/fish/.config/fish/config.fish";
+
+  home.file.".config/fish/conf.d".source =
+    mutable "configs/fish/.config/fish/conf.d";
+
+  home.file.".config/fish/functions".source =
+    mutable "configs/fish/.config/fish/functions";
+
   xdg.configFile."fish" = {
     source = ../../configs/fish/.config/fish;
     recursive = true;
