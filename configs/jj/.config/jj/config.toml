@@ -74,6 +74,7 @@ revset-aliases.'pr()' = 'ancestors(bookmark()) ~ ancestors(trunk())'
 revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())'
 revset-aliases.'prs()' = 'pr(bookmarks())'
 
+colors.megamerge = { fg = "bright green" }
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log_oneline'
 templates.log_node = 'evan_log_node'
@@ -113,6 +114,7 @@ if(root,
           label(if(empty, "empty"), description_placeholder),
         ),
         if(empty, label("empty", "(empty)")),
+        if(self.contained_in("megamerge()"), label("megamerge", "(megamerge)")),
         bookmarks,
         tags,
         working_copies,
