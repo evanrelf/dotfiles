@@ -1,9 +1,11 @@
 "$schema" = 'https://docs.jj-vcs.dev/latest/config-schema.json'
 
 # Shorter
+aliases.d = ['diff']
 aliases.dup = ['duplicate']
 aliases.mut = ['--ignore-immutable']
 aliases.par = ['parallelize']
+aliases.s = ['status']
 
 # Log
 aliases.l = ['log', '-r', 'evan_log() | ancestors(present(@), 10)']
