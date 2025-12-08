@@ -128,7 +128,7 @@ if(root,
     ),
   ),
 ) ++
-if(!empty && (!description || self.contained_in("wip()")),
+if(!empty && (current_working_copy || !description || self.contained_in("wip()")),
   diff.summary(),
 )
 '''
