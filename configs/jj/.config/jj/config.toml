@@ -17,8 +17,14 @@ aliases.give = ['squash', '--use-destination-message', '--into']
 aliases.take = ['squash', '--use-destination-message', '--from']
 
 # Bookmark
-aliases.here = ['bookmark', 'move', '--to', '@-']
-aliases.tug = ['bookmark', 'move', '--from', 'bookmark()', '--to', '@-']
+aliases.tug = ['util', 'exec', '--', 'bash', '-c', '''
+set -euo pipefail
+if [ "$#" -eq 0 ]; then
+  jj bookmark move --from 'bookmark()' --to @-
+else
+  jj bookmark move --to @- "$@"
+fi
+''', '']
 
 # Git
 aliases.blame = ['file', 'annotate']
