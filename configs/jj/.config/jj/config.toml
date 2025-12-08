@@ -79,7 +79,6 @@ revset-aliases.'pr()' = 'ancestors(bookmark()) ~ ancestors(trunk())'
 revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())'
 revset-aliases.'prs()' = 'pr(bookmarks())'
 
-colors.megamerge = { fg = "bright green" }
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log'
 templates.log_node = 'evan_log_node'
@@ -112,18 +111,7 @@ if(root,
         format_short_change_id_with_hidden_and_divergent_info(self),
         format_short_commit_id(commit_id),
         pad_start(3, format_log_timestamp(commit_timestamp(self))),
-        if(conflict, label("conflict", "conflict")),
-        if(config("ui.show-cryptographic-signatures").as_boolean(),
-          format_short_cryptographic_signature(signature)),
-        if(description,
-          label(
-            if(self.contained_in("wip()"), if(empty, "empty", "description placeholder")),
-            description.first_line()
-          ),
-          label(if(empty, "empty"), description_placeholder),
-        ),
-        if(empty, label("empty", "(empty)")),
-        if(self.contained_in("megamerge()"), label("megamerge", "(megamerge)")),
+        evan_log_description,
         bookmarks,
         tags,
         working_copies,
@@ -131,6 +119,25 @@ if(root,
     ),
   ),
 ) ++ evan_log_status
+'''
+template-aliases.'evan_log_description' = '''
+  label(
+    separate(" ",
+      if(!description || self.contained_in("wip()"), "description placeholder"),
+      if(empty, "empty"),
+    ),
+    separate(" ",
+      if(conflict, label("conflict", "conflict")),
+      stringify(if(description,
+        description.first_line(),
+        description_placeholder,
+      )),
+      surround("(", ")", separate(", ",
+        if(empty, "empty"),
+        if(self.contained_in("megamerge()"), "megamerge"),
+      ))
+    ),
+  )
 '''
 template-aliases.'evan_log_status' = '''
 if(!empty && (current_working_copy || !description || self.contained_in("wip()")),
