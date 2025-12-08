@@ -129,7 +129,9 @@ if(root,
       ) ++ "\n",
     ),
   ),
-) ++
+) ++ evan_log_status
+'''
+template-aliases.'evan_log_status' = '''
 if(!empty && (current_working_copy || !description || self.contained_in("wip()")),
   diff.summary(),
 )
