@@ -59,7 +59,7 @@ revsets.short-prefixes = 'evan_log()'
 revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
 revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
-revset-aliases.'megamerge()' = 'exactly(coalesce(@ & merges(), heads(reachable(@, mutable()) & merges()), root()), 1) ~ root()'
+revset-aliases.'megamerge()' = 'exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()'
 revset-aliases.'M' = 'megamerge()'
 revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge()) | descendants(wip())'
 revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
@@ -124,7 +124,6 @@ template-aliases.'evan_log_description' = '''
       )),
       surround("(", ")", separate(", ",
         if(empty, "empty"),
-        if(self.contained_in("megamerge()"), "megamerge"),
       ))
     ),
   )
