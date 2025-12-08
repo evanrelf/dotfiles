@@ -108,7 +108,7 @@ revset-aliases.'M' = 'megamerge()'
 revset-aliases.'private()' = 'subject(glob:"private:*") | megamerge() | wip()'
 revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
 # Nearest bookmark.
-revset-aliases.'bookmark()' = 'heads(ancestors(@) & bookmarks())'
+revset-aliases.'bookmark()' = 'exactly(heads(ancestors(@) & bookmarks()), 1)'
 # Commits you'd see on GitHub pull requests.
 revset-aliases.'pr()' = 'trunk()..bookmark() & mutable()'
 revset-aliases.'pr(x)' = 'trunk()..x & mutable()'
