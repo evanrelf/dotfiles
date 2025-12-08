@@ -38,10 +38,27 @@ jj new
 aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
 
+aliases.megaset = ['util', 'exec', '--', 'bash', '-c', '''
+set -euo pipefail
+if [ "$#" -eq 0 ]; then
+  echo "Usage: jj megaset [REVSETS]..." >&2
+  exit 1
+fi
+if [ "$#" -eq 1 ]; then
+  parents=${1:?}
+  jj rebase --source 'megamerge()' --onto "$parents"
+else
+  args=()
+  for arg in "$@"; do
+    args+=(--onto "$arg")
+  done
+  jj rebase --source 'megamerge()' "${args[@]}"
+fi
+''', '']
 aliases.megadifference = ['util', 'exec', '--', 'bash', '-c', '''
 set -euo pipefail
 if [ "$#" -ne 1 ]; then
-  echo "Usage: jj megamerge <REVSET>" >&2
+  echo "Usage: jj megadifference <REVSET>" >&2
   exit 1
 fi
 parents=${1:?}
@@ -50,7 +67,7 @@ jj rebase --source 'megamerge()' --onto "parents(megamerge()) ~ ($parents)"
 aliases.megaunion = ['util', 'exec', '--', 'bash', '-c', '''
 set -euo pipefail
 if [ "$#" -ne 1 ]; then
-  echo "Usage: jj megamerge <REVSET>" >&2
+  echo "Usage: jj megaunion <REVSET>" >&2
   exit 1
 fi
 parents=${1:?}
