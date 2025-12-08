@@ -63,7 +63,7 @@ if [ "$#" -gt 1 ]; then
   exit 1
 fi
 base=${1:-"trunk()"}
-jj rebase --source 'megaroots()' --onto "exactly($base, 1)"
+jj rebase --source "roots(($base)..megamerge())" --onto "exactly($base, 1)"
 ''', '']
 aliases.watch = ['util', 'exec', '--', 'jj-watch']
 
@@ -87,7 +87,6 @@ revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
 revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'megamerge()' = 'exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()'
-revset-aliases.'megaroots()' = 'roots(trunk()..megamerge())'
 revset-aliases.'M' = 'megamerge()'
 revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge()) | descendants(wip())'
 revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
