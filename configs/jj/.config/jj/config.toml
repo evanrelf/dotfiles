@@ -68,6 +68,7 @@ revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
 revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'megamerge()' = 'exactly(coalesce(@ & merges(), heads(reachable(@, mutable()) & merges()), root()), 1) ~ root()'
+revset-aliases.'M' = 'megamerge()'
 revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge()) | descendants(wip())'
 revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
 # Nearest bookmark.
@@ -93,6 +94,7 @@ coalesce(
     ),
     coalesce(
       if(current_working_copy, "@"),
+      if(self.contained_in("megamerge()"), "M"),
       if(immutable, "├"),
       if(conflict, "×"),
       "○",
