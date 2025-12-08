@@ -68,7 +68,8 @@ revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
 revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'megamerge()' = 'exactly(coalesce(@ & merges(), heads(reachable(@, mutable()) & merges()), root()), 1) ~ root()'
-revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge())'
+revset-aliases.'private()' = '(subject(glob:"private:*") & mine()) | descendants(megamerge()) | descendants(wip())'
+revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
 # Nearest bookmark.
 revset-aliases.'bookmark()' = 'heads(ancestors(@) & bookmarks())'
 # Commits you'd see on GitHub pull requests.
@@ -112,7 +113,10 @@ if(root,
         if(config("ui.show-cryptographic-signatures").as_boolean(),
           format_short_cryptographic_signature(signature)),
         if(description,
-          description.first_line(),
+          label(
+            if(self.contained_in("wip()"), if(empty, "empty", "description placeholder")),
+            description.first_line()
+          ),
           label(if(empty, "empty"), description_placeholder),
         ),
         if(empty, label("empty", "(empty)")),
@@ -124,7 +128,7 @@ if(root,
     ),
   ),
 ) ++
-if(!description && !empty,
+if(!empty && (!description || self.contained_in("wip()")),
   diff.summary(),
 )
 '''
