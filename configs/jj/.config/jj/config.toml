@@ -38,6 +38,24 @@ jj new
 aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
 
+aliases.megadifference = ['util', 'exec', '--', 'bash', '-c', '''
+set -euo pipefail
+if [ "$#" -ne 1 ]; then
+  echo "Usage: jj megamerge <REVSET>" >&2
+  exit 1
+fi
+parents=${1:?}
+jj rebase --source 'megamerge()' --onto "parents(megamerge()) ~ ($parents)"
+''', '']
+aliases.megaunion = ['util', 'exec', '--', 'bash', '-c', '''
+set -euo pipefail
+if [ "$#" -ne 1 ]; then
+  echo "Usage: jj megamerge <REVSET>" >&2
+  exit 1
+fi
+parents=${1:?}
+jj rebase --source 'megamerge()' --onto "parents(megamerge()) | ($parents)"
+''', '']
 aliases.megarebase = ['util', 'exec', '--', 'bash', '-c', '''
 set -euo pipefail
 if [ "$#" -gt 1 ]; then
