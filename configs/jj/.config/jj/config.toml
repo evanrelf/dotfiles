@@ -38,6 +38,15 @@ jj new
 aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
 
+aliases.megarebase = ['util', 'exec', '--', 'bash', '-c', '''
+set -euo pipefail
+if [ "$#" -gt 1 ]; then
+  echo "Usage: jj megarebase [REVSET]" >&2
+  exit 1
+fi
+base=${1:-"trunk()"}
+jj rebase --source 'megaroots()' --onto "exactly($base, 1)"
+''', '']
 aliases.watch = ['util', 'exec', '--', 'jj-watch']
 
 user.name = 'Evan Relf'
