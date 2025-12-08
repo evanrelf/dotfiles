@@ -1,4 +1,4 @@
-"$schema" = 'https://docs.jj-vcs.dev/latest/config-schema.json'
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
 
 # Shorter
 aliases.d = ['diff']
