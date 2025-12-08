@@ -26,12 +26,14 @@ aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init']
 aliases.merge = ['util', 'exec', '--', 'bash', '-c', '''
+set -euo pipefail
 if [ "$#" -gt 1 ]; then
-  echo "usage: jj merge [REVSET]" >&2
+  echo "Usage: jj merge [REVSET]" >&2
   exit 1
 fi
-revset=${1:-"trunk()"}
-jj new @- "exactly($revset, 1)" --message "Merge \`$revset\`" && jj new
+parent=${1:-"trunk()"}
+jj new @- "exactly($parent, 1)" --message "Merge \`$parent\`"
+jj new
 ''', '']
 aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
