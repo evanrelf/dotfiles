@@ -110,8 +110,8 @@ revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
 # Nearest bookmark.
 revset-aliases.'bookmark()' = 'heads(ancestors(@) & bookmarks())'
 # Commits you'd see on GitHub pull requests.
-revset-aliases.'pr()' = 'ancestors(bookmark()) ~ ancestors(trunk())'
-revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())'
+revset-aliases.'pr()' = 'trunk()..bookmark() & mutable()'
+revset-aliases.'pr(x)' = 'trunk()..x & mutable()'
 revset-aliases.'prs()' = 'pr(bookmarks())'
 
 colors.'evan_working_copy' = { bold = true }
