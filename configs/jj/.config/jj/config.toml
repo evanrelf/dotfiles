@@ -100,7 +100,6 @@ signing.key = '~/.ssh/jj.pub'
 
 revsets.log = 'evan_log()'
 revsets.short-prefixes = 'evan_log()'
-revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
 revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'megamerge()' = 'exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()'
@@ -130,7 +129,7 @@ coalesce(
     ),
     coalesce(
       if(current_working_copy, "@"),
-      if(self.contained_in("megamerge()"), "M"),
+      if(description.first_line() == "megamerge", "M"),
       if(immutable, "·"),
       "○",
     )
@@ -158,7 +157,7 @@ if(root,
 template-aliases.'evan_log_description' = '''
   label(
     separate(" ",
-      if(!description || self.contained_in("wip()"), "description placeholder"),
+      if(!description || description.first_line().starts_with("wip:"), "description placeholder"),
       if(empty, "empty"),
     ),
     separate(" ",
@@ -174,7 +173,7 @@ template-aliases.'evan_log_description' = '''
   )
 '''
 template-aliases.'evan_log_status' = '''
-if(!empty && (current_working_copy || !description || self.contained_in("wip()")),
+if(!empty && (current_working_copy || !description || description.first_line().starts_with("wip:")),
   diff.summary() ++ "\n"
 )
 '''
