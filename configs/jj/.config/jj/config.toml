@@ -80,7 +80,7 @@ revset-aliases.'prs()' = 'pr(bookmarks())'
 
 colors.megamerge = { fg = "bright green" }
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
-templates.log = 'evan_log_oneline'
+templates.log = 'evan_log'
 templates.log_node = 'evan_log_node'
 template-aliases.'format_short_id(id)' = 'id.shortest(6)'
 template-aliases.evan_log_node = '''
@@ -102,7 +102,7 @@ coalesce(
   )
 )
 '''
-template-aliases.evan_log_oneline = '''
+template-aliases.evan_log = '''
 if(root,
   format_root_commit(self),
   label(if(current_working_copy, "working_copy"),
