@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+# https://docs.jj-vcs.dev/latest/FAQ/#can-i-monitor-how-jj-log-evolves
+
+root=$(jj root)
+
+watchexec \
+  --quiet \
+  --clear \
+  --restart \
+  --project-origin "$root" \
+  --shell none \
+  --wrap-process none \
+  -- \
+  watchexec \
+    --quiet \
+    --clear \
+    --restart \
+    --project-origin "$root" \
+    --watch /.jj/repo/op_heads/heads \
+    --ignore-nothing \
+    --shell none \
+    --wrap-process none \
+    -- jj "$@"
