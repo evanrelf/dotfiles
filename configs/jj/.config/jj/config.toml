@@ -64,6 +64,7 @@ signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
 
 revsets.log = 'evan_log()'
+revsets.short-prefixes = 'evan_log()'
 revsets.log-graph-prioritize = 'coalesce(megamerge(), present(@))'
 revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
