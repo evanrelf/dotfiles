@@ -79,6 +79,7 @@ revset-aliases.'pr()' = 'ancestors(bookmark()) ~ ancestors(trunk())'
 revset-aliases.'pr(x)' = 'ancestors(x) ~ ancestors(trunk())'
 revset-aliases.'prs()' = 'pr(bookmarks())'
 
+colors.'evan_working_copy' = { bold = true }
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
 templates.log = 'evan_log'
 templates.log_node = 'evan_log_node'
@@ -88,7 +89,7 @@ coalesce(
   if(!self, label("elided", "┆")),
   label(
     separate(" ",
-      if(current_working_copy, "working_copy"),
+      if(current_working_copy, "evan_working_copy"),
       if(conflict, "conflicted"),
     ),
     coalesce(
@@ -103,7 +104,7 @@ coalesce(
 template-aliases.evan_log = '''
 if(root,
   format_root_commit(self),
-  label(if(current_working_copy, "working_copy"),
+  label(if(current_working_copy, "evan_working_copy"),
     concat(
       separate(" ",
         format_short_change_id_with_hidden_and_divergent_info(self),
