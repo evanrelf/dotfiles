@@ -37,7 +37,9 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH "$DOTFILES/bin"
     set --global --export --prepend PATH "$HOME/.local/bin"
 end
-if command -q starship
+if command -q evanrelf-prompt
+    evanrelf-prompt init | source
+else if command -q starship
     starship init fish | source
 end
 if command -q direnv

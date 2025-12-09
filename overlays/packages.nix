@@ -22,10 +22,10 @@ let
       ln -s ${drv}/share "$out/share"
     '';
 
-  rust = { name, cargoLock ? { } }:
+  rust = { name, src ? final.inputs.${name}.outPath, cargoLock ? { } }:
     final.rustPlatform.buildRustPackage (attrs: {
       inherit name;
-      src = final.inputs.${name}.outPath;
+      inherit src;
       cargoLock = (attrs.cargoLock or { }) // {
         lockFile = "${attrs.src}/Cargo.lock";
       } // cargoLock;
@@ -43,6 +43,9 @@ in
 
   empath =
     rust { name = "empath"; };
+
+  evanrelf-prompt =
+    rust { name = "evanrelf-prompt"; src = ../src/evanrelf-prompt; };
 
   findutils-gprefix =
     gprefix final.findutils;

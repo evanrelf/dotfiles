@@ -39,6 +39,7 @@ in
     direnv
     empath
     evanrelf-fish
+    evanrelf-prompt
     fd
     findutils-gprefix
     fzf
