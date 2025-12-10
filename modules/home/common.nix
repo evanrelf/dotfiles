@@ -66,7 +66,6 @@ in
     samply
     sd
     shellcheck
-    starship
     tealdeer
     tokei
     tombi
@@ -152,9 +151,6 @@ in
     source = ../../configs/ripgrep/.config/ripgrep;
     recursive = true;
   };
-
-  xdg.configFile."starship.toml".source =
-    mutable "configs/starship/.config/starship.toml";
 
   home.file.".config/zed/settings.json".source =
     mutable "configs/zed/.config/zed/settings.json";

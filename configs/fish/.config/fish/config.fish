@@ -39,8 +39,6 @@ if test -z "$IN_NIX_SHELL"
 end
 if command -q evanrelf-prompt
     evanrelf-prompt init | source
-else if command -q starship
-    starship init fish | source
 end
 if command -q direnv
     direnv hook fish | source
