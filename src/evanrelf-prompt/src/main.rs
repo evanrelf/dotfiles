@@ -28,6 +28,7 @@ const BRIGHT_BLUE: &str = "\x1b[94m";
 const RESET: &str = "\x1b[0m";
 
 fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<()> {
+    // TODO: Don't show status for successful pipeline (e.g. `true | true` gives `0 | 0`).
     let status = match pipestatus.map(str::trim) {
         Some("0") | None => "",
         Some(pipestatus) => &format!("{}\n", pipestatus.replace(' ', " | ")),
