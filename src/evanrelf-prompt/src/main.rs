@@ -59,13 +59,13 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
 fn run_init() -> anyhow::Result<()> {
     println!(
         "{}",
-        r"
+        r#"
 function fish_prompt
     evanrelf-prompt prompt \
-        --pipestatus $pipestatus \
+        --pipestatus "$pipestatus" \
         --jobs (jobs -g 2>/dev/null | count)
 end
-        "
+        "#
         .trim()
     );
 
