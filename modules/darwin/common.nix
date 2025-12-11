@@ -7,6 +7,8 @@
   #   "${inputs.home-manager}/nix-darwin"
   # ];
 
+  environment.shells = [ "/Users/evanrelf/.nix-profile/bin/fish" ];
+
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings.trusted-users = [ "@admin" ];
 
