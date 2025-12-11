@@ -216,3 +216,19 @@ ts(t),
 email = 'evanr@mercury.com'
 [--scope.fsmonitor]
 backend = 'watchman'
+[--scope.fix.tools.be-format-haskell]
+command = ['be', 'format', 'haskell', '--stdin']
+patterns = ['glob:"**/*.hs"']
+[--scope.fix.tools.prettier]
+command = ['npx', 'prettier', '--stdin-filepath', '$path']
+patterns = [
+  'glob:"**/*.css"',
+  'glob:"**/*.js"',
+  'glob:"**/*.json"',
+  'glob:"**/*.jsx"',
+  'glob:"**/*.md"',
+  'glob:"**/*.mdx"',
+  'glob:"**/*.mjs"',
+  'glob:"**/*.ts"',
+  'glob:"**/*.tsx"',
+]
