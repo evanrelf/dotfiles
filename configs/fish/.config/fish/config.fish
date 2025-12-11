@@ -32,6 +32,7 @@ if test -z "$IN_NIX_SHELL"
         set --global --export --prepend PATH /opt/homebrew/bin
     end
     set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
+    set --global --export --prepend PATH /run/current-system/sw/bin
     set --global --export --prepend PATH "$HOME/.nix-profile/bin"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
     set --global --export --prepend PATH "$DOTFILES/bin"
