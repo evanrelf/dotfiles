@@ -11,6 +11,9 @@ let
 in
 {
   darwinConfigurations = {
+    pearl =
+      mkDarwinConfiguration [ ../modules/darwin/machines/pearl.nix ];
+
     ultraviolet =
       mkDarwinConfiguration [ ../modules/darwin/machines/ultraviolet.nix ];
   };
