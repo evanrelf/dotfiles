@@ -1,6 +1,12 @@
 { inputs, pkgs, ... }:
 
 {
+  # TODO: Consider integrating `home-manager` into `nix-darwin`.
+  # https://nix-community.github.io/home-manager/index.xhtml#sec-install-nix-darwin-module
+  # imports = [
+  #   "${inputs.home-manager}/nix-darwin"
+  # ];
+
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings.trusted-users = [ "@admin" ];
 
