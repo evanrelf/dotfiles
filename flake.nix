@@ -40,7 +40,7 @@
       perSystem = { config, inputs', pkgs, system, ... }: {
         _module.args.pkgs =
           import inputs.nixpkgs {
-            localSystem = system;
+            inherit system;
             config = { allowUnfree = true; };
             overlays = [
               (_: _: { inherit inputs inputs'; })
