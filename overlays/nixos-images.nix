@@ -51,9 +51,21 @@ let
         set -Eeuxo pipefail
         IFS=$'\n\t'
 
-        DISK=/dev/nvme0n1
-        BOOT=/dev/nvme0n1p1
-        ROOT=/dev/nvme0n1p2
+        if [ -e /dev/vda ]; then
+          # virtio
+          DISK=/dev/vda
+          BOOT=/dev/vda1
+          ROOT=/dev/vda2
+        elif [ -e /dev/nvme0n1 ]; then
+          # VMWare Fusion
+          DISK=/dev/nvme0n1
+          BOOT=/dev/nvme0n1p1
+          ROOT=/dev/nvme0n1p2
+        else
+          echo "Failed to infer disk name:" >&2
+          lsblk >&2
+          exit 1
+        fi
 
         # Clear disk
         wipefs --all --force $DISK
