@@ -8,7 +8,6 @@
   networking.hostId = "12345678";
   boot.zfs.devNodes = "/dev/nvme0n1p2";
 
-  # TODO: Define with `disko`
   fileSystems."/boot" = {
     fsType = "vfat";
     device = "/dev/nvme0n1p1";
