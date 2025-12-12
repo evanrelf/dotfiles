@@ -1,52 +1,10 @@
-final: prev:
+{ modulesPath, pkgs, ... }:
 
 let
-  vmInstaller =
-    let
-      nixosSystem = config:
-        final.inputs.nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          pkgs = final;
-          modules = [ config ];
-          specialArgs = { inherit (prev) inputs; };
-        };
-
-      config = ../modules/nixos/machines/vm.nix;
-
-      system = nixosSystem config;
-
-      installerConfig = { modulesPath, ... }: {
-        imports = [
-          "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-        ];
-
-        nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
-
-        # Bake dependencies into ISO (makes it HUGE)
-        # isoImage.storeContents = [ system.config.system.build.toplevel ];
-        # isoImage.includeSystemBuildDependencies = true;
-        boot.supportedFilesystems = [ "zfs" ];
-        system.nixos-generate-config.configuration =
-          builtins.replaceStrings [ "@" ] [ "\\@" ] (builtins.readFile config);
-
-        # Install automatically
-        environment.systemPackages = [ vm-install ];
-        environment.loginShellInit = ''
-          if [ "$(whoami)" = "nixos" ] && [ ! -e .tried-vm-install ]; then
-            touch .tried-vm-install
-            sudo vm-install
-          fi
-        '';
-      };
-
-      installerSystem = nixosSystem installerConfig;
-    in
-    installerSystem.config.system.build.isoImage;
-
   # Modified version of my "Install NixOS on ZFS With Opt-In State" gist:
   # https://gist.github.com/evanrelf/562102d6e8bc5b0f386fe8e91c40e863
   vm-install =
-    final.writeShellApplication {
+    pkgs.writeShellApplication {
       name = "vm-install";
       text = ''
         set -Eeuxo pipefail
@@ -125,9 +83,31 @@ let
         poweroff
       '';
     };
+
 in
 {
-  nixosImages = (prev.nixosImages or { }) // {
-    inherit vmInstaller;
-  };
+  imports = [
+    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+    ./vm.nix
+  ];
+
+  # Bake dependencies into ISO (makes it HUGE)
+  # isoImage.storeContents = [ system.config.system.build.toplevel ];
+  # isoImage.includeSystemBuildDependencies = true;
+
+  boot.supportedFilesystems = [ "zfs" ];
+
+  system.nixos-generate-config.configuration =
+    builtins.replaceStrings [ "@" ] [ "\\@" ] (builtins.readFile ./vm.nix);
+
+  # Install automatically
+  environment.systemPackages = [ vm-install ];
+  environment.loginShellInit = ''
+    if [ "$(whoami)" = "nixos" ] && [ ! -e .tried-vm-install ]; then
+      touch .tried-vm-install
+      sudo vm-install
+    fi
+  '';
+
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 }
