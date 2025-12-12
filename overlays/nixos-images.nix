@@ -8,6 +8,7 @@ let
           system = "aarch64-linux";
           pkgs = final;
           modules = [ config ];
+          specialArgs = { inherit (prev) inputs; };
         };
 
       config = ../modules/nixos/machines/vm.nix;
