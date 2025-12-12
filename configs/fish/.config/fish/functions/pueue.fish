@@ -1,0 +1,1 @@
+pueue completions fish | source
