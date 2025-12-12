@@ -73,6 +73,9 @@ in
   #     '';
   #   });
 
+  lima =
+    prev.lima.override { withAdditionalGuestAgents = true; };
+
   pancase =
     rust { name = "pancase"; };
 }

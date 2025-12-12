@@ -1,6 +1,10 @@
 { inputs, lib, pkgs, ... }:
 
 {
+  imports = [
+    ../common.nix
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "nvme" "usbhid" "sr_mod" ];
@@ -61,8 +65,6 @@
       pkgs.kakoune
     ];
   };
-
-  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";
 }

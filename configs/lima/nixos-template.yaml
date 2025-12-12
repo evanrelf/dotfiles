@@ -1,0 +1,17 @@
+# https://github.com/lima-vm/lima/blob/master/templates/default.yaml
+
+minimumLimaVersion: 1.2.2
+
+cpus: 4
+memory: "8GiB"
+
+images:
+  - arch: "aarch64"
+    location: "./result/nixos.qcow2"
+
+mounts:
+  - location: "~"
+    # writable: true
+
+containerd:
+  user: false

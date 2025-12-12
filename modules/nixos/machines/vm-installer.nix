@@ -88,6 +88,7 @@ in
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+    ../common.nix
     ./vm.nix
   ];
 
@@ -108,6 +109,4 @@ in
       sudo vm-install
     fi
   '';
-
-  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 }
