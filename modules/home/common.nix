@@ -69,6 +69,7 @@ in
     tombi
     universal-ctags
     up
+    uutils-coreutils
     watchexec
     watchman
     zig
