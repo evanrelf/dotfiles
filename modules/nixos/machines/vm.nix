@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ../common.nix
+    # NOTE: You cannot import relative paths, because this file is copied into
+    # the installer ISO alone.
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -65,6 +66,9 @@
       pkgs.kakoune
     ];
   };
+
+  nix.settings.trusted-users = [ "@wheel" ];
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";
 }

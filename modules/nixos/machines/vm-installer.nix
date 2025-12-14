@@ -86,11 +86,6 @@ let
 
 in
 {
-  imports = [
-    ../common.nix
-    ./vm.nix
-  ];
-
   # Bake dependencies into ISO (makes it HUGE)
   # isoImage.storeContents = [ system.config.system.build.toplevel ];
   # isoImage.includeSystemBuildDependencies = true;
@@ -108,4 +103,7 @@ in
       sudo vm-install
     fi
   '';
+
+  nix.settings.trusted-users = [ "@wheel" ];
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 }
