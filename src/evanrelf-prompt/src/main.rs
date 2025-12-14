@@ -24,7 +24,6 @@ fn main() -> anyhow::Result<()> {
 }
 
 const RED: &str = "\x1b[31m";
-const GREEN: &str = "\x1b[32m";
 const BRIGHT_BLUE: &str = "\x1b[94m";
 const RESET: &str = "\x1b[0m";
 
@@ -52,11 +51,7 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
 
     let jobs = if jobs.unwrap_or(0) >= 1 { "  " } else { "" };
 
-    let is_lima = env::var("HOME").as_deref() == Ok("/home/evanrelf.linux");
-
-    let color = if is_lima { GREEN } else { BRIGHT_BLUE };
-
-    print!("\n{RED}{status}{color}{pwd}{in_nix_shell}{jobs}\n${RESET} ");
+    print!("\n{RED}{status}{BRIGHT_BLUE}{pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
 }
