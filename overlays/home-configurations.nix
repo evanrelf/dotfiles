@@ -12,14 +12,6 @@ let
 
 in
 {
-  commonPackages =
-    (import ../modules/home/common.nix {
-      config = { };
-      inputs = final.inputs;
-      lib = final.lib;
-      pkgs = final;
-    }).home.packages;
-
   homeConfigurations = {
     lima =
       mkHomeConfiguration [ ../modules/home/machines/lima.nix ];
