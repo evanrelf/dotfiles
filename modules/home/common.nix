@@ -11,8 +11,6 @@ in
 {
   # Home Manager
 
-  home.stateVersion = "22.11";
-
   home.enableNixpkgsReleaseCheck = true;
 
   news.display = "silent";

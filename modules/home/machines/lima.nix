@@ -9,4 +9,6 @@
 
   home.file."Code/${config.home.username}/dotfiles".source =
     config.lib.file.mkOutOfStoreSymlink "/Users/${config.home.username}/Code/${config.home.username}/dotfiles";
+
+  home.stateVersion = "25.11";
 }
