@@ -11,7 +11,7 @@ images:
 
 mounts:
   - location: "~"
-    # writable: true
+    writable: true
 
 containerd:
   user: false
