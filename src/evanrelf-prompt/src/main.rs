@@ -34,13 +34,21 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
         Some(pipestatus) => &format!("{}\n", pipestatus.replace(' ', " | ")),
     };
 
+    let hostname = match nix::unistd::gethostname()?.into_string() {
+        Ok(s) => match s.strip_suffix(".local") {
+            Some(s) => String::from(s),
+            None => s,
+        },
+        Err(_) => anyhow::bail!("Failed to convert hostname to UTF-8 string"),
+    };
+
     // TODO: Underline path component for repo.
     // `jj --at-operation @ --ignore-working-copy root`
     let home = Utf8PathBuf::try_from(env::home_dir().unwrap())?;
     let current_dir = Utf8PathBuf::try_from(env::current_dir()?)?;
     let pwd = match current_dir.strip_prefix(&home) {
-        Ok(pwd) if pwd.as_str().is_empty() => "~",
-        Ok(pwd) => &format!("~/{pwd}"),
+        Ok(s) if s.as_str().is_empty() => "~",
+        Ok(s) => &format!("~/{s}"),
         Err(_) => current_dir.as_str(),
     };
 
@@ -51,7 +59,7 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
 
     let jobs = if jobs.unwrap_or(0) >= 1 { "  " } else { "" };
 
-    print!("\n{RED}{status}{BRIGHT_BLUE}{pwd}{in_nix_shell}{jobs}\n${RESET} ");
+    print!("\n{RED}{status}{BRIGHT_BLUE}{hostname}:{pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
 }
