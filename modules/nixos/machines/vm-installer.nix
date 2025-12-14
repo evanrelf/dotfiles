@@ -87,7 +87,6 @@ let
 in
 {
   imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     ../common.nix
     ./vm.nix
   ];
