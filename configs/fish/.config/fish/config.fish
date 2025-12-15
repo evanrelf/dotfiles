@@ -57,6 +57,8 @@ alias ls "ls --color=auto"
 alias less "less -RMK"
 alias :q exit
 alias beep "tput bel >/dev/tty; afplay --time 0.2 /System/Library/Sounds/Sosumi.aiff"
+alias urldecode 'python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))"'
+alias urlencode 'python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.stdin.read()))"'
 set --global fish_greeting ""
 abbr --add --global g git
 abbr --add --global j jj
