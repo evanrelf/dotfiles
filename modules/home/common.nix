@@ -54,6 +54,7 @@ in
     kakoune-lsp
     lima
     mergiraf
+    nix-diff
     nix-direnv
     nix-your-shell
     nixpkgs-fmt
