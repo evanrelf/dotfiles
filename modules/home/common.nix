@@ -63,10 +63,10 @@ in
     ripgrep
     rustup
     samply
+    scc
     sd
     shellcheck
     tealdeer
-    tokei
     tombi
     universal-ctags
     up
