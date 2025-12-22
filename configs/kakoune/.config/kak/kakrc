@@ -244,19 +244,6 @@ hook -group lsp-filetype-tsgo global BufSetOption filetype=typescript %{
   }
 }
 
-hook global WinSetOption filetype=(toml) %{
-  lsp-enable-window
-  lsp-diagnostic-lines-disable window
-  lsp-inlay-diagnostics-enable window
-  lsp-did-change-on-save-enable
-}
-
-hook global WinSetOption filetype=(haskell|typescript) %{
-  lsp-enable-window
-  lsp-diagnostic-lines-disable window
-  lsp-did-change-on-save-enable
-}
-
 map global "user" "l" ": enter-user-mode lsp<ret>" -docstring "LSP mode"
 map global "object" "d" "<a-;> lsp-diagnostic-object --include-warnings<ret>" -docstring "LSP errors and warnings"
 map global "object" "D" "<a-;> lsp-diagnostic-object<ret>" -docstring "LSP errors"
