@@ -1,3 +1,4 @@
+set --universal fish_features all
 source "$__fish_config_dir/home-manager.fish" 2>/dev/null || true
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
