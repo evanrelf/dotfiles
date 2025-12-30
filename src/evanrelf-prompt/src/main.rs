@@ -1,6 +1,6 @@
 use camino::Utf8PathBuf;
 use clap::Parser as _;
-use std::env;
+use std::{env, process};
 
 #[derive(clap::Parser)]
 enum Command {
@@ -42,10 +42,10 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
         Err(_) => anyhow::bail!("Failed to convert hostname to UTF-8 string"),
     };
 
-    // TODO: Underline path component for repo.
-    // `jj --at-operation @ --ignore-working-copy root`
     let home = Utf8PathBuf::try_from(env::home_dir().unwrap())?;
     let current_dir = Utf8PathBuf::try_from(env::current_dir()?)?;
+    let repo = jj_root();
+    // TODO: Underline path component for repo.
     let pwd = match current_dir.strip_prefix(&home) {
         Ok(s) if s.as_str().is_empty() => "~",
         Ok(s) => &format!("~/{s}"),
@@ -62,6 +62,27 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
     print!("\n{RED}{status}{BRIGHT_BLUE}{hostname}:{pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
+}
+
+fn jj_root() -> anyhow::Result<Utf8PathBuf> {
+    let output = process::Command::new("jj")
+        .arg("--at-operation=@")
+        .arg("--ignore-working-copy")
+        .arg("root")
+        .output()?;
+
+    if !output.status.success() {
+        anyhow::bail!(
+            "jj root failed:\n{}",
+            str::from_utf8(&output.stderr).unwrap_or("<error: stderr not utf8>")
+        );
+    }
+
+    let string = str::from_utf8(&output.stdout)?;
+
+    let path = Utf8PathBuf::from(string);
+
+    Ok(path)
 }
 
 #[expect(clippy::unnecessary_wraps)]

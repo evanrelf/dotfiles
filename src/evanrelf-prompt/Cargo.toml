@@ -7,6 +7,7 @@ anyhow = "1.0.100"
 camino = "1.2.1"
 clap = { version = "4.5.53", features = ["derive"] }
 nix = { version = "0.30.1", features = ["hostname"] }
+pathdiff = { version = "0.2.3", features = ["camino"] }
 
 [lints]
 clippy.pedantic = { level = "warn", priority = -1 }
