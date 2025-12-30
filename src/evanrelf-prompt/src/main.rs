@@ -5,6 +5,10 @@ use std::{env, process};
 #[derive(clap::Parser)]
 enum Command {
     Prompt {
+        /// Fish's `pwd` (oblivious to symlinks)
+        #[arg(long)]
+        pwd: Option<Utf8PathBuf>,
+
         /// Fish's `$pipestatus` variable
         #[arg(long)]
         pipestatus: Option<String>,
@@ -18,7 +22,11 @@ enum Command {
 
 fn main() -> anyhow::Result<()> {
     match Command::parse() {
-        Command::Prompt { pipestatus, jobs } => run_prompt(pipestatus.as_deref(), jobs),
+        Command::Prompt {
+            pwd,
+            pipestatus,
+            jobs,
+        } => run_prompt(pwd, pipestatus.as_deref(), jobs),
         Command::Init => run_init(),
     }
 }
@@ -27,7 +35,11 @@ const RED: &str = "\x1b[31m";
 const BRIGHT_BLUE: &str = "\x1b[94m";
 const RESET: &str = "\x1b[0m";
 
-fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<()> {
+fn run_prompt(
+    pwd: Option<Utf8PathBuf>,
+    pipestatus: Option<&str>,
+    jobs: Option<usize>,
+) -> anyhow::Result<()> {
     let status = match pipestatus.map(str::trim) {
         Some("0") | None => "",
         Some(pipestatus) if pipestatus.split(' ').all(|s| s == "0") => "",
@@ -43,7 +55,10 @@ fn run_prompt(pipestatus: Option<&str>, jobs: Option<usize>) -> anyhow::Result<(
     };
 
     let home = Utf8PathBuf::try_from(env::home_dir().unwrap())?;
-    let current_dir = Utf8PathBuf::try_from(env::current_dir()?)?;
+    let current_dir = match pwd {
+        Some(pwd) => pwd,
+        None => Utf8PathBuf::try_from(env::current_dir()?)?,
+    };
     let repo = jj_root();
     // TODO: Underline path component for repo.
     let pwd = match current_dir.strip_prefix(&home) {
@@ -92,6 +107,7 @@ fn run_init() -> anyhow::Result<()> {
         r#"
 function fish_prompt
     evanrelf-prompt prompt \
+        --pwd (pwd) \
         --pipestatus "$pipestatus" \
         --jobs (jobs -g 2>/dev/null | count)
 end
