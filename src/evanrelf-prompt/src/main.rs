@@ -1,6 +1,6 @@
-use camino::Utf8PathBuf;
+use camino::{Utf8Path, Utf8PathBuf};
 use clap::Parser as _;
-use std::{env, process};
+use std::{borrow::Cow, env, process};
 
 #[derive(clap::Parser)]
 enum Command {
@@ -34,6 +34,8 @@ fn main() -> anyhow::Result<()> {
 const RED: &str = "\x1b[31m";
 const BRIGHT_BLUE: &str = "\x1b[94m";
 const RESET: &str = "\x1b[0m";
+const UNDERLINE: &str = "\x1b[4m";
+const NO_UNDERLINE: &str = "\x1b[24m";
 
 fn run_prompt(
     pwd: Option<Utf8PathBuf>,
@@ -59,13 +61,14 @@ fn run_prompt(
         Some(pwd) => pwd,
         None => Utf8PathBuf::try_from(env::current_dir()?)?,
     };
-    let repo = jj_root();
-    // TODO: Underline path component for repo.
-    let pwd = match current_dir.strip_prefix(&home) {
-        Ok(s) if s.as_str().is_empty() => "~",
-        Ok(s) => &format!("~/{s}"),
-        Err(_) => current_dir.as_str(),
+    let repo = jj_root().ok();
+    let pwd_display = match current_dir.strip_prefix(&home) {
+        Ok(s) if s.as_str().is_empty() => "~".to_string(),
+        Ok(s) => format!("~/{s}"),
+        Err(_) => current_dir.as_str().to_string(),
     };
+
+    let pwd = underline_repo(&pwd_display, &current_dir, repo.as_deref());
 
     let in_nix_shell = match env::var("IN_NIX_SHELL") {
         Ok(_) => "  ",
@@ -93,11 +96,47 @@ fn jj_root() -> anyhow::Result<Utf8PathBuf> {
         );
     }
 
-    let string = str::from_utf8(&output.stdout)?;
+    let string = str::from_utf8(&output.stdout)?.trim();
 
     let path = Utf8PathBuf::from(string);
 
     Ok(path)
+}
+
+fn underline_repo<'a>(
+    display_path: &'a str,
+    current_dir: &Utf8Path,
+    repo_root: Option<&Utf8Path>,
+) -> Cow<'a, str> {
+    let Some(repo_root) = repo_root else {
+        return Cow::Borrowed(display_path);
+    };
+
+    if !current_dir.starts_with(repo_root) {
+        return Cow::Borrowed(display_path);
+    }
+
+    let Some(repo_name) = repo_root.file_name() else {
+        return Cow::Borrowed(display_path);
+    };
+
+    let mut result =
+        String::with_capacity(display_path.len() + UNDERLINE.len() + NO_UNDERLINE.len());
+
+    for component in display_path.split('/') {
+        if !result.is_empty() {
+            result.push('/');
+        }
+        if component == repo_name {
+            result.push_str(UNDERLINE);
+            result.push_str(component);
+            result.push_str(NO_UNDERLINE);
+        } else {
+            result.push_str(component);
+        }
+    }
+
+    Cow::Owned(result)
 }
 
 #[expect(clippy::unnecessary_wraps)]
