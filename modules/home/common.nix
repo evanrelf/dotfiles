@@ -158,5 +158,7 @@ in
 
   # Services
 
+  services.colima.enable = true;
+
   services.pueue.enable = true;
 }
