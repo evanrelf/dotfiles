@@ -31,9 +31,11 @@ in
     cargo-limit
     cargo-watch
     claude-code
+    colima
     coreutils-gprefix
     delta
     direnv
+    docker-client
     empath
     evanrelf-fish
     evanrelf-prompt
