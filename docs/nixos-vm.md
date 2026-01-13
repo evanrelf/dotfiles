@@ -3,9 +3,9 @@
 Run NixOS in a virtual machine on a Mac. Inspired by
 [Mitchell Hashimoto's NixOS config](https://github.com/mitchellh/nixos-config).
 
-## VMWare Fusion
+## VMware Fusion
 
-1. Install VMWare Fusion: `brew install --cask vmware-fusion`.
+1. Install VMware Fusion: `brew install --cask vmware-fusion`.
 2. Download NixOS ISO (minimal 64-bit ARM): <https://nixos.org/download>.
 3. Create new VM
     1. Choose "Other Linux 6.x kernel 64-bit Arm" as the operating system type.

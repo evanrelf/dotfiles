@@ -16,7 +16,7 @@ let
           BOOT=/dev/vda1
           ROOT=/dev/vda2
         elif [ -e /dev/nvme0n1 ]; then
-          # VMWare Fusion
+          # VMware Fusion
           DISK=/dev/nvme0n1
           BOOT=/dev/nvme0n1p1
           ROOT=/dev/nvme0n1p2
