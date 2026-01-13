@@ -1,31 +1,8 @@
 # Lima
 
-## Using a custom NixOS instance
-
-### Build the VM image
-
-Assumes you have a Linux builder, e.g. from `nix-darwin`.
-
-```
-[host]$ nix build --system aarch64-linux --max-jobs 0 .#nixosImages.lima
-```
-
-The `./result` symlink will be used in the next step; it's referenced in the
-Lima template.
-
-### Create the Lima instance
-
-Pick whatever name you want.
-
-```
-[host]$ limactl start --yes --name default configs/lima/nixos-template.yaml
-```
-
 ## Fixing problems after instance creation
 
 ### Install Nix
-
-_Not required for NixOS instances._
 
 Copy install command from the [Lix website](https://lix.systems/install/).
 
