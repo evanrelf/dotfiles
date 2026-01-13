@@ -18,4 +18,6 @@
   environment.etc."bashrc".knownSha256Hashes = [ "a2396f60e669a9e60ca5a077ee74bff1d071a4ade9f37836aa7e852ca389c243" ];
   environment.etc."zshrc".knownSha256Hashes = [ "2a36d13c46cab744f1cc9d55a21b5e944e87e7b40132a0bcab98222a69b1071f" ];
   environment.etc."zshenv".knownSha256Hashes = [ "ad03552f1fffa6e2a84d6409bb1063f5fe121f3ee4a05ef60fd0c9e493d59b8d" ];
+
+  system.stateVersion = 6;
 }

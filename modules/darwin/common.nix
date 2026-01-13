@@ -17,5 +17,4 @@
   nix.linux-builder.ephemeral = true;
 
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-  system.stateVersion = 6;
 }
