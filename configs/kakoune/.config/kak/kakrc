@@ -436,8 +436,8 @@ hook global BufNewFile .*/MercuryTechnologies/\w+/(?<module>[A-Z]\w+(?:\.[A-Z]\w
 ################################################################################
 
 define-command -hidden file-detection-cargo-script %{ evaluate-commands %sh{
-  if [ -z "$kak_opt_filetype" ]; then
-    if [ "$(magika --format %l $kak_buffile)" = "rust" ]; then
+  if [ -z "${kak_opt_filetype}" ]; then
+    if head -n1 "${kak_buffile}" | rg '^#!\s*/usr/bin/env\b.+\bcargo\b'; then
       echo "set-option buffer filetype rust"
     fi
   fi

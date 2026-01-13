@@ -54,7 +54,6 @@ in
     kakoune
     kakoune-lsp
     lima
-    magika-cli
     mergiraf
     nix-diff
     nix-direnv
