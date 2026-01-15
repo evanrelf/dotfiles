@@ -26,7 +26,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jj debug snapshot"
+            "command": "jj debug snapshot",
+            "async": true
           }
         ]
       }
