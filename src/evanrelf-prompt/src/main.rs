@@ -48,12 +48,16 @@ fn run_prompt(
         Some(pipestatus) => &format!("{}\n", pipestatus.replace(' ', " | ")),
     };
 
-    let hostname = match nix::unistd::gethostname()?.into_string() {
-        Ok(s) => match s.strip_suffix(".local") {
-            Some(s) => String::from(s),
-            None => s,
-        },
-        Err(_) => anyhow::bail!("Failed to convert hostname to UTF-8 string"),
+    let hostname = if env::consts::OS == "macos" {
+        macos_computer_name()?
+    } else {
+        match nix::unistd::gethostname()?.into_string() {
+            Ok(s) => match s.strip_suffix(".local") {
+                Some(s) => String::from(s),
+                None => s,
+            },
+            Err(_) => anyhow::bail!("Failed to convert hostname to UTF-8 string"),
+        }
     };
 
     let home = Utf8PathBuf::try_from(env::home_dir().unwrap())?;
@@ -80,6 +84,23 @@ fn run_prompt(
     print!("\n{RED}{status}{BRIGHT_BLUE}{hostname}:{pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
+}
+
+fn macos_computer_name() -> anyhow::Result<String> {
+    let output = process::Command::new("scutil")
+        .arg("--get=ComputerName")
+        .output()?;
+
+    if !output.status.success() {
+        anyhow::bail!(
+            "scutil --get=ComputerName failed:\n{}",
+            str::from_utf8(&output.stderr).unwrap_or("<error: stderr not utf8>")
+        );
+    }
+
+    let name = String::from(str::from_utf8(&output.stdout)?.trim());
+
+    Ok(name)
 }
 
 fn jj_root() -> anyhow::Result<Utf8PathBuf> {
