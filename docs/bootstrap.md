@@ -23,11 +23,15 @@ $ sudo darwin-rebuild switch --flake .
 First time:
 
 ```
+# macOS
+$ sudo nix run .#home-manager -- switch --flake .#$(scutil --get ComputerName)
+
+# Linux
 $ sudo nix run .#home-manager -- switch --flake .#$(hostname -s)
 ```
 
 After first time:
 
 ```
-$ home-manager switch --flake .#$(hostname -s)
+$ home-manager switch --flake .#(whereami)
 ```
