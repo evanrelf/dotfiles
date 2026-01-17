@@ -128,8 +128,10 @@ in
     recursive = true;
   };
 
-  home.file.".config/hammerspoon/init.lua".source =
-    mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
+  home.file.".config/hammerspoon/init.lua" =
+    lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      source = mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
+    };
 
   home.file.".config/jj/config.toml".source =
     mutable "configs/jj/.config/jj/config.toml";
