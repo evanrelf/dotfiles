@@ -13,6 +13,9 @@ let
 in
 {
   homeConfigurations = {
+    iris =
+      mkHomeConfiguration [ ../modules/home/machines/iris.nix ];
+
     lima =
       mkHomeConfiguration [ ../modules/home/machines/lima.nix ];
 
