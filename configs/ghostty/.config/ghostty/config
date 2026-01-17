@@ -12,6 +12,6 @@ font-feature = +ss13 # Nicer Git graphs
 unfocused-split-opacity = 1
 maximize = true
 cursor-style-blink = false
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 scrollback-limit = 256_000_000
 macos-titlebar-style = native
