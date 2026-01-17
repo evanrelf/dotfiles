@@ -49,6 +49,7 @@
     "adjtime".source = "/persist/etc/adjtime";
     "NIXOS".source = "/persist/etc/NIXOS";
     "machine-id".source = "/persist/etc/machine-id";
+    "miniflux/admin-credentials".source = "/persist/etc/miniflux/admin-credentials";
   };
 
   systemd.tmpfiles.rules = [
@@ -70,6 +71,32 @@
     enable = true;
     extraSetFlags = [ "--ssh" ];
   };
+
+  services.miniflux = {
+    enable = true;
+    adminCredentialsFile = "/etc/miniflux/admin-credentials";
+    config.LISTEN_ADDR = "0.0.0.0:10001";
+  };
+  services.rss-bridge = {
+    enable = true;
+    config = {
+      system.enabled_bridges = [ "CssSelectorBridge" ];
+      error.output = "http";
+      error.report_limit = 5;
+    };
+  };
+  services.nginx.virtualHosts."_" = {
+    listen = [ { addr = "0.0.0.0"; port = 10002; } ];
+    locations."/" = {
+      proxyPass = "http://127.0.0.1";
+      extraConfig = ''
+        proxy_set_header Host rss-bridge;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      '';
+    };
+  };
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 10001 10002 ];
 
   nix.package = pkgs.lixPackageSets.latest.lix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
