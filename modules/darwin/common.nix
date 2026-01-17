@@ -10,7 +10,7 @@
   environment.shells = [ "/Users/evanrelf/.nix-profile/bin/fish" ];
 
   nix.package = pkgs.lixPackageSets.latest.lix;
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "@admin" ];
 
   nix.linux-builder.enable = true;
