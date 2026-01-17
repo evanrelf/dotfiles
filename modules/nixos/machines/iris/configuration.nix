@@ -58,9 +58,12 @@
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
   ];
 
-  security.sudo.extraConfig = ''
-    Defaults lecture = never
-  '';
+  security.sudo = {
+    wheelNeedsPassword = false;
+    extraConfig = ''
+      Defaults lecture = never
+    '';
+  };
 
   services.openssh.enable = true;
 
