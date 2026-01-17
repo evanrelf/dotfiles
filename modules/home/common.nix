@@ -19,63 +19,69 @@ in
 
   home.homeDirectory = lib.mkMerge [
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin "/Users/${config.home.username}")
-    (lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "/home/${config.home.username}")
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux "/home/${config.home.username}")
   ];
 
   # Packages
 
-  home.packages = with pkgs; [
-    as-tree
-    bat
-    cargo-edit
-    cargo-limit
-    cargo-watch
-    claude-code
-    colima
-    coreutils-gprefix
-    delta
-    direnv
-    docker-client
-    empath
-    evanrelf-fish
-    evanrelf-prompt
-    fd
-    findutils-gprefix
-    fzf
-    gawkInteractive-gprefix
-    git
-    gnugrep-gprefix
-    gnused-gprefix
-    home-manager
-    hsl
-    hyperfine
-    jq
-    jujutsu
-    kakoune
-    kakoune-lsp
-    lima
-    mergiraf
-    nix-diff
-    nix-direnv
-    nix-your-shell
-    nixpkgs-fmt
-    pancase
-    pueue
-    ripgrep
-    rustup
-    samply
-    scc
-    sd
-    shellcheck
-    tealdeer
-    tombi
-    universal-ctags
-    up
-    uutils-coreutils
-    watchexec
-    watchman
-    zig
-    zoxide
+  home.packages = with pkgs; lib.mkMerge [
+    [
+      as-tree
+      bat
+      cargo-edit
+      cargo-limit
+      cargo-watch
+      claude-code
+      coreutils-gprefix
+      delta
+      direnv
+      empath
+      evanrelf-fish
+      evanrelf-prompt
+      fd
+      findutils-gprefix
+      fzf
+      gawkInteractive-gprefix
+      git
+      gnugrep-gprefix
+      gnused-gprefix
+      home-manager
+      hsl
+      hyperfine
+      jq
+      jujutsu
+      kakoune
+      kakoune-lsp
+      mergiraf
+      nix-diff
+      nix-direnv
+      nix-your-shell
+      nixpkgs-fmt
+      pancase
+      pueue
+      ripgrep
+      rustup
+      samply
+      scc
+      sd
+      shellcheck
+      tealdeer
+      tombi
+      universal-ctags
+      up
+      uutils-coreutils
+      watchexec
+      watchman
+      zig
+      zoxide
+    ]
+    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
+      colima
+      docker-client
+      lima
+    ])
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
+    ])
   ];
 
   # Config files
@@ -136,7 +142,7 @@ in
   home.file.".config/jj/config.toml".source =
     mutable "configs/jj/.config/jj/config.toml";
 
-  xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.isDarwin {
+  xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     source = ../../configs/karabiner/.config/karabiner;
     recursive = true;
   };
@@ -160,7 +166,7 @@ in
 
   # Services
 
-  services.colima.enable = true;
+  services.colima.enable = pkgs.stdenv.hostPlatform.isDarwin;
 
   services.pueue.enable = true;
 }
