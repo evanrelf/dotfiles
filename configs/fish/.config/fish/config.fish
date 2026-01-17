@@ -13,7 +13,9 @@ set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
 set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
 set --global --export DIRENV_LOG_FORMAT ""
 set --global --export NIXPKGS_ALLOW_UNFREE 1
-set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
+if test (uname) = Darwin
+    set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
+end
 set --global --export NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
 set --global --export FZF_LEGACY_KEYBINDINGS 0
 set --global --export FZF_DEFAULT_OPTS "--tiebreak=index --style minimal --color=light --height=40% --layout=reverse --exact"
