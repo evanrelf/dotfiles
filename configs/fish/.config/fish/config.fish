@@ -38,6 +38,7 @@ if test -z "$IN_NIX_SHELL"
     set --global --export --prepend PATH "$CARGO_HOME/bin"
     set --global --export --prepend PATH "$DOTFILES/bin"
     set --global --export --prepend PATH "$HOME/.local/bin"
+    set --global --export --prepend PATH /run/wrappers/bin
 end
 if command -q evanrelf-prompt
     evanrelf-prompt init | source
