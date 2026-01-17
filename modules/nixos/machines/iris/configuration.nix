@@ -33,6 +33,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     initialPassword = "banana";
+    shell = "/home/evanrelf/.nix-profile/bin/fish";
   };
 
   environment.systemPackages = with pkgs; [
@@ -40,8 +41,6 @@
     kakoune
     neovim
   ];
-
-  environment.shells = [ "/home/evanrelf/.nix-profile/bin/fish" ];
 
   # Persist state
   environment.etc = {
