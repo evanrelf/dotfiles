@@ -18,9 +18,10 @@
   boot.zfs.devNodes = "/dev/mapper";
   services.zfs.autoScrub.enable = true;
 
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r tank/local/root@blank
-  '';
+  # TODO: Re-enable "erase your darlings"
+  # boot.initrd.postDeviceCommands = lib.mkAfter ''
+  #   zfs rollback -r tank/local/root@blank
+  # '';
 
   networking.hostName = "iris";
 
@@ -39,6 +40,8 @@
     kakoune
     neovim
   ];
+
+  environment.shells = [ "/home/evanrelf/.nix-profile/bin/fish" ];
 
   # Persist state
   environment.etc = {
@@ -60,7 +63,13 @@
   '';
 
   services.openssh.enable = true;
-  services.tailscale.enable = true;
+
+  services.tailscale = {
+    enable = true;
+    extraSetFlags = [ "--ssh" ];
+  };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
