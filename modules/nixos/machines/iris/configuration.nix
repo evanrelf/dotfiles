@@ -72,6 +72,21 @@
     extraSetFlags = [ "--ssh" ];
   };
 
+  services.dnsmasq = {
+    enable = true;
+    settings.address = [
+      "/iris.internal/100.101.235.127"
+    ];
+    /* NOTE: Unnecessary because I'm using Tailscale split DNS
+    settings.server = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "2606:4700:4700::1111"
+      "2606:4700:4700::1001"
+    ];
+    */
+  };
+
   services.miniflux = {
     enable = true;
     adminCredentialsFile = "/etc/miniflux/admin-credentials";
