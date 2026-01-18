@@ -109,6 +109,25 @@ in
   };
   services.nginx = {
     enable = true;
+    virtualHosts."iris.internal" = {
+      listen = [{ addr = "0.0.0.0"; port = 80; }];
+      root = pkgs.writeTextDir "index.html" ''
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>iris</title>
+            <meta charset="utf-8">
+          </head>
+          <body>
+            <h1>iris</h1>
+            <ul>
+              <li><a href="http://miniflux.iris.internal">Miniflux</a></li>
+              <li><a href="http://rss-bridge.iris.internal">RSS Bridge</a></li>
+            </ul>
+          </body>
+        </html>
+      '';
+    };
     virtualHosts."miniflux.iris.internal" = {
       listen = [ { addr = "0.0.0.0"; port = 80; } ];
       locations."/" = {
