@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 
+let
+  tailscaleIPAddress = "100.101.235.127";
+
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -75,7 +79,9 @@
   services.dnsmasq = {
     enable = true;
     settings.address = [
-      "/iris.internal/100.101.235.127"
+      "/iris.internal/${tailscaleIPAddress}"
+      "/miniflux.iris.internal/${tailscaleIPAddress}"
+      "/rss-bridge.iris.internal/${tailscaleIPAddress}"
     ];
     /* NOTE: Unnecessary because I'm using Tailscale split DNS
     settings.server = [
@@ -91,6 +97,7 @@
     enable = true;
     adminCredentialsFile = "/etc/miniflux/admin-credentials";
     config.LISTEN_ADDR = "0.0.0.0:10001";
+    config.BASE_URL = "http://miniflux.iris.internal";
   };
   services.rss-bridge = {
     enable = true;
@@ -100,18 +107,34 @@
       error.report_limit = 5;
     };
   };
-  services.nginx.virtualHosts."_" = {
-    listen = [ { addr = "0.0.0.0"; port = 10002; } ];
-    locations."/" = {
-      proxyPass = "http://127.0.0.1";
-      extraConfig = ''
-        proxy_set_header Host rss-bridge;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      '';
+  services.nginx = {
+    enable = true;
+    virtualHosts."miniflux.iris.internal" = {
+      listen = [ { addr = "0.0.0.0"; port = 80; } ];
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:10001";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
+    };
+    virtualHosts."rss-bridge.iris.internal" = {
+      listen = [ { addr = "0.0.0.0"; port = 80; } ];
+      locations."/" = {
+        proxyPass = "http://127.0.0.1";
+        extraConfig = ''
+          proxy_set_header Host rss-bridge;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+        '';
+      };
     };
   };
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 10001 10002 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 80 ];
 
   nix.package = pkgs.lixPackageSets.latest.lix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
