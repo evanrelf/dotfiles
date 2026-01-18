@@ -54,6 +54,7 @@ in
     "NIXOS".source = "/persist/etc/NIXOS";
     "machine-id".source = "/persist/etc/machine-id";
     "miniflux/admin-credentials".source = "/persist/etc/miniflux/admin-credentials";
+    "acme/cloudflare-credentials".source = "/persist/etc/acme/cloudflare-credentials";
   };
 
   systemd.tmpfiles.rules = [
@@ -79,28 +80,38 @@ in
   services.dnsmasq = {
     enable = true;
     settings.address = [
-      "/iris.internal/${tailscaleIPAddress}"
-      "/miniflux.iris.internal/${tailscaleIPAddress}"
-      "/rss-bridge.iris.internal/${tailscaleIPAddress}"
+      "/iris.internal.evanrelf.com/${tailscaleIPAddress}"
+      "/miniflux.internal.evanrelf.com/${tailscaleIPAddress}"
+      "/rss-bridge.internal.evanrelf.com/${tailscaleIPAddress}"
     ];
-    /* NOTE: Unnecessary because I'm using Tailscale split DNS
-      settings.server = [
-        "1.1.1.1"
-        "1.0.0.1"
-        "2606:4700:4700::1111"
-        "2606:4700:4700::1001"
-      ];
-    */
+    settings.server = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "2606:4700:4700::1111"
+      "2606:4700:4700::1001"
+    ];
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "evan@evanrelf.com";
+    certs."internal.evanrelf.com" = {
+      domain = "*.internal.evanrelf.com";
+      dnsProvider = "cloudflare";
+      environmentFile = "/etc/acme/cloudflare-credentials";
+      group = "nginx";
+    };
   };
 
   services.miniflux = {
     enable = true;
     adminCredentialsFile = "/etc/miniflux/admin-credentials";
-    config.LISTEN_ADDR = "0.0.0.0:10001";
-    config.BASE_URL = "http://miniflux.iris.internal";
+    config.LISTEN_ADDR = "127.0.0.1:10001";
+    config.BASE_URL = "https://miniflux.internal.evanrelf.com";
   };
   services.rss-bridge = {
     enable = true;
+    virtualHost = "rss-bridge.internal.evanrelf.com";
     config = {
       system.enabled_bridges = [ "CssSelectorBridge" ];
       error.output = "http";
@@ -109,8 +120,13 @@ in
   };
   services.nginx = {
     enable = true;
-    virtualHosts."iris.internal" = {
-      listen = [{ addr = "0.0.0.0"; port = 80; }];
+    virtualHosts."iris.internal.evanrelf.com" = {
+      useACMEHost = "internal.evanrelf.com";
+      forceSSL = true;
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+      ];
       root = pkgs.writeTextDir "index.html" ''
         <!DOCTYPE html>
         <html>
@@ -121,15 +137,20 @@ in
           <body>
             <h1>iris</h1>
             <ul>
-              <li><a href="http://miniflux.iris.internal">Miniflux</a></li>
-              <li><a href="http://rss-bridge.iris.internal">RSS Bridge</a></li>
+              <li><a href="https://miniflux.internal.evanrelf.com">Miniflux</a></li>
+              <li><a href="https://rss-bridge.internal.evanrelf.com">RSS Bridge</a></li>
             </ul>
           </body>
         </html>
       '';
     };
-    virtualHosts."miniflux.iris.internal" = {
-      listen = [{ addr = "0.0.0.0"; port = 80; }];
+    virtualHosts."miniflux.internal.evanrelf.com" = {
+      useACMEHost = "internal.evanrelf.com";
+      forceSSL = true;
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+      ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:10001";
         extraConfig = ''
@@ -140,20 +161,16 @@ in
         '';
       };
     };
-    virtualHosts."rss-bridge.iris.internal" = {
-      listen = [{ addr = "0.0.0.0"; port = 80; }];
-      locations."/" = {
-        proxyPass = "http://127.0.0.1";
-        extraConfig = ''
-          proxy_set_header Host rss-bridge;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-        '';
-      };
+    virtualHosts."rss-bridge.internal.evanrelf.com" = {
+      useACMEHost = "internal.evanrelf.com";
+      forceSSL = true;
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+      ];
     };
   };
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 80 ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 80 443 ];
 
   nix.package = pkgs.lixPackageSets.latest.lix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
