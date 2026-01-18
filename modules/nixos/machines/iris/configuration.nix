@@ -81,6 +81,7 @@ in
     enable = true;
     settings.address = [
       "/iris.internal.evanrelf.com/${tailscaleIPAddress}"
+      "/code.internal.evanrelf.com/${tailscaleIPAddress}"
       "/miniflux.internal.evanrelf.com/${tailscaleIPAddress}"
       "/rss-bridge.internal.evanrelf.com/${tailscaleIPAddress}"
     ];
@@ -103,12 +104,25 @@ in
     };
   };
 
+  services.forgejo = {
+    enable = true;
+    settings = {
+      server = {
+        DOMAIN = "code.internal.evanrelf.com";
+        ROOT_URL = "https://code.internal.evanrelf.com";
+        HTTP_PORT = 10002;
+        SSH_PORT = 22;
+      };
+    };
+  };
+
   services.miniflux = {
     enable = true;
     adminCredentialsFile = "/etc/miniflux/admin-credentials";
     config.LISTEN_ADDR = "127.0.0.1:10001";
     config.BASE_URL = "https://miniflux.internal.evanrelf.com";
   };
+
   services.rss-bridge = {
     enable = true;
     virtualHost = "rss-bridge.internal.evanrelf.com";
@@ -118,6 +132,7 @@ in
       error.report_limit = 5;
     };
   };
+
   services.nginx = {
     enable = true;
     virtualHosts."iris.internal.evanrelf.com" = {
@@ -137,12 +152,22 @@ in
           <body>
             <h1>iris</h1>
             <ul>
+              <li><a href="https://code.internal.evanrelf.com">code (Forgejo)</a></li>
               <li><a href="https://miniflux.internal.evanrelf.com">Miniflux</a></li>
               <li><a href="https://rss-bridge.internal.evanrelf.com">RSS Bridge</a></li>
             </ul>
           </body>
         </html>
       '';
+    };
+    virtualHosts."code.internal.evanrelf.com" = {
+      useACMEHost = "internal.evanrelf.com";
+      forceSSL = true;
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+      ];
+      locations."/".proxyPass = "http://127.0.0.1:10002";
     };
     virtualHosts."miniflux.internal.evanrelf.com" = {
       useACMEHost = "internal.evanrelf.com";
@@ -170,6 +195,7 @@ in
       ];
     };
   };
+
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 80 443 ];
 
   nix.package = pkgs.lixPackageSets.latest.lix;
