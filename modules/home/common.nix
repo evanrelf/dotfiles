@@ -47,6 +47,7 @@ in
       gnused-gprefix
       home-manager
       hsl
+      htmlq
       hyperfine
       jq
       jujutsu
