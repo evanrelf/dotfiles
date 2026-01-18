@@ -106,6 +106,7 @@ in
 
   services.forgejo = {
     enable = true;
+    package = pkgs.forgejo;
     settings = {
       server = {
         DOMAIN = "code.internal.evanrelf.com";
