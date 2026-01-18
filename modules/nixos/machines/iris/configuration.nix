@@ -84,12 +84,12 @@ in
       "/rss-bridge.iris.internal/${tailscaleIPAddress}"
     ];
     /* NOTE: Unnecessary because I'm using Tailscale split DNS
-    settings.server = [
-      "1.1.1.1"
-      "1.0.0.1"
-      "2606:4700:4700::1111"
-      "2606:4700:4700::1001"
-    ];
+      settings.server = [
+        "1.1.1.1"
+        "1.0.0.1"
+        "2606:4700:4700::1111"
+        "2606:4700:4700::1001"
+      ];
     */
   };
 
@@ -129,7 +129,7 @@ in
       '';
     };
     virtualHosts."miniflux.iris.internal" = {
-      listen = [ { addr = "0.0.0.0"; port = 80; } ];
+      listen = [{ addr = "0.0.0.0"; port = 80; }];
       locations."/" = {
         proxyPass = "http://127.0.0.1:10001";
         extraConfig = ''
@@ -141,7 +141,7 @@ in
       };
     };
     virtualHosts."rss-bridge.iris.internal" = {
-      listen = [ { addr = "0.0.0.0"; port = 80; } ];
+      listen = [{ addr = "0.0.0.0"; port = 80; }];
       locations."/" = {
         proxyPass = "http://127.0.0.1";
         extraConfig = ''
