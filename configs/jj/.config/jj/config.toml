@@ -111,7 +111,7 @@ revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) &
 revset-aliases.'megamerge()' = 'exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()'
 revset-aliases.'megaroots()' = 'children(fork_point(parents(megamerge()))) & ancestors(megamerge())'
 revset-aliases.'M' = 'megamerge()'
-revset-aliases.'private()' = 'subject(glob:"private:*") | megamerge() | wip()'
+revset-aliases.'private()' = 'subject(glob:"private:*") | megamerge()'
 revset-aliases.'wip()' = 'subject(glob:"wip:*") & mine()'
 # Nearest bookmark.
 revset-aliases.'bookmark()' = 'exactly(heads(ancestors(@) & bookmarks()), 1)'
