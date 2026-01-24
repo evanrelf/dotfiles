@@ -82,7 +82,7 @@ in
     settings.address = [
       "/iris.internal.evanrelf.com/${tailscaleIPAddress}"
       "/code.internal.evanrelf.com/${tailscaleIPAddress}"
-      "/miniflux.internal.evanrelf.com/${tailscaleIPAddress}"
+      "/feed.internal.evanrelf.com/${tailscaleIPAddress}"
       "/rss-bridge.internal.evanrelf.com/${tailscaleIPAddress}"
     ];
     settings.server = [
@@ -121,7 +121,7 @@ in
     enable = true;
     adminCredentialsFile = "/etc/miniflux/admin-credentials";
     config.LISTEN_ADDR = "127.0.0.1:10001";
-    config.BASE_URL = "https://miniflux.internal.evanrelf.com";
+    config.BASE_URL = "https://feed.internal.evanrelf.com";
   };
 
   services.rss-bridge = {
@@ -154,7 +154,7 @@ in
             <h1>iris</h1>
             <ul>
               <li><a href="https://code.internal.evanrelf.com">code (Forgejo)</a></li>
-              <li><a href="https://miniflux.internal.evanrelf.com">Miniflux</a></li>
+              <li><a href="https://feed.internal.evanrelf.com">feed (Miniflux)</a></li>
               <li><a href="https://rss-bridge.internal.evanrelf.com">RSS Bridge</a></li>
             </ul>
           </body>
@@ -170,7 +170,7 @@ in
       ];
       locations."/".proxyPass = "http://127.0.0.1:10002";
     };
-    virtualHosts."miniflux.internal.evanrelf.com" = {
+    virtualHosts."feed.internal.evanrelf.com" = {
       useACMEHost = "internal.evanrelf.com";
       forceSSL = true;
       listen = [
