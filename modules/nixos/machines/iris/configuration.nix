@@ -136,31 +136,6 @@ in
 
   services.nginx = {
     enable = true;
-    virtualHosts."iris.internal.evanrelf.com" = {
-      useACMEHost = "internal.evanrelf.com";
-      forceSSL = true;
-      listen = [
-        { addr = "0.0.0.0"; port = 80; }
-        { addr = "0.0.0.0"; port = 443; ssl = true; }
-      ];
-      root = pkgs.writeTextDir "index.html" ''
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>iris</title>
-            <meta charset="utf-8">
-          </head>
-          <body>
-            <h1>iris</h1>
-            <ul>
-              <li><a href="https://code.internal.evanrelf.com">code (Forgejo)</a></li>
-              <li><a href="https://feed.internal.evanrelf.com">feed (Miniflux)</a></li>
-              <li><a href="https://rss-bridge.internal.evanrelf.com">RSS Bridge</a></li>
-            </ul>
-          </body>
-        </html>
-      '';
-    };
     virtualHosts."code.internal.evanrelf.com" = {
       useACMEHost = "internal.evanrelf.com";
       forceSSL = true;
