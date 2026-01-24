@@ -54,7 +54,6 @@ in
     "NIXOS".source = "/persist/etc/NIXOS";
     "machine-id".source = "/persist/etc/machine-id";
     "miniflux/admin-credentials".source = "/persist/etc/miniflux/admin-credentials";
-    "freshrss/admin-credentials".source = "/persist/etc/freshrss/admin-credentials";
     "acme/cloudflare-credentials".source = "/persist/etc/acme/cloudflare-credentials";
   };
 
@@ -84,7 +83,6 @@ in
       "/iris.internal.evanrelf.com/${tailscaleIPAddress}"
       "/code.internal.evanrelf.com/${tailscaleIPAddress}"
       "/miniflux.internal.evanrelf.com/${tailscaleIPAddress}"
-      "/freshrss.internal.evanrelf.com/${tailscaleIPAddress}"
       "/rss-bridge.internal.evanrelf.com/${tailscaleIPAddress}"
     ];
     settings.server = [
@@ -136,14 +134,6 @@ in
     };
   };
 
-  services.freshrss = {
-    enable = true;
-    virtualHost = "freshrss.internal.evanrelf.com";
-    baseUrl = "https://freshrss.internal.evanrelf.com";
-    passwordFile = "/etc/freshrss/admin-credentials";
-    api.enable = true;
-  };
-
   services.nginx = {
     enable = true;
     virtualHosts."iris.internal.evanrelf.com" = {
@@ -165,7 +155,6 @@ in
             <ul>
               <li><a href="https://code.internal.evanrelf.com">code (Forgejo)</a></li>
               <li><a href="https://miniflux.internal.evanrelf.com">Miniflux</a></li>
-              <li><a href="https://freshrss.internal.evanrelf.com">FreshRSS</a></li>
               <li><a href="https://rss-bridge.internal.evanrelf.com">RSS Bridge</a></li>
             </ul>
           </body>
@@ -199,14 +188,6 @@ in
       };
     };
     virtualHosts."rss-bridge.internal.evanrelf.com" = {
-      useACMEHost = "internal.evanrelf.com";
-      forceSSL = true;
-      listen = [
-        { addr = "0.0.0.0"; port = 80; }
-        { addr = "0.0.0.0"; port = 443; ssl = true; }
-      ];
-    };
-    virtualHosts."freshrss.internal.evanrelf.com" = {
       useACMEHost = "internal.evanrelf.com";
       forceSSL = true;
       listen = [
