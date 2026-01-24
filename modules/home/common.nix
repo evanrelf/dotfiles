@@ -77,9 +77,6 @@ in
       zoxide
     ]
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
-      colima
-      docker-client
-      lima
     ])
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
     ])
@@ -166,8 +163,6 @@ in
     mutable "configs/zed/.config/zed/settings.json";
 
   # Services
-
-  services.colima.enable = pkgs.stdenv.hostPlatform.isDarwin;
 
   services.pueue.enable = true;
 }
