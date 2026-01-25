@@ -72,10 +72,7 @@ in
 
   services.openssh.enable = true;
 
-  services.tailscale = {
-    enable = true;
-    extraSetFlags = [ "--ssh" ];
-  };
+  services.tailscale.enable = true;
 
   services.dnsmasq = {
     enable = true;
