@@ -45,6 +45,7 @@ in
       git
       gnugrep-gprefix
       gnused-gprefix
+      go
       home-manager
       hsl
       htmlq

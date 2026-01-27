@@ -25,6 +25,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
 
+    # Go programs
+
     # Rust programs
     empath = { url = "github:evanrelf/empath"; flake = false; };
     hsl = { url = "github:evanrelf/hsl"; flake = false; };

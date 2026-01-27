@@ -22,10 +22,14 @@ let
       ln -s ${drv}/share "$out/share"
     '';
 
+  go = { name, src ? final.inputs.${name}.outPath, vendorHash ? null }:
+    final.buildGoModule (attrs: {
+      inherit name src vendorHash;
+    });
+
   rust = { name, src ? final.inputs.${name}.outPath, cargoLock ? { } }:
     final.rustPlatform.buildRustPackage (attrs: {
-      inherit name;
-      inherit src;
+      inherit name src;
       cargoLock = (attrs.cargoLock or { }) // {
         lockFile = "${attrs.src}/Cargo.lock";
       } // cargoLock;
@@ -58,6 +62,9 @@ in
 
   gnused-gprefix =
     gprefix final.gnused;
+
+  go-hello =
+    go { name = "go-hello"; src = ../src/go-hello; };
 
   hsl =
     rust { name = "hsl"; };
