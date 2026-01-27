@@ -5,13 +5,13 @@ use std::{borrow::Cow, env, process};
 #[derive(clap::Parser)]
 enum Command {
     Prompt {
-        /// Fish's `pwd` (oblivious to symlinks)
-        #[arg(long)]
-        pwd: Option<Utf8PathBuf>,
-
         /// Fish's `$pipestatus` variable
         #[arg(long)]
         pipestatus: Option<String>,
+
+        /// Fish's `pwd` (oblivious to symlinks)
+        #[arg(long)]
+        pwd: Option<Utf8PathBuf>,
 
         /// Job count
         #[arg(long)]
@@ -23,10 +23,10 @@ enum Command {
 fn main() -> anyhow::Result<()> {
     match Command::parse() {
         Command::Prompt {
-            pwd,
             pipestatus,
+            pwd,
             jobs,
-        } => run_prompt(pwd, pipestatus.as_deref(), jobs),
+        } => run_prompt(pipestatus.as_deref(), pwd, jobs),
         Command::Init => run_init(),
     }
 }
@@ -38,8 +38,8 @@ const UNDERLINE: &str = "\x1b[4m";
 const NO_UNDERLINE: &str = "\x1b[24m";
 
 fn run_prompt(
-    pwd: Option<Utf8PathBuf>,
     pipestatus: Option<&str>,
+    pwd: Option<Utf8PathBuf>,
     jobs: Option<usize>,
 ) -> anyhow::Result<()> {
     let status = match pipestatus.map(str::trim) {
@@ -166,10 +166,13 @@ fn run_init() -> anyhow::Result<()> {
         "{}",
         r#"
 function fish_prompt
+    set --local evanrelf_prompt_pipestatus $pipestatus
+    set --local evanrelf_prompt_pwd (pwd)
+    set --local evanrelf_prompt_jobs (jobs -g 2>/dev/null | count)
     evanrelf-prompt prompt \
-        --pwd (pwd) \
-        --pipestatus "$pipestatus" \
-        --jobs (jobs -g 2>/dev/null | count)
+        --pipestatus "$evanrelf_prompt_pipestatus" \
+        --pwd "$evanrelf_prompt_pwd" \
+        --jobs "$evanrelf_prompt_jobs"
 end
         "#
         .trim()
