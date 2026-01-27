@@ -74,6 +74,7 @@ in
       uutils-coreutils
       watchexec
       watchman
+      yt-dlp
       zig
       zoxide
     ]
