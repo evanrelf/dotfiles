@@ -53,6 +53,7 @@ hook global WinSetOption filetype=(fish|python|rust|zig) %{
 # Indent with tabs in select languages
 hook global WinSetOption filetype=(go|makefile) %{
   set-option window indentwidth 0
+  set-option window tabstop 4
 }
 
 ################################################################################
