@@ -280,6 +280,8 @@ define-command -docstring "normal: make interface look less spartan" \
 normal %{
   colorscheme primer
   add-highlighter window/number-lines number-lines -hlcursor -separator ' '
+  git hide-diff
+  hook -once window NormalIdle .* %{ try %{ git show-diff } }
 }
 
 ################################################################################
