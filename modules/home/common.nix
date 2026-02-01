@@ -67,6 +67,7 @@ in
       scc
       sd
       shellcheck
+      sprite
       tealdeer
       tombi
       universal-ctags
