@@ -32,6 +32,7 @@ in
       cargo-limit
       cargo-watch
       claude-code
+      codex
       coreutils-gprefix
       delta
       direnv
