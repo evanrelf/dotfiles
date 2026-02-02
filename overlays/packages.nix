@@ -1,17 +1,17 @@
 final: prev:
 
 let
-  checkVersion = version: drv:
+  assertUpgrade = prevDrv: finalDrv:
     let
-      older = builtins.compareVersions (drv.version or "0") version < 0;
+      older = builtins.compareVersions (prevDrv.version or "0") finalDrv.version < 0;
       error = builtins.throw ''
-        '${drv.pname}' override is outdated
+        '${finalDrv.pname}' override is outdated
 
-        Version from Nixpkgs:  ${drv.version}
-        Version from dotfiles: ${version}
+        Version from Nixpkgs:  ${prevDrv.version}
+        Version from dotfiles: ${finalDrv.version}
       '';
     in
-    assert older || error; drv;
+    assert older || error; finalDrv;
 
   gprefix = drv:
     final.runCommandLocal "gprefix-${drv.name}" { } ''
