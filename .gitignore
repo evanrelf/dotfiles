@@ -1,2 +1,6 @@
+# Nix
 result
 result-*
+
+# Rust
+target/
