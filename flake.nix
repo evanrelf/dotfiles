@@ -14,6 +14,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    naersk = {
+      url = "github:nix-community/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +54,7 @@
             config = { allowUnfree = true; };
             overlays = [
               (_: _: { inherit inputs inputs'; })
+              inputs.naersk.overlays.default
               inputs.nix-darwin.overlays.default
               inputs.ghciwatch-compat.overlays.default
               (import ./overlays/packages.nix)

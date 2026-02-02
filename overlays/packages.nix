@@ -27,7 +27,12 @@ let
       inherit name src vendorHash;
     });
 
-  rust = { name, src ? final.inputs.${name}.outPath, cargoLock ? { } }:
+  rust = rustNaersk;
+
+  rustNaersk = { name, src ? final.inputs.${name}.outPath, cargoLock ? null }:
+    final.naersk.buildPackage { inherit name src; };
+
+  rustNixpkgs = { name, src ? final.inputs.${name}.outPath, cargoLock ? { } }:
     final.rustPlatform.buildRustPackage (attrs: {
       inherit name src;
       cargoLock = (attrs.cargoLock or { }) // {
