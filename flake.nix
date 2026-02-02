@@ -39,8 +39,8 @@
     open-github-kak = { url = "github:evanrelf/open-github.kak"; flake = false; };
   };
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
       perSystem = { config, inputs', pkgs, system, ... }: {
