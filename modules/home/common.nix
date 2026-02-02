@@ -131,8 +131,11 @@ in
     recursive = true;
   };
 
-  home.file.".config/git".source =
-    mutable "configs/git/.config/git";
+  home.file.".config/git/config".source =
+    mutable "configs/git/.config/git/config";
+
+  home.file.".config/git/ignore".source =
+    mutable "configs/git/.config/git/ignore";
 
   home.file.".config/hammerspoon/init.lua" =
     lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
