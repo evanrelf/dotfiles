@@ -42,16 +42,6 @@ let
 
 in
 {
-  container =
-    assertUpgrade prev.container
-      (prev.container.overrideAttrs rec {
-        version = "0.8.0";
-        src = final.fetchurl {
-          url = "https://github.com/apple/container/releases/download/${version}/container-installer-signed.pkg";
-          hash = "sha256-ZgPUMNIPb3mSFfcppDULz3nLo3HZbLnWb8765G8FRy8=";
-        };
-      });
-
   coreutils-gprefix =
     (prev.coreutils.override {
       singleBinary = false;
