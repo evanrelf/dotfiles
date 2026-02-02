@@ -43,7 +43,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
-      perSystem = { config, inputs', pkgs, system, ... }: {
+      perSystem = { inputs', pkgs, system, ... }: {
         _module.args.pkgs =
           import inputs.nixpkgs {
             inherit system;
