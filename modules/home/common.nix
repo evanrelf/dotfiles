@@ -131,10 +131,8 @@ in
     recursive = true;
   };
 
-  xdg.configFile."git" = {
-    source = ../../configs/git/.config/git;
-    recursive = true;
-  };
+  home.file.".config/git".source =
+    mutable "configs/git/.config/git";
 
   home.file.".config/hammerspoon/init.lua" =
     lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
