@@ -7,3 +7,4 @@ My personal development environment.
 - **Shell:** [Fish](https://github.com/fish-shell/fish-shell)
 - **Terminal:** [Ghostty](https://github.com/ghostty-org/ghostty)
 - **OS:** [macOS](https://www.apple.com/os/macos/) and [NixOS](https://nixos.org/)
+- **Theme:** [Flexoki](https://stephango.com/flexoki)
