@@ -32,7 +32,7 @@ fn main() -> anyhow::Result<()> {
 }
 
 const RED: &str = "\x1b[31m";
-const BRIGHT_BLUE: &str = "\x1b[94m";
+const WHITE: &str = "\x1b[37m";
 const RESET: &str = "\x1b[0m";
 const UNDERLINE: &str = "\x1b[4m";
 const NO_UNDERLINE: &str = "\x1b[24m";
@@ -81,7 +81,7 @@ fn run_prompt(
 
     let jobs = if jobs.unwrap_or(0) >= 1 { "  " } else { "" };
 
-    print!("\n{RED}{status}{BRIGHT_BLUE}{hostname}:{pwd}{in_nix_shell}{jobs}\n${RESET} ");
+    print!("\n{RED}{status}{WHITE}{hostname}:{pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
 }
