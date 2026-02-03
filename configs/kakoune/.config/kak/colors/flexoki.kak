@@ -131,7 +131,7 @@ magenta_850="rgb:4F1B39"
 magenta_900="rgb:39172B"
 magenta_950="rgb:24131D"
 
-flexoki_theme=${flexoki_theme:-white}
+flexoki_theme=${flexoki_theme:-light}
 
 if [ "$flexoki_theme" = "white" ]; then
   tx="$black"
