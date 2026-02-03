@@ -14,4 +14,3 @@ maximize = true
 cursor-style-blink = false
 shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 scrollback-limit = 256_000_000
-macos-titlebar-style = native
