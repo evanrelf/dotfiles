@@ -2,7 +2,7 @@
 # COLORSCHEME
 ################################################################################
 
-declare-option str colorscheme "oksolar-light"
+declare-option str colorscheme "flexoki"
 
 colorscheme "%opt{colorscheme}"
 
