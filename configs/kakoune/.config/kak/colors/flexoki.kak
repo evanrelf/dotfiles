@@ -2,6 +2,7 @@ evaluate-commands %sh{
 
 # https://stephango.com/flexoki
 
+white="rgb:FFFFFF"
 paper="rgb:FFFCF0"
 base_50="rgb:F2F0E5"
 base_100="rgb:E6E4D9"
@@ -132,7 +133,24 @@ magenta_950="rgb:24131D"
 
 flexoki_theme=${flexoki_theme:-light}
 
-if [ "$flexoki_theme" = "light" ]; then
+if [ "$flexoki_theme" = "white" ]; then
+  tx="$black"
+  tx_2="$base_600"
+  tx_3="$base_300"
+  ui_3="$base_200"
+  ui_2="$base_150"
+  ui="$base_100"
+  bg_2="$base_50"
+  bg="$white"
+  red="$red_600"
+  orange="$orange_600"
+  yellow="$yellow_600"
+  green="$green_600"
+  cyan="$cyan_600"
+  blue="$blue_600"
+  purple="$purple_600"
+  magenta="$magenta_600"
+elif [ "$flexoki_theme" = "light" ]; then
   tx="$black"
   tx_2="$base_600"
   tx_3="$base_300"
