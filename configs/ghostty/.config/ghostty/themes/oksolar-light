@@ -1,4 +1,4 @@
-# ./oksolar-light.sh
+# ./oksolar.sh light
 palette = 0=#093946
 palette = 1=#f23749
 palette = 2=#819500

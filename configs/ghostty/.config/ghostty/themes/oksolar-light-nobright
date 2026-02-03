@@ -1,19 +1,19 @@
-# ./oksolar-light-nobright.sh
+# ./oksolar.sh light-nobright
 palette = 0=#093946
-palette = 8=#093946
 palette = 1=#f23749
-palette = 9=#f23749
 palette = 2=#819500
-palette = 10=#819500
 palette = 3=#ac8300
-palette = 11=#ac8300
 palette = 4=#2b90d8
-palette = 12=#2b90d8
 palette = 5=#dd459d
-palette = 13=#dd459d
 palette = 6=#259d94
-palette = 14=#259d94
 palette = 7=#f1e9d2
+palette = 8=#093946
+palette = 9=#f23749
+palette = 10=#819500
+palette = 11=#ac8300
+palette = 12=#2b90d8
+palette = 13=#dd459d
+palette = 14=#259d94
 palette = 15=#f1e9d2
 background = ffffff
 foreground = 002d38
