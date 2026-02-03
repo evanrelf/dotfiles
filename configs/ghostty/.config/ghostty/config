@@ -1,4 +1,5 @@
 theme = light:Flexoki Light,dark:Flexoki Dark
+# background = #ffffff
 font-family = PragmataPro VF
 font-style = Regular
 font-size = 17
