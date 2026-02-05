@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+cpus=2
+memory=1024
+kernel_path="" # must be uncompressed
+initrd_path=""
+kernel_cmdline="console=hvc0 reboot=t panic=-1"
+image="/Users/evanrelf/Downloads/debian-13-nocloud-arm64.raw"
+share_source=""
+share_tag=""
+mac=02:00:00:00:00:01
+
+  # --bootloader linux,kernel="$kernel_path",initrd="$initrd_path",cmdline="$kernel_cmdline" \
+  # --device virtio-fs,sharedDir="$share_source",mountTag="$share_tag" \
+  # --device virtio-net,nat,mac="$mac"
+
+vfkit \
+  --cpus "$cpus" \
+  --memory "$memory" \
+  --bootloader efi,variable-store=efi-variable-store,create \
+  --device virtio-rng \
+  --device virtio-serial,stdio \
+  --device virtio-blk,path="$image"
