@@ -14,6 +14,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    microvm = {
+      # https://github.com/microvm-nix/microvm.nix/issues/467
+      url = "github:microvm-nix/microvm.nix/2015b82bbe8bd8ac390e06219077174ba521d16b";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     naersk = {
       url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
