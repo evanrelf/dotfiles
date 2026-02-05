@@ -47,23 +47,28 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
+      flake = {
+        overlays.default =
+          inputs.nixpkgs.lib.composeManyExtensions [
+            (_: _: { inherit inputs; })
+            inputs.naersk.overlays.default
+            inputs.nix-darwin.overlays.default
+            inputs.ghciwatch-compat.overlays.default
+            (import ./overlays/packages.nix)
+            (import ./overlays/kakoune-plugins.nix)
+            (import ./overlays/fish-plugins.nix)
+            (import ./overlays/nixos-configurations.nix)
+            (import ./overlays/darwin-configurations.nix)
+            (import ./overlays/home-configurations.nix)
+          ];
+      };
+
       perSystem = { inputs', pkgs, system, ... }: {
         _module.args.pkgs =
           import inputs.nixpkgs {
             inherit system;
             config = { allowUnfree = true; };
-            overlays = [
-              (_: _: { inherit inputs inputs'; })
-              inputs.naersk.overlays.default
-              inputs.nix-darwin.overlays.default
-              inputs.ghciwatch-compat.overlays.default
-              (import ./overlays/packages.nix)
-              (import ./overlays/kakoune-plugins.nix)
-              (import ./overlays/fish-plugins.nix)
-              (import ./overlays/nixos-configurations.nix)
-              (import ./overlays/darwin-configurations.nix)
-              (import ./overlays/home-configurations.nix)
-            ];
+            overlays = [ inputs.self.overlays.default ];
           };
 
         legacyPackages = pkgs;
