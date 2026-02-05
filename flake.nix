@@ -14,6 +14,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     naersk = {
       url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,9 +55,10 @@
         overlays.default =
           inputs.nixpkgs.lib.composeManyExtensions [
             (_: _: { inherit inputs; })
+            inputs.ghciwatch-compat.overlays.default
+            inputs.llm-agents.overlays.default
             inputs.naersk.overlays.default
             inputs.nix-darwin.overlays.default
-            inputs.ghciwatch-compat.overlays.default
             (import ./overlays/packages.nix)
             (import ./overlays/kakoune-plugins.nix)
             (import ./overlays/fish-plugins.nix)
