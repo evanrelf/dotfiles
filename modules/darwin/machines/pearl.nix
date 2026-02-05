@@ -15,9 +15,9 @@
   # For now, these hashes tell `nix-darwin` these modifications are okay to
   # overwrite. In the future, it would be better to clean up this hodgepodge of
   # Nix installs so this hack isn't necessary.
-  environment.etc."bashrc".knownSha256Hashes = [ "a2396f60e669a9e60ca5a077ee74bff1d071a4ade9f37836aa7e852ca389c243" ];
-  environment.etc."zshrc".knownSha256Hashes = [ "2a36d13c46cab744f1cc9d55a21b5e944e87e7b40132a0bcab98222a69b1071f" ];
-  environment.etc."zshenv".knownSha256Hashes = [ "ad03552f1fffa6e2a84d6409bb1063f5fe121f3ee4a05ef60fd0c9e493d59b8d" ];
+  environment.etc."bashrc".knownSha256Hashes = [ "b67c9ea69b96f0ba89c575ddf9631d556d682ce1a3203cf0a458e368659f20ee" ];
+  environment.etc."zshrc".knownSha256Hashes = [ "27274e44b88a1174787f9a3d437d3387edc4f9aaaf40356054130797f5dc7912" ];
+  environment.etc."zshenv".knownSha256Hashes = [ "e7a5ba03dc84e14c8c9028888a4278c03d3f23e528b8424ab24d67aae93d59fa" ];
 
   system.stateVersion = 6;
 }
