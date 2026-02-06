@@ -31,8 +31,6 @@ in
       cargo-edit
       cargo-limit
       cargo-watch
-      claude-code
-      codex
       coreutils-gprefix
       delta
       direnv
@@ -55,6 +53,8 @@ in
       jujutsu
       kakoune
       kakoune-lsp
+      llm-agents.claude-code
+      llm-agents.codex
       mergiraf
       nix-diff
       nix-direnv
