@@ -1,0 +1,2 @@
+approval_policy = "untrusted"
+check_for_update_on_startup = false
