@@ -53,6 +53,7 @@ in
       jujutsu
       kakoune
       kakoune-lsp
+      llm-agents.amp
       llm-agents.claude-code
       llm-agents.codex
       mergiraf
