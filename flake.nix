@@ -32,6 +32,10 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
+    zig-overlay = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Go programs
 
@@ -59,6 +63,7 @@
             inputs.llm-agents.overlays.default
             inputs.naersk.overlays.default
             inputs.nix-darwin.overlays.default
+            inputs.zig-overlay.overlays.default
             (import ./overlays/packages.nix)
             (import ./overlays/kakoune-plugins.nix)
             (import ./overlays/fish-plugins.nix)

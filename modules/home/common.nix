@@ -77,7 +77,7 @@ in
       uutils-coreutils
       watchexec
       watchman
-      zig
+      zigpkgs.master
       zoxide
     ]
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
