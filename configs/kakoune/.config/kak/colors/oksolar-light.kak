@@ -25,7 +25,7 @@ green="rgb:819500"
 black="$base03"
 white="rgb:ffffff"
 
-darken() { echo "$1" | hsl l % 80 | hsl s % 150; }
+darken() { echo "$1" | hsl l%80 s%150; }
 
 dark_yellow=$(darken $yellow)
 dark_orange=$(darken $orange)
@@ -36,7 +36,7 @@ dark_blue=$(darken $blue)
 dark_cyan=$(darken $cyan)
 dark_green=$(darken $green)
 
-lighten() { echo "$1" | hsl l % 160 | hsl s % 75; }
+lighten() { echo "$1" | hsl l%160 s%75; }
 
 light_yellow=$(lighten $yellow)
 light_orange=$(lighten $orange)

@@ -25,9 +25,9 @@ green="rgb:819500"
 black="$base03"
 white="$base2"
 
-darken() { echo "$1" | hsl l % 80 | hsl s % 150; }
+darken() { echo "$1" | hsl l%80 s%150; }
 
-lighten() { echo "$1" | hsl l % 160 | hsl s % 75; }
+lighten() { echo "$1" | hsl l%160 s%75; }
 
 # light_yellow=$(lighten $yellow)
 # light_orange=$(lighten $orange)
