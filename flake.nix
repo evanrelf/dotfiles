@@ -65,6 +65,7 @@
             (import ./overlays/nixos-configurations.nix)
             (import ./overlays/darwin-configurations.nix)
             (import ./overlays/home-configurations.nix)
+            (import ./overlays/container-images.nix)
           ];
       };
 
