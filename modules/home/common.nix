@@ -81,6 +81,7 @@ in
       zoxide
     ]
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
+      container
     ])
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
     ])
