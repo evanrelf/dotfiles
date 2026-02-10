@@ -22,6 +22,8 @@ in
   boot.zfs.devNodes = "/dev/mapper";
   services.zfs.autoScrub.enable = true;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # TODO: Re-enable "erase your darlings"
   # boot.initrd.postDeviceCommands = lib.mkAfter ''
   #   zfs rollback -r tank/local/root@blank
