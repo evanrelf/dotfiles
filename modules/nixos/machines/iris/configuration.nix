@@ -35,7 +35,7 @@ in
 
   users.users.evanrelf = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
     initialPassword = "banana";
     shell = "/home/evanrelf/.nix-profile/bin/fish";
     openssh.authorizedKeys.keys = [
@@ -72,6 +72,8 @@ in
       Defaults lecture = never
     '';
   };
+
+  virtualisation.docker.enable = true;
 
   services.openssh.enable = true;
 
