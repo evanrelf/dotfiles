@@ -1,4 +1,4 @@
-function hsgoto
+function hsgoto --wraps rg
     set --local match (\
         rg \
             --type 'haskell' \

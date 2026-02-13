@@ -1,4 +1,4 @@
-function rsgoto
+function rsgoto --wraps rg
     set --local match (\
         rg \
             --type rust \
