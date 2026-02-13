@@ -66,11 +66,11 @@ in
       ripgrep
       rustup
       samply
-      scc
       sd
       shellcheck
       sprite
       tealdeer
+      tokei
       tombi
       universal-ctags
       up
