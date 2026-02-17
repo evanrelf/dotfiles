@@ -14,10 +14,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    llm-agents = {
-      url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     naersk = {
       url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +52,6 @@
           inputs.nixpkgs.lib.composeManyExtensions [
             (_: _: { inherit inputs; })
             inputs.ghciwatch-compat.overlays.default
-            inputs.llm-agents.overlays.default
             inputs.naersk.overlays.default
             inputs.nix-darwin.overlays.default
             (import ./overlays/packages.nix)
@@ -65,7 +60,6 @@
             (import ./overlays/nixos-configurations.nix)
             (import ./overlays/darwin-configurations.nix)
             (import ./overlays/home-configurations.nix)
-            (import ./overlays/container-images.nix)
           ];
       };
 
@@ -80,9 +74,4 @@
         legacyPackages = pkgs;
       };
     };
-
-  nixConfig = {
-    extra-substituters = [ "https://cache.numtide.com" ];
-    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
-  };
 }

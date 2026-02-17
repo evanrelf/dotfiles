@@ -53,9 +53,6 @@ in
       jujutsu
       kakoune
       kakoune-lsp
-      llm-agents.amp
-      llm-agents.claude-code
-      llm-agents.codex
       mergiraf
       nix-diff
       nix-direnv
@@ -68,7 +65,6 @@ in
       samply
       sd
       shellcheck
-      sprite
       tealdeer
       tokei
       tombi
@@ -81,22 +77,12 @@ in
       zoxide
     ]
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
-      container
     ])
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
     ])
   ];
 
   # Config files
-
-  home.file.".claude/settings.json".source =
-    mutable "configs/claude/.claude/settings.json";
-
-  home.file.".claude/CLAUDE.md".source =
-    mutable "configs/claude/.claude/CLAUDE.md";
-
-  home.file.".codex/config.toml".source =
-    mutable "configs/codex/.codex/config.toml";
 
   xdg.configFile."direnv" = {
     source = ../../configs/direnv/.config/direnv;
