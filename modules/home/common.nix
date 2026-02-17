@@ -59,7 +59,6 @@ in
       nix-your-shell
       nixpkgs-fmt
       pancase
-      pueue
       ripgrep
       rustup
       samply
@@ -68,9 +67,6 @@ in
       tealdeer
       tokei
       tombi
-      universal-ctags
-      up
-      uutils-coreutils
       watchexec
       watchman
       zig
@@ -156,8 +152,4 @@ in
 
   home.file.".config/zed/settings.json".source =
     mutable "configs/zed/.config/zed/settings.json";
-
-  # Services
-
-  services.pueue.enable = true;
 }
