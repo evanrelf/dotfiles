@@ -71,6 +71,7 @@ in
       tombi
       watchexec
       watchman
+      yj
       zig
       zoxide
     ]

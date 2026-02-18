@@ -18,6 +18,7 @@ aliases.take = ['squash', '--use-destination-message', '--from']
 
 # Bookmark
 aliases.tug = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -eq 0 ]; then
   jj bookmark move --from 'bookmark()' --to @-
@@ -32,6 +33,7 @@ aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init']
 aliases.merge = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -gt 1 ]; then
   echo "Usage: jj merge [REVSET]" >&2
@@ -45,6 +47,7 @@ aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
 
 aliases.megaset = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -eq 0 ]; then
   echo "Usage: jj megaset [REVSETS]..." >&2
@@ -62,6 +65,7 @@ else
 fi
 ''', '']
 aliases.megadifference = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -ne 1 ]; then
   echo "Usage: jj megadifference <REVSET>" >&2
@@ -71,6 +75,7 @@ parents=${1:?}
 jj rebase --source 'megamerge()' --onto "parents(megamerge()) ~ ($parents)"
 ''', '']
 aliases.megaunion = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -ne 1 ]; then
   echo "Usage: jj megaunion <REVSET>" >&2
@@ -80,6 +85,7 @@ parents=${1:?}
 jj rebase --source 'megamerge()' --onto "parents(megamerge()) | ($parents)"
 ''', '']
 aliases.megarebase = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -gt 1 ]; then
   echo "Usage: jj megarebase [REVSET]" >&2
