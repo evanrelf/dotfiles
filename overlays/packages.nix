@@ -74,6 +74,56 @@ in
   hsl =
     rust { name = "hsl"; };
 
+  sprite =
+    let
+      version = "0.0.1-rc31";
+      baseUrl = "https://sprites-binaries.t3.storage.dev/client/v${version}";
+      src = {
+        "aarch64-darwin" = final.fetchurl {
+          url = "${baseUrl}/sprite-darwin-arm64.tar.gz";
+          hash = "sha256-ULgnFMqG+wPEhMomeNhqwhokAcsIgFlvw4qA18CxyYc=";
+        };
+        "aarch64-linux" = final.fetchurl {
+          url = "${baseUrl}/sprite-linux-arm64.tar.gz";
+          hash = "sha256-hRv0DfUsZQdCVOeXkbJ7tvnCypopeYD8z/+LkN+p0ic=";
+        };
+        "x86_64-darwin" = final.fetchurl {
+          url = "${baseUrl}/sprite-darwin-amd64.tar.gz";
+          hash = "sha256-UCNr5irx1x0xb+D9HjWgc46ESlq5Te8pbKsAcYujBYM=";
+        };
+        "x86_64-linux" = final.fetchurl {
+          url = "${baseUrl}/sprite-linux-amd64.tar.gz";
+          hash = "sha256-tzM19cI1P83l1ioKRvTqE2ThXiP62JZzFbjBWVUqtQw=";
+        };
+      }.${final.stdenv.hostPlatform.system};
+    in
+    final.stdenv.mkDerivation {
+      pname = "sprite";
+      inherit version src;
+      dontUnpack = true;
+      dontConfigure = true;
+      dontBuild = true;
+      installPhase = ''
+        runHook preInstall
+        mkdir -p "$out/bin"
+        tar -xzf "$src" -C "$out/bin" sprite
+        chmod +x "$out/bin/sprite"
+        runHook postInstall
+      '';
+      meta = with final.lib; {
+        description = "Sprite CLI";
+        homepage = "https://sprites.dev";
+        license = licenses.unfree;
+        mainProgram = "sprite";
+        platforms = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ];
+      };
+    };
+
   # kakoune-unwrapped =
   #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
   #     version = final.inputs.kakoune.shortRev;

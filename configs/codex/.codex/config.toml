@@ -1,0 +1,4 @@
+approval_policy = "untrusted"
+check_for_update_on_startup = false
+model = "gpt-5.2-codex"
+model_reasoning_effort = "medium"
