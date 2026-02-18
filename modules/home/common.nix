@@ -55,7 +55,6 @@ in
       kakoune-lsp
       llm-agents.amp
       llm-agents.claude-code
-      llm-agents.codex
       mergiraf
       nix-diff
       nix-direnv
@@ -89,9 +88,6 @@ in
 
   home.file.".claude/CLAUDE.md".source =
     mutable "configs/claude/.claude/CLAUDE.md";
-
-  home.file.".codex/config.toml".source =
-    mutable "configs/codex/.codex/config.toml";
 
   xdg.configFile."direnv" = {
     source = ../../configs/direnv/.config/direnv;

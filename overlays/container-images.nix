@@ -66,7 +66,6 @@ in
           # Agents
           claude-code-yolo
           llm-agents.amp
-          # llm-agents.codex
 
           # Tools
           bashInteractive
