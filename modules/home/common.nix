@@ -67,7 +67,6 @@ in
       samply
       sd
       shellcheck
-      sprite
       tealdeer
       tokei
       tombi
