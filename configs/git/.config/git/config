@@ -88,8 +88,16 @@
   pager = delta
 [delta]
   light = true
+  true-color = always
   color-only = true
   syntax-theme = none
+  # Flexoki (https://stephango.com/flexoki)
+  minus-style = normal "#FFCABB" # red 100
+  minus-emph-style = normal "#F89A8A" # red 200
+  minus-empty-line-marker-style = normal "#FFCABB" # red 100
+  plus-style = syntax "#DDE2B2" # green 100
+  plus-emph-style = syntax "#BEC97E" # green 200
+  plus-empty-line-marker-style = syntax "#DDE2B2" # green 100
 [diff]
   colorMoved = default
 [difftool]
