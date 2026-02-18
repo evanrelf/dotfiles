@@ -18,7 +18,7 @@ if test (uname) = Darwin
 end
 set --global --export NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
 set --global --export FZF_LEGACY_KEYBINDINGS 0
-set --global --export FZF_DEFAULT_OPTS "--tiebreak=index --style minimal --color=light --height=40% --layout=reverse --exact"
+set --global --export FZF_DEFAULT_OPTS "--tiebreak=index --style=minimal --height=40% --layout=reverse --exact"
 set --global --export FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' . \$dir | sed -e 's_^\./__'"
 set --global --export FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
 set --global --export FZF_FIND_FILE_COMMAND "__fzf_empath \$dir"
