@@ -1,30 +1,30 @@
 final: prev:
 
-let
-  mkNixOSConfiguration = system: modules:
-    final.inputs.nixpkgs.lib.nixosSystem {
-      inherit system modules;
-      pkgs = final;
-      specialArgs = { inherit (prev) inputs; };
-    };
-
-in
 {
   nixosConfigurations = {
     iris =
-      mkNixOSConfiguration
-        "x86_64-linux"
-        [ ../modules/nixos/machines/iris/configuration.nix ];
+      final.inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ../modules/nixos/machines/iris/configuration.nix ];
+        pkgs = final;
+        specialArgs = { inherit (prev) inputs; };
+      };
 
     vm =
-      mkNixOSConfiguration
-        "aarch64-linux"
-        [ ../modules/nixos/machines/vm.nix ];
+      final.inputs.nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [ ../modules/nixos/machines/vm.nix ];
+        pkgs = final;
+        specialArgs = { inherit (prev) inputs; };
+      };
 
     vm-installer =
-      mkNixOSConfiguration
-        "aarch64-linux"
-        [ ../modules/nixos/machines/vm-installer.nix ];
+      final.inputs.nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [ ../modules/nixos/machines/vm-installer.nix ];
+        pkgs = final;
+        specialArgs = { inherit (prev) inputs; };
+      };
   };
 
   nixosImages = {
