@@ -29,11 +29,6 @@ final: prev:
 
   nixosImages = {
     vm-installer =
-      final.inputs.nixos-generators.nixosGenerate {
-        pkgs = final;
-        modules = [ ../modules/nixos/machines/vm-installer.nix ];
-        format = "install-iso";
-        specialArgs = { inherit (prev) inputs; };
-      };
+      final.nixosConfigurations.vm-installer.config.system.build.images.iso-installer;
   };
 }
