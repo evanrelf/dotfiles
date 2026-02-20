@@ -79,6 +79,7 @@ in
       container
     ])
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
+      bubblewrap
     ])
   ];
 
