@@ -80,6 +80,7 @@ in
     ])
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
       bubblewrap
+      clang
     ])
   ];
 
