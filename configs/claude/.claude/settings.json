@@ -9,6 +9,7 @@
       "Bash(jj show:*)"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "Notification": [
       {
@@ -34,8 +35,8 @@
     ]
   },
   "sandbox": {
-    "autoAllowBashIfSandboxed": false,
-    "enabled": true
+    "enabled": true,
+    "autoAllowBashIfSandboxed": false
   },
   "alwaysThinkingEnabled": true
 }
