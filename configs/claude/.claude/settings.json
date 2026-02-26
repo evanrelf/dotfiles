@@ -1,4 +1,8 @@
 {
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [""]
+  },
   "permissions": {
     "allow": [
       "Bash(git log:*)",
