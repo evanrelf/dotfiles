@@ -47,6 +47,12 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
+      imports = [
+        ./modules/flake/nixos-configurations.nix
+        ./modules/flake/darwin-configurations.nix
+        ./modules/flake/home-configurations.nix
+      ];
+
       flake = {
         overlays.default =
           inputs.nixpkgs.lib.composeManyExtensions [
@@ -58,9 +64,6 @@
             (import ./overlays/packages.nix)
             (import ./overlays/kakoune-plugins.nix)
             (import ./overlays/fish-plugins.nix)
-            (import ./overlays/nixos-configurations.nix)
-            (import ./overlays/darwin-configurations.nix)
-            (import ./overlays/home-configurations.nix)
             (import ./overlays/container-images.nix)
           ];
       };
