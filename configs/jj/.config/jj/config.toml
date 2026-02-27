@@ -220,8 +220,6 @@ ts(t),
 --when.repositories = ['~/Code/MercuryTechnologies/']
 [--scope.user]
 email = 'evanr@mercury.com'
-[--scope.fsmonitor]
-backend = 'watchman'
 [--scope.fix.tools.be-format-haskell]
 command = ['be', 'format', 'haskell', '--stdin']
 patterns = ['glob:"**/*.hs"']
