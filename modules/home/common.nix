@@ -31,6 +31,7 @@ in
       cargo-edit
       cargo-limit
       cargo-watch
+      claude-mergetool
       coreutils-gprefix
       delta
       direnv

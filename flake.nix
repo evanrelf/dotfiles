@@ -2,6 +2,10 @@
   description = "dotfiles";
 
   inputs = {
+    claude-mergetool = {
+      url = "github:9999years/claude-mergetool";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -51,6 +55,7 @@
         overlays.default =
           inputs.nixpkgs.lib.composeManyExtensions [
             (_: _: { inherit inputs; })
+            inputs.claude-mergetool.overlays.default
             inputs.ghciwatch-compat.overlays.default
             inputs.llm-agents.overlays.default
             inputs.naersk.overlays.default
