@@ -60,6 +60,11 @@ fn run_prompt(
         }
     };
 
+    let zmx_session = match env::var("ZMX_SESSION") {
+        Ok(s) => format!(" {s}"),
+        Err(_) => String::new(),
+    };
+
     let home = Utf8PathBuf::try_from(env::home_dir().unwrap())?;
     let current_dir = match pwd {
         Some(pwd) => pwd,
@@ -81,7 +86,7 @@ fn run_prompt(
 
     let jobs = if jobs.unwrap_or(0) >= 1 { "  " } else { "" };
 
-    print!("\n{RED}{status}{WHITE}{hostname}:{pwd}{in_nix_shell}{jobs}\n${RESET} ");
+    print!("\n{RED}{status}{WHITE}{hostname}{zmx_session} {pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
 }
