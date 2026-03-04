@@ -15,16 +15,6 @@
   },
   "model": "opus[1m]",
   "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-bell"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "",
