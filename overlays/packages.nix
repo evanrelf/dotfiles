@@ -50,20 +50,6 @@ in
       doCheck = false;
     });
 
-  defuddle =
-    final.buildNpmPackage {
-      pname = "defuddle";
-      version = "0.8.0";
-      src = final.fetchFromGitHub {
-        owner = "kepano";
-        repo = "defuddle";
-        tag = "0.8.0";
-        hash = "sha256-PrzB30pk7CHG/C91iZ7voY9ULsqX0qUKjgrZxiuZ9Jg=";
-      };
-      npmDepsHash = "sha256-w1WXFUH+QuihSyhnEm/uC/PlvkUWSyCcZvckDOZRorg=";
-      dontNpmPrune = true; # required to keep `jsdom` dev dependency
-    };
-
   empath =
     rust { name = "empath"; };
 
