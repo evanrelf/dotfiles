@@ -33,6 +33,7 @@ in
       cargo-watch
       claude-mergetool
       coreutils-gprefix
+      defuddle
       delta
       direnv
       empath
