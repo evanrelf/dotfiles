@@ -161,3 +161,7 @@ end)
 hs.hotkey.bind(fn, "r", hs.reload)
 
 hs.alert.show("Hammerspoon loaded!")
+
+hs.timer.doEvery(5 * 60, function()
+  hs.task.new("/Users/evanrelf/Code/evanrelf/dotfiles/bin/memory-usage", nil):start()
+end)

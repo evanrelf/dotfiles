@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+csv="$HOME/memory-usage.csv"
+
+vmstat_output=$(vm_stat)
+page_size=$(echo "$vmstat_output" | head -1 | grep -o '[0-9]\+' | tail -1)
+active=$(echo "$vmstat_output" | awk '/Pages active:/ {print $NF}' | tr -d '.')
+wired=$(echo "$vmstat_output" | awk '/Pages wired down:/ {print $NF}' | tr -d '.')
+compressed=$(echo "$vmstat_output" | awk '/Pages occupied by compressor:/ {print $NF}' | tr -d '.')
+
+memory_used_bytes=$(( (active + wired + compressed) * page_size ))
+memory_total_bytes=$(sysctl -n hw.memsize)
+swap_used_bytes=$(sysctl vm.swapusage | awk -F'  +' '{for(i=1;i<=NF;i++) if($i ~ /used/) print $i}' | grep -o '[0-9.]\+' | head -1 | awk '{printf "%.0f\n", $1 * 1024 * 1024}')
+timestamp=$(date +%Y-%m-%dT%H:%M:%S)
+
+if [ ! -f "$csv" ]; then
+    echo "timestamp,memory_used_bytes,memory_total_bytes,swap_used_bytes" > "$csv"
+fi
+
+echo "${timestamp},${memory_used_bytes},${memory_total_bytes},${swap_used_bytes}" >> "$csv"
