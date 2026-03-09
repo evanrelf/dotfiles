@@ -57,7 +57,6 @@ in
       llm-agents.amp
       llm-agents.claude-code
       mergiraf
-      nix-diff
       nix-direnv
       nix-your-shell
       nixpkgs-fmt
