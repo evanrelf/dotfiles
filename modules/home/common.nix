@@ -70,7 +70,6 @@ in
       tealdeer
       tokei
       watchexec
-      watchman
       yj
       zig
       zoxide
