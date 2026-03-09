@@ -51,9 +51,6 @@ end
 if command -q nix-your-shell
     nix-your-shell fish | source
 end
-if command -q zmx
-    zmx completions fish | source
-end
 if command -q zoxide
     zoxide init fish | source
 end

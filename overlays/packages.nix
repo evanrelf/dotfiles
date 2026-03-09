@@ -87,32 +87,4 @@ in
 
   pancase =
     rust { name = "pancase"; };
-
-  zmx =
-    let
-      version = "0.4.1";
-      src = final.fetchurl {
-        aarch64-darwin = {
-          url = "https://zmx.sh/a/zmx-${version}-macos-aarch64.tar.gz";
-          hash = "sha256-bc03jhwdXQft4MdeDjKSlPQJkHGCKP+ujoTWQq6s7uE=";
-        };
-        aarch64-linux = {
-          url = "https://zmx.sh/a/zmx-${version}-linux-aarch64.tar.gz";
-          hash = "sha256-lySWLlRP1u/uoJB9LQ44/XYf7N8uKxB4oISrGAeJwmI=";
-        };
-        x86_64-linux = {
-          url = "https://zmx.sh/a/zmx-${version}-linux-x86_64.tar.gz";
-          hash = "sha256-6bZbakDdXIj5toN2oFoOzGrHfuu7pE8WKfTbjoO2Eag=";
-        };
-      }.${final.stdenv.hostPlatform.system};
-    in
-    final.stdenv.mkDerivation {
-      pname = "zmx";
-      inherit version src;
-      sourceRoot = ".";
-      installPhase = ''
-        mkdir -p $out/bin
-        install -m755 zmx $out/bin/zmx
-      '';
-    };
 }

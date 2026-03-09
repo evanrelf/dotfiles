@@ -74,7 +74,6 @@ in
       watchman
       yj
       zig
-      zmx
       zoxide
     ]
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
