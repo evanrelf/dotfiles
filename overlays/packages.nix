@@ -40,6 +40,8 @@ let
       } // cargoLock;
     });
 
+  # TODO: Add `zig` function to easily package Zig projects.
+
 in
 {
   coreutils-gprefix =
