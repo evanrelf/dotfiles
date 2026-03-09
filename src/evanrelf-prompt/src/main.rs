@@ -95,7 +95,7 @@ fn run_prompt(
 }
 
 fn macos_computer_name() -> anyhow::Result<String> {
-    let output = process::Command::new("scutil")
+    let output = process::Command::new("/usr/sbin/scutil")
         .arg("--get=ComputerName")
         .output()
         .context("Failed to get output of `scutil`")?;
