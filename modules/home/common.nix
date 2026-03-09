@@ -69,7 +69,6 @@ in
       shellcheck
       tealdeer
       tokei
-      tombi
       watchexec
       watchman
       yj

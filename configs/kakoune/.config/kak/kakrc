@@ -227,15 +227,6 @@ hook -group lsp-filetype-rust-analyzer global BufSetOption filetype=rust %{
   }
 }
 
-hook -group lsp-filetype-tombi global BufSetOption filetype=toml %{
-  set-option buffer lsp_servers %{
-    [tombi]
-    root_globs = [".git", ".jj"]
-    command = "tombi"
-    args = ["lsp"]
-  }
-}
-
 hook -group lsp-filetype-tsgo global BufSetOption filetype=typescript %{
   set-option buffer lsp_servers %{
     [tsgo]
