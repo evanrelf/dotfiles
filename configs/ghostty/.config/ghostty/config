@@ -1,5 +1,5 @@
 theme = light:Flexoki Light,dark:Flexoki Dark
-# background = #ffffff
+
 font-family = PragmataPro VF
 font-style = Regular
 font-size = 17
@@ -10,8 +10,9 @@ font-variation-italic = wght=400
 font-variation-bold-italic = wght=650
 # https://fsd.it/pragmatapro/Handbook.png
 font-feature = +ss13 # Nicer Git graphs
+
 unfocused-split-opacity = 1
 maximize = true
 cursor-style-blink = false
 shell-integration-features = no-cursor,ssh-env,ssh-terminfo
-scrollback-limit = 256_000_000
+macos-titlebar-style = tabs
