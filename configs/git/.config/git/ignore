@@ -2,4 +2,4 @@
 .direnv/
 .envrc
 .kak.*.namecache
-.claude/settings.local.json
+**/.claude/settings.local.json
