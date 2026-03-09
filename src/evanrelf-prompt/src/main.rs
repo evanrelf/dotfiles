@@ -1,3 +1,4 @@
+use anyhow::Context as _;
 use camino::{Utf8Path, Utf8PathBuf};
 use clap::Parser as _;
 use std::{borrow::Cow, env, process};
@@ -49,9 +50,12 @@ fn run_prompt(
     };
 
     let hostname = if env::consts::OS == "macos" {
-        macos_computer_name()?
+        macos_computer_name().context("Failed to get macOS computer name")?
     } else {
-        match nix::unistd::gethostname()?.into_string() {
+        match nix::unistd::gethostname()
+            .context("Failed to get hostname")?
+            .into_string()
+        {
             Ok(s) => match s.strip_suffix(".local") {
                 Some(s) => String::from(s),
                 None => s,
@@ -60,10 +64,14 @@ fn run_prompt(
         }
     };
 
-    let home = Utf8PathBuf::try_from(env::home_dir().unwrap())?;
+    let home = Utf8PathBuf::try_from(env::home_dir().context("Failed to get home directory")?)
+        .context("Home directory path is not UTF-8")?;
     let current_dir = match pwd {
         Some(pwd) => pwd,
-        None => Utf8PathBuf::try_from(env::current_dir()?)?,
+        None => {
+            Utf8PathBuf::try_from(env::current_dir().context("Failed to get current directory")?)
+                .context("Current directory path is not UTF-8")?
+        }
     };
     let repo = jj_root().ok();
     let pwd_display = match current_dir.strip_prefix(&home) {
@@ -89,7 +97,8 @@ fn run_prompt(
 fn macos_computer_name() -> anyhow::Result<String> {
     let output = process::Command::new("scutil")
         .arg("--get=ComputerName")
-        .output()?;
+        .output()
+        .context("Failed to get output of `scutil`")?;
 
     if !output.status.success() {
         anyhow::bail!(
@@ -98,7 +107,11 @@ fn macos_computer_name() -> anyhow::Result<String> {
         );
     }
 
-    let name = String::from(str::from_utf8(&output.stdout)?.trim());
+    let name = String::from(
+        str::from_utf8(&output.stdout)
+            .context("`scutil` output is not UTF-8")?
+            .trim(),
+    );
 
     Ok(name)
 }
@@ -117,7 +130,9 @@ fn jj_root() -> anyhow::Result<Utf8PathBuf> {
         );
     }
 
-    let string = str::from_utf8(&output.stdout)?.trim();
+    let string = str::from_utf8(&output.stdout)
+        .context("`jj` output is not UTF-8")?
+        .trim();
 
     let path = Utf8PathBuf::from(string);
 
