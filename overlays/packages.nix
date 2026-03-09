@@ -74,17 +74,6 @@ in
   hsl =
     rust { name = "hsl"; };
 
-  # kakoune-unwrapped =
-  #   prev.kakoune-unwrapped.overrideAttrs (attrs: rec {
-  #     version = final.inputs.kakoune.shortRev;
-  #     src = final.inputs.kakoune;
-  #     patches = [ ];
-  #     preConfigure = ''
-  #       ${attrs.preConfigure or ""}
-  #       export version="${version}"
-  #     '';
-  #   });
-
   pancase =
     rust { name = "pancase"; };
 }
