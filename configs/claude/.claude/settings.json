@@ -28,5 +28,6 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": false
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high"
 }
