@@ -58,6 +58,7 @@ in
       llm-agents.claude-code
       llm-agents.codex
       mergiraf
+      neovim
       nix-direnv
       nix-your-shell
       nixpkgs-fmt
@@ -155,6 +156,9 @@ in
 
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
+
+  home.file.".config/nvim".source =
+    mutable "configs/neovim/.config/nvim";
 
   xdg.configFile."ripgrep" = {
     source = ../../configs/ripgrep/.config/ripgrep;
