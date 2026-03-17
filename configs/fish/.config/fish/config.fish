@@ -15,6 +15,9 @@ set --global --export DIRENV_LOG_FORMAT ""
 set --global --export NIXPKGS_ALLOW_UNFREE 1
 if test (uname) = Darwin
     set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
+    if test -e /Users/evanrelf/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+        set --global --export SSH_AUTH_SOCK /Users/evanrelf/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+    end
 end
 set --global --export NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
 set --global --export FZF_LEGACY_KEYBINDINGS 0
