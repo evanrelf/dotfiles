@@ -260,11 +260,11 @@ patterns = [
 
 [[--scope]]
 # iris uses ultraviolet key via SSH agent forwarding
---when.hostnames = ["ultraviolet", "iris"]
+--when.hostnames = ["ultraviolet", "ultraviolet.local", "iris"]
 [--scope.signing]
 key = 'ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJfnEwVJCy/fEQQ1Ea/P3nY4iQOVrxP5Gjk5rK367s6tcS8uEtK0Nmom5uvR4I0lNbTlzR1Ryn4rqEqU4+PRpqA='
 
 [[--scope]]
---when.hostnames = ["pearl"]
+--when.hostnames = ["pearl", "pearl.local"]
 [--scope.signing]
 key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn69TyVMZVhbTSYJ2mJGTiNUQG24g3dD7cRmOkkdfdx'
