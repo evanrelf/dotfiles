@@ -17,6 +17,7 @@ aliases.give = ['squash', '--use-destination-message', '--into']
 aliases.take = ['squash', '--use-destination-message', '--from']
 
 # Bookmark
+aliases.here = ['bookmark', 'set', '-r', '@-', '--allow-backwards']
 aliases.tug = ['util', 'exec', '--', 'bash', '-c', '''
 #!/usr/bin/env bash
 set -euo pipefail
