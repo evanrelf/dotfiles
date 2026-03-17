@@ -128,6 +128,23 @@ signing.behavior = 'drop'
 signing.backend = 'ssh'
 merge-tools.claude.program = 'claude-mergetool'
 merge-tools.claude.merge-args = ['merge', '$base', '$left', '$right', '-o', '$output', '-p', '$path']
+# From https://zerowidth.com/2025/jj-tips-and-tricks/#hunk-wise-style
+merge-tools.git.program = 'bash'
+merge-tools.git.edit-args = ['-c', '''
+#!/usr/bin/env bash
+set -euo pipefail
+rm -f "$right/JJ-INSTRUCTIONS"
+git -C "$left" init --quiet
+git -C "$left" add --all
+git -C "$left" commit --message baseline --allow-empty --quiet --no-gpg-sign
+mv "$left/.git" "$right"
+git -C "$right" add --intent-to-add --ignore-removal .
+git -C "$right" add --patch
+git -C "$right" diff-index --cached HEAD --quiet && { echo "No changes done, aborting split."; exit 1; }
+git -C "$right" commit --message split --quiet --no-gpg-sign
+git -C "$right" reset --hard --quiet
+''',
+]
 
 revsets.log = 'evan_log()'
 revsets.short-prefixes = 'evan_log()'
