@@ -96,6 +96,22 @@ base=${1:-"trunk()"}
 jj rebase --source 'megaroots()' --onto "exactly($base, 1)"
 ''', '']
 aliases.watch = ['util', 'exec', '--', 'jj-watch']
+# Inspired by https://news.ycombinator.com/item?id=47349889
+aliases.review = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
+set -euo pipefail
+if [ "$#" -ne 1 ]; then
+  echo "Usage: jj review <BRANCH>" >&2
+  exit 1
+fi
+# TODO: Stop hardcoding the trunk branch
+trunk=master
+branch=${1:?}
+jj git fetch --remote origin --branch "$trunk" --branch "$branch"
+jj new -r "$trunk" --message review
+jj new --message pr
+jj restore --from "$branch@origin"
+''', '']
 
 user.name = 'Evan Relf'
 user.email = 'evan@evanrelf.com'
