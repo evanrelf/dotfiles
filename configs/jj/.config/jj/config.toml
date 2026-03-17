@@ -284,4 +284,4 @@ key = 'ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBB
 [[--scope]]
 --when.hostnames = ["pearl", "pearl.local"]
 [--scope.signing]
-key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn69TyVMZVhbTSYJ2mJGTiNUQG24g3dD7cRmOkkdfdx'
+key = '~/.ssh/jj.pub'
