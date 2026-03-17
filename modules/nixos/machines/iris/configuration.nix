@@ -41,7 +41,8 @@ in
     initialPassword = "banana";
     shell = "/home/evanrelf/.nix-profile/bin/fish";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsemVJziYY5RbpgAzetb8z2K5u/6bXkVlALkU25pnbt" # ultraviolet
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsemVJziYY5RbpgAzetb8z2K5u/6bXkVlALkU25pnbt" # ultraviolet (old)
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJfnEwVJCy/fEQQ1Ea/P3nY4iQOVrxP5Gjk5rK367s6tcS8uEtK0Nmom5uvR4I0lNbTlzR1Ryn4rqEqU4+PRpqA=" # ultraviolet (Secretive)
     ];
   };
 
