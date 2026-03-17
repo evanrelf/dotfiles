@@ -126,7 +126,6 @@ git.write-change-id-header = true
 git.sign-on-push = true
 signing.behavior = 'drop'
 signing.backend = 'ssh'
-signing.key = '~/.ssh/jj.pub'
 merge-tools.claude.program = 'claude-mergetool'
 merge-tools.claude.merge-args = ['merge', '$base', '$left', '$right', '-o', '$output', '-p', '$path']
 
@@ -258,3 +257,14 @@ patterns = [
   'glob:"**/*.ts"',
   'glob:"**/*.tsx"',
 ]
+
+[[--scope]]
+# iris uses ultraviolet key via SSH agent forwarding
+--when.hostnames = ["ultraviolet", "iris"]
+[--scope.signing]
+key = 'ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJfnEwVJCy/fEQQ1Ea/P3nY4iQOVrxP5Gjk5rK367s6tcS8uEtK0Nmom5uvR4I0lNbTlzR1Ryn4rqEqU4+PRpqA='
+
+[[--scope]]
+--when.hostnames = ["pearl"]
+[--scope.signing]
+key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIn69TyVMZVhbTSYJ2mJGTiNUQG24g3dD7cRmOkkdfdx'
