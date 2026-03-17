@@ -267,7 +267,7 @@ strip %{
 # NORMAL
 ################################################################################
 
-define-command -docstring "normal: make interface look less spartan" \
+define-command -docstring "normal: make interface look normal for screen sharing" \
 normal %{
   colorscheme primer
   add-highlighter window/number-lines number-lines -hlcursor -separator ' '
