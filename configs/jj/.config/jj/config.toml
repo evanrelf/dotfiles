@@ -162,7 +162,7 @@ revset-aliases.'pr()' = 'trunk()..bookmark() & mutable()'
 revset-aliases.'pr(x)' = 'trunk()..x & mutable()'
 revset-aliases.'prs()' = 'pr(bookmarks())'
 
-fileset-aliases.lock = '**/flake.lock | **/Cargo.lock'
+fileset-aliases.lock = '**/flake.lock | **/Cargo.lock | **/go.sum'
 
 colors.'evan_working_copy' = { bold = true }
 templates.git_push_bookmark = '"evanrelf/push-" ++ change_id.short()'
