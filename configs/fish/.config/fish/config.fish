@@ -48,6 +48,9 @@ end
 if command -q evanrelf-prompt
     evanrelf-prompt init | source
 end
+if command -q atuin
+    atuin init fish | source
+end
 if command -q direnv
     direnv hook fish | source
 end

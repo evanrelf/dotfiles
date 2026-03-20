@@ -19,7 +19,6 @@ in
     final.wrapFish {
       pluginPkgs = with final.fishPlugins; [
         fish-colored-man
-        fzf
       ];
     };
 }

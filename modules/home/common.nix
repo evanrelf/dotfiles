@@ -27,6 +27,7 @@ in
   home.packages = with pkgs; lib.mkMerge [
     [
       as-tree
+      atuin
       bat
       cargo-edit
       cargo-limit
@@ -84,6 +85,9 @@ in
   ];
 
   # Config files
+
+  home.file.".config/atuin/config.toml".source =
+    mutable "configs/atuin/.config/atuin/config.toml";
 
   home.file.".claude/settings.json".source =
     mutable "configs/claude/.claude/settings.json";
