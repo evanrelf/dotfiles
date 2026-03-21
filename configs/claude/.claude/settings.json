@@ -9,7 +9,6 @@
       "Bash(jj show:*)"
     ]
   },
-  "model": "opus[1m]",
   "hooks": {
     "PostToolUse": [
       {
@@ -27,7 +26,5 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high"
+  }
 }
