@@ -34,12 +34,12 @@ in
     inputs.naersk.overlays.default
     inputs.neovim.overlays.default
     inputs.nix-darwin.overlays.default
-    (import ../overlays/packages.nix)
-    (import ../overlays/kakoune-plugins.nix)
-    (import ../overlays/fish-plugins.nix)
-    (import ../overlays/nixos-configurations.nix)
-    (import ../overlays/home-configurations.nix)
-    (import ../overlays/container-images.nix)
+    (import ../../overlays/packages.nix)
+    (import ../../overlays/kakoune-plugins.nix)
+    (import ../../overlays/fish-plugins.nix)
+    (import ../../overlays/nixos-configurations.nix)
+    (import ../../overlays/home-configurations.nix)
+    (import ../../overlays/container-images.nix)
   ];
 
   perSystem = { pkgs, system, ... }: {

@@ -12,7 +12,7 @@
 
   flake.darwinModules.ultraviolet = { config, ... }: {
     imports = [
-      ../../../modules/darwin/common.nix
+      ../../../darwin/common.nix
     ];
 
     system.stateVersion = 6;
@@ -29,7 +29,7 @@
 
   flake.homeModules.ultraviolet = { ... }: {
     imports = [
-      ../../../modules/home/common.nix
+      ../../../home/common.nix
     ];
 
     home.stateVersion = "22.11";
