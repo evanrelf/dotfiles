@@ -18,8 +18,5 @@ in
 
     lima =
       mkHomeConfiguration [ ../modules/home/machines/lima.nix ];
-
-    ultraviolet =
-      mkHomeConfiguration [ ../modules/home/machines/ultraviolet.nix ];
   };
 }
