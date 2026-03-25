@@ -2,14 +2,6 @@ final: prev:
 
 {
   nixosConfigurations = {
-    iris =
-      final.inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ../modules/nixos/machines/iris/configuration.nix ];
-        pkgs = final;
-        specialArgs = { inherit (prev) inputs; };
-      };
-
     vm =
       final.inputs.nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
