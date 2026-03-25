@@ -1,12 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(git show:*)",
-      "Bash(jj log:*)",
-      "Bash(jj diff:*)",
-      "Bash(jj show:*)"
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(jj log *)",
+      "Bash(jj diff *)",
+      "Bash(jj show *)"
     ]
   },
   "hooks": {
