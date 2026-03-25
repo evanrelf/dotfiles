@@ -1,6 +1,29 @@
 { config, inputs, lib, ... }:
 
+let
+  darwinModulesOption = { lib, moduleLocation, ... }: {
+    options.flake.darwinModules = lib.mkOption {
+      type = lib.types.lazyAttrsOf lib.types.deferredModule;
+      default = { };
+      apply = lib.mapAttrs (
+        k: v: {
+          _class = "darwin";
+          _file = "${toString moduleLocation}#darwinModules.${k}";
+          imports = [ v ];
+        }
+      );
+      description = "Darwin modules";
+    };
+  };
+
+in
 {
+  imports = [
+    inputs.home-manager.flakeModules.default
+    inputs.nix-darwin.flakeModules.default
+    darwinModulesOption
+  ];
+
   systems = import inputs.systems;
 
   flake.overlays.default = lib.composeManyExtensions [

@@ -19,9 +19,6 @@ in
     lima =
       mkHomeConfiguration [ ../modules/home/machines/lima.nix ];
 
-    pearl =
-      mkHomeConfiguration [ ../modules/home/machines/pearl.nix ];
-
     ultraviolet =
       mkHomeConfiguration [ ../modules/home/machines/ultraviolet.nix ];
   };
