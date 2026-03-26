@@ -34,7 +34,7 @@ in
     inputs.naersk.overlays.default
     inputs.neovim.overlays.default
     inputs.nix-darwin.overlays.default
-    (import ../../overlays/packages.nix)
+    (final: prev: config.flake.packages.${prev.stdenv.hostPlatform.system})
     (import ../../overlays/kakoune-plugins.nix)
     (import ../../overlays/fish-plugins.nix)
     (import ../../overlays/nixos-configurations.nix)
