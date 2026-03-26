@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Line length
+vim.o.wrap = false
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {"go", "make"},
   callback = function()
