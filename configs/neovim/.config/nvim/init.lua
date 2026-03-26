@@ -61,6 +61,9 @@ vim.keymap.set({"n", "i", "v"}, "<ScrollWheelRight>", "<Nop>")
 -- mini
 vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 require("mini.tabline").setup()
+require("mini.trailspace").setup()
+vim.api.nvim_create_user_command("Strip", function() MiniTrailspace.trim() end, {})
+
 -- Tree Sitter
 vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
