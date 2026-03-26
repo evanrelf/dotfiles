@@ -306,13 +306,13 @@ hook global WinSetOption filetype=rust %{
 }
 
 hook global WinSetOption filetype=git-commit %{
-  add-highlighter window/subject-column column 50 "default,%opt{column_color}"
+  add-highlighter window/subject-column column 51 "default,%opt{column_color}"
   set-option window autowrap_column 72
   autowrap-enable
 }
 
 hook global WinSetOption filetype=jj-description %{
-  add-highlighter window/subject-column column 50 "default,%opt{column_color}"
+  add-highlighter window/subject-column column 51 "default,%opt{column_color}"
   set-option window autowrap_column 72
   autowrap-enable
 }
