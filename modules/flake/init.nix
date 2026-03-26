@@ -35,7 +35,6 @@ in
     inputs.neovim.overlays.default
     inputs.nix-darwin.overlays.default
     (final: prev: config.flake.packages.${prev.stdenv.hostPlatform.system})
-    (import ../../overlays/kakoune-plugins.nix)
     (import ../../overlays/nixos-configurations.nix)
     (import ../../overlays/container-images.nix)
   ];

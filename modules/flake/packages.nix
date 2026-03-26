@@ -99,6 +99,25 @@
         hsl =
           rust { name = "hsl"; };
 
+        kakoune =
+          let
+            sources = {
+              better-haskell-kak = inputs.better-haskell-kak.outPath;
+              byline-kak = inputs.byline-kak.outPath;
+              locus-kak = inputs.locus-kak.outPath;
+              open-github-kak = inputs.open-github-kak.outPath;
+            };
+          in
+          pkgs.wrapKakoune pkgs.kakoune-unwrapped {
+            plugins =
+              builtins.attrValues
+                (builtins.mapAttrs
+                  (name: src: pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
+                    inherit name src;
+                  })
+                  sources);
+          };
+
         pancase =
           rust { name = "pancase"; };
       };
