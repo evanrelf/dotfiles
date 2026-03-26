@@ -50,6 +50,7 @@ in
       hsl
       htmlq
       hyperfine
+      indigo
       jq
       jujutsu
       kakoune

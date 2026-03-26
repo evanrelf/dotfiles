@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  perSystem = { pkgs, ... }:
+  perSystem = { pkgs, system, ... }:
     let
       assertUpgrade = prevDrv: finalDrv:
         let
@@ -98,6 +98,9 @@
 
         hsl =
           rust { name = "hsl"; };
+
+        indigo =
+          inputs.indigo.packages.${system}.default;
 
         kakoune =
           let
