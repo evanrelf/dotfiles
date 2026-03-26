@@ -1,1 +1,1 @@
--- vim.cmd('colorscheme flexoki')
+vim.cmd('colorscheme flexoki')
