@@ -57,6 +57,27 @@
         empath =
           rust { name = "empath"; };
 
+        evanrelf-fish =
+          let
+            fish-colored-man =
+              pkgs.fishPlugins.buildFishPlugin {
+                pname = "fish-colored-man";
+                version = "0-unstable-2021-07-15";
+                src = pkgs.fetchFromGitHub {
+                  owner = "decors";
+                  repo = "fish-colored-man";
+                  rev = "1ad8fff696d48c8bf173aa98f9dff39d7916de0e";
+                  hash = "sha256-uoZ4eSFbZlsRfISIkJQp24qPUNqxeD0JbRb/gVdRYlA=";
+                };
+              };
+          in
+          pkgs.wrapFish {
+            pluginPkgs = with pkgs.fishPlugins; [
+              fish-colored-man
+              fzf
+            ];
+          };
+
         evanrelf-prompt =
           rust { name = "evanrelf-prompt"; src = ../../src/evanrelf-prompt; };
 
