@@ -12,7 +12,7 @@
 
   flake.darwinModules.pearl = { config, ... }: {
     imports = [
-      ../../../darwin/common.nix
+      ../../darwin/common.nix
     ];
 
     # TODO: Reinstall Lix.
@@ -43,7 +43,7 @@
 
   flake.homeModules.pearl = { ... }: {
     imports = [
-      ../../../home/common.nix
+      ../../home/common.nix
     ];
 
     home.stateVersion = "22.11";

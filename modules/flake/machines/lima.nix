@@ -12,7 +12,7 @@
 
   flake.homeModules.lima = { config, ... }: {
     imports = [
-      ../../../home/common.nix
+      ../../home/common.nix
     ];
 
     home.homeDirectory = lib.mkForce "/home/${config.home.username}.linux";

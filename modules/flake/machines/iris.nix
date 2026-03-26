@@ -12,7 +12,7 @@
     );
 
   flake.nixosModules.iris =
-    import ../../../nixos/machines/iris/configuration.nix;
+    import ../../nixos/machines/iris/configuration.nix;
 
   flake.homeConfigurations.iris =
     withSystem "x86_64-linux" ({ pkgs, ... }:
@@ -25,7 +25,7 @@
 
   flake.homeModules.iris = { config, ... }: {
     imports = [
-      ../../../home/common.nix
+      ../../home/common.nix
     ];
 
     home.stateVersion = "25.11";
