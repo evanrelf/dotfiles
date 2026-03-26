@@ -38,7 +38,6 @@ in
     (import ../../overlays/kakoune-plugins.nix)
     (import ../../overlays/fish-plugins.nix)
     (import ../../overlays/nixos-configurations.nix)
-    (import ../../overlays/home-configurations.nix)
     (import ../../overlays/container-images.nix)
   ];
 
