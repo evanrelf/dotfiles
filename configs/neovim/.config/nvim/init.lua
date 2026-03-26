@@ -56,6 +56,11 @@ vim.o.smartcase = true
 vim.keymap.set({"n", "i", "v"}, "<ScrollWheelLeft>", "<Nop>")
 vim.keymap.set({"n", "i", "v"}, "<ScrollWheelRight>", "<Nop>")
 
+-- Plugins
+
+-- mini
+vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+require("mini.tabline").setup()
 -- Tree Sitter
 vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",

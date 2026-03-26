@@ -367,6 +367,17 @@ hi('LspReferenceWrite', { bg = bg_2 })
 hi('SnippetTabstop',       { link = 'Visual' })
 hi('SnippetTabstopActive', { link = 'SnippetTabstop' })
 
+-- mini.tabline
+hi('MiniTablineCurrent',         { fg = tx, bg = bg, bold = true })
+hi('MiniTablineVisible',         { fg = tx_2, bg = ui })
+hi('MiniTablineHidden',          { fg = tx_2, bg = ui })
+hi('MiniTablineFill',            { bg = ui })
+hi('MiniTablineTabpagesection',  { fg = tx_2, bg = ui })
+hi('MiniTablineTrunc',           { fg = tx_3, bg = ui })
+hi('MiniTablineModifiedCurrent', { fg = tx, bg = bg, bold = true })
+hi('MiniTablineModifiedVisible', { fg = tx_2, bg = ui })
+hi('MiniTablineModifiedHidden',  { fg = tx_2, bg = ui })
+
 -- Misc
 hi('FloatShadow',          { bg = black, blend = 80 })
 hi('FloatShadowThrough',   { bg = black, blend = 100 })
