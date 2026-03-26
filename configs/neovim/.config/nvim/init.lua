@@ -52,6 +52,10 @@ vim.api.nvim_create_autocmd("CmdlineChanged", {
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Mappings
+vim.keymap.set({"n", "i", "v"}, "<ScrollWheelLeft>", "<Nop>")
+vim.keymap.set({"n", "i", "v"}, "<ScrollWheelRight>", "<Nop>")
+
 -- Tree Sitter
 vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
