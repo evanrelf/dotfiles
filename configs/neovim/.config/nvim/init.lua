@@ -60,6 +60,7 @@ vim.keymap.set({"n", "i", "v"}, "<ScrollWheelRight>", "<Nop>")
 
 -- mini
 vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+require("mini.diff").setup()
 require("mini.surround").setup()
 require("mini.tabline").setup()
 require("mini.trailspace").setup()
