@@ -266,9 +266,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": [
-          "systems"
-        ],
+        "systems": "systems",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -447,8 +445,7 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "open-github-kak": "open-github-kak",
-        "pancase": "pancase",
-        "systems": "systems"
+        "pancase": "pancase"
       }
     },
     "rust-analyzer-src": {

@@ -23,7 +23,6 @@
       url = "github:numtide/llm-agents.nix";
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
     };
     naersk = {
       url = "github:nix-community/naersk";
@@ -39,7 +38,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs";
-    systems.url = "github:nix-systems/default";
 
     # Go programs
 
