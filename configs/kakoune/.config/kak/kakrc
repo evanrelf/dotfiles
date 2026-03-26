@@ -257,9 +257,9 @@ hook global ModeChange push:.*:insert %{
   remove-highlighter window/trailing-whitespace
 }
 
-# Strip trailing whitespace
-define-command -docstring "strip: strip trailing whitespace" \
-strip %{
+# Trim trailing whitespace
+define-command -docstring "trim: trim trailing whitespace" \
+trim %{
   execute-keys -draft '%s\h+$<ret>d'
 }
 

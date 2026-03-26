@@ -63,7 +63,7 @@ vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
 require("mini.surround").setup()
 require("mini.tabline").setup()
 require("mini.trailspace").setup()
-vim.api.nvim_create_user_command("Strip", function() MiniTrailspace.trim() end, {})
+vim.api.nvim_create_user_command("Trim", function() MiniTrailspace.trim() end, {})
 
 -- Tree Sitter
 vim.pack.add({
