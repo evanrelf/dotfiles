@@ -69,6 +69,7 @@ in
       shellcheck
       tealdeer
       tokei
+      tree-sitter
       watchexec
       yj
       zig
