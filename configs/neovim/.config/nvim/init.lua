@@ -38,6 +38,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Auto-complete
+-- https://neovim.io/doc/user/cmdline/#cmdline-autocompletion
+vim.o.wildmode = "noselect:lastused,full"
+vim.o.wildoptions = "pum"
+vim.o.pumheight = 8
+vim.api.nvim_create_autocmd("CmdlineChanged", {
+  pattern = "[:\\/\\?]",
+  callback = function() vim.fn.wildtrigger() end,
+})
+
 -- Search
 vim.o.ignorecase = true
 vim.o.smartcase = true
