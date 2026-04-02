@@ -300,11 +300,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1775027688,
-        "narHash": "sha256-7egcstV+Y62XS/f2KzXb7+KMfH9N5enBLx+o6y7+Fsw=",
+        "lastModified": 1775156944,
+        "narHash": "sha256-+XuPpjFiS4OaK3+1b3HzhmmRoLFcFTgPHJNNNjWEG4k=",
         "owner": "evanrelf",
         "repo": "indigo",
-        "rev": "5c69717926c83a0234faa4370c9a4e701be76e53",
+        "rev": "569d8ffd61789afe333591efbf5208d9f29f6e32",
         "type": "github"
       },
       "original": {
