@@ -1,7 +1,7 @@
 function wcargo --wraps "cargo lclippy"
-    cargo watch \
-        --exec "lclippy --all-targets $argv" \
-        --clear \
+    watchexec \
         --quiet \
-        --ignore '.jj/'
+        --clear \
+        --exts rs,toml \
+        -- cargo lclippy --all-targets $argv
 end

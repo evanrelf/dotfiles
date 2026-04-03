@@ -30,7 +30,6 @@ in
       bat
       cargo-edit
       cargo-limit
-      cargo-watch
       claude-mergetool
       coreutils-gprefix
       d2
