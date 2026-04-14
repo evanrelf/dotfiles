@@ -26,5 +26,6 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false
-  }
+  },
+  "model": "opus"
 }
