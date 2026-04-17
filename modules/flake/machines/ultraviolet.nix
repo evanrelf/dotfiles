@@ -27,9 +27,13 @@
       }
     );
 
-  flake.homeModules.ultraviolet = { ... }: {
+  flake.homeModules.ultraviolet = { pkgs, ... }: {
     imports = [
       ../../home/common.nix
+    ];
+
+    home.packages = with pkgs; [
+      llm-agents.amp
     ];
 
     home.stateVersion = "22.11";

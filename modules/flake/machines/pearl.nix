@@ -41,9 +41,14 @@
       }
     );
 
-  flake.homeModules.pearl = { ... }: {
+  flake.homeModules.pearl = { pkgs, ... }: {
     imports = [
       ../../home/common.nix
+    ];
+
+    home.packages = with pkgs; [
+      claude-mergetool
+      llm-agents.claude-code
     ];
 
     home.stateVersion = "22.11";
