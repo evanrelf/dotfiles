@@ -30,6 +30,7 @@ in
       bat
       cargo-edit
       cargo-limit
+      claude-mergetool
       coreutils-gprefix
       d2
       delta
@@ -54,6 +55,7 @@ in
       jujutsu
       kakoune
       kakoune-lsp
+      llm-agents.claude-code
       mergiraf
       neovim
       nix-direnv
