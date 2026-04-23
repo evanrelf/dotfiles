@@ -301,11 +301,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1775199947,
-        "narHash": "sha256-DSTCw+EKFB5nMkn6Zw4Mo6BTNEymF6rJCrUrvIuc4ts=",
+        "lastModified": 1776915446,
+        "narHash": "sha256-iSDSSbij4mT16yYzXz9iYjFV/FBU2Eqy+Hd0HRUQVQw=",
         "owner": "evanrelf",
         "repo": "indigo",
-        "rev": "32d0c10cd2f6ee46f4a1bbdef18e6a3484458a0d",
+        "rev": "bd4c03b65a20723be3c8c53242048c5f39fb8b26",
         "type": "github"
       },
       "original": {
