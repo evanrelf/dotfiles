@@ -56,6 +56,7 @@ in
       kakoune
       kakoune-lsp
       llm-agents.claude-code
+      llm-agents.codex
       mergiraf
       neovim
       nix-direnv
