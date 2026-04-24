@@ -256,6 +256,17 @@ ts(t),
 
 [[--scope]]
 --when.repositories = ['~/Code/MercuryTechnologies/']
+[--scope.aliases]
+pre-commit = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
+set -euo pipefail
+if [ "$#" -gt 1 ]; then
+  echo "Usage: jj pre-commit [REVSET]" >&2
+  exit 1
+fi
+revset=${1:-"pr()"}
+prek run --files "$(jj diff -r "$revset" --name-only)"
+''', '']
 [--scope.user]
 email = 'evanr@mercury.com'
 [--scope.fix.tools.be-format-haskell]
