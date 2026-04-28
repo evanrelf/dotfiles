@@ -32,7 +32,6 @@ in
       cargo-limit
       claude-mergetool
       coreutils-gprefix
-      d2
       delta
       direnv
       empath
