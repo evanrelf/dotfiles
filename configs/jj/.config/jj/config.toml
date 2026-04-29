@@ -265,7 +265,7 @@ if [ "$#" -gt 1 ]; then
   exit 1
 fi
 revset=${1:-"pr()"}
-prek run --files "$(jj diff -r "$revset" --name-only)"
+jj diff -r "$revset" --name-only | xargs prek run --files
 ''', '']
 [--scope.user]
 email = 'evanr@mercury.com'
