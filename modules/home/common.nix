@@ -62,6 +62,7 @@ in
       nix-your-shell
       nixpkgs-fmt
       pancase
+      pandoc
       ripgrep
       rustup
       samply
@@ -70,8 +71,10 @@ in
       tealdeer
       tokei
       tree-sitter
+      typst
       watchexec
       yj
+      yt-dlp
       zig
       zoxide
     ]
