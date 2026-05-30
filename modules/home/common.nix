@@ -170,4 +170,8 @@ in
 
   home.file.".config/zed/settings.json".source =
     mutable "configs/zed/.config/zed/settings.json";
+
+  # Services
+
+  services.pueue.enable = true;
 }
