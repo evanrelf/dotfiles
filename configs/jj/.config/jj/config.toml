@@ -253,35 +253,3 @@ if(
 ts(t),
 )))))))
 '''
-
-[[--scope]]
---when.repositories = ['~/Code/MercuryTechnologies/']
-[--scope.aliases]
-pre-commit = ['util', 'exec', '--', 'bash', '-c', '''
-#!/usr/bin/env bash
-set -euo pipefail
-if [ "$#" -gt 1 ]; then
-  echo "Usage: jj pre-commit [REVSET]" >&2
-  exit 1
-fi
-revset=${1:-"pr()"}
-jj diff -r "$revset" --name-only | xargs prek run --files
-''', '']
-[--scope.user]
-email = 'evanr@mercury.com'
-[--scope.fix.tools.be-format-haskell]
-command = ['be', 'format', 'haskell', '--stdin']
-patterns = ['glob:"**/*.hs"']
-[--scope.fix.tools.prettier]
-command = ['npx', 'prettier', '--stdin-filepath', '$path']
-patterns = [
-  'glob:"**/*.css"',
-  'glob:"**/*.js"',
-  'glob:"**/*.json"',
-  'glob:"**/*.jsx"',
-  'glob:"**/*.md"',
-  'glob:"**/*.mdx"',
-  'glob:"**/*.mjs"',
-  'glob:"**/*.ts"',
-  'glob:"**/*.tsx"',
-]

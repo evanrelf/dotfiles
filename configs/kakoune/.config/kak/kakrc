@@ -75,25 +75,8 @@ hook global WinSetOption filetype=go %{
   hook window BufWritePre .* %{ format-buffer }
 }
 
-hook global WinSetOption filetype=haskell %{
-  try %{
-    evaluate-commands %sh{
-      test -n "$be" || echo "fail"
-      echo "$kak_buffile" | rg --quiet '.*?\.(?:persistentmodels|yesodroutes)$' && echo "fail"
-    }
-    set-option window formatcmd "be format haskell --stdin"
-    hook window BufWritePre .* %{ format-buffer }
-  }
-}
-
 hook global WinSetOption filetype=nix %{
-  try %{
-    evaluate-commands %sh{ test -n "$be" || echo "fail" }
-    set-option window formatcmd "be format nix --stdin"
-    hook window BufWritePre .* %{ format-buffer }
-  } catch %{
-    set-option window formatcmd "nixpkgs-fmt"
-  }
+  set-option window formatcmd "nixpkgs-fmt"
 }
 
 hook global WinSetOption filetype=python %{
@@ -115,17 +98,6 @@ hook global WinSetOption filetype=zig %{
 ################################################################################
 # LINTING
 ################################################################################
-
-hook global WinSetOption filetype=haskell %{
-  try %{
-    evaluate-commands %sh{
-      test -n "$be" || echo "fail"
-      echo "$kak_buffile" | rg --quiet '.*?\.(?:persistentmodels|yesodroutes)$' && echo "fail"
-    }
-    set-option window lintcmd "be lint haskell 2>/dev/null"
-    hook window BufWritePost .* %{ lint-buffer }
-  }
-}
 
 hook global WinSetOption filetype=python %{
   set-option window lintcmd "ruff check --preview --output-format concise"
@@ -207,14 +179,6 @@ set-face global ReferenceBind default
 set-face global InlayHint default+d
 set-face global InlayCodeLens default+d
 
-hook -group lsp-filetype-static-ls global BufSetOption filetype=haskell %{
-  set-option buffer lsp_servers %{
-    [static-ls]
-    root_globs = ["*.cabal", "cabal.project", "package.yaml"]
-    command = "static-ls"
-  }
-}
-
 hook -group lsp-filetype-rust-analyzer global BufSetOption filetype=rust %{
   set-option buffer lsp_servers %{
     [rust-analyzer]
@@ -224,15 +188,6 @@ hook -group lsp-filetype-rust-analyzer global BufSetOption filetype=rust %{
     single_instance = true
     [rust-analyzer.settings.rust-analyzer]
     check.command = "clippy"
-  }
-}
-
-hook -group lsp-filetype-tsgo global BufSetOption filetype=typescript %{
-  set-option buffer lsp_servers %{
-    [tsgo]
-    root_globs = ["package.json", "tsconfig.json"]
-    command = "sh"
-    args = ["-c", "npx tsgo --lsp --stdio"]
   }
 }
 
@@ -403,26 +358,6 @@ define-command -hidden haskell-goto-definition %{
       echo "ctags-search"
     fi
   }}
-}
-
-hook global BufCreate .*\.(persistentmodels|yesodroutes) %{
-  set-option buffer filetype haskell
-}
-
-# TODO: this is broken
-hook global BufNewFile .*/MercuryTechnologies/\w+/(?<module>[A-Z]\w+(?:\.[A-Z]\w+)*) %{
-  evaluate-commands %sh{
-    file=$(echo "$kak_hook_param_capture_module" | tr '.' '/')
-    echo "
-      hook -once buffer NormalIdle .* %{
-        try %{
-          edit -existing src/$file.hs
-        } catch %{
-          edit -existing test/$file.hs
-        } catch %{}
-      }
-    "
-  }
 }
 
 ################################################################################
@@ -612,18 +547,6 @@ add-highlighter shared/jj-description regions
 add-highlighter shared/jj-description/code default-region group
 add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 
-}
-
-################################################################################
-# BUCK2
-################################################################################
-
-hook global BufCreate (:?.*/)?BUCK|.*\.(?:bzl|bxl) %{
-  set-option buffer filetype python
-}
-
-hook global BufCreate (:?.*/)?\.buckconfig %{
-  set-option buffer filetype ini
 }
 
 ################################################################################
