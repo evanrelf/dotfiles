@@ -34,6 +34,7 @@ in
       coreutils-gprefix
       delta
       direnv
+      duckdb
       empath
       evanrelf-fish
       evanrelf-prompt
