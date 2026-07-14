@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+os=$(uname)
+
+if [ "$os" = "Darwin" ]; then
+  exec pbpaste "$@"
+elif [ "$os" = "Linux" ]; then
+  exec wl-paste "$@"
+else
+  echo "error: unknown os '$os'" >&2
+  exit 1
+fi

@@ -17,6 +17,7 @@
 
     home.packages = with pkgs; [
       ghostty
+      wl-clipboard
     ];
 
     home.stateVersion = "26.05";

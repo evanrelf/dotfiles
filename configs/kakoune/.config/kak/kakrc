@@ -469,10 +469,10 @@ map global "surround" "_"    %{_| sd --across --flags s '(.*)' '_${1}_'      <re
 map global "surround" "*"    %{_| sd --across --flags s '(.*)' '*$1*'        <ret>} -docstring " *surround* "
 
 # User mode
-define-command -hidden clipboard-yank %{ execute-keys "<a-|>pbcopy<ret>" }
-define-command -hidden clipboard-paste-after %{ execute-keys "<a-!>pbpaste<ret>" }
-define-command -hidden clipboard-paste-before %{ execute-keys "!pbpaste<ret>" }
-define-command -hidden clipboard-replace %{ execute-keys "|pbpaste<ret>" }
+define-command -hidden clipboard-yank %{ execute-keys "<a-|>clipboard-copy<ret>" }
+define-command -hidden clipboard-paste-after %{ execute-keys "<a-!>clipboard-paste<ret>" }
+define-command -hidden clipboard-paste-before %{ execute-keys "!clipboard-paste<ret>" }
+define-command -hidden clipboard-replace %{ execute-keys "|clipboard-paste<ret>" }
 map global "user" "y" ": clipboard-yank<ret>" -docstring "yank"
 map global "user" "p" ": clipboard-paste-after<ret>" -docstring "paste after"
 map global "user" "P" ": clipboard-paste-before<ret>" -docstring "paste before"
