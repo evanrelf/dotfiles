@@ -54,7 +54,6 @@ in
       jujutsu
       kakoune
       kakoune-lsp
-      llm-agents.claude-code
       mergiraf
       neovim
       nix-direnv
