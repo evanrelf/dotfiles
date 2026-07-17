@@ -351,11 +351,11 @@
     "locus-kak": {
       "flake": false,
       "locked": {
-        "lastModified": 1750097292,
-        "narHash": "sha256-nf9iiq2J5vsHm+fwf7RgLLZQJNSMYOpiADePas76ftk=",
+        "lastModified": 1784570939,
+        "narHash": "sha256-Lueq1Fecq1cbMF4jIA5vbgR/4OqgA/p2+bXFkLv7X24=",
         "owner": "evanrelf",
         "repo": "locus.kak",
-        "rev": "580a5975d2eea779c0c300d0cb42e697ea7edc91",
+        "rev": "5822760b3ba55444b626c3b578c7453d9291a90e",
         "type": "github"
       },
       "original": {
