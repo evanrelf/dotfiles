@@ -23,6 +23,7 @@ function hsgoto --wraps rg
             --delimiter ':' \
             --with-nth '1,2,4' \
             --nth '1,3' \
+            --with-shell 'fish -c' \
             --preview '
                 set -l file {1}
                 set -l line {2}

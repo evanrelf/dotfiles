@@ -1,10 +1,14 @@
-function rsgoto --wraps rg
+# Regular expressions copied from `jacktasia/dumb-jump` Emacs plugin
+function cppgoto --wraps rg
     set --local match (\
         rg \
-            --type rust \
-            --multiline \
-            "\b(?:fn|static|const|let(?:\s+\bmut\b)?)\s+\b(?<term>$argv[1])\b|\b(?:type|struct|enum|union|trait(?:<.+>\s+)?)\s+\b(?<type>$argv[1])\b" \
-            --replace '$term$type' \
+            --type 'c' \
+            --type 'cpp' \
+            --pcre2 \
+            --regexp "\b(?<function1>$argv[1])(\s|\))*\((\w|[,&*.<>:]|\s)*(\))\s*(const|->|\{|\$)|typedef\s+(\w|[(*]|\s)+(?<function2>$argv[1])(\)|\s)*\(" \
+            --regexp "\b(?!(class\b|struct\b|return\b|else\b|delete\b))(\w+|[,>])([*&]|\s)+(?<variable1>$argv[1])\s*(\[(\d|\s)*\])*\s*([=,(){;]|:\s*\d)|#define\s+(?<variable2>$argv[1])\b" \
+            --regexp "\b(class|struct|enum|union)\b\s*(?<type1>$argv[1])\b\s*(final\s*)?(:((\s*\w+\s*::)*\s*\w*\s*<?(\s*\w+\s*::)*\w+>?\s*,*)+)?((\{|\$))|}\s*(?<type2>$argv[1])\b\s*;" \
+            --replace '$function1$function2$variable1$variable2$type1$type2' \
             --only-matching \
             --column \
             --color 'always' \
