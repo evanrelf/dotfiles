@@ -8,7 +8,7 @@ aliases.par = ['parallelize']
 aliases.s = ['status']
 
 # Log
-aliases.l = ['log', '-r', 'evan_log() | ancestors(present(@), 10)']
+aliases.l = ['log', '-r', 'evan_log() | present(trunk()..@)']
 aliases.ll = ['log', '-r', 'evan_log() | ancestors(present(@))']
 aliases.pr = ['log', '-r', 'pr()']
 
@@ -253,3 +253,8 @@ if(
 ts(t),
 )))))))
 '''
+
+[[--scope]]
+--when.hostnames = ["evanrelf-desktop"] # Antithesis
+[--scope.user]
+email = "evan.relf@antithesis.com"
