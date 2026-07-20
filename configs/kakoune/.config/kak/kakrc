@@ -553,6 +553,10 @@ add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 # TODO
 ################################################################################
 
+# TODO: Fix `evanrelf/locus.kak` bugs on newer versions of Kakoune, drop this
+# jank DIY subset.
+# require-module locus
+
 # Line and optional column: path/to/file:line[:column][:]
 hook global WinDisplay (?<file>[^:]*?):(?<line>\d+)(?::(?<column>\d+))?:?$ %{
   evaluate-commands %sh{
