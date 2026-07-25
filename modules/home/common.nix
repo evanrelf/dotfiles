@@ -56,7 +56,9 @@ in
       kakoune-lsp
       mergiraf
       neovim
+      nix-diff
       nix-direnv
+      nix-tree
       nix-your-shell
       nixpkgs-fmt
       pancase
