@@ -79,7 +79,7 @@
           };
 
         evanrelf-prompt =
-          rust { name = "evanrelf-prompt"; src = ../../src/evanrelf-prompt; };
+          rustNixpkgs { name = "evanrelf-prompt"; src = ../../src/evanrelf-prompt; };
 
         findutils-gprefix =
           gprefix pkgs.findutils;
