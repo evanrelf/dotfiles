@@ -28,7 +28,6 @@ in
 
   flake.overlays.default = lib.composeManyExtensions [
     (_: _: { inherit inputs; })
-    inputs.llm-agents.overlays.default
     inputs.naersk.overlays.default
     inputs.neovim.overlays.default
     inputs.nix-darwin.overlays.default
