@@ -31,6 +31,21 @@
 
       rust = rustNaersk;
 
+      crane =
+        inputs.crane.mkLib pkgs;
+
+      rustCrane = { name, src ? inputs.${name}.outPath, cargoLock ? null }:
+        let
+          commonArgs = {
+            pname = name;
+            version = "0.0.0";
+            src = crane.cleanCargoSource src;
+            strictDeps = true;
+          };
+          cargoArtifacts = crane.buildDepsOnly commonArgs;
+        in
+        crane.buildPackage (commonArgs // { inherit cargoArtifacts; });
+
       rustNaersk = { name, src ? inputs.${name}.outPath, cargoLock ? null }:
         pkgs.naersk.buildPackage { inherit name src; };
 
@@ -79,7 +94,7 @@
           };
 
         evanrelf-prompt =
-          rustNixpkgs { name = "evanrelf-prompt"; src = ../../src/evanrelf-prompt; };
+          rustCrane { name = "evanrelf-prompt"; src = ../../src/evanrelf-prompt; };
 
         findutils-gprefix =
           gprefix pkgs.findutils;

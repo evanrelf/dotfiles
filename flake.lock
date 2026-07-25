@@ -34,6 +34,21 @@
     },
     "crane": {
       "locked": {
+        "lastModified": 1784564969,
+        "narHash": "sha256-TkTWNhJV/8Wk3czlbz4bwHZkFCaCHPsOy+oJe4PUiXg=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "7930f6c291de6f83c257839d434592aa085f290a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
+      "locked": {
         "lastModified": 1774313767,
         "narHash": "sha256-hy0XTQND6avzGEUFrJtYBBpFa/POiiaGBr2vpU6Y9tY=",
         "owner": "ipetkov",
@@ -204,7 +219,7 @@
     },
     "indigo": {
       "inputs": {
-        "crane": "crane",
+        "crane": "crane_2",
         "fenix": "fenix",
         "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs",
@@ -389,6 +404,7 @@
       "inputs": {
         "better-haskell-kak": "better-haskell-kak",
         "byline-kak": "byline-kak",
+        "crane": "crane",
         "empath": "empath",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",

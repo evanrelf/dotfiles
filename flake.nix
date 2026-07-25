@@ -2,6 +2,7 @@
   description = "dotfiles";
 
   inputs = {
+    crane.url = "github:ipetkov/crane";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
