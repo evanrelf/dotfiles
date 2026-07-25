@@ -9,6 +9,7 @@
       "Bash(jj show *)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -27,5 +28,5 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": false
   },
-  "model": "opus"
+  "tui": "fullscreen"
 }
