@@ -126,8 +126,6 @@ git.write-change-id-header = true
 signing.behavior = 'own'
 signing.backend = 'ssh'
 signing.key = '~/.ssh/jj.pub'
-merge-tools.claude.program = 'claude-mergetool'
-merge-tools.claude.merge-args = ['merge', '$base', '$left', '$right', '-o', '$output', '-p', '$path']
 # From https://zerowidth.com/2025/jj-tips-and-tricks/#hunk-wise-style
 merge-tools.git.program = 'bash'
 merge-tools.git.edit-args = ['-c', '''

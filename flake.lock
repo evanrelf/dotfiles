@@ -65,26 +65,6 @@
         "type": "github"
       }
     },
-    "claude-mergetool": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1774896567,
-        "narHash": "sha256-ZMTcEsxRDteWAEQNEQP9anDl979jIaOLfNxBfwrJhnM=",
-        "owner": "9999years",
-        "repo": "claude-mergetool",
-        "rev": "f183778a599921cfec8e32c307bda16b391cddf6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "9999years",
-        "repo": "claude-mergetool",
-        "type": "github"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1774313767,
@@ -488,7 +468,6 @@
       "inputs": {
         "better-haskell-kak": "better-haskell-kak",
         "byline-kak": "byline-kak",
-        "claude-mergetool": "claude-mergetool",
         "empath": "empath",
         "flake-parts": "flake-parts",
         "ghciwatch-compat": "ghciwatch-compat",

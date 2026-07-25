@@ -28,7 +28,6 @@ in
 
   flake.overlays.default = lib.composeManyExtensions [
     (_: _: { inherit inputs; })
-    inputs.claude-mergetool.overlays.default
     inputs.ghciwatch-compat.overlays.default
     inputs.llm-agents.overlays.default
     inputs.naersk.overlays.default
