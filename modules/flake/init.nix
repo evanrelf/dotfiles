@@ -37,7 +37,6 @@ in
     (final: prev: config.flake.packages.${prev.stdenv.hostPlatform.system})
     # TODO: Get rid of these overlays
     (import ../../overlays/nixos-configurations.nix)
-    (import ../../overlays/container-images.nix)
   ];
 
   perSystem = { pkgs, system, ... }: {
