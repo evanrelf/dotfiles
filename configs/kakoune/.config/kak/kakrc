@@ -47,13 +47,17 @@ set-option global indentwidth 2
 
 # Indent with 4 spaces in select languages
 hook global WinSetOption filetype=(fish|python|rust|zig) %{
-  set-option window indentwidth 4
+  set-option buffer indentwidth 4
 }
 
 # Indent with tabs in select languages
 hook global WinSetOption filetype=(go|makefile) %{
-  set-option window indentwidth 0
-  set-option window tabstop 4
+  set-option buffer indentwidth 0
+  set-option buffer tabstop 4
+}
+
+hook global WinCreate ^[^*]+$ %{
+  hook -once window NormalIdle .* %{ try %{ editorconfig-load } }
 }
 
 ################################################################################
@@ -61,38 +65,38 @@ hook global WinSetOption filetype=(go|makefile) %{
 ################################################################################
 
 hook global WinSetOption filetype=fish %{
-  set-option window formatcmd "fish -c fish_indent"
-  hook window BufWritePre .* %{ format-buffer }
+  set-option buffer formatcmd "fish -c fish_indent"
+  hook buffer BufWritePre .* %{ format-buffer }
 }
 
 hook global WinSetOption filetype=gleam %{
-  set-option window formatcmd "gleam format --stdin"
-  hook window BufWritePre .* %{ format-buffer }
+  set-option buffer formatcmd "gleam format --stdin"
+  hook buffer BufWritePre .* %{ format-buffer }
 }
 
 hook global WinSetOption filetype=go %{
-  set-option window formatcmd "gofmt"
-  hook window BufWritePre .* %{ format-buffer }
+  set-option buffer formatcmd "gofmt"
+  hook buffer BufWritePre .* %{ format-buffer }
 }
 
 hook global WinSetOption filetype=nix %{
-  set-option window formatcmd "nixpkgs-fmt"
+  set-option buffer formatcmd "nixpkgs-fmt"
 }
 
 hook global WinSetOption filetype=python %{
-  set-option window formatcmd "ruff format --stdin-filename %val{buffile}"
-  hook window BufWritePre .* %{ format-buffer }
+  set-option buffer formatcmd "ruff format --stdin-filename %val{buffile}"
+  hook buffer BufWritePre .* %{ format-buffer }
 }
 
 hook global WinSetOption filetype=rust %{
   add-highlighter shared/rust/shebang region '^#!' $ fill meta
-  set-option window formatcmd "rustfmt --edition 2024"
-  hook window BufWritePre .* %{ format-buffer }
+  set-option buffer formatcmd "rustfmt --edition 2024"
+  hook buffer BufWritePre .* %{ format-buffer }
 }
 
 hook global WinSetOption filetype=zig %{
-  set-option window formatcmd "zig fmt --stdin"
-  hook window BufWritePre .* %{ format-buffer }
+  set-option buffer formatcmd "zig fmt --stdin"
+  hook buffer BufWritePre .* %{ format-buffer }
 }
 
 ################################################################################
@@ -100,13 +104,13 @@ hook global WinSetOption filetype=zig %{
 ################################################################################
 
 hook global WinSetOption filetype=python %{
-  set-option window lintcmd "ruff check --preview --output-format concise"
-  hook window BufWritePost .* %{ lint-buffer }
+  set-option buffer lintcmd "ruff check --preview --output-format concise"
+  hook buffer BufWritePost .* %{ lint-buffer }
 }
 
 hook global WinSetOption filetype=sh %{
-  set-option window lintcmd "shellcheck --format gcc"
-  hook window BufWritePost .* %{ lint-buffer }
+  set-option buffer lintcmd "shellcheck --format gcc"
+  hook buffer BufWritePost .* %{ lint-buffer }
 }
 
 ################################################################################

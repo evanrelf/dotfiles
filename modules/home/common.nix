@@ -63,6 +63,7 @@ in
       nixpkgs-fmt
       pancase
       pandoc
+      python3Packages.editorconfig
       ripgrep
       rustup
       samply
