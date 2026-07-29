@@ -91,7 +91,11 @@ hook global WinSetOption filetype=python %{
 hook global WinSetOption filetype=rust %{
   add-highlighter shared/rust/shebang region '^#!' $ fill meta
   set-option buffer formatcmd "rustfmt --edition 2024"
-  hook buffer BufWritePre .* %{ format-buffer }
+  try %{
+    # Don't format Rust code at Antithesis
+    evaluate-commands %sh{ test -n "$STARDIR" && echo "fail" }
+    hook buffer BufWritePre .* %{ format-buffer }
+  }
 }
 
 hook global WinSetOption filetype=zig %{
@@ -551,6 +555,14 @@ add-highlighter shared/jj-description regions
 add-highlighter shared/jj-description/code default-region group
 add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 
+}
+
+################################################################################
+# ANTITHESIS
+################################################################################
+
+hook global BufCreate .*\.nb2 %{
+  set-option buffer filetype javascript
 }
 
 ################################################################################
