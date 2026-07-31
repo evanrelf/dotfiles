@@ -34,6 +34,7 @@
 
     home.packages = with pkgs; [
       claude-code
+      codex
     ];
 
     home.stateVersion = "22.11";
