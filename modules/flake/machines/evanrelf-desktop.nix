@@ -17,7 +17,10 @@
 
     home.packages = with pkgs; [
       ghostty
+      gnome-tweaks
+      vscode
       wl-clipboard
+      zed-editor
     ];
 
     home.stateVersion = "26.05";
