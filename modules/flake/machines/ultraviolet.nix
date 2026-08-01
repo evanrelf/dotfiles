@@ -33,8 +33,8 @@
     ];
 
     home.packages = with pkgs; [
-      claude-code
-      codex
+      llm-agents.claude-code
+      llm-agents.codex
     ];
 
     home.stateVersion = "22.11";
