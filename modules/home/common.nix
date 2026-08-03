@@ -116,11 +116,6 @@ in
   home.file.".config/fish/functions".source =
     mutable "configs/fish/.config/fish/functions";
 
-  xdg.configFile."fish" = {
-    source = ../../configs/fish/.config/fish;
-    recursive = true;
-  };
-
   xdg.configFile."fish/home-manager.fish".text = ''
     set --global --export DOTFILES "${dotfiles}"
     set --global --export NIX_PATH "nixpkgs=${inputs.nixpkgs}"
