@@ -211,6 +211,7 @@ template-aliases.'evan_log_description' = '''
   label(
     separate(" ",
       if(!description || description.first_line().starts_with("wip:"), "description placeholder"),
+      if(description.first_line().starts_with("private:"), "description placeholder"),
       if(empty, "empty"),
     ),
     separate(" ",
