@@ -34,7 +34,7 @@
       crane =
         inputs.crane.mkLib pkgs;
 
-      rustCrane = { name, src ? inputs.${name}.outPath, cargoLock ? null }:
+      rustCrane = { name, src, cargoLock ? null }:
         let
           commonArgs = {
             pname = name;
@@ -46,10 +46,10 @@
         in
         crane.buildPackage (commonArgs // { inherit cargoArtifacts; });
 
-      rustNaersk = { name, src ? inputs.${name}.outPath, cargoLock ? null }:
+      rustNaersk = { name, src, cargoLock ? null }:
         pkgs.naersk.buildPackage { inherit name src; };
 
-      rustNixpkgs = { name, src ? inputs.${name}.outPath, cargoLock ? { } }:
+      rustNixpkgs = { name, src, cargoLock ? { } }:
         pkgs.rustPlatform.buildRustPackage (attrs: {
           inherit name src;
           cargoLock = (attrs.cargoLock or { }) // {
@@ -70,7 +70,10 @@
           });
 
         empath =
-          rust { name = "empath"; };
+          rust {
+            name = "empath";
+            src = inputs.empath.outPath;
+          };
 
         evanrelf-fish =
           let
@@ -94,7 +97,10 @@
           };
 
         evanrelf-prompt =
-          rustCrane { name = "evanrelf-prompt"; src = ../../src/evanrelf-prompt; };
+          rustCrane {
+            name = "evanrelf-prompt";
+            src = ../../src/evanrelf-prompt;
+          };
 
         findutils-gprefix =
           gprefix pkgs.findutils;
@@ -112,7 +118,10 @@
           go { name = "go-hello"; src = ../../src/go-hello; };
 
         hsl =
-          rust { name = "hsl"; };
+          rust {
+            name = "hsl";
+            src = inputs.hsl.outPath;
+          };
 
         indigo =
           inputs.indigo.packages.${system}.default;
@@ -137,7 +146,10 @@
           };
 
         pancase =
-          rust { name = "pancase"; };
+          rust {
+            name = "pancase";
+            src = inputs.pancase.outPath;
+          };
       };
     };
 }
