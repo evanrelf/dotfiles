@@ -56,13 +56,17 @@ hook global WinSetOption filetype=(go|makefile) %{
   set-option buffer tabstop 4
 }
 
-hook global WinCreate ^[^*]+$ %{
-  hook -once window NormalIdle .* %{ try %{ editorconfig-load } }
-}
+# hook global WinCreate ^[^*]+$ %{
+#   hook -once window NormalIdle .* %{ try %{ editorconfig-load } }
+# }
 
 ################################################################################
 # FORMATTING
 ################################################################################
+
+hook global BufCreate .*\.(?:c|h|cc|hh|cpp|hpp|cxx|hxx) %{
+  evaluate-commands %sh{ infer-indent --format kakoune "$kak_buffile" }
+}
 
 hook global WinSetOption filetype=fish %{
   set-option buffer formatcmd "fish -c fish_indent"
@@ -77,6 +81,11 @@ hook global WinSetOption filetype=gleam %{
 hook global WinSetOption filetype=go %{
   set-option buffer formatcmd "gofmt"
   hook buffer BufWritePre .* %{ format-buffer }
+}
+
+# Antithesis Notebook v2
+hook global BufCreate .*\.nb2 %{
+  set-option buffer filetype javascript
 }
 
 hook global WinSetOption filetype=nix %{
@@ -555,14 +564,6 @@ add-highlighter shared/jj-description regions
 add-highlighter shared/jj-description/code default-region group
 add-highlighter shared/jj-description/comment region '^JJ:' '$' fill comment
 
-}
-
-################################################################################
-# ANTITHESIS
-################################################################################
-
-hook global BufCreate .*\.nb2 %{
-  set-option buffer filetype javascript
 }
 
 ################################################################################

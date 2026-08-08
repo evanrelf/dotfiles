@@ -50,6 +50,7 @@ in
       htmlq
       hyperfine
       indigo
+      infer-indent
       jq
       jujutsu
       kakoune

@@ -126,6 +126,12 @@
         indigo =
           inputs.indigo.packages.${system}.default;
 
+        infer-indent =
+          rust {
+            name = "infer-indent";
+            src = ../../src/infer-indent;
+          };
+
         kakoune =
           let
             sources = {
