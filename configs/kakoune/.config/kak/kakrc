@@ -64,7 +64,7 @@ hook global WinSetOption filetype=(go|makefile) %{
 # FORMATTING
 ################################################################################
 
-hook global BufCreate .*\.(?:c|h|cc|hh|cpp|hpp|cxx|hxx) %{
+hook global BufCreate .*\.(?:c|h|cc|hh|cpp|hpp|cxx|hxx|nix) %{
   evaluate-commands %sh{ infer-indent --format kakoune "$kak_buffile" }
 }
 
