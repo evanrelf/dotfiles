@@ -29,6 +29,7 @@ in
       as-tree
       bat
       cargo-edit
+      cargo-expand
       cargo-limit
       coreutils-gprefix
       delta
