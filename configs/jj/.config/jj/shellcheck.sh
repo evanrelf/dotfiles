@@ -12,8 +12,10 @@ map=$(
   ' \
 )
 
+temp=$(mktemp -d)
+echo "+ cd $temp"
+cd "$temp"
 for key in $(echo "$map" | jq --raw-output 'keys[]'); do
-  temp=$(mktemp -t "$key")
-  echo "$map" | jq --raw-output ".\"$key\"" > "$temp"
-  shellcheck "$temp"
+  echo "$map" | jq --raw-output ".\"$key\"" > "jj-$key"
+  (set -x; shellcheck "jj-$key")
 done
