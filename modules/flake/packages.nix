@@ -120,6 +120,9 @@
             src = ../../src/infer-indent;
           };
 
+        jujutsu =
+          pkgs.callPackage "${inputs.nixpkgs-master}/pkgs/by-name/ju/jujutsu/package.nix" { };
+
         kakoune =
           let
             sources = {

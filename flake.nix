@@ -31,6 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     # Go programs
 
