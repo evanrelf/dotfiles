@@ -142,7 +142,7 @@ git -C "$right" reset --hard --quiet
 
 revsets.log = 'evan_log()'
 revsets.short-prefixes = 'evan_log()'
-revset-aliases.'default_log()' = 'present(@) | ancestors(immutable_heads().., 2) | present(trunk())'
+#             builtin_log() = 'present(@) |  ancestors(immutable_heads().., 2)           | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
 revset-aliases.'megamerge()' = 'exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()'
 revset-aliases.'megaroots()' = 'children(fork_point(parents(megamerge()))) & ancestors(megamerge())'
