@@ -10,6 +10,7 @@ aliases.s = ['status']
 # Log
 aliases.l = ['log', '-r', 'evan_log() | present(trunk()..@)']
 aliases.ll = ['log', '-r', 'evan_log() | ancestors(present(@))']
+aliases.lookup = ['util', 'exec', '--', 'jj-lookup']
 aliases.pr = ['log', '-r', 'pr()']
 
 # Bookmark
@@ -186,6 +187,9 @@ coalesce(
 )
 '''
 template-aliases.evan_log = '''
+  evan_log_base ++ evan_log_status
+'''
+template-aliases.evan_log_base = '''
 if(root,
   format_root_commit(self),
   label(if(current_working_copy, "evan_working_copy"),
@@ -201,7 +205,7 @@ if(root,
       ) ++ "\n",
     ),
   ),
-) ++ evan_log_status
+)
 '''
 template-aliases.evan_log_description = '''
   label(
