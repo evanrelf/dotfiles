@@ -262,3 +262,26 @@ ts(t),
 --when.hostnames = ["evanrelf-desktop"] # Antithesis
 [--scope.user]
 email = "evan.relf@antithesis.com"
+[--scope.aliases]
+unsafe-push-bookmark = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
+set -euo pipefail
+if [ "$#" -ne 1 ]; then
+  echo "Usage: jj unsafe-push-bookmark <BOOKMARK>" >&2
+  exit 1
+fi
+bookmark=$1
+if ! revision=$(jj log -r "exactly(bookmarks(\"$bookmark\"), 1)" --no-graph --template change_id 2>/dev/null); then
+  echo "Unknown bookmark"
+  exit 1
+fi
+(set -x; jj git fetch --branch "$bookmark")
+operation=$(jj op log --limit 1 --no-graph --template id)
+success=false
+trap 'test $success = true || (set -x; jj op restore $operation)' EXIT
+(set -x; jj bookmark delete "$bookmark")
+(set -x; jj git push --bookmark "$bookmark")
+(set -x; jj bookmark set --allow-backwards -r "$revision" "$bookmark")
+(set -x; jj git push --bookmark "$bookmark")
+success=true
+''', '']
