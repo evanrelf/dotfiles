@@ -3,5 +3,6 @@ function wcargo --wraps "cargo lclippy"
         --quiet \
         --clear \
         --exts rs,toml \
+        --restart \
         -- cargo lclippy --all-targets $argv
 end
