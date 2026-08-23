@@ -2,7 +2,6 @@ set --universal fish_features all
 source "$__fish_config_dir/home-manager.fish" 2>/dev/null || true
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
 set --global --export XDG_DATA_HOME "$HOME/.local/share"
-set --global --export XDG_STATE_HOME "$HOME/.local/state"
 set --global --export GHCUP_USE_XDG_DIRS 1
 set --global --export EDITOR kak
 set --global --export RUSTUP_HOME "$XDG_DATA_HOME/rustup"
@@ -24,7 +23,6 @@ set --global --export FZF_CD_COMMAND "fd --type directory --follow --exclude '.g
 set --global --export FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
 set --global --export FZF_FIND_FILE_COMMAND "__fzf_empath \$dir"
 set --global --export FZF_OPEN_COMMAND "__fzf_empath \$dir"
-set --global --export PI_SKIP_VERSION_CHECK 1
 function __fzf_empath
     set --local dir $argv[1]
     begin
