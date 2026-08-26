@@ -147,6 +147,17 @@
             name = "pancase";
             src = inputs.pancase.outPath;
           };
+
+        shrink-conflicts =
+          rust {
+            name = "shrink-conflicts";
+            src = pkgs.fetchFromGitHub {
+              owner = "asayers";
+              repo = "shrink-conflicts";
+              rev = "34e4f28677bc1cdba181c39b3b6f3e829ec26102";
+              hash = "sha256-V7vGiBq8jfc8eSFHwStoblnNN0fRLXL1UBlkQWst3Fo=";
+            };
+          };
       };
     };
 }

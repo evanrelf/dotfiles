@@ -71,6 +71,7 @@ in
       samply
       sd
       shellcheck
+      shrink-conflicts
       tealdeer
       tokei
       tree-sitter
