@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
+# https://docs.jj-vcs.dev/latest/FAQ/#can-i-monitor-how-jj-log-evolves
+
 set -Eeuo pipefail
 IFS=$'\n\t'
-
-# https://docs.jj-vcs.dev/latest/FAQ/#can-i-monitor-how-jj-log-evolves
 
 root=$(jj root)
 

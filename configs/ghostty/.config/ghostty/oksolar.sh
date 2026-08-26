@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
+# Generate a Ghostty color theme with the OKSolar palette
+# https://meat.io/oksolar
+
 # shellcheck disable=SC2034
 
 set -Eeuo pipefail
 IFS=$'\n\t'
-
-# https://meat.io/oksolar
 
 base03=002d38
 base02=093946

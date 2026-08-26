@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Run ShellCheck on `jj util exec` scripts
+
 set -Eeuo pipefail
 IFS=$'\n\t'
 

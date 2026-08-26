@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Platform-agnostic paste from clipboard
+
 set -Eeuo pipefail
 IFS=$'\n\t'
 
