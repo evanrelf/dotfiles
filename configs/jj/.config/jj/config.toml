@@ -116,6 +116,7 @@ ui.default-command = ['log', '-r', 'evan_log()']
 ui.diff-formatter = ':git'
 ui.diff-editor = ':builtin'
 ui.merge-editor = 'mergiraf'
+ui.conflict-marker-style = 'snapshot'
 ui.pager = 'delta'
 git.colocate = true
 git.private-commits = 'private()'
