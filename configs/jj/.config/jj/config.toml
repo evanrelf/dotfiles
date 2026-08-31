@@ -136,7 +136,7 @@ git -C "$left" commit --message baseline --allow-empty --quiet --no-gpg-sign
 mv "$left/.git" "$right"
 git -C "$right" add --intent-to-add --ignore-removal .
 git -C "$right" add --patch
-git -C "$right" diff-index --cached HEAD --quiet && { echo "No changes done, aborting split."; exit 1; }
+git -C "$right" diff-index --cached HEAD --quiet && { echo "Error: No changes done, aborting split" >&2; exit 1; }
 git -C "$right" commit --message split --quiet --no-gpg-sign
 git -C "$right" reset --hard --quiet
 ''',
@@ -273,7 +273,11 @@ if [ "$#" -ne 1 ]; then
 fi
 bookmark=$1
 if ! revision=$(jj log -r "exactly(bookmarks(\"$bookmark\"), 1)" --no-graph --template change_id 2>/dev/null); then
-  echo "Unknown bookmark"
+  echo "Error: Unknown bookmark" >&2
+  exit 1
+fi
+if [ "$(gh pr list --head "$bookmark" --state open --json number --jq 'length')" -gt 0 ]; then
+  echo "Error: Pull request open, refusing to force push" >&2
   exit 1
 fi
 (set -x; jj git fetch --branch "$bookmark")

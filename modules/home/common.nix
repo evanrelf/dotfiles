@@ -42,6 +42,7 @@ in
       findutils-gprefix
       fzf
       gawkInteractive-gprefix
+      gh
       git
       gnugrep-gprefix
       gnused-gprefix
