@@ -68,6 +68,7 @@ in
       pandoc
       python3Packages.editorconfig
       ripgrep
+      ruff
       rustup
       samply
       sd
@@ -77,8 +78,10 @@ in
       tealdeer
       tokei
       tree-sitter
+      ty
       typos
       typst
+      uv
       watchexec
       yj
       yt-dlp
