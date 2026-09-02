@@ -73,6 +73,7 @@ in
       sd
       shellcheck
       shrink-conflicts
+      sqlite-interactive
       tealdeer
       tokei
       tree-sitter
