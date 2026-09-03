@@ -16,6 +16,7 @@
     ];
 
     home.packages = with pkgs; [
+      file
       ghostty
       gnome-tweaks
       vscode
