@@ -1,6 +1,8 @@
 { config, inputs, lib, pkgs, ... }:
 
 let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+
   dotfiles =
     "${config.home.homeDirectory}/Code/evanrelf/dotfiles";
 
@@ -18,8 +20,8 @@ in
   home.username = "evanrelf";
 
   home.homeDirectory = lib.mkMerge [
-    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin "/Users/${config.home.username}")
-    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux "/home/${config.home.username}")
+    (lib.mkIf isDarwin "/Users/${config.home.username}")
+    (lib.mkIf isLinux "/home/${config.home.username}")
   ];
 
   # Packages
@@ -88,13 +90,8 @@ in
       zig
       zoxide
     ]
-    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
-      container
-    ])
-    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
-      bubblewrap
-      clang
-    ])
+    (lib.mkIf isDarwin [ container ])
+    (lib.mkIf isLinux [ bubblewrap clang ])
   ];
 
   # Config files
@@ -143,15 +140,14 @@ in
   home.file.".config/git/ignore".source =
     mutable "configs/git/.config/git/ignore";
 
-  home.file.".config/hammerspoon/init.lua" =
-    lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-      source = mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
-    };
+  home.file.".config/hammerspoon/init.lua" = lib.mkIf isDarwin {
+    source = mutable "configs/hammerspoon/.config/hammerspoon/init.lua";
+  };
 
   home.file.".config/jj/config.toml".source =
     mutable "configs/jj/.config/jj/config.toml";
 
-  xdg.configFile."karabiner" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+  xdg.configFile."karabiner" = lib.mkIf isDarwin {
     source = ../../configs/karabiner/.config/karabiner;
     recursive = true;
   };
