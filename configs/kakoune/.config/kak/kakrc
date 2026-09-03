@@ -117,7 +117,8 @@ hook global WinSetOption filetype=zig %{
 ################################################################################
 
 hook global WinSetOption filetype=python %{
-  set-option buffer lintcmd "ruff check --preview --output-format concise"
+  # Kakoune doesn't mark the temporary file executable
+  set-option buffer lintcmd "ruff check --preview --output-format concise --ignore EXE001"
   hook buffer BufWritePost .* %{ lint-buffer }
 }
 
@@ -391,6 +392,21 @@ define-command -hidden file-detection-cargo-script %{ evaluate-commands %sh{
 
 hook -group file-detection global BufOpenFile .* file-detection-cargo-script
 hook -group file-detection global BufWritePost .* file-detection-cargo-script
+
+################################################################################
+# PYTHON
+################################################################################
+
+define-command -hidden file-detection-uv-script %{ evaluate-commands %sh{
+  if [ -z "${kak_opt_filetype}" ]; then
+    if head -n1 "${kak_buffile}" | rg '^#!\s*/usr/bin/env\b.+\buv\b'; then
+      echo "set-option buffer filetype python"
+    fi
+  fi
+}}
+
+hook -group file-detection global BufOpenFile .* file-detection-uv-script
+hook -group file-detection global BufWritePost .* file-detection-uv-script
 
 ################################################################################
 # BUCK2
