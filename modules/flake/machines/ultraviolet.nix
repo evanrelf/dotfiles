@@ -34,7 +34,6 @@
 
     home.packages = with pkgs; [
       llm-agents.claude-code
-      llm-agents.codex
     ];
 
     home.stateVersion = "22.11";
