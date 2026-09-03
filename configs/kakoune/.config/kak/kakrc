@@ -393,6 +393,20 @@ hook -group file-detection global BufOpenFile .* file-detection-cargo-script
 hook -group file-detection global BufWritePost .* file-detection-cargo-script
 
 ################################################################################
+# BUCK2
+################################################################################
+
+# TODO: Somehow disable calling `ruff` for formatting and linting
+
+hook global BufCreate (:?.*/)?BUCK|.*\.(?:bzl|bxl) %{
+  set-option buffer filetype python
+}
+
+hook global BufCreate (:?.*/)?\.buckconfig %{
+  set-option buffer filetype ini
+}
+
+################################################################################
 # MAPPINGS
 ################################################################################
 
