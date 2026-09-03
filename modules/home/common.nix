@@ -77,6 +77,7 @@ in
       tealdeer
       tokei
       tree-sitter
+      typos
       typst
       watchexec
       yj
