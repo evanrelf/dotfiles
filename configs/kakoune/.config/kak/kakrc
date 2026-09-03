@@ -117,9 +117,14 @@ hook global WinSetOption filetype=zig %{
 ################################################################################
 
 hook global WinSetOption filetype=python %{
+  # TODO: Combine `ty` and `ruff` output somehow
+
+  # set-option buffer lintcmd "ty check --output-format concise"
+
   # Kakoune doesn't mark the temporary file executable
-  set-option buffer lintcmd "ruff check --preview --output-format concise --ignore EXE001"
-  hook buffer BufWritePost .* %{ lint-buffer }
+  # set-option buffer lintcmd "ruff check --preview --output-format concise --ignore EXE001"
+
+  # hook buffer BufWritePost .* %{ lint-buffer }
 }
 
 hook global WinSetOption filetype=sh %{
