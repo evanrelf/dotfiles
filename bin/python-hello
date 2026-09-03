@@ -1,3 +1,28 @@
 #!/usr/bin/env -S uv run --script
+#
+# /// script
+# dependencies = ["tyro"]
+# ///
 
-print("Hello, world!")
+from dataclasses import dataclass
+from typing import Literal
+import sh
+
+
+@dataclass
+class Args:
+    name: str
+    greet: Literal["Hello", "Hi"] = "Hi"
+
+
+def main():
+    import tyro
+
+    args = tyro.cli(Args)
+    print(f"{args.greet} {args.name}!")
+
+    print(sh.jj.status("-h", "--no-pager"))
+
+
+if __name__ == "__main__":
+    main()
