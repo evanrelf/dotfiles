@@ -96,9 +96,6 @@ in
 
   # Config files
 
-  home.file.".claude/settings.json".source =
-    mutable "configs/claude/.claude/settings.json";
-
   home.file.".claude/CLAUDE.md".source =
     mutable "configs/claude/.claude/CLAUDE.md";
 
