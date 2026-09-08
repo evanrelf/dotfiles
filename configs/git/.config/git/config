@@ -87,17 +87,23 @@
 [core]
   pager = delta
 [delta]
-  light = true
   true-color = always
   color-only = true
   syntax-theme = none
-  # Flexoki (https://stephango.com/flexoki)
+[delta "flexoki-light"]
   minus-style = normal "#FFCABB" # red 100
   minus-emph-style = normal "#F89A8A" # red 200
   minus-empty-line-marker-style = normal "#FFCABB" # red 100
   plus-style = syntax "#DDE2B2" # green 100
   plus-emph-style = syntax "#BEC97E" # green 200
   plus-empty-line-marker-style = syntax "#DDE2B2" # green 100
+[delta "flexoki-dark"]
+  minus-style = normal "#6C201C" # red 800
+  minus-emph-style = normal "#942822" # red 700
+  minus-empty-line-marker-style = normal "#6C201C" # red 800
+  plus-style = syntax "#3D4C07" # green 800
+  plus-emph-style = syntax "#536907" # green 700
+  plus-empty-line-marker-style = syntax "#3D4C07" # green 800
 [diff]
   colorMoved = default
 [difftool]

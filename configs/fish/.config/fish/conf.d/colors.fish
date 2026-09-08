@@ -19,3 +19,13 @@ if test -e "$__fish_config_dir/conf.d/plugin-fish-colored-man.fish"
     set --global man_standout normal
     set --global man_underline --underline normal
 end
+
+# https://github.com/dandavison/delta/issues/1678
+function _update_delta_theme --on-variable fish_terminal_color_theme
+    switch $fish_terminal_color_theme
+        case light
+            set --global --export DELTA_FEATURES +flexoki-light
+        case dark
+            set --global --export DELTA_FEATURES +flexoki-dark
+    end
+end
