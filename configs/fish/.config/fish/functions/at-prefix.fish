@@ -1,4 +1,4 @@
-function @
+function at-prefix
     while read --line line
         set --local path (string trim --left -- "$line")
         set --local indent_length (math (string length -- "$line") - (string length -- "$path"))
