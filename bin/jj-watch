@@ -19,8 +19,7 @@ watchexec \
     --quiet \
     --clear \
     --restart \
-    --project-origin "$root" \
-    --watch /.jj/repo/op_heads/heads \
+    --watch "$root/.jj/repo/op_heads/heads" \
     --ignore-nothing \
     --shell none \
     --wrap-process none \
