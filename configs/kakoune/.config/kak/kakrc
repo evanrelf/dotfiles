@@ -101,9 +101,27 @@ hook global WinSetOption filetype=rust %{
   add-highlighter shared/rust/shebang region '^#!' $ fill meta
   set-option buffer formatcmd "rustfmt --edition 2024"
   try %{
-    # Don't format Rust code at Antithesis
-    evaluate-commands %sh{ test -n "$STARDIR" && echo "fail" }
-    hook buffer BufWritePre .* %{ format-buffer }
+    # Don't format Rust code at Antithesis unless I write it
+    evaluate-commands %sh{
+      is_star() {
+        test -n "$STARDIR"
+      }
+      is_unformatted() {
+        # Some versions of `rustfmt` don't exit non-zero when formatting is
+        # required, so we have to ignore exit code and check for a diff instead.
+        test -n "$(eval "$kak_opt_formatcmd --check $kak_buffile | head -c 1" || true)"
+      }
+      if is_star; then
+        if is_unformatted; then
+          echo "echo -debug 'star file started unformatted, disabling rustfmt'"
+        else
+          echo "echo -debug 'star file started formatted, enabling rustfmt'"
+          echo "hook buffer BufWritePre .* %{ format-buffer }"
+        fi
+      else
+        echo "hook buffer BufWritePre .* %{ format-buffer }"
+      fi
+    }
   }
 }
 
