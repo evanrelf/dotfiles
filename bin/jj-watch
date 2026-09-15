@@ -41,4 +41,4 @@ if [ -f "$root/.gitignore" ]; then
   args+=(--ignore-file "$root/.gitignore")
 fi
 
-exec watchexec "${args[@]}" -- bash -c 'jj_watch_render "$@"' jj-watch "$@"
+exec watchexec "${args[@]}" -- bash -c 'jj_watch_render "$@"' jj-watch --no-integrate-operation "$@"

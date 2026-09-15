@@ -29,6 +29,7 @@ fi
   --template=evan_log_base \
   --no-graph \
   --color=always \
+  --no-integrate-operation \
 | fzf -1 -0 \
   --exact \
   --query="$*" \
