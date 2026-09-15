@@ -7,20 +7,38 @@ IFS=$'\n\t'
 
 root=$(jj root)
 
-watchexec \
-  --quiet \
-  --clear \
-  --restart \
-  --project-origin "$root" \
-  --shell none \
-  --wrap-process none \
-  -- \
-  watchexec \
-    --quiet \
-    --clear \
-    --restart \
-    --watch "$root/.jj/repo/op_heads/heads" \
-    --ignore-nothing \
-    --shell none \
-    --wrap-process none \
-    -- jj "$@"
+repo="$root/.jj/repo"
+if [ -f "$repo" ]; then
+  # Resolve workspace repo path
+  repo=$(<"$repo")
+fi
+
+jj_watch_render() {
+  local out rows
+  out=$(jj --no-pager --color=always "$@" 2>&1 || true)
+  if rows=$(tput lines 2>/dev/null) && [ "$rows" -gt 0 ]; then
+    out=$(head -n "$rows" <<<"$out")
+  fi
+  out=${out//$'\n'/$'\e[K\n'}
+  printf '\e[?2026h\e[H%s\e[K\e[J\e[?2026l' "$out"
+}
+export -f jj_watch_render
+
+args=(
+  --quiet
+  --restart
+  --project-origin "$root"
+  --watch "$root"
+  --watch "$repo/op_heads/heads"
+  --no-project-ignore
+  --no-vcs-ignore
+  --ignore '.git/**'
+  --ignore '.jj/**'
+  --ignore '!.jj/repo/op_heads/**'
+  --shell none
+)
+if [ -f "$root/.gitignore" ]; then
+  args+=(--ignore-file "$root/.gitignore")
+fi
+
+exec watchexec "${args[@]}" -- bash -c 'jj_watch_render "$@"' jj-watch "$@"
