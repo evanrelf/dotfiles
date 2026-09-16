@@ -15,7 +15,7 @@ fi
 
 jj_watch_render() {
   local out rows
-  out=$(jj --no-pager --color=always "$@" 2>&1 || true)
+  out=$(jj --no-pager --color=always "$@" 2>&1 | grep -v 'Snapshot operation left uncommitted because --no-integrate-operation was requested' || true)
   if rows=$(tput lines 2>/dev/null) && [ "$rows" -gt 0 ]; then
     out=$(head -n "$rows" <<<"$out")
   fi
