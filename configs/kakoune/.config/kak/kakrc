@@ -593,7 +593,9 @@ alias global "bd!" "delete-buffer!"
 # EMPATH
 ################################################################################
 
-hook global BufOpenFile .* %{ try %sh{ empath record "$kak_buffile" }}
+hook global WinDisplay .* %{
+  nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" }
+}
 
 ################################################################################
 # JJ
