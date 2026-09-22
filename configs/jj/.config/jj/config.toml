@@ -118,7 +118,6 @@ ui.diff-editor = ':builtin'
 ui.merge-editor = 'mergiraf'
 ui.conflict-marker-style = 'snapshot'
 ui.pager = 'delta'
-git.colocate = true
 git.private-commits = 'private()'
 git.write-change-id-header = true
 signing.behavior = 'own'
