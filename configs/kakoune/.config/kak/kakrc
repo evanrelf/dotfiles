@@ -594,7 +594,10 @@ alias global "bd!" "delete-buffer!"
 ################################################################################
 
 hook global WinDisplay .* %{
-  nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" }
+  nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" --event open }
+  hook -once buffer BufClose .* %{
+    nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" --event close }
+  }
 }
 
 ################################################################################
