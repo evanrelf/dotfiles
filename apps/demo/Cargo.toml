@@ -1,5 +1,5 @@
 [package]
-name = "hello"
+name = "demo"
 edition = "2024"
 
 [dependencies]

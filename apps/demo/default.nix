@@ -5,11 +5,11 @@
     let
       crane = inputs.crane.mkLib pkgs;
       commonArgs = {
-        pname = "hello";
+        pname = "demo";
         version = "0.0.0";
         src = crane.cleanCargoSource ./.;
         strictDeps = true;
-        meta.mainProgram = "hello";
+        meta.mainProgram = "demo";
       };
       cargoArtifacts = crane.buildDepsOnly commonArgs;
     in
