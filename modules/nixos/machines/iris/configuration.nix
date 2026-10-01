@@ -87,7 +87,6 @@ in
       "/iris.internal.evanrelf.com/${tailscaleIPAddress}"
       "/code.internal.evanrelf.com/${tailscaleIPAddress}"
       "/feed.internal.evanrelf.com/${tailscaleIPAddress}"
-      "/rss-bridge.internal.evanrelf.com/${tailscaleIPAddress}"
     ];
     settings.server = [
       "1.1.1.1"
@@ -128,16 +127,6 @@ in
     config.BASE_URL = "https://feed.internal.evanrelf.com";
   };
 
-  services.rss-bridge = {
-    enable = true;
-    virtualHost = "rss-bridge.internal.evanrelf.com";
-    config = {
-      system.enabled_bridges = [ "CssSelectorBridge" ];
-      error.output = "http";
-      error.report_limit = 5;
-    };
-  };
-
   services.nginx = {
     enable = true;
     virtualHosts."code.internal.evanrelf.com" = {
@@ -165,14 +154,6 @@ in
           proxy_set_header X-Forwarded-Proto $scheme;
         '';
       };
-    };
-    virtualHosts."rss-bridge.internal.evanrelf.com" = {
-      useACMEHost = "internal.evanrelf.com";
-      forceSSL = true;
-      listen = [
-        { addr = "0.0.0.0"; port = 80; }
-        { addr = "0.0.0.0"; port = 443; ssl = true; }
-      ];
     };
   };
 
