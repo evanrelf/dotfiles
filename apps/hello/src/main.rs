@@ -15,6 +15,10 @@ struct Args {
     /// Exit after a period with no requests
     #[arg(long, env = "ON_DEMAND")]
     on_demand: bool,
+
+    /// Unique ID for this run, set by systemd
+    #[arg(long, env = "INVOCATION_ID")]
+    invocation_id: Option<String>,
 }
 
 #[tokio::main]

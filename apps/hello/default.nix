@@ -14,4 +14,6 @@
       cargoArtifacts = crane.buildDepsOnly commonArgs;
     in
     crane.buildPackage (commonArgs // { inherit cargoArtifacts; });
+
+  onDemand = true;
 }
