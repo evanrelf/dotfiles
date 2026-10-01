@@ -64,6 +64,7 @@ in
       nix-direnv
       nix-tree
       nix-your-shell
+      nixos-rebuild
       nixpkgs-fmt
       pancase
       pandoc
