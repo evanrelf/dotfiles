@@ -19,6 +19,11 @@ in
           default = null;
           description = "Listen on this port instead of a Unix socket";
         };
+        onDemand = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Start on the first request instead of at boot, and let the app exit when it's done";
+        };
       };
     });
   };
@@ -26,6 +31,12 @@ in
   config = {
     assertions =
       lib.mapAttrsToList
+        (name: app: {
+          assertion = !(app.onDemand && app.port != null);
+          message = "iris.apps.${name}: `onDemand` requires a Unix socket, so it can't be used with `port`";
+        })
+        cfg
+      ++ lib.mapAttrsToList
         (port: names: {
           assertion = lib.length names == 1;
           message = "iris.apps: Port ${port} is used by multiple apps: ${lib.concatStringsSep ", " names}";
@@ -62,12 +73,12 @@ in
       lib.mapAttrs'
         (name: app: lib.nameValuePair "app-${name}" (lib.mkMerge [
           {
-            wantedBy = [ "multi-user.target" ];
+            wantedBy = lib.mkIf (!app.onDemand) [ "multi-user.target" ];
             serviceConfig = {
               ExecStart = lib.getExe app.package;
               DynamicUser = true;
               StateDirectory = "app-${name}"; # in /var/lib/
-              Restart = "on-failure";
+              Restart = if app.onDemand then "no" else "always";
             };
           }
           (if app.port == null then {
@@ -75,6 +86,9 @@ in
             after = [ "app-${name}.socket" ];
           } else {
             environment = { PORT = toString app.port; };
+          })
+          (lib.mkIf app.onDemand {
+            environment = { ON_DEMAND = "true"; };
           })
         ]))
         cfg;
