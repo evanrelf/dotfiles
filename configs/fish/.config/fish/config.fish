@@ -21,12 +21,12 @@ set --global --export FZF_LEGACY_KEYBINDINGS 0
 set --global --export FZF_DEFAULT_OPTS "--tiebreak=index --style=minimal --height=40% --layout=reverse --exact"
 set --global --export FZF_CD_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' . \$dir | sed -e 's_^\./__'"
 set --global --export FZF_CD_WITH_HIDDEN_COMMAND "fd --type directory --follow --exclude '.git' --exclude '.jj' --hidden . \$dir | sed -e 's_^\./__'"
-set --global --export FZF_FIND_FILE_COMMAND "__fzf_empath \$dir"
-set --global --export FZF_OPEN_COMMAND "__fzf_empath \$dir"
-function __fzf_empath
+set --global --export FZF_FIND_FILE_COMMAND "__fzf_reach \$dir"
+set --global --export FZF_OPEN_COMMAND "__fzf_reach \$dir"
+function __fzf_reach
     set --local dir $argv[1]
     begin
-        { empath query frecent 2>/dev/null || true } | grep -v '^\.\./'
+        { reach query frecent 2>/dev/null || true } | grep -v '^\.\./'
         fd --type file --follow --exclude '.git' --exclude '.jj' --hidden . $dir | sed -e 's_^\./__'
     end | awk '{ if (!seen[$0]++) print }'
 end

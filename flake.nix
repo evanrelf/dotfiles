@@ -36,10 +36,10 @@
     # Go programs
 
     # Rust programs
-    empath = { url = "github:evanrelf/empath"; flake = false; };
     hsl = { url = "github:evanrelf/hsl"; flake = false; };
     indigo = { url = "github:evanrelf/indigo"; };
     pancase = { url = "github:evanrelf/pancase"; flake = false; };
+    reach = { url = "github:evanrelf/reach"; flake = false; };
 
     # Kakoune plugins
     better-haskell-kak = { url = "github:evanrelf/better-haskell.kak"; flake = false; };

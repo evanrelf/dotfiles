@@ -37,7 +37,6 @@ in
       delta
       direnv
       duckdb
-      empath
       evanrelf-fish
       evanrelf-prompt
       fd
@@ -69,6 +68,7 @@ in
       pancase
       pandoc
       python3Packages.editorconfig
+      reach
       ripgrep
       ruff
       rustup

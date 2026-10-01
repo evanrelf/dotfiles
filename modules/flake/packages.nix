@@ -57,12 +57,6 @@
             doCheck = false;
           });
 
-        empath =
-          rust {
-            name = "empath";
-            src = inputs.empath.outPath;
-          };
-
         evanrelf-fish =
           let
             fish-colored-man =
@@ -146,6 +140,12 @@
           rust {
             name = "pancase";
             src = inputs.pancase.outPath;
+          };
+
+        reach =
+          rust {
+            name = "reach";
+            src = inputs.reach.outPath;
           };
 
         shrink-conflicts =

@@ -96,22 +96,6 @@
         "type": "github"
       }
     },
-    "empath": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790821835,
-        "narHash": "sha256-UVdJz9ZVllGrudrtyV8Quxe3LJyAUWYFlwehtV5Vip8=",
-        "owner": "evanrelf",
-        "repo": "empath",
-        "rev": "4c69ff807907ebdb5e7653e395fd8ba5f41d8d7d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "evanrelf",
-        "repo": "empath",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -476,12 +460,27 @@
         "type": "github"
       }
     },
+    "reach": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790826279,
+        "narHash": "sha256-kTAFVBggqlbhInTxiPkyKU4tomLELwztxT+iGydrn10=",
+        "owner": "evanrelf",
+        "repo": "reach",
+        "rev": "4924476afe85c0706be91a76fb013ef5c8c2f4e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "repo": "reach",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "better-haskell-kak": "better-haskell-kak",
         "byline-kak": "byline-kak",
         "crane": "crane",
-        "empath": "empath",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "hsl": "hsl",
@@ -495,7 +494,8 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-master": "nixpkgs-master",
         "open-github-kak": "open-github-kak",
-        "pancase": "pancase"
+        "pancase": "pancase",
+        "reach": "reach"
       }
     },
     "rust-analyzer-src": {
