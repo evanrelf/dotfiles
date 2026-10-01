@@ -1,0 +1,11 @@
+[package]
+name = "hello"
+edition = "2024"
+
+[dependencies]
+axum = "0.8.9"
+clap = { version = "4.6.7", features = ["derive", "env"] }
+tokio = { version = "1.53.1", features = ["full"] }
+
+[lints]
+clippy.pedantic = { level = "warn", priority = -1 }
