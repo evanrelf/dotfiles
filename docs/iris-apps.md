@@ -26,9 +26,7 @@ $ echo "<h1>Hello, world!</h1>" > apps/foo/www/index.html
 $ cat <<EOF > apps/foo/default.nix
 { pkgs, ... }:
 {
-  package = pkgs.writeShellScriptBin "foo" ''
-    exec ${pkgs.python3}/bin/python3 -m http.server "$PORT" --bind 127.0.0.1 --directory ${./www}
-  '';
+  command = "${pkgs.python3}/bin/python3 -m http.server $PORT --bind 127.0.0.1 --directory ${./www}";
   onDemand = true;
 }
 EOF

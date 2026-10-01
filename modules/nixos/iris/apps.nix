@@ -18,7 +18,11 @@ in
     default = { };
     type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
       options = {
-        package = lib.mkOption { type = lib.types.package; };
+        command = lib.mkOption {
+          type = lib.types.str;
+          example = lib.literalExpression ''"''${lib.getExe pkgs.my-server} launch"'';
+          description = "Command line to run the app, used as `ExecStart` (not a shell, but `$PORT` is expanded)";
+        };
         port = lib.mkOption {
           type = lib.types.port;
           default = 20000 + lib.mod (lib.fromHexString (lib.substring 0 7 (builtins.hashString "sha256" name))) 10000;
@@ -89,7 +93,7 @@ in
             environment.PORT = toString app.port;
             unitConfig.StopWhenUnneeded = lib.mkIf app.onDemand true;
             serviceConfig = {
-              ExecStart = lib.getExe app.package;
+              ExecStart = app.command;
               # Don't let the proxy forward connections until the app is listening
               ExecStartPost = lib.mkIf app.onDemand (waitForPort app.port);
               Restart = if app.onDemand then "no" else "always";

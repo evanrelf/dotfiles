@@ -1,6 +1,6 @@
 { inputs, lib, pkgs }:
 
-{
+let
   package =
     let
       crane = inputs.crane.mkLib pkgs;
@@ -14,6 +14,10 @@
       cargoArtifacts = crane.buildDepsOnly commonArgs;
     in
     crane.buildPackage (commonArgs // { inherit cargoArtifacts; });
+
+in
+{
+  command = lib.getExe package;
 
   onDemand = true;
 }
