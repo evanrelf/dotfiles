@@ -13,7 +13,7 @@ hostname, HTTPS, optional on-demand mode (start on request, stop on idle), etc.
   - The app should shut down after an idle period / when work is complete.
   - `systemd` provides a unique `INVOCATION_ID` for each run, if that's helpful.
 
-Here's a contrived but complete example of an app:
+Here's a trivial example app:
 
 ```
 $ mkdir -p apps/foo/www/
@@ -29,6 +29,8 @@ $ cat <<EOF > apps/foo/default.nix
 }
 EOF
 ```
+
+For a full-fledged example, see `apps/demo/`.
 
 ## Build
 
