@@ -3,37 +3,49 @@
 let
   cfg = config.iris.apps;
 
-  socketApps = lib.filterAttrs (_: app: app.port == null) cfg;
+  defaultIdleTimeout = "5min";
 
-  portApps = lib.filterAttrs (_: app: app.port != null) cfg;
+  waitForPort = port:
+    pkgs.writeShellScript "wait-for-port-${toString port}" ''
+      until (exec 3<>/dev/tcp/127.0.0.1/${toString port}) 2>/dev/null; do
+        sleep 0.1
+      done
+    '';
 
 in
 {
   options.iris.apps = lib.mkOption {
     default = { };
-    type = lib.types.attrsOf (lib.types.submodule {
+    type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
       options = {
         package = lib.mkOption { type = lib.types.package; };
         port = lib.mkOption {
-          type = lib.types.nullOr lib.types.port;
-          default = null;
-          description = "Listen on this port instead of a Unix socket";
+          type = lib.types.port;
+          default = 20000 + lib.mod (lib.fromHexString (lib.substring 0 7 (builtins.hashString "sha256" name))) 10000;
+          defaultText = "derived from the app's name";
+          description = "Port the app listens on, passed as $PORT";
         };
         onDemand = lib.mkOption {
           type = lib.types.bool;
           default = false;
-          description = "Start on the first request instead of at boot, and let the app exit when it's done";
+          description = "Start on the first request instead of at boot, and stop after `idleTimeout` without connections";
+        };
+        idleTimeout = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          example = "30s";
+          description = "How long an on-demand app can run without connections before it's stopped (default ${defaultIdleTimeout})";
         };
       };
-    });
+    }));
   };
 
   config = {
     assertions =
       lib.mapAttrsToList
         (name: app: {
-          assertion = !(app.onDemand && app.port != null);
-          message = "iris.apps.${name}: `onDemand` requires a Unix socket, so it can't be used with `port`";
+          assertion = app.idleTimeout != null -> app.onDemand;
+          message = "iris.apps.${name}: `idleTimeout` requires `onDemand = true`";
         })
         cfg
       ++ lib.mapAttrsToList
@@ -41,7 +53,7 @@ in
           assertion = lib.length names == 1;
           message = "iris.apps: Port ${port} is used by multiple apps: ${lib.concatStringsSep ", " names}";
         })
-        (lib.groupBy (name: toString cfg.${name}.port) (lib.attrNames portApps));
+        (lib.groupBy (name: toString cfg.${name}.port) (lib.attrNames cfg));
 
     iris.apps =
       let
@@ -58,7 +70,7 @@ in
 
     systemd.sockets =
       lib.mapAttrs'
-        (name: _: lib.nameValuePair "app-${name}" {
+        (name: _: lib.nameValuePair "app-${name}-proxy" {
           wantedBy = [ "sockets.target" ];
           listenStreams = [ "/run/app-${name}.sock" ];
           socketConfig = {
@@ -67,30 +79,38 @@ in
             SocketMode = "0660";
           };
         })
-        socketApps;
+        (lib.filterAttrs (_: app: app.onDemand) cfg);
 
     systemd.services =
-      lib.mapAttrs'
-        (name: app: lib.nameValuePair "app-${name}" (lib.mkMerge [
-          {
+      lib.concatMapAttrs
+        (name: app: {
+          "app-${name}" = {
             wantedBy = lib.mkIf (!app.onDemand) [ "multi-user.target" ];
+            environment.PORT = toString app.port;
+            unitConfig.StopWhenUnneeded = lib.mkIf app.onDemand true;
             serviceConfig = {
               ExecStart = lib.getExe app.package;
-              DynamicUser = true;
-              StateDirectory = "app-${name}"; # in /var/lib/
+              # Don't let the proxy forward connections until the app is listening
+              ExecStartPost = lib.mkIf app.onDemand (waitForPort app.port);
               Restart = if app.onDemand then "no" else "always";
+              StateDirectory = "app-${name}"; # in /var/lib/
+              DynamicUser = true;
             };
-          }
-          (if app.port == null then {
-            requires = [ "app-${name}.socket" ];
-            after = [ "app-${name}.socket" ];
-          } else {
-            environment = { PORT = toString app.port; };
-          })
-          (lib.mkIf app.onDemand {
-            environment = { ON_DEMAND = "true"; };
-          })
-        ]))
+          };
+        } // lib.optionalAttrs app.onDemand {
+          "app-${name}-proxy" = {
+            bindsTo = [ "app-${name}.service" ];
+            after = [ "app-${name}.service" ];
+            serviceConfig = {
+              ExecStart = lib.escapeShellArgs [
+                "${config.systemd.package}/lib/systemd/systemd-socket-proxyd"
+                "--exit-idle-time=${if app.idleTimeout != null then app.idleTimeout else defaultIdleTimeout}"
+                "127.0.0.1:${toString app.port}"
+              ];
+              DynamicUser = true;
+            };
+          };
+        })
         cfg;
 
     services.nginx.virtualHosts =
@@ -104,7 +124,7 @@ in
           ];
           locations."/" = {
             proxyPass =
-              if app.port == null
+              if app.onDemand
               then "http://unix:/run/app-${name}.sock"
               else "http://127.0.0.1:${toString app.port}";
             recommendedProxySettings = true;

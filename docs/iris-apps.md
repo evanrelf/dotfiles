@@ -6,12 +6,17 @@ hostname, HTTPS, optional on-demand mode (start on request, stop on idle), etc.
 ## Create
 
 - Write `apps/<name>/default.nix` to satisfy `modules/nixos/iris/apps.nix`.
-- Apps must follow `$PORT` and `$ON_DEMAND` (panic if unsupported).
+- Listen on `127.0.0.1:$PORT`. By default the port is derived from the app's
+  name, but you can override it.
 - Store persistent state in `$STATE_DIRECTORY` (i.e. `/var/lib/app-<name>/`).
-- If on-demand mode is supported and `ON_DEMAND=true`:
-  - The app is started lazily in response to requests.
-  - The app should shut down after an idle period / when work is complete.
+- Set `onDemand = true` to start lazily on the first request, and stop once
+  there's been no open connections for a while.
+  - `systemd-socket-proxyd` handles wake on socket and stop on idle
+    automatically; your app doesn't have to do anything except listen on a port.
   - `systemd` provides a unique `INVOCATION_ID` for each run, if that's helpful.
+  - After `idleTimeout` (defaults to 5 minutes), your process receives a
+    `SIGTERM`. Make sure to gracefully shutdown when receiving this signal if
+    necessary.
 
 Here's a trivial example app:
 
@@ -22,10 +27,9 @@ $ cat <<EOF > apps/foo/default.nix
 { pkgs, ... }:
 {
   package = pkgs.writeShellScriptBin "foo" ''
-    #!/usr/bin/env bash
-    ${pkgs.python3}/bin/python3 -m http.server 12345 --directory ${./www}
+    exec ${pkgs.python3}/bin/python3 -m http.server "$PORT" --bind 127.0.0.1 --directory ${./www}
   '';
-  port = 12345;
+  onDemand = true;
 }
 EOF
 ```
@@ -52,5 +56,7 @@ $ nixos-rebuild switch --flake .#iris --build-host iris --target-host iris --sud
 
 ```
 $ ssh iris -- systemctl status app-foo.service
+$ ssh iris -- systemctl status app-foo-proxy.{socket,service} # on-demand
+$ ssh iris -- journalctl --unit 'app-foo*' --follow
 $ ssh iris -- ls -lah /var/lib/app-foo/
 ```
