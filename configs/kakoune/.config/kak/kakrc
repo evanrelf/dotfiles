@@ -595,9 +595,9 @@ alias global "bd!" "delete-buffer!"
 
 hook global BufOpenFile .* %{
   hook -once buffer WinDisplay .* %{
-    nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" --event open }
+    nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" --session "kakoune-$kak_session" --event open }
     hook -once buffer BufClose .* %{
-      nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" --event close }
+      nop %sh{ test -n "$kak_buffile" && empath record "$kak_buffile" --session "kakoune-$kak_session" --event close }
     }
   }
 }
