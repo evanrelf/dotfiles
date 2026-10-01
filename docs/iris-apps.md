@@ -63,7 +63,7 @@ Monitor health and behavior:
 $ ssh iris -- systemctl status app-foo.service
 $ ssh iris -- systemctl status app-foo-proxy.{socket,service} # on-demand
 $ ssh iris -- journalctl --unit 'app-foo*' --follow
-$ ssh iris -- ls -lah /var/lib/app-foo/
+$ ssh iris -- sudo sh -c 'ls -lah $(realpath /var/lib/app-foo/)'
 ```
 
 Monitor and start jobs:
