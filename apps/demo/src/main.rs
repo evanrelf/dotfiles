@@ -1,4 +1,4 @@
-use axum::{Router, routing::get};
+use axum::{Router, extract::State, routing::get};
 use clap::Parser as _;
 
 #[derive(Debug, clap::Parser)]
@@ -16,11 +16,15 @@ struct Args {
 async fn main() {
     let args: &'static Args = Box::leak(Box::new(Args::parse()));
     let app = Router::new()
-        .route("/", get(|| async { "Hello, world!" }))
-        .route("/args", get(move || async move { format!("{args:#?}") }));
+        .route("/", get(handle_get_root))
+        .with_state(args);
     let listener = tokio::net::TcpListener::bind(("127.0.0.1", args.port))
         .await
         .unwrap();
     println!("Listening on http://127.0.0.1:{}", args.port);
     axum::serve(listener, app).await.unwrap();
+}
+
+async fn handle_get_root(State(args): State<&'static Args>) -> String {
+    format!("Hello, world!\n\n{args:#?}\n")
 }
