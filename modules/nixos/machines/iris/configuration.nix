@@ -134,7 +134,10 @@ in
         { addr = "0.0.0.0"; port = 80; }
         { addr = "0.0.0.0"; port = 443; ssl = true; }
       ];
-      locations."/".proxyPass = "http://127.0.0.1:10002";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:10002";
+        recommendedProxySettings = true;
+      };
     };
     virtualHosts."feed.internal.evanrelf.com" = {
       useACMEHost = "internal.evanrelf.com";
@@ -145,12 +148,7 @@ in
       ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:10001";
-        extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-        '';
+        recommendedProxySettings = true;
       };
     };
   };
