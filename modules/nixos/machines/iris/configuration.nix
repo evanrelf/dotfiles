@@ -84,9 +84,7 @@ in
   services.dnsmasq = {
     enable = true;
     settings.address = [
-      "/iris.internal.evanrelf.com/${tailscaleIPAddress}"
-      "/code.internal.evanrelf.com/${tailscaleIPAddress}"
-      "/feed.internal.evanrelf.com/${tailscaleIPAddress}"
+      "/internal.evanrelf.com/${tailscaleIPAddress}"
     ];
     settings.server = [
       "1.1.1.1"
