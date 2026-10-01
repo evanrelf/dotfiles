@@ -6,7 +6,7 @@ use tokio::sync::Notify;
 
 const IDLE_TIMEOUT: Duration = Duration::from_secs(60);
 
-#[derive(clap::Parser)]
+#[derive(Debug, clap::Parser)]
 struct Args {
     /// Port to listen on when not socket-activated
     #[arg(long, env = "PORT", default_value_t = 3000)]
@@ -19,12 +19,13 @@ struct Args {
 
 #[tokio::main]
 async fn main() {
-    let args = Args::parse();
+    let args: &'static Args = Box::leak(Box::new(Args::parse()));
 
     let activity = Arc::new(Notify::new());
 
     let app = Router::new()
         .route("/", get(|| async { "Hello, world!" }))
+        .route("/args", get(move || async move { format!("{args:#?}") }))
         .layer(axum::middleware::from_fn({
             let activity = Arc::clone(&activity);
             move |request: Request, next: Next| {
