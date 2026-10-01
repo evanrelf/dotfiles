@@ -1,14 +1,14 @@
 # Iris Apps
 
-Easily serve little web apps from `iris`. Custom `<name>.internal.evanrelf.com`
+Easily serve little web apps from `iris`. Custom `<app>.internal.evanrelf.com`
 hostname, HTTPS, optional on-demand mode (start on request, stop on idle), etc.
 
 ## Create
 
-- Write `apps/<name>/default.nix` to satisfy `modules/nixos/iris/apps.nix`.
+- Write `apps/<app>/default.nix` to satisfy `modules/nixos/iris/apps.nix`.
 - Listen on `127.0.0.1:$PORT`. By default the port is derived from the app's
   name, but you can override it.
-- Store persistent state in `$STATE_DIRECTORY` (i.e. `/var/lib/app-<name>/`).
+- Store persistent state in `$STATE_DIRECTORY` (i.e. `/var/lib/app-<app>/`).
 - Set `onDemand = true` to start lazily on the first request, and stop once
   there's been no open connections for a while.
   - `systemd-socket-proxyd` handles wake on socket and stop on idle
@@ -17,6 +17,11 @@ hostname, HTTPS, optional on-demand mode (start on request, stop on idle), etc.
   - After `idleTimeout` (defaults to 5 minutes), your process receives a
     `SIGTERM`. Make sure to gracefully shutdown when receiving this signal if
     necessary.
+- Add `jobs.<job>` to run background work ad-hoc or on a schedule.
+  - `command` is run as `app-<app>-job-<job>.service`, with the same user and
+    `$STATE_DIRECTORY` as the app.
+  - `startAt` is a `systemd.time` calendar expression (e.g. `hourly` or
+    `*:0/15`). Omit it for jobs you only run manually.
 
 Here's a trivial example app:
 
@@ -50,11 +55,20 @@ $ nixos-rebuild dry-activate --flake .#iris --build-host iris --target-host iris
 $ nixos-rebuild switch --flake .#iris --build-host iris --target-host iris --sudo
 ```
 
-## Monitor
+## Operate
+
+Monitor health and behavior:
 
 ```
 $ ssh iris -- systemctl status app-foo.service
 $ ssh iris -- systemctl status app-foo-proxy.{socket,service} # on-demand
 $ ssh iris -- journalctl --unit 'app-foo*' --follow
 $ ssh iris -- ls -lah /var/lib/app-foo/
+```
+
+Monitor and start jobs:
+
+```
+$ ssh iris -- systemctl list-timers 'app-foo-job-*'
+$ ssh iris -- sudo systemctl start app-foo-job-bar.service
 ```

@@ -40,6 +40,25 @@ in
           example = "30s";
           description = "How long an on-demand app can run without connections before it's stopped (default ${defaultIdleTimeout})";
         };
+        jobs = lib.mkOption {
+          default = { };
+          description = "Background jobs, run as `app-<app>-job-<job>.service` with the app's user and state";
+          type = lib.types.attrsOf (lib.types.submodule {
+            options = {
+              command = lib.mkOption {
+                type = lib.types.str;
+                example = lib.literalExpression ''"''${lib.getExe pkgs.my-server} reticulate-splines"'';
+                description = "Command line to run the job, used as `ExecStart` (not a shell)";
+              };
+              startAt = lib.mkOption {
+                type = lib.types.either lib.types.str (lib.types.listOf lib.types.str);
+                default = [ ];
+                example = "hourly";
+                description = "When to run the job, in `systemd.time` calendar syntax (manual-only if empty)";
+              };
+            };
+          });
+        };
       };
     }));
   };
@@ -99,9 +118,23 @@ in
               Restart = if app.onDemand then "no" else "always";
               StateDirectory = "app-${name}"; # in /var/lib/
               DynamicUser = true;
+              # Shared with the app's jobs, so they can all access `$STATE_DIRECTORY`
+              User = "app-${name}";
             };
           };
-        } // lib.optionalAttrs app.onDemand {
+        } // lib.mapAttrs'
+          (job: jobCfg: lib.nameValuePair "app-${name}-job-${job}" {
+            inherit (jobCfg) startAt;
+            serviceConfig = {
+              Type = "oneshot";
+              ExecStart = jobCfg.command;
+              StateDirectory = "app-${name}";
+              DynamicUser = true;
+              User = "app-${name}";
+            };
+          })
+          app.jobs
+        // lib.optionalAttrs app.onDemand {
           "app-${name}-proxy" = {
             bindsTo = [ "app-${name}.service" ];
             after = [ "app-${name}.service" ];
@@ -115,6 +148,18 @@ in
             };
           };
         })
+        cfg;
+
+    # Catch up on runs missed while the machine was off
+    systemd.timers =
+      lib.concatMapAttrs
+        (name: app:
+          lib.mapAttrs'
+            (job: _: lib.nameValuePair "app-${name}-job-${job}" {
+              timerConfig.Persistent = true;
+            })
+            (lib.filterAttrs (_: jobCfg: lib.toList jobCfg.startAt != [ ]) app.jobs)
+        )
         cfg;
 
     services.nginx.virtualHosts =
