@@ -1,5 +1,7 @@
 use axum::{Router, extract::State, routing::get};
 use clap::Parser as _;
+use std::path::PathBuf;
+use tokio::fs;
 
 #[derive(Debug, clap::Parser)]
 struct Args {
@@ -10,6 +12,10 @@ struct Args {
     /// Unique ID for this run set by `systemd`
     #[arg(long, env)]
     invocation_id: Option<String>,
+
+    /// Persistent state directory set by `systemd`
+    #[arg(long, env, default_value = ".")]
+    state_directory: PathBuf,
 }
 
 #[tokio::main]
@@ -26,5 +32,9 @@ async fn main() {
 }
 
 async fn handle_get_root(State(args): State<&'static Args>) -> String {
-    format!("Hello, world!\n\n{args:#?}\n")
+    // Written by the `tick` job
+    let tick = fs::read_to_string(args.state_directory.join("tick"))
+        .await
+        .unwrap_or_else(|_| String::from("never\n"));
+    format!("Hello, world!\n\n{args:#?}\n\nLast tick: {tick}")
 }

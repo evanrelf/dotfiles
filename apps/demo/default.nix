@@ -20,4 +20,9 @@ in
   command = lib.getExe package;
 
   onDemand = true;
+
+  jobs.tick = {
+    command = "${pkgs.bash}/bin/bash -c 'date > $STATE_DIRECTORY/tick'";
+    startAt = "hourly";
+  };
 }
