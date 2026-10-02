@@ -34,7 +34,7 @@ in
 
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   users.users.evanrelf = {
     isNormalUser = true;
