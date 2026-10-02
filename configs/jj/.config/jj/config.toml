@@ -140,6 +140,10 @@ git -C "$right" commit --message split --quiet --no-gpg-sign
 git -C "$right" reset --hard --quiet
 ''',
 ]
+fix.tools.rustfmt = {
+  command = ['rustfmt', '--edition=2024'],
+  patterns = ['glob:"**/*.rs"'],
+}
 
 revsets.log = 'evan_log()'
 revsets.short-prefixes = 'evan_log()'
