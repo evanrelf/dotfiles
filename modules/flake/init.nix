@@ -32,7 +32,7 @@ in
     inputs.naersk.overlays.default
     inputs.neovim.overlays.default
     inputs.nix-darwin.overlays.default
-    (final: prev: config.flake.packages.${prev.stdenv.hostPlatform.system})
+    (final: prev: config.flake.packages.${prev.stdenv.hostPlatform.system} or { })
     # TODO: Get rid of these overlays
     (import ../../overlays/nixos-configurations.nix)
     (import ../../overlays/fish.nix)

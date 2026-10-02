@@ -8,6 +8,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./apps.nix
+    ./steam.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
