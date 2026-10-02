@@ -1,7 +1,5 @@
 #:schema https://docs.jj-vcs.dev/latest/config-schema.json
 
-aliases.subcommand = ['util', 'exec', '--', 'bash', '-c', 'jj "$0 $1" "${@:2}"']
-
 # Shorter
 aliases.d = ['diff']
 aliases.dup = ['duplicate']
@@ -46,8 +44,7 @@ jj new
 aliases.push = ['git', 'push']
 aliases.remote = ['git', 'remote']
 
-aliases.mega = ['subcommand', 'mega']
-aliases.'mega set' = ['util', 'exec', '--', 'bash', '-c', '''
+aliases.megaset = ['util', 'exec', '--', 'bash', '-c', '''
 #!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -eq 0 ]; then
@@ -65,7 +62,7 @@ else
   jj rebase --source 'megamerge()' "${args[@]}"
 fi
 ''', '']
-aliases.'mega difference' = ['util', 'exec', '--', 'bash', '-c', '''
+aliases.megadifference = ['util', 'exec', '--', 'bash', '-c', '''
 #!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -ne 1 ]; then
@@ -75,7 +72,7 @@ fi
 parents=${1:?}
 jj rebase --source 'megamerge()' --onto "parents(megamerge()) ~ ($parents)"
 ''', '']
-aliases.'mega union' = ['util', 'exec', '--', 'bash', '-c', '''
+aliases.megaunion = ['util', 'exec', '--', 'bash', '-c', '''
 #!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -ne 1 ]; then
@@ -85,7 +82,7 @@ fi
 parents=${1:?}
 jj rebase --source 'megamerge()' --onto "parents(megamerge()) | ($parents)"
 ''', '']
-aliases.'mega rebase' = ['util', 'exec', '--', 'bash', '-c', '''
+aliases.megarebase = ['util', 'exec', '--', 'bash', '-c', '''
 #!/usr/bin/env bash
 set -euo pipefail
 if [ "$#" -gt 1 ]; then
