@@ -80,7 +80,7 @@ in
 
     iris.apps =
       let
-        appsDir = ../../../apps;
+        appsDir = ../../../../apps;
       in
       lib.mapAttrs
         (name: _: import (appsDir + "/${name}") { inherit inputs lib pkgs; })

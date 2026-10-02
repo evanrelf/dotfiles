@@ -7,7 +7,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ../../iris/apps.nix
+    ./apps.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

@@ -5,7 +5,8 @@ hostname, HTTPS, optional on-demand mode (start on request, stop on idle), etc.
 
 ## Create
 
-- Write `apps/<app>/default.nix` to satisfy `modules/nixos/iris/apps.nix`.
+- Write `apps/<app>/default.nix` to satisfy the
+  `modules/nixos/machines/iris/apps.nix` NixOS module.
 - Listen on `127.0.0.1:$PORT`. By default the port is derived from the app's
   name, but you can override it.
 - Store persistent state in `$STATE_DIRECTORY` (i.e. `/var/lib/app-<app>/`).
