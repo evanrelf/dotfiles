@@ -35,6 +35,14 @@
     };
   };
 
+  # Prevent Steam (in Deck mode) from suspending
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+    AllowHybridSleep = "no";
+    AllowSuspendThenHibernate = "no";
+  };
+
   services.greetd = {
     enable = true;
     settings = rec {
