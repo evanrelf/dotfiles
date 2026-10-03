@@ -162,6 +162,15 @@ in
   home.file.".config/nvim".source =
     mutable "configs/neovim/.config/nvim";
 
+  home.file.".pi/agent/keybindings.json".source =
+    mutable "configs/pi/.pi/agent/keybindings.json";
+
+  home.file.".pi/agent/settings.json".source =
+    mutable "configs/pi/.pi/agent/settings.json";
+
+  home.file.".pi/agent/themes".source =
+    mutable "configs/pi/.pi/agent/themes";
+
   xdg.configFile."ripgrep" = {
     source = ../../configs/ripgrep/.config/ripgrep;
     recursive = true;

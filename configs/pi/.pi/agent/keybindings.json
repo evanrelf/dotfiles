@@ -1,0 +1,17 @@
+{
+  "app.model.select": [],
+  "app.model.cycleForward": [],
+  "app.model.cycleBackward": [],
+  "app.thinking.cycle": [],
+  "tui.editor.historyPrevious": [],
+  "tui.editor.historyNext": [],
+  "tui.editor.cursorUp": ["up", "ctrl+p"],
+  "tui.editor.cursorDown": ["down", "ctrl+n"],
+  "tui.select.up": ["up", "ctrl+p"],
+  "tui.select.down": ["down", "ctrl+n"],
+  "tui.input.newLine": ["shift+enter", "alt+enter"],
+  "app.message.followUp": ["ctrl+enter"],
+  "app.session.togglePath": [],
+  "app.session.toggleNamedFilter": [],
+  "app.models.toggleProvider": []
+}
