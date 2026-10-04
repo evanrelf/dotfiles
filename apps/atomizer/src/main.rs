@@ -1,4 +1,7 @@
+#![allow(dead_code)] // TODO: Remove
+
 mod db;
+mod oxide_rfds;
 
 use axum::{Router, routing::get};
 use clap::Parser as _;
@@ -23,7 +26,10 @@ struct Args {
 #[derive(clap::Subcommand)]
 enum Command {
     /// Scrape a supported website
-    Scrape { website: Website },
+    Scrape {
+        #[command(subcommand)]
+        command: ScrapeCommand,
+    },
 
     /// Serve scraped websites as Atom feeds
     Syndicate {
@@ -33,10 +39,13 @@ enum Command {
     },
 }
 
-#[derive(Clone, Copy, clap::ValueEnum)]
-enum Website {
-    /// <https://rfd.shared.oxide.computer>
+#[derive(clap::Subcommand)]
+enum ScrapeCommand {
+    /// Oxide Computer Company's Requests for Discussion
     OxideRfds,
+
+    /// An arbitrary URL
+    Url { url: String },
 }
 
 #[tokio::main]
@@ -47,20 +56,35 @@ async fn main() -> anyhow::Result<()> {
     let mut db = db::open(&db_path)?;
 
     match args.command {
-        Command::Scrape { website } => run_scrape(&mut db, website).await?,
-        Command::Syndicate { port } => run_syndicate(&mut db, port).await?,
+        Command::Scrape { command } => match command {
+            ScrapeCommand::OxideRfds => oxide_rfds::scrape(&mut db).await?,
+            ScrapeCommand::Url { url } => scrape_url(&mut db, &url).await?,
+        },
+        Command::Syndicate { port } => syndicate(&mut db, port).await?,
     }
     Ok(())
 }
 
-async fn run_scrape(_db: &mut Connection, _website: Website) -> anyhow::Result<()> {
+async fn scrape_url(_db: &mut Connection, _url: &str) -> anyhow::Result<()> {
     todo!()
 }
 
-async fn run_syndicate(_db: &mut Connection, port: u16) -> anyhow::Result<()> {
-    let app = Router::new().route("/", get(|| async { "Hello, world!" }));
+async fn syndicate(_db: &mut Connection, port: u16) -> anyhow::Result<()> {
+    let app = Router::new()
+        .route("/", get(|| async { "Hello, world!" }))
+        .route(
+            "/oxide-rfds",
+            get(|| async { "TODO: Oxide RFDs Atom feed here" }),
+        )
+        .route(
+            "/url",
+            get(|| async { "TODO: URLs from SQLite `pages` table here" }),
+        );
+
     let listener = tokio::net::TcpListener::bind(("127.0.0.1", port)).await?;
+
     println!("Listening on http://127.0.0.1:{port}");
     axum::serve(listener, app).await?;
+
     Ok(())
 }
