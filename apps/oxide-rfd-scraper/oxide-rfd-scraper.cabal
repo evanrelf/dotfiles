@@ -1,0 +1,61 @@
+cabal-version: 3.6
+
+name: oxide-rfd-scraper
+version: 0.0.0.0
+
+common common
+  build-depends:
+    , base
+    , relude
+  mixins:
+    , base hiding (Prelude)
+    , relude (Relude as Prelude)
+    , relude
+  default-language: GHC2021
+  default-extensions:
+    , BlockArguments
+    , DeriveAnyClass
+    , DerivingStrategies
+    , DerivingVia
+    , LambdaCase
+    , OverloadedRecordDot
+    , OverloadedStrings
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Werror=incomplete-patterns
+    -Werror=incomplete-record-updates
+    -Werror=incomplete-uni-patterns
+    -Werror=missing-fields
+    -Werror=missing-methods
+    -Werror=partial-fields
+    -Widentities
+    -Wmissing-home-modules
+    -Wno-unticked-promoted-constructors
+    -Wredundant-constraints
+
+common executable
+  ghc-options:
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+
+library
+  import: common
+  hs-source-dirs: src
+  build-depends:
+    , json-feed
+    , optparse-applicative
+    , scalpel
+    , scotty
+    , sqlite-simple
+    , unliftio
+  exposed-modules:
+    , OxideRfdScraper
+
+executable oxide-rfd-scraper
+  import:
+    , common
+    , executable
+  main-is: src/Main.hs
+  build-depends: oxide-rfd-scraper
