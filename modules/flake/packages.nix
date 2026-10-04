@@ -158,6 +158,9 @@
               hash = "sha256-V7vGiBq8jfc8eSFHwStoblnNN0fRLXL1UBlkQWst3Fo=";
             };
           };
+
+        zig =
+          inputs.zig-overlay.packages.${system}.default;
       };
     };
 }
