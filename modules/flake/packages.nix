@@ -143,7 +143,7 @@
           };
 
         reach =
-          rust {
+          rustCrane {
             name = "reach";
             src = inputs.reach.outPath;
           };
