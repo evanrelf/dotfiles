@@ -165,9 +165,6 @@ in
   home.file.".pi/agent/keybindings.json".source =
     mutable "configs/pi/.pi/agent/keybindings.json";
 
-  home.file.".pi/agent/settings.json".source =
-    mutable "configs/pi/.pi/agent/settings.json";
-
   home.file.".pi/agent/themes".source =
     mutable "configs/pi/.pi/agent/themes";
 
