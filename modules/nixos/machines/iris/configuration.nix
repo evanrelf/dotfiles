@@ -127,6 +127,20 @@ in
     config.BASE_URL = "https://feed.internal.evanrelf.com";
   };
 
+  services.syncthing = {
+    enable = true;
+    user = "evanrelf";
+    group = "users";
+    dataDir = "/home/evanrelf";
+    configDir = "/home/evanrelf/.config/syncthing";
+    openDefaultPorts = true;
+    # Manage devices and folders imperatively via the web UI
+    overrideDevices = false;
+    overrideFolders = false;
+    # Allow access via nginx at `sync.internal.evanrelf.com`
+    settings.gui.insecureSkipHostcheck = true;
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts."code.internal.evanrelf.com" = {
@@ -150,6 +164,18 @@ in
       ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:10001";
+        recommendedProxySettings = true;
+      };
+    };
+    virtualHosts."sync.internal.evanrelf.com" = {
+      useACMEHost = "internal.evanrelf.com";
+      forceSSL = true;
+      listen = [
+        { addr = "0.0.0.0"; port = 80; }
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+      ];
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8384";
         recommendedProxySettings = true;
       };
     };
