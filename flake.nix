@@ -21,11 +21,6 @@
       url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,15 +32,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Go programs
+    # My Go programs
 
-    # Rust programs
+    # My Rust programs
     hsl = { url = "github:evanrelf/hsl"; flake = false; };
     indigo = { url = "github:evanrelf/indigo"; };
     pancase = { url = "github:evanrelf/pancase"; flake = false; };
     reach = { url = "github:evanrelf/reach"; flake = false; };
 
-    # Kakoune plugins
+    # My Kakoune plugins
     better-haskell-kak = { url = "github:evanrelf/better-haskell.kak"; flake = false; };
     byline-kak = { url = "github:evanrelf/byline.kak"; flake = false; };
     locus-kak = { url = "github:evanrelf/locus.kak"; flake = false; };
