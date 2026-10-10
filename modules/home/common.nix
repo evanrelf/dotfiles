@@ -43,13 +43,11 @@ in
       findutils-gprefix
       fzf
       gawkInteractive-gprefix
-      gh
       git
       gnugrep-gprefix
       gnused-gprefix
       home-manager
       hsl
-      htmlq
       hyperfine
       indigo
       infer-indent
@@ -59,9 +57,7 @@ in
       kakoune-lsp
       mergiraf
       neovim
-      nix-diff
       nix-direnv
-      nix-tree
       nix-your-shell
       nixos-rebuild
       nixpkgs-fmt
@@ -80,7 +76,6 @@ in
       tealdeer
       tokei
       toml2json
-      tree-sitter
       typos
       typst
       watchexec

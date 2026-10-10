@@ -15,6 +15,11 @@
       ../../home/common.nix
     ];
 
+    home.packages = with pkgs; [
+      llm-agents.claude-code
+      llm-agents.pi
+    ];
+
     home.stateVersion = "26.05";
   };
 }
