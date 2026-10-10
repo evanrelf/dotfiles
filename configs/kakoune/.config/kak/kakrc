@@ -87,11 +87,6 @@ hook global WinSetOption filetype=nix %{
   set-option buffer formatcmd "nixpkgs-fmt"
 }
 
-hook global WinSetOption filetype=python %{
-  set-option buffer formatcmd "ruff format --stdin-filename %val{buffile}"
-  hook buffer BufWritePre .* %{ format-buffer }
-}
-
 hook global WinSetOption filetype=rust %{
   add-highlighter shared/rust/shebang region '^#!' $ fill meta
   set-option buffer formatcmd "rustfmt --edition 2024"
@@ -129,17 +124,6 @@ hook global WinSetOption filetype=zig %{
 # LINTING
 ################################################################################
 
-hook global WinSetOption filetype=python %{
-  # TODO: Combine `ty` and `ruff` output somehow
-
-  # set-option buffer lintcmd "ty check --output-format concise"
-
-  # Kakoune doesn't mark the temporary file executable
-  # set-option buffer lintcmd "ruff check --preview --output-format concise --ignore EXE001"
-
-  # hook buffer BufWritePost .* %{ lint-buffer }
-}
-
 hook global WinSetOption filetype=sh %{
   set-option buffer lintcmd "shellcheck --format gcc"
   hook buffer BufWritePost .* %{ lint-buffer }
@@ -166,10 +150,6 @@ hook global InsertCompletionShow .* %{ try %{
 # Disable legacy mappings
 map global "insert" "<c-n>" "<a-;>: fail 'Use tab'<ret>"
 map global "insert" "<c-p>" "<a-;>: fail 'Use s-tab'<ret>"
-
-hook global WinSetOption filetype=python %{
-  set-option window static_words ""
-}
 
 ################################################################################
 # LSP

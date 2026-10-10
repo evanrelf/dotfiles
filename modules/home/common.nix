@@ -70,7 +70,6 @@ in
       python3Packages.editorconfig
       reach
       ripgrep
-      ruff
       rust-glancer
       rustup
       samply
@@ -81,10 +80,8 @@ in
       tealdeer
       tokei
       tree-sitter
-      ty
       typos
       typst
-      uv
       watchexec
       yj
       yt-dlp
