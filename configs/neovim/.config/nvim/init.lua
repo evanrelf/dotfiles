@@ -67,9 +67,7 @@ require("mini.trailspace").setup()
 vim.api.nvim_create_user_command("Trim", function() MiniTrailspace.trim() end, {})
 
 -- Tree Sitter
-vim.pack.add({
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-})
+vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
 require("nvim-treesitter").install({
   "bash", "fish", "go", "haskell", "json", "lua", "markdown", "nix", "rust",
   "sql", "zig",
@@ -84,3 +82,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+
+-- LSP configs
+vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
+vim.lsp.enable("rust_glancer")

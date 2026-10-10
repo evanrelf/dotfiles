@@ -3,6 +3,8 @@
 {
   perSystem = { pkgs, system, ... }:
     let
+      pkgs-master = inputs.nixpkgs-master.legacyPackages.${system};
+
       gprefix = drv:
         pkgs.runCommandLocal "gprefix-${drv.name}" { } ''
           mkdir -p "$out/bin"
@@ -117,7 +119,7 @@
         jujutsu =
           pkgs.callPackage
             "${inputs.nixpkgs-master}/pkgs/by-name/ju/jujutsu/package.nix"
-            { inherit (inputs.nixpkgs-master.legacyPackages.${system}) rustPlatform; };
+            { inherit (pkgs-master) rustPlatform; };
 
         kakoune =
           let
@@ -149,6 +151,24 @@
             name = "reach";
             src = inputs.reach.outPath;
           };
+
+        rust-glancer =
+          pkgs-master.rustPlatform.buildRustPackage (attrs: {
+            name = "rust-glancer";
+            src = pkgs.fetchFromGitHub {
+              owner = attrs.name;
+              repo = attrs.name;
+              tag = "v0.3.0";
+              hash = "sha256-3CdKyRsKbMfPBZ2UXgRmj+sKhQMl5GRuT7Pc2VkJpzs=";
+            };
+            cargoLock = (attrs.cargoLock or { }) // {
+              lockFile = "${attrs.src}/Cargo.lock";
+              outputHashes = {
+                "edition-0.0.0" = "sha256-EKsvvSydG/DQnd6diQhQhrhJs1pzPWTDoHA36RO8nWk=";
+              };
+            };
+            doCheck = false;
+          });
 
         shrink-conflicts =
           rust {

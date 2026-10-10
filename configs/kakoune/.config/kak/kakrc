@@ -222,13 +222,13 @@ set-face global InlayCodeLens default+d
 
 hook -group lsp-filetype-rust global BufSetOption filetype=rust %{
   set-option buffer lsp_servers %{
-    [rust-analyzer]
-    root_globs = ["Cargo.toml"]
-    command = "sh"
-    args = ["-c", 'if path=$(rustup which rust-analyzer 2>/dev/null); then exec "$path"; else exec rust-analyzer; fi']
-    single_instance = true
-    [rust-analyzer.settings.rust-analyzer]
-    check.command = "clippy"
+    # [rust-analyzer]
+    # root_globs = ["Cargo.toml"]
+    # command = "sh"
+    # args = ["-c", 'if path=$(rustup which rust-analyzer 2>/dev/null); then exec "$path"; else exec rust-analyzer; fi']
+    # single_instance = true
+    # [rust-analyzer.settings.rust-analyzer]
+    # check.command = "clippy"
 
     [rust-glancer]
     args = ["lsp"]

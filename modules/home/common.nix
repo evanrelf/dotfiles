@@ -72,6 +72,7 @@ in
       reach
       ripgrep
       ruff
+      rust-glancer
       rustup
       samply
       sd
