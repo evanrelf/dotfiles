@@ -79,11 +79,11 @@ in
       sqlite-interactive
       tealdeer
       tokei
+      toml2json
       tree-sitter
       typos
       typst
       watchexec
-      yj
       yt-dlp
       zig
       zoxide

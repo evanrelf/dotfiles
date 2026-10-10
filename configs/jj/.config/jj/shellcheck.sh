@@ -7,7 +7,7 @@ IFS=$'\n\t'
 
 map=$(
   cat "$HOME/.config/jj/config.toml" \
-| yj -tj \
+| toml2json \
 | jq --raw-output '
       .aliases
     | with_entries(.value = first(.value[] | select(contains("#!/usr/bin/env bash"))))
