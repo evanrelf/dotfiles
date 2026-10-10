@@ -115,7 +115,9 @@
           };
 
         jujutsu =
-          pkgs.callPackage "${inputs.nixpkgs-master}/pkgs/by-name/ju/jujutsu/package.nix" { };
+          pkgs.callPackage
+            "${inputs.nixpkgs-master}/pkgs/by-name/ju/jujutsu/package.nix"
+            { inherit (inputs.nixpkgs-master.legacyPackages.${system}) rustPlatform; };
 
         kakoune =
           let

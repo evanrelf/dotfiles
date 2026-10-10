@@ -220,7 +220,7 @@ set-face global ReferenceBind default
 set-face global InlayHint default+d
 set-face global InlayCodeLens default+d
 
-hook -group lsp-filetype-rust-analyzer global BufSetOption filetype=rust %{
+hook -group lsp-filetype-rust global BufSetOption filetype=rust %{
   set-option buffer lsp_servers %{
     [rust-analyzer]
     root_globs = ["Cargo.toml"]
@@ -229,6 +229,10 @@ hook -group lsp-filetype-rust-analyzer global BufSetOption filetype=rust %{
     single_instance = true
     [rust-analyzer.settings.rust-analyzer]
     check.command = "clippy"
+
+    [rust-glancer]
+    args = ["lsp"]
+    root_globs = ["Cargo.toml"]
   }
 }
 
