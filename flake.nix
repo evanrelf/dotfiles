@@ -32,8 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # My Go programs
-
     # My Rust programs
     hsl = { url = "github:evanrelf/hsl"; flake = false; };
     indigo = { url = "github:evanrelf/indigo"; };

@@ -78,11 +78,6 @@ hook global WinSetOption filetype=gleam %{
   hook buffer BufWritePre .* %{ format-buffer }
 }
 
-hook global WinSetOption filetype=go %{
-  set-option buffer formatcmd "gofmt"
-  hook buffer BufWritePre .* %{ format-buffer }
-}
-
 # Antithesis Notebook v2
 hook global BufCreate .*\.nb2 %{
   set-option buffer filetype javascript
