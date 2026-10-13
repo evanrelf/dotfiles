@@ -89,6 +89,18 @@
         findutils-gprefix =
           gprefix pkgs.findutils;
 
+        fix =
+          let
+            src = pkgs.fetchFromGitHub {
+              owner = "psyclyx";
+              repo = "fix";
+              rev = "e0c1f6d699894e3fcbb480c8e7445ddd3b9467fa";
+              hash = "sha256-z5nkv0cKEebjRzgxuAJOJPVluipibhk406FT0BMtiKo=";
+            };
+            top = import "${src}/default.nix" { inherit pkgs; };
+          in
+          top.packages.fix;
+
         gawkInteractive-gprefix =
           gprefix pkgs.gawkInteractive;
 
