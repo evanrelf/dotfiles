@@ -160,6 +160,7 @@ revset-aliases.'bookmark()' = 'exactly(heads(ancestors(@) & bookmarks()), 1)'
 revset-aliases.'pr()' = 'trunk()..bookmark() & mutable()'
 revset-aliases.'pr(x)' = 'trunk()..x & mutable()'
 revset-aliases.'prs()' = 'pr(bookmarks())'
+revset-aliases.'mine()' = 'author_email(exact:"evan@evanrelf.com" | exact:"evan.relf@antithesis.com")'
 
 fileset-aliases.lock = '''
   root-glob:"**/flake.lock"
