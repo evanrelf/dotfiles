@@ -52,16 +52,7 @@ fn run_prompt(
     let hostname = if env::consts::OS == "macos" {
         macos_computer_name().context("Failed to get macOS computer name")?
     } else {
-        match nix::unistd::gethostname()
-            .context("Failed to get hostname")?
-            .into_string()
-        {
-            Ok(s) => match s.strip_suffix(".local") {
-                Some(s) => String::from(s),
-                None => s,
-            },
-            Err(_) => anyhow::bail!("Failed to convert hostname to UTF-8 string"),
-        }
+        unix_hostname().context("Failed to get Unix hostname")?
     };
 
     let home = Utf8PathBuf::try_from(env::home_dir().context("Failed to get home directory")?)
@@ -92,6 +83,13 @@ fn run_prompt(
     print!("\n{RED}{status}{WHITE}{hostname} {pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
+}
+
+fn unix_hostname() -> anyhow::Result<String> {
+    let Ok(string) = nix::unistd::gethostname()?.into_string() else {
+        anyhow::bail!("Failed to convert hostname to UTF-8 string")
+    };
+    Ok(string.strip_suffix(".local").unwrap_or(&string).to_owned())
 }
 
 fn macos_computer_name() -> anyhow::Result<String> {
