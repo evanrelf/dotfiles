@@ -46,7 +46,7 @@ end
 if command -q evanrelf-prompt
     evanrelf-prompt init | source
 end
-if command -q direnv
+if command -q direnv; and not functions -q __direnv_export_eval
     direnv hook fish | source
 end
 if command -q nix-your-shell

@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
+# Skip `direnv --version` and `sort -V` subprocesses on every load.
+NIX_DIRENV_SKIP_VERSION_CHECK=1
+
 # shellcheck disable=SC1091
 source "$HOME/.nix-profile/share/nix-direnv/direnvrc"
+
+# Logs are disabled anyway (`log_format = "-"`), so don't spawn a `direnv log`
+# subprocess per message.
+log_status() { :; }
