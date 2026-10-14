@@ -183,7 +183,6 @@ in
 
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 80 443 ];
 
-  nix.package = pkgs.lixPackageSets.latest.lix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "@wheel" ];
 
