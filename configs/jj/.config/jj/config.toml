@@ -27,6 +27,11 @@ fi
 
 # Git
 aliases.blame = ['file', 'annotate']
+aliases.clean = ['util', 'exec', '--', 'bash', '-c', '''
+#!/usr/bin/env bash
+set -euo pipefail
+git clean -dxie .jj -- "$@"
+''', '']
 aliases.clone = ['git', 'clone']
 aliases.fetch = ['git', 'fetch']
 aliases.init = ['git', 'init']
