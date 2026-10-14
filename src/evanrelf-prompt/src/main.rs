@@ -17,7 +17,12 @@ enum Command {
         /// Job count
         #[arg(long)]
         jobs: Option<usize>,
+
+        /// Hostname
+        #[arg(long)]
+        hostname: Option<String>,
     },
+    Hostname,
     Init,
 }
 
@@ -27,7 +32,9 @@ fn main() -> anyhow::Result<()> {
             pipestatus,
             pwd,
             jobs,
-        } => run_prompt(pipestatus.as_deref(), pwd, jobs),
+            hostname,
+        } => run_prompt(pipestatus.as_deref(), pwd, jobs, hostname),
+        Command::Hostname => run_hostname(),
         Command::Init => run_init(),
     }
 }
@@ -42,6 +49,7 @@ fn run_prompt(
     pipestatus: Option<&str>,
     pwd: Option<Utf8PathBuf>,
     jobs: Option<usize>,
+    hostname: Option<String>,
 ) -> anyhow::Result<()> {
     let status = match pipestatus.map(str::trim) {
         Some("0") | None => "",
@@ -49,10 +57,9 @@ fn run_prompt(
         Some(pipestatus) => &format!("{}\n", pipestatus.replace(' ', " | ")),
     };
 
-    let hostname = if env::consts::OS == "macos" {
-        macos_computer_name().context("Failed to get macOS computer name")?
-    } else {
-        unix_hostname().context("Failed to get Unix hostname")?
+    let hostname = match hostname.filter(|s| !s.is_empty()) {
+        Some(hostname) => hostname,
+        None => get_hostname()?,
     };
 
     let home = Utf8PathBuf::try_from(env::home_dir().context("Failed to get home directory")?)
@@ -64,7 +71,7 @@ fn run_prompt(
                 .context("Current directory path is not UTF-8")?
         }
     };
-    let repo = jj_root(&current_dir);
+    let repo = get_jj_root(&current_dir);
     let pwd_display = match current_dir.strip_prefix(&home) {
         Ok(s) if s.as_str().is_empty() => "~".to_string(),
         Ok(s) => format!("~/{s}"),
@@ -85,14 +92,27 @@ fn run_prompt(
     Ok(())
 }
 
-fn unix_hostname() -> anyhow::Result<String> {
+fn run_hostname() -> anyhow::Result<()> {
+    println!("{}", get_hostname()?);
+    Ok(())
+}
+
+fn get_hostname() -> anyhow::Result<String> {
+    if env::consts::OS == "macos" {
+        get_macos_computer_name().context("Failed to get macOS computer name")
+    } else {
+        get_unix_hostname().context("Failed to get Unix hostname")
+    }
+}
+
+fn get_unix_hostname() -> anyhow::Result<String> {
     let Ok(string) = nix::unistd::gethostname()?.into_string() else {
         anyhow::bail!("Failed to convert hostname to UTF-8 string")
     };
     Ok(string.strip_suffix(".local").unwrap_or(&string).to_owned())
 }
 
-fn macos_computer_name() -> anyhow::Result<String> {
+fn get_macos_computer_name() -> anyhow::Result<String> {
     let output = process::Command::new("/usr/sbin/scutil")
         .arg("--get=ComputerName")
         .output()
@@ -114,7 +134,7 @@ fn macos_computer_name() -> anyhow::Result<String> {
     Ok(name)
 }
 
-fn jj_root(current_dir: &Utf8Path) -> Option<Utf8PathBuf> {
+fn get_jj_root(current_dir: &Utf8Path) -> Option<Utf8PathBuf> {
     current_dir
         .ancestors()
         .find(|dir| dir.join(".jj").is_dir())
@@ -162,14 +182,16 @@ fn run_init() -> anyhow::Result<()> {
     println!(
         "{}",
         r#"
+set --global __evanrelf_prompt_hostname (evanrelf-prompt hostname)
 function fish_prompt
-    set --local evanrelf_prompt_pipestatus $pipestatus
-    set --local evanrelf_prompt_pwd (pwd)
-    set --local evanrelf_prompt_jobs (jobs -g 2>/dev/null | count)
+    set --local __evanrelf_prompt_pipestatus $pipestatus
+    set --local __evanrelf_prompt_pwd (pwd)
+    set --local __evanrelf_prompt_jobs (jobs -g 2>/dev/null | count)
     evanrelf-prompt prompt \
-        --pipestatus "$evanrelf_prompt_pipestatus" \
-        --pwd "$evanrelf_prompt_pwd" \
-        --jobs "$evanrelf_prompt_jobs"
+        --pipestatus "$__evanrelf_prompt_pipestatus" \
+        --pwd "$__evanrelf_prompt_pwd" \
+        --jobs "$__evanrelf_prompt_jobs" \
+        --hostname "$__evanrelf_prompt_hostname"
 end
         "#
         .trim()
