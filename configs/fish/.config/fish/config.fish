@@ -1,3 +1,4 @@
+set --local os (uname)
 set --universal fish_features all
 source "$__fish_config_dir/home-manager.fish" 2>/dev/null || true
 set --global --export XDG_CONFIG_HOME "$HOME/.config"
@@ -13,7 +14,7 @@ set --global --export _ZO_DATA_DIR "$XDG_DATA_HOME/zoxide"
 set --global --export _ZO_FZF_OPTS "$FZF_DEFAULT_OPTS"
 set --global --export DIRENV_LOG_FORMAT ""
 set --global --export NIXPKGS_ALLOW_UNFREE 1
-if test (uname) = Darwin
+if test $os = Darwin
     set --global --export NIX_SSL_CERT_FILE /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt
 end
 set --global --export NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
@@ -31,7 +32,7 @@ function __fzf_reach
     end | awk '{ if (!seen[$0]++) print }'
 end
 if test -z "$IN_NIX_SHELL"
-    if test (uname) = Darwin
+    if test $os = Darwin
         set --global --export --prepend PATH /opt/homebrew/bin
     end
     set --global --export --prepend PATH /nix/var/nix/profiles/default/bin
