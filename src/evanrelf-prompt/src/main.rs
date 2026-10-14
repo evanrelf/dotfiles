@@ -73,7 +73,7 @@ fn run_prompt(
                 .context("Current directory path is not UTF-8")?
         }
     };
-    let repo = jj_root().ok();
+    let repo = jj_root(&current_dir);
     let pwd_display = match current_dir.strip_prefix(&home) {
         Ok(s) if s.as_str().is_empty() => "~".to_string(),
         Ok(s) => format!("~/{s}"),
@@ -116,27 +116,11 @@ fn macos_computer_name() -> anyhow::Result<String> {
     Ok(name)
 }
 
-fn jj_root() -> anyhow::Result<Utf8PathBuf> {
-    let output = process::Command::new("jj")
-        .arg("--at-operation=@")
-        .arg("--ignore-working-copy")
-        .arg("root")
-        .output()?;
-
-    if !output.status.success() {
-        anyhow::bail!(
-            "jj root failed:\n{}",
-            str::from_utf8(&output.stderr).unwrap_or("<error: stderr not utf8>")
-        );
-    }
-
-    let string = str::from_utf8(&output.stdout)
-        .context("`jj` output is not UTF-8")?
-        .trim();
-
-    let path = Utf8PathBuf::from(string);
-
-    Ok(path)
+fn jj_root(current_dir: &Utf8Path) -> Option<Utf8PathBuf> {
+    current_dir
+        .ancestors()
+        .find(|dir| dir.join(".jj").is_dir())
+        .map(Utf8Path::to_path_buf)
 }
 
 fn underline_repo<'a>(
