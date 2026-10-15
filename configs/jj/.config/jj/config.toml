@@ -134,6 +134,7 @@ fix.tools.rustfmt = {
   patterns = ['glob:"**/*.rs"'],
 }
 
+revsets.bookmark-advance-to = '@-'
 revsets.log = 'evan_log()'
 revsets.short-prefixes = 'evan_log()'
 #             builtin_log() = 'present(@) |  ancestors(immutable_heads().., 2)           | present(trunk())'
