@@ -160,6 +160,9 @@ in
   home.file.".pi/agent/themes".source =
     mutable "configs/pi/.pi/agent/themes";
 
+  home.file.".config/rex/init.lua".source =
+    mutable "configs/rex/.config/rex/init.lua";
+
   xdg.configFile."ripgrep" = {
     source = ../../configs/ripgrep/.config/ripgrep;
     recursive = true;

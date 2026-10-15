@@ -5,6 +5,6 @@ My personal development environment.
 - **Editor:** [Kakoune](https://github.com/mawww/kakoune)
 - **VCS:** [Jujutsu](https://github.com/jj-vcs/jj)
 - **Shell:** [Fish](https://github.com/fish-shell/fish-shell)
-- **Terminal:** [Ghostty](https://github.com/ghostty-org/ghostty)
+- **Terminal:** [Ghostty](https://github.com/ghostty-org/ghostty) and [Rex](https://www.superlogical.com/rex)
 - **OS:** [macOS](https://www.apple.com/os/macos/) and [NixOS](https://nixos.org/)
 - **Theme:** [Flexoki](https://stephango.com/flexoki)
