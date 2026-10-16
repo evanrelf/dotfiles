@@ -24,8 +24,11 @@ struct PromptArgs {
     #[arg(long)]
     hostname: Option<String>,
 
+    #[arg(long)]
+    final_rendering: bool,
+
     #[arg(allow_hyphen_values = true)]
-    argv: Vec<String>,
+    unknown: Vec<String>,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -178,6 +181,7 @@ fn run_init() -> anyhow::Result<()> {
     println!(
         "{}",
         r#"
+set --global fish_transient_prompt 1
 set --global __evanrelf_prompt_hostname (evanrelf-prompt hostname)
 function fish_prompt
     set --local __evanrelf_prompt_pipestatus $pipestatus
@@ -188,7 +192,6 @@ function fish_prompt
         --pwd "$__evanrelf_prompt_pwd" \
         --jobs "$__evanrelf_prompt_jobs" \
         --hostname "$__evanrelf_prompt_hostname" \
-        -- \
         $argv
 end
         "#
