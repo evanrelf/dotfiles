@@ -75,12 +75,13 @@ fn run_prompt(args: PromptArgs) -> anyhow::Result<()> {
 
     let pwd = underline_repo(&pwd_display, &current_dir, repo.as_deref());
 
-    let in_nix_shell = match env::var("IN_NIX_SHELL") {
-        Ok(_) => "  ",
-        Err(_) => "",
+    let in_nix_shell = if !args.final_rendering && env::var("IN_NIX_SHELL").is_ok() {
+        "  "
+    } else {
+        ""
     };
 
-    let jobs = if args.jobs.unwrap_or(0) >= 1 {
+    let jobs = if !args.final_rendering && args.jobs.unwrap_or(0) >= 1 {
         "  "
     } else {
         ""
