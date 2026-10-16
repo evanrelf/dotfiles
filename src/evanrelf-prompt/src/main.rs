@@ -21,6 +21,10 @@ enum Command {
         /// Hostname
         #[arg(long)]
         hostname: Option<String>,
+
+        /// `fish_prompt`'s `$argv`
+        #[arg(allow_hyphen_values = true)]
+        argv: Vec<String>,
     },
     Hostname,
     Init,
@@ -33,7 +37,8 @@ fn main() -> anyhow::Result<()> {
             pwd,
             jobs,
             hostname,
-        } => run_prompt(pipestatus.as_deref(), pwd, jobs, hostname),
+            argv,
+        } => run_prompt(pipestatus.as_deref(), pwd, jobs, hostname, argv),
         Command::Hostname => run_hostname(),
         Command::Init => run_init(),
     }
@@ -50,6 +55,7 @@ fn run_prompt(
     pwd: Option<Utf8PathBuf>,
     jobs: Option<usize>,
     hostname: Option<String>,
+    _argv: Vec<String>,
 ) -> anyhow::Result<()> {
     let status = match pipestatus.map(str::trim) {
         Some("0") | None => "",
@@ -191,7 +197,9 @@ function fish_prompt
         --pipestatus "$__evanrelf_prompt_pipestatus" \
         --pwd "$__evanrelf_prompt_pwd" \
         --jobs "$__evanrelf_prompt_jobs" \
-        --hostname "$__evanrelf_prompt_hostname"
+        --hostname "$__evanrelf_prompt_hostname" \
+        -- \
+        $argv
 end
         "#
         .trim()
