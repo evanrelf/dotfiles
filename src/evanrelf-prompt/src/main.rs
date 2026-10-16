@@ -5,35 +5,32 @@ use std::{borrow::Cow, env, process};
 
 #[derive(clap::Parser)]
 enum Command {
-    Prompt {
-        #[arg(long)]
-        pipestatus: Option<String>,
-
-        #[arg(long)]
-        pwd: Option<Utf8PathBuf>,
-
-        #[arg(long)]
-        jobs: Option<usize>,
-
-        #[arg(long)]
-        hostname: Option<String>,
-
-        #[arg(allow_hyphen_values = true)]
-        argv: Vec<String>,
-    },
+    Prompt(PromptArgs),
     Hostname,
     Init,
 }
 
+#[derive(clap::Args)]
+struct PromptArgs {
+    #[arg(long)]
+    pipestatus: Option<String>,
+
+    #[arg(long)]
+    pwd: Option<Utf8PathBuf>,
+
+    #[arg(long)]
+    jobs: Option<usize>,
+
+    #[arg(long)]
+    hostname: Option<String>,
+
+    #[arg(allow_hyphen_values = true)]
+    argv: Vec<String>,
+}
+
 fn main() -> anyhow::Result<()> {
     match Command::parse() {
-        Command::Prompt {
-            pipestatus,
-            pwd,
-            jobs,
-            hostname,
-            argv,
-        } => run_prompt(pipestatus.as_deref(), pwd, jobs, hostname, argv),
+        Command::Prompt(args) => run_prompt(args),
         Command::Hostname => run_hostname(),
         Command::Init => run_init(),
     }
@@ -45,27 +42,21 @@ const RESET: &str = "\x1b[0m";
 const UNDERLINE: &str = "\x1b[4m";
 const NO_UNDERLINE: &str = "\x1b[24m";
 
-fn run_prompt(
-    pipestatus: Option<&str>,
-    pwd: Option<Utf8PathBuf>,
-    jobs: Option<usize>,
-    hostname: Option<String>,
-    _argv: Vec<String>,
-) -> anyhow::Result<()> {
-    let status = match pipestatus.map(str::trim) {
+fn run_prompt(args: PromptArgs) -> anyhow::Result<()> {
+    let status = match args.pipestatus.as_deref().map(str::trim) {
         Some("0") | None => "",
         Some(pipestatus) if pipestatus.split(' ').all(|s| s == "0") => "",
         Some(pipestatus) => &format!("{}\n", pipestatus.replace(' ', " | ")),
     };
 
-    let hostname = match hostname.filter(|s| !s.is_empty()) {
+    let hostname = match args.hostname.filter(|s| !s.is_empty()) {
         Some(hostname) => hostname,
         None => get_hostname()?,
     };
 
     let home = Utf8PathBuf::try_from(env::home_dir().context("Failed to get home directory")?)
         .context("Home directory path is not UTF-8")?;
-    let current_dir = match pwd {
+    let current_dir = match args.pwd {
         Some(pwd) => pwd,
         None => {
             Utf8PathBuf::try_from(env::current_dir().context("Failed to get current directory")?)
@@ -86,7 +77,11 @@ fn run_prompt(
         Err(_) => "",
     };
 
-    let jobs = if jobs.unwrap_or(0) >= 1 { "  " } else { "" };
+    let jobs = if args.jobs.unwrap_or(0) >= 1 {
+        "  "
+    } else {
+        ""
+    };
 
     print!("\n{RED}{status}{WHITE}{hostname} {pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
