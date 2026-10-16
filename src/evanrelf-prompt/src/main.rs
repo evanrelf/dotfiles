@@ -6,23 +6,18 @@ use std::{borrow::Cow, env, process};
 #[derive(clap::Parser)]
 enum Command {
     Prompt {
-        /// Fish's `$pipestatus` variable
         #[arg(long)]
         pipestatus: Option<String>,
 
-        /// Fish's `pwd` (oblivious to symlinks)
         #[arg(long)]
         pwd: Option<Utf8PathBuf>,
 
-        /// Job count
         #[arg(long)]
         jobs: Option<usize>,
 
-        /// Hostname
         #[arg(long)]
         hostname: Option<String>,
 
-        /// `fish_prompt`'s `$argv`
         #[arg(allow_hyphen_values = true)]
         argv: Vec<String>,
     },
