@@ -201,11 +201,6 @@ hook -group lsp-filetype-rust global BufSetOption filetype=rust %{
     diagnostics.enable = false
     checkOnSave = false
     lens.enable = false
-
-    # [rust-glancer]
-    # root_globs = ["Cargo.lock", "Cargo.toml"]
-    # command = "lspmux"
-    # args = ["client", "--server-path", "rust-glancer", "lsp"]
   }
 }
 

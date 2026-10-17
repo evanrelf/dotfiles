@@ -79,7 +79,6 @@ in
       python3Packages.editorconfig
       reach
       ripgrep
-      rust-glancer
       rustup
       samply
       sd

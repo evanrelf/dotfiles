@@ -84,5 +84,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- LSP configs
-vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
-vim.lsp.enable("rust_glancer")
+-- vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
