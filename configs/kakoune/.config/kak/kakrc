@@ -204,8 +204,17 @@ hook -group lsp-filetype-rust global BufSetOption filetype=rust %{
   }
 }
 
+hook -group lsp-filetype-nix global BufSetOption filetype=nix %{
+  set-option buffer lsp_servers %{
+    [nixd]
+    root_globs = ["flake.nix", ".git"]
+    command = "lspmux"
+    args = ["client", "--server-path", "nixd"]
+  }
+}
+
 # Only enable LSP if `lspmux` server is running
-hook global WinSetOption filetype=rust %{ evaluate-commands %sh{
+hook global WinSetOption filetype=(rust|nix) %{ evaluate-commands %sh{
   if lspmux status >/dev/null 2>&1; then
     echo "
       lsp-enable-window

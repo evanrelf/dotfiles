@@ -18,7 +18,7 @@ let
     instance_timeout = 3600
     listen = "${config.xdg.stateHome}/lspmux/sock"
     connect = "${config.xdg.stateHome}/lspmux/sock"
-    pass_environment = ["PATH", "CARGO_HOME", "RUSTUP_HOME"]
+    pass_environment = ["PATH", "CARGO_HOME", "RUSTUP_HOME", "NIX_PATH"]
   '';
 
 in
@@ -72,6 +72,7 @@ in
       neovim
       nix-direnv
       nix-your-shell
+      nixd
       nixos-rebuild
       nixpkgs-fmt
       pancase
