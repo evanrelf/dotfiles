@@ -1,0 +1,19 @@
+diff --git a/src/client.rs b/src/client.rs
+index 271e6e2..33c9241 100644
+--- a/src/client.rs
++++ b/src/client.rs
+@@ -381,6 +381,14 @@ async fn output_task(
+                 break;
+             }
+ 
++            Message::Notification(notif) if notif.method == "exit" => {
++                // Some clients (e.g. kakoune-lsp) send `exit` without a prior
++                // `shutdown` request. Don't let one client kill the server
++                // shared with others, treat it as a disconnect instead.
++                info!("client sent exit notification, closing connection");
++                break;
++            }
++
+             Message::Request(mut req) => {
+                 req.id = req.id.tag(Tag::ClientId(client.id));
+                 if instance.send_message(req.into()).await.is_err() {
