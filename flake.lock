@@ -273,6 +273,27 @@
         "type": "github"
       }
     },
+    "kakrs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792551715,
+        "narHash": "sha256-LPHfV2tKu5/t0u0cQDwdjXMfaAR0Vy+QHKHeIwtqspg=",
+        "owner": "evanrelf",
+        "repo": "kakoune",
+        "rev": "c74121a17a66e4c50c74bfe11b2424ae5fea3ead",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanrelf",
+        "ref": "rust",
+        "repo": "kakoune",
+        "type": "github"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -462,6 +483,7 @@
         "hsl": "hsl",
         "import-tree": "import-tree",
         "indigo": "indigo",
+        "kakrs": "kakrs",
         "llm-agents": "llm-agents",
         "locus-kak": "locus-kak",
         "naersk": "naersk",

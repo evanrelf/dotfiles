@@ -67,6 +67,7 @@ in
       jujutsu
       kakoune
       kakoune-lsp
+      kakrs
       lspmux
       mergiraf
       neovim
