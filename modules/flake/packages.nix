@@ -3,6 +3,8 @@
 {
   perSystem = { pkgs, system, ... }:
     let
+      pkgs-stable = inputs.nixpkgs.legacyPackages.${system};
+
       pkgs-master = inputs.nixpkgs-master.legacyPackages.${system};
 
       gprefix = drv:
@@ -139,10 +141,7 @@
           };
 
         lspmux =
-          # TODO: `pkgs` has the same version as `pkgs-master`, so we should use
-          # it instead, except it triggers infinite recursion. Without overlays
-          # I'm not sure how to do this.
-          pkgs-master.lspmux.overrideAttrs (attrs: {
+          pkgs-stable.lspmux.overrideAttrs (attrs: {
             patches = (attrs.patches or [ ]) ++ [
               ../../patches/lspmux-exit.patch
             ];
