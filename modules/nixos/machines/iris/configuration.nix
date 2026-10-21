@@ -9,6 +9,7 @@ in
     ./hardware-configuration.nix
     ./apps.nix
     ./steam.nix
+    ../../amp.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -78,6 +79,28 @@ in
   };
 
   virtualisation.docker.enable = true;
+
+  # TODO: Finish setting up self-hosted Amp orbs:
+  # 1. In Amp, open Settings → Orbs, click Add Orb Provider, name it (e.g.
+  #    `iris`), and copy the `aop_live_…` token. It's only shown once.
+  # 2. After `nixos-rebuild switch` creates the `amp` user, save the token
+  #    (paste it, then Ctrl-D):
+  #      sudo install -D -m 400 -o amp -g amp /dev/stdin /persist/etc/amp/orb-provider-token
+  # 3. Start the provider. It's skipped until the token file exists:
+  #      sudo systemctl --user -M amp@ start amp-orb-provider
+  # 4. Check that it connected:
+  #      sudo journalctl _UID=400 --follow
+  # 5. Check that rootless Podman uses native overlayfs on ZFS. Expect
+  #    `overlay true`:
+  #      sudo -u amp env XDG_RUNTIME_DIR=/run/user/400 podman info --format '{{.Store.GraphDriverName}} {{index .Store.GraphStatus "Native Overlay Diff"}}'
+  # 6. Start a thread on the `iris` provider. From a shell in the orb, these
+  #    should fail: `curl -m5 192.168.1.158`, `curl -m5 100.101.235.127`,
+  #    `curl -m5 127.0.0.1:8384`. And this should work: `curl -m5 https://example.com`.
+  # 7. Optionally, make `iris` the workspace's default provider.
+  services.amp-orbs = {
+    enable = true;
+    tokenFile = "/persist/etc/amp/orb-provider-token";
+  };
 
   services.openssh.enable = true;
 
