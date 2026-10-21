@@ -18,11 +18,8 @@ aliases.here = ['bookmark', 'set', '-r', '@-', '--allow-backwards']
 aliases.tug = ['util', 'exec', '--', 'bash', '-c', '''
 #!/usr/bin/env bash
 set -euo pipefail
-if [ "$#" -eq 0 ]; then
-  jj bookmark move --from 'bookmark()' --to @-
-else
-  jj bookmark move --to @- "$@"
-fi
+echo 'Use `jj bookmark advance`!' >&2
+exit 1
 ''', '']
 
 # Git
