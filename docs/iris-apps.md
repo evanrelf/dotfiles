@@ -46,14 +46,14 @@ Currently apps' packages are only available inside of the `iris` NixOS
 configuration. The easiest way to build is:
 
 ```
-$ nixos-rebuild build --flake .#iris --build-host iris --target-host iris
+$ nixos-rebuild build --flake .#iris --build-host iris --target-host iris --use-substitutes
 ```
 
 ## Deploy
 
 ```
-$ nixos-rebuild dry-activate --flake .#iris --build-host iris --target-host iris --sudo
-$ nixos-rebuild switch --flake .#iris --build-host iris --target-host iris --sudo
+$ nixos-rebuild dry-activate --flake .#iris --build-host iris --target-host iris --use-substitutes --sudo
+$ nixos-rebuild switch --flake .#iris --build-host iris --target-host iris --use-substitutes --sudo
 ```
 
 ## Operate
