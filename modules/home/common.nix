@@ -41,6 +41,7 @@ in
   home.packages = with pkgs; lib.mkMerge [
     [
       as-tree
+      babelfish
       bat
       cargo-edit
       cargo-expand
