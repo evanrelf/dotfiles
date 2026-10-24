@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   tailscaleIPAddress = "100.101.235.127";
@@ -9,6 +9,7 @@ in
     ./hardware-configuration.nix
     ./apps.nix
     ./steam.nix
+    inputs.rex.nixosModules.default
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -80,6 +81,12 @@ in
   virtualisation.docker.enable = true;
 
   services.openssh.enable = true;
+
+  services.rex.loginServer = {
+    enable = true;
+    tailscaleServe.enable = true;
+    accounts.evanrelf.principals = [ "tailscale:evan@evanrelf.com" ];
+  };
 
   services.tailscale.enable = true;
 
