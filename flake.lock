@@ -473,6 +473,23 @@
         "type": "github"
       }
     },
+    "rex": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792794925,
+        "narHash": "sha256-GdRo3o9t2jkgdx3aGc0TSFEHhobVgQt1zDBB2pm5DBY=",
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1792794925-g175679.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "better-haskell-kak": "better-haskell-kak",
@@ -493,6 +510,7 @@
         "open-github-kak": "open-github-kak",
         "pancase": "pancase",
         "reach": "reach",
+        "rex": "rex",
         "zig-overlay": "zig-overlay"
       }
     },
