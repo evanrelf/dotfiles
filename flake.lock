@@ -260,11 +260,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1792196011,
-        "narHash": "sha256-0yPrQW7zrFftbQUUjM/krpJBRnI9s0Ek0mgPC5H7hsE=",
+        "lastModified": 1793066345,
+        "narHash": "sha256-DvKLwfhXi9kb/pKZJfvDJK/66DFoMZnPc0oaCCFH9bg=",
         "owner": "evanrelf",
         "repo": "indigo",
-        "rev": "75aab1ac9839d8450f165973c2f2c5383d1f1aad",
+        "rev": "a583e025024dc4a4d0ada60e22816bc67e799128",
         "type": "github"
       },
       "original": {
