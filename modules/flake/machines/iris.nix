@@ -23,9 +23,13 @@
       }
     );
 
-  flake.homeModules.iris = { config, ... }: {
+  flake.homeModules.iris = { config, pkgs, ... }: {
     imports = [
       ../../home/common.nix
+    ];
+
+    home.packages = with pkgs; [
+      llm-agents.claude-code
     ];
 
     home.stateVersion = "25.11";
