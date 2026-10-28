@@ -107,6 +107,9 @@ in
   home.file.".claude/CLAUDE.md".source =
     mutable "configs/claude/.claude/CLAUDE.md";
 
+  home.file.".claude/skills/jj-workspace".source =
+    mutable "configs/claude/.claude/skills/jj-workspace";
+
   xdg.configFile."direnv" = {
     source = ../../configs/direnv/.config/direnv;
     recursive = true;
