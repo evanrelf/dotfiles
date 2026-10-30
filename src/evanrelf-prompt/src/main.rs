@@ -66,7 +66,7 @@ fn run_prompt(args: PromptArgs) -> anyhow::Result<()> {
                 .context("Current directory path is not UTF-8")?
         }
     };
-    let repo = get_jj_root(&current_dir);
+    let repo = get_repo_root(&current_dir);
     let pwd_display = match current_dir.strip_prefix(&home) {
         Ok(s) if s.as_str().is_empty() => "~".to_string(),
         Ok(s) => format!("~/{s}"),
@@ -134,10 +134,11 @@ fn get_macos_computer_name() -> anyhow::Result<String> {
     Ok(name)
 }
 
-fn get_jj_root(current_dir: &Utf8Path) -> Option<Utf8PathBuf> {
+fn get_repo_root(current_dir: &Utf8Path) -> Option<Utf8PathBuf> {
+    // `.git` is a file in worktrees and submodules, so check `exists` rather than `is_dir`.
     current_dir
         .ancestors()
-        .find(|dir| dir.join(".jj").is_dir())
+        .find(|dir| dir.join(".jj").is_dir() || dir.join(".git").exists())
         .map(Utf8Path::to_path_buf)
 }
 
