@@ -1,8 +1,12 @@
 { config, inputs, withSystem, ... }:
 
+let
+  system = "x86_64-linux";
+
+in
 {
   flake.homeConfigurations.evanrelf-desktop =
-    withSystem "x86_64-linux" ({ pkgs, ... }:
+    withSystem system ({ pkgs, ... }:
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ config.flake.homeModules.evanrelf-desktop ];
@@ -17,7 +21,8 @@
 
     home.packages = with pkgs; [
       file
-      ghostty
+      # TODO: Go back to `pkgs.ghostty` once my Nixpkgs has v1.4.0
+      inputs.nixpkgs-master.legacyPackages.${system}.ghostty
       gnome-tweaks
       vscode
       wl-clipboard
