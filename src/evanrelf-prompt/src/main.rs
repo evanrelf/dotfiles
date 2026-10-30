@@ -151,11 +151,21 @@ fn underline_repo<'a>(
         return Cow::Borrowed(display_path);
     };
 
-    if !current_dir.starts_with(repo_root) {
+    let Ok(relative_dir) = current_dir.strip_prefix(repo_root) else {
         return Cow::Borrowed(display_path);
-    }
+    };
 
     let Some(repo_name) = repo_root.file_name() else {
+        return Cow::Borrowed(display_path);
+    };
+
+    // Locate the repo root's component by counting back from the end, so other components with the
+    // same name aren't underlined.
+    let Some(repo_index) = display_path
+        .split('/')
+        .count()
+        .checked_sub(relative_dir.components().count() + 1)
+    else {
         return Cow::Borrowed(display_path);
     };
 
@@ -166,7 +176,7 @@ fn underline_repo<'a>(
         if i > 0 {
             result.push('/');
         }
-        if component == repo_name {
+        if i == repo_index && component == repo_name {
             result.push_str(UNDERLINE);
             result.push_str(component);
             result.push_str(NO_UNDERLINE);
