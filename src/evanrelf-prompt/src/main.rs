@@ -162,8 +162,8 @@ fn underline_repo<'a>(
     let mut result =
         String::with_capacity(display_path.len() + UNDERLINE.len() + NO_UNDERLINE.len());
 
-    for component in display_path.split('/') {
-        if !result.is_empty() {
+    for (i, component) in display_path.split('/').enumerate() {
+        if i > 0 {
             result.push('/');
         }
         if component == repo_name {
