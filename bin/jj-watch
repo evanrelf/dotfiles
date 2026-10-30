@@ -10,7 +10,7 @@ root=$(jj root)
 repo="$root/.jj/repo"
 if [ -f "$repo" ]; then
   # Resolve workspace repo path
-  repo=$(<"$repo")
+  repo=$(cat "$repo" | sed 's|^../||' | xargs realpath)
 fi
 
 jj_watch_render() {
