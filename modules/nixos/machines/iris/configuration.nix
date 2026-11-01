@@ -124,6 +124,7 @@ in
         HTTP_PORT = 10002;
         SSH_PORT = 22;
       };
+      service.DISABLE_REGISTRATION = true;
     };
   };
 
