@@ -64,6 +64,8 @@ in
       hyperfine
       indigo
       infer-indent
+      janet
+      jpm
       jq
       jujutsu
       kakoune
