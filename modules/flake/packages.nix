@@ -140,9 +140,6 @@
                   sources);
           };
 
-        kakrs =
-          inputs.kakrs.packages.${system}.kakrs;
-
         lspmux =
           pkgs-stable.lspmux.overrideAttrs (attrs: {
             patches = (attrs.patches or [ ]) ++ [
