@@ -427,6 +427,21 @@ hook -group file-detection global BufOpenFile .* file-detection-uv-script
 hook -group file-detection global BufWritePost .* file-detection-uv-script
 
 ################################################################################
+# JANET
+################################################################################
+
+define-command -hidden file-detection-janet %{ evaluate-commands %sh{
+  if [ -z "${kak_opt_filetype}" ]; then
+    if head -n1 "${kak_buffile}" | rg '^#!\s*/usr/bin/env\b.+\bjanet\b'; then
+      echo "set-option buffer filetype janet"
+    fi
+  fi
+}}
+
+hook -group file-detection global BufOpenFile .* file-detection-janet
+hook -group file-detection global BufWritePost .* file-detection-janet
+
+################################################################################
 # BUCK2
 ################################################################################
 
