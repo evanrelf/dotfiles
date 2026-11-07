@@ -108,6 +108,9 @@ in
   home.file.".claude/CLAUDE.md".source =
     mutable "configs/claude/.claude/CLAUDE.md";
 
+  home.file.".claude/skills/debrief".source =
+    mutable "configs/claude/.claude/skills/debrief";
+
   home.file.".claude/skills/jj-workspace".source =
     mutable "configs/claude/.claude/skills/jj-workspace";
 
