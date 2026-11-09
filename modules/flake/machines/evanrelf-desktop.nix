@@ -24,9 +24,7 @@ in
       # TODO: Go back to `pkgs.ghostty` once my Nixpkgs has v1.4.0
       inputs.nixpkgs-master.legacyPackages.${system}.ghostty
       gnome-tweaks
-      vscode
       wl-clipboard
-      zed-editor
     ];
 
     home.stateVersion = "26.05";
