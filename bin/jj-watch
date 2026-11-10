@@ -13,6 +13,8 @@ if [ -f "$repo" ]; then
   repo=$(cat "$repo" | sed 's|^../||' | xargs realpath)
 fi
 
+# TODO: Re-render on terminal window resize
+
 jj_watch_render() {
   local out rows
   out=$(jj --no-pager --color=always "$@" 2>&1 | grep -v 'Snapshot operation left uncommitted because --no-integrate-operation was requested' || true)
