@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+tty="/dev/tty"
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --tty)
+      if [ $# -lt 2 ]; then
+        echo "error: --tty requires an argument" >&2
+        echo "usage: osc52-copy [--tty PATH] < input" >&2
+        exit 1
+      fi
+      tty="$2"
+      shift 2
+      ;;
+    *)
+      echo "error: unknown argument '$1'" >&2
+      echo "usage: osc52-copy [--tty PATH] < input" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# Strip newlines because GNU `base64` wraps lines at 76 characters
+data=$(base64 < /dev/stdin | tr -d '\n')
+
+printf '\e]52;c;%s\a' "$data" > "$tty"
