@@ -65,6 +65,7 @@ in
       indigo
       infer-indent
       janet
+      jj-hunk
       jpm
       jq
       jujutsu

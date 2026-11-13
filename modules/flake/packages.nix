@@ -118,6 +118,20 @@
             src = ../../src/infer-indent;
           };
 
+        jj-hunk =
+          pkgs.rustPlatform.buildRustPackage (attrs: {
+            pname = "jj-hunk";
+            version = "0.5.1";
+            src = pkgs.fetchFromGitHub {
+              owner = "laulauland";
+              repo = "jj-hunk";
+              tag = "v${attrs.version}";
+              hash = "sha256-Pe0rLEUMXmq+8eUMmjuu5KvFJ/aN53bTQ6/1rE2YcT0=";
+            };
+            cargoHash = "sha256-tO4oGY92AieYb1SY3ylWSkOlcIKadbZLKOY6nTzXo48=";
+            nativeCheckInputs = [ pkgs.jujutsu ];
+          });
+
         jujutsu =
           pkgs-master.jujutsu;
 
