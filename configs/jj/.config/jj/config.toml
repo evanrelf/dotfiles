@@ -136,6 +136,7 @@ revsets.log = 'evan_log()'
 revsets.short-prefixes = 'evan_log()'
 #             builtin_log() = 'present(@) |  ancestors(immutable_heads().., 2)           | present(trunk())'
 revset-aliases.'evan_log()' = 'present(@) | (ancestors(immutable_heads().., 2) & mine()) | present(trunk()) | bookmarks()'
+revset-aliases.'evan_log_workspace()' = 'present(@) | (ancestors(reachable(present(@), mutable() ~ (working_copies() ~ present(@))), 2) & mine()) | present(trunk())'
 revset-aliases.'megamerge()' = 'exactly(coalesce(subject(exact:"megamerge"), root()), 1) ~ root()'
 revset-aliases.'megaroots()' = 'children(fork_point(parents(megamerge()))) & ancestors(megamerge())'
 revset-aliases.M = 'megamerge()'
@@ -254,3 +255,5 @@ ts(t),
 --when.hostnames = ["evanrelf-desktop"] # Antithesis
 [--scope.user]
 email = "evan.relf@antithesis.com"
+[--scope.ui]
+default-command = ['log', '-r', 'evan_log_workspace()']
