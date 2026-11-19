@@ -23,6 +23,7 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "babed00d";
   boot.zfs.devNodes = "/dev/mapper";
+  boot.zfs.forceImportRoot = false;
   services.zfs.autoScrub.enable = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
