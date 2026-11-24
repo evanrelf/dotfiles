@@ -100,9 +100,6 @@
         gnused-gprefix =
           gprefix pkgs.gnused;
 
-        go-hello =
-          go { name = "go-hello"; src = ../../src/go-hello; };
-
         hsl =
           rust {
             name = "hsl";
