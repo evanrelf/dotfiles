@@ -32,8 +32,6 @@ in
     inputs.naersk.overlays.default
     inputs.nix-darwin.overlays.default
     (final: prev: config.flake.packages.${prev.stdenv.hostPlatform.system} or { })
-    # TODO: Get rid of these overlays
-    (import ../../overlays/nixos-configurations.nix)
   ];
 
   perSystem = { pkgs, system, ... }: {
