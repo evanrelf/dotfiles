@@ -49,7 +49,14 @@ fn run_prompt(args: PromptArgs) -> anyhow::Result<()> {
     let status = match args.pipestatus.as_deref().map(str::trim) {
         Some("0") | None => "",
         Some(pipestatus) if pipestatus.split(' ').all(|s| s == "0") => "",
-        Some(pipestatus) => &format!("{}\n", pipestatus.replace(' ', " | ")),
+        Some(pipestatus) => &format!(
+            "{}\n",
+            pipestatus
+                .split(' ')
+                .map(format_status)
+                .collect::<Vec<_>>()
+                .join(" | ")
+        ),
     };
 
     let hostname = match args.hostname.filter(|s| !s.is_empty()) {
@@ -90,6 +97,17 @@ fn run_prompt(args: PromptArgs) -> anyhow::Result<()> {
     print!("\n{RED}{status}{WHITE}{hostname} {pwd}{in_nix_shell}{jobs}\n${RESET} ");
 
     Ok(())
+}
+
+fn format_status(status: &str) -> String {
+    let signal = status
+        .parse::<i32>()
+        .ok()
+        .and_then(|code| nix::sys::signal::Signal::try_from(code.checked_sub(128)?).ok());
+    match signal {
+        Some(signal) => format!("{status} ({signal})"),
+        None => status.to_owned(),
+    }
 }
 
 fn run_hostname() -> anyhow::Result<()> {
