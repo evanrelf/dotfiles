@@ -9,18 +9,6 @@ let
   mutable = path:
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 
-  # Start `lspmux` server:
-  # ```
-  # $ mkdir -p ~/.local/state/lspmux && chmod 700 ~/.local/state/lspmux
-  # $ lspmux server
-  # ```
-  lspmuxConfig = ''
-    instance_timeout = 3600
-    listen = "${config.xdg.stateHome}/lspmux/sock"
-    connect = "${config.xdg.stateHome}/lspmux/sock"
-    pass_environment = ["PATH", "CARGO_HOME", "RUSTUP_HOME", "NIX_PATH"]
-  '';
-
 in
 {
   # Home Manager
@@ -71,7 +59,6 @@ in
       jujutsu
       kakoune
       kakoune-lsp
-      lspmux
       mergiraf
       neovim
       nix-direnv
@@ -173,12 +160,6 @@ in
 
   xdg.configFile."kak/autoload/runtime".source =
     "${pkgs.kakoune}/share/kak/autoload";
-
-  home.file."Library/Application Support/lspmux/config.toml" =
-    lib.mkIf isDarwin { text = lspmuxConfig; };
-
-  xdg.configFile."lspmux/config.toml" =
-    lib.mkIf isLinux { text = lspmuxConfig; };
 
   home.file.".config/nvim".source =
     mutable "configs/neovim/.config/nvim";

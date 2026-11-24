@@ -151,13 +151,6 @@
                   sources);
           };
 
-        lspmux =
-          pkgs-stable.lspmux.overrideAttrs (attrs: {
-            patches = (attrs.patches or [ ]) ++ [
-              ../../patches/lspmux-exit.patch
-            ];
-          });
-
         pancase =
           rust {
             name = "pancase";
