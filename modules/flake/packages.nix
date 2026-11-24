@@ -64,7 +64,7 @@
         evanrelf-fish =
           let
             fish-colored-man =
-              pkgs.fishPlugins.buildFishPlugin {
+              pkgs-master.fishPlugins.buildFishPlugin {
                 pname = "fish-colored-man";
                 version = "0-unstable-2021-07-15";
                 src = pkgs.fetchFromGitHub {
@@ -75,8 +75,8 @@
                 };
               };
           in
-          pkgs.wrapFish {
-            pluginPkgs = with pkgs.fishPlugins; [
+          pkgs-master.wrapFish {
+            pluginPkgs = with pkgs-master.fishPlugins; [
               fish-colored-man
               fzf
             ];
